@@ -10,7 +10,6 @@ var nba_key = 'hdgj9e9vs9hquzc6ds22wtdy';
 
 request('https://api.sportsdatallc.org/nba-t3/league/hierarchy.json?api_key=' + nba_key, function (error, response, body) {
   if (!error && response.statusCode == 200) {
-    //console.log(response);
     var json_response = (JSON.parse(response.body));
 
     var teams = formatTeams(json_response)
