@@ -1,11 +1,12 @@
 body {
-  padding: 50px;
+  padding: 0px 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
 }
+
 
 #team-selection{
 	margin-bottom: 15px;
