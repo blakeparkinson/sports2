@@ -24,21 +24,21 @@ var nba_teams = {
     'SAS': 'San Antonio Spurs'
 }
 
+
 var formatTeams = function(hierarchy_response){
-	var conferences = [],
-		divisions = [],
-		teams = [];
-	for (i=0;i<hierarchy_response.conferences.length;i++){
+	var teams = {};
+  for (i=0;i<hierarchy_response.conferences.length;i++){
 		for (j=0;j<hierarchy_response.conferences[i].divisions.length;j++){
-			console.log(hierarchy_response.conferences[i].divisions[j].teams.length);
-			for(k=0; k< hierarchy_response.conferences[i].divisions[j].length; k++){
-			}
-
-		}
-
+			for(k=0; k< hierarchy_response.conferences[i].divisions[j].teams.length; k++){
+        var team_id = hierarchy_response.conferences[i].divisions[j].teams[k].id,
+          team_name = hierarchy_response.conferences[i].divisions[j].teams[k].name;
+        teams[team_id]=team_name;
+      }
+		}   
 	}
+console.log(teams);
+return teams
 }
-
 
 router.get('/', function(res, res) {
   res.render('index', {
