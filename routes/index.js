@@ -34,8 +34,9 @@ var formatTeams = function(hierarchy_response){
 		for (j=0;j<hierarchy_response.conferences[i].divisions.length;j++){
 			for(k=0; k< hierarchy_response.conferences[i].divisions[j].teams.length; k++){
         		var team_id = hierarchy_response.conferences[i].divisions[j].teams[k].id,
-          		team_name = hierarchy_response.conferences[i].divisions[j].teams[k].name;
-        		teams[team_id]=team_name;
+          			team_name = hierarchy_response.conferences[i].divisions[j].teams[k].name,
+          			team_city = hierarchy_response.conferences[i].divisions[j].teams[k].market;
+        			teams[team_id]=team_city + ' ' + team_name;
       		}
 		}   
 	}
