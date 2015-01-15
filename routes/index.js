@@ -14,8 +14,9 @@ request('https://api.sportsdatallc.org/nba-t3/league/hierarchy.json?api_key=' + 
   if (!error && response.statusCode == 200) {
     var json_response = (JSON.parse(response.body));
     var teams = formatTeams(json_response);
-
-
+    
+ 	teams.sort(compare);
+ 	
     // don't render the page until we have formatted our teams
     router.get('/', function(res, res) {
   		res.render('index', {
@@ -27,6 +28,14 @@ request('https://api.sportsdatallc.org/nba-t3/league/hierarchy.json?api_key=' + 
     console.log('somethings really terrible happened');
   }
 })
+
+function compare(a,b) {
+  if (a.market < b.market)
+     return -1;
+  if (a.market > b.market)
+    return 1;
+  return 0;
+}
 
 
 var formatTeams = function(hierarchy_response){
