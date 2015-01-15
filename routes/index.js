@@ -1,6 +1,24 @@
 var express = require('express');
 var router = express.Router();
 
+var mysql =  require('mysql');
+
+var connection =  mysql.createConnection({
+  	host : "127.0.0.1",
+  	user : "root",
+  	password: ""
+  });
+
+connection.connect();
+
+connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
+  if (err) throw err;
+
+  console.log('The solution is: ', rows[0].solution);
+});
+
+connection.end();
+
 var request = require('request');
 var nba_key = 'hdgj9e9vs9hquzc6ds22wtdy';
 var nfl_key = 'b4cwkbyqfyq25fcruevj5hw2';
