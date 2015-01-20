@@ -9,7 +9,7 @@ var connection =  mysql.createConnection({
   	password: ""
   });
 
-connection.connect();
+/*connection.connect();
 
 connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
   if (err) throw err;
@@ -18,7 +18,7 @@ connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
 });
 
 connection.end();
-
+*/
 var request = require('request');
 var nba_key = 'hdgj9e9vs9hquzc6ds22wtdy';
 var nfl_key = 'b4cwkbyqfyq25fcruevj5hw2';
