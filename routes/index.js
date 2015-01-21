@@ -34,7 +34,6 @@ request('https://api.sportsdatallc.org/nba-t3/league/hierarchy.json?api_key=' + 
     var teams = formatTeams(json_response);
     
  	teams.sort(compare);
- 	
     // don't render the page until we have formatted our teams
     router.get('/', function(res, res) {
   		res.render('index', {
