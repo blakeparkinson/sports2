@@ -20,14 +20,21 @@ function fetchTeam(event) {
                 console.log(details);
                 return details;
      		}
+        failure: function(){
+          console.log("couldn't fetch anything");
+        }
     });
 
 }
 
 
 var formatRoster = function(response){
-	var team_deets = response;
-	//console.log(team_deets);
+	var team_deets = response,
+      source = $("#team").html(),
+      template = Handlebars.compile(source);
+      console.log(team_deets);
+
+  $("#roster").append(template(team_deets));
 	return team_deets;
 }
 
