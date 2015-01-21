@@ -30,11 +30,6 @@ var formatRoster = function(response){
       source = $("#team").html(),
       template = Handlebars.compile(source);
       console.log(team_deets);
-      var data = {
-  name: "Jack",
-  date: "12/04/12",
-  comment: "This is a really awesome tutorial. Thanks."
-};    
   $("#roster").append(template(team_deets));
 	return team_deets;
 }
