@@ -20,9 +20,6 @@ function fetchTeam(event) {
                 console.log(details);
                 return details;
      		}
-        failure: function(){
-          console.log("couldn't fetch anything");
-        }
     });
 
 }
