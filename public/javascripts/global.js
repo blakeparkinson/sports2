@@ -10,6 +10,7 @@ $(document).ready(function() {
 
 // Functions ============================================================= //
 
+var roster = "#roster";
 
 function fetchTeam(event) {
     var team = $('#teams option:selected').val();
@@ -29,9 +30,8 @@ var formatRoster = function(response){
 	var team_deets = response,
       source = $("#team").html(),
       template = Handlebars.compile(source);
-      console.log(team_deets);
 
-  $("#roster").append(template(team_deets));
+  $(roster).empty().append(template(team_deets));
 	return team_deets;
 }
 
