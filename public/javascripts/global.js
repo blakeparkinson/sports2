@@ -31,6 +31,7 @@ var formatRoster = function(response){
       template = Handlebars.compile(source);
       console.log(team_deets);
 
+  $("#roster").empty();
   $("#roster").append(template(team_deets));
 	return team_deets;
 }
