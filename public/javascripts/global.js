@@ -24,17 +24,38 @@ function fetchTeam(event) {
 
 }
 
-
 var formatRoster = function(response){
-	var team_deets = response,
+	var team_deets = sortTeam(response),
       source = $("#team").html(),
       template = Handlebars.compile(source);
-      console.log(team_deets);
 
   $("#roster").empty();
   $("#roster").append(template(team_deets));
 	return team_deets;
 }
+
+var sortTeam = function(team_name){
+    team_name.players.sort(compare)
+    return team_name;
+
+}
+
+// Sort team in order of most starts to least starts
+function compare(a,b) {
+  if (a.total.games_started > b.total.games_started)
+     return -1;
+  if (a.total.games_started < b.total.games_started)
+    return 1;
+  return 0;
+}
+
+
+
+
+
+
+
+
 
 
 
