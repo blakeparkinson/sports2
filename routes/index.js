@@ -1,37 +1,85 @@
+var express = require('express');
+var router = express.Router();
+var http = require("http"),
+    mongojs = require("mongojs"),
+    uri = 'mongodb://root:root@ds031541.mongolab.com:31541/rosterblitz';
 
-// DOM Ready =============================================================
-$(document).ready(function() {
-    console.log('ji');
+    db = mongojs.connect(uri, ["teams"]);
 
-    // Populate the user table on initial page load    
-    $('body').on('click', '[data-action="pick-team"]', var details = fetchTeam;);
+
+var request = require('request');
+var nba_key = 'hdgj9e9vs9hquzc6ds22wtdy';
+var nfl_key = 'b4cwkbyqfyq25fcruevj5hw2';
+var ncaa_fb_key = 'rajn798e9qe8a4av49h95qju';
+var mlb_key = 'wxf8qgjxs7ka6ay8ec249etg';
+var nba_key = 'hdgj9e9vs9hquzc6ds22wtdy',
+  teams = [];
+
+
+ db.open(function(err,db){
+      db.collection('teams',function(err,collection){
+        collection.find().toArray(function(err, nba_teams) {
+          console.log(nba_teams);
+        })
+      }) //collection
+    }); //open
+  
+request('https://api.sportsdatallc.org/nba-t3/league/hierarchy.json?api_key=' + nba_key, function (error, response, body) {
+  if (!error && response.statusCode == 200) {
+    var json_response = (JSON.parse(response.body));
+    var teams = formatTeams(json_response);
+    mongoInsert(teams);
+
+
     
-});
+  teams.sort(compare);
+    // don't render the page until we have formatted our teams
+    router.get('/', function(res, res) {
+      res.render('index', {
+      teams: teams,
+      });
+  });
+  }
+  else{
+    console.log('somethings really terrible happened');
+  }
+})
 
-// Functions ============================================================= //
+function compare(a,b) {
+  if (a.market < b.market)
+     return -1;
+  if (a.market > b.market)
+    return 1;
+  return 0;
+}
 
-
-function fetchTeam(event) {
-    var team = $('#teams option:selected').val();
-    console.log(team);
-    $.ajax({
-      url: 'https://api.sportsdatallc.org/nba-t3/seasontd/2014/reg/teams/583eca2f-fb46-11e1-82cb-f4ce4684ea4c/statistics.json?api_key=hdgj9e9vs9hquzc6ds22wtdy',
-        success: function(response){
-          formatRoster(response);
-        }
-    });
+//inserts the record into mongo. 
+//Plan is to fetch the team id from mongo and only 
+//hit api as fallback and then update mongo
+function mongoInsert(teams){
+  db.open(function(err, client){
+    client.collection("teams", function(err, col) {
+      for (var i = 0; i < teams.length; i++) {
+        col.insert({id:teams[i].id, team:teams[i].name, market:teams[i].market}, function() {});
+      }
+    })
+  });
 
 }
 
-var formatRoster = function(response){
-  //console.log(response);
-  var team_deets = response;
-  console.log(team_deets);
-  // Sublayers of team_deets: id, market, name, opponents, own_record, players, season
-  // Sublayers of Opponents: Average, Total
-  // Sublayers of Own_Record: Average, Total
-  // Sublayers of Players: (each player is an object in the array). --> average, total, first_name, full_name, id, jersey_number, last_name, position, primary_position
-  // Sublayers of Season: id, type, year
 
-  return team_deets;
+var formatTeams = function(hierarchy_response){
+  for (i=0;i<hierarchy_response.conferences.length;i++){
+    for (j=0;j<hierarchy_response.conferences[i].divisions.length;j++){
+      for(k=0; k< hierarchy_response.conferences[i].divisions[j].teams.length; k++){
+            teams.push(hierarchy_response.conferences[i].divisions[j].teams[k]);
+      }
+    }   
+  }
+return teams
 }
+
+
+
+module.exports = router;
+
