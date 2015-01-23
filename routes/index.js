@@ -16,34 +16,48 @@ var nba_key = 'hdgj9e9vs9hquzc6ds22wtdy',
   teams = [];
 
 
- db.open(function(err,db){
-      db.collection('teams',function(err,collection){
-        collection.find().toArray(function(err, nba_teams) {
-          console.log(nba_teams);
-        })
-      }) //collection
-    }); //open
-  
-request('https://api.sportsdatallc.org/nba-t3/league/hierarchy.json?api_key=' + nba_key, function (error, response, body) {
-  if (!error && response.statusCode == 200) {
-    var json_response = (JSON.parse(response.body));
-    var teams = formatTeams(json_response);
-    mongoInsert(teams);
+ 
+db.open(function(err,db){
+    db.collection('teams',function(err,collection){
+      collection.find().toArray(function(err, teams) {
+        if (err || teams.length ==0){
+          fetchFromApi();
+        }
+        else{
+          renderTeams(teams);
+        }
+      })
+    }) //collection
+  }); //open
 
+  var fetchFromApi = function(){
 
+    request('https://api.sportsdatallc.org/nba-t3/league/hierarchy.json?api_key=' + nba_key, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        var json_response = (JSON.parse(response.body));
+            teams = formatTeams(json_response);
+        renderTeams(teams);
+        mongoInsert(teams);
+      }
+      else{
+        console.log('somethings really terrible happened');
+      }
+    });
+
+  }
+
+  var renderTeams = function(nba_teams){
     
-  teams.sort(compare);
+    nba_teams.sort(compare);
     // don't render the page until we have formatted our teams
     router.get('/', function(res, res) {
       res.render('index', {
-      teams: teams,
+      teams: nba_teams,
       });
-  });
+    });
   }
-  else{
-    console.log('somethings really terrible happened');
-  }
-})
+
+  
 
 function compare(a,b) {
   if (a.market < b.market)
@@ -60,7 +74,7 @@ function mongoInsert(teams){
   db.open(function(err, client){
     client.collection("teams", function(err, col) {
       for (var i = 0; i < teams.length; i++) {
-        col.insert({id:teams[i].id, team:teams[i].name, market:teams[i].market}, function() {});
+        col.insert({id:teams[i].id, name:teams[i].name, market:teams[i].market}, function() {});
       }
     })
   });
