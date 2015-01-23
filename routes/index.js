@@ -16,14 +16,16 @@ var nba_key = 'hdgj9e9vs9hquzc6ds22wtdy',
   teams = [];
 
 
- 
+ // step one. we look in mongo
 db.open(function(err,db){
     db.collection('teams',function(err,collection){
       collection.find().toArray(function(err, teams) {
         if (err || teams.length ==0){
+          //mongo is empty, call api and let api handle render
           fetchFromApi();
         }
         else{
+          //just render
           renderTeams(teams);
         }
       })
