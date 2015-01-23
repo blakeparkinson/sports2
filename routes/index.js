@@ -76,6 +76,7 @@ function mongoInsert(teams){
   db.open(function(err, client){
     client.collection("teams", function(err, col) {
       for (var i = 0; i < teams.length; i++) {
+        //really the only 3 key:value pairs we care about for now
         col.insert({id:teams[i].id, name:teams[i].name, market:teams[i].market}, function() {});
       }
     })
