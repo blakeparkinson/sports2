@@ -19,7 +19,7 @@ router.get('/team', function(req, res) {
     		limit = req.query.page_limit;
 
     console.log(term);
-    db.collection('teams').find().toArray(function (err, items) {
+    db.collection('teams').find({'name':/term/}).toArray(function (err, items) {
         res.json(items);
     });
 });
