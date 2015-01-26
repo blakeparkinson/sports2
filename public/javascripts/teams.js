@@ -16,7 +16,6 @@ $(document).ready(function() {
                         };
                     },
                     results: function(data, page) {
-                        console.log(data);
                         var newData = [];
                         _.each(data, function (item) {
                             newData.push({
@@ -50,9 +49,14 @@ function formatResult(data){
     }
 
 function formatSelection(data){
+    var render = '<p class="selected-team id="' + data.id + '"> ' +data.market+ ' ' +data.name+'</p>';
+    return render;
 }
 
 function formatNoMatches(data){
+        var render = '<p>You drunk?</p>';
+        return render;
+
 }
 
 
