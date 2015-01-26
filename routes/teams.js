@@ -19,8 +19,8 @@ router.get('/team', function(req, res) {
     var term = req.query.q.term;
     		limit = req.query.page_limit;
 
-    //find the team, This syntax does a sql-type like clause with case insensutivity
-    db.collection('teams').find({'name': new RegExp(term, 'i')}).toArray(function (err, items) {
+    //find the team, This syntax does a sql-type like clause with case insensitivy(sp???)
+    db.collection('teams').find({$or: [{'name': new RegExp(term, 'i')}, {'market': new RegExp(term, 'i')}]}).toArray(function (err, items) {
     	console.log(items);
         res.json(items);
     });
