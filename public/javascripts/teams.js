@@ -2,39 +2,62 @@
 // DOM Ready =============================================================
 $(document).ready(function() {
 
-    $(".select2").select2({
+    $("#select2").select2({
       width: "34%",
+      placeholder: "Search a Team...",
       minimumInputLength: 2,
-      //dropdownCssClass: "standards-dropdown",
-            //containerCssClass: "standards-container",
-  
-
-            //fixedSearchResultLabel: true, // dom element that is always visible after search
-            //fixedSearchResultMarkup: "<li id='browseStandards'>Browse All Standards</li>", // dom element that is always visible after search
-
             ajax: {
                 url: "teams/team",
-                data: function (term, page) {
+                dataType: 'json', 
+                    data: function(term, page) {
+                        return {
+                            q: term, //search term
+                            page_limit: 10 // page size
+                        };
+                    },
+                    results: function(data, page) {
+                        var newData = [];
+                        _.each(data, function (item) {
+                            newData.push({
+                                id: item.id,  
+                                market: item.market,
+                                name: item.name
+                            });
+                        });
+                        return { results: newData };
+                    }
 
-                    return {
-                        q                   : term, // search term
-                        page_limit          : 10
-                    };
                 },
-                results: function (data, page) { 
-                    console.log(data);
+        formatResult: formatResult, //dropdown rendering of selectable options
+        formatNoMatches: formatNoMatches,
+        formatSelection: formatSelection, //final selected options
 
-                }
-            },
-            //formatResult: formatResult, //dropdown rendering of selectable options
-            //formatNoMatches: formatNoMatches,
-            //formatSelection: formatSelection, //final selected options
+
     });
  
     
 });
 
 // Functions ============================================================= //
+
+function formatResult(data){
+    console.log(data);
+
+    var render = '<div id ="team-market">'+data.market+ ' ' +data.name+' </div>';
+
+    return render
+    }
+
+function formatSelection(data){
+    var render = '<p class="selected-team id="' + data.id + '"> ' +data.market+ ' ' +data.name+'</p>';
+    return render;
+}
+
+function formatNoMatches(data){
+        var render = '<p>You drunk?</p>';
+        return render;
+
+}
 
 
 
