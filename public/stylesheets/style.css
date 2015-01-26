@@ -11,3 +11,36 @@ a {
 #team-selection{
 	margin-bottom: 15px;
 }
+
+.navbar.blitz{
+	background-color: #fff;
+	border-color:#fff;
+	font-family: HelveticaNeue-Thin;
+}
+
+.navbar-brand.main{
+	font-size: 22px;
+}
+
+#team-container{
+	text-align: center;
+	padding-top: 5%;
+}
+
+#team-select{
+	font-size: 42px;
+	font-family: HelveticaNeue-Thin;
+	padding-bottom: 25px;
+}
+
+.select2-container{
+	min-width: 150px;
+}
+
+.select2-selection{
+	text-align: left;
+}
+
+.select2-selection__rendered{
+	color:gray !important;
+}
