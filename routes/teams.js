@@ -21,8 +21,7 @@ router.get('/team', function(req, res) {
 
     //find the team, This syntax does a sql-type like clause with case insensitivy(sp???) with the RegEx
     db.collection('teams').find({$or: [{'name': new RegExp(term, 'i')}, {'market': new RegExp(term, 'i')}]}).toArray(function (err, items) {
-    	console.log(items);
-        res.json(items);
+    	  res.send(JSON.stringify(items));
     });
 });
 
