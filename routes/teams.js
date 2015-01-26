@@ -1,10 +1,29 @@
 var express = require('express');
 var router = express.Router();
+var http = require("http"),
+    mongojs = require("mongojs"),
+    uri = 'mongodb://root:root@ds031541.mongolab.com:31541/rosterblitz';
+
+    db = mongojs.connect(uri, ["teams"]);
+
+
 
 /* GET users listing. */
 router.get('/', function(res, res) {
       res.render('teams', {
       });
     });
+
+//this is for the /teams page search field ajax
+router.get('/team', function(req, res) {
+    var term = req.query.q.term;
+    		limit = req.query.page_limit;
+
+    //find the team, This syntax does a sql-type like clause with case insensutivity
+    db.collection('teams').find({'name': new RegExp(term, 'i')}).toArray(function (err, items) {
+    	console.log(items);
+        res.json(items);
+    });
+});
 
 module.exports = router;
