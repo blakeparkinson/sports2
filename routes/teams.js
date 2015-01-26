@@ -14,6 +14,7 @@ router.get('/', function(res, res) {
       });
     });
 
+//this is for the /teams page search field ajax
 router.get('/team', function(req, res) {
     var term = req.query.q.term;
     		limit = req.query.page_limit;
