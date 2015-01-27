@@ -28,10 +28,9 @@ router.get('/team', function(req, res) {
 router.get('/players', function(req, res) {
     var term = req.query.q;
     console.log(term);
-    //find the team, This syntax does a sql-type like clause with case insensitivity with the RegEx
-    db_players.collection('players').find({});
-    //db_players.collection('players').find({$or: [{'full_name': new RegExp(term, 'i')}, {'last_name': new RegExp(term, 'i')}]}).toArray(function (err, items) {
-        //res.json(items);
+    //find the team, this is getting stuck on uppercase
+    db_players.collection('players').find({$or: [{'full_name': new RegExp(term, 'i')}, {'last_name': new RegExp(term, 'i')}]}).toArray(function (err, items) {
+      res.json(items);
     });
 
 
