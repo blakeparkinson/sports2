@@ -28,11 +28,18 @@ a {
 }
 
 #team-select{
-	font-size: 42px;
+	font-size: 58px;
 	font-family: HelveticaNeue-Thin;
 	padding-bottom: 25px;
 }
 
+.submit-section{
+	padding-top: 30px;
+}
+
+.quiz-btn{
+	width:34%;
+}
 .select2-container{
 	min-width: 150px;
 }

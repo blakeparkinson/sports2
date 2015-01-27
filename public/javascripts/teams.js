@@ -49,7 +49,7 @@ function formatResult(data){
     }
 
 function formatSelection(data){
-    var render = '<p class="selected-team id="' + data.id + '"> ' +data.market+ ' ' +data.name+'</p>';
+    var render = '<p class="selected-team" data-id="'+ data.id + '"> ' +data.market+ ' ' +data.name+'</p>';
     return render;
 }
 
