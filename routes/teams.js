@@ -5,6 +5,7 @@ var http = require("http"),
     uri = 'mongodb://root:root@ds031541.mongolab.com:31541/rosterblitz';
 
     db = mongojs.connect(uri, ["teams"]);
+    db_players = mongojs.connect(uri, ["players"]);
 
 
 
@@ -22,5 +23,16 @@ router.get('/team', function(req, res) {
     	res.json(items);
     });
 });
+
+// grab the players
+router.get('/players', function(req, res) {
+    var term = req.query.q;
+    console.log(term);
+    //find the team, This syntax does a sql-type like clause with case insensitivy(sp???) with the RegEx
+    db_players.collection('players').find({$or: [{'full_name': new RegExp(term, 'i')}, {'last_name': new RegExp(term, 'i')}]}).toArray(function (err, items) {
+        res.json(items);
+    });
+});
+
 
 module.exports = router;
