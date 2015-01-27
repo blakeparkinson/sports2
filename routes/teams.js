@@ -18,7 +18,7 @@ router.get('/', function(res, res) {
 router.get('/team', function(req, res) {
     var term = req.query.q;
     console.log(term);
-    //find the team, This syntax does a sql-type like clause with case insensitivy(sp???) with the RegEx
+    //find the team, This syntax does a sql-type like clause with case insensitivity with the RegEx
     db.collection('teams').find({$or: [{'name': new RegExp(term, 'i')}, {'market': new RegExp(term, 'i')}]}).toArray(function (err, items) {
     	res.json(items);
     });
@@ -28,11 +28,12 @@ router.get('/team', function(req, res) {
 router.get('/players', function(req, res) {
     var term = req.query.q;
     console.log(term);
-    //find the team, This syntax does a sql-type like clause with case insensitivy(sp???) with the RegEx
-    db_players.collection('players').find({$or: [{'full_name': new RegExp(term, 'i')}, {'last_name': new RegExp(term, 'i')}]}).toArray(function (err, items) {
-        res.json(items);
+    //find the team, This syntax does a sql-type like clause with case insensitivity with the RegEx
+    db_players.collection('players').find({});
+    //db_players.collection('players').find({$or: [{'full_name': new RegExp(term, 'i')}, {'last_name': new RegExp(term, 'i')}]}).toArray(function (err, items) {
+        //res.json(items);
     });
-});
+
 
 
 module.exports = router;

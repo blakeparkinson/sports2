@@ -15,7 +15,7 @@ var ncaa_fb_key = 'rajn798e9qe8a4av49h95qju';
 var mlb_key = 'wxf8qgjxs7ka6ay8ec249etg';
 var nba_key = 'hdgj9e9vs9hquzc6ds22wtdy',
   teams = [];
-
+/*
 
 // PLAYERS ============================================================= //
 
@@ -31,14 +31,15 @@ db_players.open(function(err,db_players){
           //just render
           renderPlayers(players);
         }
+        fetchPlayersFromApi();
       })
     }) //collection
   }); //open
 
   var fetchPlayersFromApi = function(){
-    var team = "583ec825-fb46-11e1-82cb-f4ce4684ea4c";
+    var teamz = "583ec825-fb46-11e1-82cb-f4ce4684ea4c";
 
-    request('https://api.sportsdatallc.org/nba-t3/seasontd/2014/reg/teams/'+team+'/statistics.json?api_key='+nba_key, function (error, response, body) {
+    request('https://api.sportsdatallc.org/nba-t3/seasontd/2014/reg/teams/'+teamz+'/statistics.json?api_key='+nba_key, function (error, response, body) {
       if (!error && response.statusCode == 200) {
         var json_response = (JSON.parse(response.body));
             players = formatPlayers(json_response);
@@ -101,7 +102,7 @@ var formatPlayers = function(response){
   }
   return playersarray;
 }
-
+*/
 
 
 // TEAM ============================================================= //
