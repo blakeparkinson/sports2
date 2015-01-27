@@ -8,7 +8,6 @@ var http = require("http"),
 
 
 
-/* GET users listing. */
 router.get('/', function(res, res) {
       res.render('teams', {
       });

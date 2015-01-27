@@ -44,3 +44,7 @@ a {
 .select2-selection__rendered{
 	color:gray !important;
 }
+
+.select2-container .select2-choice > .select2-chosen{
+	text-align: left
+}
