@@ -105,7 +105,7 @@ html[dir="rtl"] .select2-container .select2-choice > .select2-chosen {
     text-decoration: none;
 
     border: 0;
-    background: url('images/../images/select2.png') right top no-repeat;
+    background: url('../images/select2.png') right top no-repeat;
     cursor: pointer;
     outline: 0;
 }
