@@ -19,9 +19,10 @@ $(document).ready(function() {
                         var newData = [];
                         _.each(data, function (item) {
                             newData.push({
-                                id: item.id,  
+                                id: item._id,  
                                 market: item.market,
-                                name: item.name
+                                name: item.name,
+                                team_id: item.team_id
                             });
                         });
                         return { results: newData };
@@ -41,7 +42,6 @@ $(document).ready(function() {
 // Functions ============================================================= //
 
 function formatResult(data){
-    console.log(data);
 
     var render = '<div id ="team-market">'+data.market+ ' ' +data.name+' </div>';
 
@@ -49,7 +49,7 @@ function formatResult(data){
     }
 
 function formatSelection(data){
-    var render = '<p class="selected-team" data-id="'+ data.id + '"> ' +data.market+ ' ' +data.name+'</p>';
+    var render = '<p class="selected-team" data-team_id="'+ data.team_id + '"data-id="'+ data.id + '"> ' +data.market+ ' ' +data.name+'</p>';
     return render;
 }
 
