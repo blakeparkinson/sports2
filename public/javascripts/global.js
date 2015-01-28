@@ -22,20 +22,23 @@ function fetchTeam(event) {
     }
     else{
       var team_id = $('#teams option:selected').val();
+      console.log("else clause");
     }
 
 
     $.ajax({
      	url: 'teams/players',
       data: {team_id: team_id},
-      type: 'json',
+      type: 'get',
      		success: function(response){
-     		 	details = formatRoster(response);
-          detailsP = formatPlayers(response);
-                console.log(detailsP);
-                return details;
+     		 	//details = formatRoster(response);
+          //detailsP = formatPlayers(response);
+                console.log("this is the response"+response);
+                //return details;
      		}
-    });
+    }).done(function() {
+  alert("DONE!");
+});
 
 }
 

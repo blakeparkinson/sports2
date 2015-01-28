@@ -23,4 +23,21 @@ router.get('/team', function(req, res) {
     });
 });
 
+
+// when players endpoint is hit, call the api using that team_id
+router.get('/players', function(req, res) {
+  temp = req.query.split('=');
+  team_id = temp[1];
+  console.log("team id is: "+team_id);
+  request('https://api.sportsdatallc.org/nba-t3/seasontd/2014/reg/teams/'+team_id+'/statistics.json?api_key='+nba_key, function (error, response, body) {
+
+    if (!error && response.statusCode == 200) {
+          res.json(response);
+    } 
+    else{
+      console.log("ruh roh spaghetti oh");
+    }
+  })
+});
+
 module.exports = router;
