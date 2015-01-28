@@ -2,9 +2,10 @@ var express = require('express');
 var router = express.Router();
 var http = require("http"),
     mongojs = require("mongojs"),
-    uri = 'mongodb://root:root@ds031541.mongolab.com:31541/rosterblitz';
+    uri = 'mongodb://root:root@ds031541.mongolab.com:31541/rosterblitz',
 
-    db = mongojs.connect(uri, ["teams"]);
+    db = mongojs.connect(uri, ["teams"]),
+    db_players = mongojs.connect(uri, ["players"]);
 
 
 var request = require('request');
@@ -15,8 +16,92 @@ var mlb_key = 'wxf8qgjxs7ka6ay8ec249etg';
 var nba_key = 'hdgj9e9vs9hquzc6ds22wtdy',
   teams = [];
 
+var nba_team_ids = ["583ec825-fb46-11e1-82cb-f4ce4684ea4c","583ec8d4-fb46-11e1-82cb-f4ce4684ea4c","583ecefd-fb46-11e1-82cb-f4ce4684ea4c"];
 
- // step one. we look in mongo
+
+// PLAYERS ============================================================= //
+
+ // Just pull from API each time for now
+db_players.open(function(err,db_players){
+    db_players.collection('players',function(err,collection){
+      collection.find().toArray(function(err, players) {
+        fetchPlayersFromApi();
+      })
+    }) 
+  }); 
+
+// Why is this only pulling for one team? It should pull three times given the array above.
+  var fetchPlayersFromApi = function(){
+    for (i =0; i < nba_team_ids.length; i++){
+      teamz = nba_team_ids[i];
+
+      request('https://api.sportsdatallc.org/nba-t3/seasontd/2014/reg/teams/'+teamz+'/statistics.json?api_key='+nba_key, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+          var json_response = (JSON.parse(response.body));
+              players = formatPlayers(json_response);
+          //renderPlayers(players);
+          mongoInsertPlayers(players);
+        }
+        else{
+          console.log('no bueno');
+        }
+      });
+      console.log(i+" time through the loop");
+  }
+}
+
+/*  var renderPlayers = function(players){
+    
+    // don't render the page until we have formatted our teams
+    router.get('/', function(res, res) {
+      res.render('index', {
+      teams: players,
+      });
+    });
+  }
+*/
+
+function mongoInsertPlayers(players){
+  db_players.open(function(err, client){
+    client.collection("players", function(err, col) {
+     db_players.players.insert( players );
+    })
+  });
+
+}
+
+
+var formatPlayers = function(response){
+  playersarray = [];
+  for (i=0;i<response.players.length;i++){
+    playersarray[i] = {};
+    for(var key in response.players[i]){
+      if (key != "total" && key != "average"){
+        var value = response.players[i][key];
+        playersarray[i][key] = value;
+      }
+      else if (key =="total"){
+        for(var key in response.players[i].total) {
+          var value = response.players[i].total[key];
+          playersarray[i]["total_"+key] = value;
+        }
+      }
+      else {
+        for(var key in response.players[i].average) {
+          var value = response.players[i].average[key];
+          playersarray[i]["average_"+key] = value;
+        }
+      }
+    }
+  }
+  return playersarray;
+}
+
+
+
+// TEAM ============================================================= //
+
+// step one. we look in mongo
 db.open(function(err,db){
     db.collection('teams',function(err,collection){
       collection.find().toArray(function(err, teams) {
@@ -31,6 +116,8 @@ db.open(function(err,db){
       })
     }) //collection
   }); //open
+
+
 
   var fetchFromApi = function(){
 
