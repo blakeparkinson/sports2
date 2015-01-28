@@ -22,7 +22,6 @@ function fetchTeam(event) {
     }
     else{
       var team_id = $('#teams option:selected').val();
-      console.log("else clause");
     }
 
 
@@ -31,10 +30,7 @@ function fetchTeam(event) {
       data: {team_id: team_id},
       type: 'get',
      		success: function(response){
-     		 	//details = formatRoster(response);
-          //detailsP = formatPlayers(response);
-                console.log("this is the response"+response);
-                //return details;
+          console.log("this is the response"+response);
      		}
     }).done(function() {
   alert("DONE!");
@@ -67,31 +63,6 @@ function compare(a,b) {
 }
 
 
-var formatPlayers = function(response){
-  playersarray = [];
-  for (i=0;i<response.players.length;i++){
-    playersarray[i] = {};
-    for(var key in response.players[i]){
-      if (key != "total" && key != "average"){
-        var value = response.players[i][key];
-        playersarray[i][key] = value;
-      }
-      else if (key =="total"){
-        for(var key in response.players[i].total) {
-          var value = response.players[i].total[key];
-          playersarray[i]["total_"+key] = value;
-        }
-      }
-      else {
-        for(var key in response.players[i].average) {
-          var value = response.players[i].average[key];
-          playersarray[i]["average_"+key] = value;
-        }
-      }
-    }
-  }
-  return playersarray;
-}
 
 
 
