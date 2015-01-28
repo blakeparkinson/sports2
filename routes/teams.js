@@ -74,9 +74,9 @@ function mongoInsertPlayers(players){
 var formatPlayersDocument = function(team_id, players){
   teamDocument = {};
   teamDocument[team_id] = team_id;
-  teamDocument[id] = db.teams.find( { team_id: team_id }, { id: 1);
-  teamDocument[team_name] = db.teams.find( { team_id: team_id }, { name: 1);
-  teamDocument[market] = db.teams.find( { team_id: team_id }, { market: 1);
+  teamDocument[id] = db.teams.find( { team_id: team_id }, { id: 1});
+  teamDocument[team_name] = db.teams.find( { team_id: team_id }, { name: 1});
+  teamDocument[market] = db.teams.find( { team_id: team_id }, { market: 1});
   teamDocument[players] = players;
   return teamDocument;
 }
