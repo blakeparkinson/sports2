@@ -15,8 +15,9 @@ var roster = "#roster";
 function fetchTeam(event) {
     var target = $(event.target);
     if (target.hasClass('quiz-btn')){
-      var id = $('.selected-team').data('id');
-      var team_id = $('.selected-team').data('team-id');
+      var team = $('.selected-team'),
+          id = team.data('id'),
+          team_id = team.data('team-id');
 
     }
     else{
@@ -25,7 +26,8 @@ function fetchTeam(event) {
 
 
     $.ajax({
-     	url: 'https://api.sportsdatallc.org/nba-t3/seasontd/2014/reg/teams/'+team_id+'/statistics.json?api_key=hdgj9e9vs9hquzc6ds22wtdy',
+     	url: '/teams/players',
+      data: team_id
      		success: function(response){
      		 	details = formatRoster(response);
           detailsP = formatPlayers(response);
