@@ -15,14 +15,17 @@ var roster = "#roster";
 function fetchTeam(event) {
     var target = $(event.target);
     if (target.hasClass('quiz-btn')){
-      var team = $('.selected-team').data('id');
+      var id = $('.selected-team').data('id');
+      var team_id = $('.selected-team').data('team-id');
+
     }
     else{
-      var team = $('#teams option:selected').val();
+      var team_id = $('#teams option:selected').val();
     }
 
+
     $.ajax({
-     	url: 'https://api.sportsdatallc.org/nba-t3/seasontd/2014/reg/teams/'+team+'/statistics.json?api_key=hdgj9e9vs9hquzc6ds22wtdy',
+     	url: 'https://api.sportsdatallc.org/nba-t3/seasontd/2014/reg/teams/'+team_id+'/statistics.json?api_key=hdgj9e9vs9hquzc6ds22wtdy',
      		success: function(response){
      		 	details = formatRoster(response);
           detailsP = formatPlayers(response);
