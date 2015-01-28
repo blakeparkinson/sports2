@@ -26,8 +26,9 @@ function fetchTeam(event) {
 
 
     $.ajax({
-     	url: '/teams/players',
-      data: team_id
+     	url: 'teams/players',
+      data: {team_id: team_id},
+      type: 'json',
      		success: function(response){
      		 	details = formatRoster(response);
           detailsP = formatPlayers(response);
