@@ -33,7 +33,7 @@ switch (league){
 		break;
 	//mlb seems to only return in xml for now :(
 	case 'mlb':
-		endpoint = 'https://api.sportsdatallc.org/nfl-t1/league/hierarchy.json?api_key=' + nba_key;
+		endpoint = 'https://api.sportsdatallc.org/mlb-t4/teams/2014.xml?api_key=' + mlb_key;
 		break;
 	case 'nfl':
 		endpoint = 'https://api.sportsdatallc.org/nfl-t1/teams/hierarchy.json?api_key='+ nfl_key;
