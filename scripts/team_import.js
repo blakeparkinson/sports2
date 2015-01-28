@@ -22,10 +22,15 @@ var api_key = '';
 var ver = '';
 var endpoint = '';
 var teams = [];
-
+var supported_leagues = ['nba', 'mlb'];
 
 //process.argv grabs the command line arguments
 var league = process.argv[2];
+
+if (supported_leagues.indexOf(league) == -1){
+  console.log('We cant do this league yet. Talk to Honree');
+  return
+}
 
 switch (league){
 	case 'nba':
