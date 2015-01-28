@@ -9,7 +9,7 @@ var http = require("http"),
 
     uri = 'mongodb://root:root@ds031541.mongolab.com:31541/rosterblitz';
 
-    db = mongojs.connect(uri, ["teams"]);
+    db = mongojs.connect(uri);
 
 
 var nba_key = 'hdgj9e9vs9hquzc6ds22wtdy';
