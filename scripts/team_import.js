@@ -95,6 +95,7 @@ var formatMlbTeams = function(response){
   parseString(response, function (err, result) {
     //start teh loops
      for (i=0; i < result[Object.keys(result)[0]].team.length;i++){
+     //there was some random stuff in here, if the market exists then we know it's a real team
       if (result[Object.keys(result)[0]].team[i].$.market.trim().length != 0){
         teams.push(result[Object.keys(result)[0]].team[i].$);
       }
