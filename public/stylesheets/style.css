@@ -26,6 +26,27 @@ a {
 	text-align: center;
 	padding-top: 5%;
 }
+.footer-use {
+    position:fixed;
+    bottom:0;
+    width: 100%;
+}
+.center-it {
+		margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    margin-bottom: 20px;
+}
+.footer-list {
+		list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.footer-list > li {
+	display: inline;
+	padding: 10px;
+	margin: 0 10px 0 10px;
+}
 
 #team-select{
 	font-size: 58px;
