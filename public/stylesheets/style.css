@@ -16,7 +16,7 @@ a {
 }
 
 .navbar-right.rb{
-	padding-right: 50px
+	padding: 0 50px 0 50px;
 }
 
 .navbar.blitz{
@@ -26,14 +26,6 @@ a {
 
 .navbar-brand.main{
 	font-size: 22px;
-}
-
-.nav-bar-collapse{
-	background: rgb(252, 252, 252);
-<<<<<<< HEAD
-=======
-
->>>>>>> ad1a63a2ee4062ff91c389f4318a0fa1e45c11e0
 }
 
 #team-container{
@@ -84,8 +76,4 @@ a {
 
 .select2-container .select2-choice > .select2-chosen{
 	text-align: left
-}
-
-.navbar-right.rb li{
-	padding-left: 50px;
 }
