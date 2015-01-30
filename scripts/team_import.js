@@ -36,7 +36,7 @@ var api_key = '';
 var ver = '';
 var endpoint = '';
 var teams = [];
-var supported_leagues = ['nba', 'nfl', 'mlb', 'nhl', 'eu_soccer'];
+var supported_leagues = ['nba', 'nfl', 'mlb', 'nhl'];
 
 //process.argv grabs the command line arguments
 var league = process.argv[2];
