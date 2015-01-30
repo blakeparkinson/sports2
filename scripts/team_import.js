@@ -35,7 +35,7 @@ var api_key = '';
 var ver = '';
 var endpoint = '';
 var teams = [];
-var supported_leagues = ['nba', 'nfl', 'mlb'];
+var supported_leagues = ['nba', 'nfl', 'mlb', 'nhl'];
 
 //process.argv grabs the command line arguments
 var league = process.argv[2];
@@ -56,6 +56,9 @@ switch (league){
 	case 'nfl':
 		endpoint = 'https://api.sportsdatallc.org/nfl-t1/teams/hierarchy.json?api_key='+ nfl_key;
 		break;
+  case 'nhl':
+    endpoint = 'https://api.sportsdatallc.org/nhl-t3/league/hierarchy.json?api_key='+ nhl_key;
+    break;
 }
 
     request(endpoint, function (error, response, body) {
@@ -63,6 +66,7 @@ switch (league){
             switch (league){
 	        		case 'nba':
 	            case 'nfl':
+              case 'nhl':
 	            	teams = formatNbaAndNflTeams(response.body);
 	            	break;
               case 'mlb':
