@@ -1,5 +1,4 @@
 body {
-  padding: 0px 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -12,14 +11,25 @@ a {
 	margin-bottom: 15px;
 }
 
+.navbar-header.rb{
+	padding-left: 50px
+}
+
+.navbar-right.rb{
+	padding-right: 50px
+}
+
 .navbar.blitz{
-	background-color: #fff;
 	border-color:#fff;
 	font-family: HelveticaNeue-Thin;
 }
 
 .navbar-brand.main{
 	font-size: 22px;
+}
+
+.nav-bar-collapse{
+	background: rgb(252, 252, 252);
 }
 
 #team-container{
@@ -70,4 +80,8 @@ a {
 
 .select2-container .select2-choice > .select2-chosen{
 	text-align: left
+}
+
+.navbar-right.rb li{
+	padding-left: 50px;
 }
