@@ -16,7 +16,7 @@ a {
 }
 
 .navbar-right.rb{
-	padding-right: 50px
+	padding: 0 50px 0 50px;
 }
 
 .navbar.blitz{
@@ -26,11 +26,6 @@ a {
 
 .navbar-brand.main{
 	font-size: 22px;
-}
-
-.nav-bar-collapse{
-	background: rgb(252, 252, 252);
-
 }
 
 #team-container{
