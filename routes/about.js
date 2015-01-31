@@ -7,3 +7,5 @@ router.get('/', function(res, res) {
       res.render('teams', {
       });
     });
+
+module.exports = router;
