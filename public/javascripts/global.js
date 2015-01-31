@@ -65,6 +65,8 @@ function compare(a,b) {
 
 
 
+$('#copyright-date').text( (new Date).getFullYear() );
+
 
 
 
