@@ -36,7 +36,7 @@ var api_key = '';
 var ver = '';
 var endpoint = '';
 var teams = [];
-var supported_leagues = ['nba', 'nfl', 'mlb', 'nhl'];
+var supported_leagues = ['nba', 'nfl', 'mlb', 'nhl', 'eu_soccer'];
 
 //process.argv grabs the command line arguments
 var league = process.argv[2];
@@ -70,14 +70,16 @@ switch (league){
 	        		case 'nba':
 	            case 'nfl':
               case 'nhl':
-              case 'eu_soccer':
 	            	teams = formatNbaAndNflTeams(response.body);
 	            	break;
               case 'mlb':
                 teaams = formatMlbTeams(response.body);
                 break;
+               case 'eu_soccer':
+                teams = formatSoccerTeams(response.body);
+                break;
 	           }
-       mongoInsert(teams);
+       mongoInsert(teams, league);
       }
       else{
         console.log('somethings really terrible happened');
@@ -90,8 +92,13 @@ switch (league){
     db.open(function(err, client){
       client.collection("teams", function(err, col) {
         for (var i = 0; i < teams.length; i++) {
+          if (league == 'eu_soccer'){
+              col.insert({team_id:teams[i].id, name:teams[i].name, country:teams[i].country, league:league}, function() {});
+          }
+          else{
         //really the only 4 key:value pairs we care about for now
-          col.insert({team_id:teams[i].id, name:teams[i].name, market:teams[i].market, league:league}, function() {});
+            col.insert({team_id:teams[i].id, name:teams[i].name, market:teams[i].market, league:league}, function() {});
+          }
         }
       })
   });
@@ -111,7 +118,7 @@ return teams
 }
 
 var formatMlbTeams = function(response){
-  //convert the xml to json
+  //convert the xml to js object
   parseString(response, function (err, result) {
     //start teh loops
      for (i=0; i < result[Object.keys(result)[0]].team.length;i++){
@@ -120,6 +127,36 @@ var formatMlbTeams = function(response){
         teams.push(result[Object.keys(result)[0]].team[i].$);
       }
      }
+
+  });
+  return teams;
+}
+
+formatSoccerTeams = function(response){
+  //honree says these are the soccer stuff we care about
+  var countries = ['Germany', 'England', 'Italy', 'Spain'],
+      leagues = ['Premier League', 'Bundesliga', 'Serie A', 'Primera Division'];
+  parseString(response, function (err, result) {
+    var str = result[Object.keys(result)[0]];
+         for (i=0; i < str.category.length;i++){
+            //check to see if they are in the right country
+            if (countries.indexOf(str.category[i].$.name) > -1){
+              for (j=0; j < str.category[i].tournament_group.length; j++){
+                  //check to see if they are in the right league
+                  if (leagues.indexOf(str.category[i].tournament_group[j].$.name) > -1){
+                    for(k=0; k < str.category[i].tournament_group[j].tournament.length; k++){
+                      //no idea what's going on at this point
+                      if (str.category[i].tournament_group[j].tournament[k].$.name != 'Bundesliga Relegation/Promotion'){
+                        for (l=0; l < str.category[i].tournament_group[j].tournament[k].team.length; l++){
+                          teams.push(str.category[i].tournament_group[j].tournament[k].team[l].$);
+                        }
+                      }
+                    }
+                  }
+              }
+            }
+                
+         }
 
   });
   return teams;
