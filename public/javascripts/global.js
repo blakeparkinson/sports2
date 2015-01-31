@@ -90,6 +90,8 @@ var formatPlayers = function(response){
   return playersarray;
 }
 
+$('#copyright-date').text( (new Date).getFullYear() );
+
 
 
 

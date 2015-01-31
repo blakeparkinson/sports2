@@ -70,6 +70,12 @@ a {
         padding-bottom: 20px;
 
     }
+     .center-it {
+    	width:60%;
+    }
+    .footer-list {
+    	font-size: 12px;
+    }
 }
 
 @media screen and (max-width: 460px) {
@@ -77,6 +83,12 @@ a {
         font-size: 20px;
         padding-bottom: 15px;
 
+    }
+    .center-it {
+    	width:80%;
+    }
+    .footer-list {
+    	font-size: 10px;
     }
 }
 
