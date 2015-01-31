@@ -29,6 +29,7 @@ function fetchTeam(event) {
      	url: 'teams/players',
       data: {team_id: team_id},
       type: 'get',
+      dataType: 'json',
      		success: function(response){
           console.log("this is the response"+response);
      		}

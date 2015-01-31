@@ -33,8 +33,13 @@ router.get('/players', function(req, res) {
   team_id = req.query["team_id"];
   console.log("team id is: "+team_id);
   players = fetchPlayers(team_id);
+  // I think this res.json() fires too quickly. But I don't understand callbacks soooo
   res.json(players);
 });
+
+
+
+
 
   
 var fetchPlayers = function(team_id){ 
@@ -99,13 +104,21 @@ var formatPlayers = function(response){
   return playersarray;
 }
   
+var newfunction = function(items){
+  return items;
+}
 
 var formatPlayersDocument = function(team_id, players){
   teamDocument = {};
-  teamDocument["team_id"] = team_id;  
-  //teamDocument[id] = db.teams.find( { team_id: team_id }, { id: 1});
-  //teamDocument[team_name] = db.teams.find( { team_id: team_id }, { name: 1});
-  //teamDocument[market] = db.teams.find( { team_id: team_id }, { market: 1});
+  var teamfacts = db.collection('teams').find({"team_id": team_id },{_id: 1, name: 1, market: 1});
+  var teamfacts2 = db.collection('teams').find({"team_id": team_id },{_id: 1, name: 1, market: 1}).toArray(function (err,items){
+    newfunction(items);
+  });
+
+  teamDocument["team_api_id"] = team_id;
+  teamDocument["team_id"] = teamfacts2;
+  teamDocument["team_name"] = teamfacts.name;
+  teamDocument["market"] = teamfacts;
   teamDocument["players"] = players; 
   //teamDocumnet[last_updated] = new date();
   return teamDocument;
