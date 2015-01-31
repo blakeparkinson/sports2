@@ -5,3 +5,8 @@ var http = require("http"),
     uri = 'mongodb://root:root@ds031541.mongolab.com:31541/rosterblitz';
 
     db = mongojs.connect(uri);
+
+router.get('/', function(res, res) {
+      res.render('teams', {
+      });
+    });
