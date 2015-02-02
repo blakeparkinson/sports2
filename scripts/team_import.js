@@ -19,6 +19,9 @@ var nascar_key = 'de5k375fd658a7676494hdft';
 var golf_key = 'wuczn4z2ktufacuae7u8sxfc';
 /// ----------END KEYS-------------/////
 
+var common = require('../routes/common')
+var config = common.config();
+
 
 var express = require('express');
 var router = express.Router();
@@ -40,6 +43,9 @@ var supported_leagues = ['nba', 'nfl', 'mlb', 'nhl'];
 
 //process.argv grabs the command line arguments
 var league = process.argv[2];
+
+console.log(config.nba_key);
+return;
 
 if (supported_leagues.indexOf(league) == -1){
   console.log('We cant do this league yet.');
