@@ -33,20 +33,20 @@ if (supported_leagues.indexOf(league) == -1){
 
 switch (league){
 	case 'nba':
-		endpoint = 'https://api.sportsdatallc.org/nba-t3/league/hierarchy.json?api_key=' + nba_key;
+		endpoint = 'https://api.sportsdatallc.org/nba-t3/league/hierarchy.json?api_key=' + config.nba_key;
 		break;
 	//mlb seems to only return in xml for now :(
 	case 'mlb':
-		endpoint = 'https://api.sportsdatallc.org/mlb-t4/teams/2014.xml?api_key=' + mlb_key;
+		endpoint = 'https://api.sportsdatallc.org/mlb-t4/teams/2014.xml?api_key=' + config.mlb_key;
 		break;
 	case 'nfl':
-		endpoint = 'https://api.sportsdatallc.org/nfl-t1/teams/hierarchy.json?api_key='+ nfl_key;
+		endpoint = 'https://api.sportsdatallc.org/nfl-t1/teams/hierarchy.json?api_key='+ config.nfl_key;
 		break;
   case 'nhl':
-    endpoint = 'https://api.sportsdatallc.org/nhl-t3/league/hierarchy.json?api_key='+ nhl_key;
+    endpoint = 'https://api.sportsdatallc.org/nhl-t3/league/hierarchy.json?api_key='+ config.nhl_key;
     break;
   case 'eu_soccer':
-    endpoint = 'https://api.sportsdatallc.org/soccer-t2/eu/teams/hierarchy.xml?api_key='+ soccer_eu_key;
+    endpoint = 'https://api.sportsdatallc.org/soccer-t2/eu/teams/hierarchy.xml?api_key='+ config.soccer_eu_key;
 }
 
     request(endpoint, function (error, response, body) {
