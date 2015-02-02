@@ -93,10 +93,11 @@ switch (league){
       client.collection("teams", function(err, col) {
         for (var i = 0; i < teams.length; i++) {
           if (league == 'eu_soccer'){
-              col.insert({team_id:teams[i].id, name:teams[i].name, country:teams[i].country, league:league}, function() {});
+              //soccer teams don't really have markets, their names include their citys. For our puropses (rendering), this will go into the market field
+              col.insert({team_id:teams[i].id, market:teams[i].name, name: '', country:teams[i].country, league:league}, function() {});
           }
           else{
-        //really the only 4 key:value pairs we care about for now
+            //really the only 4 key:value pairs we care about for now
             col.insert({team_id:teams[i].id, name:teams[i].name, market:teams[i].market, league:league}, function() {});
           }
         }
