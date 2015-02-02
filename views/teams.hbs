@@ -1,7 +1,11 @@
   <body>
 
+
     <div id="team-container">
-      <div id="team-select">What's your team?</div>
+	{{#loggedIn}}
+   	 Welcome, {{ user.displayName }}
+	{{/loggedIn}}
+      <div id="team-select">What's your team? </div>
       <input id="select2" type="hidden"/>
       <div class="submit-section">
         <div class="btn btn-primary quiz-btn">Take Quiz</div>
