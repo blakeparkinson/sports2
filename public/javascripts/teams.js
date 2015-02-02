@@ -19,8 +19,8 @@ $(document).ready(function() {
                         var newData = [];
                         _.each(data, function (item) {
                             //soccer doesn't have a market
-                            if (item.market == undefined){
-                                item.market = '';
+                            if (item.name == undefined){
+                                item.name = '';
                             }
                             newData.push({
                                 id: item._id,  
