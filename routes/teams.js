@@ -22,8 +22,9 @@ var http = require("http"),
     mongojs = require("mongojs"),
     uri = 'mongodb://root:root@ds031541.mongolab.com:31541/rosterblitz',
 
-    db = mongojs.connect(uri, ["teams"]),
-    db_players = mongojs.connect(uri, ["players"]);
+    db = mongojs.connect(uri);
+    //db = mongojs.connect(uri, ["teams"]),
+    //db_players = mongojs.connect(uri, ["players"]);
 
 
 
@@ -49,19 +50,14 @@ router.get('/players', function(req, res) {
   team_id = req.query["team_id"];
   console.log("team id is: "+team_id);
   players = fetchPlayers(team_id);
-  // I think this res.json() fires too quickly. But I don't understand callbacks soooo
   res.json(players);
 });
 
-
-
-
-
   
 var fetchPlayers = function(team_id){ 
-      db_players.collection('players').find({team_id : team_id}).toArray(function (err, items){
+  db.collection('players').find({team_id : team_id}).toArray(function (err, items){
         secondFunction(items, team_id);
-      });  
+      });
 }
 
 
@@ -72,6 +68,7 @@ var secondFunction = function(mongoresult, team_id){
       if (mongoresult == "[object Object]" || mongoresult  == "" /*|| daterange > 86400*/){
         console.log("we in the if statement!");
         var players = fetchPlayersFromApi(team_id); 
+        // players is returning before it has a value
         return players;    //pass this over to client side to render
       }
       else { 
@@ -90,6 +87,8 @@ var fetchPlayersFromApi = function(team_id){
     var json_response = (JSON.parse(response.body));
     var players = formatPlayers(json_response);
     var team = formatPlayersDocument(team_id, players)
+    console.log("team type is "+typeof team);
+    console.log("team length is "+Object.keys(team).length);
     mongoInsertPlayers(team);
     return team;
   });   
@@ -144,14 +143,15 @@ var formatPlayersDocument = function(team_id, players){
 
 function mongoInsertPlayers(team_document){
   console.log("inserting into the DB");
-  db_players.open(function(err, client){
-    client.collection("players", function(err, col) {
-      db_players.players.insert( team_document );
-    })
-  });
+  db.open(function(err, db){
+    db.collection("players").insert(team_document, function (err, inserted) {
+      // check err...
+    });
+  })
+}
 
   
-}
+
 
 
 module.exports = router;
