@@ -8,15 +8,18 @@ var http = require("http"),
 
 
 
-router.get('/', function(res, res) {
-      res.render('teams', {
-      });
+router.get('/', function(req, res) {
+    if(req.user)
+         req.user["loggedIn"] = true;
+
+      res.render('teams', {user:req.user});
     });
 
 //this is for the /teams page search field ajax
 router.get('/team', function(req, res) {
     var term = req.query.q;
     console.log(term);
+
     //find the team, This syntax does a sql-type like clause with case insensitivy(sp???) with the RegEx
     db.collection('teams').find({$or: [{'name': new RegExp(term, 'i')}, {'market': new RegExp(term, 'i')}]}).sort({'market': 1}).toArray(function (err, items) {
     	res.json(items);

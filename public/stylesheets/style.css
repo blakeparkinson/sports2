@@ -114,3 +114,11 @@ a {
 .select2-container .select2-choice > .select2-chosen{
 	text-align: left
 }
+.circle-avatar{
+    margin-top:5px; 
+    width:40px;
+    height:40px; 
+    border-radius:20px; 
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+}

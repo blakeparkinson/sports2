@@ -11,8 +11,12 @@ var routes = require('./routes/index');
 var teams = require('./routes/teams');
 var about = require('./routes/about');
 
+var auth = require('./routes/auth');
+var session = require('express-session'); //express-session is currently working, but is deprecated
 
 var app = express();
+var passport = require('passport')
+  , FacebookStrategy = require('passport-facebook').Strategy;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,11 +28,17 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({ secret: '1e8804554c1f41249ae1b522b23f7937' })); 
+app.use(passport.initialize());
+app.use(passport.session()); 
+
 
 app.use('/', routes);
 app.use('/teams', teams);
 app.use('/about', about);
+app.use('/auth', auth);
 
 
 // catch 404 and forward to error handler
