@@ -26,12 +26,11 @@ var http = require("http"),
 
 
 router.get('/', function(req, res) {
-    var isLoggedIn = req.user ? true : false;
-  
-      res.render('teams', {user:req.user,loggedIn : isLoggedIn});
+    if(req.user)
+         req.user["loggedIn"] = true;
+
+      res.render('teams', {user:req.user});
     });
-
-
 
 //this is for the /teams page search field ajax
 router.get('/team', function(req, res) {
