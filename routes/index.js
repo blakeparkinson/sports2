@@ -1,27 +1,10 @@
-/// ----- KEYS -------///
-var nba_key = 'fp9yece877dze22evcbwz84q';
-var nfl_key = 'vsz2dyupsmnpsbyu7rjpqa8q';
-var ncaa_fb_key = 'qfsgey5amx9vm54he8ewxwfh';
-var mlb_key = '7gce52avk2cqmj65m5v7ff63';
-var ncaa_mb_key = 'xrnt5gsejfjkd8qz6nd8rtbx';
-var nhl_key = '6pmjhpkz4xt2e8q7pzn95wpy';
-var mma_key = 'fmzetam7v54nbrbaypgy9ycw';
-var ncaa_wb_key = 'nygw89t6gxzna6xgbbcchvmd';
-var soccer_wc_key = 'nw49yuqy98udtprsednz8t24';
-var soccer_na_key = 'hczs9xpjr3ffhbtshpj7r3n5';
-var soccer_eu_key = 'sppmmqfszcc7mrqa4bfxp9xb';
-var nascar_key = 'de5k375fd658a7676494hdft';
-var golf_key = 'wuczn4z2ktufacuae7u8sxfc';
-/// ----------END KEYS-------------/////
-
-
-
+var common = require('./common')
+var config = common.config();
 var express = require('express');
 var router = express.Router();
 var http = require("http"),
     mongojs = require("mongojs"),
-    uri = 'mongodb://root:root@ds031541.mongolab.com:31541/rosterblitz',
-    db = mongojs.connect(uri, ["teams"]);
+    db = mongojs.connect(config.mongo_uri, ["teams"]);
 
 
 var request = require('request'),
@@ -46,7 +29,7 @@ db.open(function(err,db){
 
   var fetchFromApi = function(){
 
-    request('https://api.sportsdatallc.org/nba-t3/league/hierarchy.json?api_key=' + nba_key, function (error, response, body) {
+    request('https://api.sportsdatallc.org/nba-t3/league/hierarchy.json?api_key=' + config.nba_key, function (error, response, body) {
       if (!error && response.statusCode == 200) {
         var json_response = (JSON.parse(response.body));
             teams = formatTeams(json_response);
