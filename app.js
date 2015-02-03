@@ -10,8 +10,13 @@ var http = require("http"),
 var routes = require('./routes/index');
 var teams = require('./routes/teams');
 var about = require('./routes/about');
+<<<<<<< HEAD
 var auth = require('./routes/auth');
 var session = require('express-session'); //express-session is currently working, but is deprecated
+=======
+
+
+>>>>>>> 3d282bc99ec7e30a5c7695aec082607e4aa21efd
 var app = express();
 var passport = require('passport')
   , FacebookStrategy = require('passport-facebook').Strategy;
@@ -36,7 +41,7 @@ app.use(passport.session());
 app.use('/', routes);
 app.use('/teams', teams);
 app.use('/about', about);
-app.use('/auth', auth);
+
 
 
 // catch 404 and forward to error handler
