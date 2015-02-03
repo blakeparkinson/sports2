@@ -48,7 +48,7 @@ router.get('/team', function(req, res) {
 // when players endpoint is hit, call the API/DB using that team_id
 router.get('/players', function(req, res) {
   team_id = req.query["team_id"];
-  players = fetchPlayers(team_id, res);
+  players = fetchPlayers(team_id, res, returnPlayers);
 });
 
 var returnPlayers = function (players, res){
@@ -56,19 +56,19 @@ var returnPlayers = function (players, res){
 }
 
   
-var fetchPlayers = function(team_id, res){
+var fetchPlayers = function(team_id, res, callback){
 
   db.collection('players').find({team_id : team_id}).toArray(function (err, items){
         if (items.length > 0){
             return items
         }
   });
-    fetchPlayersFromApi(team_id, res)
+    var players = fetchPlayersFromApi(team_id,res,callback)
 }
 
 
 
-var fetchPlayersFromApi = function(team_id, res){
+var fetchPlayersFromApi = function(team_id,res,callback){
 var json_response = '';
 var players = {};
   request('https://api.sportsdatallc.org/nba-t3/seasontd/2014/reg/teams/'+team_id+'/statistics.json?api_key='+nba_key, function (error, response, body) {
@@ -77,15 +77,16 @@ var players = {};
         json_response = JSON.parse(body);
                 //console.log("team type is "+typeof players);
         //console.log("team length is "+Object.keys(players).length);
-        players = formatPlayers(json_response, team_id, res);
-        return players;
+        players = formatPlayers(json_response, team_id);
+        callback(players, res)
       } 
     }); 
 
 }
 
 
-var formatPlayers = function(response, team_id, res){
+var formatPlayers = function(response, team_id){
+
   playersarray = [];
   for (i=0;i<response.players.length;i++){
     playersarray[i] = {};
@@ -108,12 +109,13 @@ var formatPlayers = function(response, team_id, res){
       }
     }
   }
-  var team = formatPlayersDocument(team_id, playersarray, res);
+  var team = formatPlayersDocument(team_id, playersarray);
+  return team;
 
 }
   
 
-var formatPlayersDocument = function(team_id, players, res){
+var formatPlayersDocument = function(team_id, players){
   teamDocument = {};
   var teamfacts = db.collection('teams').find({"team_id": team_id },{_id: 1, name: 1, market: 1});
   var teamfacts2 = db.collection('teams').find({"team_id": team_id },{_id: 1, name: 1, market: 1}).toArray(function (err,items){
@@ -124,7 +126,7 @@ var formatPlayersDocument = function(team_id, players, res){
   teamDocument["market"] = teamfacts;
   teamDocument["players"] = players; 
   //teamDocumnet[last_updated] = new date();
-  returnPlayers(teamDocument, res);
+  return teamDocument;
 }
 
 
