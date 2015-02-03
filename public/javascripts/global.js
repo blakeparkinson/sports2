@@ -34,7 +34,6 @@ function fetchTeam(event) {
           console.log("this is the response"+response);
      		}
     }).done(function() {
-  alert("DONE!");
 });
 
 }

@@ -48,54 +48,44 @@ router.get('/team', function(req, res) {
 // when players endpoint is hit, call the API/DB using that team_id
 router.get('/players', function(req, res) {
   team_id = req.query["team_id"];
-  console.log("team id is: "+team_id);
-  players = fetchPlayers(team_id);
-  res.json(players);
+  players = fetchPlayers(team_id, res);
 });
 
+var returnPlayers = function (players, res){
+    res.json(players);
+}
+
   
-var fetchPlayers = function(team_id){ 
+var fetchPlayers = function(team_id, res){
+
   db.collection('players').find({team_id : team_id}).toArray(function (err, items){
-        secondFunction(items, team_id);
-      });
+        if (items.length > 0){
+            return items
+        }
+  });
+    fetchPlayersFromApi(team_id, res)
 }
 
 
-var secondFunction = function(mongoresult, team_id){
-  console.log("mongoresult type"+ typeof mongoresult);
-  console.log("mong size"+ Object.keys(mongoresult).length);
-  if(typeof mongoresult !== "undefined"){
-      if (mongoresult == "[object Object]" || mongoresult  == "" /*|| daterange > 86400*/){
-        console.log("we in the if statement!");
-        var players = fetchPlayersFromApi(team_id); 
-        // players is returning before it has a value
-        return players;    //pass this over to client side to render
-      }
-      else { 
-        console.log("we in the else statement!");
-        return mongoresult //already fresh in the DB so just pass this over to client side to render
-      }
-    }
-  else{
-    console.log("broke");
-  }
-}
 
-
-var fetchPlayersFromApi = function(team_id){
+var fetchPlayersFromApi = function(team_id, res){
+var json_response = '';
+var players = {};
   request('https://api.sportsdatallc.org/nba-t3/seasontd/2014/reg/teams/'+team_id+'/statistics.json?api_key='+nba_key, function (error, response, body) {
-    var json_response = (JSON.parse(response.body));
-    var players = formatPlayers(json_response);
-    var team = formatPlayersDocument(team_id, players)
-    console.log("team type is "+typeof team);
-    console.log("team length is "+Object.keys(team).length);
-    mongoInsertPlayers(team);
-    return team;
-  });   
+    if (!error && response.statusCode == 200) {
+
+        json_response = JSON.parse(body);
+                //console.log("team type is "+typeof players);
+        //console.log("team length is "+Object.keys(players).length);
+        players = formatPlayers(json_response, team_id, res);
+        return players;
+      } 
+    }); 
+
 }
 
 
-var formatPlayers = function(response){
+var formatPlayers = function(response, team_id, res){
   playersarray = [];
   for (i=0;i<response.players.length;i++){
     playersarray[i] = {};
@@ -118,18 +108,15 @@ var formatPlayers = function(response){
       }
     }
   }
-  return playersarray;
+  var team = formatPlayersDocument(team_id, playersarray, res);
+
 }
   
-var newfunction = function(items){
-  return items;
-}
 
-var formatPlayersDocument = function(team_id, players){
+var formatPlayersDocument = function(team_id, players, res){
   teamDocument = {};
   var teamfacts = db.collection('teams').find({"team_id": team_id },{_id: 1, name: 1, market: 1});
   var teamfacts2 = db.collection('teams').find({"team_id": team_id },{_id: 1, name: 1, market: 1}).toArray(function (err,items){
-    newfunction(items);
   });
 
   teamDocument["team_id"] = team_id;
@@ -137,7 +124,7 @@ var formatPlayersDocument = function(team_id, players){
   teamDocument["market"] = teamfacts;
   teamDocument["players"] = players; 
   //teamDocumnet[last_updated] = new date();
-  return teamDocument;
+  returnPlayers(teamDocument, res);
 }
 
 
