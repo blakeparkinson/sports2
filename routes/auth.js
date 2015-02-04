@@ -56,7 +56,7 @@ router.get('/facebook', passport.authenticate('facebook'));
 // access was granted, the user will be logged in.  Otherwise,
 // authentication has failed.
 router.get('/facebook/callback', passport.authenticate('facebook', 
-  { successRedirect: '/teams',
+  { successRedirect: '/',
    failureRedirect: '/login' 
  }));
 
