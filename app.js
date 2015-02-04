@@ -15,9 +15,7 @@ var auth = require('./routes/auth');
 var session = require('express-session'); //express-session is currently working, but is deprecated
 
 var app = express();
-var passport = require('passport')
-  , FacebookStrategy = require('passport-facebook').Strategy;
-
+var passport = require('passport');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
