@@ -1,0 +1,24 @@
+<html>
+  <title>Please Select a Team</title>
+  <body>
+    <div id="team-selection">
+      <h1>Please Select a Team:</h1>
+      <select class="selectpicker" id="teams">
+        {{#each teams}}
+          <option value ={{id}}> {{market}} {{name}}</option>
+        {{/each}}
+      </select>
+   </div>
+    <button class ="btn btn-primary" data-action="pick-team">Submit</button>
+    <ul id="roster"></ul>
+  </body>
+<html>
+
+
+<script id="team" type="text/x-handlebars-template">
+\{{#each players}}
+  <li>
+    <span class="meta">\{{full_name}}</span>
+  </li>
+\{{/each}}
+</script>
