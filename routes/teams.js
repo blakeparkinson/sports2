@@ -9,9 +9,15 @@ var http = require("http"),
 
 
 router.get('/', function(req, res) {
-    if(req.user)
-         req.user["loggedIn"] = true;
+    if (req.user){
+        if (req.user.provider === 'twitter'){
+            req.user.twitter = true;
+        }
 
+        else if (req.user.provider === 'facebook'){
+            req.user.facebook = true;
+        }
+    }
       res.render('teams', {user:req.user});
     });
 
