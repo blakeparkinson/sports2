@@ -10,6 +10,8 @@ var http = require("http"),
 var routes = require('./routes/index');
 var teams = require('./routes/teams');
 var about = require('./routes/about');
+var common = require('./routes/common');
+var config = common.config();
 
 var auth = require('./routes/auth');
 var session = require('express-session'); //express-session is currently working, but is deprecated
@@ -28,7 +30,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({ secret: '1e8804554c1f41249ae1b522b23f7937' })); 
+app.use(session({ 
+    secret: config.express_secret,
+    resave: false,
+    saveUninitialized: false
+ })); 
+
 app.use(passport.initialize());
 app.use(passport.session()); 
 
