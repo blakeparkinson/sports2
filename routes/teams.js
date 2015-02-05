@@ -34,7 +34,7 @@ router.get('/', function(res, res) {
 router.get('/team', function(req, res) {
     var term = req.query.q;
     console.log(term);
-    //find the team, This syntax does a sql-type like clause with case insensitivy(sp???) with the RegEx
+    //find the team, This syntax does a sql-type like clause with case insensitivity with the RegEx
     db.collection('teams').find({$or: [{'name': new RegExp(term, 'i')}, {'market': new RegExp(term, 'i')}]}).toArray(function (err, items) {
     	res.json(items);
     });
@@ -53,29 +53,22 @@ var returnPlayers = function (players, res){
 
   
 var fetchPlayers = function(team_id, res, callback){
-
   db.collection('players').find({team_id : team_id}).toArray(function (err, items){
-        if (items.length > 0){
-          console.log("we found it!");
-          var itemsobject = items[0];
-          var date = itemsobject["last_updated"].valueOf();
-          var datenow = new Date();
-          var datecutoff = datenow.getTime() - 86400000;
-          if (datenowcutoff > date){  
-            console.log("this team data is old");
-            var players = fetchPlayersFromApi(team_id,res,callback)
-          }
-          else {
-            console.log("this team data is still fresh");
-            callback(items, res);
-          }
-        }
-        else {
-          console.log("we need to get it");
-          var players = fetchPlayersFromApi(team_id,res,callback)
-        }
+    if (items.length > 0){ // data in Mongo
+      var date = items[0]["last_updated"].valueOf();
+      var datenow = new Date();
+      var datecutoff = datenow.getTime() - 86400000;
+      if (datecutoff > date){   //data is old so call API
+        var players = fetchPlayersFromApi(team_id,res,callback)
+      }
+      else {  // data is fine so just return it
+        callback(items, res);
+      }
+    }
+    else {  // data not already in Mongo
+      var players = fetchPlayersFromApi(team_id,res,callback)
+    }
   });
-
 }
 
 
@@ -85,19 +78,16 @@ var json_response = '';
 var players = {};
   request('https://api.sportsdatallc.org/nba-t3/seasontd/2014/reg/teams/'+team_id+'/statistics.json?api_key='+nba_key, function (error, response, body) {
     if (!error && response.statusCode == 200) {
-
-        json_response = JSON.parse(body);
-        players = formatPlayers(json_response, team_id);
-        mongoInsertPlayers(team_id, players);
-        callback(players, res)
-      } 
-    }); 
-
+      json_response = JSON.parse(body);
+      players = formatPlayers(json_response, team_id);
+      mongoInsertPlayers(team_id, players);
+      callback(players, res)
+    } 
+  }); 
 }
 
 
 var formatPlayers = function(response, team_id){
-
   playersarray = [];
   for (i=0;i<response.players.length;i++){
     playersarray[i] = {};
@@ -122,14 +112,12 @@ var formatPlayers = function(response, team_id){
   }
   var team = formatPlayersDocument(team_id, playersarray);
   return team;
-
 }
   
 
 var formatPlayersDocument = function(team_id, players){
   teamDocument = {};
   teamDocument["team_id"] = team_id;
-  teamDocument["last_updated"] = '';
   teamDocument["players"] = players; 
   return teamDocument;
 }
@@ -138,26 +126,15 @@ var formatPlayersDocument = function(team_id, players){
 function mongoInsertPlayers(team_id, team_document){
   console.log("inserting into the DB");
   db.open(function(err, db){
-    //db.collection("players").insert(team_document, function (err, inserted) {
     db.collection("players").update({team_id: team_id},
     {$set: {team_id: team_document["team_id"], last_updated: new Date(), players: team_document["players"]}},
-    {upsert: true, multi:false}, function (err, upserted){//stuff})
-      /*db.collection("players").update(
-        {team_id: team_id},
-        {$set: {last_updated: new Date()}},
-        {
-          upsert: false,
-          multi: false,
-        }, function (err, updated) {
-          //something
-        }
-      )*/
+    {upsert: true, multi:false}, function (err, upserted){
+      // if error
     });
   });
 }
 
   
 
-
-
 module.exports = router;
+
