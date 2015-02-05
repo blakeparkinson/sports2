@@ -18,6 +18,7 @@ var golf_key = 'wuczn4z2ktufacuae7u8sxfc';
 var express = require('express');
 var request = require('request');
 var router = express.Router();
+//var _ = require('underscore');
 var http = require("http"),
     mongojs = require("mongojs"),
     uri = 'mongodb://root:root@ds031541.mongolab.com:31541/rosterblitz',
@@ -51,14 +52,18 @@ var returnPlayers = function (players, res){
     res.json(players);
 }
 
-  
+// Check the db first. If it's there and has been added in the last 24 hours, use it. 
+// Otherwise, go get new data from the API and replace/add the database listing
 var fetchPlayers = function(team_id, res, callback){
   db.collection('players').find({team_id : team_id}).toArray(function (err, items){
     if (items.length > 0){ // data in Mongo
-      var date = items[0]["last_updated"].valueOf();
+      // will get this working when I can figure out how to import underscore
+      //var itemdate = _.first(items['last_updated']);
+      //console.log(itemdate);
+      var itemdate = items[0]["last_updated"].valueOf();
       var datenow = new Date();
       var datecutoff = datenow.getTime() - 86400000;
-      if (datecutoff > date){   //data is old so call API
+      if (datecutoff > itemdate){   //data is old so call API
         var players = fetchPlayersFromApi(team_id,res,callback)
       }
       else {  // data is fine so just return it
@@ -86,7 +91,7 @@ var players = {};
   }); 
 }
 
-
+// flatten players, average, & total objects into one level
 var formatPlayers = function(response, team_id){
   playersarray = [];
   for (i=0;i<response.players.length;i++){
@@ -129,7 +134,7 @@ function mongoInsertPlayers(team_id, team_document){
     db.collection("players").update({team_id: team_id},
     {$set: {team_id: team_document["team_id"], last_updated: new Date(), players: team_document["players"]}},
     {upsert: true, multi:false}, function (err, upserted){
-      // if error
+      console.log("upsert complete");
     });
   });
 }
