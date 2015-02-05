@@ -3,7 +3,7 @@ var config = common.config();
 var express = require('express');
 var request = require('request');
 var router = express.Router();
-//var _ = require('underscore');
+var _ = require('underscore');
 var http = require("http"),
     mongojs = require("mongojs"),
     db = mongojs.connect(config.mongo_uri);
@@ -41,10 +41,7 @@ var returnPlayers = function (players, res){
 var fetchPlayers = function(team_id, res, callback){
   db.collection('players').find({team_id : team_id}).toArray(function (err, items){
     if (items.length > 0){ // data in Mongo
-      // will get this working when I can figure out how to import underscore
-      //var itemdate = _.first(items['last_updated']);
-      //console.log(itemdate);
-      var itemdate = items[0]["last_updated"].valueOf();
+      var itemdate = _.first(items['last_updated']);
       var datenow = new Date();
       var datecutoff = datenow.getTime() - 86400000;
       if (datecutoff > itemdate){   //data is old so call API
