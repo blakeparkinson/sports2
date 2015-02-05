@@ -57,7 +57,18 @@ var fetchPlayers = function(team_id, res, callback){
   db.collection('players').find({team_id : team_id}).toArray(function (err, items){
         if (items.length > 0){
           console.log("we found it!");
+          var itemsobject = items[0];
+          var date = itemsobject["last_updated"].valueOf();
+          var datenow = new Date();
+          var datecutoff = datenow.getTime() - 86400000;
+          if (datecutoff > date){
+            console.log("this team data is old");
+            var players = fetchPlayersFromApi(team_id,res,callback)
+          }
+          else {
+            console.log("this team data is still fresh");
             callback(items, res);
+          }
         }
         else {
           console.log("we need to get it");
@@ -134,7 +145,6 @@ function mongoInsertPlayers(team_document){
         {
           upsert: false,
           multi: false,
-          //writeConcern: <document>
         }, function (err, updated) {
           //something
         }
