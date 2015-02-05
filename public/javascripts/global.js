@@ -19,6 +19,7 @@ $(document).ready(function() {
 var roster = "#roster";
 
 function openAuthPopup(){
+  //TODO center the popup in the screen
   window.open('auth/twitter', 'Log in with Twitter', 'width=780,height=410,toolbar=0,scrollbars=0,status=0,resizable=0,location=0,menuBar=0,left=500,top=800');
 }
 
