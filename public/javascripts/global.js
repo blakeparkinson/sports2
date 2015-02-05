@@ -4,13 +4,29 @@ $(document).ready(function() {
 
     // Populate the user table on initial page load    
     $('body').on('click', '[data-action="pick-team"], .quiz-btn', fetchTeam);
+    $('body').on('click', '.twitter-login', openAuthPopup);
+    $('body').on('click', '.close-auth', closePopupAndRefreshPage);
 
+    if (window.location.href.indexOf('auth') > -1){
+      // let's just close the window for auth popup for them
+      $('.close-auth').trigger('click');
+    }
     
 });
 
 // Functions ============================================================= //
 
 var roster = "#roster";
+
+function openAuthPopup(){
+  //TODO center the popup in the screen
+  window.open('auth/twitter', 'Log in with Twitter', 'width=780,height=410,toolbar=0,scrollbars=0,status=0,resizable=0,location=0,menuBar=0,left=500,top=800');
+}
+
+function closePopupAndRefreshPage(){
+  window.opener.location.reload(true);
+  window.close();
+}
 
 function fetchTeam(event) {
     var target = $(event.target);

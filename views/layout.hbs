@@ -19,37 +19,41 @@
     </button>    
   </div>
   <div class="navbar-collapse collapse">
-    <ul class="nav navbar-nav navbar-right rb"> 
-      {{#if user.facebook}}
-         <li><div class="circle-avatar" style="background:url(http://graph.facebook.com/v2.2/{{ user.id }}/picture?height=20&width=20) no-repeat;"></div></li>
-         <li><a>{{ displayName }}</a></li>
-      {{else}}
-         <li><a  href="/auth/facebook">Login with Facebook</a></li>
-      {{/if}}
-      {{#if user.twitter}}
-         <li>
-          <div class="circle-avatar" style="background:url({{user._json.profile_image_url_https}}) no-repeat;"></div>
-         </li>
-      {{else}}
-         <li><a href="/auth/twitter">Login with Twitter</a></li>
-      {{/if}}
-         <li><a href="#contact">Pony</a></li>
-    </ul>
+    {{# unless special_layout}}
+      <ul class="nav navbar-nav navbar-right rb"> 
+        {{#if user.facebook}}
+           <li><div class="circle-avatar" style="background:url(http://graph.facebook.com/v2.2/{{ user.id }}/picture?height=20&width=20) no-repeat;"></div></li>
+           <li><a>{{ displayName }}</a></li>
+        {{else}}
+           <li><a  href="/auth/facebook">Login with Facebook</a></li>
+        {{/if}}
+        {{#if user.twitter}}
+           <li>
+            <div class="circle-avatar" style="background:url({{user._json.profile_image_url_https}}) no-repeat;"></div>
+           </li>
+        {{else}}
+           <li><a class="twitter-login" href=>Login with Twitter</a></li>
+        {{/if}}
+           <li><a href="#contact">Pony</a></li>
+      </ul>
+    {{/unless}}
   </div>
 </nav>
 	</header>
     {{{body}}}
-    <div class="blitz footer-use">
-      <div class="center-it">
-        <ul class="footer-list">
-          <li><a href="/">Home</a></li>      
-          <li><a href="/about">About</a></li>
-          <li><a href="/jobs">Jobs</a></li>
-          <li><a href="/contactUs">Contact Us</a></li>
-          <li>Copyright <span id="copyright-date"></span>
-        </ul>
-      </div>    
-    </div>
+    {{# unless special_layout}}
+      <div class="blitz footer-use">
+        <div class="center-it">
+          <ul class="footer-list">
+            <li><a href="/">Home</a></li>      
+            <li><a href="/about">About</a></li>
+            <li><a href="/jobs">Jobs</a></li>
+            <li><a href="/contactUs">Contact Us</a></li>
+            <li>Copyright <span id="copyright-date"></span>
+          </ul>
+        </div>    
+      </div>
+    {{/unless}}
 
 
     <script src='/javascripts/underscore.min.js'></script>
