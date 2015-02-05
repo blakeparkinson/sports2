@@ -23,10 +23,6 @@ var http = require("http"),
     uri = 'mongodb://root:root@ds031541.mongolab.com:31541/rosterblitz',
 
     db = mongojs.connect(uri);
-    //db = mongojs.connect(uri, ["teams"]),
-    //db_players = mongojs.connect(uri, ["players"]);
-
-
 
 
 router.get('/', function(res, res) {
@@ -60,10 +56,15 @@ var fetchPlayers = function(team_id, res, callback){
 
   db.collection('players').find({team_id : team_id}).toArray(function (err, items){
         if (items.length > 0){
-            return items
+          console.log("we found it!");
+            callback(items, res);
+        }
+        else {
+          console.log("we need to get it");
+          var players = fetchPlayersFromApi(team_id,res,callback)
         }
   });
-    var players = fetchPlayersFromApi(team_id,res,callback)
+
 }
 
 
@@ -78,6 +79,7 @@ var players = {};
                 //console.log("team type is "+typeof players);
         //console.log("team length is "+Object.keys(players).length);
         players = formatPlayers(json_response, team_id);
+        mongoInsertPlayers(players);
         callback(players, res)
       } 
     }); 
@@ -117,13 +119,7 @@ var formatPlayers = function(response, team_id){
 
 var formatPlayersDocument = function(team_id, players){
   teamDocument = {};
-  var teamfacts = db.collection('teams').find({"team_id": team_id },{_id: 1, name: 1, market: 1});
-  var teamfacts2 = db.collection('teams').find({"team_id": team_id },{_id: 1, name: 1, market: 1}).toArray(function (err,items){
-  });
-
   teamDocument["team_id"] = team_id;
-  teamDocument["team_name"] = teamfacts.name;
-  teamDocument["market"] = teamfacts;
   teamDocument["players"] = players; 
   //teamDocumnet[last_updated] = new date();
   return teamDocument;
