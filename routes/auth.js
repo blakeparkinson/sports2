@@ -17,12 +17,17 @@ passport.deserializeUser(function(obj, done) {
 });
 
 
+
 passport.use(new FacebookStrategy({
     clientID: config.facebook_client_id,
     clientSecret: config.facebook_client_secret,
-    callbackURL: "http://localhost:3000/auth/facebook/callback"
+    callbackURL: "http://localhost:3000/auth/facebook/callback",
+    passReqToCallback: true
   },
-  function(accessToken, refreshToken, profile, done) {
+  function(req,accessToken, refreshToken, profile, done) {
+    req.session.facebook = profile;
+    req.session.facebook.token = accessToken;
+    req.session.facebook.auth = true;
   	//check if exists / save user to database (http://passportjs.org/guide/profile/)
   	/*
   	 User.findOrCreate({ facebookId: profile.id }, function (err, user) {
@@ -38,9 +43,13 @@ passport.use(new FacebookStrategy({
 passport.use(new TwitterStrategy({
     consumerKey: config.twitter_consumer_key,
     consumerSecret: config.twitter_consumer_secret,
-    callbackURL: "http://localhost:3000/auth/twitter/callback"
+    callbackURL: "http://localhost:3000/auth/twitter/callback",
+    passReqToCallback: true
   },
-  function(token, tokenSecret, profile, done) {
+  function(req,token, tokenSecret, profile, done) {
+      req.session.twitter = profile;
+      req.session.twitter.auth = true;
+      req.session.twitter.token = token;
     /*User.findOrCreate(..., function(err, user) {
       if (err) { return done(err); }
       done(null, user);
