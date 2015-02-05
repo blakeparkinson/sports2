@@ -18,6 +18,10 @@ $(document).ready(function() {
                     results: function(data, page) {
                         var newData = [];
                         _.each(data, function (item) {
+                            //soccer doesn't have a market
+                            if (item.name == undefined){
+                                item.name = '';
+                            }
                             newData.push({
                                 id: item._id,  
                                 market: item.market,
