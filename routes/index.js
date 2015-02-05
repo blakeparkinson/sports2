@@ -7,16 +7,7 @@ var http = require("http"),
     db = mongojs.connect(config.mongo_uri, ["teams"]);
 
 router.get('/', function(req, res) {
-    if (req.user){
-        if (req.user.provider === 'twitter'){
-            req.user.twitter = true;
-        }
-
-        else if (req.user.provider === 'facebook'){
-            req.user.facebook = true;
-        }
-    }
-      res.render('index', {user:req.user});
+      res.render('index', {session:req.session});
     });
 
 
