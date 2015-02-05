@@ -61,7 +61,7 @@ var fetchPlayers = function(team_id, res, callback){
           var date = itemsobject["last_updated"].valueOf();
           var datenow = new Date();
           var datecutoff = datenow.getTime() - 86400000;
-          if (datecutoff > date){
+          if (datenowcutoff > date){  
             console.log("this team data is old");
             var players = fetchPlayersFromApi(team_id,res,callback)
           }
@@ -88,7 +88,7 @@ var players = {};
 
         json_response = JSON.parse(body);
         players = formatPlayers(json_response, team_id);
-        mongoInsertPlayers(players);
+        mongoInsertPlayers(team_id, players);
         callback(players, res)
       } 
     }); 
@@ -135,11 +135,14 @@ var formatPlayersDocument = function(team_id, players){
 }
 
 
-function mongoInsertPlayers(team_document){
+function mongoInsertPlayers(team_id, team_document){
   console.log("inserting into the DB");
   db.open(function(err, db){
-    db.collection("players").insert(team_document, function (err, inserted) {
-      db.collection("players").update(
+    //db.collection("players").insert(team_document, function (err, inserted) {
+    db.collection("players").update({team_id: team_id},
+    {$set: {team_id: team_document["team_id"], last_updated: new Date(), players: team_document["players"]}},
+    {upsert: true, multi:false}, function (err, upserted){//stuff})
+      /*db.collection("players").update(
         {team_id: team_id},
         {$set: {last_updated: new Date()}},
         {
@@ -148,7 +151,7 @@ function mongoInsertPlayers(team_document){
         }, function (err, updated) {
           //something
         }
-      )
+      )*/
     });
   });
 }
