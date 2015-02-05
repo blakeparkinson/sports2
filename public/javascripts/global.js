@@ -6,6 +6,11 @@ $(document).ready(function() {
     $('body').on('click', '[data-action="pick-team"], .quiz-btn', fetchTeam);
     $('body').on('click', '.twitter-login', openAuthPopup);
     $('body').on('click', '.close-auth', closePopupAndRefreshPage);
+
+    if (window.location.href.indexOf('auth') > -1){
+      // let's just close the window for auth popup for them
+      $('.close-auth').trigger('click');
+    }
     
 });
 
