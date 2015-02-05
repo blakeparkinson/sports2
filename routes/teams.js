@@ -76,8 +76,6 @@ var players = {};
     if (!error && response.statusCode == 200) {
 
         json_response = JSON.parse(body);
-                //console.log("team type is "+typeof players);
-        //console.log("team length is "+Object.keys(players).length);
         players = formatPlayers(json_response, team_id);
         mongoInsertPlayers(players);
         callback(players, res)
@@ -120,8 +118,8 @@ var formatPlayers = function(response, team_id){
 var formatPlayersDocument = function(team_id, players){
   teamDocument = {};
   teamDocument["team_id"] = team_id;
+  teamDocument["last_updated"] = '';
   teamDocument["players"] = players; 
-  //teamDocumnet[last_updated] = new date();
   return teamDocument;
 }
 
@@ -130,9 +128,19 @@ function mongoInsertPlayers(team_document){
   console.log("inserting into the DB");
   db.open(function(err, db){
     db.collection("players").insert(team_document, function (err, inserted) {
-      // check err...
+      db.collection("players").update(
+        {team_id: team_id},
+        {$set: {last_updated: new Date()}},
+        {
+          upsert: false,
+          multi: false,
+          //writeConcern: <document>
+        }, function (err, updated) {
+          //something
+        }
+      )
     });
-  })
+  });
 }
 
   
