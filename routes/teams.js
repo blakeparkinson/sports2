@@ -11,7 +11,6 @@ var http = require("http"),
 var request = require('request'),
     teams = [];
 
-
  // step one. we look in mongo
 db.open(function(err,db){
     db.collection('teams',function(err,collection){
