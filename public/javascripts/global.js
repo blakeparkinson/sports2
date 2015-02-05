@@ -13,9 +13,6 @@ $(document).ready(function() {
 
 var roster = "#roster";
 
-var win;
-var checkConnect;
-
 function openAuthPopup(){
   window.open('auth/twitter', 'Log in with Twitter', 'width=780,height=410,toolbar=0,scrollbars=0,status=0,resizable=0,location=0,menuBar=0,left=500,top=800');
 }
