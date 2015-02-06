@@ -122,3 +122,15 @@ a {
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
 }
+
+.auth-container{
+    text-align: center;
+    padding-top: 100px;
+}
+
+.auth-thanks{
+    color: #777;
+    font-family: HelveticaNeue-Thin;
+    font-size: 30px;
+    padding-bottom: 20px;
+}
