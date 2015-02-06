@@ -75,8 +75,6 @@ switch (league){
     break;
   case 'nhl':
     endpoint = 'https://api.sportsdatallc.org/nhl-t3/seasontd/2014/REG/teams/'+team_id+'/statistics.json?api_key='+ config.nhl_key;
-  default:
-    console.log("poop");
 }
 
     request(endpoint, function (error, response, body) {
@@ -99,45 +97,14 @@ switch (league){
 }
 
 
-// flatten players, average, & total objects into one level
 var formatPlayers = function(response, team_id){
   playersarray = [];
   for (i=0;i<response.players.length;i++){
     playersarray[i] = {};
-    for(var key in response.players[i]){
-      if (key =="total"){  //nba
-        for(var key in response.players[i].total) {
-          var value = response.players[i].total[key];
-          playersarray[i]["total_"+key] = value;
-        }
-      }
-      else if (key =="average"){  // nba
-        for(var key in response.players[i].average) {
-          var value = response.players[i].average[key];
-          playersarray[i]["average_"+key] = value;
-        }
-      }
-      else if (key == "statistics"){   //nfl & nhl
-        for(var key in response.players[i].statistics){
-          var value = response.players[i].statistics[key];
-          playersarray[i]["statistics_"+key] = value;
-        }
-      }
-      else if (key == "time_on_ice"){   //nhl
-        for(var key in response.players[i].time_on_ice){
-          var value = response.players[i].time_on_ice[key];
-          playersarray[i]["time_on_ice"+key] = value;
-        }
-      }
-      else{
-        for(var key in response.players[i]){   //all
-          if (key != "total" && key != "average"){
-            var value = response.players[i][key];
-            playersarray[i][key] = value;
-          }
-        }
-      }
-    }    
+    for(var key in response.players[i]){   //all
+      var value = response.players[i][key];
+      playersarray[i][key] = value;
+    }
   }
   var team = formatPlayersDocument(team_id, playersarray);
   return team;
