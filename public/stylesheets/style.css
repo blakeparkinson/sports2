@@ -1,5 +1,12 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+/* do epic photo later
+  background: url("http://p1.pichost.me/i/59/1834780.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  */
 }
 
 a {
@@ -33,29 +40,38 @@ a {
 	padding-top: 5%;
 }
 
-.footer-use {
-    position:fixed;
-    bottom:0;
-    width: 100%;
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+}
+.container {
+  width: auto;
+  max-width: 680px;
+  padding: 0 15px;
+  text-align: center;
+}
+.container .text-muted {
+  margin: 20px 0;
+  text-align: center;
+  font-family: HelveticaNeue-Thin;
+}
+.bs-docs-footer-links {
+    padding-left: 0;
+    margin-top: 20px;
+}
+.bs-docs-footer-links > li {
+	margin:0 10px 0 10px;
+    display: inline-block;
+}
+ul {
+    list-style-type: none;    
 }
 .center-it {
-    margin-left: auto;
-    margin-right: auto;
-    width: 40%;
-    margin-bottom: 20px;
-}
-.footer-list {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    font-family: HelveticaNeue-Thin;
-    border-color:#fff;
-    font-size: 16px;    
-}
-.footer-list > li {
-  display: inline;
-  padding: 10px;
-  margin: 0 10px 0 10px;
+	width: auto;
 }
 
 #team-select{
@@ -70,12 +86,7 @@ a {
         padding-bottom: 20px;
 
     }
-     .center-it {
-    	width:60%;
-    }
-    .footer-list {
-    	font-size: 12px;
-    }
+     
 }
 
 @media screen and (max-width: 460px) {
@@ -83,13 +94,7 @@ a {
         font-size: 20px;
         padding-bottom: 15px;
 
-    }
-    .center-it {
-    	width:80%;
-    }
-    .footer-list {
-    	font-size: 10px;
-    }
+    }    
 }
 
 .submit-section{
