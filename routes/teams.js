@@ -7,11 +7,10 @@ var _ = require('underscore');
 var http = require("http"),
     mongojs = require("mongojs"),
     db = mongojs.connect(config.mongo_uri);
-var dataAgeCutOff = 86400000;
+var dataAgeCutOff = 86400000;  //This is 24 hours in milliseconds
 var teams = [];
 
 
-//<<<<<<< HEAD
 router.get('/', function(res, res) {
       res.render('teams', {
       });
