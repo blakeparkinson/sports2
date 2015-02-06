@@ -7,6 +7,7 @@ var _ = require('underscore');
 var http = require("http"),
     mongojs = require("mongojs"),
     db = mongojs.connect(config.mongo_uri);
+var dataAgeCutOff = 86400000;
 
 
 router.get('/', function(res, res) {
@@ -43,7 +44,7 @@ var fetchPlayers = function(team_id, res, callback){
     if (items.length > 0){ // data in Mongo
       var itemdate = _.first(items['last_updated']);
       var datenow = new Date();
-      var datecutoff = datenow.getTime() - 86400000;
+      var datecutoff = datenow.getTime() - dataAgeCutOff;
       if (datecutoff > itemdate){   //data is old so call API
         var players = fetchPlayersFromApi(team_id,res,callback)
       }
@@ -115,7 +116,10 @@ function mongoInsertPlayers(team_id, team_document){
     db.collection("players").update({team_id: team_id},
     {$set: {team_id: team_document["team_id"], last_updated: new Date(), players: team_document["players"]}},
     {upsert: true, multi:false}, function (err, upserted){
-      console.log("upsert complete");
+      if (err) {
+        console.log('Ahh! An Error!');
+        return;
+      }
     });
   });
 }
