@@ -3,6 +3,7 @@ var router = express.Router();
 var common = require('./common')
 var config = common.config();
 var http = require("http");
+var Twitter = require('twitter');
 var passport = require('passport'),
     TwitterStrategy = require('passport-twitter').Strategy,
     FacebookStrategy = require('passport-facebook').Strategy;
@@ -50,6 +51,7 @@ passport.use(new TwitterStrategy({
       req.session.twitter = profile;
       req.session.twitter.auth = true;
       req.session.twitter.token = token;
+      req.session.twitter.token_secret = tokenSecret;
     /*User.findOrCreate(..., function(err, user) {
       if (err) { return done(err); }
       done(null, user);
@@ -83,6 +85,19 @@ router.get('/', function(res, res) {
       });
     });
 
+router.get('/tweet', function(req, res) {
+  message = req.query["message"];
+  var client = new Twitter({
+    consumer_key: config.twitter_consumer_key,
+    consumer_secret: config.twitter_consumer_secret,
+    access_token_key: req.session.twitter.token,
+    access_token_secret: req.session.twitter.token_secret
+  });
+
+  client.post('statuses/update', {status: message},  function(error, tweet, response){
+    if(error) throw error;
+  });
+});
 
 
 module.exports = router;

@@ -6,6 +6,7 @@ $(document).ready(function() {
     $('body').on('click', '[data-action="pick-team"], .quiz-btn', fetchTeam);
     $('body').on('click', '.twitter-login', openAuthPopup);
     $('body').on('click', '.close-auth', closePopupAndRefreshPage);
+    $('body').on('click', '.tweet-btn', postToTwitter);
 
     if (window.location.href.indexOf('auth') > -1){
       // let's just close the window for auth popup for them
@@ -17,6 +18,18 @@ $(document).ready(function() {
 // Functions ============================================================= //
 
 var roster = "#roster";
+
+function postToTwitter(){
+  $.ajax({
+      url: 'auth/tweet',
+      data: {message: 'From Rosterblitz. GLASSMAN GOAT 4/20'},
+      type: 'get',
+      dataType: 'json',
+        success: function(response){
+          console.log('here');
+        }
+    })
+}
 
 function openAuthPopup(){
   //TODO center the popup in the screen
