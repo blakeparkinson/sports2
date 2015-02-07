@@ -63,7 +63,7 @@ function fetchTeam(event) {
       type: 'get',
       dataType: 'json',
      		success: function(response){
-          console.log("this is the response"+response);
+          window.location.href ='quiz?quiz_id=6'
      		}
     }).done(function() {
 });

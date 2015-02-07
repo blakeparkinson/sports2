@@ -9,7 +9,9 @@ var http = require("http"),
 
 var routes = require('./routes/index');
 var teams = require('./routes/teams');
+var quiz = require('./routes/quiz');
 var about = require('./routes/about');
+var players = require('./routes/players');
 var common = require('./routes/common');
 var config = common.config();
 
@@ -44,6 +46,10 @@ app.use('/', routes);
 app.use('/teams', teams);
 app.use('/about', about);
 app.use('/auth', auth);
+app.use('/quiz', quiz);
+app.use('/players', players);
+
+
 
 
 // catch 404 and forward to error handler
