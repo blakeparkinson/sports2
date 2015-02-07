@@ -54,8 +54,7 @@ function fetchTeam(event) {
       var team_id = $('#teams option:selected').val();
     }
 
-    //var data = {team_id: team_id, league: league};
-    var data = {id: id};
+    var data = {team_id: team_id, league: league};
 
     $.ajax({
      	url: 'teams/players',
