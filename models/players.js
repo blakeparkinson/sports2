@@ -1,4 +1,4 @@
-var common = require('./common')
+var common = require('../routes/common')
 var config = common.config();
 var express = require('express');
 var request = require('request');
@@ -11,31 +11,6 @@ var dataAgeCutOff = 86400000;  //This is 24 hours in milliseconds
 var teams = [];
 var endpoint = '';
 
-
-router.get('/', function(res, res) {
-      res.render('teams', {
-      });
-    });
-
-
-//this is for the /teams page search field ajax
-router.get('/team', function(req, res) {
-    var term = req.query.q;
-    console.log(term);
-    //find the team, This syntax does a sql-type like clause with case insensitivity with the RegEx
-    db.collection('teams').find({$or: [{'name': new RegExp(term, 'i')}, {'market': new RegExp(term, 'i')}]}).sort({'market': 1}).toArray(function (err, items) {
-    	res.json(items);
-    });
-});
-
-
-// when players endpoint is hit, call the API/DB using that team_id
-router.get('/players', function(req, res) {
-  team_id = req.query["team_id"];
-  league = req.query["league"];
-  players = fetchPlayers(team_id, league, res, returnPlayers);
-});
-
 var returnPlayers = function (players, res){
     res.json(players);
 }
@@ -43,6 +18,7 @@ var returnPlayers = function (players, res){
 // Check the db first. If it's there and has been added in the last 24 hours, use it. 
 // Otherwise, go get new data from the API and replace/add the database listing
 var fetchPlayers = function(team_id, league, res, callback){
+  console.log('hi');
   db.collection('players').find({team_id : team_id}).toArray(function (err, items){
     if (items.length > 0){ // data in Mongo
       var itemdate = _.first(items['last_updated']);
@@ -133,7 +109,11 @@ function mongoInsertPlayers(team_id, team_document){
   });
 }
 
-  
-
-module.exports = router;
-
+module.exports = {
+  returnPlayers: returnPlayers,
+  fetchPlayersFromApi: fetchPlayersFromApi,
+  fetchPlayers: fetchPlayers,
+  formatPlayers: formatPlayers,
+  formatPlayersDocument: formatPlayersDocument,
+  mongoInsertPlayers: mongoInsertPlayers
+}
