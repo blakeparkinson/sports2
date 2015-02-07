@@ -30,15 +30,85 @@ router.get('/team', function(req, res) {
 
 
 // when players endpoint is hit, call the API/DB using that team_id
-router.get('/players', function(req, res) {
+/*router.get('/players', function(req, res) {
   team_id = req.query["team_id"];
   league = req.query["league"];
   players = fetchPlayers(team_id, league, res, returnPlayers);
-});
+});*/
 
 var returnPlayers = function (players, res){
     res.json(players);
 }
+
+
+// when quiz endpoint is hit, insert a new quiz into mongo and return quiz_id and rosterblitz team_id
+router.get('/players', function(req, res) {
+  id = req.query["id"];
+  console.log("Id is "+ id);
+  quiz = createQuiz(id, res, returnQuiz);
+});
+
+var returnQuiz = function (quiz, res){
+  res.json(quiz);
+}
+
+var createQuiz = function(rb_team_id, res, callback){
+  db.open(function(err, db){
+    db.collection("quiz").insert({team_id: rb_team_id}, function (err, insert){
+        if (err){
+          console.log("new quiz insert failed");
+        }
+        else {
+          var quiz_id = insert[0]._id;
+          console.log(insert);
+          console.log("quiz_id is"+quiz_id);
+          callback(quiz_id, res);
+        }
+    });
+  });
+}
+
+
+var returnPlayers = function (players, res){
+    res.json(players);
+}
+
+
+
+
+
+
+function mongoInsertPlayers(team_id, team_document){
+  console.log("inserting into the DB");
+  db.open(function(err, db){
+    db.collection("players").update({team_id: team_id},
+    {$set: {team_id: team_document["team_id"], last_updated: new Date(), players: team_document["players"]}},
+    {upsert: true, multi:false}, function (err, upserted){
+      if (err) {
+        console.log('Ahh! An Error!');
+        return;
+      }
+    });
+  });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Check the db first. If it's there and has been added in the last 24 hours, use it. 
 // Otherwise, go get new data from the API and replace/add the database listing

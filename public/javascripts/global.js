@@ -54,8 +54,8 @@ function fetchTeam(event) {
       var team_id = $('#teams option:selected').val();
     }
 
-    var data = {team_id: team_id, league: league};
-
+    //var data = {team_id: team_id, league: league};
+    var data = {id: id};
 
     $.ajax({
      	url: 'teams/players',
@@ -69,6 +69,43 @@ function fetchTeam(event) {
 });
 
 }
+
+function fetchQuiz(event) {
+    var target = $(event.target);
+    if (target.hasClass('quiz-btn')){
+      var team = $('.selected-team'),
+          id = team.data('id')
+          //team_id = team.data('team-id'),
+          //league = team.data('league');
+
+    }
+    else{
+      var team_id = $('#teams option:selected').val();
+    }
+
+    var data = {id: id};
+
+
+    $.ajax({
+      url: 'teams/quiz',
+      data: data,
+      type: 'get',
+      dataType: 'json',
+        success: function(response){
+          console.log("this is the response"+response);
+        }
+    }).done(function() {
+});
+
+}
+
+
+
+
+
+
+
+
 
 var formatRoster = function(response){
 	var team_deets = sortTeam(response),
