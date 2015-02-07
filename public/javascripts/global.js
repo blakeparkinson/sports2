@@ -3,7 +3,7 @@
 $(document).ready(function() {
 
     // Populate the user table on initial page load    
-    $('body').on('click', '[data-action="pick-team"], .quiz-btn', fetchTeam);
+    $('body').on('click', '[data-action="pick-team"], .quiz-btn', fetchQuiz);
     $('body').on('click', '.twitter-login', openAuthPopup);
     $('body').on('click', '.close-auth', closePopupAndRefreshPage);
     $('body').on('click', '.tweet-btn', postToTwitter);
@@ -74,9 +74,7 @@ function fetchQuiz(event) {
     var target = $(event.target);
     if (target.hasClass('quiz-btn')){
       var team = $('.selected-team'),
-          id = team.data('id')
-          //team_id = team.data('team-id'),
-          //league = team.data('league');
+          id = team.data('id');
 
     }
     else{
