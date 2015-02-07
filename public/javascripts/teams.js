@@ -1,7 +1,7 @@
 
 // DOM Ready =============================================================
 $(document).ready(function() {
-alert(object.model)
+
     $("#select2").select2({
       width: "34%",
       placeholder: "Search a Team...",
