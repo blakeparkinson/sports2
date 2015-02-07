@@ -18,7 +18,7 @@ var returnPlayers = function (players, res){
 // Check the db first. If it's there and has been added in the last 24 hours, use it. 
 // Otherwise, go get new data from the API and replace/add the database listing
 var fetchPlayers = function(team_id, league, res, callback){
-  console.log('hi');
+  
   db.collection('players').find({team_id : team_id}).toArray(function (err, items){
     if (items.length > 0){ // data in Mongo
       var itemdate = _.first(items['last_updated']);
