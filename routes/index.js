@@ -7,12 +7,9 @@ var http = require("http"),
     db = mongojs.connect(config.mongo_uri, ["teams"]);
 
 router.get('/', function(req, res) {
-      res.render('index', {session:req.session});
+    res.render('index', {session:req.session});
+	
     });
-
-
-
-
 
 module.exports = router;
 
