@@ -78,10 +78,8 @@ app.use(function(err, req, res, next) {
     });
 });
 
-hbs.registerHelper('json', function(context) {
-    console.log(context);
+hbs.registerHelper('json_stringify', function(context) {
     var c = JSON.stringify(context);
-    console.log(c);
     return c;
 });
 
