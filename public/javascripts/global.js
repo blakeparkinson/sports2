@@ -3,7 +3,7 @@
 $(document).ready(function() {
 
     // Populate the user table on initial page load    
-    $('body').on('click', '[data-action="pick-team"], .quiz-btn', fetchTeam);
+    $('body').on('click', '[data-action="pick-team"], .quiz-btn', fetchQuiz);
     $('body').on('click', '.twitter-login', openAuthPopup);
     $('body').on('click', '.close-auth', closePopupAndRefreshPage);
     $('body').on('click', '.tweet-btn', postToTwitter);
@@ -56,7 +56,6 @@ function fetchTeam(event) {
 
     var data = {team_id: team_id, league: league};
 
-
     $.ajax({
      	url: 'teams/players',
       data: data,
@@ -69,6 +68,41 @@ function fetchTeam(event) {
 });
 
 }
+
+function fetchQuiz(event) {
+    var target = $(event.target);
+    if (target.hasClass('quiz-btn')){
+      var team = $('.selected-team'),
+          id = team.data('id');
+
+    }
+    else{
+      var team_id = $('#teams option:selected').val();
+    }
+
+    var data = {id: id};
+
+
+    $.ajax({
+      url: 'teams/quiz',
+      data: data,
+      type: 'get',
+      dataType: 'json',
+        success: function(response){
+          console.log("this is the response"+response);
+        }
+    }).done(function() {
+});
+
+}
+
+
+
+
+
+
+
+
 
 var formatRoster = function(response){
 	var team_deets = sortTeam(response),
