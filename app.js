@@ -18,6 +18,7 @@ var session = require('express-session'); //express-session is currently working
 
 var app = express();
 var passport = require('passport');
+var hbs = require('hbs');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -76,6 +77,14 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
+
+hbs.registerHelper('json', function(context) {
+    console.log(context);
+    var c = JSON.stringify(context);
+    console.log(c);
+    return c;
+});
+
 
 
 module.exports = app;

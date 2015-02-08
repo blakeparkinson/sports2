@@ -6,8 +6,10 @@ var http = require("http"),
     mongojs = require("mongojs"),
     db = mongojs.connect(config.mongo_uri, ["teams"]);
 
+    var test = {"test": 1};
+
 router.get('/', function(req, res) {
-      res.render('index', {session:req.session});
+      res.render('index', {session:req.session, test: test});
     });
 
 
