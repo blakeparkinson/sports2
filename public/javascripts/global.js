@@ -7,6 +7,8 @@ $(document).ready(function() {
     $('body').on('click', '.twitter-login', openAuthPopup);
     $('body').on('click', '.close-auth', closePopupAndRefreshPage);
     $('body').on('click', '.tweet-btn', postToTwitter);
+    $('body').on('click', '.email-btn', sendEmail);
+
 
     if (window.location.href.indexOf('auth') > -1){
       // let's just close the window for auth popup for them
@@ -18,6 +20,25 @@ $(document).ready(function() {
 // Functions ============================================================= //
 
 var roster = "#roster";
+
+function sendEmail(){
+  var data = {
+    sender: 'Rosterblitz <rosterblitz@gmail.com>',
+    recipients: 'wizardplow@gmail.com',
+    subject: 'You are so Elite',
+    text_body: 'Take this quiz',
+    html_body: '<p>Take this quiz</p>'
+  }
+  $.ajax({
+      url: 'teams/email',
+      data: data,
+      type: 'get',
+      dataType: 'json',
+        success: function(response){
+          console.log('here');
+        }
+    })
+}
 
 function postToTwitter(){
   $.ajax({

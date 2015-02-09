@@ -8,6 +8,15 @@ var http = require("http"),
     mongojs = require("mongojs"),
     db = mongojs.connect(config.mongo_uri);
 var players_model = require('../models/players.js');
+var nodemailer = require('nodemailer');
+// create reusable transporter object using SMTP transport 
+var transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        user: config.rosterblitz_gmail_un,
+        pass: config.rosterblitz_gmail_pw
+    }
+});
 
 
 router.get('/', function(res, res) {
@@ -61,7 +70,26 @@ router.get('/players', function(req, res) {
 });
 
 
+router.get('/email', function(req,res){
 
+    var mailOptions = {
+
+        from: req.query.sender, // sender address 
+        to: req.query.recipients, // list of receivers 
+        subject: req.query.subject, // Subject line 
+        text: req.query.text_body, // plaintext body 
+        html: req.query.html_body// html body 
+    };
+
+    // send mail with defined transport object 
+    transporter.sendMail(mailOptions, function(error, info){
+        if(error){
+            console.log(error);
+        }else{
+            console.log('Message sent: ' + info.response);
+        }
+    });
+})
   
 
 module.exports = router;
