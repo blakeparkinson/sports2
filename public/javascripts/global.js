@@ -7,6 +7,7 @@ $(document).ready(function() {
     $('body').on('click', '.twitter-login', openAuthPopup);
     $('body').on('click', '.close-auth', closePopupAndRefreshPage);
     $('body').on('click', '.tweet-btn', postToTwitter);
+    $('body').on('click', '#email-btn', sendEmail);
 
     if (window.location.href.indexOf('auth') > -1){
       // let's just close the window for auth popup for them
@@ -18,6 +19,63 @@ $(document).ready(function() {
 // Functions ============================================================= //
 
 var roster = "#roster";
+
+function sendEmail(event){
+  var target = $(event.target),
+      modal = target.closest('.modal-content'),
+      sender = modal.find('#email-sender').val(),
+      recipients = modal.find('#email-recipients').val(),
+      message = modal.find('textarea#message').val();
+      console.log(sender);
+
+
+  var data = {
+    sender: $.trim(sender),
+    recipients: $.trim(recipients),
+    subject: 'Take this Quiz from Rosterblitz',
+    text_body: $.trim(message),
+    html_body: '<p>' + $.trim(message) + '</p>'
+  }
+
+  var has_errors = validateInputs(data);
+
+
+  if (!has_errors){
+
+    $.ajax({
+        url: 'teams/email',
+        data: data,
+        type: 'get',
+        dataType: 'json',
+          success: function(response){
+            console.log('here');
+          }
+      })
+  }
+
+  $('#emailModal').modal('hide');
+}
+
+function validateInputs(data){
+  var has_errors = false;
+  if (data.sender.length < 1){
+    has_errors = true;
+  }
+  var recipients_array = data.recipients.split(',');
+  for (i = 0; i < recipients_array.length; i++){
+    if (!validateEmail(recipients_array[i])){
+      has_errors = true;
+      return has_errors;
+    }
+  }
+  if (data.text_body.length < 1){
+    has_errors = true;
+  }
+  return has_errors;
+}
+
+
+
 
 function postToTwitter(){
   $.ajax({
@@ -127,6 +185,11 @@ function compare(a,b) {
     return 1;
   return 0;
 }
+
+function validateEmail(email) { 
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+} 
 
 
 
