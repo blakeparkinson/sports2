@@ -58,8 +58,9 @@ function sendEmail(event){
 
 function validateInputs(data){
   var has_errors = false;
-  if (data.sender.length < 1){
+  if (data.sender.length < 1 || data.text_body.length < 1 ){
     has_errors = true;
+    return has_errors;
   }
   var recipients_array = data.recipients.split(',');
   for (i = 0; i < recipients_array.length; i++){
@@ -67,9 +68,6 @@ function validateInputs(data){
       has_errors = true;
       return has_errors;
     }
-  }
-  if (data.text_body.length < 1){
-    has_errors = true;
   }
   return has_errors;
 }
