@@ -7,6 +7,39 @@
       </div>
     </div>
    <div class="btn btn-primary tweet-btn">Make a Tweet</div>
+   <div class="btn btn-primary" data-toggle="modal" data-target="#emailModal">Send email to Blake</div>
+
+   <!-- Modal -->
+<div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Email your quiz!</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="to">To:</label>
+            <input type="recipients" class="form-control" id="email-recipients" placeholder="Separate email addresses with commas">
+          </div>
+          <div class="form-group">
+            <label for="from">From:</label>
+            <input type="sender" class="form-control" id="email-sender" placeholder="Your Email Address">
+          </div>
+          <div class="form-group">
+            <label for="message">Message:</label>
+            <textarea class="form-control" rows="5" id="message">I just dominated this quiz. You should try it!!!</textarea>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="email-btn">Send Email</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
    <script type='text/javascript'>
 
