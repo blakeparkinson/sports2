@@ -19,7 +19,6 @@ $(document).ready(function() {
 
 var roster = "#roster";
 
-
 function postToTwitter(){
   $.ajax({
       url: 'auth/tweet',
