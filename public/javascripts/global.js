@@ -13,12 +13,32 @@ $(document).ready(function() {
       // let's just close the window for auth popup for them
       $('.close-auth').trigger('click');
     }
+
+    $('body').on('hidden.bs.modal', '.modal', clearModal)
+
+    $('body').on('click', '.email-img', appendMessage);
+
     
 });
 
 // Functions ============================================================= //
 
 var roster = "#roster";
+var modal = $('.modal');
+
+function clearModal(){
+
+  modal.find('#email-sender').val('');
+  modal.find('#email-recipients').val('');
+  modal.find('#message').val('');
+  $(this).removeData('bs.modal');
+}
+
+
+function appendMessage(event){
+
+  modal.find('#message').val('I totally just dominated this quiz');
+}
 
 function sendEmail(event){
   var target = $(event.target),
@@ -26,7 +46,6 @@ function sendEmail(event){
       sender = modal.find('#email-sender').val(),
       recipients = modal.find('#email-recipients').val(),
       message = modal.find('textarea#message').val();
-      console.log(sender);
 
 
   var data = {
