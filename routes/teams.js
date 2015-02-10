@@ -27,8 +27,9 @@ router.get('/', function(res, res) {
 
 // when quiz endpoint is hit, insert a new quiz into mongo and return quiz_id
 router.get('/quiz', function(req, res) {
-  id = req.query["id"];   //this is the rosterblitz id, not the API one
-  quiz = createQuiz(id, res, returnItem);
+  id = req.query.team_id;   //this is the API id
+  league = req.query.league;
+  quiz = createQuiz(id, league, res, returnItem);
 });
 
 // made the return more universal for all callbacks
@@ -36,15 +37,14 @@ var returnItem = function (item, res){
   res.json(item);
 }
 
-var createQuiz = function(rb_team_id, res, callback){
+var createQuiz = function(rb_team_id, league, res, callback){
   db.open(function(err, db){
-    db.collection("quiz").insert({team_id: rb_team_id}, function (err, insert){
+    db.collection("quiz").insert({team_id: rb_team_id, league: league}, function (err, insert){
         if (err){
           console.log("new quiz insert failed");
         }
         else {
-          var quiz_id = _.first(insert)._id;
-          callback(quiz_id, res);
+          callback(insert, res);
         }
     });
   });
@@ -59,14 +59,6 @@ router.get('/team', function(req, res) {
     db.collection('teams').find({$or: [{'name': new RegExp(term, 'i')}, {'market': new RegExp(term, 'i')}]}).sort({'market': 1}).toArray(function (err, items) {
     	res.json(items);
     });
-});
-
-// when players endpoint is hit, call the API/DB using that team_id
-router.get('/players', function(req, res) {
-  team_id = req.query["team_id"];
-  league = req.query["league"];
-
-  players = players_model.fetchPlayers(team_id, league, res, players_model.returnPlayers);
 });
 
 
