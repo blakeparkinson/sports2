@@ -61,14 +61,6 @@ router.get('/team', function(req, res) {
     });
 });
 
-// when players endpoint is hit, call the API/DB using that team_id
-router.get('/players', function(req, res) {
-  team_id = req.query["team_id"];
-  league = req.query["league"];
-
-  players = players_model.fetchPlayers(team_id, league, res, players_model.returnPlayers);
-});
-
 
 router.get('/email', function(req,res){
 
