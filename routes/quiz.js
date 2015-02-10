@@ -5,14 +5,16 @@ var router = express.Router();
 var http = require("http");
 		mongojs = require("mongojs"),
     db = mongojs.connect(config.mongo_uri, ["teams"]);
+var players_model = require('../models/players.js');
     
 
 router.get('/', function(req, res) {
 			quiz_id = req.query.quiz_id;
-			console.log(quiz_id);
-			// start fetching players using models.players stuff
-      res.render('quiz', {
-      });
+			team_id = req.query.team_id;
+			league = req.query.league;
+			players = players_model.fetchPlayers(team_id, league, res, players_model.returnPlayers);
+      //res.render('quiz', {
+      //});
     });
 
 module.exports = router;

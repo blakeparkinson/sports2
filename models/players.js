@@ -25,14 +25,14 @@ var fetchPlayers = function(team_id, league, res, callback){
       var datenow = new Date();
       var datecutoff = datenow.getTime() - dataAgeCutOff;
       if (datecutoff > itemdate){   //data is old so call API
-        var players = fetchPlayersFromApi(team_id,league, res,callback)
+        var players = fetchPlayersFromApi(team_id, league, res, callback)
       }
       else {  // data is fine so just return it
         callback(items, res);
       }
     }
     else {  // data not already in Mongo
-      var players = fetchPlayersFromApi(team_id,league, res,callback)
+      var players = fetchPlayersFromApi(team_id, league, res, callback)
     }
   });
 }
@@ -63,7 +63,7 @@ switch (league){
                 players = formatPlayers(json_response, team_id);
                 mongoInsertPlayers(team_id, players);
                 callback(players, res)
-                 break;
+                break;
               }
       }
       else{
