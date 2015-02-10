@@ -146,6 +146,8 @@ function fetchQuiz(event) {
       dataType: 'json',
         success: function(response){
           console.log("this is the response"+response);
+          console.log("this is response first"+response[0]["_id"]);
+          window.location.href = 'quiz?quiz_id='+response[0]["_id"];
         }
     }).done(function() {
 });

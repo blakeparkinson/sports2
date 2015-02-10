@@ -10,6 +10,7 @@ var http = require("http");
 router.get('/', function(req, res) {
 			quiz_id = req.query.quiz_id;
 			console.log(quiz_id);
+			// start fetching players using models.players stuff
       res.render('quiz', {
       });
     });

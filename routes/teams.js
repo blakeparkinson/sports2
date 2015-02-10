@@ -43,8 +43,8 @@ var createQuiz = function(rb_team_id, res, callback){
           console.log("new quiz insert failed");
         }
         else {
-          var quiz_id = _.first(insert)._id;
-          callback(quiz_id, res);
+          console.log("a"+insert[0]["_id"]);
+          callback(insert, res);
         }
     });
   });
