@@ -56,6 +56,9 @@ switch (league){
     break;
   case 'eu_soccer':
     endpoint = 'https://api.sportsdatallc.org/soccer-t2/eu/teams/'+team_id+'/profile.xml?api_key='+config.soccer_eu_key;
+    break;
+  case 'mlb':
+    endpoint = 'https://api.sportsdatallc.org/mlb-t4/rosters/2014.xml?api_key='+config.mlb_key;
 }
 
     request(endpoint, function (error, response, body) {
@@ -71,6 +74,12 @@ switch (league){
                 break;
                case 'eu_soccer':
                 playersParsed = formatEUSoccerPlayers(response.body);
+                players = formatPlayersDocument(team_id, playersParsed);
+                mongoInsertPlayers(team_id, players);
+                callback(players, res)
+                break;
+               case 'mlb':  //have not tested this code yet bc there are no baseball teams in mongo
+                playersParsed = formatMLBPlayers(response.body, team_id);
                 players = formatPlayersDocument(team_id, playersParsed);
                 mongoInsertPlayers(team_id, players);
                 callback(players, res)
@@ -135,6 +144,24 @@ formatEUSoccerPlayers = function(response){
   return players;
 }
 
+// have not tested this code yet bc there aren't any mlb teams in mongo yet
+formatMLBPlayers = function(response, team_id){
+  parseString(response, function (err, result) {
+    var str = result[Object.keys(result)[0]];
+      for (i=0; i < str.roster.length;i++){
+        for (j=0; j < str.roster[i].team.length; j++){
+          if (str.roster[i].team[j].id = team_id){
+            for (k=0; k < str.roster[i].team[j].players.length; k++){
+              for (l=0; l < str.roster[i].team[j].players[k].player.length; l++){
+                players.push(str.roster[i].team[j].players[k].player[l].$);
+              }
+            }
+          }
+        }
+      }
+  });
+  return players;
+}
 
 
 module.exports = {
