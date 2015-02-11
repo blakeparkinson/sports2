@@ -1,13 +1,6 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   font-family: HelveticaNeue-Thin;
-/* do epic photo later
-  background: url("http://p1.pichost.me/i/59/1834780.jpg") no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  */
 }
 
 a {
@@ -140,3 +133,34 @@ ul {
     font-size: 30px;
     padding-bottom: 20px;
 }
+
+/* about page */
+.about-body {
+	background: url(../images/oregon-stadium.jpg);	 	 
+	background-position: center center;
+	background-attachment: fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;	
+	-o-background-size: cover;
+	background-size: cover;
+	background-color: #211922;
+	margin: 0;
+	padding: 0;
+}
+.about-center {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 120px;
+	max-width: 600px;
+	text-align: center;
+	background-color: rgba(0, 0, 0, 0.6);
+	color: white;
+	border-radius: 5px;
+}
+.text-contain {
+	padding:20px;
+}
+.about-body {
+	font: 24px;
+}
+
