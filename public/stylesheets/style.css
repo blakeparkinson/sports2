@@ -1,6 +1,6 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  font-family: HelveticaNeue-Thin;
+  font-family: HelveticaNeue-Thin !important;
 }
 
 a {
