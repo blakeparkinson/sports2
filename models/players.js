@@ -125,9 +125,7 @@ formatEUSoccerPlayers = function(response){
   parseString(response, function (err, result) {
     var str = result[Object.keys(result)[0]];
       for (i=0; i < str.team.length;i++){
-        console.log("LOOP 1"+str.team[i]);
         for (j=0; j < str.team[i].roster.length; j++){
-          console.log("loop 2"+str.team[i].roster);   //length is 1
           for (k=0; k < str.team[i].roster[j].player.length; k++){
             players.push(str.team[i].roster[j].player[k].$);
           }
