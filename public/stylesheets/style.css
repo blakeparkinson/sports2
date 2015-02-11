@@ -186,7 +186,7 @@ ul {
 .social-sidebar #email{
     background-image: url(../images/blitz-social-sprite.png);
     background-repeat: no-repeat;
-    background-position: -60px -60px;
+    background-position: -60px -59px;
     height: 45px;
     width: 45px;
     top: 0;
@@ -218,7 +218,7 @@ ul {
 .social-sidebar #twitter{
     background-image: url(../images/blitz-social-sprite.png);
     background-repeat: no-repeat;
-    background-position: -393px -60px;
+    background-position: -393px -59px;
     height: 45px;
     width: 45px;
     top: 0;
