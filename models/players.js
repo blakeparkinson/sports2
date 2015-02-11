@@ -10,6 +10,8 @@ var http = require("http"),
 var dataAgeCutOff = 86400000;  //This is 24 hours in milliseconds
 var teams = [];
 var endpoint = '';
+var parseString = require('xml2js').parseString;
+var players = [];
 
 var returnPlayers = function (players, res){
     res.json(players);
@@ -51,6 +53,9 @@ switch (league){
     break;
   case 'nhl':
     endpoint = 'https://api.sportsdatallc.org/nhl-t3/seasontd/2014/REG/teams/'+team_id+'/statistics.json?api_key='+ config.nhl_key;
+    break;
+  case 'eu_soccer':
+    endpoint = 'https://api.sportsdatallc.org/soccer-t2/eu/teams/'+team_id+'/profile.xml?api_key='+config.soccer_eu_key;
 }
 
     request(endpoint, function (error, response, body) {
@@ -61,6 +66,12 @@ switch (league){
                case 'nhl':
                 json_response = JSON.parse(body);
                 players = formatPlayers(json_response, team_id);
+                mongoInsertPlayers(team_id, players);
+                callback(players, res)
+                break;
+               case 'eu_soccer':
+                playersParsed = formatEUSoccerPlayers(response.body);
+                players = formatPlayersDocument(team_id, playersParsed);
                 mongoInsertPlayers(team_id, players);
                 callback(players, res)
                 break;
@@ -85,7 +96,7 @@ var formatPlayers = function(response, team_id){
   var team = formatPlayersDocument(team_id, playersarray);
   return team;
 }
-  
+ 
 
 var formatPlayersDocument = function(team_id, players){
   teamDocument = {};
@@ -108,6 +119,23 @@ function mongoInsertPlayers(team_id, team_document){
     });
   });
 }
+
+
+formatEUSoccerPlayers = function(response){
+  parseString(response, function (err, result) {
+    var str = result[Object.keys(result)[0]];
+      for (i=0; i < str.team.length;i++){
+        for (j=0; j < str.team[i].roster.length; j++){
+          for (k=0; k < str.team[i].roster[j].player.length; k++){
+            players.push(str.team[i].roster[j].player[k].$);
+          }
+        }
+      }
+  });
+  return players;
+}
+
+
 
 module.exports = {
   returnPlayers: returnPlayers,
