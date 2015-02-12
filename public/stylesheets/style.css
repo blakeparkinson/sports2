@@ -169,17 +169,4 @@ ul {
 	font: 24px;
 	opacity: 0.9;
 }
-.main-court {
-	width: 570px;
-	height: : 380px;
-	background: url(../images/court_diagrams/basketball1.jpg);	 	 
-	background-position: center center;
-	background-attachment: fixed;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;	
-	-o-background-size: cover;
-	background-size: cover;
-	background-color: #211922;
-	margin: 0;
-	padding: 0;
-}
+
