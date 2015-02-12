@@ -5,6 +5,9 @@ $(document).ready(function() {
     // Populate the user table on initial page load    
     $('body').on('click', '[data-action="pick-team"], .quiz-btn', fetchQuiz);
     $('body').on('click', '.twitter-login', openAuthPopup);
+    $('body').on('click', '.tweet', openTweetPopup);
+    $('body').on('click', '.facebook-login', openFacebookAuthPopup);
+    $('body').on('click', '.facebook-post', openFacebookPostPopup);
     $('body').on('click', '.close-auth', closePopupAndRefreshPage);
     $('body').on('click', '.tweet-btn', postToTwitter);
     $('body').on('click', '#email-btn', sendEmail);
@@ -13,12 +16,31 @@ $(document).ready(function() {
       // let's just close the window for auth popup for them
       $('.close-auth').trigger('click');
     }
+
+    $('body').on('hidden.bs.modal', '.modal', clearModal)
+
+    $('body').on('click', '.email-img', appendMessage);
     
 });
 
 // Functions ============================================================= //
 
 var roster = "#roster";
+var modal = $('.modal');
+
+function clearModal(){
+
+  modal.find('#email-sender').val('');
+  modal.find('#email-recipients').val('');
+  modal.find('#message').val('');
+  $(this).removeData('bs.modal');
+}
+
+
+function appendMessage(event){
+
+  modal.find('#message').val('I totally just dominated this quiz');
+}
 
 function sendEmail(event){
   var target = $(event.target),
@@ -26,7 +48,6 @@ function sendEmail(event){
       sender = modal.find('#email-sender').val(),
       recipients = modal.find('#email-recipients').val(),
       message = modal.find('textarea#message').val();
-      console.log(sender);
 
 
   var data = {
@@ -76,6 +97,8 @@ function validateInputs(data){
 
 
 function postToTwitter(){
+  console.log("here");
+  /*
   $.ajax({
       url: 'auth/tweet',
       data: {message: 'From Rosterblitz. GLASSMAN GOAT 4/20'},
@@ -85,16 +108,36 @@ function postToTwitter(){
           console.log('here');
         }
     })
+*/
 }
 
+//Twitter
 function openAuthPopup(){
   //TODO center the popup in the screen
   window.open('auth/twitter', 'Log in with Twitter', 'width=780,height=410,toolbar=0,scrollbars=0,status=0,resizable=0,location=0,menuBar=0,left=500,top=800');
 }
 
+function openTweetPopup(){
+  //TODO center the popup in the screen
+  window.open('auth/tweet', 'Share on Twitter', 'width=780,height=410,toolbar=0,scrollbars=0,status=0,resizable=0,location=0,menuBar=0,left=500,top=800');
+}
+
+//Facebook
+function openFacebookAuthPopup(){
+  //TODO center the popup in the screen
+  window.open('auth/facebook', 'Log in with Facebook', 'width=780,height=410,toolbar=0,scrollbars=0,status=0,resizable=0,location=0,menuBar=0,left=500,top=800');
+}
+function openFacebookPostPopup(){
+  //TODO center the popup in the screen
+  window.open('auth/posttofacebook', 'Share on Facebook', 'width=780,height=410,toolbar=0,scrollbars=0,status=0,resizable=0,location=0,menuBar=0,left=500,top=800');
+}
+
+
 function closePopupAndRefreshPage(){
+  /*
   window.opener.location.reload(true);
   window.close();
+  */
 }
 
 function fetchTeam(event) {
@@ -129,14 +172,15 @@ function fetchQuiz(event) {
     var target = $(event.target);
     if (target.hasClass('quiz-btn')){
       var team = $('.selected-team'),
-          id = team.data('id');
+          id = team.data('team-id'),
+          league = team.data('league');
 
     }
     else{
       var team_id = $('#teams option:selected').val();
     }
 
-    var data = {id: id};
+    var data = {team_id: id, league: league};
 
 
     $.ajax({
@@ -145,7 +189,7 @@ function fetchQuiz(event) {
       type: 'get',
       dataType: 'json',
         success: function(response){
-          console.log("this is the response"+response);
+          window.location.href = 'quiz?quiz_id='+response[0]["_id"]+'&team_id='+response[0]["team_id"]+'&league='+response[0]["league"];
         }
     }).done(function() {
 });

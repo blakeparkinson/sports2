@@ -7,9 +7,11 @@ var _ = require('underscore');
 var http = require("http"),
     mongojs = require("mongojs"),
     db = mongojs.connect(config.mongo_uri);
-var dataAgeCutOff = 86400000;  //This is 24 hours in milliseconds
+var dataAgeCutOff = 604800000;  //This is 1 week in milliseconds
 var teams = [];
 var endpoint = '';
+var parseString = require('xml2js').parseString;
+var players = [];
 
 var returnPlayers = function (players, res){
     res.json(players);
@@ -25,14 +27,14 @@ var fetchPlayers = function(team_id, league, res, callback){
       var datenow = new Date();
       var datecutoff = datenow.getTime() - dataAgeCutOff;
       if (datecutoff > itemdate){   //data is old so call API
-        var players = fetchPlayersFromApi(team_id,league, res,callback)
+        var players = fetchPlayersFromApi(team_id, league, res, callback)
       }
       else {  // data is fine so just return it
         callback(items, res);
       }
     }
     else {  // data not already in Mongo
-      var players = fetchPlayersFromApi(team_id,league, res,callback)
+      var players = fetchPlayersFromApi(team_id, league, res, callback)
     }
   });
 }
@@ -51,6 +53,12 @@ switch (league){
     break;
   case 'nhl':
     endpoint = 'https://api.sportsdatallc.org/nhl-t3/seasontd/2014/REG/teams/'+team_id+'/statistics.json?api_key='+ config.nhl_key;
+    break;
+  case 'eu_soccer':
+    endpoint = 'https://api.sportsdatallc.org/soccer-t2/eu/teams/'+team_id+'/profile.xml?api_key='+config.soccer_eu_key;
+    break;
+  case 'mlb':
+    endpoint = 'https://api.sportsdatallc.org/mlb-t4/rosters/2014.xml?api_key='+config.mlb_key;
 }
 
     request(endpoint, function (error, response, body) {
@@ -63,7 +71,19 @@ switch (league){
                 players = formatPlayers(json_response, team_id);
                 mongoInsertPlayers(team_id, players);
                 callback(players, res)
-                 break;
+                break;
+               case 'eu_soccer':
+                playersParsed = formatEUSoccerPlayers(response.body);
+                players = formatPlayersDocument(team_id, playersParsed);
+                mongoInsertPlayers(team_id, players);
+                callback(players, res)
+                break;
+               case 'mlb':  
+                playersParsed = formatMLBPlayers(response.body, team_id);
+                players = formatPlayersDocument(team_id, playersParsed);
+                mongoInsertPlayers(team_id, players);
+                callback(players, res)
+                break;
               }
       }
       else{
@@ -85,7 +105,7 @@ var formatPlayers = function(response, team_id){
   var team = formatPlayersDocument(team_id, playersarray);
   return team;
 }
-  
+ 
 
 var formatPlayersDocument = function(team_id, players){
   teamDocument = {};
@@ -99,15 +119,45 @@ function mongoInsertPlayers(team_id, team_document){
   console.log("inserting into the DB");
   db.open(function(err, db){
     db.collection("players").update({team_id: team_id},
-    {$set: {team_id: team_document["team_id"], last_updated: new Date(), players: team_document["players"]}},
+    {$set: {team_id: team_document["team_id"], last_updated: new Date().toISOString().slice(0, 19).replace('T', ' '), players: team_document["players"]}},
     {upsert: true, multi:false}, function (err, upserted){
       if (err) {
-        console.log('Ahh! An Error!');
+        console.log('Ahh! An Error with Insert!');
         return;
       }
     });
   });
 }
+
+
+formatEUSoccerPlayers = function(response){
+  parseString(response, function (err, result) {
+    var str = result[Object.keys(result)[0]];
+      for (i=0; i < str.team.length;i++){
+        for (j=0; j < str.team[i].roster.length; j++){
+          for (k=0; k < str.team[i].roster[j].player.length; k++){
+            players.push(str.team[i].roster[j].player[k].$);
+          }
+        }
+      }
+  });
+  return players;
+}
+
+formatMLBPlayers = function(response, team_id){
+  parseString(response, function (err, result) {
+    var str = result[Object.keys(result)[0]];
+        for (j=0; j < str.team.length; j++){ 
+          if (str.team[j].$.id.trim() == team_id.trim()){
+            for (k=0; k < str.team[j].players[0].player.length; k++){
+              players.push(str.team[j].players[0].player[k].$)
+            }
+          }
+        }
+  });
+  return players;
+}
+
 
 module.exports = {
   returnPlayers: returnPlayers,

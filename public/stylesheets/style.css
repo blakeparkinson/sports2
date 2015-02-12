@@ -170,3 +170,83 @@ ul {
 	opacity: 0.9;
 }
 
+.social-sidebar{
+    position: absolute;
+    left: 78%;
+    top: 60px;
+}
+
+
+@media screen and (max-width: 880px) {
+    .social-sidebar{
+        left: 94%;
+
+    }
+     
+}
+
+@media screen and (max-width: 750px) {
+    .social-sidebar{
+        left: 93%;
+
+    }
+     
+}
+
+@media screen and (max-width: 600px) {
+    .social-sidebar{
+        display: none;
+
+    }
+}
+.social-sidebar .share-element{
+    position: relative;
+    float: right;
+}
+.social-sidebar #email{
+    background-image: url(../images/blitz-social-sprite.png);
+    background-repeat: no-repeat;
+    background-position: -60px -59px;
+    height: 45px;
+    width: 45px;
+    top: 0;
+    left: 0;
+    background-size: 700px;
+    cursor: pointer;
+}
+
+.social-sidebar #email:hover{
+    background-position: -60px -147px;
+}
+
+.social-sidebar #facebook{
+    background-image: url(../images/blitz-social-sprite.png);
+    background-repeat: no-repeat;
+    background-position: -260px -60px;
+    height: 45px;
+    width: 45px;
+    top: 0;
+    left: 0;
+    background-size: 700px;
+    cursor: pointer;
+}
+
+.social-sidebar #facebook:hover{
+    background-position: -260px -148px;
+}
+
+.social-sidebar #twitter{
+    background-image: url(../images/blitz-social-sprite.png);
+    background-repeat: no-repeat;
+    background-position: -393px -59px;
+    height: 45px;
+    width: 45px;
+    top: 0;
+    left: 0;
+    background-size: 700px;
+    cursor: pointer;
+}
+
+.social-sidebar #twitter:hover{
+    background-position: -393px -147px;
+}
