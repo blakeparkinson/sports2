@@ -5,6 +5,9 @@ $(document).ready(function() {
     // Populate the user table on initial page load    
     $('body').on('click', '[data-action="pick-team"], .quiz-btn', fetchQuiz);
     $('body').on('click', '.twitter-login', openAuthPopup);
+    $('body').on('click', '.tweet', openTweetPopup);
+    $('body').on('click', '.facebook-login', openFacebookAuthPopup);
+    $('body').on('click', '.facebook-post', openFacebookPostPopup);
     $('body').on('click', '.close-auth', closePopupAndRefreshPage);
     $('body').on('click', '.tweet-btn', postToTwitter);
     $('body').on('click', '#email-btn', sendEmail);
@@ -94,6 +97,8 @@ function validateInputs(data){
 
 
 function postToTwitter(){
+  console.log("here");
+  /*
   $.ajax({
       url: 'auth/tweet',
       data: {message: 'From Rosterblitz. GLASSMAN GOAT 4/20'},
@@ -103,16 +108,36 @@ function postToTwitter(){
           console.log('here');
         }
     })
+*/
 }
 
+//Twitter
 function openAuthPopup(){
   //TODO center the popup in the screen
   window.open('auth/twitter', 'Log in with Twitter', 'width=780,height=410,toolbar=0,scrollbars=0,status=0,resizable=0,location=0,menuBar=0,left=500,top=800');
 }
 
+function openTweetPopup(){
+  //TODO center the popup in the screen
+  window.open('auth/tweet', 'Share on Twitter', 'width=780,height=410,toolbar=0,scrollbars=0,status=0,resizable=0,location=0,menuBar=0,left=500,top=800');
+}
+
+//Facebook
+function openFacebookAuthPopup(){
+  //TODO center the popup in the screen
+  window.open('auth/facebook', 'Log in with Facebook', 'width=780,height=410,toolbar=0,scrollbars=0,status=0,resizable=0,location=0,menuBar=0,left=500,top=800');
+}
+function openFacebookPostPopup(){
+  //TODO center the popup in the screen
+  window.open('auth/posttofacebook', 'Share on Facebook', 'width=780,height=410,toolbar=0,scrollbars=0,status=0,resizable=0,location=0,menuBar=0,left=500,top=800');
+}
+
+
 function closePopupAndRefreshPage(){
+  /*
   window.opener.location.reload(true);
   window.close();
+  */
 }
 
 function fetchTeam(event) {
