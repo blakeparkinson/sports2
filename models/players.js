@@ -13,34 +13,39 @@ var endpoint = '';
 var parseString = require('xml2js').parseString;
 var players = [];
 
-var returnPlayers = function (players, res){
+var returnPlayers = function (players, res, options){
+  if (options != undefined && options.quiz_page){
+    res.render('quiz', {players:players});
+
+  }
+  else{
     res.json(players);
+  }
 }
 
 // Check the db first. If it's there and has been added in the last 24 hours, use it. 
 // Otherwise, go get new data from the API and replace/add the database listing
-var fetchPlayers = function(team_id, league, res, callback){
-  
+var fetchPlayers = function(team_id, league, res, callback, options){  
   db.collection('players').find({team_id : team_id}).toArray(function (err, items){
     if (items.length > 0){ // data in Mongo
       var itemdate = _.first(items['last_updated']);
       var datenow = new Date();
       var datecutoff = datenow.getTime() - dataAgeCutOff;
       if (datecutoff > itemdate){   //data is old so call API
-        var players = fetchPlayersFromApi(team_id, league, res, callback)
+        var players = fetchPlayersFromApi(team_id, league, res, callback, options)
       }
       else {  // data is fine so just return it
-        callback(items, res);
+        callback(items, res, options);
       }
     }
     else {  // data not already in Mongo
-      var players = fetchPlayersFromApi(team_id, league, res, callback)
+      var players = fetchPlayersFromApi(team_id, league, res, callback, options)
     }
   });
 }
 
 
-var fetchPlayersFromApi = function(team_id, league, res, callback){
+var fetchPlayersFromApi = function(team_id, league, res, callback, options){
 var json_response = '';
 var players = {};
 
@@ -67,13 +72,13 @@ switch (league){
                 json_response = JSON.parse(body);
                 players = formatPlayers(json_response, team_id);
                 mongoInsertPlayers(team_id, players);
-                callback(players, res)
+                callback(players, res, options)
                 break;
                case 'eu_soccer':
                 playersParsed = formatEUSoccerPlayers(response.body);
                 players = formatPlayersDocument(team_id, playersParsed);
                 mongoInsertPlayers(team_id, players);
-                callback(players, res)
+                callback(players, res, options)
                 break;
               }
       }

@@ -4,17 +4,18 @@ var express = require('express');
 var router = express.Router();
 var http = require("http");
 		mongojs = require("mongojs"),
+		options = {},
     db = mongojs.connect(config.mongo_uri, ["teams"]);
 var players_model = require('../models/players.js');
     
 
 router.get('/', function(req, res) {
+			options.quiz_page = true;
 			quiz_id = req.query.quiz_id;
 			team_id = req.query.team_id;
 			league = req.query.league;
-			players = players_model.fetchPlayers(team_id, league, res, players_model.returnPlayers);
-      //res.render('quiz', {
-      //});
-    });
+			players = players_model.fetchPlayers(team_id, league, res, players_model.returnPlayers, options);
+
+  });
 
 module.exports = router;
