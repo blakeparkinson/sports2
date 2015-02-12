@@ -78,7 +78,7 @@ switch (league){
                 mongoInsertPlayers(team_id, players);
                 callback(players, res)
                 break;
-               case 'mlb':  //have not tested this code yet bc there are no baseball teams in mongo
+               case 'mlb':  
                 playersParsed = formatMLBPlayers(response.body, team_id);
                 players = formatPlayersDocument(team_id, playersParsed);
                 mongoInsertPlayers(team_id, players);
@@ -122,7 +122,7 @@ function mongoInsertPlayers(team_id, team_document){
     {$set: {team_id: team_document["team_id"], last_updated: new Date(), players: team_document["players"]}},
     {upsert: true, multi:false}, function (err, upserted){
       if (err) {
-        console.log('Ahh! An Error!');
+        console.log('Ahh! An Error with Insert!');
         return;
       }
     });
@@ -144,21 +144,16 @@ formatEUSoccerPlayers = function(response){
   return players;
 }
 
-// have not tested this code yet bc there aren't any mlb teams in mongo yet
 formatMLBPlayers = function(response, team_id){
   parseString(response, function (err, result) {
     var str = result[Object.keys(result)[0]];
-      for (i=0; i < str.roster.length;i++){
-        for (j=0; j < str.roster[i].team.length; j++){
-          if (str.roster[i].team[j].id = team_id){
-            for (k=0; k < str.roster[i].team[j].players.length; k++){
-              for (l=0; l < str.roster[i].team[j].players[k].player.length; l++){
-                players.push(str.roster[i].team[j].players[k].player[l].$);
-              }
+        for (j=0; j < str.team.length; j++){ 
+          if (str.team[j].$.id == team_id){
+            for (k=0; k < str.team[j].players[0].player.length; k++){
+              players.push(str.team[j].players[0].player[k].$)
             }
           }
         }
-      }
   });
   return players;
 }
