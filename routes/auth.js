@@ -67,20 +67,26 @@ router.get('/facebook', passport.authenticate('facebook'));
 // access was granted, the user will be logged in.  Otherwise,
 // authentication has failed.
 router.get('/facebook/callback', passport.authenticate('facebook', 
-  { successRedirect: '/auth',
+  { successRedirect: '/auth/posttofacebook',
    failureRedirect: '/login' 
  }));
 
 router.get('/twitter', passport.authenticate('twitter'));
 
 router.get('/twitter/callback', passport.authenticate('twitter', { 
-  successRedirect: '/',
+  successRedirect: '/auth/tweet',
   failureRedirect: '/login' 
 })
 );
 
 router.get('/tweet', function(res, res) {
       res.render('tweet', {
+        special_layout : true
+      });
+    });
+
+router.get('/posttofacebook', function(res, res) {
+      res.render('facebookpost', {
         special_layout : true
       });
     });
