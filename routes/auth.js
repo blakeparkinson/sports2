@@ -74,19 +74,22 @@ router.get('/facebook/callback', passport.authenticate('facebook',
 router.get('/twitter', passport.authenticate('twitter'));
 
 router.get('/twitter/callback', passport.authenticate('twitter', { 
-  successRedirect: '/auth',
+  successRedirect: '/',
   failureRedirect: '/login' 
 })
 );
 
-router.get('/', function(res, res) {
-      res.render('auth', {
+router.get('/tweet', function(res, res) {
+      res.render('tweet', {
         special_layout : true
       });
     });
-
+/*
 router.get('/tweet', function(req, res) {
-  message = req.query["message"];
+
+  console.log(req.query["message"]);
+  message = req.query["message"] + " blitzzzzz";
+
   var client = new Twitter({
     consumer_key: config.twitter_consumer_key,
     consumer_secret: config.twitter_consumer_secret,
@@ -95,10 +98,12 @@ router.get('/tweet', function(req, res) {
   });
 
   client.post('statuses/update', {status: message},  function(error, tweet, response){
-    if(error) throw error;
+    if(error) { console.log(error); }
+    else { console.log("no error"); }
+    //if(error) throw error;
   });
 });
-
+*/
 
 module.exports = router;
 
