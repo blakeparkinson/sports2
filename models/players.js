@@ -56,6 +56,9 @@ switch (league){
     break;
   case 'eu_soccer':
     endpoint = 'https://api.sportsdatallc.org/soccer-t2/eu/teams/'+team_id+'/profile.xml?api_key='+config.soccer_eu_key;
+    break;
+  case 'mlb':
+    endpoint = 'https://api.sportsdatallc.org/mlb-t4/rosters/2014.xml?api_key='+config.mlb_key;
 }
 
     request(endpoint, function (error, response, body) {
@@ -71,6 +74,12 @@ switch (league){
                 break;
                case 'eu_soccer':
                 playersParsed = formatEUSoccerPlayers(response.body);
+                players = formatPlayersDocument(team_id, playersParsed);
+                mongoInsertPlayers(team_id, players);
+                callback(players, res)
+                break;
+               case 'mlb':  
+                playersParsed = formatMLBPlayers(response.body, team_id);
                 players = formatPlayersDocument(team_id, playersParsed);
                 mongoInsertPlayers(team_id, players);
                 callback(players, res)
@@ -113,7 +122,7 @@ function mongoInsertPlayers(team_id, team_document){
     {$set: {team_id: team_document["team_id"], last_updated: new Date(), players: team_document["players"]}},
     {upsert: true, multi:false}, function (err, upserted){
       if (err) {
-        console.log('Ahh! An Error!');
+        console.log('Ahh! An Error with Insert!');
         return;
       }
     });
@@ -135,6 +144,19 @@ formatEUSoccerPlayers = function(response){
   return players;
 }
 
+formatMLBPlayers = function(response, team_id){
+  parseString(response, function (err, result) {
+    var str = result[Object.keys(result)[0]];
+        for (j=0; j < str.team.length; j++){ 
+          if (str.team[j].$.id.trim() == team_id.trim()){
+            for (k=0; k < str.team[j].players[0].player.length; k++){
+              players.push(str.team[j].players[0].player[k].$)
+            }
+          }
+        }
+  });
+  return players;
+}
 
 
 module.exports = {
