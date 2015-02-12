@@ -110,7 +110,7 @@ function mongoInsertPlayers(team_id, team_document){
   console.log("inserting into the DB");
   db.open(function(err, db){
     db.collection("players").update({team_id: team_id},
-    {$set: {team_id: team_document["team_id"], last_updated: new Date(), players: team_document["players"]}},
+    {$set: {team_id: team_document["team_id"], last_updated: new Date().toISOString().slice(0, 19).replace('T', ' '), players: team_document["players"]}},
     {upsert: true, multi:false}, function (err, upserted){
       if (err) {
         console.log('Ahh! An Error!');
