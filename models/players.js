@@ -148,7 +148,7 @@ formatMLBPlayers = function(response, team_id){
   parseString(response, function (err, result) {
     var str = result[Object.keys(result)[0]];
         for (j=0; j < str.team.length; j++){ 
-          if (str.team[j].$.id == team_id){
+          if (str.team[j].$.id.trim() == team_id.trim()){
             for (k=0; k < str.team[j].players[0].player.length; k++){
               players.push(str.team[j].players[0].player[k].$)
             }
