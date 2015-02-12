@@ -4,7 +4,7 @@ var http = require("http");
     
 
 router.get('/', function(res, res) {
-      res.render('teams', {
+      res.render('about', {
       });
     });
 

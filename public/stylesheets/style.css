@@ -1,18 +1,14 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-/* do epic photo later
-  background: url("http://p1.pichost.me/i/59/1834780.jpg") no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  */
+  font-family: HelveticaNeue-Thin !important;
 }
 
 a {
   color: #00B7FF;
 }
-
+.navbar {
+	opacity: 0.8;
+}
 
 #team-selection{
 	margin-bottom: 15px;
@@ -47,6 +43,9 @@ a {
   /* Set the fixed height of the footer here */
   height: 60px;
   background-color: #f5f5f5;
+  opacity: 0.8;
+  border-radius: 4px;
+
 }
 .container {
   width: auto;
@@ -140,6 +139,36 @@ ul {
     padding-bottom: 20px;
 }
 
+/* about page */
+.about-body {
+	background: url(../images/stadiums/soccer-stadium4.jpg);	 	 
+	background-position: center center;
+	background-attachment: fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;	
+	-o-background-size: cover;
+	background-size: cover;
+	background-color: #211922;
+	margin: 0;
+	padding: 0;
+}
+.about-center {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 120px;
+	max-width: 800px;
+	text-align: center;
+	background-color: rgba(0, 0, 0, 0.75);
+	color: white;
+	border-radius: 80px;
+}
+.text-contain {
+	padding:20px;
+}
+.about-body {
+	font: 24px;
+	opacity: 0.9;
+}
 
 .social-sidebar{
     position: absolute;
