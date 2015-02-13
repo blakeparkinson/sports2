@@ -65,6 +65,12 @@ switch (league){
       if (!error && response.statusCode == 200) {
              switch (league){
                case 'nba':
+               json_response = JSON.parse(body);
+               players_sorted = sortNBA(json_response);
+               players = formatPlayers(players_sorted, team_id);
+               mongoInsertPlayers(team_id, players);
+               callback(players, res)
+               break;
                case 'nfl':
                case 'nhl':
                 json_response = JSON.parse(body);
@@ -91,6 +97,27 @@ switch (league){
       }
     });
 }
+
+
+var sortNBA = function(players_object){
+  new_playersarray = players_object.players;
+  new_playersobject = players_object;
+  for (i=0; i<new_playersarray.length; i++){
+    sorted = new_playersarray.sort(compare);
+    new_playersobject.players = sorted;
+    return new_playersobject;
+  }
+}
+
+function compare(a,b) {
+  if (a.total.games_started < b.total.games_started)
+     return 1;
+  if (a.total.games_started > b.total.games_started)
+    return -1;
+  return 0;
+}
+
+
 
 
 var formatPlayers = function(response, team_id){
