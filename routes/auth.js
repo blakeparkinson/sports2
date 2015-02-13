@@ -85,6 +85,22 @@ router.get('/tweet', function(res, res) {
       });
     });
 
+router.get('/maketweet', function(req, res) {
+  message = req.query["message"];
+  console.log(message);
+  var client = new Twitter({
+    consumer_key: config.twitter_consumer_key,
+    consumer_secret: config.twitter_consumer_secret,
+    access_token_key: req.session.twitter.token,
+    access_token_secret: req.session.twitter.token_secret
+  });
+
+  client.post('statuses/update', {status: message},  function(error, tweet, response){
+    console.log(error);
+    if(error) throw error;
+  });
+});
+
 router.get('/posttofacebook', function(res, res) {
       res.render('facebookpost', {
         special_layout : true

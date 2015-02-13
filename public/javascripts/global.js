@@ -98,17 +98,17 @@ function validateInputs(data){
 
 function postToTwitter(){
   console.log("here");
-  /*
+  
   $.ajax({
-      url: 'auth/tweet',
-      data: {message: 'From Rosterblitz. GLASSMAN GOAT 4/20'},
+      url: '/auth/maketweet',
+      data: {message: 'From Rosterblitz. Holla'},
       type: 'get',
       dataType: 'json',
         success: function(response){
           console.log('here');
         }
     })
-*/
+
 }
 
 //Twitter

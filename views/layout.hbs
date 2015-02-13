@@ -29,6 +29,8 @@
 	</header>
     {{{body}}}
     
+  {{# unless special_layout}}
+
     <div class="social-sidebar">
       <div id="share-1" class="share-element email-img" data-toggle="modal" data-target="#emailModal">
         <div id="email"></div>
@@ -49,7 +51,6 @@
       </div>
     </div>
     
-    {{# unless special_layout}}
     <footer class="footer">
       <div class="navbar-collapse collapse">      
         <div class="container">        
