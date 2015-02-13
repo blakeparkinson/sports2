@@ -20,7 +20,10 @@ $(document).ready(function() {
     $('body').on('hidden.bs.modal', '.modal', clearModal)
 
     $('body').on('click', '.email-img', appendMessage);
-    
+
+    //client now has server-side players
+    console.log(players);
+
 });
 
 // Functions ============================================================= //

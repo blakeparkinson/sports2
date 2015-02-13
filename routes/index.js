@@ -6,10 +6,9 @@ var http = require("http"),
     mongojs = require("mongojs"),
     db = mongojs.connect(config.mongo_uri, ["teams"]);
 
-    var players = {"WOAT": "NTGD", "GOAT": "PLOW"};
 
 router.get('/', function(req, res) {
-      res.render('index', {session:req.session, players: players});
+      res.render('index', {session:req.session});
     });
 
 
