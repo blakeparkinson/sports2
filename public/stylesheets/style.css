@@ -314,8 +314,11 @@ ul {
     padding: 0 40px;
 }
 
-.auth-container .tweet-btn{
+.auth-container .submit{
     float:right;
+}
+
+.auth-container .tweet-btn{
     background-color: rgb(85, 172, 238);
     background-image: linear-gradient(rgba(0, 0, 0, 0),rgba(0, 0, 0, 0.05));
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#00000000, endColorstr=#0C000000)";
@@ -345,5 +348,15 @@ ul {
 
 .auth-container .profile-photo img {
     border-radius: 7px;
+}
+
+.auth-container #char-count{
+    border: 0;
+    background: rgb(255, 255, 255);
+    padding: 4px 0;
+    color: rgb(102, 117, 127);
+    margin-right: 8px;
+    width: 3em;
+    text-align: right;
 }
 

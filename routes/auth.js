@@ -80,10 +80,14 @@ router.get('/twitter/callback', passport.authenticate('twitter', {
 );
 
 router.get('/tweet', function(req, res) {
-      var image_url = req.session.twitter._json.profile_image_url;
+      var image_url = req.session.twitter._json.profile_image_url,
+          status = "I just kicked ass on this quiz",
+          word_count = status.length;
       res.render('tweet', {
         special_layout : true,
-        profile_image:image_url
+        profile_image:image_url,
+        status: status,
+        word_count: word_count
       });
     });
 

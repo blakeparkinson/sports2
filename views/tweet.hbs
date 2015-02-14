@@ -14,8 +14,11 @@
       Share a quiz with your followers
 		</h2>
     <div class="form-group">
-      <textarea class="form-control" rows="3" id="message">I just kicked ass on this quiz</textarea>
+      <textarea class="form-control" rows="3" id="message">{{status}}</textarea>
     </div>
-    <div class="btn btn-primary tweet-btn">Tweet</div>
+    <div class="submit">
+    	<input type="text" id="char-count" aria-live="polite" disabled="" value="{{word_count}}">
+    	<div class="btn btn-primary tweet-btn">Tweet</div>
+    </div>
 	</div>
 </div>

@@ -21,6 +21,7 @@ $(document).ready(function() {
 
     $('body').on('click', '.email-img', appendMessage);
 
+
 });
 
 // Functions ============================================================= //
@@ -96,8 +97,8 @@ function validateInputs(data){
 
 
 
-function postToTwitter(){
-  console.log("here");
+function postToTwitter(event){
+  console.log(event);
   
   $.ajax({
       url: '/auth/maketweet',
