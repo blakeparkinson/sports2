@@ -79,9 +79,11 @@ router.get('/twitter/callback', passport.authenticate('twitter', {
 })
 );
 
-router.get('/tweet', function(res, res) {
+router.get('/tweet', function(req, res) {
+      var image_url = req.session.twitter._json.profile_image_url;
       res.render('tweet', {
-        special_layout : true
+        special_layout : true,
+        profile_image:image_url
       });
     });
 
