@@ -8,37 +8,22 @@ $( document ).ready(function() {
   	small:"barnes",
   	power:"green",
   	center:"bogut"
+  }	
+
+
+  var showTheRightOne = function() {
+  	var guess = $(".guess-box").val();
+  	console.log(guess);
+  	if (guess == warriors.point) {
+  		$(".pg-hide").show().text(warriors.point);  		
+  		$(".guess-box").val('');  		
+  	}  
   }
+  
+
+  
+
+	$('body').on('keyup', '.guess-box', showTheRightOne);
 
 
-	
-	var checkTheName = function() {					
-		$.each(warriors, function(key, twoName){			
-			if (twoName == warriors.point) {
-				showTheNice();
-			}		
-			else {
-				$(".nice2").hide();
-			}
-
-		});
-	}
-
-
-	var showTheNice = function() {
-	$(".nice2").show();
-	}	
-
- $('body').on('keyup', '.2', showTheNice);
- $('body').on('keyup', '.2', checkTheName);
-
-
-
-});
-
-
-// check if the user typed a letter
-
-
-
-// check if the text in the box is equal to the player's checkTheName
+	});
