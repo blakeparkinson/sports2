@@ -72,6 +72,12 @@ switch (league){
                callback(players, res)
                break;
                case 'nfl':
+               json_response = JSON.parse(body);
+               players_sorted = sortNFL(json_response);
+               players = formatPlayers(players_sorted, team_id);
+               mongoInsertPlayers(team_id, players);
+               callback(players, res)
+               break;
                case 'nhl':
                 json_response = JSON.parse(body);
                 players = formatPlayers(json_response, team_id);
@@ -103,13 +109,13 @@ var sortNBA = function(players_object){
   new_playersarray = players_object.players;
   new_playersobject = players_object;
   for (i=0; i<new_playersarray.length; i++){
-    sorted = new_playersarray.sort(compare);
+    sorted = new_playersarray.sort(compareNBA);
     new_playersobject.players = sorted;
     return new_playersobject;
   }
 }
 
-function compare(a,b) {
+function compareNBA(a,b) {
   if (a.total.games_started < b.total.games_started)
      return 1;
   if (a.total.games_started > b.total.games_started)
@@ -117,6 +123,24 @@ function compare(a,b) {
   return 0;
 }
 
+
+var sortNFL = function(players_object){
+  new_playersarray = players_object.players;
+  new_playersobject = players_object;
+  for (i=0; i<new_playersarray.length; i++){
+    sorted = new_playersarray.sort(compareNFL);
+    new_playersobject.players = sorted;
+    return new_playersobject;
+  }
+}
+
+function compareNFL(a,b) {
+  if (a.games_started < b.games_started)
+     return 1;
+  if (a.games_started > b.games_started)
+    return -1;
+  return 0;
+}
 
 
 
