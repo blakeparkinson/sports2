@@ -255,3 +255,33 @@ ul {
 .social-sidebar #twitter:hover{
     background-position: -394px -147.5px;
 }
+.table-iphone td, .table-iphone th {
+  padding: 5px 20px;
+  border: solid 1px black;
+}
+table tr:first-child th {
+  border-top: 0;
+}
+ table tr:last-child td {
+  border-bottom: 0;
+}
+table tr td:first-child,
+table tr th:first-child {
+  border-left: 0;
+}
+table tr td:last-child,
+table tr th:last-child {
+  border-right: 0;
+}
+.iphone-table-container {
+  margin:20px 0 0 20px;
+}
+.guesser {
+  margin-top: 10px;
+}
+.the-orange {
+  color: #FF3030;  
+}
+.the-blue {  
+  color: #4876FF;
+}
