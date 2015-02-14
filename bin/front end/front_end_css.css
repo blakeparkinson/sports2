@@ -11,15 +11,15 @@ th,td {
 }
 
 .main-court {
-	/* background: url(http://www.conceptdraw.com/How-To-Guide/picture/basketball-court-dimensions/Sport-Basketball-Simple-basketball-court-Template.png);	 	 */
-	background: url(http://i.cdn.turner.com/nba/nba/teamsites/images/legacy/bucks/MilBucks_Court_practice_604.jpg);	 	 
+	/* background: url(http://www.conceptdraw.com/How-To-Guide/picture/basketball-court-dimensions/Sport-Basketball-Simple-basketball-court-Template.png);	 */
+
 	background-position: center center;
 	background-attachment: fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;	
 	-o-background-size: cover;
 	background-size: cover;
-	background-color: #211922;
+	background-color: white;
 	margin: 0;
 	padding: 0;
 	height: 715px;

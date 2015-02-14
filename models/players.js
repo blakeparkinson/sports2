@@ -14,13 +14,18 @@ var parseString = require('xml2js').parseString;
 var players = [];
 
 var returnPlayers = function (players, res){
+  if (res.quiz_page != undefined && res.quiz_page){
+    res.render('quiz', {players:players[0].players});
+
+  }
+  else{
     res.json(players);
+  }
 }
 
 // Check the db first. If it's there and has been added in the last 24 hours, use it. 
 // Otherwise, go get new data from the API and replace/add the database listing
-var fetchPlayers = function(team_id, league, res, callback){
-  
+var fetchPlayers = function(team_id, league, res, callback){  
   db.collection('players').find({team_id : team_id}).toArray(function (err, items){
     if (items.length > 0){ // data in Mongo
       var itemdate = _.first(items['last_updated']);
@@ -65,18 +70,30 @@ switch (league){
       if (!error && response.statusCode == 200) {
              switch (league){
                case 'nba':
+               json_response = JSON.parse(body);
+               players_sorted = sortNBA(json_response);
+               players = formatPlayers(players_sorted, team_id);
+               mongoInsertPlayers(team_id, players);
+               callback(players, res)
+               break;
                case 'nfl':
+               json_response = JSON.parse(body);
+               players_sorted = sortNFL(json_response);
+               players = formatPlayers(players_sorted, team_id);
+               mongoInsertPlayers(team_id, players);
+               callback(players, res)
+               break;
                case 'nhl':
                 json_response = JSON.parse(body);
                 players = formatPlayers(json_response, team_id);
                 mongoInsertPlayers(team_id, players);
-                callback(players, res)
+                callback(players, res, options)
                 break;
                case 'eu_soccer':
                 playersParsed = formatEUSoccerPlayers(response.body);
                 players = formatPlayersDocument(team_id, playersParsed);
                 mongoInsertPlayers(team_id, players);
-                callback(players, res)
+                callback(players, res, options)
                 break;
                case 'mlb':  
                 playersParsed = formatMLBPlayers(response.body, team_id);
@@ -91,6 +108,45 @@ switch (league){
       }
     });
 }
+
+
+var sortNBA = function(players_object){
+  new_playersarray = players_object.players;
+  new_playersobject = players_object;
+  for (i=0; i<new_playersarray.length; i++){
+    sorted = new_playersarray.sort(compareNBA);
+    new_playersobject.players = sorted;
+    return new_playersobject;
+  }
+}
+
+function compareNBA(a,b) {
+  if (a.total.games_started < b.total.games_started)
+     return 1;
+  if (a.total.games_started > b.total.games_started)
+    return -1;
+  return 0;
+}
+
+
+var sortNFL = function(players_object){
+  new_playersarray = players_object.players;
+  new_playersobject = players_object;
+  for (i=0; i<new_playersarray.length; i++){
+    sorted = new_playersarray.sort(compareNFL);
+    new_playersobject.players = sorted;
+    return new_playersobject;
+  }
+}
+
+function compareNFL(a,b) {
+  if (a.games_started < b.games_started)
+     return 1;
+  if (a.games_started > b.games_started)
+    return -1;
+  return 0;
+}
+
 
 
 var formatPlayers = function(response, team_id){
