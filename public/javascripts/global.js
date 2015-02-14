@@ -21,9 +21,6 @@ $(document).ready(function() {
 
     $('body').on('click', '.email-img', appendMessage);
 
-    //client now has server-side players
-    console.log(players);
-
 });
 
 // Functions ============================================================= //
