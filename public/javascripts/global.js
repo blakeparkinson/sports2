@@ -155,6 +155,7 @@ function fetchPopupDimensions(){
 //Twitter
 function openAuthPopup(){
  var d = fetchPopupDimensions();
+ //window takes up half the screen and is centered
   var newWindow = window.open('auth/twitter', 'Log in with Twitter', 'scrollbars=yes, width=' + d.w + ', height=' + d.h + ', top=' + d.top + ', left=' + d.left);
   // Puts focus on the newWindow
     if (window.focus) {
@@ -165,6 +166,7 @@ function openAuthPopup(){
 function openTweetPopup(){
   
   var d = fetchPopupDimensions();
+   //window takes up half the screen and is centered
     var newWindow = window.open('auth/tweet', 'Share on Twitter','scrollbars=yes, width=' + d.w + ', height=' + d.h + ', top=' + d.top + ', left=' + d.left);
 
     // Puts focus on the newWindow
