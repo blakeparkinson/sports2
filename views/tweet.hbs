@@ -1,5 +1,24 @@
 <div class ="auth-container">
-    <div class="btn btn-primary tweet-btn">Make a Tweet</div>
-
-	<button class ="btn btn-primary close-auth">Close Window</button>
+	<div id="header" role="banner">
+      <div class="bar">
+        <h1 class="logo">
+          <div class="tweet-logo"></div>
+        </h1>
+        <h1 class="profile-photo">
+          <img src="{{profile_image}}" alt="" width="32" height="32">
+        </h1>
+    </div>
+  </div>
+  <div class="social-section">
+  	<h2 class="share">
+      Share a quiz with your followers
+		</h2>
+    <div class="form-group">
+      <textarea class="form-control tweet-message" rows="3" id="message" maxlength="140">{{status}}</textarea>
+    </div>
+    <div class="submit">
+    	<input type="text" id="char-count" aria-live="polite" disabled="" value="{{word_count}}">
+    	<div class="btn btn-primary tweet-btn">Tweet</div>
+    </div>
+	</div>
 </div>

@@ -8,9 +8,11 @@ $(document).ready(function() {
     $('body').on('click', '.tweet', openTweetPopup);
     $('body').on('click', '.facebook-login', openFacebookAuthPopup);
     $('body').on('click', '.facebook-post', openFacebookPostPopup);
-    $('body').on('click', '.close-auth', closePopupAndRefreshPage);
+    $('body').on('click', '.close-window', closePopup);
     $('body').on('click', '.tweet-btn', postToTwitter);
     $('body').on('click', '#email-btn', sendEmail);
+    $('body').on('keyup', '.tweet-message', fetchCharacterCount);
+
 
     if (window.location.href.indexOf('auth') > -1){
       // let's just close the window for auth popup for them
@@ -20,6 +22,7 @@ $(document).ready(function() {
     $('body').on('hidden.bs.modal', '.modal', clearModal)
 
     $('body').on('click', '.email-img', appendMessage);
+
 
 });
 
@@ -34,6 +37,15 @@ function clearModal(){
   modal.find('#email-recipients').val('');
   modal.find('#message').val('');
   $(this).removeData('bs.modal');
+}
+
+function fetchCharacterCount(e){
+  var char_count = ($(this).val().length),
+
+      container = $(e.target).closest('.auth-container'),
+      input = container.find('#char-count');
+  input.val(char_count);
+
 }
 
 
@@ -96,30 +108,71 @@ function validateInputs(data){
 
 
 
-function postToTwitter(){
-  console.log("here");
-  /*
+function postToTwitter(e){
+  container = $(e.target).closest('.auth-container'),
+      tweet = container.find('.tweet-message').val();
+  
   $.ajax({
-      url: 'auth/tweet',
-      data: {message: 'From Rosterblitz. GLASSMAN GOAT 4/20'},
+      url: '/auth/maketweet',
+      data: {message: tweet},
       type: 'get',
       dataType: 'json',
         success: function(response){
-          console.log('here');
+          var social = container.find('.social-section'),
+          markup = $('<h2 class="share center">Thanks for tweeting about Rosterblitz!</h2>'+
+            '<div class="btn btn-primary close-window">Close Window</div>');
+          social.empty();
+          social.append(markup);
+          setTimeout(function(){
+              window.close();
+          }, 2000)
         }
     })
-*/
-}
 
+}
+function fetchPopupDimensions(){
+  //gotta do all this shit for dual screens
+  var w = window.innerWidth/2;
+ var h = window.innerHeight/2;
+  var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+    var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+
+    width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+    height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+    var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+    var top = ((height / 2) - (h / 2)) + dualScreenTop;
+    var dimensions = {
+      w: w,
+      h: h,
+      top:top,
+      left: left
+    }
+
+    return dimensions;
+
+}
 //Twitter
 function openAuthPopup(){
-  //TODO center the popup in the screen
-  window.open('auth/twitter', 'Log in with Twitter', 'width=780,height=410,toolbar=0,scrollbars=0,status=0,resizable=0,location=0,menuBar=0,left=500,top=800');
+ var d = fetchPopupDimensions();
+ //window takes up half the screen and is centered
+  var newWindow = window.open('auth/twitter', 'Log in with Twitter', 'scrollbars=yes, width=' + d.w + ', height=' + d.h + ', top=' + d.top + ', left=' + d.left);
+  // Puts focus on the newWindow
+    if (window.focus) {
+        newWindow.focus();
+    }
 }
 
 function openTweetPopup(){
-  //TODO center the popup in the screen
-  window.open('auth/tweet', 'Share on Twitter', 'width=780,height=410,toolbar=0,scrollbars=0,status=0,resizable=0,location=0,menuBar=0,left=500,top=800');
+  
+  var d = fetchPopupDimensions();
+   //window takes up half the screen and is centered
+    var newWindow = window.open('auth/tweet', 'Share on Twitter','scrollbars=yes, width=' + d.w + ', height=' + d.h + ', top=' + d.top + ', left=' + d.left);
+
+    // Puts focus on the newWindow
+    if (window.focus) {
+        newWindow.focus();
+    }
 }
 
 //Facebook
@@ -133,11 +186,10 @@ function openFacebookPostPopup(){
 }
 
 
-function closePopupAndRefreshPage(){
-  /*
-  window.opener.location.reload(true);
+function closePopup(){
+  
   window.close();
-  */
+  
 }
 
 function fetchTeam(event) {
