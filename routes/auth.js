@@ -104,6 +104,7 @@ router.get('/maketweet', function(req, res) {
   client.post('statuses/update', {status: message},  function(error, tweet, response){
     console.log(error);
     if(error) throw error;
+    else res.end('{"success" : "Tweet Posted", "status" : 200}');
   });
 });
 

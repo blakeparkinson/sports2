@@ -310,6 +310,11 @@ ul {
     font-size: 24px;
 }
 
+.auth-container .share.center{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
 .auth-container .social-section{
     padding: 0 40px;
 }
