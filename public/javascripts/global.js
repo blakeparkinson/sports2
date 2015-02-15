@@ -93,22 +93,35 @@ function validateInputs(data){
   return has_errors;
 }
 
+function fetchPopupDimensions(){
+  //gotta do all this shit for dual screens
+  var w = window.innerWidth/2;
+ var h = window.innerHeight/2;
+  var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+    var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
 
+    width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+    height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+    var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+    var top = ((height / 2) - (h / 2)) + dualScreenTop;
+    var dimensions = {
+      w: w,
+      h: h,
+      top:top,
+      left: left
+    }
+
+    return dimensions;
+
+}
 
 
 function postToTwitter(){
-  console.log("here");
-  /*
-  $.ajax({
-      url: 'auth/tweet',
-      data: {message: 'From Rosterblitz. GLASSMAN GOAT 4/20'},
-      type: 'get',
-      dataType: 'json',
-        success: function(response){
-          console.log('here');
-        }
-    })
-*/
+
+  var d = fetchPopupDimensions();
+    window.open('https://twitter.com/share?text=blahblahblah&url='+window.location.href, 'Share a quiz on twitter', 'scrollbars=yes, width=' + d.w + ', height=' + d.h + ', top=' + d.top + ', left=' + d.left);
+
 }
 
 //Twitter
