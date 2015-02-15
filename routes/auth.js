@@ -79,11 +79,34 @@ router.get('/twitter/callback', passport.authenticate('twitter', {
 })
 );
 
-router.get('/tweet', function(res, res) {
+router.get('/tweet', function(req, res) {
+      var image_url = req.session.twitter._json.profile_image_url,
+          status = "I just kicked ass on this quiz",
+          word_count = status.length;
       res.render('tweet', {
-        special_layout : true
+        special_layout : true,
+        profile_image:image_url,
+        status: status,
+        word_count: word_count
       });
     });
+
+router.get('/maketweet', function(req, res) {
+  message = req.query["message"];
+  console.log(message);
+  var client = new Twitter({
+    consumer_key: config.twitter_consumer_key,
+    consumer_secret: config.twitter_consumer_secret,
+    access_token_key: req.session.twitter.token,
+    access_token_secret: req.session.twitter.token_secret
+  });
+
+  client.post('statuses/update', {status: message},  function(error, tweet, response){
+    console.log(error);
+    if(error) throw error;
+    else res.end('{"success" : "Tweet Posted", "status" : 200}');
+  });
+});
 
 router.get('/posttofacebook', function(res, res) {
       res.render('facebookpost', {
