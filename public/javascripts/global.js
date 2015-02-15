@@ -10,6 +10,7 @@ $(document).ready(function() {
     $('body').on('click', '.facebook-post', openFacebookPostPopup);
     $('body').on('click', '.close-auth', closePopupAndRefreshPage);
     $('body').on('click', '.tweet-btn', postToTwitter);
+    $('body').on('click', '.fb-btn', postTofacebook);
     $('body').on('click', '#email-btn', sendEmail);
 
     if (window.location.href.indexOf('auth') > -1){
@@ -121,6 +122,14 @@ function postToTwitter(){
 
   var d = fetchPopupDimensions();
     window.open('https://twitter.com/share?text=blahblahblah&url='+window.location.href, 'Share a quiz on twitter', 'scrollbars=yes, width=' + d.w + ', height=' + d.h + ', top=' + d.top + ', left=' + d.left);
+
+}
+
+function postTofacebook(){
+
+  var d = fetchPopupDimensions();
+    window.open('https://www.facebook.com/dialog/feed?app_id=1600051886893474&redirect_uri=http://localhost:3000/auth/tweet&name=lahblahblah&display=popup&link='+window.location.href, 'Share a quiz on twitter', 'scrollbars=yes, width=' + d.w + ', height=' + d.h + ', top=' + d.top + ', left=' + d.left);
+
 
 }
 
