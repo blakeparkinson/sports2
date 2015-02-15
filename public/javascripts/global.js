@@ -131,6 +131,7 @@ function postToTwitter(e){
 
 }
 function fetchPopupDimensions(){
+  //gotta do all this shit for dual screens
   var w = window.innerWidth/2;
  var h = window.innerHeight/2;
   var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
