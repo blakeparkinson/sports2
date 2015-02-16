@@ -1,4 +1,72 @@
-<div>Hello World</div>
+<div class="container-iphone">
+	<div class="iphone-table-container">
+		<table class="table-iphone">
+	  	<tr>
+	    	<th>Position</th>
+	    	<th>Name</th> 
+	    	<th>Number</th>
+	  	</tr>
+	  	<tr>
+	    	<td>G</td>
+	    	<td data="g1-name" class="g1-name"></td> 
+	    	<td data="g1-number"></td>
+	  	</tr>
+	  	<tr>
+	    	<td>G</td>
+	    	<td data="g2-name" class="g2-name"></td> 
+	    	<td data="g2-number"></td>
+	  	</tr>
+	  	<tr>
+	    	<td>F</td>
+	    	<td data="f1-name" class="f1-name"></td> 
+	    	<td data="f1-number"></td>
+	  	</tr>
+	  	<tr>
+	    	<td>F</td>
+	    	<td data="f2-name" class="f2-name"></td> 
+	    	<td data="f2-number"></td>
+	  	</tr>
+	  	<tr>
+	    	<td>F/C</td>
+	    	<td data="c-name" class="c-name"></td> 
+	    	<td data="c-number"></td>
+	  	</tr>
+	  	<tr>
+	    	<td>Bench 1</td>
+	    	<td data="bench1-name"></td> 
+	    	<td data="bench1-name"></td>
+	  	</tr>
+	  	<tr>
+	    	<td>Bench 2</td>
+	    	<td data="bench2-name"></td> 
+	    	<td data="bench2-number"></td>
+	  	</tr>
+	  	<tr>
+	    	<td>Bench 3</td>
+	    	<td data="bench3-name"></td> 
+	    	<td data="bench3-number"></td>
+	  	</tr>
+	  	<tr>
+	    	<td>Bench 4</td>
+	    	<td data="bench4-name"></td> 
+	    	<td data="bench4-number"></td>
+	  	</tr>
+	  	<tr>
+	    	<td>Bench 5</td>
+	    	<td data="bench5-name"></td> 
+	    	<td data="bench5-number"></td>
+	  	</tr>
+		</table>
+		<div class="guesser">
+  		<span class="player-name">Enter player name: </span>
+  		<input class="guess-box" type="text" placeholder="e.g. JJ Barea">
+		</div>
+	</div>
+</div>
+
+
+
+
 
 <script type='text/javascript'>
     var players = {{{json_stringify players}}};
