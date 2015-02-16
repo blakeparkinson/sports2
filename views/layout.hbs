@@ -9,47 +9,42 @@
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' />
   </head>
   <body>
-  	<nav class="navbar navbar-default blitz" role="navigation">
-  <div class="navbar-header rb">
-    <a class="navbar-brand main" href="#">RosterBlitz</a>
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>    
-  </div>
-  <div class="navbar-collapse collapse">
-    {{# unless special_layout}}
-      <ul class="nav navbar-nav navbar-right rb"> 
-           <li><a href="#contact">Pony</a></li>
-      </ul>
-    {{/unless}}
-  </div>
-</nav>
-	</header>
+{{# unless special_layout}}
+
+  <nav class="navbar navbar-default blitz" role="navigation">
+    <div class="navbar-header rb">
+      <a class="navbar-brand main" href="#">RosterBlitz</a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>    
+    </div>
+    <div class="navbar-collapse collapse">
+      {{# unless special_layout}}
+        <ul class="nav navbar-nav navbar-right rb"> 
+             <li><a href="#contact">Pony</a></li>
+        </ul>
+      {{/unless}}
+    </div>
+  </nav>
+{{/unless}}
     {{{body}}}
     
-    <div class="social-sidebar">
+  {{# unless special_layout}}
+
+    <div class="social-sidebar" data-title="Try out this quiz at Rosterblitz: ">
       <div id="share-1" class="share-element email-img" data-toggle="modal" data-target="#emailModal">
         <div id="email"></div>
       </div>
       <div id ="share-2" class="share-element">
-        {{#if session.facebook.auth}}
-           <div id="facebook" class="fb-btn"></div>
-        {{else}}
-           <div id="facebook" class="fb-btn"></div>
-        {{/if}}
+        <div id="facebook" class="post-social"></div>
       </div>
         <div id ="share-3" class="share-element">
-       {{#if session.twitter.auth}}
-        <div id="twitter" class="tweet-btn" data-text="blahblah"></div>
-       {{else}}
-        <div id="twitter" class="tweet-btn" data-text="blahblah"></div>
-       {{/if}}
+        <div id="twitter" class="post-social"></div>
       </div>
     </div>
     
-    {{# unless special_layout}}
     <footer class="footer">
       <div class="navbar-collapse collapse">      
         <div class="container">        
@@ -108,16 +103,5 @@
     <script src='/javascripts/teams.js'></script>
     <script src='/javascripts/bootstrap-select.min.js'></script>
     <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js'></script>
-    <script>
-window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));
-</script>
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0&appId=1600051886893474";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
   </body>
 </html>

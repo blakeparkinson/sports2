@@ -9,13 +9,14 @@ $(document).ready(function() {
     $('body').on('click', '.facebook-login', openFacebookAuthPopup);
     $('body').on('click', '.facebook-post', openFacebookPostPopup);
     $('body').on('click', '.close-auth', closePopupAndRefreshPage);
-    $('body').on('click', '.tweet-btn', postToTwitter);
-    $('body').on('click', '.fb-btn', postTofacebook);
+    $('body').on('click', '.post-social', postSocial);
     $('body').on('click', '#email-btn', sendEmail);
 
     if (window.location.href.indexOf('auth') > -1){
       // let's just close the window for auth popup for them
-      $('.close-auth').trigger('click');
+      setTimeout(function(){
+        window.close();
+         }, 2000)
     }
 
     $('body').on('hidden.bs.modal', '.modal', clearModal)
@@ -118,20 +119,23 @@ function fetchPopupDimensions(){
 }
 
 
-function postToTwitter(){
+function postSocial(event){
 
-  var d = fetchPopupDimensions();
-    window.open('https://twitter.com/share?text=blahblahblah&url='+window.location.href, 'Share a quiz on twitter', 'scrollbars=yes, width=' + d.w + ', height=' + d.h + ', top=' + d.top + ', left=' + d.left);
+  var target = $(event.target),
+    d = fetchPopupDimensions(),
+    title = target.closest('.social-sidebar').data('title');
+  console.log(target);
 
-}
+  if (target.attr('id') == 'twitter'){
+    window.open('https://twitter.com/share?text='+title+'&url='+window.location.href, 'Share a quiz on twitter', 'scrollbars=yes, width=' + d.w + ', height=' + d.h + ', top=' + d.top + ', left=' + d.left);
+  }
 
-function postTofacebook(){
-
-  var d = fetchPopupDimensions();
+  else{
     window.open('https://www.facebook.com/dialog/feed?app_id=1600051886893474&redirect_uri=http://localhost:3000/auth/tweet&name=lahblahblah&display=popup&link='+window.location.href, 'Share a quiz on twitter', 'scrollbars=yes, width=' + d.w + ', height=' + d.h + ', top=' + d.top + ', left=' + d.left);
-
+  }
 
 }
+
 
 //Twitter
 function openAuthPopup(){

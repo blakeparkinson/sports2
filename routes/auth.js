@@ -79,9 +79,9 @@ router.get('/twitter/callback', passport.authenticate('twitter', {
 })
 );
 
-router.get('/tweet', function(res, res) {
+router.get('/tweet', function(req, res) {
       res.render('tweet', {
-        special_layout : true
+        special_layout : true,
       });
     });
 
