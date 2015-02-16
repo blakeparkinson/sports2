@@ -6,9 +6,7 @@ body {
 a {
   color: #00B7FF;
 }
-.navbar {
-	opacity: 0.8;
-}
+
 
 #team-selection{
 	margin-bottom: 15px;
@@ -43,7 +41,6 @@ a {
   /* Set the fixed height of the footer here */
   height: 60px;
   background-color: #f5f5f5;
-  opacity: 0.8;
   border-radius: 4px;
 
 }
