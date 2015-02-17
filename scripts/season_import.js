@@ -38,7 +38,9 @@ var teams = db.collection('teams').find({'league': league}).toArray(function (er
 
 
 
-// call the season api. Build new object with the season info we want.
+// this endpoint returns the entire nba season schedule
+// grab that info, and for every team we have in that league in mongo, loop through and build that team's individual schedule
+// Once we have a document with each team's individual schedule, we can use that game id to make the starting players calls
 
 endpoint = 'https://api.sportsdatallc.org/nba-t3/games/2014/REG/schedule.json?api_key='+config.nba_key;
 request(endpoint, function (error, response, body) {
@@ -60,7 +62,6 @@ request(endpoint, function (error, response, body) {
 					}
 					team_sched_document.push({league: league, team_id: items[i].team_id, team_schedule: team_schedule});
 					console.log(team_sched_document);
-				//console.log(team_sched_document);
 				}
 			}
 		});		
@@ -84,31 +85,6 @@ var formatNbaSched = function(response){
       }
 return season_sched;
 }
-
-
-
-
-
-/*switch (league){
-	case 'nba':
-		
-		});
-
-		//endpoint = 'https://api.sportsdatallc.org/nba-t3/league/hierarchy.json?api_key=' + config.nba_key;
-		break;
-}
-
-    request(endpoint, function (error, response, body) {
-		if (!error && response.statusCode == 200) {
-            switch (league){
-	        	case 'nba':
-	            	console.log("Weeeeee");
-      			}
-      	else {
-        	console.log('somethings really terrible happened');
-      	}
-    }
-})*/
 
   
 
