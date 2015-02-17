@@ -9,12 +9,15 @@ $(document).ready(function() {
     $('body').on('click', '.facebook-login', openFacebookAuthPopup);
     $('body').on('click', '.facebook-post', openFacebookPostPopup);
     $('body').on('click', '.close-auth', closePopupAndRefreshPage);
-    $('body').on('click', '.tweet-btn', postToTwitter);
+    $('body').on('click', '.post-social', postSocial);
     $('body').on('click', '#email-btn', sendEmail);
+    $('body').on('click', '.close-window', function(){window.close()});
 
     if (window.location.href.indexOf('auth') > -1){
       // let's just close the window for auth popup for them
-      $('.close-auth').trigger('click');
+      setTimeout(function(){
+        window.close();
+         }, 2000)
     }
 
     $('body').on('hidden.bs.modal', '.modal', clearModal)
@@ -93,23 +96,47 @@ function validateInputs(data){
   return has_errors;
 }
 
+function fetchPopupDimensions(){
+  //gotta do all this shit for dual screens
+  var w = window.innerWidth/2;
+ var h = window.innerHeight/2;
+  var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+    var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
 
+    width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+    height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
 
+    var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+    var top = ((height / 2) - (h / 2)) + dualScreenTop;
+    var dimensions = {
+      w: w,
+      h: h,
+      top:top,
+      left: left
+    }
 
-function postToTwitter(){
-  console.log("here");
-  /*
-  $.ajax({
-      url: 'auth/tweet',
-      data: {message: 'From Rosterblitz. GLASSMAN GOAT 4/20'},
-      type: 'get',
-      dataType: 'json',
-        success: function(response){
-          console.log('here');
-        }
-    })
-*/
+    return dimensions;
+
 }
+
+
+function postSocial(event){
+
+  var target = $(event.target),
+    d = fetchPopupDimensions(),
+    title = target.closest('.social-sidebar').data('title');
+
+  if (target.attr('id') == 'twitter'){
+    window.open('https://twitter.com/share?text='+title+'&url='+window.location.href, 'Share a quiz on twitter', 'scrollbars=yes, width=' + d.w + ', height=' + d.h + ', top=' + d.top + ', left=' + d.left);
+  }
+
+  else{
+    // it's teh facebook
+    window.open('https://www.facebook.com/dialog/feed?app_id=1600051886893474&redirect_uri=http://localhost:3000/auth/tweet&name=lahblahblah&display=popup&link='+window.location.href, 'Share a quiz on twitter', 'scrollbars=yes, width=' + d.w + ', height=' + d.h + ', top=' + d.top + ', left=' + d.left);
+  }
+
+}
+
 
 //Twitter
 function openAuthPopup(){
