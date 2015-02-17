@@ -11,9 +11,9 @@
   <body>
 {{# unless special_layout}}
 
-  <nav class="navbar navbar-default blitz" role="navigation">
+	<nav class="navbar navbar-default blitz" role="navigation">
     <div class="navbar-header rb">
-      <a class="navbar-brand main" href="#">RosterBlitz</a>
+      <a class="navbar-brand main" href="#"><span class="the-blue">Roster</span><span class="the-orange">Blitz</span></a>
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -21,46 +21,44 @@
       </button>    
     </div>
     <div class="navbar-collapse collapse">
-      {{# unless special_layout}}
         <ul class="nav navbar-nav navbar-right rb"> 
-             <li><a href="#contact">Pony</a></li>
+          <li><a href="#contact">Pony</a></li>
         </ul>
-      {{/unless}}
     </div>
   </nav>
 {{/unless}}
-    {{{body}}}
+  {{{body}}}
     
-  {{# unless special_layout}}
+{{# unless special_layout}}
 
-    <div class="social-sidebar" data-title="Try out this quiz at Rosterblitz: ">
-      <div id="share-1" class="share-element email-img" data-toggle="modal" data-target="#emailModal">
-        <div id="email"></div>
-      </div>
-      <div id ="share-2" class="share-element">
-        <div id="facebook" class="post-social"></div>
-      </div>
-        <div id ="share-3" class="share-element">
-        <div id="twitter" class="post-social"></div>
-      </div>
+  <div class="social-sidebar" data-title="Try out this quiz at Rosterblitz: ">
+    <div id="share-1" class="share-element email-img" data-toggle="modal" data-target="#emailModal">
+      <div id="email"></div>
     </div>
-    
-    <footer class="footer">
-      <div class="navbar-collapse collapse">      
-        <div class="container">        
-            <p class="text-muted">     
-              <ul class="bs-docs-footer-links text-muted">
-                <li><a href="/">Home</a></li>      
-                <li><a href="/about">About</a></li>
-                <li><a href="/jobs">Jobs</a></li>
-                <li><a href="/contactUs">Contact Us</a></li>                       
-              </ul>                     
-            </p>      
-        </div>
-      </div>  
-    </footer>
-    
-    {{/unless}}
+    <div id ="share-2" class="share-element">
+      <div id="facebook" class="post-social"></div>
+    </div>
+      <div id ="share-3" class="share-element">
+      <div id="twitter" class="post-social"></div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+    <div class="navbar-collapse collapse">      
+      <div class="container">        
+          <p class="text-muted">     
+            <ul class="bs-docs-footer-links text-muted">
+              <li><a href="/" class="the-blue">Home</a></li>      
+              <li><a href="/about" class="the-orange">About</a></li>
+              <li><a href="/jobs" class="the-blue">Jobs</a></li>
+              <li><a href="/contactUs" class="the-orange">Contact Us</a></li>                       
+            </ul>                     
+          </p>      
+      </div>
+    </div>  
+  </footer>
+  
+  {{/unless}}
 
        <!-- Modal -->
 <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
