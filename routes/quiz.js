@@ -14,6 +14,7 @@ router.get('/', function(req, res) {
           team_id = req.query.team_id,
           league = req.query.league;
       if (!team_id || !league){
+      	//it's the short url, so let's look up by quiz id to find the other info
           db.collection('quiz').findOne({_id : quiz_id},function (err, doc){
               players = players_model.fetchPlayers(doc.team_id, doc.league, res, players_model.returnPlayers);
           });
