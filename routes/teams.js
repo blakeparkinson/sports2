@@ -8,7 +8,9 @@ var http = require("http"),
     mongojs = require("mongojs"),
     db = mongojs.connect(config.mongo_uri);
 var players_model = require('../models/players.js');
+var shortId = require('shortid');
 var nodemailer = require('nodemailer');
+
 // create reusable transporter object using SMTP transport 
 var transporter = nodemailer.createTransport({
     service: 'Gmail',
@@ -39,7 +41,7 @@ var returnItem = function (item, res){
 
 var createQuiz = function(rb_team_id, league, res, callback){
   db.open(function(err, db){
-    db.collection("quiz").insert({team_id: rb_team_id, created_at: new Date().toISOString().slice(0, 19).replace('T', ' '), league: league}, function (err, insert){
+    db.collection("quiz").insert({_id:shortId.generate(), team_id: rb_team_id, created_at: new Date().toISOString().slice(0, 19).replace('T', ' '), league: league}, function (err, insert){
         if (err){
           console.log("new quiz insert failed");
         }
