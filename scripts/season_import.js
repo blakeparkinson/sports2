@@ -32,31 +32,31 @@ if (supported_leagues.indexOf(league) == -1){
 
 endpoint = 'https://api.sportsdatallc.org/nba-t3/games/2014/REG/schedule.json?api_key='+config.nba_key;
 request(endpoint, function (error, response, body) {
-	if (!error && response.statusCode == 200) {
-		formatNbaSched(response.body);
-		db.collection('teams').find({'league': league}).toArray(function (err, items) {
-			if (err) {
-				console.log("error fetching teams")
-			}
-			else {
-				teams_sched = [];  //This will be one array with each team's info as a separate element.
-				// items are the list of teams in that league pulled from mongo
-				for (i=0; i<items.length; i++){
-					team_schedule = []; //This is one team's season information
-					for (j=0; j<season_sched.length; j++){
-						if (season_sched[j].game_home_team == items[i].team_id || season_sched[j].game_away_team == items[i].team_id){
-							team_schedule.push({game_id: season_sched[j].game_id, game_date:season_sched[j].game_date.slice(0,10)});
-						}
-					}
-					teams_sched.push({league: league, team_id: items[i].team_id, team_schedule: team_schedule});
-				}
-				mongoInsert(teams_sched);
-			}
-		});		
-	}
-	else {
-		console.log("ruh rohs");
-	}
+  if (!error && response.statusCode == 200) {
+    formatNbaSched(response.body);
+    db.collection('teams').find({'league': league}).toArray(function (err, items) {
+      if (err) {
+        console.log("error fetching teams")
+      }
+      else {
+        teams_sched = [];  //This will be one array with each team's info as a separate element.
+        // items are the list of teams in that league pulled from mongo
+        for (i=0; i<items.length; i++){
+          team_schedule = []; //This is one team's season information
+          for (j=0; j<season_sched.length; j++){
+            if (season_sched[j].game_home_team == items[i].team_id || season_sched[j].game_away_team == items[i].team_id){
+              team_schedule.push({game_id: season_sched[j].game_id, game_date:season_sched[j].game_date.slice(0,10)});
+            }
+          }
+          teams_sched.push({league: league, team_id: items[i].team_id, team_schedule: team_schedule});
+        }
+        mongoInsert(teams_sched);
+      }
+    });    
+  }
+  else {
+    console.log("ruh rohs");
+  }
 })
 
 
@@ -65,12 +65,12 @@ request(endpoint, function (error, response, body) {
 var formatNbaSched = function(response){
   var  hierarchy_response = JSON.parse(response);
   for (i=0;i<hierarchy_response.games.length;i++){
-  		var game_id = hierarchy_response.games[i].id;
-  		var game_date = hierarchy_response.games[i].scheduled;
-  		var home_team = hierarchy_response.games[i].home.id; 
-  		var away_team = hierarchy_response.games[i].away.id;  
-        season_sched.push({game_id: game_id,game_date:game_date,game_home_team:home_team, game_away_team:away_team});
-      }
+    var game_id = hierarchy_response.games[i].id;
+    var game_date = hierarchy_response.games[i].scheduled;
+    var home_team = hierarchy_response.games[i].home.id; 
+    var away_team = hierarchy_response.games[i].away.id;  
+    season_sched.push({game_id: game_id,game_date:game_date,game_home_team:home_team, game_away_team:away_team});
+    }
 return season_sched;
 }
 
@@ -78,18 +78,18 @@ return season_sched;
 function mongoInsert(teams_schedule){
   console.log("inserting into the DB");
   for (i=0;i<teams_schedule.length;i++){
-	  console.log("teams_schedule stuff"+teams_schedule[i].team_id);
-	  console.log("teams_schedule stuff"+teams_schedule[i].league);
-	  db.open(function(err, db){
-	    db.collection("schedule").update({team_id: teams_schedule.team_id},
-	    {$set: {team_id: teams_schedule[i].team_id, league: teams_schedule[i].league, team_schedule: teams_schedule[i].team_schedule}},
-	    {upsert: true, multi:false}, function (err, upserted){
-	      if (err) {
-	        console.log('Ahh! An Error with Insert!');
-	        return;
-	      }
-	  	});
-	  });
+    console.log("teams_schedule stuff"+teams_schedule[i].team_id);
+    console.log("teams_schedule stuff"+teams_schedule[i].league);
+    db.open(function(err, db){
+      db.collection("schedule").update({team_id: teams_schedule.team_id},
+      {$set: {team_id: teams_schedule[i].team_id, league: teams_schedule[i].league, team_schedule: teams_schedule[i].team_schedule}},
+      {upsert: true, multi:false}, function (err, upserted){
+        if (err) {
+          console.log('Ahh! An Error with Insert!');
+          return;
+        }
+      });
+    });
   }
 }
 
