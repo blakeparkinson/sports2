@@ -87,13 +87,13 @@ switch (league){
                 json_response = JSON.parse(body);
                 players = formatPlayers(json_response, team_id);
                 mongoInsertPlayers(team_id, players);
-                callback(players, res, options)
+                callback(players, res)
                 break;
                case 'eu_soccer':
                 playersParsed = formatEUSoccerPlayers(response.body);
                 players = formatPlayersDocument(team_id, playersParsed);
                 mongoInsertPlayers(team_id, players);
-                callback(players, res, options)
+                callback(players, res)
                 break;
                case 'mlb':  
                 playersParsed = formatMLBPlayers(response.body, team_id);
