@@ -84,13 +84,22 @@ ul {
     }
      
 }
+/*
+.container-iphone {
+  display:none;
+}
+*/
 
 @media screen and (max-width: 460px) {
     #team-select {
         font-size: 20px;
         padding-bottom: 15px;
-
     }    
+    /* ADD BACK LATER
+    .container-iphone {
+      display: block;
+    }  
+    */
 }
 
 .submit-section{
