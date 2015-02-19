@@ -13,9 +13,12 @@ var endpoint = '';
 var parseString = require('xml2js').parseString;
 var players = [];
 
-var returnPlayers = function (players, res){
+var returnPlayers = function (players, res, league){
   if (res.quiz_page != undefined && res.quiz_page){
-    res.render('quiz', {players:players[0].players});
+    res.render('quiz', {
+      players:players[0].players,
+      league: league
+    });
 
   }
   else{
@@ -35,7 +38,7 @@ var fetchPlayers = function(team_id, league, res, callback){
         var players = fetchPlayersFromApi(team_id, league, res, callback)
       }
       else {  // data is fine so just return it
-        callback(items, res);
+        callback(items, res, league);
       }
     }
     else {  // data not already in Mongo
@@ -74,32 +77,32 @@ switch (league){
                players_sorted = sortNBA(json_response);
                players = formatPlayers(players_sorted, team_id);
                mongoInsertPlayers(team_id, players);
-               callback(players, res)
+               callback(players, res, league)
                break;
                case 'nfl':
                json_response = JSON.parse(body);
                players_sorted = sortNFL(json_response);
                players = formatPlayers(players_sorted, team_id);
                mongoInsertPlayers(team_id, players);
-               callback(players, res)
+               callback(players, res, league)
                break;
                case 'nhl':
                 json_response = JSON.parse(body);
                 players = formatPlayers(json_response, team_id);
                 mongoInsertPlayers(team_id, players);
-                callback(players, res)
+                callback(players, res, league)
                 break;
                case 'eu_soccer':
                 playersParsed = formatEUSoccerPlayers(response.body);
                 players = formatPlayersDocument(team_id, playersParsed);
                 mongoInsertPlayers(team_id, players);
-                callback(players, res)
+                callback(players, res, league)
                 break;
                case 'mlb':  
                 playersParsed = formatMLBPlayers(response.body, team_id);
                 players = formatPlayersDocument(team_id, playersParsed);
                 mongoInsertPlayers(team_id, players);
-                callback(players, res)
+                callback(players, res, league)
                 break;
               }
       }
