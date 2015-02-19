@@ -16,7 +16,7 @@ var players = [];
 var returnPlayers = function (players, res, league){
   if (res.quiz_page != undefined && res.quiz_page){
     res.render('quiz', {
-      players:players[0].players,
+      players:players.players,
       league: league
     });
 
