@@ -21,6 +21,7 @@ var app = express();
 var passport = require('passport');
 
 var hbs = require('hbs');
+hbs.registerPartials(__dirname + '/views/partials');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
