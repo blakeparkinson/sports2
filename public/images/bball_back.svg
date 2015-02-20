@@ -3,11 +3,11 @@
  <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
  <g>
   <title>Layer 1</title>
-  <path stroke="#ccccbd" transform="rotate(-90 512.0000000000001,386.6666564941407) " id="svg_4" d="m225.986511,84.65744l286.013977,0l0,0c157.960693,0 286.013,135.214508 286.013,302.009491c0,166.794983 -128.052307,302.008972 -286.013,302.008972l-286.013977,0l0,-604.018463z" fill-opacity="null" stroke-width="5" fill="#ffffff"/>
+  <path stroke="#ccccbd" transform="rotate(-90 512.0000000000001,388.0000610351563) " id="svg_4" d="m225.987,85.990738l286.013,0l0,0c157.960999,0 286.013,135.214584 286.013,302.009598c0,166.794952 -128.052002,302.009003 -286.013,302.009003l-286.013,0l0,-604.0186z" fill-opacity="null" stroke-width="5" fill="#ffffff"/>
   <path id="svg_5" d="m172.5,162" opacity="0.5" fill-opacity="null" stroke-width="5" stroke="#9b9b98" fill="#ffffff"/>
   <path id="svg_7" d="m142.5,399" opacity="0.5" fill-opacity="null" stroke-width="5" stroke="#9b9b98" fill="#ffffff"/>
   <path id="svg_8" d="m402.5,219" opacity="0.5" fill-opacity="null" stroke-width="5" stroke="#9b9b98" fill="#ffffff"/>
   <path id="svg_10" d="m196,148" opacity="0.5" fill-opacity="null" stroke-width="5" stroke="#b5b5a8" fill="#ffffff"/>
-  <path id="svg_22" d="m375.309937,664c-4,-384 -6.666687,-385.333344 -7.333344,-386.666656c0.666656,1.333313 282.000031,1.333313 281.333344,0c0.666687,1.333313 7.333374,391.999969 6.666687,390.666656" fill-opacity="null" stroke-opacity="null" stroke-width="5" stroke="#ccccbd" fill="#ffffff"/>
+  <path id="svg_27" d="m386,671.333313l-5.333313,-389.999969l259.999939,0l2.666687,391.999969" fill-opacity="null" stroke-opacity="null" stroke-width="5" stroke="#ccccbd" fill="none"/>
  </g>
 </svg>
