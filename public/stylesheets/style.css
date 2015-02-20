@@ -317,3 +317,10 @@ table tr th:last-child {
   }
 }
 
+@media screen and (max-height: 600px) {
+
+  .standard-nba-container{
+    min-height: 500px;
+  }
+}
+
