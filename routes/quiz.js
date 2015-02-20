@@ -10,7 +10,7 @@ var players_model = require('../models/players.js');
 
 router.get('/', function(req, res) {
       res.quiz_page = true;
-      var quiz_id = req.query.quiz_id,
+      var quiz_id = req.query.id,
           team_id = req.query.team_id,
           league = req.query.league;
       if (!team_id || !league){
