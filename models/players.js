@@ -17,7 +17,7 @@ var returnPlayers = function (players, res, league){
   console.log(players)
   if (res.quiz_page != undefined && res.quiz_page){
     res.render('quiz', {
-      players:players.players,
+      players:players,
       league: league
     });
 
@@ -79,32 +79,32 @@ switch (league){
                players_sorted = sortNBA(json_response);
                players = formatPlayers(players_sorted, team_id);
                mongoInsertPlayers(team_id, players);
-               callback(players, res, league)
+               callback(players.players, res, league)
                break;
                case 'nfl':
                json_response = JSON.parse(body);
                players_sorted = sortNFL(json_response);
                players = formatPlayers(players_sorted, team_id);
                mongoInsertPlayers(team_id, players);
-               callback(players, res, league)
+               callback(players.players, res, league)
                break;
                case 'nhl':
                 json_response = JSON.parse(body);
                 players = formatPlayers(json_response, team_id);
                 mongoInsertPlayers(team_id, players);
-                callback(players, res, league)
+                callback(players.players, res, league)
                 break;
                case 'eu_soccer':
                 playersParsed = formatEUSoccerPlayers(response.body);
                 players = formatPlayersDocument(team_id, playersParsed);
                 mongoInsertPlayers(team_id, players);
-                callback(players, res, league)
+                callback(players.players, res, league)
                 break;
                case 'mlb':  
                 playersParsed = formatMLBPlayers(response.body, team_id);
                 players = formatPlayersDocument(team_id, playersParsed);
                 mongoInsertPlayers(team_id, players);
-                callback(players, res, league)
+                callback(players.players, res, league)
                 break;
               }
       }
