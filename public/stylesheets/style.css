@@ -176,6 +176,10 @@ ul {
 	opacity: 0.9;
 }
 
+.about-body.modal-open {
+  opacity: 1;
+}
+
 .social-sidebar{
     position: absolute;
     left: 78%;
