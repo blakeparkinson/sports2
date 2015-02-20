@@ -167,34 +167,6 @@ function closePopupAndRefreshPage(){
   */
 }
 
-function fetchTeam(event) {
-    var target = $(event.target);
-    if (target.hasClass('quiz-btn')){
-      var team = $('.selected-team'),
-          id = team.data('id'),
-          team_id = team.data('team-id'),
-          league = team.data('league');
-
-    }
-    else{
-      var team_id = $('#teams option:selected').val();
-    }
-
-    var data = {team_id: team_id, league: league};
-
-    $.ajax({
-     	url: 'teams/players',
-      data: data,
-      type: 'get',
-      dataType: 'json',
-     		success: function(response){
-          window.location.href ='quiz?quiz_id=6'
-     		}
-    }).done(function() {
-});
-
-}
-
 function fetchQuiz(event) {
     var target = $(event.target);
     if (target.hasClass('quiz-btn')){
