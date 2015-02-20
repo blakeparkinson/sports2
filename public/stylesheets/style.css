@@ -324,3 +324,8 @@ table tr th:last-child {
   }
 }
 
+
+#quiz-container .answer-container{
+  padding-left: 90px;
+  max-width:75%;
+}
