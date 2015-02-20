@@ -14,7 +14,6 @@ var parseString = require('xml2js').parseString;
 var players = [];
 
 var returnPlayers = function (players, res, league){
-  console.log(players)
   if (res.quiz_page != undefined && res.quiz_page){
     res.render('quiz', {
       players:players,
@@ -30,17 +29,16 @@ var returnPlayers = function (players, res, league){
 // Check the db first. If it's there and has been added in the last 24 hours, use it. 
 // Otherwise, go get new data from the API and replace/add the database listing
 var fetchPlayers = function(team_id, league, res, callback){  
-  db.collection('players').findOne({team_id : team_id}),function (err, doc){
-    console.log(doc);
-    if (doc.length > 0){ // data in Mongo
-      var itemdate = _.first(doc['last_updated']);
+  db.collection('players').find({team_id : team_id}).toArray(function (err, items){
+    if (items.length > 0){ // data in Mongo
+      var itemdate = _.first(items['last_updated']);
       var datenow = new Date();
       var datecutoff = datenow.getTime() - dataAgeCutOff;
       if (datecutoff > itemdate){   //data is old so call API
         var players = fetchPlayersFromApi(team_id, league, res, callback)
       }
       else {  // data is fine so just return it
-        callback(doc, res, league);
+        callback(items, res, league);
       }
     }
     else {  // data not already in Mongo
