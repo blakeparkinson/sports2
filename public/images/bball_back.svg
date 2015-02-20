@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<svg width="1024" height="768" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+ <g>
+  <title>Layer 1</title>
+  <path stroke="#ccccbd" transform="rotate(-90 512.0000000000001,384.00000000000006) " id="svg_4" d="m225.986511,81.990776l286.013977,0l0,0c157.960693,0 286.013,135.2145 286.013,302.009499c0,166.794952 -128.052307,302.008942 -286.013,302.008942l-286.013977,0l0,-604.01844z" fill-opacity="null" stroke-width="5" fill="#ffffff"/>
+  <path id="svg_5" d="m172.5,162" opacity="0.5" fill-opacity="null" stroke-width="5" stroke="#9b9b98" fill="#ffffff"/>
+  <path id="svg_7" d="m142.5,399" opacity="0.5" fill-opacity="null" stroke-width="5" stroke="#9b9b98" fill="#ffffff"/>
+  <path id="svg_8" d="m402.5,219" opacity="0.5" fill-opacity="null" stroke-width="5" stroke="#9b9b98" fill="#ffffff"/>
+  <path id="svg_10" d="m196,148" opacity="0.5" fill-opacity="null" stroke-width="5" stroke="#b5b5a8" fill="#ffffff"/>
+  <path stroke="#ccccbd" id="svg_21" d="m376.451263,661.999023c-7,-391.999969 -7,-392.999969 -8,-393.999969c1,1 280.999969,2 279.999969,1c1,1 8,395.999969 7,394.999969" fill-opacity="null" stroke-opacity="null" stroke-width="5" fill="#ffffff"/>
+ </g>
+</svg>

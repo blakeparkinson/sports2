@@ -84,22 +84,17 @@ ul {
     }
      
 }
-/*
+
 .container-iphone {
   display:none;
 }
-*/
+
 
 @media screen and (max-width: 460px) {
-    #team-select {
-        font-size: 20px;
-        padding-bottom: 15px;
-    }    
-    /* ADD BACK LATER
     .container-iphone {
       display: block;
     }  
-    */
+    
 }
 
 .submit-section{
@@ -303,5 +298,22 @@ table tr th:last-child {
 }
 .the-blue {  
   color: #8DA0EA;
+}
+
+.standard-nba-container{
+    background: url(../images/bball_back.svg) no-repeat scroll center top/cover transparent;
+    background-size: initial;
+    padding: 0;
+    position: absolute;
+    bottom:0;
+    min-height: 650px;
+    width:100%;
+  }
+
+@media screen and (max-width: 480px) {
+
+  .standard-nba-container{
+    display: none;
+  }
 }
 
