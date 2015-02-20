@@ -171,6 +171,10 @@ ul {
 	opacity: 0.9;
 }
 
+.about-body.modal-open {
+  opacity: 1;
+}
+
 .social-sidebar{
     position: absolute;
     left: 78%;
@@ -294,7 +298,7 @@ table tr th:last-child {
   margin-top: 10px;
 }
 .the-orange {
-  color: #CDA567;  
+  color: #F4A766;  
 }
 .the-blue {  
   color: #8DA0EA;

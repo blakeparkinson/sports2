@@ -21,6 +21,7 @@ var app = express();
 var passport = require('passport');
 
 var hbs = require('hbs');
+hbs.registerPartials(__dirname + '/views/partials');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -87,6 +88,13 @@ app.use(function(err, req, res, next) {
 hbs.registerHelper('json_stringify', function(context) {
     var c = JSON.stringify(context);
     return c;
+});
+
+hbs.registerHelper('ifCond', function(v1, v2, options) {
+  if(v1 === v2) {
+    return options.fn(this);
+  }
+  return options.inverse(this);
 });
 
 
