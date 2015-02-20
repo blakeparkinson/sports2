@@ -28,21 +28,23 @@ var returnPlayers = function (players, res, league){
 
 // Check the db first. If it's there and has been added in the last 24 hours, use it. 
 // Otherwise, go get new data from the API and replace/add the database listing
-var fetchPlayers = function(team_id, league, res, callback){  
+var fetchPlayers = function(team_id, league, res, callback){ 
+  var players;
   db.collection('players').find({team_id : team_id}).toArray(function (err, items){
     if (items.length > 0){ // data in Mongo
       var itemdate = _.first(items['last_updated']);
       var datenow = new Date();
       var datecutoff = datenow.getTime() - dataAgeCutOff;
       if (datecutoff > itemdate){   //data is old so call API
-        var players = fetchPlayersFromApi(team_id, league, res, callback)
+         players = fetchPlayersFromApi(team_id, league, res, callback)
       }
       else {  // data is fine so just return it
-        callback(items, res, league);
+        players = items[0].players;
+        callback(players, res, league);
       }
     }
     else {  // data not already in Mongo
-      var players = fetchPlayersFromApi(team_id, league, res, callback)
+       players = fetchPlayersFromApi(team_id, league, res, callback)
     }
   });
 }
