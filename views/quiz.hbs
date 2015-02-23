@@ -1,3 +1,12 @@
+<div id="quiz-container" class="row">
+  <div class="answer-container col-md-6">
+    <div class="input-group player-name">
+      <span class="input-group-addon" id="basic-addon1">Enter a Player</span>
+      <input type="text" class="form-control guess-box" placeholder="Player Name..." aria-describedby="basic-addon1">
+    </div>
+  </div>
+</div>
+
 {{#ifCond league 'nba'}}
     {{> nba }} 
 {{/ifCond}}
