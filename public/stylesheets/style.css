@@ -23,6 +23,7 @@ a {
 .navbar.blitz{
 	border-color:#fff;
 	font-family: HelveticaNeue-Thin;
+  z-index:100;
 }
 
 .navbar-brand.main{
