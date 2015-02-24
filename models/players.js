@@ -15,8 +15,13 @@ var players = [];
 
 var returnPlayers = function (players, res, league){
   if (res.quiz_page != undefined && res.quiz_page){
+
+    //only return active players to the client
+    var actives = _.filter(players, function(player){
+      return player.status == 'ACT';
+    })
     res.render('quiz', {
-      players:players,
+      players:actives,
       league: league
     });
 
