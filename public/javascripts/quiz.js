@@ -99,7 +99,7 @@ var findCenter = function() {
 
 
  	var startingLineup = {
-  	point:"curry",
+  	point:"stephen curry",
   	shooting:"thompson",
   	small:"barnes",
   	power:"green",
