@@ -73,13 +73,34 @@ switch (league){
 
     request(endpoint, function (error, response, body) {
       if (!error && response.statusCode == 200) {
+        json_response = JSON.parse(body);
              switch (league){
                case 'nba':
-               json_response = JSON.parse(body);
-               players_sorted = sortNBA(json_response);
-               players = formatPlayers(players_sorted, team_id);
-               mongoInsertPlayers(team_id, players);
-               callback(players.players, res, league)
+               //for nba we need to make a 2nd api request to fetch players on the active roster
+               request('https://api.sportsdatallc.org/nba-t3/teams/'+team_id+'/profile.json?api_key=' +config.nba_key, function (error, response, roster) {
+                      if (!error && response.statusCode == 200) {
+                         var team_roster = JSON.parse(roster);
+                         var players_roster = team_roster.players;
+                         for (var i=0; i<json_response.players.length;i++){
+                          for (var j=0; j<players_roster.length; j++){
+                            //compare by player id
+                            if (json_response.players[i].id == players_roster[j].id){
+                              json_response.players[i].status = players_roster[j].status;
+                              //we found a match, break out of the 2nd loop iteration
+                              continue;
+                            }
+                          }
+                         }
+                         players_sorted = sortNBA(json_response);
+                         players = formatPlayers(players_sorted, team_id);
+                         mongoInsertPlayers(team_id, players);
+                         callback(players.players, res, league)
+                      }
+
+                      else{
+                        console.log(error + ' api_status_code:' + response.statusCode);
+                      }
+                })
                break;
                case 'nfl':
                json_response = JSON.parse(body);
