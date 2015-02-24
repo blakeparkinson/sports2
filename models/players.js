@@ -12,11 +12,13 @@ var teams = [];
 var endpoint = '';
 var parseString = require('xml2js').parseString;
 var players = [];
+var encryption = require('../encryption.js');
 
-var returnPlayers = function (players, res, league){
+var returnPlayers = function (players, rb_team_id, res, league){
   if (res.quiz_page != undefined && res.quiz_page){
     res.render('quiz', {
       players:players,
+      rb_team_id: rb_team_id,
       league: league
     });
 
@@ -28,15 +30,15 @@ var returnPlayers = function (players, res, league){
 
 // Check the db first. If it's there and has been added in the last 24 hours, use it. 
 // Otherwise, go get new data from the API and replace/add the database listing
-var fetchPlayers = function(team_id, league, res, callback){ 
+var fetchPlayers = function(team_id, rb_team_id, league, res, callback){ 
   var players;
-  db.collection('players').find({team_id : team_id}).toArray(function (err, items){
+  db.collection('players').find({team_id : rb_team_id}).toArray(function (err, items){
     if (items.length > 0){ // data in Mongo
       var itemdate = _.first(items['last_updated']);
       var datenow = new Date();
       var datecutoff = datenow.getTime() - dataAgeCutOff;
       if (datecutoff > itemdate){   //data is old so call API
-         players = fetchPlayersFromApi(team_id, league, res, callback)
+         players = fetchPlayersFromApi(team_id, rb_team_id, league, res, callback)
       }
       else {  // data is fine so just return it
         players = items[0].players;
@@ -44,28 +46,28 @@ var fetchPlayers = function(team_id, league, res, callback){
       }
     }
     else {  // data not already in Mongo
-       players = fetchPlayersFromApi(team_id, league, res, callback)
+       players = fetchPlayersFromApi(team_id, rb_team_id, league, res, callback)
     }
   });
 }
 
 
-var fetchPlayersFromApi = function(team_id, league, res, callback){
+var fetchPlayersFromApi = function(team_id, rb_team_id, league, res, callback){
 var json_response = '';
 var players = {};
 
 switch (league){
   case 'nba':
-    endpoint = 'https://api.sportsdatallc.org/nba-t3/seasontd/2014/reg/teams/'+team_id+'/statistics.json?api_key=' + config.nba_key;
+    endpoint = 'https://api.sportsdatallc.org/nba-t3/seasontd/2014/reg/teams/'+encryption.decrypt(team_id)+'/statistics.json?api_key=' + config.nba_key;
     break;
   case 'nfl':
-    endpoint = 'https://api.sportsdatallc.org/nfl-t1/teams/'+team_id+'/2014/REG/statistics.json?api_key='+ config.nfl_key;
+    endpoint = 'https://api.sportsdatallc.org/nfl-t1/teams/'+encryption.decrypt(team_id)+'/2014/REG/statistics.json?api_key='+ config.nfl_key;
     break;
   case 'nhl':
-    endpoint = 'https://api.sportsdatallc.org/nhl-t3/seasontd/2014/REG/teams/'+team_id+'/statistics.json?api_key='+ config.nhl_key;
+    endpoint = 'https://api.sportsdatallc.org/nhl-t3/seasontd/2014/REG/teams/'+encryption.decrypt(team_id)+'/statistics.json?api_key='+ config.nhl_key;
     break;
   case 'eu_soccer':
-    endpoint = 'https://api.sportsdatallc.org/soccer-t2/eu/teams/'+team_id+'/profile.xml?api_key='+config.soccer_eu_key;
+    endpoint = 'https://api.sportsdatallc.org/soccer-t2/eu/teams/'+encryption.decrypt(team_id)+'/profile.xml?api_key='+config.soccer_eu_key;
     break;
   case 'mlb':
     endpoint = 'https://api.sportsdatallc.org/mlb-t4/rosters/2014.xml?api_key='+config.mlb_key;
@@ -77,34 +79,35 @@ switch (league){
                case 'nba':
                json_response = JSON.parse(body);
                players_sorted = sortNBA(json_response);
-               players = formatPlayers(players_sorted, team_id);
-               mongoInsertPlayers(team_id, players);
-               callback(players.players, res, league)
+               players = formatPlayers(players_sorted, rb_team_id);
+               mongoInsertPlayers(rb_team_id, players);
+               callback(players.players, rb_team_id, res, league)
                break;
                case 'nfl':
                json_response = JSON.parse(body);
                players_sorted = sortNFL(json_response);
-               players = formatPlayers(players_sorted, team_id);
-               mongoInsertPlayers(team_id, players);
-               callback(players.players, res, league)
+               players = formatPlayers(players_sorted, rb_team_id);
+               mongoInsertPlayers(rb_team_id, players);
+               callback(players.players, rb_team_id, res, league)
                break;
                case 'nhl':
                 json_response = JSON.parse(body);
-                players = formatPlayers(json_response, team_id);
-                mongoInsertPlayers(team_id, players);
-                callback(players.players, res, league)
+                players = formatPlayers(json_response, rb_team_id);
+                mongoInsertPlayers(rb_team_id, players);
+                callback(players.players, rb_team_id, res, league)
                 break;
                case 'eu_soccer':
                 playersParsed = formatEUSoccerPlayers(response.body);
-                players = formatPlayersDocument(team_id, playersParsed);
-                mongoInsertPlayers(team_id, players);
-                callback(players.players, res, league)
+                players = formatPlayersDocument(rb_team_id, playersParsed);
+                mongoInsertPlayers(rb_team_id, players);
+                callback(players.players, rb_team_id, res, league)
                 break;
                case 'mlb':  
+               // THIS TEAM ID ACTIVITY WILL NEED TO BE DIFFERENT
                 playersParsed = formatMLBPlayers(response.body, team_id);
                 players = formatPlayersDocument(team_id, playersParsed);
                 mongoInsertPlayers(team_id, players);
-                callback(players.players, res, league)
+                callback(players.players, rb_team_id, res, league)
                 break;
               }
       }
@@ -154,7 +157,7 @@ function compareNFL(a,b) {
 
 
 
-var formatPlayers = function(response, team_id){
+var formatPlayers = function(response, rb_team_id){
   playersarray = [];
   for (i=0;i<response.players.length;i++){
     playersarray[i] = {};
@@ -163,23 +166,23 @@ var formatPlayers = function(response, team_id){
       playersarray[i][key] = value;
     }
   }
-  var team = formatPlayersDocument(team_id, playersarray);
+  var team = formatPlayersDocument(rb_team_id, playersarray);
   return team;
 }
  
 
-var formatPlayersDocument = function(team_id, players){
+var formatPlayersDocument = function(rb_team_id, players){
   teamDocument = {};
-  teamDocument["team_id"] = team_id;
+  teamDocument["team_id"] = rb_team_id;
   teamDocument["players"] = players; 
   return teamDocument;
 }
 
 
-function mongoInsertPlayers(team_id, team_document){
+function mongoInsertPlayers(rb_team_id, team_document){
   console.log("inserting into the DB");
   db.open(function(err, db){
-    db.collection("players").update({team_id: team_id},
+    db.collection("players").update({team_id: rb_team_id},
     {$set: {team_id: team_document["team_id"], last_updated: new Date().toISOString().slice(0, 19).replace('T', ' '), players: team_document["players"]}},
     {upsert: true, multi:false}, function (err, upserted){
       if (err) {

@@ -172,14 +172,14 @@ function fetchQuiz(event) {
     if (target.hasClass('quiz-btn')){
       var team = $('.selected-team'),
           id = team.data('team-id'),
-          league = team.data('league');
-
+          league = team.data('league'),
+          rb_team_id = team.data('id');
     }
     else{
       var team_id = $('#teams option:selected').val();
     }
 
-    var data = {team_id: id, league: league};
+    var data = {team_id: id, league: league, rb_team_id: rb_team_id};
 
 
     $.ajax({
@@ -188,6 +188,7 @@ function fetchQuiz(event) {
       type: 'get',
       dataType: 'json',
         success: function(response){
+          console.log(response);
           window.location.href = 'quiz?id='+response[0]["_id"]+'&team_id='+response[0]["team_id"]+'&league='+response[0]["league"];
         }
     }).done(function() {

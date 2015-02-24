@@ -29,7 +29,7 @@ router.get('/', function(res, res) {
 
 // when quiz endpoint is hit, insert a new quiz into mongo and return quiz_id
 router.get('/quiz', function(req, res) {
-  id = req.query.team_id;   //this is the API id
+  id = req.query.rb_team_id;   //this was the API id previously
   league = req.query.league;
   quiz = createQuiz(id, league, res, returnItem);
 });
