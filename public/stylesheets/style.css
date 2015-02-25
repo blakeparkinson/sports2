@@ -396,5 +396,6 @@ table tr th:last-child {
 .answer-box {
   width:  10%;
   height: 100%;
-  border: 1px solid black;
+  border: 1px solid #D3D3D3
+;
 }
