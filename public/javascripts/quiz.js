@@ -11,7 +11,7 @@ $(document).ready(function() {
   
 
 	$('body').on('keyup', '.guess-box', blake);
-	 
+	$("#guess-box").focus();
  
  });
   
@@ -130,6 +130,7 @@ var findCenter = function() {
 	if (guess == startingLineup.center) {
   	$(".c-name").show().text(center);  		
   	$(".guess-box").val("");  
+  	cnosole.log('got here');
 	}
 }
 
