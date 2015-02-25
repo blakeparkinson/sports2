@@ -53,9 +53,6 @@ var fetchPlayers = function(team_id, league, res, callback){
 var fetchPlayersFromApi = function(team_id, league, res, callback){
 var json_response = '';
 var players = {};
-console.log(team_id);
-console.log(league);
-console.log(res)
 
 switch (league){
   case 'nba':
@@ -81,11 +78,8 @@ switch (league){
                json_response = JSON.parse(body);
                players_sorted = sortNBA(json_response);
                players = formatPlayers(players_sorted, team_id);
-               console.log(res);
-               if (!res.only_insert){
-                 mongoInsertPlayers(team_id, players);
-                 callback(players.players, res, league);
-              }
+               mongoInsertPlayers(team_id, players);
+               callback(players.players, res, league);
                break;
                case 'nfl':
                json_response = JSON.parse(body);
