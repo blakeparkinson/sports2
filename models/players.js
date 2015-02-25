@@ -16,12 +16,18 @@ var players = [];
 var returnPlayers = function (players, res, league){
   if (res.quiz_page != undefined && res.quiz_page){
 
+    if (league == 'nba'){
     //only return active players to the client
-    var actives = _.filter(players, function(player){
-      return player.status == 'ACT';
-    })
+      var actives = _.filter(players, function(player){
+        return player.status == 'ACT';
+      })
+      var roster = actives;
+    }
+    else{
+      var roster = players;
+    }
     res.render('quiz', {
-      players:actives,
+      players: roster,
       league: league
     });
 
