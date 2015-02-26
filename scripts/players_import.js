@@ -50,6 +50,9 @@ var rosters = [];
                    var team_roster = JSON.parse(roster);
                    var players_roster = team_roster.players;
                    for (var i=0; i<json_response.players.length;i++){
+                    //add the last updated
+                    //var last_updated = new Date().toISOString().slice(0, 19).replace('T', ' ');
+                    //json_response[i].push(last_updated);
                     for (var j=0; j<players_roster.length; j++){
                       //compare by player id, loop through and add the active tag
                       if (json_response.players[i].id == players_roster[j].id){
@@ -81,7 +84,7 @@ var rosters = [];
             if (rosters.length){
               //we failed somewhere and were likely rate limited, let's just insert what we got
               console.log('failed on roster fetching call');
-              playersss_model.mongoBulkInsertPlayers(rosters);
+              players_model.mongoBulkInsertPlayers(rosters);
             }
             else{
               console.log('failed before we did anything');
