@@ -42,7 +42,7 @@ var fetchPlayers = function(team_id, rb_team_id, league, res, callback){
       }
       else {  // data is fine so just return it
         players = items[0].players;
-        callback(players, res, league);
+        callback(players, rb_team_id, res, league);
       }
     }
     else {  // data not already in Mongo
