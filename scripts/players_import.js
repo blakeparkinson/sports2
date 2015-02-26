@@ -51,8 +51,8 @@ var rosters = [];
                    var players_roster = team_roster.players;
                    for (var i=0; i<json_response.players.length;i++){
                     //add the last updated
-                    //var last_updated = new Date().toISOString().slice(0, 19).replace('T', ' ');
-                    //json_response[i].push(last_updated);
+                    var last_updated = new Date().toISOString().slice(0, 19).replace('T', ' ');
+                    json_response[i].push(last_updated);
                     for (var j=0; j<players_roster.length; j++){
                       //compare by player id, loop through and add the active tag
                       if (json_response.players[i].id == players_roster[j].id){
