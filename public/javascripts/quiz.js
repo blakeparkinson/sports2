@@ -129,8 +129,7 @@ var findCenter = function() {
 	}
 	if (guess == startingLineup.center) {
   	$(".c-name").show().text(center);  		
-  	$(".guess-box").val("");  
-  	cnosole.log('got here');
+  	$(".guess-box").val("");    	
 	}
 }
 
