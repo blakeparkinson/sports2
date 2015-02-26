@@ -22,6 +22,7 @@ var ver = '';
 var endpoint = '';
 var teams = [];
 var supported_leagues = ['nba', 'nfl', 'mlb', 'nhl', 'eu_soccer'];
+var shortId = require('shortid');
 
 //process.argv grabs the command line arguments
 var league = process.argv[2];
@@ -79,11 +80,11 @@ switch (league){
         for (var i = 0; i < teams.length; i++) {
           if (league == 'eu_soccer'){
               //soccer teams don't really have markets, their names include their citys. For our puropses (rendering), this will go into the market field
-              col.insert({team_id:encryption.encrypt(teams[i].id), market:teams[i].name, name: '', country:teams[i].country, league:league}, function() {});
+              col.insert({_id:shortId.generate(), team_id:encryption.encrypt(teams[i].id), market:teams[i].name, name: '', country:teams[i].country, league:league}, function() {});
           }
           else{
             //really the only 4 key:value pairs we care about for now
-            col.insert({team_id:encryption.encrypt(teams[i].id), name:teams[i].name, market:teams[i].market, league:league}, function() {});
+            col.insert({_id:shortId.generate(), team_id:encryption.encrypt(teams[i].id), name:teams[i].name, market:teams[i].market, league:league}, function() {});
           }
         }
       })

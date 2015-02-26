@@ -24,7 +24,7 @@ var returnPlayers = function (players, rb_team_id, res, league){
 
   }
   else{
-    res.json(players);
+    res.json(players);   //this else statement poops out TypeError: Object nfl has no method 'json'
   }
 }
 

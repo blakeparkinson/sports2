@@ -31,7 +31,8 @@ router.get('/', function(res, res) {
 router.get('/quiz', function(req, res) {
   id = req.query.rb_team_id;   //this was the API id previously
   league = req.query.league;
-  quiz = createQuiz(id, league, res, returnItem);
+  api_team_id = req.query.team_id
+  quiz = createQuiz(id, league, api_team_id, res, returnItem);
 });
 
 // made the return more universal for all callbacks
@@ -39,9 +40,9 @@ var returnItem = function (item, res){
   res.json(item);
 }
 
-var createQuiz = function(rb_team_id, league, res, callback){
+var createQuiz = function(rb_team_id, league, api_team_id, res, callback){
   db.open(function(err, db){
-    db.collection("quiz").insert({_id:shortId.generate(), team_id: rb_team_id, created_at: new Date().toISOString().slice(0, 19).replace('T', ' '), league: league}, function (err, insert){
+    db.collection("quiz").insert({_id:shortId.generate(), team_id: rb_team_id, created_at: new Date().toISOString().slice(0, 19).replace('T', ' '), league: league, api_team_id: api_team_id}, function (err, insert){
         if (err){
           console.log("new quiz insert failed");
         }
