@@ -103,7 +103,7 @@ switch (league){
                 callback(players.players, rb_team_id, res, league)
                 break;
                case 'mlb':  
-               // THIS TEAM ID ACTIVITY WILL NEED TO BE DIFFERENT
+               // THIS ENCRYPTION ACTIVITY WILL NEED TO BE DIFFERENT
                 playersParsed = formatMLBPlayers(response.body, team_id);
                 players = formatPlayersDocument(team_id, playersParsed);
                 mongoInsertPlayers(team_id, players);

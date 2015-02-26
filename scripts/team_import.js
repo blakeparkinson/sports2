@@ -73,7 +73,6 @@ switch (league){
     });
 
   
-// Store the API team_id in an encrypted form
   function mongoInsert(teams){
     db.open(function(err, client){
       client.collection("teams", function(err, col) {

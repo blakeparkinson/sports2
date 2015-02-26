@@ -14,7 +14,7 @@ router.get('/', function(req, res) {
           rb_team_id = req.query.team_id,  // rb team id
           league = req.query.league;
           db.collection('teams').findOne( { _id : rb_team_id}, function (err, items){
-            team_id = items.team_id;   // API team id
+            team_id = items.team_id;       // API team id
             console.log(team_id);
           
             if (!rb_team_id || !league){
