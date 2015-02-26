@@ -105,7 +105,7 @@ switch (league){
                          players_sorted = sortNBA(json_response);
                          players = formatPlayers(players_sorted, team_id);
                          mongoInsertPlayers(team_id, players);
-                         callback(players.players, res, league)
+                         callback(players.players, res, league);
                       }
 
                       else{
@@ -118,25 +118,25 @@ switch (league){
                players_sorted = sortNFL(json_response);
                players = formatPlayers(players_sorted, team_id);
                mongoInsertPlayers(team_id, players);
-               callback(players.players, res, league)
+               callback(players.players, res, league);
                break;
                case 'nhl':
                 json_response = JSON.parse(body);
                 players = formatPlayers(json_response, team_id);
                 mongoInsertPlayers(team_id, players);
-                callback(players.players, res, league)
+                callback(players.players, res, league);
                 break;
                case 'eu_soccer':
                 playersParsed = formatEUSoccerPlayers(response.body);
                 players = formatPlayersDocument(team_id, playersParsed);
                 mongoInsertPlayers(team_id, players);
-                callback(players.players, res, league)
+                callback(players.players, res, league);
                 break;
                case 'mlb':  
                 playersParsed = formatMLBPlayers(response.body, team_id);
                 players = formatPlayersDocument(team_id, playersParsed);
                 mongoInsertPlayers(team_id, players);
-                callback(players.players, res, league)
+                callback(players.players, res, league);
                 break;
               }
       }
@@ -222,6 +222,17 @@ function mongoInsertPlayers(team_id, team_document){
   });
 }
 
+function mongoBulkInsertPlayers(document){
+    db.open(function(err, db){
+      db.collection("players").insert(document, function(err){
+        if (err){
+          console.log(err);
+        }
+      });
+
+  });
+}
+
 
 formatEUSoccerPlayers = function(response){
   parseString(response, function (err, result) {
@@ -254,9 +265,11 @@ formatMLBPlayers = function(response, team_id){
 
 module.exports = {
   returnPlayers: returnPlayers,
+  sortNBA: sortNBA,
   fetchPlayersFromApi: fetchPlayersFromApi,
   fetchPlayers: fetchPlayers,
   formatPlayers: formatPlayers,
   formatPlayersDocument: formatPlayersDocument,
-  mongoInsertPlayers: mongoInsertPlayers
+  mongoInsertPlayers: mongoInsertPlayers,
+  mongoBulkInsertPlayers: mongoBulkInsertPlayers
 }
