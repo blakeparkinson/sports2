@@ -89,7 +89,6 @@ var datecutoff = datenow.getTime() - config.dataAgeCutOff;
           else{
             console.log('error:' + error + ' ,response: '+ response.statusCode);
             console.log('failed on roster fetching call');
-            console.log(rosters);
             if (rosters.length){
               //we failed somewhere and were likely rate limited, let's just insert what we got
               mongoInsertLoop(rosters)
