@@ -103,7 +103,6 @@ var datecutoff = datenow.getTime() - config.dataAgeCutOff;
       function done() {
         //somehow we didn't get rate limited!!!!
         mongoInsertLoop(rosters)
-        console.log(rosters);
     });
   });
 });
