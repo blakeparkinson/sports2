@@ -75,41 +75,32 @@ switch (league){
 
     request(endpoint, function (error, response, body) {
       if (!error && response.statusCode == 200) {
-             switch (league){
-               case 'nba':
-               json_response = JSON.parse(body);
-               players_sorted = sortNBA(json_response);
-               players = formatPlayers(players_sorted, rb_team_id);
-               mongoInsertPlayers(rb_team_id, players);
-               callback(players.players, rb_team_id, res, league)
-               break;
-               case 'nfl':
-               json_response = JSON.parse(body);
-               players_sorted = sortNFL(json_response);
-               players = formatPlayers(players_sorted, rb_team_id);
-               mongoInsertPlayers(rb_team_id, players);
-               callback(players.players, rb_team_id, res, league)
-               break;
-               case 'nhl':
-                json_response = JSON.parse(body);
-                players = formatPlayers(json_response, rb_team_id);
-                mongoInsertPlayers(rb_team_id, players);
-                callback(players.players, rb_team_id, res, league)
-                break;
-               case 'eu_soccer':
-                playersParsed = formatEUSoccerPlayers(response.body);
-                players = formatPlayersDocument(rb_team_id, playersParsed);
-                mongoInsertPlayers(rb_team_id, players);
-                callback(players.players, rb_team_id, res, league)
-                break;
-               case 'mlb':  
-               // THIS ENCRYPTION ACTIVITY WILL NEED TO BE DIFFERENT
-                playersParsed = formatMLBPlayers(response.body, team_id);
-                players = formatPlayersDocument(rb_team_id, playersParsed);
-                mongoInsertPlayers(rb_team_id, players);
-                callback(players.players, rb_team_id, res, league)
-                break;
-              }
+        switch (league){
+          case 'nba':
+            json_response = JSON.parse(body);
+            players_sorted = sortNBA(json_response);
+            players = formatPlayers(players_sorted, rb_team_id);
+            break;
+          case 'nfl':
+            json_response = JSON.parse(body);
+            players_sorted = sortNFL(json_response);
+            players = formatPlayers(players_sorted, rb_team_id);
+            break;
+          case 'nhl':
+            json_response = JSON.parse(body);
+            players = formatPlayers(json_response, rb_team_id);
+            break;
+          case 'eu_soccer':
+            playersParsed = formatEUSoccerPlayers(response.body);
+            players = formatPlayersDocument(rb_team_id, playersParsed);
+            break;
+          case 'mlb':  
+            playersParsed = formatMLBPlayers(response.body, team_id);
+            players = formatPlayersDocument(rb_team_id, playersParsed);
+            break;
+        }
+      mongoInsertPlayers(rb_team_id, players);
+      callback(players.players, rb_team_id, res, league);
       }
       else{
         console.log('something really terrible has happened');
