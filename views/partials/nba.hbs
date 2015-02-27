@@ -1,65 +1,125 @@
-<div class="container-iphone">
-  <div class="iphone-table-container">
-    <table class="table-iphone">
-      <tr>
-        <th>Position</th>
-        <th>Name</th> 
-        <th>Number</th>
-      </tr>
-      <tr>
-        <td>G</td>
-        <td data="g1-name" class="g1-name"></td> 
-        <td data="g1-number"></td>
-      </tr>
-      <tr>
-        <td>G</td>
-        <td data="g2-name" class="g2-name"></td> 
-        <td data="g2-number"></td>
-      </tr>
-      <tr>
-        <td>F</td>
-        <td data="f1-name" class="f1-name"></td> 
-        <td data="f1-number"></td>
-      </tr>
-      <tr>
-        <td>F</td>
-        <td data="f2-name" class="f2-name"></td> 
-        <td data="f2-number"></td>
-      </tr>
-      <tr>
-        <td>F/C</td>
-        <td data="c-name" class="c-name"></td> 
-        <td data="c-number"></td>
-      </tr>
-      <tr>
-        <td>Bench 1</td>
-        <td data="bench1-name"></td> 
-        <td data="bench1-name"></td>
-      </tr>
-      <tr>
-        <td>Bench 2</td>
-        <td data="bench2-name"></td> 
-        <td data="bench2-number"></td>
-      </tr>
-      <tr>
-        <td>Bench 3</td>
-        <td data="bench3-name"></td> 
-        <td data="bench3-number"></td>
-      </tr>
-      <tr>
-        <td>Bench 4</td>
-        <td data="bench4-name"></td> 
-        <td data="bench4-number"></td>
-      </tr>
-      <tr>
-        <td>Bench 5</td>
-        <td data="bench5-name"></td> 
-        <td data="bench5-number"></td>
-      </tr>
-    </table>
-    <div class="guesser">
-      <span class="player-name">Enter player name: </span>
-      <input class="guess-box" type="text" placeholder="e.g. JJ Barea">
+<div class="standard-nba-container">  
+  <div class="row1"> 
+
+    <div class="nba-bench-container"> 
+      <table class="bench-table">
+          <tr>
+            <th>Position</th>
+            <th>Name</th> 
+            <th>Number</th>
+            <th>Position</th>  
+          </tr>        
+          <tr>
+            <td>Bench 1</td>
+            <td data="bench1-name"></td> 
+            <td data="bench1-number"></td>
+            <td data="bench1-pos"></td>
+          </tr>
+          <tr>
+            <td>Bench 2</td>
+            <td data="bench2-name"></td> 
+            <td data="bench2-number"></td>
+            <td data="bench2-pos"></td>
+          </tr>
+          <tr>
+            <td>Bench 3</td>
+            <td data="bench3-name"></td> 
+            <td data="bench3-number"></td>
+            <td data="bench3-pos"></td>
+          </tr>
+          <tr>
+            <td>Bench 4</td>
+            <td data="bench4-name"></td> 
+            <td data="bench4-number"></td>
+            <td data="bench4-pos"></td>
+          </tr>
+          <tr>
+            <td>Bench 5</td>
+            <td data="bench5-name"></td> 
+            <td data="bench5-number"></td>
+            <td data="bench5-pos"></td>
+          </tr>
+      </table>
+      </div>    
+        <div class="nba-starting-players">
+          <div class="guard-div">
+            <span class="guard-1-place">Guard 1: </span><span class="answer-box gl-name" data="g1-name">placeholder</span>      
+            <span class="guard-2-place">Guard 2: </span><span class="answer-box g2-name" data="g2-name">placeholder</span>  
+          </div>
+          <div class="forward-1-div">
+            <span class="forward-1-place">Forward 1: </span><span class="answer-box f1-name" data="f1-name">placeholder</span>              
+          </div>
+          <div class="forward-2-div">
+            <span class="forward-2-place">Forward 2: </span><span class="answer-box f2-name" data="f2-name">placeholder</span>  
+          </div>
+          <div class="center-div">
+            <span class="center-place">Center: </span><span class="answer-box c-name" data="c-name">placeholder</span>  
+          </div>
+
+        </div>
+
+    
+  </div>  
+</div>
+
+  <div class="container-iphone">
+    <div class="iphone-table-container">
+      <table class="table-iphone">
+        <tr>
+          <th>Position</th>
+          <th>Name</th> 
+          <th>Number</th>
+        </tr>
+        <tr>
+          <td>G</td>
+          <td data="g1-name" class="g1-name"></td> 
+          <td data="g1-number"></td>
+        </tr>
+        <tr>
+          <td>G</td>
+          <td data="g2-name" class="g2-name"></td> 
+          <td data="g2-number"></td>
+        </tr>
+        <tr>
+          <td>F</td>
+          <td data="f1-name" class="f1-name"></td> 
+          <td data="f1-number"></td>
+        </tr>
+        <tr>
+          <td>F</td>
+          <td data="f2-name" class="f2-name"></td> 
+          <td data="f2-number"></td>
+        </tr>
+        <tr>
+          <td>F/C</td>
+          <td data="c-name" class="c-name"></td> 
+          <td data="c-number"></td>
+        </tr>
+        <tr>
+          <td>Bench 1</td>
+          <td data="bench1-name"></td> 
+          <td data="bench1-name"></td>
+        </tr>
+        <tr>
+          <td>Bench 2</td>
+          <td data="bench2-name"></td> 
+          <td data="bench2-number"></td>
+        </tr>
+        <tr>
+          <td>Bench 3</td>
+          <td data="bench3-name"></td> 
+          <td data="bench3-number"></td>
+        </tr>
+        <tr>
+          <td>Bench 4</td>
+          <td data="bench4-name"></td> 
+          <td data="bench4-number"></td>
+        </tr>
+        <tr>
+          <td>Bench 5</td>
+          <td data="bench5-name"></td> 
+          <td data="bench5-number"></td>
+        </tr>
+      </table>
     </div>
   </div>
-</div>

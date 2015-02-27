@@ -10,12 +10,30 @@ if (typeof(players) != undefined){
 $(document).ready(function() {
   
 
-	$('body').on('keyup', '.guess-box', showTheRightOne);
-	 
+	$('body').on('keyup', '.guess-box', blake);
+	$("#guess-box").focus();
  
  });
   
+var blake = function(){
+  var guess = $(this).val().toLowerCase().trim(),
+      target = $(event.target);
+  if (guess.length > 2){
+      checkForMatches(guess, target);
 
+  }
+}
+
+var checkForMatches = function(guess, input_field){
+  _.each(roster, function(player, index){
+    //check full name and just last name, also make sure the player has not been guessed already
+    if ((guess == player.last_name.toLowerCase().trim() || guess == player.full_name.toLowerCase().trim()) && !player.guessed){
+      player.guessed = true;
+      input_field.val('');
+
+    }
+  })
+}
 //FUNCTIONS
 
 
@@ -81,7 +99,7 @@ var findCenter = function() {
 
 
  	var startingLineup = {
-  	point:"curry",
+  	point:"stephen curry",
   	shooting:"thompson",
   	small:"barnes",
   	power:"green",
@@ -111,7 +129,7 @@ var findCenter = function() {
 	}
 	if (guess == startingLineup.center) {
   	$(".c-name").show().text(center);  		
-  	$(".guess-box").val("");  
+  	$(".guess-box").val("");    	
 	}
 }
 

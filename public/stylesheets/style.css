@@ -23,6 +23,7 @@ a {
 .navbar.blitz{
 	border-color:#fff;
 	font-family: HelveticaNeue-Thin;
+  z-index:100;
 }
 
 .navbar-brand.main{
@@ -84,22 +85,18 @@ ul {
     }
      
 }
-/*
+
 .container-iphone {
   display:none;
 }
-*/
 
-@media screen and (max-width: 460px) {
-    #team-select {
-        font-size: 20px;
-        padding-bottom: 15px;
-    }    
-    /* ADD BACK LATER
+
+@media screen and (max-width: 480px) {
     .container-iphone {
       display: block;
+      background: url(../images/bball_back.svg) no-repeat scroll center top/cover transparent;
     }  
-    */
+    
 }
 
 .submit-section{
@@ -203,7 +200,7 @@ ul {
      
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 480px) {
     .social-sidebar{
         display: none;
 
@@ -278,10 +275,20 @@ ul {
     text-align: center;
     margin-bottom: 30px;
 }
+.table-iphone{
+  margin-left: auto;
+  margin-right: auto;
+}
 .table-iphone td, .table-iphone th {
+  padding: 5px 20px;
+  /* border: solid 1px black;    comment out borders for mobile view */
+}
+.bench-table td, .bench-table th {
   padding: 5px 20px;
   border: solid 1px black;
 }
+
+
 table tr:first-child th {
   border-top: 0;
 }
@@ -309,3 +316,86 @@ table tr th:last-child {
   color: #8DA0EA;
 }
 
+.standard-nba-container{
+    background: url(../images/bball_back.svg) no-repeat scroll center top/cover transparent;
+    background-size: initial;
+    padding: 0;
+    position: absolute;
+    bottom:0;
+    min-height: 650px;
+    width:100%;
+  }
+
+@media screen and (max-width: 480px) {
+
+  .standard-nba-container{
+    display: none;
+  }
+}
+
+@media screen and (max-height: 600px) {
+
+  .standard-nba-container{
+    min-height: 500px;
+  }
+}
+
+
+#quiz-container .answer-container{
+  padding-left: 90px;
+  max-width:75%;
+}
+.nba-bench-container {
+  float: left;
+  
+
+}
+.nba-starting-players {
+  display: inline-block;
+  width: 50%;
+  height: 100%;
+}
+.row1 {
+  width: 100%;
+  height: 300px;
+  margin: 100px 0 0 30px;
+}
+.guard-div {
+  margin: 0 0 0 5%;
+  width: 80%;
+}
+.guard-1-place {
+  padding: 0 0 0 5%;
+}
+.guard-2-place {
+  padding: 0 0 0 46%;
+}
+.forward-1-div {
+  margin: 20% 0 0 5%;
+  width: 80%;
+  
+}
+.forward-1-place {
+  padding: 0 0 0 13%;
+}
+.forward-2-div {
+  margin: 10% 0 0 5%;
+  width: 80%;
+
+}
+.forward-2-place {
+  margin: 10% 0 0 53%;
+}
+.center-div {
+  margin: 15% 0 0 5%;
+  width: 80%;
+}
+.center-place {
+  margin: 10% 0 0 25%;
+}
+.answer-box {
+  width:  10%;
+  height: 100%;
+  border: 1px solid #D3D3D3
+;
+}

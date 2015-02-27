@@ -3,7 +3,7 @@ var config = common.config();
 var express = require('express');
 var request = require('request');
 var router = express.Router();
-var _ = require('underscore');
+var _ = require('lodash');
 var http = require("http"),
     mongojs = require("mongojs"),
     db = mongojs.connect(config.mongo_uri);
@@ -16,8 +16,19 @@ var encryption = require('../encryption.js');
 
 var returnPlayers = function (players, rb_team_id, res, league){
   if (res.quiz_page != undefined && res.quiz_page){
+
+    if (league == 'nba'){
+    //only return active players to the client
+      var actives = _.filter(players, function(player){
+        return player.status == 'ACT';
+      })
+      var roster = actives;
+    }
+    else{
+      var roster = players;
+    }
     res.render('quiz', {
-      players:players,
+      players: roster,
       rb_team_id: rb_team_id,
       league: league
     });
@@ -78,30 +89,60 @@ switch (league){
         switch (league){
           case 'nba':
             json_response = JSON.parse(body);
-            players_sorted = sortNBA(json_response);
-            players = formatPlayers(players_sorted, rb_team_id);
+            //for nba we need to make a 2nd api request to fetch players on the active roster
+            request('https://api.sportsdatallc.org/nba-t3/teams/'+encryption.decrypt(team_id)+'/profile.json?api_key=' +config.nba_key, function (error, response, roster) {
+                  if (!error && response.statusCode == 200) {
+                     var team_roster = JSON.parse(roster);
+                     var players_roster = team_roster.players;
+                     for (var i=0; i<json_response.players.length;i++){
+                      for (var j=0; j<players_roster.length; j++){
+                        //compare by player id
+                        if (json_response.players[i].id == players_roster[j].id){
+                          json_response.players[i].status = players_roster[j].status;
+                          //we found a match, break out of the 2nd loop iteration
+                          continue;
+                        }
+                      }
+                     }
+                     players_sorted = sortNBA(json_response);
+                     players = formatPlayers(players_sorted, rb_team_id);
+                     mongoInsertPlayers(rb_team_id, players);
+                     callback(players.players, rb_team_id, res, league)
+                  }
+
+                  else{
+                    console.log(error + ' api_status_code:' + response.statusCode);
+                  }
+            })
             break;
           case 'nfl':
             json_response = JSON.parse(body);
             players_sorted = sortNFL(json_response);
             players = formatPlayers(players_sorted, rb_team_id);
+            mongoInsertPlayers(rb_team_id, players);
+            callback(players.players, rb_team_id, res, league)
             break;
           case 'nhl':
             json_response = JSON.parse(body);
             players = formatPlayers(json_response, rb_team_id);
+            mongoInsertPlayers(rb_team_id, players);
+            callback(players.players, rb_team_id, res, league)
             break;
           case 'eu_soccer':
-            playersParsed = formatEUSoccerPlayers(response.body);
+            playersParsed = formatEUSoccerPlayers(response.body, team_id);
             players = formatPlayersDocument(rb_team_id, playersParsed);
+            mongoInsertPlayers(rb_team_id, players);
+            callback(players.players, rb_team_id, res, league)
             break;
           case 'mlb':  
             playersParsed = formatMLBPlayers(response.body, team_id);
             players = formatPlayersDocument(rb_team_id, playersParsed);
+            mongoInsertPlayers(rb_team_id, players);
+            callback(players.players, rb_team_id, res, league)
             break;
         }
-      mongoInsertPlayers(rb_team_id, players);
-      callback(players.players, rb_team_id, res, league);
-      }
+
+    }
       else{
         console.log('something really terrible has happened');
       }
