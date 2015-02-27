@@ -46,14 +46,15 @@ var fetchPlayers = function(team_id, rb_team_id, league, res, callback){
   db.collection('players').find({team_id : rb_team_id}).toArray(function (err, items){
     if (items.length > 0){ // data in Mongo
       //convert the date to unix timestamp
-      var itemdate = new Date(_.first(items['last_updated']).replace(' ', 'T')).getTime();
+      var item = _.first(items);
+      var itemdate = new Date(item.last_updated.replace(' ', 'T')).getTime();
       var datenow = new Date();
       var datecutoff = datenow.getTime() - dataAgeCutOff;
       if (datecutoff > itemdate){   //data is old so call API
          players = fetchPlayersFromApi(team_id, rb_team_id, league, res, callback)
       }
       else {  // data is fine so just return it
-        players = items[0].players;
+        players = item.players;
         callback(players, rb_team_id, res, league);
       }
     }
