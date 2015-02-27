@@ -45,7 +45,7 @@ var fetchPlayers = function(team_id, rb_team_id, league, res, callback){
   var players;
   db.collection('players').find({team_id : rb_team_id}).toArray(function (err, items){
     if (items.length > 0){ // data in Mongo
-      var itemdate = new Date(_.first(items['last_updated'].replace(' ', 'T')).getTime();
+      var itemdate = new Date(_.first(items['last_updated']).replace(' ', 'T')).getTime();
       var datenow = new Date();
       var datecutoff = datenow.getTime() - dataAgeCutOff;
       if (datecutoff > itemdate){   //data is old so call API
@@ -261,5 +261,7 @@ module.exports = {
   fetchPlayers: fetchPlayers,
   formatPlayers: formatPlayers,
   formatPlayersDocument: formatPlayersDocument,
-  mongoInsertPlayers: mongoInsertPlayers
+  mongoInsertPlayers: mongoInsertPlayers,
+  sortNBA: sortNBA
+
 }
