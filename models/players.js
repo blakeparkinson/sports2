@@ -7,7 +7,6 @@ var _ = require('lodash');
 var http = require("http"),
     mongojs = require("mongojs"),
     db = mongojs.connect(config.mongo_uri);
-var dataAgeCutOff = 604800000;  //This is 1 week in milliseconds
 var teams = [];
 var endpoint = '';
 var parseString = require('xml2js').parseString;
@@ -43,9 +42,11 @@ var fetchPlayers = function(team_id, league, res, callback){
   var players;
   db.collection('players').find({team_id : team_id}).toArray(function (err, items){
     if (items.length > 0){ // data in Mongo
-      var itemdate = _.first(items['last_updated']);
+      var itemdate = _.first(items);
+      console.log(itemdate);
       var datenow = new Date();
-      var datecutoff = datenow.getTime() - dataAgeCutOff;
+      var datecutoff = datenow.getTime() - config.dataAgeCutOff;
+      console.log(datecutoff);
       if (datecutoff > itemdate){   //data is old so call API
          players = fetchPlayersFromApi(team_id, league, res, callback)
       }
@@ -84,7 +85,7 @@ switch (league){
 
     request(endpoint, function (error, response, body) {
       if (!error && response.statusCode == 200) {
-        json_response = JSON.parse(body);
+        //json_response = JSON.parse(body);
              switch (league){
                case 'nba':
                //for nba we need to make a 2nd api request to fetch players on the active roster

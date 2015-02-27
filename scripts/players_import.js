@@ -25,18 +25,25 @@ var rosters = [];
     db.collection('teams').find({'league': league}).toArray(function (err, teams) {
       //fetch the players collectiom
       db.collection('players').find().toArray(function (err, players){
-        var common_team_ids = [];
+        var non_insert_teams = [];
         var all_team_ids = [];
+        console.log(players)
+        var datenow = new Date();
+        var datecutoff = datenow.getTime() - config.dataAgeCutOff;
+        console.log(datecutoff);
         //loop through and filter out the players collections that we already have
         for (var i=0; i < teams.length; i++){
           all_team_ids.push(teams[i].team_id);
           for (var j=0; j < players.length; j++){
+
             if (teams[i].team_id == players[j].team_id){
-              common_team_ids.push(teams[i].team_id);
+              if (datecutoff > players[j].last_updated){
+                  non_insert_teams.push(teams[i].team_id);
+              }
             }
           }
         }
-        var uncommon_team_ids = difference(common_team_ids, all_team_ids);
+        var uncommon_team_ids = difference(non_insert_teams, all_team_ids);
             
         //async is a helper library that helps keeping requests async
         async.eachSeries(uncommon_team_ids, function    (id, callback) {
