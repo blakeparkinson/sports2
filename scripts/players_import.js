@@ -35,9 +35,9 @@ var rosters = [];
         for (var i=0; i < teams.length; i++){
           all_team_ids.push(teams[i].team_id);
           for (var j=0; j < players.length; j++){
-
+            var timestamp = new Date(players[j].last_updated.replace(' ', 'T')).getTime();
             if (teams[i].team_id == players[j].team_id){
-              if (datecutoff > players[j].last_updated){
+              if (datecutoff > timestamp){
                   non_insert_teams.push(teams[i].team_id);
               }
             }
@@ -59,7 +59,7 @@ var rosters = [];
                    for (var i=0; i<json_response.players.length;i++){
                     //add the last updated
                     var last_updated = new Date().toISOString().slice(0, 19).replace('T', ' ');
-                    json_response[i].push(last_updated);
+                    //json_response.players[i].push(last_updated);
                     for (var j=0; j<players_roster.length; j++){
                       //compare by player id, loop through and add the active tag
                       if (json_response.players[i].id == players_roster[j].id){
@@ -81,7 +81,7 @@ var rosters = [];
                 if (rosters.length){
                   //we failed somewhere and were likely rate limited, let's just insert what we got
                   console.log('failed on active player call.')
-                  players_model.mongoBulkInsertPlayers(rosters);
+                  players_model.mongoBulkInsertPlayers(rosters, league);
                 }
               }
             });
@@ -91,7 +91,7 @@ var rosters = [];
             if (rosters.length){
               //we failed somewhere and were likely rate limited, let's just insert what we got
               console.log('failed on roster fetching call');
-              players_model.mongoBulkInsertPlayers(rosters);
+              players_model.mongoBulkInsertPlayers(rosters, league);
             }
             else{
               console.log('failed before we did anything');
@@ -101,7 +101,7 @@ var rosters = [];
       },
       function done() {
         //somehow we didn't get rate limited!!!!
-        players_model.mongoBulkInsertPlayers(rosters);
+        players_model.mongoBulkInsertPlayers(rosters, league);
         console.log(rosters);
     });
   });

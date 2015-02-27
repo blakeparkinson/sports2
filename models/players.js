@@ -85,9 +85,9 @@ switch (league){
 
     request(endpoint, function (error, response, body) {
       if (!error && response.statusCode == 200) {
-        //json_response = JSON.parse(body);
              switch (league){
                case 'nba':
+               json_response = JSON.parse(body);
                //for nba we need to make a 2nd api request to fetch players on the active roster
                request('https://api.sportsdatallc.org/nba-t3/teams/'+team_id+'/profile.json?api_key=' +config.nba_key, function (error, response, roster) {
                       if (!error && response.statusCode == 200) {
@@ -223,9 +223,9 @@ function mongoInsertPlayers(team_id, team_document){
   });
 }
 
-function mongoBulkInsertPlayers(document){
+function mongoBulkInsertPlayers(document, league){
     db.open(function(err, db){
-      db.collection("players").insert(document, function(err){
+      db.collection("players").find({league: league}).upsert().update(document, function(err){
         if (err){
           console.log(err);
         }
