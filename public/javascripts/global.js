@@ -171,15 +171,15 @@ function fetchQuiz(event) {
     var target = $(event.target);
     if (target.hasClass('quiz-btn')){
       var team = $('.selected-team'),
-          id = team.data('team-id'),
-          league = team.data('league');
-
+          api_team_id = team.data('team-id'),
+          league = team.data('league'),
+          rb_team_id = team.data('id');
     }
     else{
       var team_id = $('#teams option:selected').val();
     }
 
-    var data = {team_id: id, league: league};
+    var data = {api_team_id: api_team_id, league: league, rb_team_id: rb_team_id};
 
 
     $.ajax({
@@ -188,7 +188,7 @@ function fetchQuiz(event) {
       type: 'get',
       dataType: 'json',
         success: function(response){
-          window.location.href = 'quiz?id='+response[0]["_id"]+'&team_id='+response[0]["team_id"]+'&league='+response[0]["league"];
+          window.location.href = 'quiz?id='+response["_id"]+'&team_id='+response["rb_team_id"]+'&league='+response["league"];
         }
     }).done(function() {
 });
