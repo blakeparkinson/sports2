@@ -20,30 +20,29 @@ var league = process.argv[2];
 var options = {};
 options.only_insert = true;
 var rosters = [];
+var datenow = new Date();
+var datecutoff = datenow.getTime() - config.dataAgeCutOff;
 
     //fetch the team collections
     db.collection('teams').find({'league': league}).toArray(function (err, teams) {
       //fetch the players collectiom
       db.collection('players').find().toArray(function (err, players){
-        var non_insert_teams = [];
+        var common_team_ids = [];
         var all_team_ids = [];
-        console.log(players)
-        var datenow = new Date();
-        var datecutoff = datenow.getTime() - config.dataAgeCutOff;
-        console.log(datecutoff);
         //loop through and filter out the players collections that we already have
         for (var i=0; i < teams.length; i++){
           all_team_ids.push(teams[i].team_id);
           for (var j=0; j < players.length; j++){
             var timestamp = new Date(players[j].last_updated.replace(' ', 'T')).getTime();
             if (teams[i].team_id == players[j].team_id){
-              if (datecutoff > timestamp){
-                  non_insert_teams.push(teams[i].team_id);
+              //see if their time in the db has been too loong and if so update them
+              if (datecutoff < timestamp){
+                common_team_ids.push(teams[i].team_id);
               }
             }
           }
         }
-        var uncommon_team_ids = difference(non_insert_teams, all_team_ids);
+        var uncommon_team_ids = difference(common_team_ids, all_team_ids);
             
         //async is a helper library that helps keeping requests async
         async.eachSeries(uncommon_team_ids, function    (id, callback) {
@@ -57,9 +56,6 @@ var rosters = [];
                    var team_roster = JSON.parse(roster);
                    var players_roster = team_roster.players;
                    for (var i=0; i<json_response.players.length;i++){
-                    //add the last updated
-                    var last_updated = new Date().toISOString().slice(0, 19).replace('T', ' ');
-                    //json_response.players[i].push(last_updated);
                     for (var j=0; j<players_roster.length; j++){
                       //compare by player id, loop through and add the active tag
                       if (json_response.players[i].id == players_roster[j].id){
@@ -78,32 +74,44 @@ var rosters = [];
 
               else{
                 console.log('error:' + error + ' ,response: '+ response.statusCode);
+                console.log('failed on active player fetching call');
+                console.log(rosters);
                 if (rosters.length){
                   //we failed somewhere and were likely rate limited, let's just insert what we got
-                  console.log('failed on active player call.')
-                  players_model.mongoBulkInsertPlayers(rosters, league);
+                  mongoInsertLoop(rosters)
+
                 }
               }
             });
           }
           else{
             console.log('error:' + error + ' ,response: '+ response.statusCode);
+            console.log('failed on roster fetching call');
+            console.log(rosters);
             if (rosters.length){
               //we failed somewhere and were likely rate limited, let's just insert what we got
-              console.log('failed on roster fetching call');
-              players_model.mongoBulkInsertPlayers(rosters, league);
+              mongoInsertLoop(rosters)
             }
             else{
-              console.log('failed before we did anything');
+              console.log('we accomplished nothing');
             }
           }
         });
       },
       function done() {
         //somehow we didn't get rate limited!!!!
-        players_model.mongoBulkInsertPlayers(rosters, league);
+        mongoInsertLoop(rosters)
         console.log(rosters);
     });
   });
-});  
+});
+
+function mongoInsertLoop(rosters){
+  console.log('we accomplished something');
+  for (var b=0; b < rosters.length; b++){
+    players_model.mongoInsertPlayers(rosters[b].team_id, rosters[b]);
+  }
+
+}
+
 

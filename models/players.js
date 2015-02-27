@@ -223,17 +223,6 @@ function mongoInsertPlayers(team_id, team_document){
   });
 }
 
-function mongoBulkInsertPlayers(document, league){
-    db.open(function(err, db){
-      db.collection("players").find({league: league}).upsert().update(document, function(err){
-        if (err){
-          console.log(err);
-        }
-      });
-
-  });
-}
-
 
 formatEUSoccerPlayers = function(response){
   parseString(response, function (err, result) {
@@ -272,5 +261,4 @@ module.exports = {
   formatPlayers: formatPlayers,
   formatPlayersDocument: formatPlayersDocument,
   mongoInsertPlayers: mongoInsertPlayers,
-  mongoBulkInsertPlayers: mongoBulkInsertPlayers
 }
