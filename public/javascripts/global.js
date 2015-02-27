@@ -188,8 +188,7 @@ function fetchQuiz(event) {
       type: 'get',
       dataType: 'json',
         success: function(response){
-          console.log(response);
-          window.location.href = 'quiz?id='+response[0]["_id"]+'&team_id='+response[0]["rb_team_id"]+'&league='+response[0]["league"];
+          window.location.href = 'quiz?id='+response["_id"]+'&team_id='+response["rb_team_id"]+'&league='+response["league"];
         }
     }).done(function() {
 });

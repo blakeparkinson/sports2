@@ -47,7 +47,7 @@ var createQuiz = function(rb_team_id, league, api_team_id, res, callback){
           console.log("new quiz insert failed");
         }
         else {
-          callback(insert, res);
+          callback(insert[0], res);
         }
     });
   });
