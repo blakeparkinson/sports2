@@ -105,8 +105,8 @@ switch (league){
                case 'mlb':  
                // THIS ENCRYPTION ACTIVITY WILL NEED TO BE DIFFERENT
                 playersParsed = formatMLBPlayers(response.body, team_id);
-                players = formatPlayersDocument(team_id, playersParsed);
-                mongoInsertPlayers(team_id, players);
+                players = formatPlayersDocument(rb_team_id, playersParsed);
+                mongoInsertPlayers(rb_team_id, players);
                 callback(players.players, rb_team_id, res, league)
                 break;
               }
@@ -212,7 +212,7 @@ formatMLBPlayers = function(response, team_id){
   parseString(response, function (err, result) {
     var str = result[Object.keys(result)[0]];
         for (j=0; j < str.team.length; j++){ 
-          if (str.team[j].$.id.trim() == team_id.trim()){
+          if (str.team[j].$.id.trim() == encryption.decrypt(team_id).trim()){
             for (k=0; k < str.team[j].players[0].player.length; k++){
               players.push(str.team[j].players[0].player[k].$)
             }
