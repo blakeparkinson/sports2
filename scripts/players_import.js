@@ -80,7 +80,7 @@ var datecutoff = datenow.getTime() - config.dataAgeCutOff;
                 console.log(rosters);
                 if (rosters.length){
                   //we failed somewhere and were likely rate limited, let's just insert what we got
-                  mongoInsertLoop(rosters)
+                  mongoInsertLoop(league,rosters)
 
                 }
               }
@@ -91,7 +91,7 @@ var datecutoff = datenow.getTime() - config.dataAgeCutOff;
             console.log('failed on roster fetching call');
             if (rosters.length){
               //we failed somewhere and were likely rate limited, let's just insert what we got
-              mongoInsertLoop(rosters)
+              mongoInsertLoop(league,rosters)
             }
             else{
               console.log('we accomplished nothing');
@@ -101,15 +101,15 @@ var datecutoff = datenow.getTime() - config.dataAgeCutOff;
       },
       function done() {
         //somehow we didn't get rate limited!!!!
-        mongoInsertLoop(rosters)
+        mongoInsertLoop(league,rosters)
     });
   });
 });
 
-function mongoInsertLoop(rosters){
+function mongoInsertLoop(league, rosters){
   console.log('we accomplished something');
   for (var b=0; b < rosters.length; b++){
-    players_model.mongoInsertPlayers(rosters[b].team_id, rosters[b]);
+    players_model.mongoInsertPlayers(rosters[b].team_id, league, rosters[b]);
   }
 
 }
