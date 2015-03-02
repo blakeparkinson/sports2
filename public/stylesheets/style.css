@@ -396,6 +396,34 @@ table tr th:last-child {
 .answer-box {
   width:  10%;
   height: 100%;
-  border: 1px solid #D3D3D3
-;
+  border: 1px solid #D3D3D3;
+}
+/* soccer styling */
+.standard-soccer-container{
+    background: url(../images/court_diagrams/soccer_field_diagram.svg) no-repeat scroll center top/cover transparent;
+    background-size: initial;
+    padding: 0;
+    position: absolute;
+    bottom:0;
+    min-height: 650px;
+    width:100%;
+  }
+@media screen and (max-width: 480px) {
+    .container-iphone {
+      display: block;
+      background: url(../images/court_diagrams/soccer_field_diagram.svg) no-repeat scroll center top/cover transparent;
+    }  
+    
+}
+.table-holder {
+  padding: 20px;
+}
+.table-soccer {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.table-soccer th, td  {
+   border: 1px solid black;
+   width: 20px;
 }
