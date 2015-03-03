@@ -105,9 +105,9 @@ switch (league){
                           continue;
                         }
                       }
-                     }
+                     } 
                      players_sorted = sortNBA(json_response);
-                     players = formatPlayers(players_sorted, rb_team_id);
+                     players = formatNBAPlayers(players_sorted, rb_team_id);
                      mongoInsertPlayers(rb_team_id, league, players);
                      callback(players.players, rb_team_id, res, league)
                   }
@@ -190,6 +190,30 @@ function compareNFL(a,b) {
 }
 
 
+var formatNBAPlayers = function(response, rb_team_id){
+  startersarray = [];
+  bencharray = [];
+  for (i=0;i<5;i++){
+    startersarray[i] = {};
+    for(var key in response.players[i]){   //all
+      var value = response.players[i][key];
+      startersarray[i][key] = value;
+    }
+  }
+  if (response.players.length > 5) {
+    for (i=5; i< response.players.length;i++){
+      bencharray[i] = {};
+      for(var key in response.players[i]){   //all
+        var value = response.players[i][key];
+        bencharray[i][key] = value;
+      }
+    }
+  }
+  var team = formatNBAPlayersDocument(rb_team_id, startersarray, bencharray);
+  return team;
+}
+
+
 
 var formatPlayers = function(response, rb_team_id){
   playersarray = [];
@@ -205,6 +229,14 @@ var formatPlayers = function(response, rb_team_id){
 }
  
 
+var formatNBAPlayersDocument = function(rb_team_id, starters, bench){
+  teamDocument = {};
+  teamDocument["team_id"] = rb_team_id;
+  teamDocument["starters"] = starters; 
+  teamDocument["bench"] = bench; 
+  return teamDocument;
+}
+
 var formatPlayersDocument = function(rb_team_id, players){
   teamDocument = {};
   teamDocument["team_id"] = rb_team_id;
@@ -217,7 +249,7 @@ function mongoInsertPlayers(rb_team_id, league, team_document){
   console.log("inserting into the DB");
   db.open(function(err, db){
     db.collection("players").update({team_id: rb_team_id},
-    {$set: {team_id: team_document["team_id"], league: league, last_updated: new Date().toISOString().slice(0, 19).replace('T', ' '), players: team_document["players"]}},
+    {$set: {team_id: team_document["team_id"], league: league, last_updated: new Date().toISOString().slice(0, 19).replace('T', ' '), starters: team_document["starters"], bench: team_document["bench"]}},
     {upsert: true, multi:false}, function (err, upserted){
       if (err) {
         console.log('Ahh! An Error with Insert!');
