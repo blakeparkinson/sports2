@@ -54,7 +54,7 @@ function formatResult(data){
     }
 
 function formatSelection(data){
-    var render = '<p class="selected-team" data-league= "'+data.league+'" data-team-id="'+ data.team_id + '"data-id="'+ data.id + '"> ' +data.market+ ' ' +data.name+'</p>';
+    var render = '<p class="selected-team" data-team="'+data.market+ ' ' +data.name+'" data-league= "'+data.league+'" data-team-id="'+ data.team_id + '"data-id="'+ data.id + '"> ' +data.market+ ' ' +data.name+'</p>';
     return render;
 }
 

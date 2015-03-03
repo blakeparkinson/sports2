@@ -1,3 +1,13 @@
+@font-face {
+    font-family:"Erbos Draco 1st NBP";
+    src: url(../fonts/erbos_draco_1st_nbp.ttf)
+}
+
+@font-face {
+    font-family:"Erbos Draco 1st Open NBP";
+    src: url(../fonts/erbos_draco_1st_open_nbp.ttf)
+}
+
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   font-family: HelveticaNeue-Thin !important;
@@ -24,6 +34,7 @@ a {
 	border-color:#fff;
 	font-family: HelveticaNeue-Thin;
   z-index:100;
+  margin-bottom: 0;
 }
 
 .navbar-brand.main{
@@ -35,6 +46,33 @@ a {
 	padding-top: 5%;
 }
 
+.team-container{
+  width: 50%;
+  padding-top: 40px;
+  margin: 0 auto;
+}
+
+.team-name{
+  color:#fff;
+  font-size: 18px;
+  display:inline-block;
+}
+
+.clock{
+  display: inline-block;
+  font-family:"Erbos Draco 1st Open NBP";
+  float: right;
+  background-color: rgb(232, 6, 6);
+  color: #fff;
+  margin-top: 3px;
+  border-radius: 1px;
+  font-size: 22px;
+}
+
+.name-point-container{
+  margin-top: 15px;
+}
+
 .footer {
   position: absolute;
   bottom: 0;
@@ -43,7 +81,10 @@ a {
   height: 60px;
   background-color: #f5f5f5;
   border-radius: 4px;
+}
 
+.footer.static{
+  position: relative;
 }
 .container {
   width: auto;
@@ -75,6 +116,29 @@ ul {
 	font-size: 58px;
 	font-family: HelveticaNeue-Thin;
 	padding-bottom: 25px;
+}
+
+.point-container{
+  background: rgb(62, 65, 62);
+  color: rgb(73, 252, 73);
+  padding: 6px 11px 6px 11px;
+  margin-left: -4px;
+  width: 15%;
+  line-height: 1;
+  text-align: center;
+  float: right;
+  border-radius: 0 5px 5px 0;
+}
+
+.point-container .number{
+  margin: 0;
+  font-size: 17px;
+}
+
+.point-container .points{
+  font-size: 12px;
+  margin:0;
+
 }
 
 @media screen and (max-width: 780px) {
@@ -317,13 +381,13 @@ table tr th:last-child {
 }
 
 .standard-nba-container{
-    background: url(../images/bball_back.svg) no-repeat scroll center top/cover transparent;
+    background: url(../images/stadiums/kings-stadium.jpg) no-repeat scroll center top/cover transparent;
     background-size: initial;
     padding: 0;
-    position: absolute;
     bottom:0;
     min-height: 650px;
     width:100%;
+    position:relative;
   }
 
 @media screen and (max-width: 480px) {
@@ -340,10 +404,20 @@ table tr th:last-child {
   }
 }
 
+.player-name{
+  width: 85%;
+  float:left;
+}
+
+.player-name .form-control{
+  padding: 19px 12px;
+  border-radius: 4px 0 0 4px;
+}
 
 #quiz-container .answer-container{
   padding-left: 90px;
   max-width:75%;
+  float: none;
 }
 .nba-bench-container {
   float: left;
@@ -351,24 +425,22 @@ table tr th:last-child {
 
 }
 .nba-starting-players {
-  display: inline-block;
-  width: 50%;
-  height: 100%;
+  padding-top: 30px;
+  text-align: center
 }
 .row1 {
   width: 100%;
   height: 300px;
-  margin: 100px 0 0 30px;
 }
 .guard-div {
   margin: 0 0 0 5%;
   width: 80%;
 }
 .guard-1-place {
-  padding: 0 0 0 5%;
+  padding: 0 0 0 10%;
 }
 .guard-2-place {
-  padding: 0 0 0 46%;
+  padding: 0 0 0 35%;
 }
 .forward-1-div {
   margin: 20% 0 0 5%;

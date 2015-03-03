@@ -15,7 +15,6 @@ router.get('/', function(req, res) {
           league = req.query.league;
           db.collection('teams').findOne( { _id : rb_team_id}, function (err, items){
             team_id = items.team_id;       // API team id
-            console.log(team_id);
           
             if (!rb_team_id || !league){
             	//it's the short url, so let's look up by quiz id to find the other info
@@ -24,7 +23,7 @@ router.get('/', function(req, res) {
                 });
             }
             else{
-              players = players_model.fetchPlayers(team_id, rb_team_id, league, res, players_model.returnPlayers);
+              players = players_model.fetchPlayers(team_id, rb_team_id, league, res, req, players_model.returnPlayers);
             }
 
       });

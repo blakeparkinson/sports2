@@ -14,7 +14,7 @@ var parseString = require('xml2js').parseString;
 var players = [];
 var encryption = require('../encryption.js');
 
-var returnPlayers = function (players, rb_team_id, res, league){
+var returnPlayers = function (players, rb_team_id, res, req, league){
   if (res.quiz_page != undefined && res.quiz_page){
 
     if (league == 'nba'){
@@ -30,7 +30,9 @@ var returnPlayers = function (players, rb_team_id, res, league){
     res.render('quiz', {
       players: roster,
       rb_team_id: rb_team_id,
-      league: league
+      league: league,
+      static_footer: true,
+      team_name: req.session.team_name
     });
 
   }
@@ -41,7 +43,7 @@ var returnPlayers = function (players, rb_team_id, res, league){
 
 // Check the db first. If it's there and has been added in the last 24 hours, use it. 
 // Otherwise, go get new data from the API and replace/add the database listing
-var fetchPlayers = function(team_id, rb_team_id, league, res, callback){ 
+var fetchPlayers = function(team_id, rb_team_id, league, res, req, callback){ 
   var players;
   db.collection('players').find({team_id : rb_team_id}).toArray(function (err, items){
     if (items.length > 0){ // data in Mongo
@@ -55,17 +57,17 @@ var fetchPlayers = function(team_id, rb_team_id, league, res, callback){
       }
       else {  // data is fine so just return it
         players = item.players;
-        callback(players, rb_team_id, res, league);
+        callback(players, rb_team_id, res, req, league);
       }
     }
     else {  // data not already in Mongo
-       players = fetchPlayersFromApi(team_id, rb_team_id, league, res, callback)
+       players = fetchPlayersFromApi(team_id, rb_team_id, league, res, req, callback)
     }
   });
 }
 
 
-var fetchPlayersFromApi = function(team_id, rb_team_id, league, res, callback){
+var fetchPlayersFromApi = function(team_id, rb_team_id, league, res, req, callback){
 var json_response = '';
 var players = {};
 
@@ -109,7 +111,7 @@ switch (league){
                      players_sorted = sortNBA(json_response);
                      players = formatPlayers(players_sorted, rb_team_id);
                      mongoInsertPlayers(rb_team_id, players);
-                     callback(players.players, rb_team_id, res, league)
+                     callback(players.players, rb_team_id, res, req, league)
                   }
 
                   else{
@@ -122,25 +124,25 @@ switch (league){
             players_sorted = sortNFL(json_response);
             players = formatPlayers(players_sorted, rb_team_id);
             mongoInsertPlayers(rb_team_id, players);
-            callback(players.players, rb_team_id, res, league)
+            callback(players.players, rb_team_id, res, req, league)
             break;
           case 'nhl':
             json_response = JSON.parse(body);
             players = formatPlayers(json_response, rb_team_id);
             mongoInsertPlayers(rb_team_id, players);
-            callback(players.players, rb_team_id, res, league)
+            callback(players.players, rb_team_id, res, req, league)
             break;
           case 'eu_soccer':
             playersParsed = formatEUSoccerPlayers(response.body, team_id);
             players = formatPlayersDocument(rb_team_id, playersParsed);
             mongoInsertPlayers(rb_team_id, players);
-            callback(players.players, rb_team_id, res, league)
+            callback(players.players, rb_team_id, res, req, league)
             break;
           case 'mlb':  
             playersParsed = formatMLBPlayers(response.body, team_id);
             players = formatPlayersDocument(rb_team_id, playersParsed);
             mongoInsertPlayers(rb_team_id, players);
-            callback(players.players, rb_team_id, res, league)
+            callback(players.players, rb_team_id, res, req, league)
             break;
         }
 
