@@ -105,9 +105,9 @@ switch (league){
                           continue;
                         }
                       }
-                     }
+                     } 
                      players_sorted = sortNBA(json_response);
-                     players = formatPlayers(players_sorted, rb_team_id);
+                     players = formatNBAPlayers(players_sorted, rb_team_id);
                      mongoInsertPlayers(rb_team_id, league, players);
                      callback(players.players, rb_team_id, res, league)
                   }
@@ -115,8 +115,8 @@ switch (league){
                   else{
                     console.log(error + ' api_status_code:' + response.statusCode);
                   }
-            })
-            break;
+            }) 
+            break; 
           case 'nfl':
             json_response = JSON.parse(body);
             players_sorted = sortNFL(json_response);
@@ -190,6 +190,15 @@ function compareNFL(a,b) {
 }
 
 
+var formatNBAPlayers = function(response, rb_team_id){
+  var startersarray = response.players.slice(0,5);
+  var bencharray = response.players.slice(5,response.players.length);
+  var players = [];
+  players.push({starters: startersarray});
+  players.push({bench: bencharray});
+  var team = formatPlayersDocument(rb_team_id, players);
+  return team;
+}
 
 var formatPlayers = function(response, rb_team_id){
   playersarray = [];
@@ -203,7 +212,7 @@ var formatPlayers = function(response, rb_team_id){
   var team = formatPlayersDocument(rb_team_id, playersarray);
   return team;
 }
- 
+
 
 var formatPlayersDocument = function(rb_team_id, players){
   teamDocument = {};
