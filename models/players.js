@@ -191,8 +191,8 @@ function compareNFL(a,b) {
 
 
 var formatNBAPlayers = function(response, rb_team_id){
-  var startersarray = response.players.splice(0,5);
-  var bencharray = response.players.splice(5,response.players.length - 5);
+  var startersarray = response.players.slice(0,5);
+  var bencharray = response.players.slice(5,response.players.length);
   var players = [];
   players.push({starters: startersarray});
   players.push({bench: bencharray});
