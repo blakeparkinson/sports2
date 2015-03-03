@@ -110,8 +110,13 @@ switch (league){
                      }
                      players_sorted = sortNBA(json_response);
                      players = formatPlayers(players_sorted, rb_team_id);
+<<<<<<< HEAD
                      mongoInsertPlayers(rb_team_id, players);
                      callback(players.players, rb_team_id, res, req, league)
+=======
+                     mongoInsertPlayers(rb_team_id, league, players);
+                     callback(players.players, rb_team_id, res, league)
+>>>>>>> 686c53a23a99899d7a4b5836dbaf49325bc64ace
                   }
 
                   else{
@@ -123,26 +128,46 @@ switch (league){
             json_response = JSON.parse(body);
             players_sorted = sortNFL(json_response);
             players = formatPlayers(players_sorted, rb_team_id);
+<<<<<<< HEAD
             mongoInsertPlayers(rb_team_id, players);
             callback(players.players, rb_team_id, res, req, league)
+=======
+            mongoInsertPlayers(rb_team_id, league, players);
+            callback(players.players, rb_team_id, res, league)
+>>>>>>> 686c53a23a99899d7a4b5836dbaf49325bc64ace
             break;
           case 'nhl':
             json_response = JSON.parse(body);
             players = formatPlayers(json_response, rb_team_id);
+<<<<<<< HEAD
             mongoInsertPlayers(rb_team_id, players);
             callback(players.players, rb_team_id, res, req, league)
+=======
+            mongoInsertPlayers(rb_team_id, league, players);
+            callback(players.players, rb_team_id, res, league)
+>>>>>>> 686c53a23a99899d7a4b5836dbaf49325bc64ace
             break;
           case 'eu_soccer':
             playersParsed = formatEUSoccerPlayers(response.body, team_id);
             players = formatPlayersDocument(rb_team_id, playersParsed);
+<<<<<<< HEAD
             mongoInsertPlayers(rb_team_id, players);
             callback(players.players, rb_team_id, res, req, league)
+=======
+            mongoInsertPlayers(rb_team_id, league, players);
+            callback(players.players, rb_team_id, res, league)
+>>>>>>> 686c53a23a99899d7a4b5836dbaf49325bc64ace
             break;
           case 'mlb':  
             playersParsed = formatMLBPlayers(response.body, team_id);
             players = formatPlayersDocument(rb_team_id, playersParsed);
+<<<<<<< HEAD
             mongoInsertPlayers(rb_team_id, players);
             callback(players.players, rb_team_id, res, req, league)
+=======
+            mongoInsertPlayers(rb_team_id, league, players);
+            callback(players.players, rb_team_id, res, league)
+>>>>>>> 686c53a23a99899d7a4b5836dbaf49325bc64ace
             break;
         }
 
@@ -215,11 +240,11 @@ var formatPlayersDocument = function(rb_team_id, players){
 }
 
 
-function mongoInsertPlayers(rb_team_id, team_document){
+function mongoInsertPlayers(rb_team_id, league, team_document){
   console.log("inserting into the DB");
   db.open(function(err, db){
     db.collection("players").update({team_id: rb_team_id},
-    {$set: {team_id: team_document["team_id"], last_updated: new Date().toISOString().slice(0, 19).replace('T', ' '), players: team_document["players"]}},
+    {$set: {team_id: team_document["team_id"], league: league, last_updated: new Date().toISOString().slice(0, 19).replace('T', ' '), players: team_document["players"]}},
     {upsert: true, multi:false}, function (err, upserted){
       if (err) {
         console.log('Ahh! An Error with Insert!');
