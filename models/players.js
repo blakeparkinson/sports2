@@ -15,7 +15,6 @@ var players = [];
 var encryption = require('../encryption.js');
 
 var returnPlayers = function (players, rb_team_id, res, league){
-  console.log(players);
   if (res.quiz_page != undefined && res.quiz_page){
     res.render('quiz', {
       players: players.players,
