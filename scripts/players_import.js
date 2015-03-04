@@ -49,7 +49,7 @@ var datecutoff = datenow.getTime() - config.dataAgeCutOff;
         //async is a helper library that helps keeping requests async
         async.eachSeries(uncommon_team_ids, function (id, callback) {
           //statistics endpoint
-          request('https://api.sportsdatallc.org/nba-t3/seasontd/2014/reg/teams/'+encryption.decrypt(id)+'/statistics.json?api_key=' + config.nba_key, function (error, response, body) {
+          request('https://api.sportsdatallc.org/nba-t3/seasontd/2014/reg/teams/'+encryption.decrypt(id)+'/statistics.json?api_key=' + config.nba_key2, function (error, response, body) {
             if (!error && response.statusCode == 200) {
               json_response = JSON.parse(body);
               //active roster endpoint
