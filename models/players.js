@@ -16,23 +16,11 @@ var encryption = require('../encryption.js');
 
 var returnPlayers = function (players, rb_team_id, res, req, league){
   if (res.quiz_page != undefined && res.quiz_page){
-
-    if (league == 'nba'){
-    //only return active players to the client
-      var actives = _.filter(players, function(player){
-        return player.status == 'ACT';
-      })
-      var roster = actives;
-    }
-    else{
-      var roster = players;
-    }
     res.render('quiz', {
-      players: roster,
+      players: players,
       rb_team_id: rb_team_id,
       league: league,
       static_footer: true,
-      team_name: req.session.team_name
     });
 
   }
@@ -156,9 +144,13 @@ switch (league){
 
 var sortNBA = function(players_object){
   new_playersarray = players_object.players;
+  //only return active players to the client
+    var actives = _.filter(new_playersarray, function(player){
+      return player.status == 'ACT';
+    })
   new_playersobject = players_object;
   for (i=0; i<new_playersarray.length; i++){
-    sorted = new_playersarray.sort(compareNBA);
+    sorted = actives.sort(compareNBA);
     new_playersobject.players = sorted;
     return new_playersobject;
   }
