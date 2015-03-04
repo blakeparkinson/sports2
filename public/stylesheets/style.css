@@ -121,7 +121,6 @@ ul {
 
 .point-container{
   background: rgb(62, 65, 62);
-  color: rgb(73, 252, 73);
   padding: 6px 11px 4px 11px;
   margin-left: -4px;
   width: 15%;
@@ -144,7 +143,6 @@ ul {
 
 .answer-row{
   padding: 10px 12px;
-  color: rgb(73, 252, 73);
 }
 
 .answer-row.left{
@@ -390,11 +388,12 @@ table tr th:last-child {
 .guesser {
   margin-top: 10px;
 }
-.the-orange {
-  color: #F4A766;  
+.rb-green {
+  color: rgb(22, 231, 22); 
 }
-.the-blue {  
-  color: #8DA0EA;
+
+.rb-black{
+    color: #000000;
 }
 
 .standard-nba-container{
