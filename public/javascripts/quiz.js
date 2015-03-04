@@ -18,7 +18,7 @@ $(document).ready(function() {
 
 var startCounter = function(){
   var clock = $('.clock');
-      if (clock){
+      if (clock.length){
         var time = clock.html(),
           ss = time.split(":"),
           dt = new Date();
