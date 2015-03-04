@@ -21,7 +21,6 @@ var returnPlayers = function (players, rb_team_id, res, req, league){
       rb_team_id: rb_team_id,
       league: league,
       static_footer: true,
-      team_name: req.session.team_name
     });
 
   }
