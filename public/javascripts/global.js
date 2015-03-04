@@ -173,13 +173,14 @@ function fetchQuiz(event) {
       var team = $('.selected-team'),
           api_team_id = team.data('team-id'),
           league = team.data('league'),
-          rb_team_id = team.data('id');
+          rb_team_id = team.data('id'),
+          team = team.data('team');
     }
     else{
       var team_id = $('#teams option:selected').val();
     }
 
-    var data = {api_team_id: api_team_id, league: league, rb_team_id: rb_team_id};
+    var data = {api_team_id: api_team_id, league: league, rb_team_id: rb_team_id, team_name: team};
 
 
     $.ajax({

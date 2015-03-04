@@ -12,8 +12,28 @@ $(document).ready(function() {
 
 	$('body').on('keyup', '.guess-box', blake);
 	$("#guess-box").focus();
- 
+
+  startCounter();
  });
+
+var startCounter = function(){
+  var clock = $('.clock');
+      if (clock){
+        var time = clock.html(),
+          ss = time.split(":"),
+          dt = new Date();
+          dt.setHours(0);
+          dt.setMinutes(ss[0]);
+          dt.setSeconds(ss[1]);
+
+        var dt2 = new Date(dt.valueOf() - 1000),
+            temp = dt2.toTimeString().split(" "),
+            ts = temp[0].split(":");
+        clock.html(ts[1]+":"+ts[2]);
+        setTimeout(startCounter, 1000);
+      }
+
+}
   
 var blake = function(){
   var guess = $(this).val().toLowerCase().trim(),

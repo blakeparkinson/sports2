@@ -1,11 +1,22 @@
-<div id="quiz-container" class="row">
-  <div class="answer-container col-md-6">
-    <div class="input-group player-name">
-      <span class="input-group-addon" id="basic-addon1">Enter a Player</span>
-      <input type="text" class="form-control guess-box" id="guess-box" placeholder="Player Name..." aria-describedby="basic-addon1">
-    </div>
-  </div>
-</div>
+	<div class="standard-{{league}}-container">  
+	  <div class="team-container">
+	  	<p class="team-name">{{team_name}}</p>
+	  	<div class="clock">22:00</div>
+	  	<div class="name-point-container">
+		  	<div class="form-group player-name">
+	         <input type="recipients" class="form-control" id="email-recipients" placeholder="Enter Player Name">
+	      </div>
+	      <div class="point-container">
+	      	<p class="number">4</p>
+	      	<p class="points">points</p>
+	      </div>
+	    </div>
+	    <div class="answer-container">
+	      	<div class="answer-row left">Anthony Davis</div>
+	      	<div class="answer-row right">Tyreke Evans</div>
+	     </div>
+	  </div>
+
 
 {{#ifCond league 'nba'}}
     {{> nba }} 
@@ -26,6 +37,9 @@
 {{#ifCond league 'mlb'}}
     {{> mlb }} 
 {{/ifCond}}
+	</div>
+
+
 
 
 <script type='text/javascript'>
