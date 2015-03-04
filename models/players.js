@@ -149,12 +149,19 @@ var sortNBA = function(players_object){
       return player.status == 'ACT';
     })
   new_playersobject = players_object;
-  for (i=0; i<new_playersarray.length; i++){
-    sorted = actives.sort(compareNBA);
-    new_playersobject.players = sorted;
-    return new_playersobject;
+  for (i=0; i<actives.length; i++){
+    if (i % 2 == 0){
+      actives[i].render = 'left';
+    }
+    else{
+      actives[i].render = 'right';
+    }
   }
-}
+  sorted = actives.sort(compareNBA);
+  new_playersobject.players = sorted;
+  return new_playersobject;
+  }
+
 
 function compareNBA(a,b) {
   if (a.total.games_started < b.total.games_started)
