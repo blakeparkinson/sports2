@@ -248,11 +248,11 @@ function mongoInsertPlayers(league, team_document, rb_team_id){
 
   //the players_import script doesn't pass the rb_team_id but the document will have it
   else{
-    team_id = team_document['rb_team_id'];
+    team_id = team_document.rb_team_id;
   }
   db.open(function(err, db){
     db.collection("players").update({team_id: team_document.rb_team_id},
-    {$set: {team_id: team_id, team_name: team_document["team_name"], league: league, last_updated: new Date().toISOString().slice(0, 19).replace('T', ' '), starters: team_document.starters, bench: team_document.bench}},
+    {$set: {team_id: team_id, team_name: team_document.team_name, league: league, last_updated: new Date().toISOString().slice(0, 19).replace('T', ' '), starters: team_document.starters, bench: team_document.bench}},
     {upsert: true, multi:false}, function (err, upserted){
       if (err) {
         console.log('Ahh! An Error with Insert!');
