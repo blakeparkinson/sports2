@@ -56,6 +56,7 @@ var datecutoff = datenow.getTime() - config.dataAgeCutOff;
               request('https://api.sportsdatallc.org/nba-t3/teams/'+encryption.decrypt(id)+'/profile.json?api_key=' +config.nba_key, function (error, response, roster) {
                    if (!error && response.statusCode == 200) {
                    var team_roster = JSON.parse(roster);
+                   var team_name = team_roster.market + ' ' + team_roster.name;
                    var players_roster = team_roster.players;
                    for (var i=0; i<json_response.players.length;i++){
                     for (var j=0; j<players_roster.length; j++){
@@ -69,7 +70,7 @@ var datecutoff = datenow.getTime() - config.dataAgeCutOff;
                   }
                   //do our sorting and what not in the model methods
                   players_sorted = players_model.sortNBA(json_response);
-                  players = players_model.formatPlayers(players_sorted, id);
+                  players = players_model.formatNBAPlayers(players_sorted, id, team_name);
                   rosters.push(players);
                   callback();
                 }
@@ -77,7 +78,6 @@ var datecutoff = datenow.getTime() - config.dataAgeCutOff;
               else{
                 console.log('error:' + error + ' ,response: '+ response.statusCode);
                 console.log('failed on active player fetching call');
-                console.log(rosters);
                 if (rosters.length){
                   //we failed somewhere and were likely rate limited, let's just insert what we got
                   mongoInsertLoop(league,rosters)

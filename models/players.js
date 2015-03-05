@@ -14,9 +14,8 @@ var parseString = require('xml2js').parseString;
 var players = [];
 var encryption = require('../encryption.js');
 
-var returnPlayers = function (players, rb_team_id, res, req, league){
-  console.log(league);
-  console.log(players.players.starters);
+
+var returnPlayers = function (players, rb_team_id, res, league){
   if (res.quiz_page != undefined && res.quiz_page){
     var roster = [];
         //starters = formatEvenOdds(players.starters),
@@ -28,7 +27,8 @@ var returnPlayers = function (players, rb_team_id, res, req, league){
       bench: players.players.bench,
       rb_team_id: rb_team_id,
       league: league,
-      static_footer: true
+      static_footer: true,
+      team_name: players.team_name
     });
 
   }
@@ -66,8 +66,8 @@ var fetchPlayers = function(team_id, rb_team_id, league, res, req, callback){
          players = fetchPlayersFromApi(team_id, rb_team_id, league, res, callback)
       }
       else {  // data is fine so just return it
-        players = item.players;
-        callback(players, rb_team_id, res, req, league);
+        players = item;
+        callback(players, rb_team_id, res, league);
       }
     }
     else {  // data not already in Mongo
@@ -108,6 +108,7 @@ switch (league){
                   if (!error && response.statusCode == 200) {
                      var team_roster = JSON.parse(roster);
                      var players_roster = team_roster.players;
+                     var team_name = team_roster.market + ' ' + team_roster.name;
                      for (var i=0; i<json_response.players.length;i++){
                       for (var j=0; j<players_roster.length; j++){
                         //compare by player id
@@ -119,7 +120,7 @@ switch (league){
                       }
                      } 
                      players_sorted = sortNBA(json_response);
-                     players = formatNBAPlayers(players_sorted, rb_team_id);
+                     players = formatNBAPlayers(players_sorted, rb_team_id, team_name);
                      mongoInsertPlayers(rb_team_id, league, players);
                      callback(players, rb_team_id, res, league)
                   }
@@ -206,13 +207,19 @@ function compareNFL(a,b) {
 }
 
 
-var formatNBAPlayers = function(response, rb_team_id){
+var formatNBAPlayers = function(response, rb_team_id, team_name){
   var startersarray = response.players.slice(0,5);
   var bencharray = response.players.slice(5,response.players.length);
   var players = [];
+<<<<<<< HEAD
   players.starters = startersarray;
   players.bench = bencharray;
   var team = formatPlayersDocument(rb_team_id, players);
+=======
+  players.push({starters: startersarray});
+  players.push({bench: bencharray});
+  var team = formatPlayersDocument(rb_team_id, players, team_name);
+>>>>>>> 42b8fd84a8e04b8e660dfa62fb7ffbf58f527ba6
   return team;
 }
 
@@ -230,10 +237,11 @@ var formatPlayers = function(response, rb_team_id){
 }
 
 
-var formatPlayersDocument = function(rb_team_id, players){
+var formatPlayersDocument = function(rb_team_id, players, team_name){
   teamDocument = {};
   teamDocument["team_id"] = rb_team_id;
-  teamDocument["players"] = players; 
+  teamDocument["players"] = players;
+  teamDocument["team_name"] = team_name;
   return teamDocument;
 }
 
@@ -242,7 +250,7 @@ function mongoInsertPlayers(rb_team_id, league, team_document){
   console.log("inserting into the DB");
   db.open(function(err, db){
     db.collection("players").update({team_id: rb_team_id},
-    {$set: {team_id: team_document["team_id"], league: league, last_updated: new Date().toISOString().slice(0, 19).replace('T', ' '), players: team_document["players"]}},
+    {$set: {team_id: team_document["team_id"], team_name: team_document["team_name"], league: league, last_updated: new Date().toISOString().slice(0, 19).replace('T', ' '), players: team_document["players"]}},
     {upsert: true, multi:false}, function (err, upserted){
       if (err) {
         console.log('Ahh! An Error with Insert!');
@@ -287,6 +295,7 @@ module.exports = {
   fetchPlayersFromApi: fetchPlayersFromApi,
   fetchPlayers: fetchPlayers,
   formatPlayers: formatPlayers,
+  formatNBAPlayers: formatNBAPlayers,
   formatPlayersDocument: formatPlayersDocument,
   mongoInsertPlayers: mongoInsertPlayers,
   sortNBA: sortNBA
