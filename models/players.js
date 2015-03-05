@@ -268,6 +268,7 @@ module.exports = {
   fetchPlayersFromApi: fetchPlayersFromApi,
   fetchPlayers: fetchPlayers,
   formatPlayers: formatPlayers,
+  formatNBAPlayers: formatNBAPlayers,
   formatPlayersDocument: formatPlayersDocument,
   mongoInsertPlayers: mongoInsertPlayers,
   sortNBA: sortNBA
