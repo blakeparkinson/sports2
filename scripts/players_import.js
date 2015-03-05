@@ -44,9 +44,8 @@ var datecutoff = datenow.getTime() - config.dataAgeCutOff;
             }
           }
         }
-        console.log(common_team_ids);
         var uncommon_team_ids = difference(common_team_ids, all_team_ids);
-            
+        
         //async is a helper library that helps keeping requests async
         async.eachSeries(uncommon_team_ids, function (id, callback) {
           //statistics endpoint
@@ -120,7 +119,6 @@ function appendRbTeamId(teams, players){
 
   for (var i=0; i < teams.length; i++){
     if (teams[i].team_id == players.team_id){
-      console.log(players.team_id);
       players.rb_team_id = teams[i]._id
       continue;
     }

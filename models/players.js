@@ -241,11 +241,12 @@ var formatPlayersDocument = function(rb_team_id, players, team_name){
 
 function mongoInsertPlayers(league, team_document, rb_team_id){
   console.log("inserting into the DB");
-  console.log(rb_team_id);
   var team_id = '';
   if (rb_team_id != undefined){
     team_id = rb_team_id;
   }
+
+  //the players_import script doesn't pass the rb_team_id but the document will have it
   else{
     team_id = team_document['rb_team_id'];
   }
