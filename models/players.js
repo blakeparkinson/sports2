@@ -15,12 +15,20 @@ var players = [];
 var encryption = require('../encryption.js');
 
 var returnPlayers = function (players, rb_team_id, res, req, league){
+  console.log(league);
+  console.log(players.players.starters);
   if (res.quiz_page != undefined && res.quiz_page){
+    var roster = [];
+        //starters = formatEvenOdds(players.starters),
+        //bench = formatEvenOdds (players.bench);
+    //roster.starters = starters;
+   // roster.bench = bench;
     res.render('quiz', {
-      players: players,
+      starters: players.players.starters,
+      bench: players.players.bench,
       rb_team_id: rb_team_id,
       league: league,
-      static_footer: true,
+      static_footer: true
     });
 
   }
@@ -28,6 +36,20 @@ var returnPlayers = function (players, rb_team_id, res, req, league){
     res.json(players);   //this else statement poops out TypeError: Object nfl has no method 'json'
   }
 }
+
+var formatEvenOdds = function(players){
+  for (i=0; i<players.length; i++){
+    if (i % 2 == 0){
+      players[i].render = 'left';
+    }
+    else{
+      players[i].render = 'right';
+    }
+  }
+  return players;
+}
+
+
 
 // Check the db first. If it's there and has been added in the last 24 hours, use it. 
 // Otherwise, go get new data from the API and replace/add the database listing
@@ -99,7 +121,7 @@ switch (league){
                      players_sorted = sortNBA(json_response);
                      players = formatNBAPlayers(players_sorted, rb_team_id);
                      mongoInsertPlayers(rb_team_id, league, players);
-                     callback(players.players, rb_team_id, res, league)
+                     callback(players, rb_team_id, res, league)
                   }
 
                   else{
@@ -188,8 +210,8 @@ var formatNBAPlayers = function(response, rb_team_id){
   var startersarray = response.players.slice(0,5);
   var bencharray = response.players.slice(5,response.players.length);
   var players = [];
-  players.push({starters: startersarray});
-  players.push({bench: bencharray});
+  players.starters = startersarray;
+  players.bench = bencharray;
   var team = formatPlayersDocument(rb_team_id, players);
   return team;
 }
