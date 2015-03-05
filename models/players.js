@@ -119,7 +119,6 @@ switch (league){
                      } 
                      players_sorted = sortNBA(json_response);
                      players = formatNBAPlayers(players_sorted, rb_team_id, team_name);
-                     console.log(players);
                      mongoInsertPlayers(rb_team_id, league, players);
                      callback(players, rb_team_id, res, league)
                   }
@@ -242,8 +241,6 @@ var formatPlayersDocument = function(rb_team_id, players, team_name){
 
 function mongoInsertPlayers(rb_team_id, league, team_document){
   console.log("inserting into the DB");
-                       console.log(team_document);
-
   db.open(function(err, db){
     db.collection("players").update({team_id: rb_team_id},
     {$set: {team_id: team_document["team_id"], team_name: team_document["team_name"], league: league, last_updated: new Date().toISOString().slice(0, 19).replace('T', ' '), starters: team_document.starters, bench: team_document.bench}},
