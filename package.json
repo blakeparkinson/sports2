@@ -16,7 +16,7 @@
     "mongojs": "*",
     "http": "*",
     "jquery": "*",
-    "xml2js": "*",
+    "xml2js": "*"
   },
   "devDependencies": {
     "handlebars-helpers": "^0.5.8"
