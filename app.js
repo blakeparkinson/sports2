@@ -97,11 +97,35 @@ hbs.registerHelper('ifCond', function(v1, v2, options) {
   return options.inverse(this);
 });
 
-hbs.registerHelper("inc", function(value, options)
+hbs.registerHelper('inc', function(value, options)
 {
     return parseInt(value) + 1;
 });
 
+hbs.registerHelper('render_position', function(position){
+
+  var position = position.toUpperCase();
+  switch (position){
+    case 'G':
+      position = 'Guard';
+    break;
+    case 'F':
+      position = 'Forward';
+    break;
+    case 'C':
+      position = 'Center';
+    break;
+    case 'F-C':
+    case 'C-F':
+     position = 'Forward/Center';
+    break;
+    case 'G-F':
+    case 'F-G':
+     position = 'Guard/Forward';
+    break;
+  }
+  return position;
+})
 
 
 module.exports = app;
