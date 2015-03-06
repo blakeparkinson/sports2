@@ -26,13 +26,29 @@ var returnPlayers = function (players, rb_team_id, res, league){
       rb_team_id: rb_team_id,
       league: league,
       static_footer: true,
-      team_name: players.team_name
+      team_name: players.team_name,
+      clock: getTimeLimit(league)
     });
 
   }
   else{
     res.json(players);   //this else statement poops out TypeError: Object nfl has no method 'json'
   }
+}
+
+var getTimeLimit = function(league){
+  var clock = '0:00';
+  switch (league){
+    case 'nhl':
+    case 'mlb':
+    case 'eu_soccer':
+    case 'nfl':
+    case 'nba':
+      clock = '5:00';
+    break;
+  }
+
+  return clock;
 }
 
 var formatEvenOdds = function(players){
