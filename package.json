@@ -17,7 +17,6 @@
     "http": "*",
     "jquery": "*",
     "xml2js": "*",
-    "bcrypt": "*"
   },
   "devDependencies": {
     "handlebars-helpers": "^0.5.8"
