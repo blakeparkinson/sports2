@@ -1,13 +1,28 @@
     
-var players;
-if (typeof(players) != undefined){
-    	var roster = players;
-    }else{
-    	var roster = {};
-    }
+var starters,bench;
+if (typeof(starters) != undefined){
+  starters = starters;
+}
+
+else{
+  starters = {};
+}
+
+if (typeof(bench) != undefined){
+  bench = bench;
+}
+
+else{
+  bench = {};
+}
 
 // DOM Ready =============================================================
 $(document).ready(function() {
+
+        console.log(bench);
+        console.log(starters);
+
+
   
 
 	$('body').on('keyup', '.guess-box', blake);
@@ -64,7 +79,6 @@ var checkForMatches = function(guess, input_field){
 // sort the players into the slots
 	// get the top ten by games played
 		// sort the two guards
-	console.log(roster);
 	var findStartingGuards = function() {
 		var allGuards = [];	
 		for (i=0; i<roster.length; i++){		

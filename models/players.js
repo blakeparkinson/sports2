@@ -14,10 +14,15 @@ var parseString = require('xml2js').parseString;
 var players = [];
 var encryption = require('../encryption.js');
 
+
 var returnPlayers = function (players, rb_team_id, res, league){
   if (res.quiz_page != undefined && res.quiz_page){
-    res.render('quiz', {
-      players: players.players,
+    var roster = [];
+     starters = formatEvenOdds(players.starters),
+     bench = formatEvenOdds(players.bench);
+     res.render('quiz', {
+      starters: starters,
+      bench: bench,
       rb_team_id: rb_team_id,
       league: league,
       static_footer: true,
@@ -29,6 +34,20 @@ var returnPlayers = function (players, rb_team_id, res, league){
     res.json(players);   //this else statement poops out TypeError: Object nfl has no method 'json'
   }
 }
+
+var formatEvenOdds = function(players){
+  for (i=0; i<players.length; i++){
+    if (i % 2 == 0){
+      players[i].render = 'left';
+    }
+    else{
+      players[i].render = 'right';
+    }
+  }
+  return players;
+}
+
+
 
 // Check the db first. If it's there and has been added in the last 24 hours, use it. 
 // Otherwise, go get new data from the API and replace/add the database listing
@@ -100,7 +119,7 @@ switch (league){
                      } 
                      players_sorted = sortNBA(json_response);
                      players = formatNBAPlayers(players_sorted, rb_team_id, team_name);
-                     mongoInsertPlayers(rb_team_id, league, players);
+                     mongoInsertPlayers(league, players, rb_team_id);
                      callback(players, rb_team_id, res, league)
                   }
 
@@ -113,25 +132,25 @@ switch (league){
             json_response = JSON.parse(body);
             players_sorted = sortNFL(json_response);
             players = formatPlayers(players_sorted, rb_team_id);
-            mongoInsertPlayers(rb_team_id, league, players);
+            mongoInsertPlayers(league, players, rb_team_id);
             callback(players.players, rb_team_id, res, league)
             break;
           case 'nhl':
             json_response = JSON.parse(body);
             players = formatPlayers(json_response, rb_team_id);
-            mongoInsertPlayers(rb_team_id, league, players);
+            mongoInsertPlayers(league, players, rb_team_id);
             callback(players.players, rb_team_id, res, league)
             break;
           case 'eu_soccer':
             playersParsed = formatEUSoccerPlayers(response.body, team_id);
             players = formatPlayersDocument(rb_team_id, playersParsed);
-            mongoInsertPlayers(rb_team_id, league, players);
+            mongoInsertPlayers(league, players, rb_team_id);
             callback(players.players, rb_team_id, res, league)
             break;
           case 'mlb':  
             playersParsed = formatMLBPlayers(response.body, team_id);
             players = formatPlayersDocument(rb_team_id, playersParsed);
-            mongoInsertPlayers(rb_team_id, league, players);
+            mongoInsertPlayers(league, players, rb_team_id);
             callback(players.players, rb_team_id, res, league)
             break;
         }
@@ -190,8 +209,8 @@ var formatNBAPlayers = function(response, rb_team_id, team_name){
   var startersarray = response.players.slice(0,5);
   var bencharray = response.players.slice(5,response.players.length);
   var players = [];
-  players.push({starters: startersarray});
-  players.push({bench: bencharray});
+  players.starters = startersarray;
+  players.bench = bencharray;
   var team = formatPlayersDocument(rb_team_id, players, team_name);
   return team;
 }
@@ -213,17 +232,27 @@ var formatPlayers = function(response, rb_team_id){
 var formatPlayersDocument = function(rb_team_id, players, team_name){
   teamDocument = {};
   teamDocument["team_id"] = rb_team_id;
-  teamDocument["players"] = players;
+  teamDocument["starters"] = players.starters;
+  teamDocument["bench"] = players.bench;
   teamDocument["team_name"] = team_name;
   return teamDocument;
 }
 
 
-function mongoInsertPlayers(rb_team_id, league, team_document){
+function mongoInsertPlayers(league, team_document, rb_team_id){
   console.log("inserting into the DB");
+  var team_id = '';
+  if (rb_team_id != undefined){
+    team_id = rb_team_id;
+  }
+
+  //the players_import script doesn't pass the rb_team_id but the document will have it
+  else{
+    team_id = team_document.rb_team_id;
+  }
   db.open(function(err, db){
-    db.collection("players").update({team_id: rb_team_id},
-    {$set: {team_id: team_document["team_id"], team_name: team_document["team_name"], league: league, last_updated: new Date().toISOString().slice(0, 19).replace('T', ' '), players: team_document["players"]}},
+    db.collection("players").update({team_id: team_document.rb_team_id},
+    {$set: {team_id: team_id, team_name: team_document.team_name, league: league, last_updated: new Date().toISOString().slice(0, 19).replace('T', ' '), starters: team_document.starters, bench: team_document.bench}},
     {upsert: true, multi:false}, function (err, upserted){
       if (err) {
         console.log('Ahh! An Error with Insert!');

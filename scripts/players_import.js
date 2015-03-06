@@ -36,7 +36,7 @@ var datecutoff = datenow.getTime() - config.dataAgeCutOff;
           all_team_ids.push(teams[i].team_id);
           for (var j=0; j < players.length; j++){
             var timestamp = new Date(players[j].last_updated.replace(' ', 'T')).getTime();
-            if (teams[i].team_id == players[j].team_id){
+            if (teams[i]._id == players[j].team_id){
               //see if their time in the db has been too loong and if so update them
               if (datecutoff < timestamp){
                 common_team_ids.push(teams[i].team_id);
@@ -45,7 +45,7 @@ var datecutoff = datenow.getTime() - config.dataAgeCutOff;
           }
         }
         var uncommon_team_ids = difference(common_team_ids, all_team_ids);
-            
+        
         //async is a helper library that helps keeping requests async
         async.eachSeries(uncommon_team_ids, function (id, callback) {
           //statistics endpoint
@@ -71,6 +71,7 @@ var datecutoff = datenow.getTime() - config.dataAgeCutOff;
                   //do our sorting and what not in the model methods
                   players_sorted = players_model.sortNBA(json_response);
                   players = players_model.formatNBAPlayers(players_sorted, id, team_name);
+                  players = appendRbTeamId(teams, players);
                   rosters.push(players);
                   callback();
                 }
@@ -109,9 +110,22 @@ var datecutoff = datenow.getTime() - config.dataAgeCutOff;
 function mongoInsertLoop(league, rosters){
   console.log('we accomplished something');
   for (var b=0; b < rosters.length; b++){
-    players_model.mongoInsertPlayers(rosters[b].team_id, league, rosters[b]);
+    players_model.mongoInsertPlayers(league, rosters[b]);
   }
 
+}
+
+function appendRbTeamId(teams, players){
+
+  for (var i=0; i < teams.length; i++){
+    if (teams[i].team_id == players.team_id){
+      players.rb_team_id = teams[i]._id
+      continue;
+    }
+  }
+  //this is the api team id. kill it with fire
+  delete players.team_id;
+  return players;
 }
 
 
