@@ -37,7 +37,11 @@ var returnPlayers = function (players, rb_team_id, res, league){
 
 var formatEvenOdds = function(players){
   for (i=0; i<players.length; i++){
-    if (i % 2 == 0){
+    //special case if it's the last one and an odd number, it gets a row to itself
+    if((players.length - i == 1) && (i % 2 == 0)) {
+      players[i].render = '';
+    }
+    else if (i % 2 == 0){
       players[i].render = 'left';
     }
     else{

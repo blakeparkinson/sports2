@@ -11,10 +11,15 @@
 	      	<p class="points">points</p>
 	      </div>
 	    </div>
-	    <div class="answer-container">
-	      	<div class="answer-row left rb-green">Anthony Davis</div>
-	      	<div class="answer-row right rb-green">Tyreke Evans</div>
-	     </div>
+	    <div class="answer-container starters">
+	    	{{#each starters}}
+	      	<div class="answer-row {{render}} rb-green">Anthony Davis</div>
+	      {{/each}}
+	    </div>
+	    <div class="answer-container bench">
+	    	{{#each bench}}
+	    		<div class="answer-row {{render}} rb-green">Anthony Davis</div>
+	    	{{/each}}
 	  </div>
 
 

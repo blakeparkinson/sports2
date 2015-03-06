@@ -48,7 +48,7 @@ a {
 
 .team-container{
   width: 50%;
-  padding-top: 60px;
+  padding: 60px 0 60px 0;
   margin: 0 auto;
 }
 
@@ -141,8 +141,12 @@ ul {
 
 }
 
-.answer-row{
+.starters .answer-row {
   padding: 10px 12px;
+}
+
+.bench .answer-row {
+  padding: 6px 12px;
 }
 
 .answer-row.left{
@@ -154,6 +158,7 @@ ul {
   background: #fff;
   border-radius: 5px;
   opacity: 0.9;
+  border-bottom: 1px solid #ccc;
 }
 
 @media screen and (max-width: 780px) {
