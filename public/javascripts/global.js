@@ -173,6 +173,7 @@ function fetchQuiz(event) {
       var team = $('.selected-team'),
           api_team_id = team.data('team-id'),
           league = team.data('league'),
+          team_name = team.data('market')+' '+team.data('name'),
           rb_team_id = team.data('id'),
           team = team.data('team');
     }
@@ -180,7 +181,7 @@ function fetchQuiz(event) {
       var team_id = $('#teams option:selected').val();
     }
 
-    var data = {api_team_id: api_team_id, league: league, rb_team_id: rb_team_id, team_name: team};
+    var data = {api_team_id: api_team_id, team_name: team_name, league: league, rb_team_id: rb_team_id, team_name: team};
 
 
     $.ajax({

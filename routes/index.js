@@ -15,22 +15,32 @@ router.get('/', function(req, res) {
 	[{ $project: {
 		_id: 0,
 		rb_team_id: 1,
+		team_name: 1,
 		Created_in_timeframe: {$cond: [{$lt: ['$created_at', quizCutoffDate]}, 1, 0]}
 		}
 	},
 	{ $group : {
-		_id : "$rb_team_id", counts : {$sum: '$Created_in_timeframe'} 
+		_id : {rb_team_id: "$rb_team_id", team_name: "$team_name"}, counts : {$sum: '$Created_in_timeframe'} 
 		}
 	},
 	{ $sort: {
 		counts: -1
 		}
 	}], function(err, result){
-		newresult = [];
-		newresult.push(result.slice(0,3))
-		newresult = _.first(newresult)
-		console.log(newresult);
-		return newresult;
+		temparray = [];
+		endresult = [];
+		if (result){
+			temparray.push(result.slice(0,3))
+			temparray = _.first(temparray)
+			for (i=0;i<temparray.length;i++){
+				team_info = temparray[i]._id;
+				counts = temparray[i].counts;
+				team_info.counts = counts;
+				endresult.push(team_info);
+			}
+		}
+		console.log(endresult);
+		return endresult;
 	}
 	);
 	res.render('index', {session:req.session});
