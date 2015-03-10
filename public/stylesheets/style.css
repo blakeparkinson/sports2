@@ -291,14 +291,14 @@ ul {
 
 .social-sidebar{
     position: absolute;
-    left: 78%;
+    right: 82%;
     top: 60px;
 }
 
 
 @media screen and (max-width: 880px) {
     .social-sidebar{
-        left: 94%;
+        right: 92%;
 
     }
      
@@ -306,7 +306,7 @@ ul {
 
 @media screen and (max-width: 750px) {
     .social-sidebar{
-        left: 93%;
+        right: 91%;
 
     }
      
