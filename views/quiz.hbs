@@ -4,7 +4,7 @@
 	  	<div class="clock">{{clock}}</div>
 	  	<div class="name-point-container">
 		  	<div class="form-group player-name">
-	         <input type="recipients" class="form-control" id="email-recipients" placeholder="Enter Player Name">
+	         <input type="recipients" class="form-control" id="guess-box" placeholder="Enter Player Name">
 	      </div>
 	      <div class="point-container rb-green">
 	      	<p class="number">0</p>
@@ -19,7 +19,7 @@
 		    </div>
 		    <div class="answer-container bench">
 		    	{{#each bench}}
-		    	  <div class="answer-row {{render}}">Bench {{inc @index}}</div>
+		    	  <div class="answer-row {{render}} empty">Bench {{inc @index}}</div>
 		    	{{/each}}
 		    </div>
 		  </div>

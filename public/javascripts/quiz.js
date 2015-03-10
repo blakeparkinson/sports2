@@ -5,7 +5,7 @@ if (typeof(starters) != undefined){
 }
 
 else{
-  starters = {};
+  starters = [];
 }
 
 if (typeof(bench) != undefined){
@@ -13,8 +13,13 @@ if (typeof(bench) != undefined){
 }
 
 else{
-  bench = {};
+  bench = [];
 }
+
+var roster = starters.concat(bench),
+    correct = 0,
+    answer_container = $('.answer-container');
+
 
 // DOM Ready =============================================================
 $(document).ready(function() {
@@ -25,7 +30,7 @@ $(document).ready(function() {
 
   
 
-	$('body').on('keyup', '.guess-box', blake);
+	$('body').on('keyup', '#guess-box', blake);
 	$("#guess-box").focus();
 
   startCounter();
@@ -64,10 +69,23 @@ var checkForMatches = function(guess, input_field){
     //check full name and just last name, also make sure the player has not been guessed already
     if ((guess == player.last_name.toLowerCase().trim() || guess == player.full_name.toLowerCase().trim()) && !player.guessed){
       player.guessed = true;
+      correct++;
+      populateTable(player);
       input_field.val('');
 
     }
   })
+}
+
+var populateTable = function(player){
+  if (player.starter){
+    var field = answer_container.find("[data-id='" + player.player_id + "']");
+  }
+  else{
+    var field = answer_container.find('.bench .answer-row.empty').first();
+  }
+  field.html(player.full_name).addClass('rb-green').removeClass('empty');
+
 }
 //FUNCTIONS
 

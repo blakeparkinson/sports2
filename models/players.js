@@ -19,7 +19,7 @@ var shortId = require('shortid');
 var returnPlayers = function (players, rb_team_id, res, league){
   if (res.quiz_page != undefined && res.quiz_page){
     var roster = [];
-     starters = formatEvenOdds(players.starters),
+     starters = formatEvenOdds(players.starters, true),
      bench = formatEvenOdds(players.bench);
      res.render('quiz', {
       starters: starters,
@@ -52,8 +52,11 @@ var getTimeLimit = function(league){
   return clock;
 }
 
-var formatEvenOdds = function(players){
+var formatEvenOdds = function(players, is_starter){
   for (i=0; i<players.length; i++){
+    if (is_starter){
+      players[i].starter = true;
+    }
     //special case if it's the last one and an odd number, it gets a row to itself
     if((players.length - i == 1) && (i % 2 == 0)) {
       players[i].render = '';
