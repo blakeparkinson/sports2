@@ -234,6 +234,7 @@ function compareNFL(a,b) {
 
 var formatNBAPlayers = function(response, rb_team_id, team_name){
   var startersarray = response.players.slice(0,5);
+  sortByPositions('nba', startersarray);
   var bencharray = response.players.slice(5,response.players.length);
   var players = [];
   players.starters = startersarray;
@@ -241,6 +242,23 @@ var formatNBAPlayers = function(response, rb_team_id, team_name){
   var team = formatPlayersDocument(rb_team_id, players, team_name);
   return team;
 }
+
+var sortByPositions = function(league, starters){
+    switch (league){
+      case 'nba':
+        var order = ['G', 'G-F', 'F-G', 'F', 'F-C', 'C-F', 'C'];
+      break;
+
+      //figure out the other leagues later
+      default:
+        return;
+
+    }
+    starters.sort(function(a,b){
+      return order.indexOf(a.position) - order.indexOf(b.position);
+    });
+}
+
 
 var formatPlayers = function(response, rb_team_id){
   playersarray = [];
