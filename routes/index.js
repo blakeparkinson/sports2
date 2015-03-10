@@ -39,10 +39,8 @@ router.get('/', function(req, res) {
 				endresult.push(team_info);
 			}
 		}
-		console.log(endresult);
-		return endresult;
-	}
-	);
+		return endresult; 
+	});
 	res.render('index', {session:req.session});
 });
 
