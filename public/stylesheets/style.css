@@ -53,6 +53,13 @@ a {
   min-height: 650px;
 }
 
+@media screen and (max-width: 535px) {
+    .team-container{
+      width:85%;
+
+    }
+}
+
 .team-name{
   color:#fff;
   font-size: 18px;
@@ -132,6 +139,14 @@ ul {
   border-radius: 0 5px 5px 0;
 }
 
+@media screen and (max-width: 535px) {
+    .point-container{
+      padding: 4px 11px 4px 4px;
+
+    }
+}
+
+
 .point-container .number{
   margin: 0;
   font-size: 17px;
@@ -154,6 +169,13 @@ ul {
 .answer-row.left{
   float:left;
   width:50%;
+}
+
+@media screen and (max-width: 535px) {
+    .answer-row.left{
+      float:none;
+
+    }
 }
 
 .answer-container{
@@ -416,12 +438,6 @@ table tr th:last-child {
     position:relative;
   }
 
-@media screen and (max-width: 480px) {
-
-  .standard-nba-container{
-    display: none;
-  }
-}
 
 @media screen and (max-height: 600px) {
 
