@@ -14,7 +14,7 @@
 	    <div class="answer-container">
 		    <div class="starters">
 		    	{{#each starters}}
-		      	<div class="answer-row {{render}}">{{render_position position}}</div>
+		      	<div class="answer-row {{render}}" data-id={{player_id}}>{{render_position position}}</div>
 		      {{/each}}
 		    </div>
 		    <div class="answer-container bench">
