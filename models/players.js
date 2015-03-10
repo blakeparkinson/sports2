@@ -13,6 +13,7 @@ var endpoint = '';
 var parseString = require('xml2js').parseString;
 var players = [];
 var encryption = require('../encryption.js');
+var shortId = require('shortid');
 
 
 var returnPlayers = function (players, rb_team_id, res, league){
@@ -187,14 +188,20 @@ var sortNBA = function(players_object){
   new_playersarray = players_object.players;
   //only return active players to the client
     var actives = _.filter(new_playersarray, function(player){
+      appendPlayerShortId(player);
       return player.status == 'ACT';
     })
   new_playersobject = players_object;
   for (i=0; i<new_playersarray.length; i++){
+
     sorted = actives.sort(compareNBA);
     new_playersobject.players = sorted;
     return new_playersobject;
   }
+}
+
+function appendPlayerShortId(player){
+  return player.player_id = shortId.generate();
 }
 
 function compareNBA(a,b) {
@@ -251,6 +258,7 @@ var sortByPositions = function(league, starters){
       return order.indexOf(a.position) - order.indexOf(b.position);
     });
 }
+
 
 var formatPlayers = function(response, rb_team_id){
   playersarray = [];
