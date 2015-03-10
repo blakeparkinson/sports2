@@ -13,6 +13,7 @@ var endpoint = '';
 var parseString = require('xml2js').parseString;
 var players = [];
 var encryption = require('../encryption.js');
+var shortId = require('shortid');
 
 
 var returnPlayers = function (players, rb_team_id, res, league){
@@ -187,14 +188,20 @@ var sortNBA = function(players_object){
   new_playersarray = players_object.players;
   //only return active players to the client
     var actives = _.filter(new_playersarray, function(player){
+      appendPlayerShortId(player);
       return player.status == 'ACT';
     })
   new_playersobject = players_object;
   for (i=0; i<new_playersarray.length; i++){
+
     sorted = actives.sort(compareNBA);
     new_playersobject.players = sorted;
     return new_playersobject;
   }
+}
+
+function appendPlayerShortId(player){
+  return player.player_id = shortId.generate();
 }
 
 function compareNBA(a,b) {
@@ -227,29 +234,12 @@ function compareNFL(a,b) {
 
 var formatNBAPlayers = function(response, rb_team_id, team_name){
   var startersarray = response.players.slice(0,5);
-  sortByPositions('nba', startersarray);
   var bencharray = response.players.slice(5,response.players.length);
   var players = [];
   players.starters = startersarray;
   players.bench = bencharray;
   var team = formatPlayersDocument(rb_team_id, players, team_name);
   return team;
-}
-
-var sortByPositions = function(league, starters){
-    switch (league){
-      case 'nba':
-        var order = ['G', 'G-F', 'F-G', 'F', 'F-C', 'C-F', 'C'];
-      break;
-
-      //figure out the other leagues later
-      default:
-        return;
-
-    }
-    starters.sort(function(a,b){
-      return order.indexOf(a.position) - order.indexOf(b.position);
-    });
 }
 
 var formatPlayers = function(response, rb_team_id){
