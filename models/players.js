@@ -252,6 +252,7 @@ var sortByPositions = function(league, starters){
     });
 }
 
+
 var formatPlayers = function(response, rb_team_id){
   playersarray = [];
   for (i=0;i<response.players.length;i++){
