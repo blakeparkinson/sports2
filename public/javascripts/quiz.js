@@ -56,6 +56,8 @@ var startCounter = function(){
           setTimeout(startCounter, 1000);
         }
         else{
+          var input = team_container.find('#guess-box');
+          input.prop('readonly', true);
           // time is up, fill up the players and ship the score off to the BE
           for (var i=0; i < roster.length; i++){
             //populateTable takes in a player and maps it to the right spot, loop through and place them
