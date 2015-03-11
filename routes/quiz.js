@@ -30,4 +30,28 @@ router.get('/', function(req, res) {
 
   });
 
+
+router.get('/results', function(req, res) {
+  var quiz_id = req.query.id,
+    quiz_score = req.query.score;
+    db.open(function(err, db){
+      db.collection("quiz").update({_id: quiz_id},
+      {$set: {quiz_score: quiz_score}},
+      {upsert: true, multi:false}, function (err, upserted){
+        if (err){
+          console.log(err);
+        }
+        else {
+         res.json(upserted);
+        }
+      });
+    });
+});
+          
+
+
+
+
+
+
 module.exports = router;
