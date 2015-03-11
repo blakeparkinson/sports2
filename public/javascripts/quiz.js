@@ -60,8 +60,8 @@ var startCounter = function(){
           for (var i=0; i < roster.length; i++){
             //populateTable takes in a player and maps it to the right spot, loop through and place them
             populateTable(roster[i]);
-            uploadScore(correct);
           }
+          uploadScore(correct);
         }
       }
 
