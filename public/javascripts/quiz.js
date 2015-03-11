@@ -1,4 +1,4 @@
-    
+
 var starters,bench;
 if (typeof(starters) != undefined){
   starters = starters;
@@ -101,16 +101,17 @@ var checkForMatches = function(guess, input_field){
   _.each(roster, function(player, index){
     //check full name and just last name, also make sure the player has not been guessed already
     if ((guess == player.last_name.toLowerCase().trim() || guess == player.full_name.toLowerCase().trim()) && !player.guessed){
-      player.guessed = true;
       correct++;
       populateTable(player);
       input_field.val('');
       team_container.find('.number').html(correct);
+      player.guessed = true;
     }
   })
 }
 
 var populateTable = function(player){
+  if (player.guessed) return;
   if (player.starter){
     var field = answer_container.find("[data-id='" + player.player_id + "']");
   }
