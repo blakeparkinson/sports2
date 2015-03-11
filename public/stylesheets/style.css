@@ -514,3 +514,12 @@ table tr th:last-child {
   border: 1px solid #D3D3D3
 ;
 }
+
+.button-section{
+    text-align: center;
+    padding-top: 10px;
+}
+
+.button-section .quit-btn{
+  padding: 6px 30px;
+}
