@@ -56,6 +56,7 @@ var startCounter = function(){
           setTimeout(startCounter, 1000);
         }
         else{
+          // time is up, fill up the players and ship the score off to the BE
           for (var i=0; i < roster.length; i++){
             populateTable(roster[i]);
             uploadScore(correct);
@@ -66,6 +67,7 @@ var startCounter = function(){
 }
 
 var uploadScore = function(correct_answers){
+  //get the quiz_id from the url
   var query_string = QueryString();
   var data = {
     quiz_id: query_string.id,
