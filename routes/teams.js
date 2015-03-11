@@ -43,7 +43,7 @@ var returnItem = function (item, res){
 
 var createQuiz = function(rb_team_id, league, api_team_id, quiz_name, res, callback){
   db.open(function(err, db){
-    db.collection("quiz").insert({_id:shortId.generate(), rb_team_id: rb_team_id, created_at: new Date().toISOString().slice(0, 19).replace('T', ' '), league: league, api_team_id: api_team_id, quiz_name: quiz_name}, function (err, insert){
+    db.collection("quiz").insert({_id:shortId.generate(), rb_team_id: rb_team_id, created_at: new Date().toISOString().slice(0, 19).replace('T', ' '), league: league, api_team_id: api_team_id, quiz_name: quiz_name, quiz_score: "null"}, function (err, insert){
         if (err){
           console.log("new quiz insert failed");
         }
