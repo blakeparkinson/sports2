@@ -18,6 +18,7 @@ else{
 
 var roster = starters.concat(bench),
     correct = 0,
+    team_container = $('.team-container'),
     answer_container = $('.answer-container');
 
 
@@ -48,10 +49,39 @@ var startCounter = function(){
 
         var dt2 = new Date(dt.valueOf() - 1000),
             temp = dt2.toTimeString().split(" "),
-            ts = temp[0].split(":");
-        clock.html(ts[1]+":"+ts[2]);
-        setTimeout(startCounter, 1000);
+            ts = temp[0].split(":"),
+            time = ts[1]+":"+ts[2];
+        clock.html(time);
+        if (time != '00:00'){
+          setTimeout(startCounter, 1000);
+        }
+        else{
+          for (var i=0; i < roster.length; i++){
+            populateTable(roster[i]);
+            uploadScore(correct);
+          }
+        }
       }
+
+}
+
+var uploadScore = function(correct_answers){
+  var query_string = QueryString();
+  var data = {
+    quiz_id: query_string.id,
+    quiz_score: correct_answers
+  };
+
+
+  $.ajax({
+      url: 'quiz/results',
+      data: data,
+      type: 'post',
+      dataType: 'json',
+        success: function(response){
+          alert(response)
+        }
+    });
 
 }
   
@@ -72,7 +102,7 @@ var checkForMatches = function(guess, input_field){
       correct++;
       populateTable(player);
       input_field.val('');
-
+      team_container.find('.number').html(correct);
     }
   })
 }
@@ -184,6 +214,29 @@ var findCenter = function() {
   	$(".guess-box").val("");    	
 	}
 }
+
+var QueryString = function () {
+  // This function is anonymous, is executed immediately and 
+  // the return value is assigned to QueryString!
+  var query_string = {};
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i=0;i<vars.length;i++) {
+    var pair = vars[i].split("=");
+        // If first entry with this name
+    if (typeof query_string[pair[0]] === "undefined") {
+      query_string[pair[0]] = pair[1];
+        // If second entry with this name
+    } else if (typeof query_string[pair[0]] === "string") {
+      var arr = [ query_string[pair[0]], pair[1] ];
+      query_string[pair[0]] = arr;
+        // If third or later entry with this name
+    } else {
+      query_string[pair[0]].push(pair[1]);
+    }
+  } 
+    return query_string;
+} 
 
    
 
