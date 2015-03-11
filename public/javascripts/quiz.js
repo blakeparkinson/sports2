@@ -79,7 +79,7 @@ var uploadScore = function(correct_answers){
   $.ajax({
       url: 'quiz/results',
       data: data,
-      type: 'post',
+      type: 'get',
       dataType: 'json',
         success: function(response){
           alert(response)
