@@ -49,13 +49,13 @@ var startCounter = function(){
           dt.setMinutes(ss[0]);
           dt.setSeconds(ss[1]);
 
-        var dt2 = new Date(dt.valueOf() - 1000),
-            temp = dt2.toTimeString().split(" "),
-            ts = temp[0].split(":"),
-            time = ts[1]+":"+ts[2];
-        clock.html(time);
-        if (time != '00:00'){
-          setTimeout(startCounter, 1000);
+          if (time != '00:00'){
+            var dt2 = new Date(dt.valueOf() - 1000),
+                temp = dt2.toTimeString().split(" "),
+                ts = temp[0].split(":"),
+                time = ts[1]+":"+ts[2];
+                clock.html(time);
+                setTimeout(startCounter, 1000);
         }
         else{
           var input = team_container.find('#guess-box');
@@ -220,6 +220,7 @@ var findCenter = function() {
 }
 
 var quit = function(){
+  team_container.find('.clock').text('00:00');
   for (var i=0; i < roster.length; i++){
     //populateTable takes in a player and maps it to the right spot, loop through and place them
     populateTable(roster[i]);
