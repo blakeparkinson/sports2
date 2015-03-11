@@ -32,17 +32,18 @@ router.get('/', function(req, res) {
 
 
 router.get('/results', function(req, res) {
-  var quiz_id = req.query.id,
-    quiz_score = req.query.score;
+  var quiz_id = req.query.quiz_id,
+    quiz_score = req.query.quiz_score;
     db.open(function(err, db){
       db.collection("quiz").update({_id: quiz_id},
       {$set: {quiz_score: quiz_score}},
       {upsert: true, multi:false}, function (err, upserted){
         if (err){
           console.log(err);
+          res.json({success: false});
         }
         else {
-         res.json(upserted);
+          res.json({success: true});
         }
       });
     });
