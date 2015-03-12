@@ -37,6 +37,7 @@ router.get('/', function(req, res) {
 				counts = temparray[i].counts;
 				team_info.counts = counts;
         if (temparray.length - i == 1){
+          //don't add a comma to the last team because that's bad english
           team_info.comma = '';
         }
         else{
