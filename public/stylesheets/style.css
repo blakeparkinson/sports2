@@ -523,8 +523,3 @@ table tr th:last-child {
 .button-section .quit-btn{
   padding: 6px 30px;
 }
-
-.trending-quiz{
-  color: #009AB9;
-  cursor: pointer;
-}
