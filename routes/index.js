@@ -36,7 +36,6 @@ router.get('/', function(req, res) {
 				team_info = temparray[i]._id;
 				counts = temparray[i].counts;
 				team_info.counts = counts;
-<<<<<<< HEAD
         if (temparray.length - i == 1){
           //don't add a comma to the last team because that's bad english
           team_info.comma = '';
@@ -44,8 +43,6 @@ router.get('/', function(req, res) {
         else{
           team_info.comma = ','
         }
-=======
->>>>>>> parent of c85b272... Fix for quiz_name, and sending popular quizzes to the FE
 				endresult.push(team_info);
 			}
 		}

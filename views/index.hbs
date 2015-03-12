@@ -6,10 +6,12 @@
         <div class="btn btn-primary quiz-btn">Take Quiz</div>
         <div>
           <br />
-          Or challenge yourself or a friend to: <a href="#">Top PPG this season (NBA)</a>, <a href="#">Most TDs by tight ends (NFL)</a>, <a href="#">Most shut-outs by goalkeeper (EPL)</a>
+          Or try one of our trending quizzes:
+          {{#each trending_quiz}}
+            <span class="trending-quiz" data-id={{rb_team_id}}>{{quiz_name}}{{comma}}</span>
+          {{/each}} 
           <br />
         </div>
       </div>
     </div>
-
   </body>
