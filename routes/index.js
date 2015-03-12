@@ -15,12 +15,12 @@ router.get('/', function(req, res) {
 	[{ $project: {
 		_id: 0,
 		rb_team_id: 1,
-		team_name: 1,
+		quiz_name: 1,
 		Created_in_timeframe: {$cond: [{$lt: ['$created_at', quizCutoffDate]}, 1, 0]}
 		}
 	},
 	{ $group : {
-		_id : {rb_team_id: "$rb_team_id", team_name: "$team_name"}, counts : {$sum: '$Created_in_timeframe'} 
+		_id : {rb_team_id: "$rb_team_id", quiz_name: "$quiz_name"}, counts : {$sum: '$Created_in_timeframe'} 
 		}
 	},
 	{ $sort: {
@@ -38,7 +38,7 @@ router.get('/', function(req, res) {
 				team_info.counts = counts;
         if (temparray.length - i == 1){
           //don't add a comma to the last team because that's bad english
-          team_info.comma = '';
+          team_info.comma = '.';
         }
         else{
           team_info.comma = ','
@@ -46,9 +46,12 @@ router.get('/', function(req, res) {
 				endresult.push(team_info);
 			}
 		}
-		return endresult; 
 	});
-	res.render('index', {session:req.session});
+	res.render('index', 
+  {
+    session:req.session,
+    trending_quiz: endresult
+  });
 });
 
 
