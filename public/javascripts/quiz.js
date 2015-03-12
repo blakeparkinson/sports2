@@ -110,15 +110,17 @@ var checkForMatches = function(guess, input_field){
   })
 }
 
-var populateTable = function(player){
+var populateTable = function(player, class_color){
   if (player.guessed) return;
+
+  var class_name = class_color !== undefined ? class_color : 'rb-green';
   if (player.starter){
     var field = answer_container.find("[data-id='" + player.player_id + "']");
   }
   else{
     var field = answer_container.find('.bench .answer-row.empty').first();
   }
-  field.html(player.full_name).addClass('rb-green').removeClass('empty');
+  field.html(player.full_name).addClass(class_name).removeClass('empty');
 
 }
 
@@ -126,7 +128,8 @@ var quit = function(){
   team_container.find('.clock').text('00:00');
   for (var i=0; i < roster.length; i++){
     //populateTable takes in a player and maps it to the right spot, loop through and place them
-    populateTable(roster[i]);
+    var class_color = 'rb-red';
+    populateTable(roster[i], class_color);
   }
   uploadScore(correct);
 }
