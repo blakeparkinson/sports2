@@ -322,7 +322,6 @@ ul {
 .social-sidebar .share-element{
     position: relative;
     float: right;
-    padding-right: 5px;
 }
 .social-sidebar #email{
     background-image: url(../images/blitz-social-sprite.png);
