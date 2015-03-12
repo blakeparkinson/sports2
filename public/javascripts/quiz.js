@@ -82,7 +82,7 @@ var uploadScore = function(correct_answers){
       type: 'get',
       dataType: 'json',
         success: function(response){
-          alert(response);
+          console.log(response);
         }
     });
 
