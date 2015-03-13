@@ -322,6 +322,7 @@ ul {
 .social-sidebar .share-element{
     position: relative;
     float: right;
+    padding-right: 5px;
 }
 .social-sidebar #email{
     background-image: url(../images/blitz-social-sprite.png);
@@ -522,4 +523,9 @@ table tr th:last-child {
 
 .button-section .quit-btn{
   padding: 6px 30px;
+}
+
+.trending-quiz{
+  color: #009AB9;
+  cursor: pointer;
 }
