@@ -18,6 +18,7 @@ else{
 
 var roster = starters.concat(bench),
     correct = 0,
+    stop_counter = false;
     team_container = $('.team-container'),
     answer_container = $('.answer-container');
 
@@ -33,7 +34,7 @@ $(document).ready(function() {
 
 	$('body').on('keyup', '#guess-box', fetchGuess);
 	$("#guess-box").focus();
-  $('body').on('click', '.quit-btn', quit);
+  $('body').on('click', '.quit-btn', endQuiz);
 
 
   startCounter();
@@ -49,19 +50,21 @@ var startCounter = function(){
           dt.setMinutes(ss[0]);
           dt.setSeconds(ss[1]);
 
-          if (time != '00:00'){
-            var dt2 = new Date(dt.valueOf() - 1000),
-                temp = dt2.toTimeString().split(" "),
-                ts = temp[0].split(":"),
-                time = ts[1]+":"+ts[2];
-                clock.html(time);
-                setTimeout(startCounter, 1000);
+        if (time != '00:00'){
+          var dt2 = new Date(dt.valueOf() - 1000),
+              temp = dt2.toTimeString().split(" "),
+              ts = temp[0].split(":"),
+              time = ts[1]+":"+ts[2];
+              clock.html(time);
+              setTimeout(startCounter, 1000);
         }
         else{
           var input = team_container.find('#guess-box');
           input.prop('readonly', true);
           // time is up, fill up the players and ship the score off to the BE
-          quit();
+          if (!stop_counter){
+            endQuiz();
+          }
         }
       }
 
@@ -106,6 +109,10 @@ var checkForMatches = function(guess, input_field){
       input_field.val('');
       team_container.find('.number').html(correct);
       player.guessed = true;
+      if (correct == roster.length){
+        //user has finished the quiz and answered everthing
+        endQuiz(event,true);
+      }
     }
   })
 }
@@ -122,12 +129,17 @@ var populateTable = function(player){
 
 }
 
-var quit = function(){
+var endQuiz = function(e, skip_mapping){
+  stop_counter = true;
   team_container.find('.clock').text('00:00');
-  for (var i=0; i < roster.length; i++){
-    //populateTable takes in a player and maps it to the right spot, loop through and place them
-    populateTable(roster[i]);
+  if (!skip_mapping){
+    for (var i=0; i < roster.length; i++){
+      //populateTable takes in a player and maps it to the right spot, loop through and place them
+      populateTable(roster[i]);
+    }
   }
+  //remove the quit button
+  team_container.find('.quit-btn').remove();
   uploadScore(correct);
 }
 
