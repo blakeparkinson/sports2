@@ -47,10 +47,14 @@ router.get('/', function(req, res) {
 			}
 		}
 	});
+  var trending_quiz = {};
+  if (typeof endresult !== 'undefined' && endresult){
+    trending_quiz = endresult
+  }
 	res.render('index', 
   {
     session:req.session,
-    trending_quiz: endresult
+    trending_quiz: trending_quiz
   });
 });
 
