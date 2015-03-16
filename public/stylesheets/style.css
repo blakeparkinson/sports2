@@ -430,6 +430,10 @@ table tr th:last-child {
     color: #000000;
 }
 
+.rb-red{
+    color: rgb(231, 85, 22);
+}
+
 .standard-nba-container{
     background: url(../images/stadiums/nba_stadiums/NBA-kings-stadium.jpg) no-repeat scroll center top/cover transparent;
     padding: 0;
