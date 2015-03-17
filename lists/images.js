@@ -18,7 +18,7 @@ var images = [
         "usat_id": "BOS"
 
       },
-      {
+      
         "team_id": "",
         "team_name": "Brooklyn Nets",
         "usat_id": "BRK"
