@@ -1,3 +1,4 @@
+var images_list = require('../lists/images2.js');
 var common = require('../routes/common')
 var config = common.config();
 var express = require('express');
@@ -75,7 +76,7 @@ var formatEvenOdds = function(players, is_starter){
 
 // Check the db first. If it's there and has been added in the last 24 hours, use it. 
 // Otherwise, go get new data from the API and replace/add the database listing
-var fetchPlayers = function(team_id, rb_team_id, league, res, req, callback){ 
+var fetchPlayers = function(team_id, rb_team_id, league, usat_id, res, req, callback){ 
   var players;
   db.collection('players').find({team_id : rb_team_id}).toArray(function (err, items){
     if (items.length > 0){ // data in Mongo
@@ -85,7 +86,7 @@ var fetchPlayers = function(team_id, rb_team_id, league, res, req, callback){
       var datenow = new Date();
       var datecutoff = datenow.getTime() - dataAgeCutOff;
       if (datecutoff > itemdate){   //data is old so call API
-         players = fetchPlayersFromApi(team_id, rb_team_id, league, res, callback)
+         players = fetchPlayersFromApi(team_id, rb_team_id, league, usat_id, res, callback)
       }
       else {  // data is fine so just return it
         players = item;
@@ -93,13 +94,13 @@ var fetchPlayers = function(team_id, rb_team_id, league, res, req, callback){
       }
     }
     else {  // data not already in Mongo
-       players = fetchPlayersFromApi(team_id, rb_team_id, league, res, req, callback)
+       players = fetchPlayersFromApi(team_id, rb_team_id, league, usat_id, res, req, callback)
     }
   });
 }
 
 
-var fetchPlayersFromApi = function(team_id, rb_team_id, league, res, req, callback){
+var fetchPlayersFromApi = function(team_id, rb_team_id, league, usat_id, res, req, callback){
 var json_response = '';
 var players = {};
 
@@ -125,6 +126,14 @@ switch (league){
         switch (league){
           case 'nba':
             json_response = JSON.parse(body);
+
+            // find the image from usat and insert into players array
+            for (a=0;a<Object.keys(json_response.players).length;a++){
+              var player_name = json_response.players[a].first_name.toLowerCase()+'-'+json_response.players[a].last_name.toLowerCase()
+              endpoint = 'http://www.gannett-cdn.com/media/SMG/sports_headshots/'+league+'/player/2014/'+usat_id+'/120x120/'+player_name+'.jpg';
+              json_response.players[a].avatar_url = endpoint;
+            } 
+                
             //for nba we need to make a 2nd api request to fetch players on the active roster
             request('https://api.sportsdatallc.org/nba-t3/teams/'+encryption.decrypt(team_id)+'/profile.json?api_key=' +config.nba_key, function (error, response, roster) {
                   if (!error && response.statusCode == 200) {
