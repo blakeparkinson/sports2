@@ -67,7 +67,7 @@ switch (league){
                 teams = formatSoccerTeams(response.body);
                 break;
 	           }
-        mongoInsert(teams, league);
+       mongoInsert(teams, league);
       }
       else{
         console.log('somethings really terrible happened');
