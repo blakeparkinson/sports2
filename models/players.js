@@ -1,3 +1,4 @@
+var images_list = require('../lists/images.js');
 var common = require('../routes/common')
 var config = common.config();
 var express = require('express');
@@ -125,6 +126,22 @@ switch (league){
         switch (league){
           case 'nba':
             json_response = JSON.parse(body);
+            
+            // find the image from usat and insert into players array
+            for (b=0;b<images_list.images.length;b++){
+              league_temp = images_list.images[b];
+              for (c=0;c<Object.keys(league_temp.teams).length;c++){
+                if (rb_team_id == league_temp.teams[c].team_id){
+                  var team_initials = league_temp.teams[c].usat_id;
+                }
+              }
+            }
+            for (a=0;a<Object.keys(json_response.players).length;a++){
+              var player_name = json_response.players[a].first_name.toLowerCase()+'-'+json_response.players[a].last_name.toLowerCase()
+              endpoint = 'http://www.gannett-cdn.com/media/SMG/sports_headshots/'+league+'/player/2014/'+team_initials+'/120x120/'+player_name+'.jpg';
+              json_response.players[a].avatar_url = endpoint;
+            } 
+                
             //for nba we need to make a 2nd api request to fetch players on the active roster
             request('https://api.sportsdatallc.org/nba-t3/teams/'+encryption.decrypt(team_id)+'/profile.json?api_key=' +config.nba_key, function (error, response, roster) {
                   if (!error && response.statusCode == 200) {
