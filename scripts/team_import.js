@@ -2,7 +2,7 @@
 //then typing "node team_import.js [league you want to import]"
 // for example to import nba, you do "node team_import.js nba"
 
-
+var images_list = require('../lists/images2.js');
 var common = require('../routes/common')
 var config = common.config();
 
@@ -54,9 +54,11 @@ switch (league){
       if (!error && response.statusCode == 200) {
             switch (league){
 	        		case 'nba':
+                teams = formatNbaTeams(response.body);
+                break;
 	            case 'nfl':
               case 'nhl':
-	            	teams = formatNbaAndNflTeams(response.body);
+	            	teams = formatNflTeams(response.body);
 	            	break;
               case 'mlb':
                 teaams = formatMlbTeams(response.body);
@@ -65,7 +67,7 @@ switch (league){
                 teams = formatSoccerTeams(response.body);
                 break;
 	           }
-       mongoInsert(teams, league);
+        mongoInsert(teams, league);
       }
       else{
         console.log('somethings really terrible happened');
@@ -83,7 +85,7 @@ switch (league){
           }
           else{
             //really the only 4 key:value pairs we care about for now
-            col.insert({_id:shortId.generate(), team_id:encryption.encrypt(teams[i].id), name:teams[i].name, market:teams[i].market, league:league}, function() {});
+            col.insert({_id:shortId.generate(), team_id:encryption.encrypt(teams[i].id), name:teams[i].name, market:teams[i].market, league:league, usat_id: teams[i].usat_id}, function() {});
           }
         }
       })
@@ -91,7 +93,32 @@ switch (league){
 
 }
 
-var formatNbaAndNflTeams = function(response){
+
+var formatNbaTeams = function(response){
+  var  hierarchy_response = JSON.parse(response);
+  for (i=0;i<hierarchy_response.conferences.length;i++){
+    for (j=0;j<hierarchy_response.conferences[i].divisions.length;j++){
+      for(k=0; k< hierarchy_response.conferences[i].divisions[j].teams.length; k++){
+        var team_item = hierarchy_response.conferences[i].divisions[j].teams[k];
+        for (b=0;b<images_list.images.length;b++){
+          league_temp = images_list.images[b];
+          for (c=0;c<Object.keys(league_temp.teams).length;c++){
+            team_name = team_item.market+' '+team_item.name;
+            if (team_name == league_temp.teams[c].team_name){
+              var team_initials = league_temp.teams[c].usat_id;
+              team_item.usat_id = team_initials;
+            }
+          }
+        }
+        teams.push(team_item);
+      }
+    }   
+  }
+return teams
+}
+
+
+var formatNflTeams = function(response){
   var  hierarchy_response = JSON.parse(response);
   for (i=0;i<hierarchy_response.conferences.length;i++){
     for (j=0;j<hierarchy_response.conferences[i].divisions.length;j++){

@@ -1,4 +1,4 @@
-var images_list = require('../lists/images.js');
+var images_list = require('../lists/images2.js');
 var common = require('../routes/common')
 var config = common.config();
 var express = require('express');
@@ -126,7 +126,7 @@ switch (league){
         switch (league){
           case 'nba':
             json_response = JSON.parse(body);
-            
+
             // find the image from usat and insert into players array
             for (b=0;b<images_list.images.length;b++){
               league_temp = images_list.images[b];
