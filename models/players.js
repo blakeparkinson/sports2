@@ -76,7 +76,7 @@ var formatEvenOdds = function(players, is_starter){
 
 // Check the db first. If it's there and has been added in the last 24 hours, use it. 
 // Otherwise, go get new data from the API and replace/add the database listing
-var fetchPlayers = function(team_id, rb_team_id, league, res, req, callback){ 
+var fetchPlayers = function(team_id, rb_team_id, league, usat_id, res, req, callback){ 
   var players;
   db.collection('players').find({team_id : rb_team_id}).toArray(function (err, items){
     if (items.length > 0){ // data in Mongo
@@ -86,7 +86,7 @@ var fetchPlayers = function(team_id, rb_team_id, league, res, req, callback){
       var datenow = new Date();
       var datecutoff = datenow.getTime() - dataAgeCutOff;
       if (datecutoff > itemdate){   //data is old so call API
-         players = fetchPlayersFromApi(team_id, rb_team_id, league, res, callback)
+         players = fetchPlayersFromApi(team_id, rb_team_id, league, usat_id, res, callback)
       }
       else {  // data is fine so just return it
         players = item;
@@ -94,13 +94,13 @@ var fetchPlayers = function(team_id, rb_team_id, league, res, req, callback){
       }
     }
     else {  // data not already in Mongo
-       players = fetchPlayersFromApi(team_id, rb_team_id, league, res, req, callback)
+       players = fetchPlayersFromApi(team_id, rb_team_id, league, usat_id, res, req, callback)
     }
   });
 }
 
 
-var fetchPlayersFromApi = function(team_id, rb_team_id, league, res, req, callback){
+var fetchPlayersFromApi = function(team_id, rb_team_id, league, usat_id, res, req, callback){
 var json_response = '';
 var players = {};
 
@@ -128,17 +128,9 @@ switch (league){
             json_response = JSON.parse(body);
 
             // find the image from usat and insert into players array
-            for (b=0;b<images_list.images.length;b++){
-              league_temp = images_list.images[b];
-              for (c=0;c<Object.keys(league_temp.teams).length;c++){
-                if (rb_team_id == league_temp.teams[c].team_id){
-                  var team_initials = league_temp.teams[c].usat_id;
-                }
-              }
-            }
             for (a=0;a<Object.keys(json_response.players).length;a++){
               var player_name = json_response.players[a].first_name.toLowerCase()+'-'+json_response.players[a].last_name.toLowerCase()
-              endpoint = 'http://www.gannett-cdn.com/media/SMG/sports_headshots/'+league+'/player/2014/'+team_initials+'/120x120/'+player_name+'.jpg';
+              endpoint = 'http://www.gannett-cdn.com/media/SMG/sports_headshots/'+league+'/player/2014/'+usat_id+'/120x120/'+player_name+'.jpg';
               json_response.players[a].avatar_url = endpoint;
             } 
                 
