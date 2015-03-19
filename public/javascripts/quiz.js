@@ -1,5 +1,9 @@
+var starters,bench, roster,
+    correct = 0,
+    stop_counter = false;
+    team_container = $('.team-container'),
+    answer_container = $('.answer-container');
 
-var starters,bench;
 if (typeof(starters) != undefined){
   starters = starters;
 }
@@ -16,20 +20,18 @@ else{
   bench = [];
 }
 
-var roster = starters.concat(bench),
-    correct = 0,
-    stop_counter = false;
-    team_container = $('.team-container'),
-    answer_container = $('.answer-container');
+console.log(bench); console.log(starters);
+if (typeof bench != "undefined" && typeof starters != "undefined"){
+  roster = starters.concat(bench);
+}    
+
+else{
+  roster = [];
+}
 
 
 // DOM Ready =============================================================
 $(document).ready(function() {
-
-        console.log(bench);
-        console.log(starters);
-
-
   
 
 	$('body').on('keyup', '#guess-box', fetchGuess);

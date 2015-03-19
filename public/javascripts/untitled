@@ -1,9 +1,0 @@
-    
-// DOM Ready =============================================================
-$(document).ready(function() {
-
-    var players = players || {};
-
-    //client now has server-side players
-    console.log(players);
-});
