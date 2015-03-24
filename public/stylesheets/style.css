@@ -561,6 +561,10 @@ THE TEAM
 /* team quote slider */
 #the-team .quote-slider { height:173px; }
 #the-team .quote-slider .slide-text span.slide-fact { line-height:24px; color:#252525; font-size:18px; }
+.teampage-images {
+  border-radius:75px;
+  border:2px solid #e2e2e2;
+}
 /* 
 -------------------------------------------------------------
 THE OTHER GUYS
