@@ -26,7 +26,7 @@ var download = function(uri, filename, player, items, player_type, iteration){
     }
     else{
         var team_id = items.team_id;
-        avatar_url[player_type+"."+ iteration +".avatar_url"] = null;
+        avatar_url[player_type+"."+ iteration +".avatar_url"] = '../images/headshots/untitled.jpg';
     }
     db.collection('players').findAndModify({
             query: {team_id: team_id},
