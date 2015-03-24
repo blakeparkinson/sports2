@@ -11,6 +11,7 @@ var routes = require('./routes/index');
 var teams = require('./routes/teams');
 var quiz = require('./routes/quiz');
 var about = require('./routes/about');
+var ourteam = require('./routes/ourteam');
 var common = require('./routes/common');
 var config = common.config();
 
@@ -48,6 +49,7 @@ app.use(passport.session());
 app.use('/', routes);
 app.use('/teams', teams);
 app.use('/about', about);
+app.use('/ourteam', ourteam);
 app.use('/auth', auth);
 app.use('/quiz', quiz);
 
