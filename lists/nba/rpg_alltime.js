@@ -1,4 +1,9 @@
 var topRPG = [
+  list_id: 6,
+  league: "NBA",
+  keywords: "top rebounds rebounding",
+  description: "Top rebounds per game all time",
+  player:
   {
     "rank":1,
     "last_name":"Chamberlain",

@@ -1,4 +1,9 @@
 var topAPG = [
+  list_id: 2,
+  league: "NBA",
+  keywords: "top apg nba assists passing",
+  description: "Top APG averages all time",
+  player: 
   {
     "rank":1,
     "last_name":"Johnson",

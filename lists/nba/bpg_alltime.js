@@ -1,4 +1,9 @@
 var topBPG = [
+  list_id: 3,
+  league: "NBA",
+  keywords: "top bpg nba blocks",
+  description: "Top blocks per game averages all time",
+  player: 
   {
     "rank":1,
     "last_name":"Eaton",

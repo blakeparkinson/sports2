@@ -1,4 +1,9 @@
 var fieldGoalPercentage = [
+  list_id: 4,
+  league: "NBA",
+  keywords: "top field goal percentage nba shooting scoring",
+  description: "Top field goal percentage all time",
+  player:
   {
     "rank":1,
     "last_name":"Gilmore",
