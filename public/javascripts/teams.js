@@ -27,7 +27,9 @@ $(document).ready(function() {
                                 market: item.market,
                                 name: item.name,
                                 team_id: item.team_id,
-                                league: item.league
+                                league: item.league,
+                                list_id: item.list_id,
+                                description: item.description
                             });
                         });
                         return { results: newData };
@@ -48,13 +50,26 @@ $(document).ready(function() {
 
 function formatResult(data){
 
-    var render = '<div id ="team-market">'+data.market+ ' ' +data.name+' </div>';
+    if (data.list_id){
+        var render = '<div id ="team-market">'+data.description+' </div>';
+    }
+    else{
+
+        var render = '<div id ="team-market">'+data.market+ ' ' +data.name+' </div>';
+    }
 
     return render
     }
 
 function formatSelection(data){
-    var render = '<p class="selected-team" data-team="'+data.market+ ' ' +data.name+'" data-league= "'+data.league+'" data-team-id="'+ data.team_id + '"data-id="'+ data.id + '"> ' +data.market+ ' ' +data.name+'</p>';
+    console.log(data);
+    if (data.list_id){
+        var render = '<p class="selected-team"  data-league= "'+data.league+'" data-list-id="'+ data.list_id + '"data-id="'+ data.id + '"> ' +data.description+'</p>';
+    }
+
+    else{
+        var render = '<p class="selected-team" data-team="'+data.market+ ' ' +data.name+'" data-league= "'+data.league+'" data-team-id="'+ data.team_id + '"data-id="'+ data.id + '"> ' +data.market+ ' ' +data.name+'</p>';
+    }
     return render;
 }
 
