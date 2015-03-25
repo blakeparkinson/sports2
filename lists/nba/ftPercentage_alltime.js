@@ -1,4 +1,9 @@
 var ftPercentage = [
+  list_id: 5,
+  league: "NBA",
+  keywords: "top free throw freethrow percentage nba shooting scoring",
+  description: "Top free throw percentage all time",
+  player:
   {
     "rank":1,
     "last_name":"Nash",

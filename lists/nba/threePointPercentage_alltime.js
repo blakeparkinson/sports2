@@ -1,4 +1,9 @@
 var threePointPercentage = [
+  list_id: 8,
+  league: "NBA",
+  keywords: "top three point threepoint shooting scoring",
+  description: "Top three point percentage all time",
+  player:
   {
     "rank":1,
     "last_name":"Kerr",
