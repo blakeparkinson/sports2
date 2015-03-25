@@ -14,8 +14,9 @@
 	    <div class="answer-container">
 		    <div class="starters">
 		    	{{#each starters}}
-		    	<img class="circle-pic" src={{avatar_url}}>
-		      	<div class="answer-row {{render}}" data-id={{player_id}}>{{render_position position}}</div>
+		      	<div class="answer-row {{render}}" data-id={{player_id}}>
+		      		<p class="answered-player">{{render_position position}}</p>
+		      	</div>
 		      {{/each}}
 		    </div>
 		    <div class="answer-container bench">

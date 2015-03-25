@@ -161,6 +161,8 @@ ul {
 
 .starters .answer-row {
   padding: 10px 12px;
+  height:45px;
+  line-height: 45px;
 }
 
 .bench .answer-row {
@@ -188,6 +190,7 @@ ul {
 
 .answer-container .starters{
   border-bottom: 1px solid #ccc;
+  padding-bottom: 15px;
 }
 
 @media screen and (max-width: 780px) {
@@ -432,6 +435,16 @@ table tr th:last-child {
 
 .rb-red{
     color: rgb(231, 85, 22);
+}
+
+.circle-pic{
+  height: 32px;
+  border-radius: 30px;
+  display: inline-block;
+}
+
+.answer-row .answered-player{
+  display: inline-block;
 }
 
 .standard-nba-container{

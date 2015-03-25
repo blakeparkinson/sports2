@@ -125,11 +125,15 @@ var populateTable = function(player, class_color){
   var class_name = class_color !== undefined ? class_color : 'rb-green';
   if (player.starter){
     var field = answer_container.find("[data-id='" + player.player_id + "']");
+    var img_html =  '<img class="circle-pic" src='+player.avatar_url+'>';
+
+    field.prepend(img_html);
   }
   else{
     var field = answer_container.find('.bench .answer-row.empty').first();
   }
-  field.html(player.full_name).addClass(class_name).removeClass('empty');
+  field.addClass(class_name).removeClass('empty');
+  field.find('.answered-player').html(player.full_name);
 
 }
 
