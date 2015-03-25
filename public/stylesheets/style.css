@@ -690,7 +690,7 @@ DRIBBBLE FEED
 -------------------------------------------------------------
 POP UP
 */
-.modal { position:absolute; top:0px; left:0px; z-index:450; background-image:url(../img/modal-blacktrans.png); background-repeat:repeat; display:none; }
+.modal { position:absolute; top:0px; left:0px; z-index:450; background-repeat:repeat; display:none; }
 .modal-main { position:relative; width:1100px; margin:auto; box-shadow:0px 0px 10px rgba(0,0,0,0.3); }
 .modal-content { padding:40px; }
 .modal-video { width:1100px; height:619px; margin-bottom:-5px; }
