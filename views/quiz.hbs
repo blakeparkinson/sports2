@@ -1,32 +1,33 @@
-	<div class="standard-{{league}}-container">  
-	  <div class="team-container">
-	  	<p class="team-name">{{team_name}}</p>
-	  	<div class="clock">{{clock}}</div>
-	  	<div class="name-point-container">
-		  	<div class="form-group player-name">
-	         <input type="text" class="form-control" id="guess-box" placeholder="Enter Player Name">
-	      </div>
-	      <div class="point-container rb-green">
-	      	<p class="number">0</p>
-	      	<p class="points">points</p>
-	      </div>
-	    </div>
-	    <div class="answer-container">
-		    <div class="starters">
-		    	{{#each starters}}
-		    	<img class="circle-pic" src={{avatar_url}}>
-		      	<div class="answer-row {{render}}" data-id={{player_id}}>{{render_position position}}</div>
-		      {{/each}}
-		    </div>
-		    <div class="answer-container bench">
-		    	{{#each bench}}
-		    	  <div class="answer-row {{render}} empty">Bench {{inc @index}}</div>
-		    	{{/each}}
-		    </div>
-		  </div>
-		  <div class="button-section">
-		  	<div class="btn btn-primary quit-btn">Give Up</div>
-			</div>
+  <div class="standard-{{league}}-container">  
+    <div class="team-container">
+      <p class="team-name">{{team_name}}</p>
+      <div class="clock">{{clock}}</div>
+      <div class="name-point-container">
+        <div class="form-group player-name">
+           <input type="text" class="form-control" id="guess-box" placeholder="Enter Player Name">
+        </div>
+        <div class="point-container rb-green">
+          <p class="number">0</p>
+          <p class="points">points</p>
+        </div>
+      </div>
+      <div class="answer-container">
+        <div class="starters">
+          {{#each starters}}
+            <div class="answer-row {{render}}" data-id={{player_id}}>
+              <p class="answered-player">{{render_position position}}</p>
+            </div>
+          {{/each}}
+        </div>
+        <div class="answer-container bench">
+          {{#each bench}}
+            <div class="answer-row {{render}} empty">Bench {{inc @index}}</div>
+          {{/each}}
+        </div>
+      </div>
+      <div class="button-section">
+        <div class="btn btn-primary quit-btn">Give Up</div>
+      </div>
 
 
 {{#ifCond league 'nba'}}
@@ -48,13 +49,13 @@
 {{#ifCond league 'mlb'}}
     {{> mlb }} 
 {{/ifCond}}
-	</div>
+  </div>
 
 
 
 
 <script type='text/javascript'>
     var starters = {{{json_stringify starters}}},
-    		bench = {{{json_stringify bench}}},
-    		league = '{{league}}';
+        bench = {{{json_stringify bench}}},
+        league = '{{league}}';
  </script>
