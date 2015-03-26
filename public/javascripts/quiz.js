@@ -128,12 +128,13 @@ var populateTable = function(player, class_color){
     var img_html =  '<img class="circle-pic" src='+player.avatar_url+'>';
 
     field.prepend(img_html);
+    field.find('.answered-player').html(player.full_name);
   }
   else{
     var field = answer_container.find('.bench .answer-row.empty').first();
+    field.html(player.full_name);
   }
   field.addClass(class_name).removeClass('empty');
-  field.find('.answered-player').html(player.full_name);
 
 }
 
