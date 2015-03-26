@@ -32,10 +32,16 @@ router.get('/quiz', function(req, res) {
   var rb_team_id = req.query.rb_team_id; 
   if (req.query.trending){
     db.collection('teams').findOne( { _id : rb_team_id}, function (err, item){
-      var league = item.league;
-      var api_team_id = item.team_id;
-      var quiz_name = item.market + ' ' + item.name;
-      createQuiz(rb_team_id, league, api_team_id, quiz_name, res, returnItem);
+      if (item != null){
+        var league = item.league;
+        var api_team_id = item.team_id;
+        var quiz_name = item.market + ' ' + item.name;
+        createQuiz(rb_team_id, league, api_team_id, quiz_name, res, returnItem);
+      }
+      else{
+        res.status(500);
+        res.json('error', { error: 'unable to find a matching team' });
+      }
     });
   }
   else{
