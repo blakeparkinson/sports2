@@ -448,7 +448,6 @@ table tr th:last-child {
 
 .answer-row .answered-player{
   display: inline-block;
-  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
