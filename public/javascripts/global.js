@@ -4,6 +4,7 @@ $(document).ready(function() {
 
     // Populate the user table on initial page load    
     $('body').on('click', '[data-action="pick-team"], .quiz-btn', fetchQuiz);
+    $('body').on('click', '.trending-quiz', fetchTrendingQuiz);
     $('body').on('click', '.twitter-login', openAuthPopup);
     $('body').on('click', '.tweet', openTweetPopup);
     $('body').on('click', '.facebook-login', openFacebookAuthPopup);
@@ -167,6 +168,16 @@ function closePopupAndRefreshPage(){
   */
 }
 
+function fetchTrendingQuiz(event){
+  var rb_team_id = $(this).data('id');
+  var data = {
+    rb_team_id: rb_team_id,
+    trending: true
+  };
+  AjaxCreateQuiz(data);
+
+}
+
 function fetchQuiz(event) {
     var target = $(event.target);
     if (target.hasClass('quiz-btn')){
@@ -180,10 +191,19 @@ function fetchQuiz(event) {
       var team_id = $('#teams option:selected').val();
     }
 
-    var data = {api_team_id: api_team_id, league: league, rb_team_id: rb_team_id, team_name: team};
+    var data = {
+      api_team_id: api_team_id, 
+      league: league, 
+      rb_team_id: rb_team_id, 
+      team_name: team
+    };
+    
+    AjaxCreateQuiz(data);
+}
 
+function AjaxCreateQuiz(data){
 
-    $.ajax({
+  $.ajax({
       url: 'teams/quiz',
       data: data,
       type: 'get',
@@ -192,8 +212,7 @@ function fetchQuiz(event) {
           window.location.href = 'quiz?id='+response["_id"]+'&team_id='+response["rb_team_id"]+'&league='+response["league"];
         }
     }).done(function() {
-});
-
+  });
 }
 
 
