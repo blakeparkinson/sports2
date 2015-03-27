@@ -163,8 +163,9 @@ switch (league){
             break; 
           case 'nfl':
             json_response = JSON.parse(body);
+            var team_name = json_response.market + ' ' + json_response.name;
             players_sorted = sortNFL(json_response);
-            players = formatPlayers(players_sorted, rb_team_id);
+            players = formatPlayers(players_sorted, rb_team_id, team_name);
             mongoInsertPlayers(league, players, rb_team_id);
             callback(players.players, rb_team_id, res, league)
             break;
@@ -272,7 +273,7 @@ var sortByPositions = function(league, starters){
 }
 
 
-var formatPlayers = function(response, rb_team_id){
+var formatPlayers = function(response, rb_team_id, team_name){
   playersarray = [];
   for (i=0;i<response.players.length;i++){
     playersarray[i] = {};
@@ -281,7 +282,7 @@ var formatPlayers = function(response, rb_team_id){
       playersarray[i][key] = value;
     }
   }
-  var team = formatPlayersDocument(rb_team_id, playersarray);
+  var team = formatPlayersDocument(rb_team_id, playersarray, team_name);
   return team;
 }
 
