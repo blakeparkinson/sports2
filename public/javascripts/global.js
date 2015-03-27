@@ -197,7 +197,7 @@ function fetchQuiz(event) {
       rb_team_id: rb_team_id, 
       team_name: team
     };
-    
+
     AjaxCreateQuiz(data);
 }
 
@@ -209,7 +209,10 @@ function AjaxCreateQuiz(data){
       type: 'get',
       dataType: 'json',
         success: function(response){
-          window.location.href = 'quiz?id='+response["_id"]+'&team_id='+response["rb_team_id"]+'&league='+response["league"];
+          if (!response.error){
+            window.location.href = 'quiz?id='+response["_id"]+'&team_id='+response["rb_team_id"]+'&league='+response["league"];
+          }
+          else{console.log('Throw an error popup or smething eventually');}
         }
     }).done(function() {
   });
