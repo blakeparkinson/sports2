@@ -20,10 +20,8 @@ var shortId = require('shortid');
 var returnPlayers = function (players, rb_team_id, res, league){
   if (res.quiz_page != undefined && res.quiz_page){
     var roster = {};
-     starters = formatEvenOdds(players.players.starters, true),
-     bench = formatEvenOdds(players.players.bench);
-     roster.bench = bench;
-     roster.starters = starters;
+     roster.starters = formatEvenOdds(players.players.starters, true),
+     roster.bench = formatEvenOdds(players.players.bench);
      res.render('quiz', {
       roster: roster,
       rb_team_id: rb_team_id,
