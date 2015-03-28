@@ -277,7 +277,7 @@ var sortByPositions = function(league, starters){
 }
 
 
-var formatPlayers = function(response, rb_team_id){
+var formatPlayers = function(response, rb_team_id, team_name){
   playersarray = [];
   for (i=0;i<response.players.length;i++){
     playersarray[i] = {};

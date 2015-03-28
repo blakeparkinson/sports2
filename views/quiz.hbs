@@ -55,10 +55,10 @@
 
 
 <script type='text/javascript'>
-		{{#ifCond league 'nba'}}
-			var bench = {{{json_stringify roster.bench}}},
-					starters = {{{json_stringify roster.starters}}},
-        	league = '{{league}}';
-		{{/ifCond}}
+  {{#ifCond league 'nba'}}
+    var bench = {{{json_stringify roster.bench}}},
+        starters = {{{json_stringify roster.starters}}},
+        league = '{{league}}';
+  {{/ifCond}}
     
  </script>
