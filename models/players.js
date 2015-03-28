@@ -286,7 +286,7 @@ var formatPlayers = function(response, rb_team_id, team_name){
       playersarray[i][key] = value;
     }
   }
-  var team = formatPlayersDocument(rb_team_id, playersarray);
+  var team = formatPlayersDocument(rb_team_id, playersarray, team_name);
   return team;
 }
 
