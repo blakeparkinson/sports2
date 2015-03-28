@@ -13,14 +13,14 @@
       </div>
       <div class="answer-container">
         <div class="starters">
-          {{#each starters}}
+          {{#each roster.starters}}
             <div class="answer-row {{render}}" data-id={{player_id}}>
               <p class="answered-player">{{render_position position}}</p>
             </div>
           {{/each}}
         </div>
         <div class="answer-container bench">
-          {{#each bench}}
+          {{#each roster.bench}}
             <div class="answer-row {{render}} empty">Bench {{inc @index}}</div>
           {{/each}}
         </div>
@@ -55,7 +55,10 @@
 
 
 <script type='text/javascript'>
-    var starters = {{{json_stringify starters}}},
-        bench = {{{json_stringify bench}}},
+  {{#ifCond league 'nba'}}
+    var bench = {{{json_stringify roster.bench}}},
+        starters = {{{json_stringify roster.starters}}},
         league = '{{league}}';
+  {{/ifCond}}
+    
  </script>
