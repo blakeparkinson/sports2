@@ -19,12 +19,13 @@ var shortId = require('shortid');
 
 var returnPlayers = function (players, rb_team_id, res, league){
   if (res.quiz_page != undefined && res.quiz_page){
-    var roster = [];
-     starters = formatEvenOdds(players.starters, true),
-     bench = formatEvenOdds(players.bench);
+    var roster = {};
+     starters = formatEvenOdds(players.players.starters, true),
+     bench = formatEvenOdds(players.players.bench);
+     roster.bench = bench;
+     roster.starters = starters;
      res.render('quiz', {
-      starters: starters,
-      bench: bench,
+      roster: roster,
       rb_team_id: rb_team_id,
       league: league,
       static_footer: true,
@@ -163,9 +164,8 @@ switch (league){
             break; 
           case 'nfl':
             json_response = JSON.parse(body);
-            var team_name = json_response.market + ' ' + json_response.name;
             players_sorted = sortNFL(json_response);
-            players = formatPlayers(players_sorted, rb_team_id, team_name);
+            players = formatPlayers(players_sorted, rb_team_id);
             mongoInsertPlayers(league, players, rb_team_id);
             callback(players.players, rb_team_id, res, league)
             break;
@@ -249,11 +249,15 @@ var formatNBAPlayers = function(response, rb_team_id, team_name){
   var startersarray = response.players.slice(0,5);
   sortByPositions('nba', startersarray);
   var bencharray = response.players.slice(5,response.players.length);
-  var players = [];
+  var players = {};
   players.starters = startersarray;
   players.bench = bencharray;
   var team = formatPlayersDocument(rb_team_id, players, team_name);
   return team;
+}
+
+var formatNFLPlayers = function(response, rb_team_id, team_name){
+  //TODO get starters by sorting offense and defense, games started
 }
 
 var sortByPositions = function(league, starters){
@@ -273,7 +277,7 @@ var sortByPositions = function(league, starters){
 }
 
 
-var formatPlayers = function(response, rb_team_id, team_name){
+var formatPlayers = function(response, rb_team_id){
   playersarray = [];
   for (i=0;i<response.players.length;i++){
     playersarray[i] = {};
@@ -282,17 +286,16 @@ var formatPlayers = function(response, rb_team_id, team_name){
       playersarray[i][key] = value;
     }
   }
-  var team = formatPlayersDocument(rb_team_id, playersarray, team_name);
+  var team = formatPlayersDocument(rb_team_id, playersarray);
   return team;
 }
 
 
 var formatPlayersDocument = function(rb_team_id, players, team_name){
   teamDocument = {};
-  teamDocument["team_id"] = rb_team_id;
-  teamDocument["starters"] = players.starters;
-  teamDocument["bench"] = players.bench;
-  teamDocument["team_name"] = team_name;
+  teamDocument.team_id = rb_team_id;
+  teamDocument.players= players;
+  teamDocument.team_name = team_name;
   return teamDocument;
 }
 
@@ -310,7 +313,7 @@ function mongoInsertPlayers(league, team_document, rb_team_id){
   }
   db.open(function(err, db){
     db.collection("players").update({team_id: team_document.rb_team_id},
-    {$set: {team_id: team_id, team_name: team_document.team_name, league: league, last_updated: new Date().toISOString().slice(0, 19).replace('T', ' '), starters: team_document.starters, bench: team_document.bench}},
+    {$set: {team_id: team_id, team_name: team_document.team_name, league: league, last_updated: new Date().toISOString().slice(0, 19).replace('T', ' '), players: team_document.players}},
     {upsert: true, multi:false}, function (err, upserted){
       if (err) {
         console.log('Ahh! An Error with Insert!');
