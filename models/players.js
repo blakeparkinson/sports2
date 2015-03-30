@@ -20,8 +20,13 @@ var shortId = require('shortid');
 var returnPlayers = function (players, rb_team_id, res, league){
   if (res.quiz_page != undefined && res.quiz_page){
     var roster = {};
+    if (league == 'nba'){
      roster.starters = formatEvenOdds(players.players.starters, true),
      roster.bench = formatEvenOdds(players.players.bench);
+    }
+    else{
+      roster = players.players;
+    }
      res.render('quiz', {
       roster: roster,
       rb_team_id: rb_team_id,
@@ -175,7 +180,7 @@ switch (league){
             break;
           case 'eu_soccer':
             playersParsed = formatEUSoccerPlayers(response.body, team_id);
-            players = formatPlayersDocument(rb_team_id, playersParsed);
+            players = formatPlayersDocument(rb_team_id, playersParsed.players, playersParsed.team_name);
             mongoInsertPlayers(league, players, rb_team_id);
             callback(players.players, rb_team_id, res, league)
             break;
@@ -323,8 +328,11 @@ function mongoInsertPlayers(league, team_document, rb_team_id){
 
 
 formatEUSoccerPlayers = function(response){
+  var roster = {};
   parseString(response, function (err, result) {
     var str = result[Object.keys(result)[0]];
+    roster.team_name = str.team[0].$.name;
+
       for (i=0; i < str.team.length;i++){
         for (j=0; j < str.team[i].roster.length; j++){
           for (k=0; k < str.team[i].roster[j].player.length; k++){
@@ -333,7 +341,8 @@ formatEUSoccerPlayers = function(response){
         }
       }
   });
-  return players;
+  roster.players = players
+  return roster;
 }
 
 formatMLBPlayers = function(response, team_id){
