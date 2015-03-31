@@ -66,7 +66,6 @@ function formatResult(data){
     }
 
 function formatSelection(data){
-    console.log(data);
     if (data.list_id){
         var render = '<p class="selected-team"  data-league= "'+data.league+'" data-list-id="'+ data.list_id +'" data-list-name="'+ data.list_name + '"data-id="'+ data.id + '"> ' +data.description+'</p>';
     }

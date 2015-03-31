@@ -46,6 +46,10 @@
     {{> eu_soccer }} 
 {{/ifCond}}
 
+{{#ifCond league 'goats'}}
+    {{> goats }} 
+{{/ifCond}}
+
 {{#ifCond league 'mlb'}}
     {{> mlb }} 
 {{/ifCond}}
@@ -62,6 +66,9 @@
         starters = {{{json_stringify roster.starters}}},
   {{/ifCond}}
   {{#ifCond league 'eu_soccer'}}
+    var roster =  {{{json_stringify roster}}};
+  {{/ifCond}}
+    {{#ifCond league 'goats'}}
     var roster =  {{{json_stringify roster}}};
   {{/ifCond}}
 

@@ -11,9 +11,7 @@ var players_model = require('../models/players.js');
 router.get('/', function(req, res) {   // this stuff comes from the URL
       res.quiz_page = true;
       var quiz_id = req.query.id;
-      console.log("quiz_id"+quiz_id);
       db.collection('quiz').findOne( { _id : quiz_id}, function(err, items){
-        console.log('items'+ Object.keys(items));
         list_id = items.list_id;
         rb_team_id = items.rb_team_id;
         league = items.league;

@@ -44,15 +44,13 @@ var returnPlayers = function (players, rb_team_id, res, league){
 
 var returnGoatPlayers = function (players, list_id, rb_team_id, res, league){
   if (res.quiz_page != undefined && res.quiz_page){
-    var roster = [];
-     bench = players;
-     console.log("in rgp bench: "+bench);
+     var roster = players;
      res.render('quiz', {
-      bench: bench,
+      roster: roster,
       rb_team_id: rb_team_id,
       league: league,
       static_footer: true,
-      //team_name: players.team_name,
+      team_name: rb_team_id,   // need to fix this to team name
       clock: getTimeLimit(league)
     });
   }
@@ -69,6 +67,7 @@ var getTimeLimit = function(league){
     case 'eu_soccer':
     case 'nfl':
     case 'nba':
+    case 'goats':
       clock = '5:00';
     break;
   }

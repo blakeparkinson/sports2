@@ -48,7 +48,6 @@ router.get('/quiz', function(req, res) {
     });
   }
   else{
-    console.log("we in the else");
     var league = req.query.league;
     var api_team_id = req.query.api_team_id;
     var quiz_name = req.query.team_name;
@@ -62,11 +61,10 @@ var returnItem = function (item, res){
 }
 
 var createQuiz = function(rb_team_id, list_id, league, api_team_id, quiz_name, res, callback){
-  console.log("meh"+list_id);
   db.open(function(err, db){
     db.collection("quiz").insert({_id:shortId.generate(), rb_team_id: rb_team_id, list_id: list_id, created_at: new Date().toISOString().slice(0, 19).replace('T', ' '), league: league, api_team_id: api_team_id, quiz_name: quiz_name, quiz_score: "null"}, function (err, insert){
         if (err){
-          console.log("new quiz insert failed");
+          console.log("new quiz insert failed: "+ err);
         }
         else {
           callback(insert[0], res);

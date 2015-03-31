@@ -1,4 +1,4 @@
-var starters,bench, roster,
+var starters, bench, roster,
     correct = 0,
     stop_counter = false;
     team_container = $('.team-container'),
@@ -31,10 +31,6 @@ console.log(bench); console.log(starters); console.log(roster);
 if (typeof bench != "undefined" && typeof starters != "undefined"){
   roster = starters.concat(bench);
 }    
-
-else if (typeof bench != "undefined"){
-  roster = bench;
-}
 
 else {
   roster = [];
