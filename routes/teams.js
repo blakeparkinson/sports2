@@ -29,11 +29,27 @@ router.get('/', function(res, res) {
 
 // when quiz endpoint is hit, insert a new quiz into mongo and return quiz_id
 router.get('/quiz', function(req, res) {
-  rb_team_id = req.query.rb_team_id; 
-  league = req.query.league;
-  api_team_id = req.query.api_team_id;
-  quiz_name = req.query.team_name;
-  quiz = createQuiz(rb_team_id, league, api_team_id, quiz_name, res, returnItem);
+  var rb_team_id = req.query.rb_team_id; 
+  if (req.query.trending){
+    db.collection('teams').findOne( { _id : rb_team_id}, function (err, item){
+      if (item != null){
+        var league = item.league;
+        var api_team_id = item.team_id;
+        var quiz_name = item.market + ' ' + item.name;
+        createQuiz(rb_team_id, league, api_team_id, quiz_name, res, returnItem);
+      }
+      else{
+        res.status(500);
+        res.json('error', { error: 'unable to find a matching team' });
+      }
+    });
+  }
+  else{
+    var league = req.query.league;
+    var api_team_id = req.query.api_team_id;
+    var quiz_name = req.query.team_name;
+    createQuiz(rb_team_id, league, api_team_id, quiz_name, res, returnItem);
+  }
 });
 
 // made the return more universal for all callbacks
@@ -58,7 +74,6 @@ var createQuiz = function(rb_team_id, league, api_team_id, quiz_name, res, callb
 //this is for the /teams page search field ajax
 router.get('/team', function(req, res) {
     var term = req.query.q;
-    console.log(term);
     //find the team, This syntax does a sql-type like clause with case insensitivity with the RegEx
     db.collection('teams').find({$or: [{'name': new RegExp(term, 'i')}, {'market': new RegExp(term, 'i')}, {'keywords': new RegExp(term, 'i')}]}).sort({'market': 1}).toArray(function (err, items) {
     	res.json(items);

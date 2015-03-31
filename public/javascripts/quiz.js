@@ -3,6 +3,13 @@ var starters,bench, roster,
     stop_counter = false;
     team_container = $('.team-container'),
     answer_container = $('.answer-container');
+if (typeof(roster) != undefined){
+  roster = roster;
+}
+
+else{
+  roster = [];
+}
 
 if (typeof(starters) != undefined){
   starters = starters;
@@ -20,7 +27,7 @@ else{
   bench = [];
 }
 
-console.log(bench); console.log(starters);
+console.log(bench); console.log(starters); console.log(roster);
 if (typeof bench != "undefined" && typeof starters != "undefined"){
   roster = starters.concat(bench);
 }    
@@ -125,11 +132,16 @@ var populateTable = function(player, class_color){
   var class_name = class_color !== undefined ? class_color : 'rb-green';
   if (player.starter){
     var field = answer_container.find("[data-id='" + player.player_id + "']");
+    var img_html =  '<img class="circle-pic" src='+player.avatar_url+'>';
+
+    field.prepend(img_html);
+    field.find('.answered-player').html(player.full_name);
   }
   else{
     var field = answer_container.find('.bench .answer-row.empty').first();
+    field.html(player.full_name);
   }
-  field.html(player.full_name).addClass(class_name).removeClass('empty');
+  field.addClass(class_name).removeClass('empty');
 
 }
 
