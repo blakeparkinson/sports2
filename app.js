@@ -12,6 +12,7 @@ var teams = require('./routes/teams');
 var quiz = require('./routes/quiz');
 var about = require('./routes/about');
 var ourteam = require('./routes/ourteam');
+var leaguesearch = require('./routes/leaguesearch');
 var common = require('./routes/common');
 var config = common.config();
 
@@ -50,6 +51,7 @@ app.use('/', routes);
 app.use('/teams', teams);
 app.use('/about', about);
 app.use('/ourteam', ourteam);
+app.use('/leaguesearch', leaguesearch);
 app.use('/auth', auth);
 app.use('/quiz', quiz);
 
