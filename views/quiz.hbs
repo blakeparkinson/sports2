@@ -12,18 +12,30 @@
         </div>
       </div>
       <div class="answer-container">
-        <div class="starters">
-          {{#each roster.starters}}
-            <div class="answer-row {{render}}" data-id={{player_id}}>
-              <p class="answered-player">{{render_position position}}</p>
-            </div>
-          {{/each}}
-        </div>
-        <div class="answer-container bench">
-          {{#each roster.bench}}
-            <div class="answer-row {{render}} empty">Bench {{inc @index}}</div>
-          {{/each}}
-        </div>
+      	{{#compare league 'nba'}}
+	        <div class="starters">
+	          {{#each roster.starters}}
+	            <div class="answer-row {{render}}" data-id={{player_id}}>
+	              <p class="answered-player">{{render_position position}}</p>
+	            </div>
+	          {{/each}}
+	        </div>
+	        <div class="answer-container bench">
+	          {{#each roster.bench}}
+	            <div class="answer-row {{render}} empty">Bench {{inc @index}}</div>
+	          {{/each}}
+	        </div>
+	       {{/compare}}
+	       {{#compare league '!=' 'nba'}}
+	       	{{#each roster}}
+			       <div class="player">
+							<div class="answer-row {{render}}" data-id={{player_id}}>
+		          	<p class="answered-player">{{render_position position}}</p>
+		          </div>
+			       </div>
+			     {{/each}}
+	       {{/compare}}
+
       </div>
       <div class="button-section">
         <div class="btn btn-primary quit-btn">Give Up</div>
