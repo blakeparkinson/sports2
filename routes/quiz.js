@@ -8,11 +8,21 @@ var http = require("http");
 var players_model = require('../models/players.js');
     
 
-router.get('/', function(req, res) {
+router.get('/', function(req, res) {   // this stuff comes from the URL
       res.quiz_page = true;
-      var quiz_id = req.query.id,
-          rb_team_id = req.query.team_id,  // rb team id
-          league = req.query.league;
+      var quiz_id = req.query.id;
+      console.log("quiz_id"+quiz_id);
+      db.collection('quiz').findOne( { _id : quiz_id}, function(err, items){
+        console.log('items'+ Object.keys(items));
+        list_id = items.list_id;
+        rb_team_id = items.rb_team_id;
+        league = items.league;
+        api_team_id = items.api_team_id;
+        quiz_name = items.quiz_name;
+        if (list_id){ 
+            players_model.fetchGoatPlayers(list_id, rb_team_id, league, res, req, players_model.returnGoatPlayers)
+          }
+        else {
           db.collection('teams').findOne( { _id : rb_team_id}, function (err, items){
             team_id = items.team_id;       // API team id
             usat_id = items.usat_id;
@@ -26,10 +36,10 @@ router.get('/', function(req, res) {
             else{
               players = players_model.fetchPlayers(team_id, rb_team_id, league, usat_id, res, req, players_model.returnPlayers);
             }
-
-      });
-
+          });
+        }
   });
+});
 
 
 router.get('/results', function(req, res) {

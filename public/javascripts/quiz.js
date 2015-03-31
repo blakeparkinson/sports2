@@ -20,15 +20,18 @@ else{
   bench = [];
 }
 
-console.log(bench); console.log(starters);
+console.log(bench); console.log(starters); console.log(roster);
 if (typeof bench != "undefined" && typeof starters != "undefined"){
   roster = starters.concat(bench);
 }    
 
-else{
-  roster = [];
+else if (typeof bench != "undefined"){
+  roster = bench;
 }
 
+else {
+  roster = [];
+}
 
 // DOM Ready =============================================================
 $(document).ready(function() {

@@ -38,6 +38,25 @@ var returnPlayers = function (players, rb_team_id, res, league){
   }
 }
 
+var returnGoatPlayers = function (players, list_id, rb_team_id, res, league){
+  if (res.quiz_page != undefined && res.quiz_page){
+    var roster = [];
+     bench = players;
+     console.log("in rgp bench: "+bench);
+     res.render('quiz', {
+      bench: bench,
+      rb_team_id: rb_team_id,
+      league: league,
+      static_footer: true,
+      //team_name: players.team_name,
+      clock: getTimeLimit(league)
+    });
+  }
+  else{
+    res.json(players);   //this else statement poops out TypeError: Object nfl has no method 'json'
+  }
+}
+
 var getTimeLimit = function(league){
   var clock = '0:00';
   switch (league){
@@ -70,6 +89,19 @@ var formatEvenOdds = function(players, is_starter){
     }
   }
   return players;
+}
+
+
+
+var fetchGoatPlayers = function(list_id, rb_team_id, league, res, req, callback){ 
+  var players;
+  db.collection('goats').find({id : list_id}).toArray(function (err, items){
+    if (items.length > 0){ // data in Mongo
+      var item = _.first(items);
+        players = item.players;
+        callback(players, list_id, rb_team_id, res, league)
+      }
+  });
 }
 
 
@@ -354,6 +386,8 @@ module.exports = {
   returnPlayers: returnPlayers,
   fetchPlayersFromApi: fetchPlayersFromApi,
   fetchPlayers: fetchPlayers,
+  fetchGoatPlayers: fetchGoatPlayers,
+  returnGoatPlayers: returnGoatPlayers,
   formatPlayers: formatPlayers,
   formatNBAPlayers: formatNBAPlayers,
   formatPlayersDocument: formatPlayersDocument,

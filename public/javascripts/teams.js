@@ -22,6 +22,9 @@ $(document).ready(function() {
                             if (item.name == undefined){
                                 item.name = '';
                             }
+                            /*if (item.list_id){
+                                item.name = item.list_name;
+                            } */
                             newData.push({
                                 id: item._id,  
                                 market: item.market,
@@ -29,6 +32,7 @@ $(document).ready(function() {
                                 team_id: item.team_id,
                                 league: item.league,
                                 list_id: item.list_id,
+                                list_name: item.list_name,
                                 description: item.description
                             });
                         });
@@ -64,7 +68,7 @@ function formatResult(data){
 function formatSelection(data){
     console.log(data);
     if (data.list_id){
-        var render = '<p class="selected-team"  data-league= "'+data.league+'" data-list-id="'+ data.list_id + '"data-id="'+ data.id + '"> ' +data.description+'</p>';
+        var render = '<p class="selected-team"  data-league= "'+data.league+'" data-list-id="'+ data.list_id +'" data-list-name="'+ data.list_name + '"data-id="'+ data.id + '"> ' +data.description+'</p>';
     }
 
     else{
