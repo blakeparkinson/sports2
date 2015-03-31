@@ -56,14 +56,18 @@
 
 <script type='text/javascript'>
   league = '{{league}}';
+ </script>
 
   {{#ifCond league 'nba'}}
+  	<script type='text/javascript'>
     var bench = {{{json_stringify roster.bench}}},
-        starters = {{{json_stringify roster.starters}}},
+        starters = {{{json_stringify roster.starters}}};
+    </script>
   {{/ifCond}}
   {{#ifCond league 'eu_soccer'}}
-    var roster =  {{{json_stringify roster}}};
-  {{/ifCond}}
+  	<script type='text/javascript'>
+    	var roster =  {{{json_stringify roster.bench}}};
+    </script>
+	{{/ifCond}}
 
     
- </script>
