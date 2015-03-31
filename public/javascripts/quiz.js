@@ -62,7 +62,7 @@ var randImg = function() {
               images[6] = "NBA-rockets-stadium.jpg",
               images[7] = "NBA-knicks-stadium.jpg",
               images[8] = "NBA-heat-stadium.jpg",
-      document.getElementById("standard-nba-container").style.backgroundImage = "url(" + dir + images[randomCount] + ")"; 
+      $("#standard-nba-container").style.backgroundImage = "url(" + dir + images[randomCount] + ")"; 
 }
 
 var startCounter = function(){
