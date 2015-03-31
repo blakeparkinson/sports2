@@ -39,8 +39,8 @@ else{
 
 // DOM Ready =============================================================
 $(document).ready(function() {
-  
-
+    
+  randImg();
 	$('body').on('keyup', '#guess-box', fetchGuess);
 	$("#guess-box").focus();
   $('body').on('click', '.quit-btn', endQuiz);
@@ -48,6 +48,22 @@ $(document).ready(function() {
 
   startCounter();
  });
+
+var randImg = function() {
+ var imgCount = 8;
+      var dir = '../images/stadiums/nba_stadiums/';
+      var randomCount = Math.round(Math.random() * (imgCount - 1)) + 1;
+      var images = new Array
+              images[1] = "NBA-kings-stadium.jpg",
+              images[2] = "NBA-bucks-stadium.jpg",
+              images[3] = "NBA-warriors-stadium.jpg",
+              images[4] = "NBA-pelicans-stadium.jpg",
+              images[5] = "NBA-hornets-stadium.jpg",
+              images[6] = "NBA-rockets-stadium.jpg",
+              images[7] = "NBA-knicks-stadium.jpg",
+              images[8] = "NBA-heat-stadium.jpg",
+      document.getElementById("standard-nba-container").style.backgroundImage = "url(" + dir + images[randomCount] + ")"; 
+}
 
 var startCounter = function(){
   var clock = $('.clock');
