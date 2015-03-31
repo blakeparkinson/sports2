@@ -94,11 +94,44 @@ hbs.registerHelper('json_stringify', function(context) {
     return c;
 });
 
-hbs.registerHelper('ifCond', function(v1, v2, options) {
-  if(v1 === v2) {
-    return options.fn(this);
-  }
-  return options.inverse(this);
+hbs.registerHelper('compare', function (lvalue, operator, rvalue, options) {
+
+    var operators, result;
+    
+    if (arguments.length < 3) {
+        throw new Error("Handlerbars Helper 'compare' needs 2 parameters");
+    }
+    
+    if (options === undefined) {
+        options = rvalue;
+        rvalue = operator;
+        operator = "===";
+    }
+    
+    operators = {
+        '==': function (l, r) { return l == r; },
+        '===': function (l, r) { return l === r; },
+        '!=': function (l, r) { return l != r; },
+        '!==': function (l, r) { return l !== r; },
+        '<': function (l, r) { return l < r; },
+        '>': function (l, r) { return l > r; },
+        '<=': function (l, r) { return l <= r; },
+        '>=': function (l, r) { return l >= r; },
+        'typeof': function (l, r) { return typeof l == r; }
+    };
+    
+    if (!operators[operator]) {
+        throw new Error("Handlerbars Helper 'compare' doesn't know the operator " + operator);
+    }
+    
+    result = operators[operator](lvalue, rvalue);
+    
+    if (result) {
+        return options.fn(this);
+    } else {
+        return options.inverse(this);
+    }
+
 });
 
 hbs.registerHelper('inc', function(value, options)
