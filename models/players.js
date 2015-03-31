@@ -27,7 +27,6 @@ var returnPlayers = function (players, rb_team_id, res, league){
     else{
       roster = players.players;
     }
-
      res.render('quiz', {
       roster: roster,
       rb_team_id: rb_team_id,
@@ -173,25 +172,25 @@ switch (league){
             players_sorted = sortNFL(json_response);
             players = formatPlayers(players_sorted, rb_team_id);
             mongoInsertPlayers(league, players, rb_team_id);
-            callback(players.players, rb_team_id, res, league)
+            callback(players, rb_team_id, res, league)
             break;
           case 'nhl':
             json_response = JSON.parse(body);
             players = formatPlayers(json_response, rb_team_id);
             mongoInsertPlayers(league, players, rb_team_id);
-            callback(players.players, rb_team_id, res, league)
+            callback(players, rb_team_id, res, league)
             break;
           case 'eu_soccer':
             playersParsed = formatEUSoccerPlayers(response.body, team_id);
             players = formatPlayersDocument(rb_team_id, playersParsed.players, playersParsed.team_name);
             mongoInsertPlayers(league, players, rb_team_id);
-            callback(players.players, rb_team_id, res, league)
+            callback(players, rb_team_id, res, league)
             break;
           case 'mlb':  
             playersParsed = formatMLBPlayers(response.body, team_id);
             players = formatPlayersDocument(rb_team_id, playersParsed);
             mongoInsertPlayers(league, players, rb_team_id);
-            callback(players.players, rb_team_id, res, league)
+            callback(players, rb_team_id, res, league)
             break;
         }
 
