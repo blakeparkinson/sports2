@@ -3,6 +3,13 @@ var starters,bench, roster,
     stop_counter = false;
     team_container = $('.team-container'),
     answer_container = $('.answer-container');
+if (typeof(roster) != undefined){
+  roster = roster;
+}
+
+else{
+  roster = [];
+}
 
 if (typeof(starters) != undefined){
   starters = starters;
