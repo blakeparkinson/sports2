@@ -28,8 +28,6 @@ var returnPlayers = function (players, rb_team_id, res, league){
       roster = players.players;
     }
 
-    var img = randImg();
-    console.log(img);
      res.render('quiz', {
       roster: roster,
       rb_team_id: rb_team_id,
