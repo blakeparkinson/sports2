@@ -27,14 +27,17 @@ var returnPlayers = function (players, rb_team_id, res, league){
     else{
       roster = players.players;
     }
+
      res.render('quiz', {
       roster: roster,
       rb_team_id: rb_team_id,
       league: league,
       static_footer: true,
       team_name: players.team_name,
-      clock: getTimeLimit(league)
+      clock: getTimeLimit(league),
+      background_image: randImg()
     });
+
 
   }
   else{
@@ -357,6 +360,27 @@ formatMLBPlayers = function(response, team_id){
         }
   });
   return players;
+}
+
+
+var randImg = function() {
+ var imgCount = 8;
+      var dir = '../images/stadiums/nba_stadiums/';
+      var randomCount = Math.round(Math.random() * (imgCount - 1)) + 1;
+      var images = [];
+              images[1] = "NBA-kings-stadium.jpg",
+              images[2] = "NBA-bucks-stadium.jpg",
+              images[3] = "NBA-warriors-stadium.jpg",
+              images[4] = "NBA-pelicans-stadium.jpg",
+              images[5] = "NBA-hornets-stadium.jpg",
+              images[6] = "NBA-rockets-stadium.jpg",
+              images[7] = "NBA-knicks-stadium.jpg",
+              images[8] = "NBA-heat-stadium.jpg"
+              
+
+      var image = dir + images[randomCount];
+      return image;
+      // $("#standard-nba-container").style.backgroundImage = "url(" + dir + images[randomCount] + ")"; 
 }
 
 
