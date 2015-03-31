@@ -29,7 +29,6 @@ $(document).ready(function() {
 
 // Functions ============================================================= //
 
-var roster = "#roster";
 var modal = $('.modal');
 
 function clearModal(){
