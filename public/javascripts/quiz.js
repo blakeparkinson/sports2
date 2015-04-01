@@ -38,8 +38,7 @@ else {
 
 // DOM Ready =============================================================
 $(document).ready(function() {
-  
-
+    
 	$('body').on('keyup', '#guess-box', fetchGuess);
 	$("#guess-box").focus();
   $('body').on('click', '.quit-btn', endQuiz);
@@ -47,6 +46,8 @@ $(document).ready(function() {
 
   startCounter();
  });
+
+
 
 var startCounter = function(){
   var clock = $('.clock');

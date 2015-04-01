@@ -22,7 +22,7 @@ var topPPG = [
 			"rank": 3,
 			"last_name": "James",
 			"first_name": "LeBron",
-			"ppg": 27.44
+			"ppg": 27.44	
 		},
 		{
 			"player_id":4

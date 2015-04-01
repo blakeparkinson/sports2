@@ -1,4 +1,4 @@
-  <div class="standard-{{league}}-container">  
+  <div id="standard-{{league}}-container" style="background-image: url({{background_image}});">  
     <div class="team-container">
       <p class="team-name">{{team_name}}</p>
       <div class="clock">{{clock}}</div>
@@ -15,7 +15,7 @@
         <div class="starters">
           {{#each roster.starters}}
             <div class="answer-row {{render}}" data-id={{player_id}}>
-              <p class="answered-player">{{render_position position}}</p>
+              <p class="answered-player">{{{render_position ../league position}}}</p>
             </div>
           {{/each}}
         </div>
@@ -30,25 +30,11 @@
       </div>
 
 
-{{#ifCond league 'nba'}}
-    {{> nba }} 
-{{/ifCond}}
+{{#compare league 'eu_soccer'}}
+	{{> eu_soccer }} 
+{{/compare}}
 
-{{#ifCond league 'nfl'}}
-    {{> nfl }} 
-{{/ifCond}}
 
-{{#ifCond league 'nhl'}}
-    {{> nhl }} 
-{{/ifCond}}
-
-{{#ifCond league 'eu_soccer'}}
-    {{> eu_soccer }} 
-{{/ifCond}}
-
-{{#ifCond league 'mlb'}}
-    {{> mlb }} 
-{{/ifCond}}
   </div>
 
 
@@ -56,17 +42,19 @@
 
 <script type='text/javascript'>
   league = '{{league}}';
+ </script>
 
-  {{#ifCond league 'nba'}}
+  {{#compare league 'nba'}}
+  	<script type='text/javascript'>
     var bench = {{{json_stringify roster.bench}}},
         starters = {{{json_stringify roster.starters}}};
-  {{/ifCond}}
-  {{#ifCond league 'eu_soccer'}}
-    var roster =  {{{json_stringify roster}}};
-  {{/ifCond}}
-    {{#ifCond league 'goats'}}
-    var roster =  {{{json_stringify roster}}};
-  {{/ifCond}}
+    </script>
+  {{/compare}}
+  {{#compare league '!=' 'nba'}}
+  	<script type='text/javascript'>
+    	var roster =  {{{json_stringify roster}}};
+    </script>
+	{{/compare}}
+
 
     
- </script>

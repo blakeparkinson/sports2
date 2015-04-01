@@ -37,8 +37,10 @@ var returnPlayers = function (players, rb_team_id, res, league){
       league: league,
       static_footer: true,
       team_name: players.team_name,
-      clock: getTimeLimit(league)
+      clock: getTimeLimit(league),
+      background_image: randImg()
     });
+
 
   }
   else{
@@ -191,25 +193,25 @@ switch (league){
             players_sorted = sortNFL(json_response);
             players = formatPlayers(players_sorted, rb_team_id);
             mongoInsertPlayers(league, players, rb_team_id);
-            callback(players.players, rb_team_id, res, league)
+            callback(players, rb_team_id, res, league)
             break;
           case 'nhl':
             json_response = JSON.parse(body);
             players = formatPlayers(json_response, rb_team_id);
             mongoInsertPlayers(league, players, rb_team_id);
-            callback(players.players, rb_team_id, res, league)
+            callback(players, rb_team_id, res, league)
             break;
           case 'eu_soccer':
             playersParsed = formatEUSoccerPlayers(response.body, team_id);
             players = formatPlayersDocument(rb_team_id, playersParsed.players, playersParsed.team_name);
             mongoInsertPlayers(league, players, rb_team_id);
-            callback(players.players, rb_team_id, res, league)
+            callback(players, rb_team_id, res, league)
             break;
           case 'mlb':  
             playersParsed = formatMLBPlayers(response.body, team_id);
             players = formatPlayersDocument(rb_team_id, playersParsed);
             mongoInsertPlayers(league, players, rb_team_id);
-            callback(players.players, rb_team_id, res, league)
+            callback(players, rb_team_id, res, league)
             break;
         }
 
@@ -357,7 +359,9 @@ formatEUSoccerPlayers = function(response){
       for (i=0; i < str.team.length;i++){
         for (j=0; j < str.team[i].roster.length; j++){
           for (k=0; k < str.team[i].roster[j].player.length; k++){
-            players.push(str.team[i].roster[j].player[k].$);
+            var player = str.team[i].roster[j].player[k].$;
+            appendPlayerShortId(player);
+            players.push(player);
           }
         }
       }
@@ -378,6 +382,27 @@ formatMLBPlayers = function(response, team_id){
         }
   });
   return players;
+}
+
+
+var randImg = function() {
+ var imgCount = 8;
+      var dir = '../images/stadiums/nba_stadiums/';
+      var randomCount = Math.round(Math.random() * (imgCount - 1)) + 1;
+      var images = [];
+              images[1] = "NBA-kings-stadium.jpg",
+              images[2] = "NBA-bucks-stadium.jpg",
+              images[3] = "NBA-warriors-stadium.jpg",
+              images[4] = "NBA-pelicans-stadium.jpg",
+              images[5] = "NBA-hornets-stadium.jpg",
+              images[6] = "NBA-rockets-stadium.jpg",
+              images[7] = "NBA-knicks-stadium.jpg",
+              images[8] = "NBA-heat-stadium.jpg"
+              
+
+      var image = dir + images[randomCount];
+      return image;
+      // $("#standard-nba-container").style.backgroundImage = "url(" + dir + images[randomCount] + ")"; 
 }
 
 

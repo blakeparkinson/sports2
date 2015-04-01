@@ -12,6 +12,7 @@ var teams = require('./routes/teams');
 var quiz = require('./routes/quiz');
 var about = require('./routes/about');
 var ourteam = require('./routes/ourteam');
+var leaguesearch = require('./routes/leaguesearch');
 var common = require('./routes/common');
 var config = common.config();
 
@@ -50,6 +51,7 @@ app.use('/', routes);
 app.use('/teams', teams);
 app.use('/about', about);
 app.use('/ourteam', ourteam);
+app.use('/leaguesearch', leaguesearch);
 app.use('/auth', auth);
 app.use('/quiz', quiz);
 
@@ -92,11 +94,44 @@ hbs.registerHelper('json_stringify', function(context) {
     return c;
 });
 
-hbs.registerHelper('ifCond', function(v1, v2, options) {
-  if(v1 === v2) {
-    return options.fn(this);
-  }
-  return options.inverse(this);
+hbs.registerHelper('compare', function (lvalue, operator, rvalue, options) {
+
+    var operators, result;
+    
+    if (arguments.length < 3) {
+        throw new Error("Handlerbars Helper 'compare' needs 2 parameters");
+    }
+    
+    if (options === undefined) {
+        options = rvalue;
+        rvalue = operator;
+        operator = "===";
+    }
+    
+    operators = {
+        '==': function (l, r) { return l == r; },
+        '===': function (l, r) { return l === r; },
+        '!=': function (l, r) { return l != r; },
+        '!==': function (l, r) { return l !== r; },
+        '<': function (l, r) { return l < r; },
+        '>': function (l, r) { return l > r; },
+        '<=': function (l, r) { return l <= r; },
+        '>=': function (l, r) { return l >= r; },
+        'typeof': function (l, r) { return typeof l == r; }
+    };
+    
+    if (!operators[operator]) {
+        throw new Error("Handlerbars Helper 'compare' doesn't know the operator " + operator);
+    }
+    
+    result = operators[operator](lvalue, rvalue);
+    
+    if (result) {
+        return options.fn(this);
+    } else {
+        return options.inverse(this);
+    }
+
 });
 
 hbs.registerHelper('inc', function(value, options)
@@ -104,27 +139,52 @@ hbs.registerHelper('inc', function(value, options)
     return parseInt(value) + 1;
 });
 
-hbs.registerHelper('render_position', function(position){
+hbs.registerHelper('render_position', function(league, position){
+
+  if (arguments.length < 2) {
+        throw new Error("Handlerbars Helper 'render_position' needs 2 parameters");
+    }
 
   var position = position.toUpperCase();
-  switch (position){
-    case 'G':
-      position = 'Guard';
+  switch (league){
+    case 'nba':
+      switch (position){
+        case 'G':
+          position = 'Guard';
+        break;
+        case 'F':
+          position = 'Forward';
+        break;
+        case 'C':
+          position = 'Center';
+        break;
+        case 'F-C':
+        case 'C-F':
+         position = 'Forward/Center';
+        break;
+        case 'G-F':
+        case 'F-G':
+         position = 'Guard/Forward';
+        break;
+      }
     break;
-    case 'F':
-      position = 'Forward';
-    break;
-    case 'C':
-      position = 'Center';
-    break;
-    case 'F-C':
-    case 'C-F':
-     position = 'Forward/Center';
-    break;
-    case 'G-F':
-    case 'F-G':
-     position = 'Guard/Forward';
-    break;
+    case 'eu_soccer':
+      switch (position){
+        case 'D': 
+          position = 'Defender';
+        break;
+        case 'F':
+          position = 'Forward';
+        break;
+        case 'M':
+          position = 'Midfielder';
+        break;
+        case 'G':
+          position = 'Goalie';
+        break;
+
+      }
+      break;
   }
   return position;
 })
