@@ -15,8 +15,8 @@
       	{{#compare league 'nba'}}
 	        <div class="starters">
 	          {{#each roster.starters}}
-	            <div class="answer-row {{render}}" data-id={{player_id}}>
-	              <p class="answered-player">{{render_position position}}</p>
+	            <div class="answer-row {{render}}" data-id="{{player_id}}">
+	              <p class="answered-player">{{render_position ../league position}}</p>
 	            </div>
 	          {{/each}}
 	        </div>
@@ -28,14 +28,13 @@
 	       {{/compare}}
 	       {{#compare league '!=' 'nba'}}
 	       	{{#each roster}}
-			       <div class="player">
-							<div class="answer-row {{render}}" data-id={{player_id}}>
-		          	<p class="answered-player">{{render_position position}}</p>
+			       <div class="player bench">
+							<div class="answer-row {{render}}" data-id="{{player_id}}">
+		          	<p class="answered-player">{{render_position ../league position}}</p>
 		          </div>
 			       </div>
 			     {{/each}}
 	       {{/compare}}
-
       </div>
       <div class="button-section">
         <div class="btn btn-primary quit-btn">Give Up</div>
