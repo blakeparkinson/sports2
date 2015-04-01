@@ -338,7 +338,9 @@ formatEUSoccerPlayers = function(response){
       for (i=0; i < str.team.length;i++){
         for (j=0; j < str.team[i].roster.length; j++){
           for (k=0; k < str.team[i].roster[j].player.length; k++){
-            players.push(str.team[i].roster[j].player[k].$);
+            var player = str.team[i].roster[j].player[k].$;
+            appendPlayerShortId(player);
+            players.push(player);
           }
         }
       }
