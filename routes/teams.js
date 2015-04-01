@@ -31,7 +31,8 @@ router.get('/', function(res, res) {
 router.get('/quiz', function(req, res) {
   var rb_team_id = req.query.rb_team_id;
   var league = req.query.league;
-  var list_id = req.query.list_id; 
+  var list_id = req.query.list_id;
+
   if (req.query.trending){
     console.log("we trending");
     db.collection('teams').findOne( { _id : rb_team_id}, function (err, item){
@@ -47,10 +48,16 @@ router.get('/quiz', function(req, res) {
       }
     });
   }
-  else{
+  else if (list_id){
+    var quiz_name = req.query.list_name;
     var league = req.query.league;
     var api_team_id = req.query.api_team_id;
+    createQuiz(rb_team_id, list_id, league, api_team_id, quiz_name, res, returnItem);
+  }
+  else{
     var quiz_name = req.query.team_name;
+    var league = req.query.league;
+    var api_team_id = req.query.api_team_id;
     createQuiz(rb_team_id, list_id, league, api_team_id, quiz_name, res, returnItem);
   }
 });
