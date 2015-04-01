@@ -363,10 +363,11 @@ formatMLBPlayers = function(response, team_id){
   return players;
 }
 
-var randImg = function(league) {            
+var randImg = function(league) {      
+      var images = [];      
       switch (league) {
         case "nba": 
-          var images = [];
+          var path = '../images/stadiums/nba_stadiums/';          
                   images[0] = "NBA-kings-stadium.jpg",
                   images[1] = "NBA-bucks-stadium.jpg",
                   images[2] = "NBA-warriors-stadium.jpg",
@@ -377,55 +378,48 @@ var randImg = function(league) {
                   images[7] = "NBA-heat-stadium.jpg"
                   break;
         case "mlb":
-          var images = [];
-                  images[1] = "NBA-kings-stadium.jpg",
-                  images[2] = "NBA-bucks-stadium.jpg",
-                  images[3] = "NBA-warriors-stadium.jpg",
-                  images[4] = "NBA-pelicans-stadium.jpg",
-                  images[5] = "NBA-hornets-stadium.jpg",
-                  images[6] = "NBA-rockets-stadium.jpg",
-                  images[7] = "NBA-knicks-stadium.jpg",
-                  images[8] = "NBA-heat-stadium.jpg"
+          var path = '../images/stadiums/mlb_stadiums/';          
+                  images[0] = "NBA-kings-stadium.jpg",
+                  images[1] = "NBA-bucks-stadium.jpg",
+                  images[2] = "NBA-warriors-stadium.jpg",
+                  images[3] = "NBA-pelicans-stadium.jpg",
+                  images[4] = "NBA-hornets-stadium.jpg",
+                  images[5] = "NBA-rockets-stadium.jpg",
+                  images[6] = "NBA-knicks-stadium.jpg",
+                  images[7] = "NBA-heat-stadium.jpg"
                   break;
         case "nfl":
-          var images = [];
-                  images[1] = "NBA-kings-stadium.jpg",
-                  images[2] = "NBA-bucks-stadium.jpg",
-                  images[3] = "NBA-warriors-stadium.jpg",
-                  images[4] = "NBA-pelicans-stadium.jpg",
-                  images[5] = "NBA-hornets-stadium.jpg",
-                  images[6] = "NBA-rockets-stadium.jpg",
-                  images[7] = "NBA-knicks-stadium.jpg",
-                  images[8] = "NBA-heat-stadium.jpg"
+          var path = '../images/stadiums/nfl_stadiums/';          
+                  images[0] = "NBA-kings-stadium.jpg",
+                  images[1] = "NBA-bucks-stadium.jpg",
+                  images[2] = "NBA-warriors-stadium.jpg",
+                  images[3] = "NBA-pelicans-stadium.jpg",
+                  images[4] = "NBA-hornets-stadium.jpg",
+                  images[5] = "NBA-rockets-stadium.jpg",
+                  images[6] = "NBA-knicks-stadium.jpg",
+                  images[7] = "NBA-heat-stadium.jpg"
                   break;
         case "eu_soccer":
-          var images = [];
-                  images[1] = "NBA-kings-stadium.jpg",
-                  images[2] = "NBA-bucks-stadium.jpg",
-                  images[3] = "NBA-warriors-stadium.jpg",
-                  images[4] = "NBA-pelicans-stadium.jpg",
-                  images[5] = "NBA-hornets-stadium.jpg",
-                  images[6] = "NBA-rockets-stadium.jpg",
-                  images[7] = "NBA-knicks-stadium.jpg",
-                  images[8] = "NBA-heat-stadium.jpg"
+          var path = '../images/stadiums/euro_soccer_stadiums/';          
+                  images[0] = "olympiastadion-stadium.jpg",
+                  images[1] = "soccer-stadium4.jpg"                  
                   break; 
         case "nhl":
-          var images = [];
-                  images[1] = "NBA-kings-stadium.jpg",
-                  images[2] = "NBA-bucks-stadium.jpg",
-                  images[3] = "NBA-warriors-stadium.jpg",
-                  images[4] = "NBA-pelicans-stadium.jpg",
-                  images[5] = "NBA-hornets-stadium.jpg",
-                  images[6] = "NBA-rockets-stadium.jpg",
-                  images[7] = "NBA-knicks-stadium.jpg",
-                  images[8] = "NBA-heat-stadium.jpg"
+          var path = '../images/stadiums/nhl_stadiums/';          
+                  images[0] = "NBA-kings-stadium.jpg",
+                  images[1] = "NBA-bucks-stadium.jpg",
+                  images[2] = "NBA-warriors-stadium.jpg",
+                  images[3] = "NBA-pelicans-stadium.jpg",
+                  images[4] = "NBA-hornets-stadium.jpg",
+                  images[5] = "NBA-rockets-stadium.jpg",
+                  images[6] = "NBA-knicks-stadium.jpg",
+                  images[7] = "NBA-heat-stadium.jpg"
                   break;      
-      }     
-
+      }        
       var image = images[Math.floor(Math.random()*images.length)];
-      image = '../images/stadiums/nba_stadiums/' + image;
+      image = path + image;
       return image;    
-
+    }
 
 module.exports = {
   returnPlayers: returnPlayers,
