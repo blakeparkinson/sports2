@@ -193,7 +193,19 @@ function fetchQuiz(event) {
       var team_id = $('#teams option:selected').val();
     }
 
-    var data = {api_team_id: api_team_id, league: league, rb_team_id: rb_team_id, team_name: team_name, list_name: list_name, list_id: list_id};
+    var data = {
+      api_team_id: api_team_id, 
+      league: league, 
+      rb_team_id: rb_team_id, 
+      team_name: team_name,
+      list_name: list_name,
+      list_id: list_id
+    };
+
+    AjaxCreateQuiz(data);
+}
+
+function AjaxCreateQuiz(data){
 
     $.ajax({
       url: 'teams/quiz',
@@ -201,7 +213,10 @@ function fetchQuiz(event) {
       type: 'get',
       dataType: 'json',
         success: function(response){
-          window.location.href = 'quiz?id='+response["_id"]+'&team_id='+response["rb_team_id"]+'&league='+response["league"];//'&lists_id='+["list_id"];
+          if (!response.error){
+            window.location.href = 'quiz?id='+response["_id"]+'&team_id='+response["rb_team_id"]+'&league='+response["league"];
+          }
+          else{console.log('Throw an error popup or smething eventually');}
         }
     }).done(function() {
 });

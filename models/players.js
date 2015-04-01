@@ -87,11 +87,9 @@ var formatEvenOdds = function(players, is_starter){
 
 
 var fetchGoatPlayers = function(list_id, rb_team_id, league, res, req, callback){ 
-  var players;
-  console.log("list_id"+list_id);
   db.collection('goats').findOne({lid : list_id}, function (err, item){
     if (item != undefined){ // data in Mongo
-        players = item.players;
+        var players = item.players;
         callback(players, rb_team_id, res, league)
       }
     else {
