@@ -464,16 +464,14 @@ table tr th:last-child {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
-#standard-nba-container{
-    background: no-repeat scroll center top/cover transparent; 
-    padding: 0;
-    bottom:0;
-    min-height: 650px;
-    width:100%;
-    position:relative;
-  }
-
+.quiz-page-backgrounds {
+  background: no-repeat scroll center top/cover transparent; 
+  padding: 0;
+  bottom:0;
+  min-height: 650px;
+  width:100%;
+  position:relative;
+}
 
 @media screen and (max-height: 600px) {
 
