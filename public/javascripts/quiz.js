@@ -124,8 +124,8 @@ var checkForMatches = function(guess, input_field){
     }
 
     //hax for soccer. whatever
-    else if (player.full_last_name != undefined){
-      full_name = player.full_last_name;
+    else if (player.full_first_name != undefined){
+      full_name = player.full_first_name;
     }
 
     var last_name = player.last_name != undefined? player.last_name : player.full_last_name;
@@ -153,8 +153,8 @@ var populateTable = function(player, class_color){
   else if (player.first_name && player.last_name){
     full_name = player.first_name + ' ' + player.last_name;
   }
-  else if (player.full_last_name){
-    full_name = player.full_last_name;
+  else if (player.full_first_name){
+    full_name = player.full_first_name;
   }
 
   var class_name = class_color !== undefined ? class_color : 'rb-green';
