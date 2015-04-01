@@ -353,10 +353,6 @@ formatEUSoccerPlayers = function(response){
   return roster;
 }
 
-renameSoccerFields =function(player){
-
-}
-
 formatMLBPlayers = function(response, team_id){
   parseString(response, function (err, result) {
     var str = result[Object.keys(result)[0]];
