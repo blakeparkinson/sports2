@@ -46,10 +46,6 @@
     {{> eu_soccer }} 
 {{/ifCond}}
 
-{{#ifCond league 'goats'}}
-    {{> goats }} 
-{{/ifCond}}
-
 {{#ifCond league 'mlb'}}
     {{> mlb }} 
 {{/ifCond}}
@@ -63,7 +59,7 @@
 
   {{#ifCond league 'nba'}}
     var bench = {{{json_stringify roster.bench}}},
-        starters = {{{json_stringify roster.starters}}},
+        starters = {{{json_stringify roster.starters}}};
   {{/ifCond}}
   {{#ifCond league 'eu_soccer'}}
     var roster =  {{{json_stringify roster}}};

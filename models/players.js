@@ -24,6 +24,10 @@ var returnPlayers = function (players, rb_team_id, res, league){
      roster.starters = formatEvenOdds(players.players.starters, true),
      roster.bench = formatEvenOdds(players.players.bench);
     }
+    else if (league == 'goats'){
+      roster = players;
+      // need to fix team name
+    }
     else{
       roster = players.players;
     }
@@ -42,22 +46,6 @@ var returnPlayers = function (players, rb_team_id, res, league){
   }
 }
 
-var returnGoatPlayers = function (players, list_id, rb_team_id, res, league){
-  if (res.quiz_page != undefined && res.quiz_page){
-     var roster = players;
-     res.render('quiz', {
-      roster: roster,
-      rb_team_id: rb_team_id,
-      league: league,
-      static_footer: true,
-      team_name: rb_team_id,   // need to fix this to team name
-      clock: getTimeLimit(league)
-    });
-  }
-  else{
-    res.json(players);   //this else statement poops out TypeError: Object nfl has no method 'json'
-  }
-}
 
 var getTimeLimit = function(league){
   var clock = '0:00';
@@ -98,15 +86,17 @@ var formatEvenOdds = function(players, is_starter){
 
 var fetchGoatPlayers = function(list_id, rb_team_id, league, res, req, callback){ 
   var players;
-  db.collection('goats').find({id : list_id}).toArray(function (err, items){
-    if (items.length > 0){ // data in Mongo
-      var item = _.first(items);
+  console.log("list_id"+list_id);
+  db.collection('goats').findOne({lid : list_id}, function (err, item){
+    if (item != undefined){ // data in Mongo
         players = item.players;
-        callback(players, list_id, rb_team_id, res, league)
+        callback(players, rb_team_id, res, league)
       }
+    else {
+      console.log("goat list not in mongo");
+    }
   });
 }
-
 
 
 // Check the db first. If it's there and has been added in the last 24 hours, use it. 
@@ -396,7 +386,6 @@ module.exports = {
   fetchPlayersFromApi: fetchPlayersFromApi,
   fetchPlayers: fetchPlayers,
   fetchGoatPlayers: fetchGoatPlayers,
-  returnGoatPlayers: returnGoatPlayers,
   formatPlayers: formatPlayers,
   formatNBAPlayers: formatNBAPlayers,
   formatPlayersDocument: formatPlayersDocument,

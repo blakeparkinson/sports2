@@ -4,6 +4,7 @@ $(document).ready(function() {
 
     // Populate the user table on initial page load    
     $('body').on('click', '[data-action="pick-team"], .quiz-btn', fetchQuiz);
+    $('body').on('click', '.trending-quiz', fetchTrendingQuiz);
     $('body').on('click', '.twitter-login', openAuthPopup);
     $('body').on('click', '.tweet', openTweetPopup);
     $('body').on('click', '.facebook-login', openFacebookAuthPopup);
@@ -165,6 +166,17 @@ function closePopupAndRefreshPage(){
   window.close();
   */
 }
+
+function fetchTrendingQuiz(event){
+  var rb_team_id = $(this).data('id');
+  var data = {
+    rb_team_id: rb_team_id,
+    trending: true
+  };
+  AjaxCreateQuiz(data);
+}
+
+
 
 function fetchQuiz(event) {
     var target = $(event.target);

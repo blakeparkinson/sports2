@@ -8,7 +8,7 @@ var http = require("http");
 var players_model = require('../models/players.js');
     
 
-router.get('/', function(req, res) {   // this stuff comes from the URL
+router.get('/', function(req, res) {
       res.quiz_page = true;
       var quiz_id = req.query.id;
       db.collection('quiz').findOne( { _id : quiz_id}, function(err, items){
@@ -18,7 +18,7 @@ router.get('/', function(req, res) {   // this stuff comes from the URL
         api_team_id = items.api_team_id;
         quiz_name = items.quiz_name;
         if (list_id){ 
-            players_model.fetchGoatPlayers(list_id, rb_team_id, league, res, req, players_model.returnGoatPlayers)
+            players_model.fetchGoatPlayers(list_id, rb_team_id, league, res, req, players_model.returnPlayers)
           }
         else {
           db.collection('teams').findOne( { _id : rb_team_id}, function (err, items){

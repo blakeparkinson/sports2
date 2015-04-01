@@ -31,7 +31,7 @@ router.get('/', function(res, res) {
 router.get('/quiz', function(req, res) {
   var rb_team_id = req.query.rb_team_id;
   var league = req.query.league;
-  list_id = req.query.list_id; 
+  var list_id = req.query.list_id; 
   if (req.query.trending){
     console.log("we trending");
     db.collection('teams').findOne( { _id : rb_team_id}, function (err, item){

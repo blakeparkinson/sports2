@@ -22,9 +22,7 @@ $(document).ready(function() {
                             if (item.name == undefined){
                                 item.name = '';
                             }
-                            /*if (item.list_id){
-                                item.name = item.list_name;
-                            } */
+
                             newData.push({
                                 id: item._id,  
                                 market: item.market,
