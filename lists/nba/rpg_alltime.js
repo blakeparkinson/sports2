@@ -1,67 +1,79 @@
 var topRPG = [
-  list_id: 6,
-  league: "NBA",
-  keywords: "top rebounds rebounding",
-  description: "Top rebounds per game all time",
-  player:
+  "lid": "6",
+  "league": "goats",
+  "keywords": "top rebounds rpg rebounding",
+  "list_name": "topRPGnba",
+  "description": "Top rebounds per game all time",
+  "players": [
   {
-    "rank":1,
+    "player_id":"1",
+    "rank":"1",
     "last_name":"Chamberlain",
     "first_name":"Wilt",
-    "rpg":22.89
+    "rpg":"22.89"
   },
   {
-    "rank":2,
+    "player_id":"2",
+    "rank":"2",
     "last_name":"Russell",
     "first_name":"Bill",
-    "rpg":22.45
+    "rpg":"22.45"
   },
   {
-    "rank":3,
+    "player_id":"3",
+    "rank":"3",
     "last_name":"Pettit",
     "first_name":"Bob",
-    "rpg":16.22
+    "rpg":"16.22"
   },
   {
-    "rank":4,
+    "player_id":"4",
+    "rank":"4",
     "last_name":"Lucas",
     "first_name":"Jerry",
-    "rpg":15.61
+    "rpg":"15.61"
   },
   {
-    "rank":5,
+    "player_id":"5",
+    "rank":"5",
     "last_name":"Thurmond",
     "first_name":"Nate",
-    "rpg":15
+    "rpg":"15"
   },
   {
-    "rank":6,
+    "player_id":"6",
+    "rank":"6",
     "last_name":"Unseld",
     "first_name":"Wes",
-    "rpg":13.99
+    "rpg":"13.99"
   },
   {
-    "rank":7,
+    "player_id":"7",
+    "rank":"7",
     "last_name":"Bellamy",
     "first_name":"Walt",
-    "rpg":13.65
+    "rpg":"13.65"
   },
   {
-    "rank":8,
+    "player_id":"8",
+    "rank":"8",
     "last_name":"Cowens",
     "first_name":"Dave",
-    "rpg":13.63
+    "rpg":"13.63"
   },
   {
-    "rank":9,
+    "player_id":"9",
+    "rank":"9",
     "last_name":"Baylor",
     "first_name":"Elgin",
-    "rpg":13.55
+    "rpg":"13.55"
   },
   {
-    "rank":10,
+    "player_id":"10",
+    "rank":"10",
     "last_name":"Rodman",
     "first_name":"Dennis",
-    "rpg":13.12
+    "rpg":"13.12"
   }
+  ]
 ]
