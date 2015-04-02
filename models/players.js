@@ -390,57 +390,39 @@ formatMLBPlayers = function(response, team_id){
 var randImg = function(league) {      
       var images = [];      
       switch (league) {
-        case "nba": 
-          var path = '../images/stadiums/nba_stadiums/';          
-                  images[0] = "NBA-kings-stadium.jpg",
-                  images[1] = "NBA-bucks-stadium.jpg",
-                  images[2] = "NBA-warriors-stadium.jpg",
-                  images[3] = "NBA-pelicans-stadium.jpg",
-                  images[4] = "NBA-hornets-stadium.jpg",
-                  images[5] = "NBA-rockets-stadium.jpg",
-                  images[6] = "NBA-knicks-stadium.jpg",
-                  images[7] = "NBA-heat-stadium.jpg"
-                  break;
         case "mlb":
           var path = '../images/stadiums/mlb_stadiums/';          
-                  images[0] = "NBA-kings-stadium.jpg",
-                  images[1] = "NBA-bucks-stadium.jpg",
-                  images[2] = "NBA-warriors-stadium.jpg",
-                  images[3] = "NBA-pelicans-stadium.jpg",
-                  images[4] = "NBA-hornets-stadium.jpg",
-                  images[5] = "NBA-rockets-stadium.jpg",
-                  images[6] = "NBA-knicks-stadium.jpg",
-                  images[7] = "NBA-heat-stadium.jpg"
-                  break;
         case "nfl":
-          var path = '../images/stadiums/nfl_stadiums/';          
-                  images[0] = "NBA-kings-stadium.jpg",
-                  images[1] = "NBA-bucks-stadium.jpg",
-                  images[2] = "NBA-warriors-stadium.jpg",
-                  images[3] = "NBA-pelicans-stadium.jpg",
-                  images[4] = "NBA-hornets-stadium.jpg",
-                  images[5] = "NBA-rockets-stadium.jpg",
-                  images[6] = "NBA-knicks-stadium.jpg",
-                  images[7] = "NBA-heat-stadium.jpg"
-                  break;
+          var path = '../images/stadiums/nfl_stadiums/';
+        case "nhl":
+          var path = '../images/stadiums/nhl_stadiums/';
+        case "nba": 
+          var path = '../images/stadiums/nba_stadiums/';          
+            images[0] = "NBA-kings-stadium.jpg",
+            images[1] = "NBA-bucks-stadium.jpg",
+            images[2] = "NBA-warriors-stadium.jpg",
+            images[3] = "NBA-pelicans-stadium.jpg",
+            images[4] = "NBA-hornets-stadium.jpg",
+            images[5] = "NBA-rockets-stadium.jpg",
+            images[6] = "NBA-knicks-stadium.jpg",
+            images[7] = "NBA-heat-stadium.jpg"
+        break;          
         case "eu_soccer":
           var path = '../images/stadiums/euro_soccer_stadiums/';          
-                  images[0] = "olympiastadion-stadium.jpg",
-                  images[1] = "soccer-stadium4.jpg",
-                  images[2] = "fcbarcelona-stadium.jpg",
-                  images[3] = "sounders-stadium.jpg"                        
-                  break; 
-        case "nhl":
-          var path = '../images/stadiums/nhl_stadiums/';          
-                  images[0] = "NBA-kings-stadium.jpg",
-                  images[1] = "NBA-bucks-stadium.jpg",
-                  images[2] = "NBA-warriors-stadium.jpg",
-                  images[3] = "NBA-pelicans-stadium.jpg",
-                  images[4] = "NBA-hornets-stadium.jpg",
-                  images[5] = "NBA-rockets-stadium.jpg",
-                  images[6] = "NBA-knicks-stadium.jpg",
-                  images[7] = "NBA-heat-stadium.jpg"
-                  break;      
+            images[0] = "olympiastadion-stadium.jpg",
+            images[1] = "soccer-stadium4.jpg"                  
+          break;
+        default:
+        var path = '../images/stadiums/nba_stadiums/';          
+            images[0] = "NBA-kings-stadium.jpg",
+            images[1] = "NBA-bucks-stadium.jpg",
+            images[2] = "NBA-warriors-stadium.jpg",
+            images[3] = "NBA-pelicans-stadium.jpg",
+            images[4] = "NBA-hornets-stadium.jpg",
+            images[5] = "NBA-rockets-stadium.jpg",
+            images[6] = "NBA-knicks-stadium.jpg",
+            images[7] = "NBA-heat-stadium.jpg"        
+  
       }        
       var image = images[Math.floor(Math.random()*images.length)];
       image = path + image;
