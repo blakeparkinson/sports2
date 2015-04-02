@@ -24,6 +24,10 @@ var returnPlayers = function (players, rb_team_id, res, league){
      roster.starters = formatEvenOdds(players.players.starters, true),
      roster.bench = formatEvenOdds(players.players.bench);
     }
+    else if (league == 'goats'){
+      roster = players;
+      // need to fix team name
+    }
     else{
       roster = players.players;
     }
@@ -44,6 +48,7 @@ var returnPlayers = function (players, rb_team_id, res, league){
   }
 }
 
+
 var getTimeLimit = function(league){
   var clock = '0:00';
   switch (league){
@@ -52,6 +57,7 @@ var getTimeLimit = function(league){
     case 'eu_soccer':
     case 'nfl':
     case 'nba':
+    case 'goats':
       clock = '5:00';
     break;
   }
@@ -78,6 +84,19 @@ var formatEvenOdds = function(players, is_starter){
   return players;
 }
 
+
+
+var fetchGoatPlayers = function(list_id, rb_team_id, league, res, req, callback){ 
+  db.collection('goats').findOne({lid : list_id}, function (err, item){
+    if (item != undefined){ // data in Mongo
+        var players = item.players;
+        callback(players, rb_team_id, res, league)
+      }
+    else {
+      console.log("goat list not in mongo");
+    }
+  });
+}
 
 
 // Check the db first. If it's there and has been added in the last 24 hours, use it. 
@@ -425,6 +444,7 @@ module.exports = {
   returnPlayers: returnPlayers,
   fetchPlayersFromApi: fetchPlayersFromApi,
   fetchPlayers: fetchPlayers,
+  fetchGoatPlayers: fetchGoatPlayers,
   formatPlayers: formatPlayers,
   formatNBAPlayers: formatNBAPlayers,
   formatPlayersDocument: formatPlayersDocument,
