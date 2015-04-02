@@ -1,7 +1,7 @@
 {
-    "list_id": 7,
+    "list_id": "7",
     "list_name": "topFieldGoalnba",
-    "league": "NBA",
+    "league": "goats",
 		"keywords": "top steals defense",
 		"description": "Top steals per game all time"
 }

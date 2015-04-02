@@ -1,67 +1,79 @@
 var threePointPercentage = [
-  list_id: 8,
-  league: "NBA",
-  keywords: "top three point threepoint shooting scoring",
-  description: "Top three point percentage all time",
-  player:
+  "lid": "8",
+  "league": "goats",
+  "keywords": "top three point threepoint shooting scoring",
+  "list_name": "topThreePointnba",
+  "description": "Top three point percentage all time",
+  "players": [
   {
-    "rank":1,
+    "player_id":"1",
+    "rank":"1",
     "last_name":"Kerr",
     "first_name":"Steve",
-    "threePointPercentage":0.454
+    "threePointPercentage":"0.454"
   },
   {
-    "rank":2,
+    "player_id":"2",
+    "rank":"2",
     "last_name":"Davis",
     "first_name":"Hubert",
-    "threePointPercentage":0.4409
+    "threePointPercentage":"0.4409"
   },
   {
-    "rank":3,
+    "player_id":"3",
+    "rank":"3",
     "last_name":"Petrovic",
     "first_name":"Drazen",
-    "threePointPercentage":0.4374
+    "threePointPercentage":"0.4374"
   },
   {
-    "rank":4,
+    "player_id":"4",
+    "rank":"4",
     "last_name":"Curry",
     "first_name":"Stephen",
-    "threePointPercentage":0.4347
+    "threePointPercentage":"0.4347"
   },
   {
-    "rank":5,
+    "player_id":"5",
+    "rank":"5",
     "last_name":"Kapono",
     "first_name":"Jason",
-    "threePointPercentage":0.4336
+    "threePointPercentage":"0.4336"
   },
   {
-    "rank":6,
+    "player_id":"6",
+    "rank":"6",
     "last_name":"Novak",
     "first_name":"Steve",
-    "threePointPercentage":0.4328
+    "threePointPercentage":"0.4328"
   },
   {
-    "rank":7,
+    "player_id":"7",
+    "rank":"7",
     "last_name":"Korver",
     "first_name":"Kyle",
-    "threePointPercentage":0.4314
+    "threePointPercentage":"0.4314"
   },
   {
-    "rank":8,
+    "player_id":"8",
+    "rank":"8",
     "last_name":"Legler",
     "first_name":"Tim",
-    "threePointPercentage":0.4312
+    "threePointPercentage":"0.4312"
   },
   {
-    "rank":9,
+    "player_id":"9",
+    "rank":"9",
     "last_name":"Nash",
     "first_name":"Steve",
-    "threePointPercentage":0.4278
+    "threePointPercentage":"0.4278"
   },
   {
-    "rank":10,
+    "player_id":"10",
+    "rank":"10",
     "last_name":"Armstrong",
     "first_name":"B.J.",
-    "threePointPercentage":0.425
+    "threePointPercentage":"0.425"
   }
+  ]
 ]

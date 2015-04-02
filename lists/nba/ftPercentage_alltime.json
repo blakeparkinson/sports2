@@ -1,7 +1,7 @@
 {
-    "list_id": 5,
-    "list_name": "topFieldGoalnba",
-    "league": "NBA",
+    "list_id": "5",
+    "list_name": "topFreeThrownba",
+    "league": "goats",
 		"keywords": "top free throw freethrow percentage nba shooting scoring",
 		"description": "Top free throw percentage all time"
 }
