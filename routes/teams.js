@@ -29,14 +29,17 @@ router.get('/', function(res, res) {
 
 // when quiz endpoint is hit, insert a new quiz into mongo and return quiz_id
 router.get('/quiz', function(req, res) {
-  var rb_team_id = req.query.rb_team_id; 
+  var rb_team_id = req.query.rb_team_id;
+  var league = req.query.league;
+  var list_id = req.query.list_id;
+
   if (req.query.trending){
     db.collection('teams').findOne( { _id : rb_team_id}, function (err, item){
       if (item != null){
         var league = item.league;
         var api_team_id = item.team_id;
         var quiz_name = item.market + ' ' + item.name;
-        createQuiz(rb_team_id, league, api_team_id, quiz_name, res, returnItem);
+        createQuiz(rb_team_id, list_id, league, api_team_id, quiz_name, res, returnItem);
       }
       else{
         res.status(500);
@@ -44,11 +47,17 @@ router.get('/quiz', function(req, res) {
       }
     });
   }
-  else{
+  else if (list_id){
+    var quiz_name = req.query.list_name;
     var league = req.query.league;
     var api_team_id = req.query.api_team_id;
+    createQuiz(rb_team_id, list_id, league, api_team_id, quiz_name, res, returnItem);
+  }
+  else{
     var quiz_name = req.query.team_name;
-    createQuiz(rb_team_id, league, api_team_id, quiz_name, res, returnItem);
+    var league = req.query.league;
+    var api_team_id = req.query.api_team_id;
+    createQuiz(rb_team_id, list_id, league, api_team_id, quiz_name, res, returnItem);
   }
 });
 
@@ -57,11 +66,11 @@ var returnItem = function (item, res){
   res.json(item);
 }
 
-var createQuiz = function(rb_team_id, league, api_team_id, quiz_name, res, callback){
+var createQuiz = function(rb_team_id, list_id, league, api_team_id, quiz_name, res, callback){
   db.open(function(err, db){
-    db.collection("quiz").insert({_id:shortId.generate(), rb_team_id: rb_team_id, created_at: new Date().toISOString().slice(0, 19).replace('T', ' '), league: league, api_team_id: api_team_id, quiz_name: quiz_name, quiz_score: "null"}, function (err, insert){
+    db.collection("quiz").insert({_id:shortId.generate(), rb_team_id: rb_team_id, list_id: list_id, created_at: new Date().toISOString().slice(0, 19).replace('T', ' '), league: league, api_team_id: api_team_id, quiz_name: quiz_name, quiz_score: "null"}, function (err, insert){
         if (err){
-          console.log("new quiz insert failed");
+          console.log("new quiz insert failed: "+ err);
         }
         else {
           callback(insert[0], res);

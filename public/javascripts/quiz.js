@@ -1,4 +1,4 @@
-var starters,bench, roster,
+var starters, bench, roster,
     correct = 0,
     stop_counter = false;
     team_container = $('.team-container'),
@@ -32,7 +32,6 @@ if (typeof bench != "undefined" && typeof starters != "undefined"){
 }   
 
 console.log(bench); console.log(starters); console.log(roster);
-
 
 
 // DOM Ready =============================================================
