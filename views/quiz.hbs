@@ -31,11 +31,11 @@
              <div class="player bench">
               <div class="answer-row {{render}}" data-id="{{player_id}}">
                 {{#compare ../league '!=' 'goats'}}
-              		<p class="answered-player">{{render_position ../league position}}</p>
+                  <p class="answered-player">{{render_position ../league position}}</p>
                 {{/compare}}
                 {{#compare ../league 'goats'}}
                   <p class="answered-player">{{rank}}</p>
-                {{/compare}}	
+                {{/compare}}  
               </div>
              </div>
            {{/each}}
