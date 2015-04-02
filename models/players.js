@@ -23,20 +23,22 @@ var returnPlayers = function (players, rb_team_id, res, league){
     if (league == 'nba'){
      roster.starters = formatEvenOdds(players.players.starters, true),
      roster.bench = formatEvenOdds(players.players.bench);
+     var team_name = players.team_name;
     }
     else if (league == 'goats'){
-      roster = players;
-      // need to fix team name
+      roster = formatEvenOdds(players.players);
+      var team_name = players.list_name
     }
     else{
       roster = formatEvenOdds(players.players);
+      var team_name = players.team_name;
     }
      res.render('quiz', {
       roster: roster,
       rb_team_id: rb_team_id,
       league: league,
       static_footer: true,
-      team_name: players.team_name,
+      team_name: team_name,
       clock: getTimeLimit(league),
       background_image: randImg(league)
     });
@@ -89,8 +91,7 @@ var formatEvenOdds = function(players, is_starter){
 var fetchGoatPlayers = function(list_id, rb_team_id, league, res, req, callback){ 
   db.collection('goats').findOne({lid : list_id}, function (err, item){
     if (item != undefined){ // data in Mongo
-        var players = item.players;
-        callback(players, rb_team_id, res, league)
+        callback(item, rb_team_id, res, league)
       }
     else {
       console.log("goat list not in mongo");
