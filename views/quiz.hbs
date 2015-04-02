@@ -30,7 +30,12 @@
            {{#each roster}}
              <div class="player bench">
               <div class="answer-row {{render}}" data-id="{{player_id}}">
-                <p class="answered-player">{{render_position ../league position}}</p>
+                {{#compare ../league '!=' 'goats'}}
+                  <p class="answered-player">{{render_position ../league position}}</p>
+                {{/compare}}
+                {{#compare ../league 'goats'}}
+                  <p class="answered-player">{{rank}}</p>
+                {{/compare}}  
               </div>
              </div>
            {{/each}}
