@@ -23,18 +23,24 @@ var returnPlayers = function (players, rb_team_id, res, league){
     if (league == 'nba'){
      roster.starters = formatEvenOdds(players.players.starters, true),
      roster.bench = formatEvenOdds(players.players.bench);
+     var team_name = players.team_name;
+    }
+    else if (league == 'goats'){
+      roster = formatEvenOdds(players.players);
+      var team_name = players.list_name
     }
     else{
-      roster = players.players;
+      roster = formatEvenOdds(players.players);
+      var team_name = players.team_name;
     }
      res.render('quiz', {
       roster: roster,
       rb_team_id: rb_team_id,
       league: league,
       static_footer: true,
-      team_name: players.team_name,
+      team_name: team_name,
       clock: getTimeLimit(league),
-      background_image: randImg()
+      background_image: randImg(league)
     });
 
 
@@ -44,6 +50,7 @@ var returnPlayers = function (players, rb_team_id, res, league){
   }
 }
 
+
 var getTimeLimit = function(league){
   var clock = '0:00';
   switch (league){
@@ -52,6 +59,7 @@ var getTimeLimit = function(league){
     case 'eu_soccer':
     case 'nfl':
     case 'nba':
+    case 'goats':
       clock = '5:00';
     break;
   }
@@ -78,6 +86,18 @@ var formatEvenOdds = function(players, is_starter){
   return players;
 }
 
+
+
+var fetchGoatPlayers = function(list_id, rb_team_id, league, res, req, callback){ 
+  db.collection('goats').findOne({lid : list_id}, function (err, item){
+    if (item != undefined){ // data in Mongo
+        callback(item, rb_team_id, res, league)
+      }
+    else {
+      console.log("goat list not in mongo");
+    }
+  });
+}
 
 
 // Check the db first. If it's there and has been added in the last 24 hours, use it. 
@@ -169,14 +189,18 @@ switch (league){
             break; 
           case 'nfl':
             json_response = JSON.parse(body);
+            var team_name = json_response.market + ' ' + json_response.name;
             players_sorted = sortNFL(json_response);
-            players = formatPlayers(players_sorted, rb_team_id);
+            players = formatPlayers(players_sorted, rb_team_id, team_name);
             mongoInsertPlayers(league, players, rb_team_id);
             callback(players, rb_team_id, res, league)
             break;
           case 'nhl':
             json_response = JSON.parse(body);
-            players = formatPlayers(json_response, rb_team_id);
+            var team_name = json_response.market + ' ' + json_response.name;
+            players = formatPlayers(json_response, rb_team_id, team_name);
+            appendPlayerShortId(players.players);
+            sortByPositions('nhl', players.players);
             mongoInsertPlayers(league, players, rb_team_id);
             callback(players, rb_team_id, res, league)
             break;
@@ -219,6 +243,14 @@ var sortNBA = function(players_object){
 }
 
 function appendPlayerShortId(player){
+  //we can pass this method an array and it will generate playerids for each player
+  if (player.length > 1){
+    for (i=0; i < player.length; i++){
+      player[i].player_id = shortId.generate();
+    }
+    return;
+  }
+  // it's just a single value
   return player.player_id = shortId.generate();
 }
 
@@ -271,6 +303,13 @@ var sortByPositions = function(league, starters){
         var order = ['G', 'G-F', 'F-G', 'F', 'F-C', 'C-F', 'C'];
       break;
 
+      case 'eu_soccer':
+        var order = ['F', 'M', 'D', 'G'];
+      break;
+
+      case 'nhl':
+        var order = ['F', 'D', 'G'];
+      break;
       //figure out the other leagues later
       default:
         return;
@@ -286,7 +325,7 @@ var formatPlayers = function(response, rb_team_id, team_name){
   playersarray = [];
   for (i=0;i<response.players.length;i++){
     playersarray[i] = {};
-    for(var key in response.players[i]){   //all
+    for(var key in response.players[i]){  //all
       var value = response.players[i][key];
       playersarray[i][key] = value;
     }
@@ -345,6 +384,7 @@ formatEUSoccerPlayers = function(response){
         }
       }
   });
+  sortByPositions('eu_soccer', players);
   roster.players = players
   return roster;
 }
@@ -363,32 +403,53 @@ formatMLBPlayers = function(response, team_id){
   return players;
 }
 
-
-var randImg = function() {
- var imgCount = 8;
-      var dir = '../images/stadiums/nba_stadiums/';
-      var randomCount = Math.round(Math.random() * (imgCount - 1)) + 1;
-      var images = [];
-              images[1] = "NBA-kings-stadium.jpg",
-              images[2] = "NBA-bucks-stadium.jpg",
-              images[3] = "NBA-warriors-stadium.jpg",
-              images[4] = "NBA-pelicans-stadium.jpg",
-              images[5] = "NBA-hornets-stadium.jpg",
-              images[6] = "NBA-rockets-stadium.jpg",
-              images[7] = "NBA-knicks-stadium.jpg",
-              images[8] = "NBA-heat-stadium.jpg"
-              
-
-      var image = dir + images[randomCount];
-      return image;
-      // $("#standard-nba-container").style.backgroundImage = "url(" + dir + images[randomCount] + ")"; 
-}
-
+var randImg = function(league) {      
+      var images = [];      
+      switch (league) {
+        case "mlb":
+          var path = '../images/stadiums/mlb_stadiums/';          
+        case "nfl":
+          var path = '../images/stadiums/nfl_stadiums/';
+        case "nhl":
+          var path = '../images/stadiums/nhl_stadiums/';
+        case "nba": 
+          var path = '../images/stadiums/nba_stadiums/';          
+            images[0] = "NBA-kings-stadium.jpg",
+            images[1] = "NBA-bucks-stadium.jpg",
+            images[2] = "NBA-warriors-stadium.jpg",
+            images[3] = "NBA-pelicans-stadium.jpg",
+            images[4] = "NBA-hornets-stadium.jpg",
+            images[5] = "NBA-rockets-stadium.jpg",
+            images[6] = "NBA-knicks-stadium.jpg",
+            images[7] = "NBA-heat-stadium.jpg"
+        break;          
+        case "eu_soccer":
+          var path = '../images/stadiums/euro_soccer_stadiums/';          
+            images[0] = "olympiastadion-stadium.jpg",
+            images[1] = "soccer-stadium4.jpg"                  
+          break;
+        default:
+        var path = '../images/stadiums/nba_stadiums/';          
+            images[0] = "NBA-kings-stadium.jpg",
+            images[1] = "NBA-bucks-stadium.jpg",
+            images[2] = "NBA-warriors-stadium.jpg",
+            images[3] = "NBA-pelicans-stadium.jpg",
+            images[4] = "NBA-hornets-stadium.jpg",
+            images[5] = "NBA-rockets-stadium.jpg",
+            images[6] = "NBA-knicks-stadium.jpg",
+            images[7] = "NBA-heat-stadium.jpg"        
+  
+      }        
+      var image = images[Math.floor(Math.random()*images.length)];
+      image = path + image;
+      return image;    
+    }
 
 module.exports = {
   returnPlayers: returnPlayers,
   fetchPlayersFromApi: fetchPlayersFromApi,
   fetchPlayers: fetchPlayers,
+  fetchGoatPlayers: fetchGoatPlayers,
   formatPlayers: formatPlayers,
   formatNBAPlayers: formatNBAPlayers,
   formatPlayersDocument: formatPlayersDocument,

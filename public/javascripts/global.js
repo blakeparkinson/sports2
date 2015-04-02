@@ -174,8 +174,9 @@ function fetchTrendingQuiz(event){
     trending: true
   };
   AjaxCreateQuiz(data);
-
 }
+
+
 
 function fetchQuiz(event) {
     var target = $(event.target);
@@ -184,7 +185,9 @@ function fetchQuiz(event) {
           api_team_id = team.data('team-id'),
           league = team.data('league'),
           rb_team_id = team.data('id'),
-          team = team.data('team');
+          team_name = team.data('team'),
+          list_id = team.data('list-id'),
+          list_name = team.data('list-name');
     }
     else{
       var team_id = $('#teams option:selected').val();
@@ -194,7 +197,9 @@ function fetchQuiz(event) {
       api_team_id: api_team_id, 
       league: league, 
       rb_team_id: rb_team_id, 
-      team_name: team
+      team_name: team_name,
+      list_name: list_name,
+      list_id: list_id
     };
 
     AjaxCreateQuiz(data);
@@ -202,7 +207,7 @@ function fetchQuiz(event) {
 
 function AjaxCreateQuiz(data){
 
-  $.ajax({
+    $.ajax({
       url: 'teams/quiz',
       data: data,
       type: 'get',
@@ -214,7 +219,8 @@ function AjaxCreateQuiz(data){
           else{console.log('Throw an error popup or smething eventually');}
         }
     }).done(function() {
-  });
+});
+
 }
 
 

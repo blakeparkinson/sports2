@@ -140,7 +140,6 @@ hbs.registerHelper('inc', function(value, options)
 });
 
 hbs.registerHelper('render_position', function(league, position){
-
   if (arguments.length < 2) {
         throw new Error("Handlerbars Helper 'render_position' needs 2 parameters");
     }
@@ -185,6 +184,19 @@ hbs.registerHelper('render_position', function(league, position){
 
       }
       break;
+    case 'nhl':
+      switch(position){
+        case 'D':
+          position = 'Defence';
+        break;
+        case 'F':
+          position = 'Forward';
+        break;
+        case 'G':
+          position = 'Goalie';
+        break;
+      }
+    break;
   }
   return position;
 })

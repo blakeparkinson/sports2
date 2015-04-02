@@ -1,4 +1,4 @@
-var starters,bench, roster,
+var starters, bench, roster,
     correct = 0,
     stop_counter = false;
     team_container = $('.team-container'),
@@ -27,14 +27,11 @@ else{
   bench = [];
 }
 
-console.log(bench); console.log(starters); console.log(roster);
 if (typeof bench != "undefined" && typeof starters != "undefined"){
   roster = starters.concat(bench);
-}    
+}   
 
-else{
-  roster = [];
-}
+console.log(bench); console.log(starters); console.log(roster);
 
 
 // DOM Ready =============================================================
@@ -111,9 +108,28 @@ var fetchGuess = function(){
 }
 
 var checkForMatches = function(guess, input_field){
+  
   _.each(roster, function(player, index){
+    var last_name = '';
+    var full_name = '';
+    if (player.last_name !=undefined){
+      last_name = player.last_name;
+    }
+    else if (player.full_last_name !=undefined){
+      last_name = player.full_last_name;
+    }
+    if (player.full_name != undefined){
+      full_name = player.full_name;
+    }
+
+    //hax for soccer. whatever
+    else if (player.full_first_name != undefined){
+      full_name = player.full_first_name;
+    }
+
+    var last_name = player.last_name != undefined? player.last_name : player.full_last_name;
     //check full name and just last name, also make sure the player has not been guessed already
-    if ((guess == player.last_name.toLowerCase().trim() || guess == player.full_name.toLowerCase().trim()) && !player.guessed){
+    if ((guess == last_name.toLowerCase().trim() || guess == full_name.toLowerCase().trim()) && !player.guessed){
       correct++;
       populateTable(player);
       input_field.val('');
@@ -129,14 +145,24 @@ var checkForMatches = function(guess, input_field){
 
 var populateTable = function(player, class_color){
   if (player.guessed) return;
+  var full_name = '';
+  if (player.full_name){
+    full_name = player.full_name;
+  }
+  else if (player.first_name && player.last_name){
+    full_name = player.first_name + ' ' + player.last_name;
+  }
+  else if (player.full_first_name){
+    full_name = player.full_first_name;
+  }
 
   var class_name = class_color !== undefined ? class_color : 'rb-green';
-  if (player.starter){
+  if (player.starter || league != 'nba'){
     var field = answer_container.find("[data-id='" + player.player_id + "']");
     var img_html =  '<img class="circle-pic" src='+player.avatar_url+'>';
 
-    field.prepend(img_html);
-    field.find('.answered-player').html(player.full_name);
+    if (league == 'nba')field.prepend(img_html);
+    field.find('.answered-player').html(full_name);
   }
   else{
     var field = answer_container.find('.bench .answer-row.empty').first();
