@@ -425,7 +425,9 @@ var randImg = function(league) {
         case "eu_soccer":
           var path = '../images/stadiums/euro_soccer_stadiums/';          
                   images[0] = "olympiastadion-stadium.jpg",
-                  images[1] = "soccer-stadium4.jpg"                  
+                  images[1] = "soccer-stadium4.jpg",
+                  images[2] = "fcbarcelona-stadium.jpg",
+                  images[3] = "sounders-stadium.jpg"                        
                   break; 
         case "nhl":
           var path = '../images/stadiums/nhl_stadiums/';          
