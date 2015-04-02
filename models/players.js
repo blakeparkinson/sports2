@@ -29,7 +29,7 @@ var returnPlayers = function (players, rb_team_id, res, league){
       // need to fix team name
     }
     else{
-      roster = players.players;
+      roster = formatEvenOdds(players.players);
     }
      res.render('quiz', {
       roster: roster,
@@ -290,6 +290,9 @@ var sortByPositions = function(league, starters){
         var order = ['G', 'G-F', 'F-G', 'F', 'F-C', 'C-F', 'C'];
       break;
 
+      case 'eu_soccer':
+        var order = ['F', 'M', 'D', 'G'];
+      break;
       //figure out the other leagues later
       default:
         return;
@@ -364,6 +367,7 @@ formatEUSoccerPlayers = function(response){
         }
       }
   });
+  sortByPositions('eu_soccer', players);
   roster.players = players
   return roster;
 }
