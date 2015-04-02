@@ -189,14 +189,18 @@ switch (league){
             break; 
           case 'nfl':
             json_response = JSON.parse(body);
+            var team_name = json_response.market + ' ' + json_response.name;
             players_sorted = sortNFL(json_response);
-            players = formatPlayers(players_sorted, rb_team_id);
+            players = formatPlayers(players_sorted, rb_team_id, team_name);
             mongoInsertPlayers(league, players, rb_team_id);
             callback(players, rb_team_id, res, league)
             break;
           case 'nhl':
             json_response = JSON.parse(body);
-            players = formatPlayers(json_response, rb_team_id);
+            var team_name = json_response.market + ' ' + json_response.name;
+            players = formatPlayers(json_response, rb_team_id, team_name);
+            appendPlayerShortId(players.players);
+            sortByPositions('nhl', players.players);
             mongoInsertPlayers(league, players, rb_team_id);
             callback(players, rb_team_id, res, league)
             break;
@@ -239,6 +243,14 @@ var sortNBA = function(players_object){
 }
 
 function appendPlayerShortId(player){
+  //we can pass this method an array and it will generate playerids for each player
+  if (player.length > 1){
+    for (i=0; i < player.length; i++){
+      player[i].player_id = shortId.generate();
+    }
+    return;
+  }
+  // it's just a single value
   return player.player_id = shortId.generate();
 }
 
@@ -294,6 +306,10 @@ var sortByPositions = function(league, starters){
       case 'eu_soccer':
         var order = ['F', 'M', 'D', 'G'];
       break;
+
+      case 'nhl':
+        var order = ['F', 'D', 'G'];
+      break;
       //figure out the other leagues later
       default:
         return;
@@ -309,7 +325,7 @@ var formatPlayers = function(response, rb_team_id, team_name){
   playersarray = [];
   for (i=0;i<response.players.length;i++){
     playersarray[i] = {};
-    for(var key in response.players[i]){   //all
+    for(var key in response.players[i]){  //all
       var value = response.players[i][key];
       playersarray[i][key] = value;
     }
