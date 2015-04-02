@@ -3,17 +3,25 @@
       <div id="team-select">What's your team?</div>
       <input id="select2" type="hidden"/>
       <div class="submit-section">
-        <div class="btn btn-primary quiz-btn">Take Quiz</div>
+        <div class="btn btn-success quiz-btn">Take Quiz</div>
+        
         {{#if trending_quiz.length}}
-          <div>
-            <br />
-            Or try one of our trending quizzes:
-            {{#each trending_quiz}}
-              <span class="trending-quiz" data-id={{rb_team_id}}>{{quiz_name}}{{comma}}</span>
-            {{/each}} 
+          <div id="trending-quiz-contain">
+            
+            <div>
+              <span id="trending-guys-back">
+                <span id="trending-guys-inner">
+                  Or try one of our trending quizzes:
+                {{#each trending_quiz}}
+                  <span class="trending-quiz" data-id={{rb_team_id}}>{{quiz_name}}{{comma}}</span>
+                {{/each}} 
+                </span>
+              </span>
+            </div>
             <br />
           </div>
         {{/if}}
+
       </div>
     </div>
   </body>
