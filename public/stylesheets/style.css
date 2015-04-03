@@ -49,6 +49,15 @@ a {
   opacity: 0.92;
 }
 
+.player-card{
+  background: #fff;
+  border-radius: 0 0 5px 5px;
+  opacity: 0.92;
+  border-bottom: 1px solid #ccc;
+  height: 700px;
+  
+}
+
 .navbar-brand.main{
 	font-size: 22px;
 }
@@ -151,6 +160,49 @@ ul {
   float: right;
   border-radius: 0 5px 0 0;
   border-bottom: 1px solid #ccc;
+}
+  /* ===== PLAYER CARD STYLING ===== */
+  #player-card-contain{
+    margin-top: 10%;
+  }
+  #player-card-contain {
+    min-height: 300px;
+    min-width: 100px;
+  }
+ #top-half-card {
+  text-align: center;
+  padding-top: 5%;
+ }
+  #player-card-image {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 40%;
+    height: 50%;
+    width: 50%;
+  }
+  #lower-half-card {
+    margin-top: 5%;
+    padding: 0 10% 0 10%;
+  }
+  #player-card-name {
+    text-align: center;
+    font-size: 2em;
+  }
+  .player-card-table td {
+    padding: 5%;
+    padding-top: 1.5%; 
+    font-size: 1.3em;
+  }
+  .player-card-table th {
+    padding-right: 5%;
+    padding-top: 1.5%; 
+    font-size: 1.3em;
+  }
+#basic-info-table {
+  margin-top: 3%;
+}
+#player-card-basic {
+  border-top: 1px solid black;
 }
 
 @media screen and (max-width: 535px) {
@@ -820,8 +872,4 @@ GENERAL RESPONSIVE VIEWS
   /* modal */
   .modal-video { width:100%; height:250px; }
 
-  /* ===== PLAYER CARD STYLING ===== */
-  #player-card-contain {
-    min-height: 300px;
-    min-width: 100px;
-  }
+

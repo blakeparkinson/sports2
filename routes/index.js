@@ -58,6 +58,12 @@ router.get('/', function(req, res) {
   });
 });
 
+router.get('/get', function(req, res) {
+    var term = req.query.q;
+    res.render('../views/partials/player_card.hbs', {layout: false, data: data});
+
+});
+
 
 
 
