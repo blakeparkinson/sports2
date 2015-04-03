@@ -155,6 +155,13 @@ var populateTable = function(player, class_color){
   else if (player.full_first_name){
     full_name = player.full_first_name;
   }
+  var source   = $("#card").html();
+  console.log(source);
+var template = Handlebars.compile(source);
+var data = {full_name: full_name};
+var html = template(data);
+console.log(html)
+$('.player-card').append(html);
 
   var class_name = class_color !== undefined ? class_color : 'rb-green';
   if (player.starter || league != 'nba'){
