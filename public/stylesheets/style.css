@@ -49,6 +49,15 @@ a {
   opacity: 0.92;
 }
 
+.player-card{
+  background: #fff;
+  border-radius: 0 0 5px 5px;
+  opacity: 0.92;
+  border-bottom: 1px solid #ccc;
+  height: 700px;
+  
+}
+
 .navbar-brand.main{
 	font-size: 22px;
 }
