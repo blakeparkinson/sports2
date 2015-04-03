@@ -12,15 +12,13 @@
         </div>
       </div>
 			<div class="player-card">
-				{{> player_card }} 
 			</div>
       <div class="button-section">
         <div class="btn btn-primary quit-btn">Give Up</div>
       </div>
   </div>
 
-
-
+  				{{> player_card }} 
 
 <script type='text/javascript'>
   league = '{{league}}';
@@ -37,6 +35,3 @@
       var roster =  {{{json_stringify roster}}};
     </script>
   {{/compare}}
-
-
-    

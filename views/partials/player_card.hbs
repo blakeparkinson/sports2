@@ -1,16 +1,16 @@
 
+<script id="card" type="text/x-handlebars-template">
 
 <div id="player-card-contain">
   <div id="top-half-card">
-    <img id="player-card-image" src="http://www.clker.com/cliparts/Q/i/y/n/x/i/grey-silhouette-of-man2-hi.png">
+    <img id="player-card-image" src="\{{avatar_url}}">
   </div>
   <div id="lower-half-card">
-    <div id="player-card-name">Anthony Davis</div>
+    <div id="player-card-name">\{{full_name}}</div>
     
     <table id="basic-info-table" class="player-card-table">
       <tr id="player-card-basic">
         <td id="number-and-pos">#13 SG</td>
-        <td id="height-and-weight">6'5", 225 lbs</td>
         <td id="player-card-team">New Orleans Pelicans</td>
       </tr>
     </table>
@@ -35,3 +35,4 @@
 
 
 </div>
+</script>

@@ -29,10 +29,9 @@ else{
 
 if (typeof bench != "undefined" && typeof starters != "undefined"){
   roster = starters.concat(bench);
-}   
-
+}
+var card = $('.player-card');
 console.log(bench); console.log(starters); console.log(roster);
-
 
 // DOM Ready =============================================================
 $(document).ready(function() {
@@ -155,13 +154,8 @@ var populateTable = function(player, class_color){
   else if (player.full_first_name){
     full_name = player.full_first_name;
   }
-  var source   = $("#card").html();
-  console.log(source);
-var template = Handlebars.compile(source);
-var data = {full_name: full_name};
-var html = template(data);
-console.log(html)
-$('.player-card').append(html);
+  var source   = $("#card");
+  AppendTemplate(source, card, player);
 
   var class_name = class_color !== undefined ? class_color : 'rb-green';
   if (player.starter || league != 'nba'){
@@ -177,6 +171,14 @@ $('.player-card').append(html);
   }
   field.addClass(class_name).removeClass('empty');
 
+}
+
+var AppendTemplate = function(source, parent, data){
+  var source   = source.html();
+  var template = Handlebars.compile(source);
+  parent.empty();
+  var html = template(data);
+  parent.append(html);
 }
 
 var endQuiz = function(e, skip_mapping){
@@ -215,4 +217,32 @@ var QueryString = function () {
     }
   } 
     return query_string;
-} 
+}
+
+var getTemplate = function(name, data, options){
+
+    templates = {},
+
+    $.post('/index/get/' + name, data, function(d){
+        
+        templates[name] = d;
+        
+        tpl = processTemplate(d, data, options); 
+
+
+        return tpl;
+
+    }); 
+                   
+  }
+
+  var processTemplate = function(template, data, options){
+
+        var tpl = Handlebars.compile(template, options),
+            compiled;
+
+        data ? compiled = tpl(data) : compiled = tpl({});
+
+        return compiled;
+
+    }
