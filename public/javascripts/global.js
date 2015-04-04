@@ -25,6 +25,14 @@ $(document).ready(function() {
 
     $('body').on('click', '.email-img', appendMessage);
 
+    $(document).keypress(function(event){ 
+      var keycode = (event.keyCode ? event.keyCode : event.which);
+      if(keycode == '13'){
+         $("#take-quiz-button").click();
+      }     
+    });
+    
+
 });
 
 // Functions ============================================================= //

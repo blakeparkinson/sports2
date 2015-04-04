@@ -49,12 +49,11 @@ a {
   opacity: 0.92;
 }
 
-.player-card{
-  background: #fff;
+.player-card{  
   border-radius: 0 0 5px 5px;
-  opacity: 0.92;
   border-bottom: 1px solid #ccc;
   height: 700px;
+  background: rgba(255, 255, 255, .92);
   
 }
 
