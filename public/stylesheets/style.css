@@ -169,28 +169,34 @@ ul {
     min-width: 100px;
   }
  #top-half-card {
-  text-align: center;
   padding-top: 5%;
+  padding-left: 8%;
  }
   #player-card-image {
-    max-width: 200px;
-    max-height: 200px;
+    max-width: 150px;
+    max-height: 150px;
     border-radius: 40%;
     height: 50%;
     width: 50%;
+    float: left;    
+  }
+  #top-player-info {
+    padding-left: 30%;
+
   }
   #lower-half-card {
     margin-top: 5%;
     padding: 0 10% 0 10%;
   }
   #player-card-name {
-    text-align: center;
+    
     font-size: 2em;
   }
   .player-card-table td {
     padding: 5%;
     padding-top: 1.5%; 
     font-size: 1.3em;
+    min-width: 50px;    
   }
   .player-card-table th {
     padding-right: 5%;
