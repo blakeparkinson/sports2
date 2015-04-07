@@ -154,6 +154,8 @@ var populateTable = function(player, class_color){
   else if (player.full_first_name){
     full_name = player.full_first_name;
   }
+  player.team_name = team_name;
+  player.league = league;
   var source   = $("#card");
   AppendTemplate(source, card, player);
 
