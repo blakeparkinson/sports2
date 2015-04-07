@@ -50,9 +50,9 @@ a {
 }
 
 .player-card{
-  background: #fff;
+  background: #6C6C6C;
   border-radius: 0 0 5px 5px;
-  opacity: 0.92;
+  opacity: 0.97;
   border-bottom: 1px solid #ccc;
   height: 700px;
   
@@ -162,9 +162,7 @@ ul {
   border-bottom: 1px solid #ccc;
 }
   /* ===== PLAYER CARD STYLING ===== */
-  #player-card-contain{
-    margin-top: 10%;
-  }
+
   #player-card-contain {
     min-height: 300px;
     min-width: 100px;
@@ -174,6 +172,7 @@ ul {
   padding-top: 5%;
  }
   #player-card-image {
+    float:left;
     max-width: 200px;
     max-height: 200px;
     border-radius: 40%;
@@ -185,8 +184,9 @@ ul {
     padding: 0 10% 0 10%;
   }
   #player-card-name {
-    text-align: center;
     font-size: 2em;
+    color:rgb(234, 234, 207);
+    font-weight: 800;
   }
   .player-card-table td {
     padding: 5%;
