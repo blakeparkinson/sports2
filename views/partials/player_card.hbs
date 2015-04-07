@@ -4,16 +4,19 @@
 <div id="player-card-contain">
   <div id="top-half-card">
     <img id="player-card-image" src="\{{avatar_url}}">
+     <div id="top-player-info"> 
+      <div id="player-card-name">\{{full_name}}</div>
+      <table id="basic-info-table" class="player-card-table">
+        <tr id="player-card-basic">
+          <td id="player-card-number">#13</td>
+          <td id="player-card-pos">SG</td>
+          <td id="player-card-team">New Orleans Pelicans</td>
+        </tr>
+      </table>
+    </div>  
   </div>
-  <div id="lower-half-card">
-    <div id="player-card-name">\{{full_name}}</div>
+  <div id="lower-half-card">    
     
-    <table id="basic-info-table" class="player-card-table">
-      <tr id="player-card-basic">
-        <td id="number-and-pos">#13 SG</td>
-        <td id="player-card-team">New Orleans Pelicans</td>
-      </tr>
-    </table>
     <br />
     <div>Season stats</div>
     <table class="player-card-table">
@@ -24,10 +27,10 @@
         <th>PER</th>
       </tr>
       <tr>
-        <td>15</td>
-        <td>5</td>
-        <td>6</td>
-        <td>25.6</td>
+        <td id="ppg">15</td>
+        <td id="apg">5</td>
+        <td id="rpg">6</td>
+        <td id="per">25.6</td>
       </tr>
     </table>
 
