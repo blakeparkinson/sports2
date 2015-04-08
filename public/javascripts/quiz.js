@@ -131,6 +131,7 @@ var checkForMatches = function(guess, input_field){
     if ((guess == last_name.toLowerCase().trim() || guess == full_name.toLowerCase().trim()) && !player.guessed){
       correct++;
       populateTable(player);
+      addToCorrectList(correct, player);
       input_field.val('');
       team_container.find('.number').html(correct);
       player.guessed = true;
@@ -140,6 +141,12 @@ var checkForMatches = function(guess, input_field){
       }
     }
   })
+}
+
+var addToCorrectList = function (count, player){
+  var section = $('.answer-right-section').find('.content-section'),
+      html = '<div class="correct-guess">'+count +'.' + player.full_name + '</div>';
+  section.append(html);
 }
 
 var populateTable = function(player, class_color){
@@ -158,7 +165,6 @@ var populateTable = function(player, class_color){
   player.league = league;
   var source   = $("#card");
   AppendTemplate(source, card, player);
-
   var class_name = class_color !== undefined ? class_color : 'rb-green';
   if (player.starter || league != 'nba'){
     var field = answer_container.find("[data-id='" + player.player_id + "']");
