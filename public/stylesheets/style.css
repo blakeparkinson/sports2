@@ -152,14 +152,14 @@ ul {
 
 .point-container{
   background: rgb(62, 65, 62);
-  padding: 6px 11px 4px 11px;
+  padding: 6px 11px 5px 11px;
   margin-left: -4px;
   width: 15%;
   line-height: 1;
   text-align: center;
   float: right;
   border-radius: 0 5px 0 0;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px rgb(62, 65, 62);
 }
   /* ===== PLAYER CARD STYLING ===== */
 
