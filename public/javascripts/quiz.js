@@ -39,6 +39,8 @@ $(document).ready(function() {
 	$('body').on('keyup', '#guess-box', fetchGuess);
 	$("#guess-box").focus();
   $('body').on('click', '.quit-btn', endQuiz);
+  $('body').on('click', '.correct-guess', showCard);
+
 
 
   startCounter();
@@ -131,6 +133,7 @@ var checkForMatches = function(guess, input_field){
     if ((guess == last_name.toLowerCase().trim() || guess == full_name.toLowerCase().trim()) && !player.guessed){
       correct++;
       populateTable(player);
+      addToCorrectList(correct, player, index);
       input_field.val('');
       team_container.find('.number').html(correct);
       player.guessed = true;
@@ -142,8 +145,24 @@ var checkForMatches = function(guess, input_field){
   })
 }
 
+var addToCorrectList = function (count, player, index){
+  var section = $('.answer-right-section').find('.content-section'),
+      html = '<div class="correct-guess" data-index="'+index+'">'+count +'.' + player.full_name + '</div>';
+  section.append(html);
+}
+
 var populateTable = function(player, class_color){
   if (player.guessed) return;
+  prepareCard(player);
+}
+
+//show the card when clicked from sidebar
+var showCard = function(e){
+  var index = $(this).data('index');
+  prepareCard(roster[index]);
+}
+
+var prepareCard = function(player){
   var full_name = '';
   if (player.full_name){
     full_name = player.full_name;
@@ -158,20 +177,6 @@ var populateTable = function(player, class_color){
   player.league = league;
   var source   = $("#card");
   AppendTemplate(source, card, player);
-
-  var class_name = class_color !== undefined ? class_color : 'rb-green';
-  if (player.starter || league != 'nba'){
-    var field = answer_container.find("[data-id='" + player.player_id + "']");
-    var img_html =  '<img class="circle-pic" src='+player.avatar_url+'>';
-
-    if (league == 'nba')field.prepend(img_html);
-    field.find('.answered-player').html(full_name);
-  }
-  else{
-    var field = answer_container.find('.bench .answer-row.empty').first();
-    field.html(player.full_name);
-  }
-  field.addClass(class_name).removeClass('empty');
 
 }
 

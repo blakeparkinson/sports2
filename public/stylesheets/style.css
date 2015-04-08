@@ -72,6 +72,32 @@ a {
   padding: 60px 0 60px 0;
   margin: 0 auto;
   min-height: 750px;
+  float:left;
+  margin-left: 22%;
+  margin-right:5%;
+}
+
+.answer-right-section{
+  float: left;
+  min-height: 30px;
+  background: rgb(255, 255, 255);
+  margin-top: 117px;
+  border-radius: 2px;
+}
+
+.answer-right-section .content-section {
+  padding: 9px;
+}
+
+.answer-right-section .subheader {
+  border-bottom: 1px solid rgb(204, 204, 204);
+}
+
+
+.answer-right-section .correct-guess{
+  padding-top: 10px;
+  cursor: pointer;
+  color: rgb(55, 132, 211);
 }
 
 @media screen and (max-width: 580px) {
