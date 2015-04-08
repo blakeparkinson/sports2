@@ -96,6 +96,8 @@ a {
 
 .answer-right-section .correct-guess{
   padding-top: 10px;
+  cursor: pointer;
+  color: rgb(55, 132, 211);
 }
 
 @media screen and (max-width: 580px) {
