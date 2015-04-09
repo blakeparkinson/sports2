@@ -58,4 +58,14 @@ Handlebars.registerHelper('render_position', function(league, position){
     break;
   }
   return position;
+});
+
+Handlebars.registerHelper('format_height', function(heightInches){
+  if (arguments.length < 1) {
+        throw new Error("Handlerbars Helper 'render_position' needs 2 parameters");
+    }
+  var feet = Math.floor(heightInches / 12);
+  var inches =  heightInches % 12;
+  var americanHeight = feet + "'" + inches + "\"";
+  return americanHeight;
 })
