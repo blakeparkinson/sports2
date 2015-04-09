@@ -417,7 +417,13 @@ var randImg = function(league) {
             images[1] = "nfl-giants-stadium.jpg",
             images[2] = "nfl-patriots-stadium.jpg",
             images[3] = "nfl-ravens-stadium.jpg",
-            images[4] = "nfl-seahawks-stadium.jpg"          
+            images[4] = "nfl-seahawks-stadium.jpg",
+            images[5] = "nfl-bills-stadium.jpg",
+            images[6] = "nfl-chargers-stadium.jpg",
+            images[7] = "nfl-chiefs-stadium.jpg",
+            images[8] = "nfl-jets-stadium.jpg",
+            images[9] = "nfl-raiders-stadium.jpg",
+            images[10] = "nfl-cowboys-stadium.jpg"
           break;
         case "nhl":
           var path = '../images/stadiums/nhl_stadiums/';
@@ -442,7 +448,12 @@ var randImg = function(league) {
         case "eu_soccer":
           var path = '../images/stadiums/euro_soccer_stadiums/';          
             images[0] = "olympiastadion-stadium.jpg",
-            images[1] = "soccer-stadium4.jpg"                  
+            images[1] = "soccer-stadium4.jpg",
+            images[2] = "bayernmunich-stadium.jpg",
+            images[3] = "newcastle-stadium.jpg",
+            images[4] = "saitama-stadium.jpg",
+            images[5] = "sounders-stadium.jpg",
+            images[6] = "fcbarcelona-stadium.jpg"                                                      
           break;
         default:
         var path = '../images/stadiums/nba_stadiums/';          
