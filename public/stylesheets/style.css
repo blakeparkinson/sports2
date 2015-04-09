@@ -568,12 +568,15 @@ table tr th:last-child {
 }
 
 #standard-nba-container{ 
-    background: no-repeat scroll center top/cover transparent; 
-    padding: 0;
-    bottom:0;
-    min-height: 650px;
-    width:100%;
-    position:relative;
+  background-position: center center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-color: #211922;
+  margin: 0;
+  padding: 0;
 }
 #trending-quiz-contain {
   padding-top: 1%;

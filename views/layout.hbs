@@ -9,7 +9,7 @@
     <link rel='stylesheet' href='/stylesheets/leaguepage.css' />
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' />
   </head>
-  <body>
+  <body class="quiz-page-backgrounds" id="standard-{{league}}-container" style="background-image: url({{background_image}});">
 {{# unless special_layout}}
 
 	<nav class="navbar navbar-default blitz" role="navigation">
@@ -48,20 +48,22 @@
     </div>
   </div>
   
-  <footer class="footer {{#if static_footer}}static{{/if}}">
-    <div class="navbar-collapse collapse">      
-      <div class="container">        
-          <p class="text-muted">     
-            <ul class="bs-docs-footer-links text-muted">
-              <li><a href="/" class="rb-green">Home</a></li>      
-              <li><a href="/about" class="rb-green">About</a></li>
-              <li><a href="/ourteam" class="rb-green">Team</a></li>
-              <li><a href="/contactUs" class="rb-green">Contact Us</a></li>                       
-            </ul>                     
-          </p>      
-      </div>
-    </div>  
-  </footer>
+  {{#unless remove_footer}}
+    <footer class="footer">
+      <div class="navbar-collapse collapse">      
+        <div class="container">        
+            <p class="text-muted">     
+              <ul class="bs-docs-footer-links text-muted">
+                <li><a href="/" class="rb-green">Home</a></li>      
+                <li><a href="/about" class="rb-green">About</a></li>
+                <li><a href="/ourteam" class="rb-green">Team</a></li>
+                <li><a href="/contactUs" class="rb-green">Contact Us</a></li>                       
+              </ul>                     
+            </p>      
+        </div>
+      </div>  
+    </footer>
+  {{/unless}}
   
   {{/unless}}
 
