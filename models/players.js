@@ -37,7 +37,7 @@ var returnPlayers = function (players, rb_team_id, res, league){
       roster: roster,
       rb_team_id: rb_team_id,
       league: league,
-      static_footer: true,
+      remove_footer: true,
       team_name: team_name,
       clock: getTimeLimit(league),
       background_image: randImg(league)
