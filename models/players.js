@@ -410,8 +410,21 @@ var randImg = function(league) {
           var path = '../images/stadiums/mlb_stadiums/';          
         case "nfl":
           var path = '../images/stadiums/nfl_stadiums/';
+            images[0] = "nfl-49ers-stadium.jpg",
+            images[1] = "nfl-giants-stadium.jpg",
+            images[2] = "nfl-patriots-stadium.jpg",
+            images[3] = "nfl-ravens-stadium.jpg",
+            images[4] = "nfl-seahawks-stadium.jpg"          
+          break;
         case "nhl":
           var path = '../images/stadiums/nhl_stadiums/';
+            images[0] = "nhl-bruins-stadium.jpg",
+            images[1] = "nhl-flyers-stadium.jpg",
+            images[2] = "nhl-redwings-stadium.jpg",
+            images[3] = "nhl-sabres-stadium.jpg",
+            images[4] = "nhl-thrashers-stadium.jpg",
+            images[5] = "nhl-predators-stadium.jpg"
+          break;
         case "nba": 
           var path = '../images/stadiums/nba_stadiums/';          
             images[0] = "NBA-kings-stadium.jpg",
