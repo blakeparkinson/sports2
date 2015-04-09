@@ -152,7 +152,6 @@ switch (league){
         switch (league){
           case 'nba':
             json_response = JSON.parse(body);
-
             // find the image from usat and insert into players array
             for (a=0;a<Object.keys(json_response.players).length;a++){
               var player_name = json_response.players[a].first_name.toLowerCase()+'-'+json_response.players[a].last_name.toLowerCase()
@@ -171,6 +170,10 @@ switch (league){
                         //compare by player id
                         if (json_response.players[i].id == players_roster[j].id){
                           json_response.players[i].status = players_roster[j].status;
+                          json_response.players[i].weight = players_roster[j].weight;
+                          json_response.players[i].height = players_roster[j].height;
+                          json_response.players[i].experience = players_roster[j].experience;
+                          json_response.players[i].college = players_roster[j].college;
                           //we found a match, break out of the 2nd loop iteration
                           continue;
                         }
