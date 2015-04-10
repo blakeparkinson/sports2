@@ -24,12 +24,10 @@ router.get('/', function(req, res) {
 		temparray = [];
 		var endresult = [];
 		if (result){
-			temparray.push(result.slice(0,3))
-			temparray = _.first(temparray)
+			temparray = result.slice(0,3)
 			for (i=0;i<temparray.length;i++){
 				team_info = temparray[i]._id;
-				counts = temparray[i].counts;
-				team_info.counts = counts;
+				team_info.counts = temparray[i].counts;
         if (temparray.length - i == 1){
           //don't add a comma to the last team because that's bad english
           team_info.comma = '.';

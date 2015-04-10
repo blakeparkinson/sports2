@@ -26,8 +26,8 @@ router.get('/', function(req, res) {
 
 	], function (err, result){ 
 		if (result){
-			var all_leagues = team_array(result);
-			var sorted_teams = team_sort(all_leagues);  // Sort the teams within each league by number of quizzes taken
+			var all_leagues = createTeamLists(result);
+			var sorted_teams = sortTeams(all_leagues);  // Sort the teams within each league by number of quizzes taken
 		}
 		res.render('leaguesearch',
 			{ popular_teams: sorted_teams }
@@ -53,7 +53,7 @@ router.get('/:league', function(req, res) {
 		], function (err, result){  // in this case, result is one league object with an array of teams
 			if (result){
 				//var all_leagues = team_array(result);
-				var sorted_teams = team_sort(result);  // Sort the teams within the league by number of quizzes taken
+				var sorted_teams = sortTeams(result);  // Sort the teams within the league by number of quizzes taken
 				for (i=0;i<sorted_teams[0].length;i++){
 					console.log(quizCutoffDate);
 					console.log("moop"+sorted_teams[0][i].rb_team_id);
@@ -70,75 +70,61 @@ router.get('/:league', function(req, res) {
 
 
 
-var team_array = function(teamobject){
+var createTeamLists = function(teamobject){
 	var teams = [];
 	var nba_teams = [];
 	var nfl_teams = [];
 	var eu_soccer_teams = [];
 	var nhl_teams = [];
 	var goats_teams = [];
+	var mlb_teams = [];
 	for (i=0;i<Object.keys(teamobject).length;i++){
 		var team = {};
 		team.rb_team_id = teamobject[i]._id.rb_team_id;
 		team.league = teamobject[i]._id.league;
 		team.quizCount = teamobject[i].quizCount;
-		if (team.league == "nba"){
-			nba_teams.push(team);
-		}
-		else if (team.league == "goats"){
-			goats_teams.push(team);
-		}
-		else if (team.league == "eu_soccer"){
-			eu_soccer_teams.push(team);
-		}
-		else if (team.league == "nhl"){
-			nhl_teams.push(team);
-		}
-		else if (team.league == "nfl"){
-			nfl_teams.push(team);
-		}
-		else{
-			console.log("not in leagues");
-		}	
-	}
-	teams.push(nba_teams);
-	teams.push(goats_teams);
-	teams.push(eu_soccer_teams);
-	teams.push(nhl_teams);
-	teams.push(nfl_teams);
+		switch (team.league){
+			case 'nba':
+				nba_teams.push(team);				
+				break;
+			case 'goats':
+				goats_teams.push(team);				
+				break;
+			case 'eu_soccer':
+				eu_soccer_teams.push(team);				
+				break;
+			case 'nhl':
+				nhl_teams.push(team);				
+				break;
+			case 'nfl':
+				nfl_teams.push(team);				
+				break;
+			case 'mlb':
+				mlb_teams.push(team);				
+		}}
+
+	teams.push(nba_teams, goats_teams, eu_soccer_teams, nhl_teams, nfl_teams, mlb_teams);
 	return teams
 }
 
 
-var team_sort = function(teamsarray){
+var sortTeams = function(teamsarray){
 	for (i=0;i<Object.keys(teamsarray).length;i++){ 
 		currentleague = teamsarray[i];
-		var sorted = currentleague.sort(comparecounts);
+		var sorted = currentleague.sort(compareCounts);
 		teamsarray[i] = sorted
 	}
 	return teamsarray
 }
 
 
-
-
-function comparecounts(a,b) {
+function compareCounts(a,b) {
   if (a.quizCount < b.quizCount)
      return 1;
   if (a.quizCount > b.quizCount)
     return -1;
   return 0;
 }
-
-
-
-
-
-
-
-
-
-
 
 
 module.exports = router;
