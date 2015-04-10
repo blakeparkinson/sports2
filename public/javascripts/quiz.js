@@ -146,9 +146,9 @@ var checkForMatches = function(guess, input_field){
 }
 
 var addToCorrectList = function (count, player, index){
-  var section = $('.answer-right-section').find('.content-section'),
-      html = '<div class="correct-guess" data-index="'+index+'">'+count +'.' + player.full_name + '</div>';
-  section.append(html);
+
+  var html = '<div class="correct-guess" data-index="'+index+'">'+count +'.' + player.full_name + '</div>';
+  answer_container.append(html);
 }
 
 var populateTable = function(player, class_color){
