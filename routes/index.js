@@ -40,7 +40,7 @@ router.get('/', function(req, res) {
 				endresult.push(team_info);
 			}
 		}
-//	});
+
   var trending_quiz = {};
   if (typeof endresult !== 'undefined' && endresult){
     trending_quiz = endresult
