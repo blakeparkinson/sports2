@@ -51,7 +51,7 @@ router.get('/:league', function(req, res) {
 				"quizCount": { "$sum": 1}
 			}}
 		], function (err, result){  // in this case, result is one league object with an array of teams
-			if (result){
+			if (result.length > 0){
 				//var all_leagues = team_array(result);
 				var sorted_teams = sortTeams(result);  // Sort the teams within the league by number of quizzes taken
 				for (i=0;i<sorted_teams[0].length;i++){
