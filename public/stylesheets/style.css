@@ -174,7 +174,7 @@ ul {
   width: 15%;
   line-height: 1;
   text-align: center;
-  float: right;
+  display: inline-block;
   border-radius: 0 5px 0 0;
   border-bottom: 1px rgb(62, 65, 62);
 }
@@ -677,6 +677,10 @@ table tr th:last-child {
 }
 .button-section .quit-btn{
   padding: 6px 30px;
+}
+.quit-btn {
+  display: block !important;
+  width: 85%;
 }
 .trending-quiz{
   color: #009AB9;
