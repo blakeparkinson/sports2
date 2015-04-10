@@ -37,7 +37,6 @@ router.get('/', function(req, res) {
 
 
 
-// HAVE NOT TESTED THIS CODE YET
 router.get('/:league', function(req, res) {
 	var league = req.params.league;
 	db.collection('quiz').aggregate(
@@ -52,14 +51,9 @@ router.get('/:league', function(req, res) {
 			}}
 		], function (err, result){  // in this case, result is one league object with an array of teams
 			if (result.length > 0){
-				//var all_leagues = team_array(result);
-				var sorted_teams = sortTeams(result);  // Sort the teams within the league by number of quizzes taken
-				for (i=0;i<sorted_teams[0].length;i++){
-					console.log(quizCutoffDate);
-					console.log("moop"+sorted_teams[0][i].rb_team_id);
-					console.log("muup"+sorted_teams[0][i].quizCount);
-
-				}  //will remove once I've tested
+				var temparray = [];
+				temparray.push(result);
+				var sorted_teams = sortTeams(temparray);  // Sort the teams within the league by number of quizzes taken
 			}
 
 		res.render('leaguesearch', {
