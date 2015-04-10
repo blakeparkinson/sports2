@@ -12,15 +12,9 @@ quizCutoffDate.setDate(quizCutoffDate.getDate() - 7);  //currently set to 1 week
 
 router.get('/', function(req, res) {
 	var popular_quizzes = db.collection('quiz').aggregate(
-	[{ $project: {
-		_id: 0,
-		rb_team_id: 1,
-		quiz_name: 1,
-		Created_in_timeframe: {$cond: [{$lt: ['$created_at', quizCutoffDate]}, 1, 0]}
-		}
-	},
+	[{ "$match" : { "created_at" : { "$gt" : quizCutoffDate.toISOString().slice(0, 19).replace('T', ' ') }}},
 	{ $group : {
-		_id : {rb_team_id: "$rb_team_id", quiz_name: "$quiz_name"}, counts : {$sum: '$Created_in_timeframe'} 
+		_id : {rb_team_id: "$rb_team_id", quiz_name: "$quiz_name"}, counts : {$sum: 1} 
 		}
 	},
 	{ $sort: {
@@ -28,14 +22,12 @@ router.get('/', function(req, res) {
 		}
 	}], function(err, result){
 		temparray = [];
-		endresult = [];
+		var endresult = [];
 		if (result){
-			temparray.push(result.slice(0,3))
-			temparray = _.first(temparray)
+			temparray = result.slice(0,3)
 			for (i=0;i<temparray.length;i++){
 				team_info = temparray[i]._id;
-				counts = temparray[i].counts;
-				team_info.counts = counts;
+				team_info.counts = temparray[i].counts;
         if (temparray.length - i == 1){
           //don't add a comma to the last team because that's bad english
           team_info.comma = '.';
@@ -46,7 +38,7 @@ router.get('/', function(req, res) {
 				endresult.push(team_info);
 			}
 		}
-	});
+
   var trending_quiz = {};
   if (typeof endresult !== 'undefined' && endresult){
     trending_quiz = endresult
@@ -57,6 +49,7 @@ router.get('/', function(req, res) {
     trending_quiz: trending_quiz
   });
 });
+})
 
 router.get('/get', function(req, res) {
     var term = req.query.q;
