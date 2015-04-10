@@ -11,173 +11,32 @@ quizCutoffDate.setDate(quizCutoffDate.getDate() - 7);  //currently set to 1 week
     
 
 router.get('/', function(req, res) {
-
-	/*
-
-	// Long shitty way that only pulls top 2
-      
-db.collection('quiz').aggregate([
+	db.collection('quiz').aggregate([
 		{ "$group": {
-			"_id": {
-				"league": "$league",
-				"rb_team_id": "$rb_team_id"
-			},
-			"quizCount": { "$sum":1}
-		}},
-		{ "$group": {
-			"_id": "$_id.league",
-			"quizzes": {
-				"$push": {
-					"rb_team_id": "$_id.rb_team_id",
-					"count": "$quizCount"
-				},
-			},
-			"count": {"$sum": "$quizCount"}
-		}},
-		{ "$sort": {"count": -1} },
-		{"$limit": 10},
-		{"$unwind": "$quizzes"},
-		{"$sort": { "count": 1, "quizzes.count": -1} },
-		{ "$group": {
-			"_id": "$_id",
-			"quizzes": { "$push": "$quizzes"},
-			"count": {"$first": "$count"}
-		}},
-		{ "$project": {
-			"_id": {
-				"_id": "$_id",
-				"quizzes": "$quizzes",
-				"count": "$count"
-			},
-			"newQuizzes": "$quizzes"
-		}},
-		{ "$unwind": "$newQuizzes"},
-		{"$group": {
-			"_id": "$_id",
-			"num1": { "$first": "$newQuizzes"}
-		}},
-		{"$project": {
-			"_id": "$_id",
-			"num1": 1,
-			"newQuizzes": 1,
-			"seen": { "$eq": [
-				"$num1",
-				"$newQuizzes"
-			]}
-		}},
-		{ "$match": { "seen": false } },
-		{ "$group":{
-			"_id": "$_id._id",
-			"num1": {"$first": "$num1"},
-			"num2": {"$first": "$newQuizzes"},
-			"count": {"$first": "$_id.count"}
-		}},
-		{ "$project": {
-			"num1": 1,
-			"num2": 1,
-			"count": 1,
-			"type": { "$cond": [1, [true,false],0	]}
-		}},
-		{ "$unwind": "$type" },
-		{"$project": {
-			"quizzes": { "$cond": [
-			"$type",
-			"$num1",
-			"$num2"
-			]},
-			"count":1
-		}},
-		{"$group": {
-			"_id": "$_id",
-			"count": {"$first": "$count" },
-			"quizzes": { "$push": "$quizzes"}
-		}},
-		{"$sort": { "count": -1}}
-
-
-
-], function (err, result){ 
-	for (i=0;i<Object.keys(result).length; i++){
-		console.log("id "+result[i]._id);
-		console.log("c "+result[i].count);
-		console.log("q "+result[i].quizzes[0].rb_team_id);
-		console.log("q "+result[i].quizzes[0].count);
-		console.log("q "+result[i].quizzes[1].rb_team_id);
-		console.log("q "+result[i].quizzes[1].count);
-	}
-
-	*/
-
-
-
-
-
-// SORTING ATTEMPT V2
-db.collection('quiz').aggregate([
-	{ "$group": {
 			"_id": {
 				"rb_team_id": "$rb_team_id",
 				"league": "$league"
-				
 			},
 			"quizCount": { "$sum":1}
 		}},
-		//{$unwind: "$league"},
-		//{$sort: {"league.quizCount": -1}},
-		//{$group: {"_id": "$_id", "league": {$push: "$league"} } }
-
-
-], function (err, result){ 
-	var all_leagues = team_array(result);
-	var sorted_teams = team_sort(all_leagues);  // Sort the teams within each league by number of quizzes taken
-
-
-
-
-
-/*
-// SORTING ATTEMPT V3
-db.collection('quiz').aggregate([
-	{ "$group": {
-			_id: "$quiz_name", 
-			quiz_count: { $sum : 1 }
-			}
-		},
-		{$sort: {"quiz_count": -1}}
-			
-		
-		//{$unwind: "$league"},
-		//{$sort: {"league.quizCount": -1}},
-		//{$group: {"_id": "$_id", "league": {$push: "$league"} } }
-
-
-], function (err, result){ 
-	console.log("1"+Object.keys(result));
-	console.log("result "+ result);
-	for (i=0;i<Object.keys(result).length;i++){
-		console.log("lala"+result[i]._id);
-		console.log("quiz"+result[i].quiz_count);
-	}
-
-*/
-
-
-res.render('leaguesearch',
-	{ popular_teams: sorted_teams
-	});		
-}); 
-
+	], function (err, result){ 
+		var all_leagues = team_array(result);
+		var sorted_teams = team_sort(all_leagues);  // Sort the teams within each league by number of quizzes taken
+		res.render('leaguesearch',
+			{ popular_teams: sorted_teams }
+		);		
+	}); 
 })
 
 
 
 
- router.get('/:league', function(req, res) {
-               var league = req.params.league;
-      res.render('leaguesearch', {
-       league: league
-      });
-    })
+router.get('/:league', function(req, res) {
+	var league = req.params.league;
+	res.render('leaguesearch', {
+		league: league
+	});
+})
 
 
 
@@ -229,7 +88,6 @@ var team_sort = function(teamsarray){
 	}
 	return teamsarray
 }
-
 
 
 
