@@ -6,22 +6,29 @@ var config = common.config();
 var _ = require('lodash'),
  	mongojs = require("mongojs"),
 	db = mongojs.connect(config.mongo_uri);
-var quizCutoffDate = new Date();
+var quizCutoffDate = new Date()
 quizCutoffDate.setDate(quizCutoffDate.getDate() - 7);  //currently set to 1 week ago
-    
+
 
 router.get('/', function(req, res) {
-	db.collection('quiz').aggregate([
-		{ "$group": {
+	 db.collection('quiz').aggregate(
+
+
+	[{ "$match" : { "created_at" : { "$gt" : quizCutoffDate.toISOString().slice(0, 19).replace('T', ' ') }} //only pull quizzes in timeframe
+	},
+	{ "$group": {
 			"_id": {
 				"rb_team_id": "$rb_team_id",
 				"league": "$league"
 			},
-			"quizCount": { "$sum":1}
-		}},
+			"quizCount": { "$sum": 1}
+		}}
+
 	], function (err, result){ 
-		var all_leagues = team_array(result);
-		var sorted_teams = team_sort(all_leagues);  // Sort the teams within each league by number of quizzes taken
+		if (result){
+			var all_leagues = team_array(result);
+			var sorted_teams = team_sort(all_leagues);  // Sort the teams within each league by number of quizzes taken
+		}
 		res.render('leaguesearch',
 			{ popular_teams: sorted_teams }
 		);		
@@ -30,12 +37,35 @@ router.get('/', function(req, res) {
 
 
 
-
+// HAVE NOT TESTED THIS CODE YET
 router.get('/:league', function(req, res) {
 	var league = req.params.league;
-	res.render('leaguesearch', {
-		league: league
-	});
+	db.collection('quiz').aggregate(
+		[{ "$match" : {"$and" : [{ "created_at" : { "$gt" : quizCutoffDate.toISOString().slice(0, 19).replace('T', ' ') }}, {"league" : league} ] }
+		},
+		{ "$group": {
+				"_id": {
+					"rb_team_id": "$rb_team_id",
+					"league": "$league"
+				},
+				"quizCount": { "$sum": 1}
+			}}
+		], function (err, result){  // in this case, result is one league object with an array of teams
+			if (result){
+				//var all_leagues = team_array(result);
+				var sorted_teams = team_sort(result);  // Sort the teams within the league by number of quizzes taken
+				for (i=0;i<sorted_teams[0].length;i++){
+					console.log(quizCutoffDate);
+					console.log("moop"+sorted_teams[0][i].rb_team_id);
+					console.log("muup"+sorted_teams[0][i].quizCount);
+
+				}  //will remove once I've tested
+			}
+
+		res.render('leaguesearch', {
+			league: sorted_teams
+		});
+	})
 })
 
 

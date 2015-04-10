@@ -12,15 +12,9 @@ quizCutoffDate.setDate(quizCutoffDate.getDate() - 7);  //currently set to 1 week
 
 router.get('/', function(req, res) {
 	var popular_quizzes = db.collection('quiz').aggregate(
-	[{ $project: {
-		_id: 0,
-		rb_team_id: 1,
-		quiz_name: 1,
-		Created_in_timeframe: {$cond: [{$lt: ['$created_at', quizCutoffDate]}, 1, 0]}
-		}
-	},
+	[{ "$match" : { "created_at" : { "$gt" : quizCutoffDate.toISOString().slice(0, 19).replace('T', ' ') }}},
 	{ $group : {
-		_id : {rb_team_id: "$rb_team_id", quiz_name: "$quiz_name"}, counts : {$sum: '$Created_in_timeframe'} 
+		_id : {rb_team_id: "$rb_team_id", quiz_name: "$quiz_name"}, counts : {$sum: 1} 
 		}
 	},
 	{ $sort: {
@@ -28,7 +22,7 @@ router.get('/', function(req, res) {
 		}
 	}], function(err, result){
 		temparray = [];
-		endresult = [];
+		var endresult = [];
 		if (result){
 			temparray.push(result.slice(0,3))
 			temparray = _.first(temparray)
@@ -46,7 +40,7 @@ router.get('/', function(req, res) {
 				endresult.push(team_info);
 			}
 		}
-	});
+//	});
   var trending_quiz = {};
   if (typeof endresult !== 'undefined' && endresult){
     trending_quiz = endresult
@@ -57,6 +51,7 @@ router.get('/', function(req, res) {
     trending_quiz: trending_quiz
   });
 });
+})
 
 
 
