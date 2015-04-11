@@ -566,7 +566,7 @@ table tr th:last-child {
   white-space: nowrap;
 }
 
-#standard-nba-container{ 
+#league-background{ 
   background-position: center center;
   background-attachment: fixed;
   -webkit-background-size: cover;
@@ -576,6 +576,7 @@ table tr th:last-child {
   background-color: #211922;
   margin: 0;
   padding: 0;
+  background-image:url(../images/stadiums/euro_soccer_stadiums/olympiastadion-stadium.jpg); 
 }
 #trending-quiz-contain {
   padding-top: 1%;
