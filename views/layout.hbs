@@ -9,7 +9,7 @@
     <link rel='stylesheet' href='/stylesheets/leaguepage.css' />
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' />
   </head>
-  <body>
+  <body id="league-background" style={{#if background_image}}"background-image: url({{background_image}});"{{/if}}>
 {{# unless special_layout}}
 
 	<nav class="navbar navbar-default blitz" role="navigation">
@@ -48,20 +48,22 @@
     </div>
   </div>
   
-  <footer class="footer {{#if static_footer}}static{{/if}}">
-    <div class="navbar-collapse collapse">      
-      <div class="container">        
-          <p class="text-muted">     
-            <ul class="bs-docs-footer-links text-muted">
-              <li><a href="/" class="rb-green">Home</a></li>      
-              <li><a href="/about" class="rb-green">About</a></li>
-              <li><a href="/ourteam" class="rb-green">Team</a></li>
-              <li><a href="/contactUs" class="rb-green">Contact Us</a></li>                       
-            </ul>                     
-          </p>      
-      </div>
-    </div>  
-  </footer>
+  {{#unless remove_footer}}
+    <footer class="footer">
+      <div class="navbar-collapse collapse">      
+        <div class="container">        
+            <p class="text-muted">     
+              <ul class="bs-docs-footer-links text-muted">
+                <li><a href="/" class="rb-green">Home</a></li>      
+                <li><a href="/about" class="rb-green">About</a></li>
+                <li><a href="/ourteam" class="rb-green">Team</a></li>
+                <li><a href="/contactUs" class="rb-green">Contact Us</a></li>                       
+              </ul>                     
+            </p>      
+        </div>
+      </div>  
+    </footer>
+  {{/unless}}
   
   {{/unless}}
 
@@ -100,6 +102,7 @@
     <script src='/javascripts/underscore.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js'></script>
     <script src='https://code.jquery.com/jquery.js'></script>
+    <script src='/javascripts/handlebars-helpers.js'></script>
     <script src='/javascripts/select2.min.js'></script>
     <script src='/javascripts/global.js'></script>
     <script src='/javascripts/quiz.js'></script>

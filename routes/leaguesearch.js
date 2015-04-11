@@ -37,7 +37,6 @@ router.get('/', function(req, res) {
 
 
 
-// HAVE NOT TESTED THIS CODE YET
 router.get('/:league', function(req, res) {
 	var league = req.params.league;
 	db.collection('quiz').aggregate(
@@ -51,7 +50,7 @@ router.get('/:league', function(req, res) {
 				"quizCount": { "$sum": 1}
 			}}
 		], function (err, result){  // in this case, result is one league object with an array of teams
-			if (result){
+			if (result.length > 0){
 				var temparray = [];
 				temparray.push(result);
 				var sorted_teams = sortTeams(temparray);  // Sort the teams within the league by number of quizzes taken

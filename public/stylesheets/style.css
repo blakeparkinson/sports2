@@ -49,6 +49,15 @@ a {
   opacity: 0.92;
 }
 
+.player-card{
+  background: #6C6C6C;
+  border-radius: 0 0 5px 5px;
+  opacity: 0.98;
+  border-bottom: 1px solid #ccc;
+  margin-top: 8%;
+  min-width: 500px;
+}
+
 .navbar-brand.main{
 	font-size: 22px;
 }
@@ -58,11 +67,26 @@ a {
 	padding-top: 5%;
 }
 
-.team-container{
-  width: 50%;
-  padding: 60px 0 60px 0;
-  margin: 0 auto;
+.team-container{  
+  padding: 15% 20% 0 10%;
   min-height: 750px;
+  
+}
+
+
+.answer-right-section .content-section {
+  padding: 9px;
+}
+
+.answer-right-section .subheader {
+  border-bottom: 1px solid rgb(204, 204, 204);
+}
+
+
+.answer-right-section .correct-guess{
+  padding-top: 10px;
+  cursor: pointer;
+  color: rgb(55, 132, 211);
 }
 
 @media screen and (max-width: 580px) {
@@ -74,24 +98,26 @@ a {
 
 .team-name{
   color:#fff;
-  font-size: 22px;
+  font-size: 40px;
   display:inline-block;
 }
-
+#align-clock {
+  text-align: center; 
+}
 .clock{
   display: inline-block;
   font-family:"Erbos Draco 1st Open NBP";
-  float: right;
   background-color: rgb(137, 32, 32);
   color: #F4E1E1;
   border-radius: 1px;
-  font-size: 22px;
+  font-size: 46px;
   padding-left: 5px;
   padding-bottom: 2px;
+  margin-top: 10%; 
 }
 
 .name-point-container{
-  padding-top: 15px;
+  padding-top: 15%;
   overflow: hidden;
 }
 
@@ -100,7 +126,7 @@ a {
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 50px;
+  height: 60px;
   background-color: #f5f5f5;
   border-radius: 4px;
   opacity: 0.92;
@@ -143,14 +169,93 @@ ul {
 
 .point-container{
   background: rgb(62, 65, 62);
-  padding: 6px 11px 4px 11px;
+  padding: 6px 11px 5px 11px;
   margin-left: -4px;
   width: 15%;
   line-height: 1;
   text-align: center;
-  float: right;
+  display: inline-block;
   border-radius: 0 5px 0 0;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px rgb(62, 65, 62);
+}
+#left-quiz-column {
+  float: left;
+  width: 50%;
+}
+#right-quiz-column {
+  float: right;
+  width: 50%;
+  min-height: 750px;
+}
+#right-column-contain {
+  width: 70%;
+  padding: 20% 0 0 10%;
+}
+  /* ===== PLAYER CARD STYLING ===== */
+
+#player-card-contain {
+  min-height: 300px;
+  min-width: 100px;
+}
+#top-half-card {
+padding-top: 5%;
+padding-left: 5%;
+}
+#player-card-image {
+  max-width: 130px;
+  border-radius: 40%;
+  float: left;    
+}
+#top-player-info {
+  padding-left: 25%;
+
+}
+#lower-half-card {
+  margin-top: 5%;
+  padding: 0 10% 0 10%;
+}
+#player-card-name {
+  font-size: 2em;
+  color:rgb(234, 234, 207);
+  font-weight: 800;
+}
+#player-card-basic td {
+  padding-top: 1.5%; 
+  font-size: 1.3em;
+  padding-left: 20px;
+}
+
+#lower-half-card .player-card-table{
+  border-collapse: separate;
+  border-spacing: 2px 0;
+  width: 230px;
+}
+#lower-half-card .player-card-table td{
+  background: rgba(250, 250, 250, 0.2);
+  text-align: center;
+  padding: 2px 10px;
+  font-size: 16px;
+  line-height: 24px;
+  color: #fff;
+}
+#lower-half-card .subheader{
+  color: #fff;
+}
+.player-card-table th {
+  text-align: center; 
+  font-size: 13px;
+  line-height: 14px;
+  color: #fff;
+  padding-top: 2px;
+  font-weight: normal;
+  background: #931207;
+}
+#basic-info-table {
+  margin-top: 3%;
+  color: rgb(234, 234, 207);
+}
+#player-card-basic {
+  border-top: 1px solid black;
 }
 
 @media screen and (max-width: 535px) {
@@ -172,13 +277,8 @@ ul {
 
 }
 
-.starters .answer-row {
-  padding: 10px 12px;
-  height:45px;
-  line-height: 45px;
-}
 
-.bench .answer-row {
+.answer-row.subheader {
   padding: 6px 12px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -427,9 +527,10 @@ table tr:first-child th {
  table tr:last-child td {
   border-bottom: 0;
 }
-table tr td:first-child,
-table tr th:first-child {
+#basic-info-table tr td:first-child,
+#basic-info-table tr th:first-child {
   border-left: 0;
+  padding-left: 0;
 }
 table tr td:last-child,
 table tr th:last-child {
@@ -465,13 +566,17 @@ table tr th:last-child {
   white-space: nowrap;
 }
 
-#standard-nba-container{ 
-    background: no-repeat scroll center top/cover transparent; 
-    padding: 0;
-    bottom:0;
-    min-height: 650px;
-    width:100%;
-    position:relative;
+#league-background{ 
+  background-position: center center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-color: #211922;
+  margin: 0;
+  padding: 0;
+  background-image:url(../images/stadiums/euro_soccer_stadiums/olympiastadion-stadium.jpg); 
 }
 #trending-quiz-contain {
   padding-top: 1%;
@@ -564,16 +669,19 @@ table tr th:last-child {
 .answer-box {
   width:  10%;
   height: 100%;
-  border: 1px solid #D3D3D3
-;
+  border: 1px solid #D3D3D3;
 }
 
 .button-section{
     text-align: center;
-    padding-top: 10px;
+    padding-top: 15px;
 }
 .button-section .quit-btn{
   padding: 6px 30px;
+}
+.quit-btn {
+  display: block !important;
+  width: 85%;
 }
 .trending-quiz{
   color: #009AB9;
@@ -740,7 +848,6 @@ POP UP
 */
 .modal { position:absolute; top:0px; left:0px; z-index:450; background-repeat:repeat; display:none; }
 .modal-main { position:relative; width:1100px; margin:auto; box-shadow:0px 0px 10px rgba(0,0,0,0.3); }
-.modal-content { padding:40px; }
 .modal-video { width:1100px; height:619px; margin-bottom:-5px; }
 .modal-close { width:40px; height:40px; position:absolute; right:35px; top:35px; transition:opacity 0.1s linear; -webkit-transition:opacity 0.1s linear; -moz-transition:opacity 0.1s linear; opacity:0.5; }
 .modal-close:hover { opacity:1; }
@@ -819,3 +926,5 @@ GENERAL RESPONSIVE VIEWS
 @media (max-width: 479px) {
   /* modal */
   .modal-video { width:100%; height:250px; }
+
+

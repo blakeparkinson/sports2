@@ -37,7 +37,7 @@ var returnPlayers = function (players, rb_team_id, res, league){
       roster: roster,
       rb_team_id: rb_team_id,
       league: league,
-      static_footer: true,
+      remove_footer: true,
       team_name: team_name,
       clock: getTimeLimit(league),
       background_image: randImg(league)
@@ -152,7 +152,6 @@ switch (league){
         switch (league){
           case 'nba':
             json_response = JSON.parse(body);
-
             // find the image from usat and insert into players array
             for (a=0;a<Object.keys(json_response.players).length;a++){
               var player_name = json_response.players[a].first_name.toLowerCase()+'-'+json_response.players[a].last_name.toLowerCase()
@@ -171,6 +170,10 @@ switch (league){
                         //compare by player id
                         if (json_response.players[i].id == players_roster[j].id){
                           json_response.players[i].status = players_roster[j].status;
+                          json_response.players[i].weight = players_roster[j].weight;
+                          json_response.players[i].height = players_roster[j].height;
+                          json_response.players[i].experience = players_roster[j].experience;
+                          json_response.players[i].college = players_roster[j].college;
                           //we found a match, break out of the 2nd loop iteration
                           continue;
                         }
@@ -410,8 +413,27 @@ var randImg = function(league) {
           var path = '../images/stadiums/mlb_stadiums/';          
         case "nfl":
           var path = '../images/stadiums/nfl_stadiums/';
+            images[0] = "nfl-49ers-stadium.jpg",
+            images[1] = "nfl-giants-stadium.jpg",
+            images[2] = "nfl-patriots-stadium.jpg",
+            images[3] = "nfl-ravens-stadium.jpg",
+            images[4] = "nfl-seahawks-stadium.jpg",
+            images[5] = "nfl-bills-stadium.jpg",
+            images[6] = "nfl-chargers-stadium.jpg",
+            images[7] = "nfl-chiefs-stadium.jpg",
+            images[8] = "nfl-jets-stadium.jpg",
+            images[9] = "nfl-raiders-stadium.jpg",
+            images[10] = "nfl-cowboys-stadium.jpg"
+          break;
         case "nhl":
           var path = '../images/stadiums/nhl_stadiums/';
+            images[0] = "nhl-bruins-stadium.jpg",
+            images[1] = "nhl-flyers-stadium.jpg",
+            images[2] = "nhl-redwings-stadium.jpg",
+            images[3] = "nhl-sabres-stadium.jpg",
+            images[4] = "nhl-thrashers-stadium.jpg",
+            images[5] = "nhl-predators-stadium.jpg"
+          break;
         case "nba": 
           var path = '../images/stadiums/nba_stadiums/';          
             images[0] = "NBA-kings-stadium.jpg",
@@ -419,14 +441,19 @@ var randImg = function(league) {
             images[2] = "NBA-warriors-stadium.jpg",
             images[3] = "NBA-pelicans-stadium.jpg",
             images[4] = "NBA-hornets-stadium.jpg",
-            images[5] = "NBA-rockets-stadium.jpg",
+            images[5] = "NBA-rockets-stadium.png",
             images[6] = "NBA-knicks-stadium.jpg",
             images[7] = "NBA-heat-stadium.jpg"
         break;          
         case "eu_soccer":
           var path = '../images/stadiums/euro_soccer_stadiums/';          
             images[0] = "olympiastadion-stadium.jpg",
-            images[1] = "soccer-stadium4.jpg"                  
+            images[1] = "soccer-stadium4.jpg",
+            images[2] = "bayernmunich-stadium.jpg",
+            images[3] = "newcastle-stadium.jpg",
+            images[4] = "saitama-stadium.jpg",
+            images[5] = "sounders-stadium.jpg",
+            images[6] = "fcbarcelona-stadium.jpg"                                                      
           break;
         default:
         var path = '../images/stadiums/nba_stadiums/';          

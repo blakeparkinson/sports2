@@ -1,56 +1,43 @@
-  <div class="quiz-page-backgrounds" id="standard-{{league}}-container" style="background-image: url({{background_image}});">  
+  <div id="left-quiz-column">
     <div class="team-container">
       <p class="team-name">{{team_name}}</p>
-      <div class="clock">{{clock}}</div>
       <div class="name-point-container">
         <div class="form-group player-name">
            <input type="text" class="form-control" id="guess-box" placeholder="Enter Player Name">
-        </div>
-        <div class="point-container rb-green">
+        </div>               
+      </div>
+      
+      <div id="align-clock">
+        <span>Points</span>
+        <div class="point-container rb-green">          
           <p class="number">0</p>
           <p class="points">points</p>
         </div>
+        <div class="clock">{{clock}}</div>
+      </div>  
+       <div class="button-section">
+         <div class="btn btn-danger quit-btn">Give Up</div>
       </div>
+    </div>   
+
+  </div>  
+
+  <div id="right-quiz-column">
+    <div id="right-column-contain">
       <div class="answer-container">
-        {{#compare league 'nba'}}
-          <div class="starters">
-            {{#each roster.starters}}
-              <div class="answer-row {{render}}" data-id="{{player_id}}">
-                <p class="answered-player">{{render_position ../../league position}}</p>
-              </div>
-            {{/each}}
-          </div>
-          <div class="answer-container bench">
-            {{#each roster.bench}}
-              <div class="answer-row {{render}} empty">Bench {{inc @index}}</div>
-            {{/each}}
-          </div>
-         {{/compare}}
-         {{#compare league '!=' 'nba'}}
-           {{#each roster}}
-             <div class="player bench">
-              <div class="answer-row {{render}}" data-id="{{player_id}}">
-                {{#compare ../league '!=' 'goats'}}
-                  <p class="answered-player">{{render_position ../../league position}}</p>
-                {{/compare}}
-                {{#compare ../league 'goats'}}
-                  <p class="answered-player">{{rank}}</p>
-                {{/compare}}  
-              </div>
-             </div>
-           {{/each}}
-         {{/compare}}
+        <div class="answer-row subheader">Players Guessed</div>
       </div>
-      <div class="button-section">
-        <div class="btn btn-primary quit-btn">Give Up</div>
-      </div>
+      <div class="player-card"></div>        
+    </div>  
   </div>
 
+  
 
-
+  				{{> player_card }}
 
 <script type='text/javascript'>
-  league = '{{league}}';
+  var league = '{{league}}',
+    team_name = '{{team_name}}';
  </script>
 
   {{#compare league 'nba'}}
@@ -64,6 +51,3 @@
       var roster =  {{{json_stringify roster}}};
     </script>
   {{/compare}}
-
-
-    

@@ -29,10 +29,9 @@ else{
 
 if (typeof bench != "undefined" && typeof starters != "undefined"){
   roster = starters.concat(bench);
-}   
-
+}
+var card = $('.player-card');
 console.log(bench); console.log(starters); console.log(roster);
-
 
 // DOM Ready =============================================================
 $(document).ready(function() {
@@ -40,6 +39,8 @@ $(document).ready(function() {
 	$('body').on('keyup', '#guess-box', fetchGuess);
 	$("#guess-box").focus();
   $('body').on('click', '.quit-btn', endQuiz);
+  $('body').on('click', '.correct-guess', showCard);
+
 
 
   startCounter();
@@ -132,6 +133,7 @@ var checkForMatches = function(guess, input_field){
     if ((guess == last_name.toLowerCase().trim() || guess == full_name.toLowerCase().trim()) && !player.guessed){
       correct++;
       populateTable(player);
+      addToCorrectList(correct, player, index);
       input_field.val('');
       team_container.find('.number').html(correct);
       player.guessed = true;
@@ -143,8 +145,24 @@ var checkForMatches = function(guess, input_field){
   })
 }
 
+var addToCorrectList = function (count, player, index){
+
+  var html = '<div class="correct-guess" data-index="'+index+'">'+count +'.' + player.full_name + '</div>';
+  answer_container.append(html);
+}
+
 var populateTable = function(player, class_color){
   if (player.guessed) return;
+  prepareCard(player);
+}
+
+//show the card when clicked from sidebar
+var showCard = function(e){
+  var index = $(this).data('index');
+  prepareCard(roster[index]);
+}
+
+var prepareCard = function(player){
   var full_name = '';
   if (player.full_name){
     full_name = player.full_name;
@@ -155,21 +173,19 @@ var populateTable = function(player, class_color){
   else if (player.full_first_name){
     full_name = player.full_first_name;
   }
+  player.team_name = team_name;
+  player.league = league;
+  var source   = $("#card");
+  AppendTemplate(source, card, player);
 
-  var class_name = class_color !== undefined ? class_color : 'rb-green';
-  if (player.starter || league != 'nba'){
-    var field = answer_container.find("[data-id='" + player.player_id + "']");
-    var img_html =  '<img class="circle-pic" src='+player.avatar_url+'>';
+}
 
-    if (league == 'nba')field.prepend(img_html);
-    field.find('.answered-player').html(full_name);
-  }
-  else{
-    var field = answer_container.find('.bench .answer-row.empty').first();
-    field.html(player.full_name);
-  }
-  field.addClass(class_name).removeClass('empty');
-
+var AppendTemplate = function(source, parent, data){
+  var source   = source.html();
+  var template = Handlebars.compile(source);
+  parent.empty();
+  var html = template(data);
+  parent.append(html);
 }
 
 var endQuiz = function(e, skip_mapping){
@@ -208,4 +224,32 @@ var QueryString = function () {
     }
   } 
     return query_string;
-} 
+}
+
+var getTemplate = function(name, data, options){
+
+    templates = {},
+
+    $.post('/index/get/' + name, data, function(d){
+        
+        templates[name] = d;
+        
+        tpl = processTemplate(d, data, options); 
+
+
+        return tpl;
+
+    }); 
+                   
+  }
+
+  var processTemplate = function(template, data, options){
+
+        var tpl = Handlebars.compile(template, options),
+            compiled;
+
+        data ? compiled = tpl(data) : compiled = tpl({});
+
+        return compiled;
+
+    }
