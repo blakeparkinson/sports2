@@ -1,4 +1,5 @@
 var ftPercentage = [
+ {
   "lid": "5",
   "league": "goats",
   "keywords": "top free throw freethrow percentage nba shooting scoring",
@@ -76,4 +77,9 @@ var ftPercentage = [
     "ftPercentage":"0.8877"
   }
   ]
-]
+}]
+
+
+module.exports = {
+  ftPercentage: ftPercentage
+}

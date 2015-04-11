@@ -1,5 +1,6 @@
  var topPPG = [
-    "lid": "1",
+  {
+   "lid": "1",
     "league": "goats",
     "keywords": "top ppg nba scoring points",
     "list_name": "topPPGnba",
@@ -77,4 +78,9 @@
             "ppg": "25.68"
         }
     ]
-]
+}]
+
+
+module.exports = {
+  topPPG: topPPG
+}

@@ -1,4 +1,5 @@
 var topBPG = [
+{
   "lid": "3",
   "league": "goats",
   "keywords": "top bpg nba blocks",
@@ -76,4 +77,8 @@ var topBPG = [
     "bpg":"2.55"
   }
   ]
-]
+}]
+
+module.exports = {
+  topBPG: topBPG
+}

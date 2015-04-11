@@ -1,4 +1,5 @@
 var topAPG = [
+{
   "lid": "2",
   "league": "goats",
   "keywords": "top apg nba assists passing",
@@ -76,4 +77,9 @@ var topAPG = [
     "apg":"8.49"
   }
   ]
-]
+}]
+
+
+module.exports = {
+  topAPG: topAPG
+}

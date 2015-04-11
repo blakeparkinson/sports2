@@ -1,5 +1,5 @@
 var threePointPercentage = [
-  "lid": "8",
+{  "lid": "8",
   "league": "goats",
   "keywords": "top three point threepoint shooting scoring",
   "list_name": "topThreePointnba",
@@ -76,4 +76,10 @@ var threePointPercentage = [
     "threePointPercentage":"0.425"
   }
   ]
-]
+}]
+
+
+module.exports = {
+  threePointPercentage: threePointPercentage
+}
+
