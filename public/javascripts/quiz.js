@@ -41,6 +41,8 @@ $(document).ready(function() {
   $('body').on('click', '.quit-btn', endQuiz);
   $('body').on('click', '.correct-guess', showCard);
 
+  $("#card").flip();
+  $("#card").click(console.log('hey'));
 
 
   startCounter();
