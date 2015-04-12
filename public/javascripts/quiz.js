@@ -40,6 +40,7 @@ $(document).ready(function() {
 	$("#guess-box").focus();
   $('body').on('click', '.quit-btn', endQuiz);
   $('body').on('click', '.correct-guess', showCard);
+  $("#card").flip();
 
 
   startCounter();
@@ -185,8 +186,6 @@ var AppendTemplate = function(source, parent, data){
   parent.empty();
   var html = template(data);
   parent.append(html);
-  $("#card").flip();
-
 }
 
 var endQuiz = function(e, skip_mapping){
