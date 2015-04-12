@@ -41,9 +41,6 @@ $(document).ready(function() {
   $('body').on('click', '.quit-btn', endQuiz);
   $('body').on('click', '.correct-guess', showCard);
 
-  $("#card").flip();
-  $("#card").click(console.log('hey'));
-
 
   startCounter();
  });
@@ -177,7 +174,7 @@ var prepareCard = function(player){
   }
   player.team_name = team_name;
   player.league = league;
-  var source   = $("#card");
+  var source   = $("#full-card");
   AppendTemplate(source, card, player);
 
 }
@@ -188,6 +185,8 @@ var AppendTemplate = function(source, parent, data){
   parent.empty();
   var html = template(data);
   parent.append(html);
+  $("#card").flip();
+
 }
 
 var endQuiz = function(e, skip_mapping){
