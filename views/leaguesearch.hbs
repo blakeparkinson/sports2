@@ -1,10 +1,15 @@
 <div class="league-middle">
 
   <div class="container-league">{{popular_teams}}
-    <div id="league-type">{{ league }}</div>
+    <div id="league-type">
+    	{{#each league}}
+				<span class="league" data-id={{rb_team_id}}>{{quizCount}}{{league}}</span>
+      {{/each}} 
+    </div>
     <div class="column-center"><div class="league-align-center">Current league leaders</div></div>
     <div class="column-left"><div class="league-align-center">Team player quizzes</div></div>
     <div class="column-right"><div class="league-align-center">Great of all time quizzes</div></div>
   </div>
         
  </div>
+

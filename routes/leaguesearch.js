@@ -25,12 +25,32 @@ router.get('/', function(req, res) {
 		}}
 
 	], function (err, result){ 
-		if (result){
+		temparray = [];
+		var endresult = [];
+		if (result.length > 0){
 			var all_leagues = createTeamLists(result);
 			var sorted_teams = sortTeams(all_leagues);  // Sort the teams within each league by number of quizzes taken
+			temparray = sorted_teams;
+			for (i=0;i<temparray.length;i++){ // # of leagues
+				console.log("1 "+temparray.length);
+				for (j=0;j<temparray[i].length;j++){ // # of teams
+					console.log("2 "+ temparray[i].length);
+					tempteam = temparray[i];
+					console.log("2b "+ tempteam[0]);
+					console.log("2c "+ tempteam[1]);
+					for (k=0;k<tempteam[j].length;k++){ //# inside of each team
+						console.log("3 "+ tempteam[j]);
+						team_info = tempteam[j][k]._id;
+						team_info.counts = temparray[i][j][k].quizCount;
+						endresult.push(team_info);
+					}
+					
+				}				
+			}
 		}
+
 		res.render('leaguesearch',
-			{ popular_teams: sorted_teams }
+			{ popular_teams: endresult }
 		);		
 	}); 
 })
@@ -48,16 +68,22 @@ router.get('/:league', function(req, res) {
 					"league": "$league"
 				},
 				"quizCount": { "$sum": 1}
-			}}
-		], function (err, result){  // in this case, result is one league object with an array of teams
+			}
+		}], function(err, result){
+			temparray = [];
+			var endresult = [];
 			if (result.length > 0){
-				var temparray = [];
-				temparray.push(result);
-				var sorted_teams = sortTeams(temparray);  // Sort the teams within the league by number of quizzes taken
+				temparray = result;
+				for (i=0;i<temparray.length;i++){
+					team_info = temparray[i]._id;
+					team_info.counts = temparray[i].quizCount;
+					endresult.push(team_info);
+				}
 			}
 
+
 		res.render('leaguesearch', {
-			league: sorted_teams
+			league: endresult
 		});
 	})
 })
