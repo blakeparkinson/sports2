@@ -186,9 +186,7 @@ ul {
   width: 70%;
   padding: 20% 0 0 10%;
 }
-#goats-icon:before {
-  content: url(http://upload.wikimedia.org/wikipedia/en/thumb/c/c0/Portuguese_Ibex_Cabrera_Goat.svg/500px-Portuguese_Ibex_Cabrera_Goat.svg.png);
-}
+
   /* ===== PLAYER CARD STYLING ===== */
 
 .player-card{
@@ -229,7 +227,6 @@ padding-left: 5%;
   font-size: 1.3em;
   padding-left: 20px;
 }
-
 #lower-half-card .player-card-table{
   border-collapse: separate;
   border-spacing: 2px 0;
