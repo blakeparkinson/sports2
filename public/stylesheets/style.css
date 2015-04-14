@@ -60,6 +60,7 @@ a {
 .team-container{  
   margin-left: 5%;
   padding: 5% 2% 5% 2%;
+  margin-top: 2%;
   background: rgba(32, 26, 26, 0.7);
 }
 
@@ -180,23 +181,24 @@ ul {
   float: right;
   width: 50%;
   min-height: 750px;
-  margin-top: 5%;
-  padding-left: 5%;
-  padding-right: 5%;
 }
-
+#right-column-contain {
+  width: 70%;
+  padding: 20% 0 0 10%;
+}
   /* ===== PLAYER CARD STYLING ===== */
 
-#player-card-contain {
-  min-height: 300px;
-  min-width: 100px;
+.player-card{
   background: #6C6C6C;
   border-radius: 0 0 5px 5px;
   opacity: 0.98;
   margin-top: 8%;
   min-width: 500px;
 }
-
+#player-card-contain {
+  min-height: 300px;
+  min-width: 100px;
+}
 #top-half-card {
 padding-top: 5%;
 padding-left: 5%;
