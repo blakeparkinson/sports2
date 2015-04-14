@@ -48,6 +48,10 @@ router.get('/:league', function(req, res) {
 					"league": "$league"
 				},
 				"quizCount": { "$sum": 1}
+				/*
+				,
+				"market" : "$market",
+				"name" : "$name"  */
 			}}
 		], function (err, result){  // in this case, result is one league object with an array of teams
 			if (result.length > 0){
