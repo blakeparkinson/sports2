@@ -30,8 +30,10 @@ router.get('/', function(req, res) {
 		if (result.length > 0){
 			var all_leagues = createTeamLists(result);
 			var sorted_teams = sortTeams(all_leagues);  // Sort the teams within each league by number of quizzes taken
-			temparray = sorted_teams;
-			for (i=0;i<temparray.length;i++){ // # of leagues
+
+			//Blake - stopping here. I don't know what the purpose of the rest of this stuff is
+
+			/*for (i=0;i<temparray.length;i++){ // # of leagues
 				console.log("1 "+temparray.length);
 				for (j=0;j<temparray[i].length;j++){ // # of teams
 					console.log("2 "+ temparray[i].length);
@@ -46,11 +48,11 @@ router.get('/', function(req, res) {
 					}
 					
 				}				
-			}
+			}*/
 		}
 
 		res.render('leaguesearch',
-			{ popular_teams: endresult }
+			{ popular_teams: sorted_teams }
 		);		
 	}); 
 })
@@ -91,7 +93,7 @@ router.get('/:league', function(req, res) {
 
 
 var createTeamLists = function(teamobject){
-	var teams = [];
+	var teams = {};
 	var nba_teams = [];
 	var nfl_teams = [];
 	var eu_soccer_teams = [];
@@ -122,19 +124,24 @@ var createTeamLists = function(teamobject){
 			case 'mlb':
 				mlb_teams.push(team);				
 		}}
-
-	teams.push(nba_teams, goats_teams, eu_soccer_teams, nhl_teams, nfl_teams, mlb_teams);
+		teams.nba=nba_teams;
+		teams.goats_teams=goats_teams;
+		teams.eu_soccer_teams = eu_soccer_teams;
+		teams.nhl_teams=nhl_teams;
+		teams.nfl_teams = nfl_teams;
+		teams.mlb_teams = mlb_teams;
+	//teams.push(nba_teams, goats_teams, eu_soccer_teams, nhl_teams, nfl_teams, mlb_teams);
 	return teams
 }
 
 
-var sortTeams = function(teamsarray){
-	for (i=0;i<Object.keys(teamsarray).length;i++){ 
-		currentleague = teamsarray[i];
-		var sorted = currentleague.sort(compareCounts);
-		teamsarray[i] = sorted
+
+var sortTeams = function(teamsobject){
+	for (var key in teamsobject){
+		teamsobject[key].sort(compareCounts);
 	}
-	return teamsarray
+	//console.log(teamsobject);
+	return teamsobject
 }
 
 
