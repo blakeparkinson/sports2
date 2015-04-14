@@ -1,4 +1,5 @@
 var topRPG = [
+{
   "lid": "6",
   "league": "goats",
   "keywords": "top rebounds rpg rebounding",
@@ -76,4 +77,9 @@ var topRPG = [
     "rpg":"13.12"
   }
   ]
-]
+}]
+
+
+module.exports = {
+  topRPG: topRPG
+}

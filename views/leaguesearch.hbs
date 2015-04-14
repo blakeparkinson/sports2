@@ -1,15 +1,11 @@
 <div class="league-middle">
-
-  <div class="container-league">{{popular_teams}}
-    <div id="league-type">
-    	{{#each league}}
-				<span class="league" data-id={{rb_team_id}}>{{quizCount}}{{league}}</span>
-      {{/each}} 
-    </div>
-    <div class="column-center"><div class="league-align-center">Current league leaders</div></div>
-    <div class="column-left"><div class="league-align-center">Team player quizzes</div></div>
-    <div class="column-right"><div class="league-align-center">Great of all time quizzes</div></div>
+  <div class="container-league">
+    <div id="league-type"></div>    
+    <div class="column-left all-columns"><div class="league-align-center"><p class="all-icons roster-icon" data-toggle="tooltip" data-placement="top" title="Team roster quizzes"></p></div>{{#each league}}  {{/each}}</div>
+    <div class="column-center all-columns"><div class="league-align-center"><p class="all-icons season-leaders-icon" data-toggle="tooltip" data-placement="top" title="Current season leaders"</p></div>
+    {{popular_teams}}
+  	</div>
+    <div class="column-right all-columns"><div class="league-align-center"><p class="goats-icon all-icons" data-toggle="tooltip" data-placement="top" title="Great Of All Time quizzes"></p></div></div>
   </div>
         
- </div>
-
+ </div>	

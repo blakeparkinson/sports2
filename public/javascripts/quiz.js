@@ -40,8 +40,7 @@ $(document).ready(function() {
 	$("#guess-box").focus();
   $('body').on('click', '.quit-btn', endQuiz);
   $('body').on('click', '.correct-guess', showCard);
-
-
+  $('#card').flip({trigger: 'manual'});
 
   startCounter();
  });
@@ -132,7 +131,7 @@ var checkForMatches = function(guess, input_field){
     //check full name and just last name, also make sure the player has not been guessed already
     if ((guess == last_name.toLowerCase().trim() || guess == full_name.toLowerCase().trim()) && !player.guessed){
       correct++;
-      populateTable(player);
+      //populateTable(player);
       addToCorrectList(correct, player, index);
       input_field.val('');
       team_container.find('.number').html(correct);
@@ -159,10 +158,10 @@ var populateTable = function(player, class_color){
 //show the card when clicked from sidebar
 var showCard = function(e){
   var index = $(this).data('index');
-  prepareCard(roster[index]);
+  prepareCard(roster[index], true);
 }
 
-var prepareCard = function(player){
+var prepareCard = function(player, flip){
   var full_name = '';
   if (player.full_name){
     full_name = player.full_name;
@@ -175,8 +174,11 @@ var prepareCard = function(player){
   }
   player.team_name = team_name;
   player.league = league;
-  var source   = $("#card");
+  var source   = $("#full-card");
   AppendTemplate(source, card, player);
+  if (flip){
+    $("#card").flip(true);
+  }
 
 }
 
@@ -186,6 +188,8 @@ var AppendTemplate = function(source, parent, data){
   parent.empty();
   var html = template(data);
   parent.append(html);
+    $(parent).on('click', '.back-to-answer', function(){$("#card").flip(false);});
+
 }
 
 var endQuiz = function(e, skip_mapping){

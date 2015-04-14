@@ -1,4 +1,5 @@
 var fieldGoalPercentage = [
+ {
   "lid": "4",
   "league": "goats",
   "keywords": "top field goal percentage nba shooting scoring",
@@ -76,4 +77,9 @@ var fieldGoalPercentage = [
     "fieldGoalPercentage":"0.5637"
   }
   ]
-]
+}]
+
+
+module.exports = {
+  fieldGoalPercentage: fieldGoalPercentage
+}

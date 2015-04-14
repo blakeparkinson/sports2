@@ -1,4 +1,5 @@
   var topSPG = [
+{
   "lid": "7",
   "league": "goats",
   "keywords": "top steals defense",
@@ -76,4 +77,9 @@
       "spg":"2.03"
     }
   ]
-]
+}]
+
+
+module.exports = {
+  topSPG: topSPG
+}

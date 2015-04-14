@@ -1,45 +1,47 @@
 
-<script id="card" type="text/x-handlebars-template">
-
-<div id="player-card-contain">
-  <div id="top-half-card">
-    <img id="player-card-image" src="\{{avatar_url}}">
-     <div id="top-player-info">
-      <div class="card-right">
-        <div id="player-card-name">\{{full_name}}</div>
-        <table id="basic-info-table" class="player-card-table">
-          <tr id="player-card-basic">
-            <td id="player-card-number">\{{jersey_number}}</td>
-            <td id="player-card-pos">\{{render_position league position}}</td>
-            <td id="player-card-team">\{{team_name}}</td>
+<script id="full-card" type="text/x-handlebars-template">
+    <div id="player-card-contain">
+      <div id="top-half-card">
+        <img id="player-card-image" src="\{{avatar_url}}">
+         <div id="top-player-info">
+          <div class="card-right">
+            <div id="player-card-name">\{{full_name}}</div>
+            <table id="basic-info-table" class="player-card-table">
+              <tr id="player-card-basic">
+                <td id="player-card-number">\{{jersey_number}}</td>
+                <td id="player-card-pos">\{{render_position league position}}</td>
+                <td id="player-card-team">\{{team_name}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>  
+      </div>
+      <div id="lower-half-card">    
+        
+        <br />
+        <div class="subheader">Season stats</div>
+        <table class="player-card-table">
+          <tr>
+            <th>PPG</th>
+            <th>APG</th>
+            <th>RPG</th>
+          </tr>
+          <tr>
+            <td id="ppg">\{{average.points}}</td>
+            <td id="apg">\{{average.assists}}</td>
+            <td id="rpg">\{{average.rebounds}}</td>
           </tr>
         </table>
+        <div id="years-in-league">Years in League: \{{experience}}</div>
+        <div id="college">College: \{{college}}</div>
+        <div id="height">Height: \{{format_height height}}
+        </div>
+        <div id="weight">Weight: \{{weight}}</div>
       </div>
-    </div>  
-  </div>
-  <div id="lower-half-card">    
-    
-    <br />
-    <div class="subheader">Season stats</div>
-    <table class="player-card-table">
-      <tr>
-        <th>PPG</th>
-        <th>APG</th>
-        <th>RPG</th>
-      </tr>
-      <tr>
-        <td id="ppg">\{{average.points}}</td>
-        <td id="apg">\{{average.assists}}</td>
-        <td id="rpg">\{{average.rebounds}}</td>
-      </tr>
-    </table>
-    <div id="years-in-league">Years in League: \{{experience}}</div>
-    <div id="college">College: \{{college}}</div>
-    <div id="height">Height: \{{format_height height}}
+      <div class ="back-to-answer"> BACK</div>
+
+
     </div>
-    <div id="weight">Weight: \{{weight}}</div>
-  </div>
-
-
+  </div> 
 </div>
 </script>
