@@ -23,7 +23,7 @@ var returnPlayers = function (players, rb_team_id, res, league){
     if (league == 'nba'){
      roster.starters = formatEvenOdds(players.players.starters, true),
      roster.bench = formatEvenOdds(players.players.bench);
-     var team_name = players.market + ' ' + players.name;
+     var team_name = players.team_name;
     }
     else if (league == 'goats'){
       roster = formatEvenOdds(players.players);
@@ -31,7 +31,7 @@ var returnPlayers = function (players, rb_team_id, res, league){
     }
     else{
       roster = formatEvenOdds(players.players);
-      var team_name = players.market + ' ' + players.name;
+      var team_name = players.team_name;
     }
      res.render('quiz', {
       roster: roster,
@@ -337,6 +337,7 @@ var formatPlayersDocument = function(rb_team_id, players, market, name){
   teamDocument.players= players;
   teamDocument.market = market;
   teamDocument.name = name
+  teamDocument.team_name = market + ' ' + name;
   return teamDocument;
 }
 
@@ -354,7 +355,7 @@ function mongoInsertPlayers(league, team_document, rb_team_id){
   }
   db.open(function(err, db){
     db.collection("players").update({team_id: team_document.rb_team_id},
-    {$set: {team_id: team_id, market: team_document.market, name: team_document.name, league: league, last_updated: new Date().toISOString().slice(0, 19).replace('T', ' '), players: team_document.players}},
+    {$set: {team_id: team_id, market: team_document.market, name: team_document.name, team_name: team_document.team_name, league: league, last_updated: new Date().toISOString().slice(0, 19).replace('T', ' '), players: team_document.players}},
     {upsert: true, multi:false}, function (err, upserted){
       if (err) {
         console.log('Ahh! An Error with Insert!');
