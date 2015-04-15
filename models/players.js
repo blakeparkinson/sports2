@@ -41,7 +41,7 @@ var returnPlayers = function (players, rb_team_id, res, league){
       team_name: team_name,
       clock: getTimeLimit(league),
       background_image: randImg(league),
-      logo_url: '../images/team_logos/'+league+'/'+players.name+'.gif'
+      logo_url: '../images/team_logos/'+league+'/'+players.name+'.png'
     });
 
 
