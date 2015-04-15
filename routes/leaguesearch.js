@@ -25,30 +25,9 @@ router.get('/', function(req, res) {
 		}}
 
 	], function (err, result){ 
-		temparray = [];
-		var endresult = [];
 		if (result.length > 0){
 			var all_leagues = createTeamLists(result);
 			var sorted_teams = sortTeams(all_leagues);  // Sort the teams within each league by number of quizzes taken
-
-			//Blake - stopping here. I don't know what the purpose of the rest of this stuff is
-
-			/*for (i=0;i<temparray.length;i++){ // # of leagues
-				console.log("1 "+temparray.length);
-				for (j=0;j<temparray[i].length;j++){ // # of teams
-					console.log("2 "+ temparray[i].length);
-					tempteam = temparray[i];
-					console.log("2b "+ tempteam[0]);
-					console.log("2c "+ tempteam[1]);
-					for (k=0;k<tempteam[j].length;k++){ //# inside of each team
-						console.log("3 "+ tempteam[j]);
-						team_info = tempteam[j][k]._id;
-						team_info.counts = temparray[i][j][k].quizCount;
-						endresult.push(team_info);
-					}
-					
-				}				
-			}*/
 		}
 
 		res.render('leaguesearch',
@@ -72,20 +51,20 @@ router.get('/:league', function(req, res) {
 				"quizCount": { "$sum": 1}
 			}
 		}], function(err, result){
-			temparray = [];
-			var endresult = [];
 			if (result.length > 0){
-				temparray = result;
-				for (i=0;i<temparray.length;i++){
-					team_info = temparray[i]._id;
-					team_info.counts = temparray[i].quizCount;
-					endresult.push(team_info);
-				}
+				teams = [];
+				for (i=0;i<Object.keys(result).length;i++){
+						var team = {};
+						team.rb_team_id = result[i]._id.rb_team_id;
+						team.league = result[i]._id.league;
+						team.quizCount = result[i].quizCount;
+						teams.push(team);
+					}
+				sorted_team = teams.sort(compareCounts)
 			}
 
-
 		res.render('leaguesearch', {
-			league: endresult
+			popular_teams: sorted_team
 		});
 	})
 })
@@ -130,7 +109,6 @@ var createTeamLists = function(teamobject){
 		teams.nhl_teams=nhl_teams;
 		teams.nfl_teams = nfl_teams;
 		teams.mlb_teams = mlb_teams;
-	//teams.push(nba_teams, goats_teams, eu_soccer_teams, nhl_teams, nfl_teams, mlb_teams);
 	return teams
 }
 
@@ -140,7 +118,6 @@ var sortTeams = function(teamsobject){
 	for (var key in teamsobject){
 		teamsobject[key].sort(compareCounts);
 	}
-	//console.log(teamsobject);
 	return teamsobject
 }
 
