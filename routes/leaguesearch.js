@@ -47,11 +47,7 @@ router.get('/:league', function(req, res) {
 					"rb_team_id": "$rb_team_id",
 					"league": "$league"
 				},
-				"quizCount": { "$sum": 1}
-				/*
-				,
-				"market" : "$market",
-				"name" : "$name"  */
+				"quizCount": { "$sum": 1}			
 			}}
 		], function (err, result){  // in this case, result is one league object with an array of teams
 			if (result.length > 0){
