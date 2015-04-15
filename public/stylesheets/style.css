@@ -299,15 +299,23 @@ padding-left: 5%;
 }
 
 .answer-container-contain {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.98);
   border-radius: 5px 5px 5px 5px;
-  opacity: 0.92;
   border-bottom: 1px solid #ccc;
   min-height: 220px;
+  overflow: auto;
+  position: relative;
+}
+
+.answer-container .cover{
+  position: absolute;
   background-size: 30% auto;
   background-repeat: no-repeat;
   background-position: center center;
-  overflow: auto;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.1;
 }
 
 .answer-container .starters{
