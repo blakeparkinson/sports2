@@ -40,7 +40,8 @@ var returnPlayers = function (players, rb_team_id, res, league){
       remove_footer: true,
       team_name: team_name,
       clock: getTimeLimit(league),
-      background_image: randImg(league)
+      background_image: randImg(league),
+      logo_url: '../images/team_logos/'+league+'/'+players.name+'.gif'
     });
 
 

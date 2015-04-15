@@ -304,6 +304,9 @@ padding-left: 5%;
   opacity: 0.92;
   border-bottom: 1px solid #ccc;
   min-height: 220px;
+  background-size: 30% auto;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .answer-container .starters{
