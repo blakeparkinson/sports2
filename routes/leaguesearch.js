@@ -19,7 +19,8 @@ router.get('/', function(req, res) {
 	{ "$group": {
 			"_id": {
 				"rb_team_id": "$rb_team_id",
-				"league": "$league"
+				"league": "$league",
+				"quiz_name": "$quiz_name"
 			},
 			"quizCount": { "$sum": 1}
 		}}
@@ -46,7 +47,8 @@ router.get('/:league', function(req, res) {
 		{ "$group": {
 				"_id": {
 					"rb_team_id": "$rb_team_id",
-					"league": "$league"
+					"league": "$league",
+					"quiz_name": "$quiz_name"
 				},
 				"quizCount": { "$sum": 1}
 			}
@@ -57,6 +59,7 @@ router.get('/:league', function(req, res) {
 						var team = {};
 						team.rb_team_id = result[i]._id.rb_team_id;
 						team.league = result[i]._id.league;
+						team.team_name = result[i]._id.quiz_name;
 						team.quizCount = result[i].quizCount;
 						teams.push(team);
 					}
@@ -83,6 +86,7 @@ var createTeamLists = function(teamobject){
 		var team = {};
 		team.rb_team_id = teamobject[i]._id.rb_team_id;
 		team.league = teamobject[i]._id.league;
+		team.team_name = teamobject[i]._id.quiz_name;
 		team.quizCount = teamobject[i].quizCount;
 		switch (team.league){
 			case 'nba':
