@@ -3,7 +3,7 @@
     width: 70%;
     margin-left: auto;
     margin-right: auto;    
-    margin-top:5%;  
+    margin-top:8%;  
     height: 300px; 	
 }
 #league-type {
@@ -37,19 +37,23 @@
 	font-size: 1.5em;
 }
 .all-icons {
-  max-width: 25%;
-  max-height: 25%;
-  border-radius: 10px;  
+  max-width: 22%;
+  max-height: 22%;
   margin: 0 auto 0 auto;
-  padding-top: 5%;
+  margin-top: 5%;
+  /*
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 50px
+  */
 }
 .goats-icon {
   content: url(http://upload.wikimedia.org/wikipedia/en/thumb/c/c0/Portuguese_Ibex_Cabrera_Goat.svg/500px-Portuguese_Ibex_Cabrera_Goat.svg.png);
 }
 .season-leaders-icon {
  content: url(http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/magic-marker-icons-culture/115276-magic-marker-icon-culture-crown-five-points2.png);   
- max-width: 28%;
- padding-top: 2%;
+ max-width: 26%;
+ padding-top: 1%;
 }
 .roster-icon {
  content: url(https://cdn4.iconfinder.com/data/icons/ios7-essence/22/editor_clipboard_checkmark_done-512.png);    
