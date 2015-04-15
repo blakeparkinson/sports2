@@ -1,5 +1,4 @@
 <div class="league-middle">
-
   <div class="container-league">
     <div id="league-type"></div>    
     <div class="column-left all-columns"><div class="league-align-center"><p class="all-icons roster-icon" id="rosters-league-page" data-toggle="popover" data-container="body" data-placement="left" title="Team roster quizzes" data-content="See if you can name all the players on a specific team" data-trigger="hover"></p></div>{{#each league}}  {{/each}}</div>
@@ -12,6 +11,8 @@
  </div>	
 
 <script type='text/javascript'>
-  var league = {{{json_stringify league}}};
-  console.log(league);
- </script>
+
+    var teams = {{{json_stringify popular_teams}}};
+    console.log(teams);
+</script>
+
