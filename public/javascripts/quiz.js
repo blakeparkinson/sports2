@@ -2,7 +2,7 @@ var starters, bench, roster,
     correct = 0,
     stop_counter = false;
     team_container = $('.team-container'),
-    answer_container = $('.answer-container');
+    answer_container = $('.answer-container-contain');
 if (typeof(roster) != undefined){
   roster = roster;
 }
