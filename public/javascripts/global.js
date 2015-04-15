@@ -4,7 +4,7 @@ $(document).ready(function() {
 
     // Populate the user table on initial page load    
     $('body').on('click', '[data-action="pick-team"], .quiz-btn', fetchQuiz);
-    $('body').on('click', '.trending-quiz', fetchTrendingQuiz);
+    $('body').on('click', '.create-quiz', fetchTrendingQuiz);
     $('body').on('click', '.twitter-login', openAuthPopup);
     $('body').on('click', '.tweet', openTweetPopup);
     $('body').on('click', '.facebook-login', openFacebookAuthPopup);
