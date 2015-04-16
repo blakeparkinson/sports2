@@ -61,6 +61,8 @@ a {
   margin-left: 5%;
   padding: 5% 2% 5% 2%;
   background: rgba(32, 26, 26, 0.7);
+  min-height: 220px;
+  min-width: 330px;
 }
 
 
@@ -183,6 +185,22 @@ ul {
   margin-top: 5%;
   padding-left: 5%;
   padding-right: 5%;
+}
+
+@media screen and (max-width: 780px) {
+    #right-quiz-column {
+        float:none;
+        padding-bottom: 20px;
+        margin-top: none;
+        padding-left: 5%;
+    }
+    #left-quiz-column{
+      float:none;
+      margin-top: none;
+      padding-left: 5%;
+
+    }
+     
 }
 
   /* ===== PLAYER CARD STYLING ===== */
