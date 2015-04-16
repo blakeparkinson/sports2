@@ -58,3 +58,9 @@
 .roster-icon {
  content: url(https://cdn4.iconfinder.com/data/icons/ios7-essence/22/editor_clipboard_checkmark_done-512.png);    
 }
+.top-list-contain {
+    padding-top: 10%;
+}
+.top-list-contain li {
+    padding: 5px;
+}
