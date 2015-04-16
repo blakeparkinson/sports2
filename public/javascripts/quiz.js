@@ -146,7 +146,7 @@ var checkForMatches = function(guess, input_field){
 
 var addToCorrectList = function (count, player, index){
 
-  var html = '<div class="correct-guess" data-index="'+index+'">'+count +'.' + '<img class="circle-pic" src='+player.avatar_url+'>' + player.full_name + '</div>';
+  var html = '<div class="outer-guess"><div class="correct-guess" data-index="'+index+'">'+count +'.' + '<img class="circle-pic" src='+player.avatar_url+'>' + player.full_name + '</div></div>';
   answer_container.append(html);
 }
 
