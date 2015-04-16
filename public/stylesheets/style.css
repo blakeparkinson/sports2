@@ -323,10 +323,21 @@ padding-left: 5%;
   padding-bottom: 15px;
 }
 
-.answer-container .correct-guess{
+.answer-container .outer-guess{
   padding: 5px;
   float: left;
   width: 50%;
+  height:42px;
+}
+.answer-container .correct-guess{
+  position: absolute;
+  z-index: 5;
+  width:inherit;
+}
+
+.answer-container .correct-guess:hover{
+  cursor:pointer;
+  background-color:rgb(185, 153, 153);
 }
 
 @media screen and (max-width: 780px) {
