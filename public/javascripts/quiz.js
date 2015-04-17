@@ -206,8 +206,8 @@ var endQuiz = function(e, skip_mapping){
   if (!skip_mapping){
     for (var i=0; i < roster.length; i++){
       //populateTable takes in a player and maps it to the right spot, loop through and place them
-      correct++;
       addToCorrectList(correct, roster[i], i);
+      correct++;
     }
   }
   //remove the quit button
