@@ -131,6 +131,7 @@ var checkForMatches = function(guess, input_field){
     //check full name and just last name, also make sure the player has not been guessed already
     if ((guess == last_name.toLowerCase().trim() || guess == full_name.toLowerCase().trim()) && !player.guessed){
       correct++;
+      appendGreenCheck(input_field);
       //populateTable(player);
       addToCorrectList(correct, player, index);
       input_field.val('');
@@ -143,9 +144,16 @@ var checkForMatches = function(guess, input_field){
     }
   })
 }
+ 
+var appendGreenCheck  = function(input_field){
+  var glyc = input_field.closest('.form-group').find('.glyphicon');
+  glyc.removeClass('hidden').show();
+  glyc.fadeOut(2000);
+
+}
 
 var addToCorrectList = function (count, player, index){
-
+  if (player.guessed == true) return;
   var html = '<div class="outer-guess"><div class="correct-guess" data-index="'+index+'">'+count +'.' + '<img class="circle-pic" src='+player.avatar_url+'>' + player.full_name + '</div></div>';
   answer_container.append(html);
 }
@@ -198,8 +206,8 @@ var endQuiz = function(e, skip_mapping){
   if (!skip_mapping){
     for (var i=0; i < roster.length; i++){
       //populateTable takes in a player and maps it to the right spot, loop through and place them
-      correct++;
       addToCorrectList(correct, roster[i], i);
+      correct++;
     }
   }
   //remove the quit button

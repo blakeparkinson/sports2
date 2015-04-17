@@ -675,6 +675,15 @@ table tr th:last-child {
   width: 85%;
   float:left;
   margin-bottom: 0;
+  position: relative;
+}
+
+.name-point-container .player-name .glyphicon-ok{
+  position: absolute;
+  right: 2%;
+  top: 26%;
+  color: rgb(22, 231, 22);
+}
 }
 
 .player-name .form-control{
