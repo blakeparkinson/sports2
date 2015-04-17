@@ -231,10 +231,11 @@ padding-top: 4%;
 padding-left: 3%;
 }
 #player-card-image {
-  max-width: 85px;
+  max-width: 95px;
   border-radius: 50%;
   float: left;
-  border: 1.5px solid #000;    
+  border: 1.5px solid #000; 
+  margin-left: 10px;   
 }
 #top-player-info {
   padding-left: 22%;
