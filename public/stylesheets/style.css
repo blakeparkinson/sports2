@@ -357,16 +357,18 @@ padding-left: 5%;
   width: 50%;
   height:42px;
 }
+
+.answer-container .outer-guess:hover{
+  cursor:pointer;
+  background-color:rgb(185, 153, 153);
+}
+
 .answer-container .correct-guess{
   position: absolute;
   z-index: 5;
   width:inherit;
 }
 
-.answer-container .correct-guess:hover{
-  cursor:pointer;
-  background-color:rgb(185, 153, 153);
-}
 
 @media screen and (max-width: 780px) {
     #team-select {
