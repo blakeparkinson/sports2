@@ -70,11 +70,11 @@ Handlebars.registerHelper('format_height', function(heightInches){
   return americanHeight;
 });
 
-Handlebars.registerHelper('percentageCalc', function(attempt, made){
+Handlebars.registerHelper('percentageCalc', function(denominator, numerator){
   if (arguments.length < 1) {
         throw new Error("Handlerbars Helper 'render_position' needs 2 parameters");
     }
-  var percentage = made/attempt; 
+  var percentage = numerator/denominator; 
   percentage = percentage * 100;
   percentage = percentage.toFixed(1);
 
