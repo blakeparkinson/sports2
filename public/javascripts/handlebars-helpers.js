@@ -68,4 +68,20 @@ Handlebars.registerHelper('format_height', function(heightInches){
   var inches =  heightInches % 12;
   var americanHeight = feet + "'" + inches + "\"";
   return americanHeight;
-})
+});
+
+Handlebars.registerHelper('percentageCalc', function(attempt, made){
+  if (arguments.length < 1) {
+        throw new Error("Handlerbars Helper 'render_position' needs 2 parameters");
+    }
+  var percentage = made/attempt; 
+  percentage = percentage * 100;
+  percentage = percentage.toFixed(1);
+
+  if (isNaN(percentage) || (percentage < 10)) {
+    percentage = "N/A";
+  } else {
+    percentage = percentage + "%";
+  }
+  return percentage;
+});
