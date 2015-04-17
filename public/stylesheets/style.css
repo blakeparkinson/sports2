@@ -220,8 +220,14 @@ ul {
   color:#337ab7;;
 }
 
+.back-to-answer-absolute{
+  position: absolute;
+  z-index: 5;
+  width: inherit;
+}
+
 #top-half-card {
-padding-top: 2%;
+padding-top: 4%;
 padding-left: 3%;
 }
 #player-card-image {
@@ -334,7 +340,7 @@ padding-left: 3%;
   position: relative;
 }
 
-.answer-container .cover{
+.cover{
   position: absolute;
   background-size: 30% auto;
   background-repeat: no-repeat;
