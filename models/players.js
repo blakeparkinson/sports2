@@ -199,7 +199,7 @@ switch (league){
             break;
           case 'nhl':
             json_response = JSON.parse(body);
-            players = formatPlayers(players_sorted, rb_team_id, json_response.market, json_response.name);
+            players = formatPlayers(json_response, rb_team_id, json_response.market, json_response.name);
             appendPlayerShortId(players.players);
             sortByPositions('nhl', players.players);
             mongoInsertPlayers(league, players, rb_team_id);
