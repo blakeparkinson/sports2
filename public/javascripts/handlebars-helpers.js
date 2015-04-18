@@ -62,10 +62,26 @@ Handlebars.registerHelper('render_position', function(league, position){
 
 Handlebars.registerHelper('format_height', function(heightInches){
   if (arguments.length < 1) {
-        throw new Error("Handlerbars Helper 'render_position' needs 2 parameters");
+        throw new Error("Handlerbars Helper 'format_height' needs 2 parameters");
     }
   var feet = Math.floor(heightInches / 12);
   var inches =  heightInches % 12;
   var americanHeight = feet + "'" + inches + "\"";
   return americanHeight;
-})
+});
+
+Handlebars.registerHelper('percentageCalc', function(denominator, numerator){
+  if (arguments.length < 1) {
+        throw new Error("Handlerbars Helper 'percentageCalc' needs 2 parameters");
+    }
+  var percentage = numerator/denominator; 
+  percentage = percentage * 100;
+  percentage = percentage.toFixed(1);
+
+  if (isNaN(percentage) || (percentage < 10)) {
+    percentage = "N/A";
+  } else {
+    percentage = percentage + "%";
+  }
+  return percentage;
+});

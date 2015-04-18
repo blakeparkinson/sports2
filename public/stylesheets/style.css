@@ -231,10 +231,11 @@ padding-top: 4%;
 padding-left: 3%;
 }
 #player-card-image {
-  max-width: 85px;
+  max-width: 95px;
   border-radius: 50%;
   float: left;
-  border: 1.5px solid #000;    
+  border: 1.5px solid #000; 
+  margin-left: 10px;   
 }
 #top-player-info {
   padding-left: 22%;
@@ -251,7 +252,7 @@ padding-left: 3%;
 #line-divider {  
   border: 1px solid #000;
   margin: 5px 0 5px 0;
-  width: 91%;
+  width: 80%;
 }
 #player-card-basic td {
   font-size: 1.1em;
@@ -288,6 +289,16 @@ padding-left: 3%;
   font-weight: normal;
   background: #931207;
 }
+#other-card-info {
+  padding-top: 5%;
+  font-size: 1.3em;
+}
+#other-card-info-left {
+  float: left;
+  padding-right: 30%;
+}
+
+/* ======= END PLAYER CARD  ========= */
 
 
 @media screen and (max-width: 535px) {
