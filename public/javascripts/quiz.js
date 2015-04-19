@@ -156,8 +156,7 @@ var addToCorrectList = function (count, player, index){
   if (player.guessed == true) return;
   var html = '<div class="outer-guess"><div class="correct-guess" data-index="'+index+'">'+count +'.' + '<img class="circle-pic" src='+player.avatar_url+'>' + player.full_name + '</div></div>';
   answer_container.append(html);
-  var current = $('.correct-guess[data-index="' + index + '" ]').parent()
-  console.log(current);
+  var current = $('.correct-guess[data-index="' + index + '" ]').parent()  
   current.hide();
   current.fadeIn(200).addClass('green-background');
   
