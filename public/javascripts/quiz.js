@@ -156,7 +156,15 @@ var addToCorrectList = function (count, player, index){
   if (player.guessed == true) return;
   var html = '<div class="outer-guess"><div class="correct-guess" data-index="'+index+'">'+count +'.' + '<img class="circle-pic" src='+player.avatar_url+'>' + player.full_name + '</div></div>';
   answer_container.append(html);
-}
+  var current = $('.correct-guess[data-index="' + index + '" ]').parent()
+  console.log(current);
+  current.hide();
+  current.fadeIn(200).addClass('green-background');
+  
+  setTimeout(function() {
+    current.removeClass("green-background");
+    }, 500);    
+  }
 
 var populateTable = function(player, class_color){
   if (player.guessed) return;
@@ -201,6 +209,7 @@ var AppendTemplate = function(source, parent, data){
 }
 
 var endQuiz = function(e, skip_mapping){
+  $('#also-might-like').show();
   stop_counter = true;
   team_container.find('.clock').text('00:00');
   if (!skip_mapping){

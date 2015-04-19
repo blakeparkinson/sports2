@@ -19,14 +19,8 @@
                 <td id="player-card-team">\{{team_name}}</td>
               </tr>
             </table>
-          </div>
-        </div>  
-      </div>
-      <div id="lower-half-card">    
-        
-        <br />
-        <div class="subheader">Season stats</div>
-        <table class="player-card-table">
+            <div class="subheader">Season stats</div>
+        <table id="stats-table" class="player-card-table">
           <tr>
             <th>PPG</th>
             <th>APG</th>
@@ -43,7 +37,13 @@
             <td id="ft-percent">\{{percentageCalc average.free_throws_att average.free_throws_made}}</td>
             <td id="threepoint-percent">\{{percentageCalc average.three_points_att average.three_points_made}}</td>
           </tr>
-        </table>       
+        </table>
+          </div>
+        </div>  
+      </div>
+      <div id="lower-half-card">    
+        
+        <br />              
         <div id="other-card-info">
           <div id="other-card-info-left">
             <div id="years-in-league">Years in League: \{{experience}}</div>
@@ -52,7 +52,7 @@
           <div id="other-card-info-right">  
             <div id="height">Height: \{{format_height height}} </div>
             <div id="weight">Weight: \{{weight}}</div>
-          </div> 
+          </div>           
         </div>
       </div>
     </div>
