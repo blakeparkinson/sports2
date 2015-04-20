@@ -110,7 +110,7 @@
           .attr('aria-hidden', true);
 
         $.support.transition && this.$element.hasClass('fade') ?
-          this.hide() :
+          this.hideWithTransition() :
           this.hideModal();
     };
 
