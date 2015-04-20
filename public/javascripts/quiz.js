@@ -130,10 +130,9 @@ var checkForMatches = function(guess, input_field){
     var last_name = player.last_name != undefined? player.last_name : player.full_last_name;
     //check full name and just last name, also make sure the player has not been guessed already
     if ((guess == last_name.toLowerCase().trim() || guess == full_name.toLowerCase().trim()) && !player.guessed){
-      correct++;
       appendGreenCheck(input_field);
       //populateTable(player);
-      addToCorrectList(correct, player, index);
+      addToCorrectList(player, index);
       input_field.val('');
       team_container.find('.number').html(correct);
       player.guessed = true;
@@ -152,9 +151,10 @@ var appendGreenCheck  = function(input_field){
 
 }
 
-var addToCorrectList = function (count, player, index){
+var addToCorrectList = function (player, index){
   if (player.guessed == true) return;
-  var html = '<div class="outer-guess"><div class="correct-guess" data-index="'+index+'">'+count +'.' + '<img class="circle-pic" src='+player.avatar_url+'>' + player.full_name + '</div></div>';
+  correct++;
+  var html = '<div class="outer-guess"><div class="correct-guess" data-index="'+index+'">'+correct +'.' + '<img class="circle-pic" src='+player.avatar_url+'>' + player.full_name + '</div></div>';
   answer_container.append(html);
   var current = answer_container.find('.correct-guess[data-index="' + index + '" ]').parent();
   current.hide();
@@ -210,8 +210,7 @@ var endQuiz = function(e, skip_mapping){
   if (!skip_mapping){
     for (var i=0; i < roster.length; i++){
       //populateTable takes in a player and maps it to the right spot, loop through and place them
-      addToCorrectList(correct, roster[i], i);
-      correct++;
+      addToCorrectList(roster[i], i);
     }
   }
   //remove the quit button
