@@ -401,7 +401,37 @@ padding-left: 3%;
   background-color:rgb(22, 231, 22);  
 }
 .green-background {
-  background-color:rgb(22, 231, 22);  
+  background-color:rgb(22, 231, 22);
+  animation: fadeout 2s forwards;
+    animation-delay: 1s;
+    -moz-animation: fadeout 2s forwards;
+    -moz-animation-delay: 1s;
+    -webkit-animation: fadeout 2s forwards;
+    -webkit-animation-delay: 1s;
+    -o-animation: fadeout 2s forwards;
+    -o-animation-delay: 1s;
+}
+
+@keyframes fadeout {
+    to {
+        background-color:rgba(255, 255, 255, 0.3);
+    }
+
+}
+@-moz-keyframes fadeout {
+    to {
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+}
+@-webkit-keyframes fadeout {
+    to {
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+}
+@-o-keyframes fadeout {
+    to {
+        background-color: rgba(255, 255, 255, 0.3);
+    }
 }
 
 .answer-container .correct-guess{
