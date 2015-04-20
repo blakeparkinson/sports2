@@ -7,6 +7,7 @@
     <link rel='stylesheet' href='/stylesheets/bootstrap-select.min.css' />
     <link rel='stylesheet' href='/stylesheets/select2.css' />
     <link rel='stylesheet' href='/stylesheets/leaguepage.css' />
+    <link rel='stylesheet' href='/stylesheets/bootstrap-lightbox.min.css' />
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' />
   </head>
   <body id="league-background" style={{#if background_image}}"background-image: url({{background_image}});"{{/if}}>
@@ -24,7 +25,7 @@
     <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right rb"> 
           <li><a href="/leaguesearch/soccer"><span class="rb-green">Soccer</span></a></li>
-          <li class="rb-green"><a href="/leaguesearch/mlb"><span class="rb-green">MLB</span></a></li>
+          <li class="rb-green"><a data-toggle="lightbox" href="#demoLightbox"><span class="rb-green">MLB</span></a></li>
           <li class="rb-green"><a href="/leaguesearch/nba"><span class="rb-green">NBA</span></a></li>
           <li class="rb-green"><a href="/leaguesearch/nfl"><span class="rb-green">NFL</span></a></li>
           <li class="rb-green"><a href="/leaguesearch/nhl"><span class="rb-green">NHL</span></a></li>
@@ -47,6 +48,13 @@
       <div id="twitter" class="post-social"></div>
     </div>
   </div>
+  <div id="demoLightbox" class="lightbox hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class='lightbox-content'>
+    <img src="https://www.petfinder.com/wp-content/uploads/2012/11/dog-how-to-select-your-new-best-friend-thinkstock99062463.jpg">
+    <div class="lightbox-caption"><p>hey you</p></div>
+  </div>
+</div>
+
   
   {{#unless remove_footer}}
     <footer class="footer">
@@ -98,7 +106,6 @@
   </div>
 </div>
 
-
     <script src='/javascripts/underscore.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js'></script>
     <script src='https://code.jquery.com/jquery.js'></script>
@@ -111,5 +118,6 @@
     <script src='/javascripts/leaguesearch.js'></script>    
     <script src='/javascripts/bootstrap-select.min.js'></script>
     <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js'></script>
+    <script src='/javascripts/bootstrap-lightbox.js'></script>
   </body>
 </html>
