@@ -40,7 +40,32 @@ a {
 .navbar-right.rb{
   padding: 0 50px 0 50px;
 }
-
+#how-works-modal {
+  margin-top: 20%;
+}
+#how-works-main {
+  padding: 4% 0 4% 0;
+}
+#how-works-footer {
+  text-align: center;
+  padding: 10px 0 3px 0;
+}
+#how-works-body {
+  font-size: 1.3em;
+}
+#how-works-header {
+  text-align: center;
+}
+.float-icon {
+  float: left;
+}
+.modal-bullets {  
+  margin: 0 5% 0 16%;
+}
+.modal-clear {
+  clear: left;
+  margin-top: 5%;
+}
 .navbar.blitz{
   background: rgba(32, 26, 26, 0.7);
   font-family: HelveticaNeue-Thin;
