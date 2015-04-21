@@ -10,14 +10,15 @@ var app     = express();
         if(!error){
             var $ = cheerio.load(html);
 
-
+           	//this is the table class name
             $('.data').filter(function(){
 
            // Let's store the data we filter into a variable so we can easily see what's going on.
-                 
+
 
                 var data = $(this);
                 var results = [];
+                //sort through their odd and even rows
                 var tr = data.find('.row1, .row2')
                 tr.each(function(i, element){
                   var player = $(this).find('td:first-child').text();
