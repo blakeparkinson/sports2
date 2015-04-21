@@ -28,6 +28,8 @@
           <li class="rb-green"><a href="/leaguesearch/nba"><span class="rb-green">NBA</span></a></li>
           <li class="rb-green"><a href="/leaguesearch/nfl"><span class="rb-green">NFL</span></a></li>
           <li class="rb-green"><a href="/leaguesearch/nhl"><span class="rb-green">NHL</span></a></li>
+          <li class="rb-green"><a href="/leaguesearch/nhl"><span class="rb-green">NHL</span></a></li>
+          <li><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" id="how-works-button">How this works</button></li>
         </ul>
     </div>
   </nav>
@@ -94,6 +96,38 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" id="email-btn">Send Email</button>
       </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" id="how-works-modal">
+      <div class="modal-header" id="how-works-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="myModalLabel">Three ways to play</h3>
+      </div>
+      <div class="modal-body" id="how-works-body">
+        RosterBlitz lets you play sports trivia how you want want. There are three types of quizzes.
+        <div id="how-works-main">        
+          <div>
+              <p class="roster-icon all-icons-small float-icon"></p>
+              <p class="modal-bullets">Rosters: The flagship and namesake quiz type. Try to name all the players on your favorite team, or that scrub team they never show on TV.</p>
+          </div>
+          <div class="modal-clear">
+            <p class="season-leaders-icon all-icons-small float-icon"></p>
+            <p class="modal-bullets">Season leaders: Who is currently leading the NBA in rebounds per game? Or leading the NFL in touchdown passes? Play yourself--or challenge a--friend to test your current sports knowledge!</p>
+          </div>
+          <div class="modal-clear">
+            <p class="goats-icon all-icons-small float-icon"></p>
+            <p class="modal-bullets">Great of All Time (GOAT): Who is the all time leader in rushing yards per attempt? Goals in the World Cup? Try a GOAT quiz to test your knowledge of the best of the best.</p>
+          </div>               
+        </div>
+        <div class="modal-footer" id="how-works-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">I'm ready to play!</button>        
+        </div>
     </div>
   </div>
 </div>
