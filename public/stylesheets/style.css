@@ -36,9 +36,15 @@ a {
 .navbar-header.rb{
   padding-left: 50px
 }
-
+#how-works-button {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 7px;
+}
 .navbar-right.rb{
-  padding: 0 50px 0 50px;
+  padding: 0 30px 0 50px;
 }
 #how-works-modal {
   margin-top: 20%;
