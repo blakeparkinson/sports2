@@ -429,6 +429,7 @@ padding-left: 3%;
 .answer-container .inner-guess{
   padding: 5px;
   height:42px;
+  width:100%;
 }
 
 .answer-container .inner-guess:hover{  
