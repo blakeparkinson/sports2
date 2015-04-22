@@ -11,6 +11,7 @@ else{
   roster = [];
 }
 
+var card = $('.player-card');
 
 // DOM Ready =============================================================
 $(document).ready(function() {
