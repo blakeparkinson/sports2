@@ -54,16 +54,5 @@
 <script type='text/javascript'>
   var league = '{{league}}',
     team_name = '{{team_name}}';
+  var roster =  {{{json_stringify roster}}};
  </script>
-
-  {{#compare league 'nba'}}
-    <script type='text/javascript'>
-    var bench = {{{json_stringify roster.bench}}},
-        starters = {{{json_stringify roster.starters}}};
-    </script>
-  {{/compare}}
-  {{#compare league '!=' 'nba'}}
-    <script type='text/javascript'>
-      var roster =  {{{json_stringify roster}}};
-    </script>
-  {{/compare}}

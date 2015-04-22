@@ -1,4 +1,4 @@
-var starters, bench, roster,
+var roster,
     correct = 0,
     stop_counter = false;
     team_container = $('.team-container'),
@@ -11,27 +11,6 @@ else{
   roster = [];
 }
 
-if (typeof(starters) != undefined){
-  starters = starters;
-}
-
-else{
-  starters = [];
-}
-
-if (typeof(bench) != undefined){
-  bench = bench;
-}
-
-else{
-  bench = [];
-}
-
-if (typeof bench != "undefined" && typeof starters != "undefined"){
-  roster = starters.concat(bench);
-}
-var card = $('.player-card');
-console.log(bench); console.log(starters); console.log(roster);
 
 // DOM Ready =============================================================
 $(document).ready(function() {
