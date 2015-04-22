@@ -19,22 +19,9 @@ var shortId = require('shortid');
 
 var returnPlayers = function (players, rb_team_id, res, league){
   if (res.quiz_page != undefined && res.quiz_page){
-    var roster = {};
-    if (league == 'nba'){
-     roster.starters = formatEvenOdds(players.players.starters, true),
-     roster.bench = formatEvenOdds(players.players.bench);
-     var team_name = players.team_name;
-    }
-    else if (league == 'goats'){
-      roster = formatEvenOdds(players.players);
-      var team_name = players.list_name
-    }
-    else{
-      roster = formatEvenOdds(players.players);
-      var team_name = players.team_name;
-    }
+    var team_name = players.list_name    
      res.render('quiz', {
-      roster: roster,
+      roster: players.players,
       rb_team_id: rb_team_id,
       league: league,
       remove_footer: true,
@@ -68,7 +55,7 @@ var getTimeLimit = function(league){
   return clock;
 }
 
-var formatEvenOdds = function(players, is_starter){
+/*var formatEvenOdds = function(players, is_starter){
   for (i=0; i<players.length; i++){
     if (is_starter){
       players[i].starter = true;
@@ -86,7 +73,7 @@ var formatEvenOdds = function(players, is_starter){
   }
   return players;
 }
-
+*/
 
 
 var fetchGoatPlayers = function(list_id, rb_team_id, league, res, req, callback){ 
@@ -284,17 +271,11 @@ function compareNFL(a,b) {
 
 
 var formatNBAPlayers = function(response, rb_team_id, team_info){
-  var startersarray = response.players.slice(0,5);
-  sortByPositions('nba', startersarray);
-  var bencharray = response.players.slice(5,response.players.length);
-  var players = {};
-  players.starters = startersarray;
-  players.bench = bencharray;
-  var team = formatPlayersDocument(rb_team_id, players, team_info);
+  var team = formatPlayersDocument(rb_team_id, response.players, team_info);
   return team;
 }
 
-var sortByPositions = function(league, starters){
+/*var sortByPositions = function(league, starters){
     switch (league){
       case 'nba':
         var order = ['G', 'G-F', 'F-G', 'F', 'F-C', 'C-F', 'C'];
@@ -315,7 +296,7 @@ var sortByPositions = function(league, starters){
     starters.sort(function(a,b){
       return order.indexOf(a.position) - order.indexOf(b.position);
     });
-}
+}*/
 
 
 var formatPlayers = function(response, rb_team_id, team_info){
