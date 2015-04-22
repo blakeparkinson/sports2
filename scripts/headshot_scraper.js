@@ -60,21 +60,28 @@ db.collection('players').find().toArray(function (err, items){
     		}
     	}
 
-
-    	for (var b=0; b < items[i].players.length; b++){
-    		var full_name = items[i].players[b].full_name.replace(/\s+/g, '-').toLowerCase();
-    		var url = 'http://www.gannett-cdn.com/media/SMG/sports_headshots/'+league+'/player/2014/'+usat_id+'/120x120/'+full_name+'.jpg';
-            console.log("URL"+ url);
-            download(url, '../public/images/headshots/'+league+'/'+full_name+'.jpg', items[i].players[b], items[i], 'players', b, league);
-
-    	}
-        /*
-    	for (var c=0; c < items[i].starters.length; c++){
-    		var full_name = items[i].starters[c].full_name.replace(/\s+/g, '-').toLowerCase();
-    		var url = 'http://www.gannett-cdn.com/media/SMG/sports_headshots/nba/player/2014/'+usat_id+'/120x120/'+full_name+'.jpg';
-	  		download(url, '../images/headshots/nba/'+full_name+'.jpg', items[i].starters[c], items[i], 'starters', c);
-    	}*/
-
-    }
+        if (league == "nba") {
+            console.log("ps"+items[i].players.starters.length);
+            console.log("ps"+items[i].players.bench.length);
+            for (var c=0; c < items[i].players.starters.length; c++){
+                var full_name = items[i].players.starters[c].full_name.replace(/\s+/g, '-').toLowerCase();
+                var url = 'http://www.gannett-cdn.com/media/SMG/sports_headshots/nba/player/2014/'+usat_id+'/120x120/'+full_name+'.jpg';
+                download(url, '../public/images/headshots/nba/'+full_name+'.jpg', items[i].players.starters[c], items[i], 'starters', c, league);
+            }
+            for (var d=0; d < items[i].players.bench.length; d++){
+                var full_name = items[i].players.bench[d].full_name.replace(/\s+/g, '-').toLowerCase();
+                var url = 'http://www.gannett-cdn.com/media/SMG/sports_headshots/nba/player/2014/'+usat_id+'/120x120/'+full_name+'.jpg';
+                download(url, '../public/images/headshots/nba/'+full_name+'.jpg', items[i].players.bench[d], items[i], 'bench', d, league);
+            }
+        }
+        else {
+            for (var b=0; b < items[i].players.length; b++){
+                var full_name = items[i].players[b].full_name.replace(/\s+/g, '-').toLowerCase();
+                var url = 'http://www.gannett-cdn.com/media/SMG/sports_headshots/'+league+'/player/2014/'+usat_id+'/120x120/'+full_name+'.jpg';
+                console.log("URL"+ url);
+                download(url, '../public/images/headshots/'+league+'/'+full_name+'.jpg', items[i].players[b], items[i], 'players', b, league);
+            }
+        }
+    } 
   });
 
