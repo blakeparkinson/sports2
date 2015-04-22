@@ -249,7 +249,7 @@ ul {
 #player-card-contain {
   min-height: 300px;
   min-width: 100px;
-  background: rgba(235, 235, 235, 0.9);
+  background: rgba(255, 255, 255, 0.98);
   border-radius: 0 0 5px 5px;  
   color: black;
 }
