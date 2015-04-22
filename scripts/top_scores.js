@@ -3,6 +3,19 @@ var fs = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
 var app     = express();
+var images = require('../lists/images2.js');
+var _ = require('lodash');
+var common = require('../routes/common')
+var config = common.config();
+var http = require("http"),
+    mongojs = require("mongojs"),
+    db = mongojs.connect(config.mongo_uri);
+var players_model = require('../models/players.js');
+
+
+
+players_model.pluckPlayerFromName('OKC', 'Russel Westbrook');
+
     
     url = 'http://www.cbssports.com/nba/stats/playersort/nba/year-2014-season-regularseason-category-scoringpergame';
     request(url, function(error, response, html){
@@ -22,18 +35,23 @@ var app     = express();
                 var tr = data.find('.row1, .row2')
                 tr.each(function(i, element){
                   var player = $(this).find('td:first-child').text();
+                  var team = $(this).find('td:nth-child(3)').text();
                   var ppg = $(this).find('td.sort').text();
                   var metadata = {
                     name: player,
                     ppg: ppg,
+                    team: team	
                   };
                   results.push(metadata);
                 })
-                console.log(results);
+                _.forEach(results, function(n, key) {
+                  console.log(n.team);
+
+                })
 
             })
         }
         else{
-          conole.log(error);
+          console.log(error);
         }
     })

@@ -193,7 +193,7 @@ switch (league){
           case 'nfl':
             json_response = JSON.parse(body);
             players_sorted = sortNFL(json_response);
-            players = formatPlayers(players_sorted, rb_team_id, json_response;
+            players = formatPlayers(players_sorted, rb_team_id, json_response);
             mongoInsertPlayers(league, players, rb_team_id);
             callback(players, rb_team_id, res, league)
             break;
@@ -469,6 +469,13 @@ var randImg = function(league) {
       return image;    
     }
 
+    var pluckPlayerFromName= function(teamAbbreviation, playerName){
+      db.collection('players').findOne({"abbreviation": teamAbbreviation},function (err, doc){
+                    console.log(doc);
+
+                  })
+    }
+
 module.exports = {
   returnPlayers: returnPlayers,
   fetchPlayersFromApi: fetchPlayersFromApi,
@@ -478,6 +485,7 @@ module.exports = {
   formatNBAPlayers: formatNBAPlayers,
   formatPlayersDocument: formatPlayersDocument,
   mongoInsertPlayers: mongoInsertPlayers,
-  sortNBA: sortNBA
+  sortNBA: sortNBA,
+  pluckPlayerFromName: pluckPlayerFromName
 
 }
