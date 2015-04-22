@@ -100,7 +100,6 @@ var fetchGoatPlayers = function(list_id, rb_team_id, league, res, req, callback)
   });
 }
 
-
 // Check the db first. If it's there and has been added in the last 24 hours, use it. 
 // Otherwise, go get new data from the API and replace/add the database listing
 var fetchPlayers = function(team_id, rb_team_id, league, usat_id, res, req, callback){ 
@@ -178,9 +177,10 @@ switch (league){
                           continue;
                         }
                       }
-                     } 
+                     }
+                     team_roster.usat_id = usat_id;
                      players_sorted = sortNBA(json_response);
-                     players = formatNBAPlayers(players_sorted, rb_team_id, team_roster.market, team_roster.name);
+                     players = formatNBAPlayers(players_sorted, rb_team_id, team_roster);
                      mongoInsertPlayers(league, players, rb_team_id);
                      callback(players, rb_team_id, res, league)
                   }
@@ -193,13 +193,13 @@ switch (league){
           case 'nfl':
             json_response = JSON.parse(body);
             players_sorted = sortNFL(json_response);
-            players = formatPlayers(players_sorted, rb_team_id, json_response.market, json_response.name);
+            players = formatPlayers(players_sorted, rb_team_id, json_response;
             mongoInsertPlayers(league, players, rb_team_id);
             callback(players, rb_team_id, res, league)
             break;
           case 'nhl':
             json_response = JSON.parse(body);
-            players = formatPlayers(players_sorted, rb_team_id, json_response.market, json_response.name);
+            players = formatPlayers(players_sorted, rb_team_id, json_response);
             appendPlayerShortId(players.players);
             sortByPositions('nhl', players.players);
             mongoInsertPlayers(league, players, rb_team_id);
@@ -207,7 +207,7 @@ switch (league){
             break;
           case 'eu_soccer':
             playersParsed = formatEUSoccerPlayers(response.body, team_id);
-            players = formatPlayersDocument(rb_team_id, playersParsed.players, playersParsed.team_name);
+            players = formatPlayersDocument(rb_team_id, playersParsed.players, playersParsed);
             mongoInsertPlayers(league, players, rb_team_id);
             callback(players, rb_team_id, res, league)
             break;
@@ -283,14 +283,14 @@ function compareNFL(a,b) {
 }
 
 
-var formatNBAPlayers = function(response, rb_team_id, market, name){
+var formatNBAPlayers = function(response, rb_team_id, team_info){
   var startersarray = response.players.slice(0,5);
   sortByPositions('nba', startersarray);
   var bencharray = response.players.slice(5,response.players.length);
   var players = {};
   players.starters = startersarray;
   players.bench = bencharray;
-  var team = formatPlayersDocument(rb_team_id, players, market, name);
+  var team = formatPlayersDocument(rb_team_id, players, team_info);
   return team;
 }
 
@@ -318,7 +318,7 @@ var sortByPositions = function(league, starters){
 }
 
 
-var formatPlayers = function(response, rb_team_id, market, name){
+var formatPlayers = function(response, rb_team_id, team_info){
   playersarray = [];
   for (i=0;i<response.players.length;i++){
     playersarray[i] = {};
@@ -327,18 +327,19 @@ var formatPlayers = function(response, rb_team_id, market, name){
       playersarray[i][key] = value;
     }
   }
-  var team = formatPlayersDocument(rb_team_id, playersarray, market, name);
+  var team = formatPlayersDocument(rb_team_id, playersarray, team_info);
   return team;
 }
 
 
-var formatPlayersDocument = function(rb_team_id, players, market, name){
+var formatPlayersDocument = function(rb_team_id, players, team_info){
   teamDocument = {};
   teamDocument.team_id = rb_team_id;
   teamDocument.players= players;
-  teamDocument.market = market;
-  teamDocument.name = name
-  teamDocument.team_name = market + ' ' + name;
+  teamDocument.market = team_info.market;
+  teamDocument.name = team_info.name;
+  teamDocument.team_name = team_info.market + ' ' + team_info.name;
+  teamDocument.abbreviation = team_info.usat_id;
   return teamDocument;
 }
 
@@ -356,7 +357,7 @@ function mongoInsertPlayers(league, team_document, rb_team_id){
   }
   db.open(function(err, db){
     db.collection("players").update({team_id: team_document.rb_team_id},
-    {$set: {team_id: team_id, market: team_document.market, name: team_document.name, team_name: team_document.team_name, league: league, last_updated: new Date().toISOString().slice(0, 19).replace('T', ' '), players: team_document.players}},
+    {$set: {team_id: team_id, market: team_document.market, name: team_document.name, team_name: team_document.team_name, abbreviation: team_document.abbreviation, league: league, last_updated: new Date().toISOString().slice(0, 19).replace('T', ' '), players: team_document.players}},
     {upsert: true, multi:false}, function (err, upserted){
       if (err) {
         console.log('Ahh! An Error with Insert!');
