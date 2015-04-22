@@ -14,7 +14,7 @@ var players_model = require('../models/players.js');
 
 
 
-players_model.pluckPlayerFromName('OKC', 'Russel Westbrook');
+players_model.pluckPlayerFromName('OKC', 'Russell Westbrook');
 
     
     url = 'http://www.cbssports.com/nba/stats/playersort/nba/year-2014-season-regularseason-category-scoringpergame';
