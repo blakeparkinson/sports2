@@ -471,9 +471,13 @@ var randImg = function(league) {
 
     var pluckPlayerFromName= function(teamAbbreviation, playerName){
       db.collection('players').findOne({"abbreviation": teamAbbreviation},function (err, doc){
-                    console.log(doc);
-
-                  })
+        var playerInfo = {};
+        for (i=0;i<doc.players.length;i++){
+          if (doc.players[i].full_name.toLowerCase() == playerName.toLowerCase()){
+            playerInfo = doc.players[i];
+          }
+        }
+      });
     }
 
 module.exports = {
