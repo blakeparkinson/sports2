@@ -193,7 +193,7 @@ switch (league){
           case 'nfl':
             json_response = JSON.parse(body);
             players_sorted = sortNFL(json_response);
-            players = formatPlayers(players_sorted, rb_team_id, json_response;
+            players = formatPlayers(players_sorted, rb_team_id, json_response);
             mongoInsertPlayers(league, players, rb_team_id);
             callback(players, rb_team_id, res, league)
             break;
@@ -322,7 +322,7 @@ var formatPlayers = function(response, rb_team_id, team_info){
   playersarray = [];
   for (i=0;i<response.players.length;i++){
     playersarray[i] = {};
-    for(var key in response.players[i]){  //all
+    for(var key in response.players[i]){ 
       var value = response.players[i][key];
       playersarray[i][key] = value;
     }
