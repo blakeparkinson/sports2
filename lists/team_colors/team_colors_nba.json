@@ -1,0 +1,217 @@
+var team_colors = [
+  {
+    "league": "nba",
+    "teams": [
+      {
+        "team_id": "7yZHDWViK",
+        "market": "Atlanta",
+        "team_name": "Hawks",
+        "primary_hex": "#000080",
+        "secondary_hex": "#FF0000"
+      },
+      {
+        "team_id": "m1wBwbNst",
+        "market": "Boston",
+        "team_name": "Celtics",
+        "primary_hex": "#009E60",
+        "secondary_hex": "#000000"
+      },
+      {
+        "team_id": "mklSD-EjY",
+        "market": "Charlotte",
+        "team_name": "Hornets",
+        "primary_hex": "#1D1160",
+        "secondary_hex": "#008CA8"
+      },
+      {
+        "team_id": "m1LrD-NiY",
+        "market": "Brooklyn",
+        "team_name": "Nets",
+        "primary_hex": "#000000",
+        "secondary_hex": "#FFFFFF"
+      },      
+      {
+        "team_id": "mkFBD-NiF",
+        "market": "Chicago",
+        "team_name": "Bulls",
+        "primary_hex": "#D4001F",
+        "secondary_hex": "#000000"
+      },
+      {
+        "team_id": "mk9SPZViF",
+        "market": "Cleveland",
+        "team_name": "Cavaliers",
+        "primary_hex": "#860038",
+        "secondary_hex": "#FDBB30"
+      },
+      {
+        "team_id": "QyvgrDWViY",
+        "market": "Dallas",
+        "team_name": "Mavericks",
+        "primary_hex": "#0B60AD",
+        "secondary_hex": "#A9A9A9"
+      },
+      {
+        "team_id": "QJzxSPWViK",
+        "market": "Denver",
+        "team_name": "Nuggets",
+        "primary_hex": "#4B90CD",
+        "secondary_hex": "#FDB827"
+      },
+      {
+        "team_id": "mJ3HD-NoY",
+        "market": "Detriot",
+        "team_name": "Pistons",
+        "primary_hex": "#00519A",
+        "secondary_hex": "#EB003C"
+      },
+      {
+        "team_id": "Qk4lBwbVst",
+        "market": "Houston",
+        "team_name": "Rockets",
+        "primary_hex": "#CE1138",
+        "secondary_hex": "#CCCCCC"
+      },
+      {
+        "team_id": "X1dxrP-VjY",
+        "market": "Golden State",
+        "team_name": "Warriors",
+        "primary_hex": "#04529C",
+        "secondary_hex": "#FFCC33"
+      },
+      {
+        "team_id": "7JsHvWViY",
+        "market": "Indiana",
+        "team_name": "Pacers",
+        "primary_hex": "#092C57",
+        "secondary_hex": "#FFC322"
+      },
+      {
+        "team_id": "X15lBDbNoY",
+        "market": "Los Angeles",
+        "team_name": "Clippers",
+        "primary_hex": "#EE2944",
+        "secondary_hex": "#146AA2"
+      },
+      {
+        "team_id": "QkYgBDb4sY",
+        "market": "Los Angeles",
+        "team_name": "Lakers",
+        "primary_hex": "#4A2583",
+        "secondary_hex": "#F5AF1B"
+      },
+      {
+        "team_id": "XJ7erwZVsK",
+        "market": "Memphis",
+        "team_name": "Grizzlies",
+        "primary_hex": "#001F70",
+        "secondary_hex": "#7399C6"
+      },
+      {
+        "team_id": "XJfrPZNjY",
+        "market": "Miami",
+        "team_name": "Heat",
+        "primary_hex": "#000000",
+        "secondary_hex": "#B62630"
+      },
+      {
+        "team_id": "7kaBD-Eot",
+        "market": "Milwaukee",
+        "team_name": "Bucks",
+        "primary_hex": "#003614",
+        "secondary_hex": "#E32636"
+      },
+      {
+        "team_id": "QkASwZNoF",
+        "market": "Minnesota",
+        "team_name": "Timberwolves",
+        "primary_hex": "#0F4D92",
+        "secondary_hex": "#50C878"
+      },
+       {
+        "team_id": "mkHxHwbNoF",
+        "market": "New Orleans",
+        "team_name": "Pelicans",
+        "primary_hex": "#002B5C",
+        "secondary_hex": "#E31836"
+      },
+       {
+        "team_id": "QJ4HPW4jt",
+        "market": "New York",
+        "team_name": "Knicks",
+        "primary_hex": "#0953A0",
+        "secondary_hex": "#FF7518"
+      },
+       {
+        "team_id": "Q1lgrP-4jt",
+        "market": "Oklahoma City",
+        "team_name": "Thunder",
+        "primary_hex": "#007DC3",
+        "secondary_hex": "#F05133"
+      },
+       {
+        "team_id": "Qk7rPZ4iY",
+        "market": "Orlando",
+        "team_name": "Magic",
+        "primary_hex": "#0047AB",
+        "secondary_hex": "#708090"
+      },
+       {
+        "team_id": "QJrrvbNsK",
+        "market": "Philadelphia",
+        "team_name": "76ers",
+        "primary_hex": "#0046AD",
+        "secondary_hex": "#D0103A"
+      },
+       {
+        "team_id": "QkjlHvbNsK",
+        "market": "Phoenix",
+        "team_name": "Suns",
+        "primary_hex": "#1C105E",
+        "secondary_hex": "#E65F20"
+      },
+      {
+        "team_id": "XkWxBvWNoY",
+        "market": "Portland",
+        "team_name": "Trailblazers",
+        "primary_hex": "#F0163A",
+        "secondary_hex": "#B6BFBF"
+      },
+      {
+        "team_id": "XkhgSwZ4oK",
+        "market": "Sacramento",
+        "team_name": "Kings",
+        "primary_hex": "#753BBD",
+        "secondary_hex": "#8A8D8F"
+      },
+      {
+        "team_id": "QyIeSw-EsF",
+        "market": "San Antonio",
+        "team_name": "Spurs",
+        "primary_hex": "#000000",
+        "secondary_hex": "#BEC8C9"
+      },
+      {
+        "team_id": "Q1_BvW4jF",
+        "market": "Toronto",
+        "team_name": "Raptors",
+        "primary_hex": "#B31B1B",
+        "secondary_hex": "#708090"
+      },
+      {
+        "team_id": "X11lBPW4iY",
+        "market": "Utah",
+        "team_name": "Jazz",
+        "primary_hex": "##00275D",
+        "secondary_hex": "#B5B5B5"
+      },
+      {
+        "team_id": "Q1BvbViF",
+        "market": "Washington",
+        "team_name": "Wizards",
+        "primary_hex": "#C60C30",
+        "secondary_hex": "#002244"
+      }
+    ]             
+  }
+]
