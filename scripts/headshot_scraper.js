@@ -18,8 +18,9 @@ var download = function(uri, filename, player, items, player_type, iteration, le
     var content_type = res.headers['content-type'];
     //make sure the image actually exists
     if (content_type == 'image/jpeg'){
+        var team_id = items.team_id;
         //This is really dirty. Mongo doesnt allow iterative variables in the update so we trick it by casting the object before asking mongo
-        avatar_url[player_type+"."+ iteration +".avatar_url"] = '../public/images/headshots/'+league+'/'+player.full_name.replace(/\s+/g, '-').toLowerCase()+'.jpg';
+        avatar_url[player_type + "."+ iteration +".avatar_url"] = '../public/images/headshots/'+league+'/'+player.full_name.replace(/\s+/g, '-').toLowerCase()+'.jpg';
     	request(uri).pipe(fs.createWriteStream(filename)).on('close', function(){
         });
         
@@ -28,17 +29,18 @@ var download = function(uri, filename, player, items, player_type, iteration, le
         var team_id = items.team_id;
         avatar_url[player_type+"."+ iteration +".avatar_url"] = '../public/images/headshots/untitled.jpg';
     }
-    db.open(function(err, db){
-        db.collection('players').findAndModify(
-            {team_id: team_id},
-            {},
-            {avatar_url: avatar_url},
-            {new: true, upsert: true},
-            function(err, doc, lastErrorObject) {
-            if (err) console.log(err);
-            if (lastErrorObject) console.log(lastErrorObject);
+
+
+    db.collection('players').findAndModify({
+                query: {team_id: team_id},
+                update: {$set: avatar_url},
+                upsert: true
+            }, function(err, doc, lastErrorObject) {
+                if (err) console.log("error"+err);
+                if (lastErrorObject) console.log(lastErrorObject);
             });
-        });
+
+
     });
 }
 
@@ -57,6 +59,8 @@ db.collection('players').find().toArray(function (err, items){
     			}
     		}
     	}
+
+
     	for (var b=0; b < items[i].players.length; b++){
     		var full_name = items[i].players[b].full_name.replace(/\s+/g, '-').toLowerCase();
     		var url = 'http://www.gannett-cdn.com/media/SMG/sports_headshots/'+league+'/player/2014/'+usat_id+'/120x120/'+full_name+'.jpg';
