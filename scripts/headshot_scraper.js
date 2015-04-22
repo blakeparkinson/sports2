@@ -61,8 +61,6 @@ db.collection('players').find().toArray(function (err, items){
     	}
 
         if (league == "nba") {
-            console.log("ps"+items[i].players.starters.length);
-            console.log("ps"+items[i].players.bench.length);
             for (var c=0; c < items[i].players.starters.length; c++){
                 var full_name = items[i].players.starters[c].full_name.replace(/\s+/g, '-').toLowerCase();
                 var url = 'http://www.gannett-cdn.com/media/SMG/sports_headshots/nba/player/2014/'+usat_id+'/120x120/'+full_name+'.jpg';
