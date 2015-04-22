@@ -2,7 +2,7 @@ var starters, bench, roster,
     correct = 0,
     stop_counter = false;
     team_container = $('.team-container'),
-    answer_container = $('.answer-container');
+    answer_container = $('.answer-container-contain');
 if (typeof(roster) != undefined){
   roster = roster;
 }
@@ -130,9 +130,9 @@ var checkForMatches = function(guess, input_field){
     var last_name = player.last_name != undefined? player.last_name : player.full_last_name;
     //check full name and just last name, also make sure the player has not been guessed already
     if ((guess == last_name.toLowerCase().trim() || guess == full_name.toLowerCase().trim()) && !player.guessed){
-      correct++;
+      appendGreenCheck(input_field);
       //populateTable(player);
-      addToCorrectList(correct, player, index);
+      addToCorrectList(player, index);
       input_field.val('');
       team_container.find('.number').html(correct);
       player.guessed = true;
@@ -143,12 +143,23 @@ var checkForMatches = function(guess, input_field){
     }
   })
 }
+ 
+var appendGreenCheck  = function(input_field){
+  var glyc = input_field.closest('.form-group').find('.glyphicon');
+  glyc.removeClass('hidden').show();
+  glyc.fadeOut(2000);
 
-var addToCorrectList = function (count, player, index){
-
-  var html = '<div class="correct-guess" data-index="'+index+'">'+count +'.' + '<img class="circle-pic" src='+player.avatar_url+'>' + player.full_name + '</div>';
-  answer_container.append(html);
 }
+
+var addToCorrectList = function (player, index){
+  if (player.guessed == true) return;
+  correct++;
+  var html = '<div class="outer-guess"><div class="correct-guess" data-index="'+index+'">'+correct +'.' + '<img class="circle-pic" src='+player.avatar_url+'>' + player.full_name + '</div></div>';
+  answer_container.append(html);
+  var current = answer_container.find('.correct-guess[data-index="' + index + '" ]').parent();
+  current.hide();
+  current.fadeIn(200).addClass('green-background');
+  }
 
 var populateTable = function(player, class_color){
   if (player.guessed) return;
@@ -193,13 +204,13 @@ var AppendTemplate = function(source, parent, data){
 }
 
 var endQuiz = function(e, skip_mapping){
+  $('#also-might-like').show();
   stop_counter = true;
   team_container.find('.clock').text('00:00');
   if (!skip_mapping){
     for (var i=0; i < roster.length; i++){
       //populateTable takes in a player and maps it to the right spot, loop through and place them
-      var class_color = 'rb-red';
-      populateTable(roster[i], class_color);
+      addToCorrectList(roster[i], i);
     }
   }
   //remove the quit button

@@ -41,11 +41,13 @@
   max-height: 22%;
   margin: 0 auto 0 auto;
   margin-top: 5%;
-  /*
-  border: 1px solid black;
-  padding: 10px;
-  border-radius: 50px
-  */
+}
+.all-icons-small {
+  max-width: 12% !important;
+  max-height: 15%;
+}
+.text-align-center {
+    text-align: center;
 }
 .goats-icon {
   content: url(http://upload.wikimedia.org/wikipedia/en/thumb/c/c0/Portuguese_Ibex_Cabrera_Goat.svg/500px-Portuguese_Ibex_Cabrera_Goat.svg.png);
@@ -57,4 +59,12 @@
 }
 .roster-icon {
  content: url(https://cdn4.iconfinder.com/data/icons/ios7-essence/22/editor_clipboard_checkmark_done-512.png);    
+}
+.top-list-contain {
+    padding-top: 10%;
+}
+.top-list-contain li {
+    padding: 5px;
+    cursor:pointer;
+    color: #337ab7;
 }

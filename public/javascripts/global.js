@@ -4,7 +4,7 @@ $(document).ready(function() {
 
     // Populate the user table on initial page load    
     $('body').on('click', '[data-action="pick-team"], .quiz-btn', fetchQuiz);
-    $('body').on('click', '.trending-quiz', fetchTrendingQuiz);
+    $('body').on('click', '.create-quiz', fetchTrendingQuiz);
     $('body').on('click', '.twitter-login', openAuthPopup);
     $('body').on('click', '.tweet', openTweetPopup);
     $('body').on('click', '.facebook-login', openFacebookAuthPopup);
@@ -218,15 +218,23 @@ function fetchQuiz(event) {
 }
 
 function AjaxCreateQuiz(data){
+  var url = window.location.pathname.split("/");
+  if (url.length > 2){
+    //we are in an action page (i.e. leaguesearch/nba, go up a level)
+    var ajax_url = '../teams/quiz'
+  }
+  else{
+    var ajax_url = 'teams/quiz'
+  }
 
     $.ajax({
-      url: 'teams/quiz',
+      url: ajax_url,
       data: data,
       type: 'get',
       dataType: 'json',
         success: function(response){
           if (!response.error){
-            window.location.href = 'quiz?id='+response["_id"]+'&team_id='+response["rb_team_id"]+'&league='+response["league"];
+            window.location.href = '../quiz?id='+response["_id"]+'&team_id='+response["rb_team_id"]+'&league='+response["league"];
           }
           else{console.log('Throw an error popup or smething eventually');}
         }
