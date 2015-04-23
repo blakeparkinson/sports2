@@ -15,13 +15,24 @@ var parseString = require('xml2js').parseString;
 var players = [];
 var encryption = require('../encryption.js');
 var shortId = require('shortid');
+var team_colors_nba = require('../lists/team_colors/team_colors_nba.js')
 
 
-var returnPlayers = function (players, rb_team_id, res, league){
+var intreturnPlayers = function(players, rb_team_id, res, league, second_callback){
+    var team_name = players.team_name;
+    second_callback(players, rb_team_id, res, league, fetchTeamColors(league, team_name))
+}
+
+
+var returnPlayers = function (players, rb_team_id, res, league, colors){
   if (res.quiz_page != undefined && res.quiz_page){
-    var team_name = players.list_name    
+    var team_name = players.team_name
+    var primary_hex = colors.primary_hex;
+    var secondary_hex = colors.secondary_hex;
      res.render('quiz', {
       roster: players.players,
+      primary_hex: primary_hex,
+      secondary_hex: secondary_hex,
       rb_team_id: rb_team_id,
       league: league,
       remove_footer: true,
@@ -35,6 +46,31 @@ var returnPlayers = function (players, rb_team_id, res, league){
   }
   else{
     res.json(players);   //this else statement poops out TypeError: Object nfl has no method 'json'
+  }
+}
+
+var fetchTeamColors = function (league, team_name){
+  var colorsObject = _.first(team_colors_nba.team_colors);
+  var colors = [];
+  switch (league){
+    case 'nba':
+      for (i=0;i<colorsObject.teams.length;i++){
+        if (colorsObject.teams[i].team_name == team_name){
+          colors.primary_hex = colorsObject.teams[i].primary_hex;
+          colors.secondary_hex = colorsObject.teams[i].secondary_hex;
+          return colors;
+        }
+      }
+    break;
+    case 'nfl':
+    case 'nhl':
+    case 'goats':
+    case 'mlb':
+    case 'eu_soccer':
+      colors.primary_hex = "#333333";
+      colors.secondary_hex = "#FFFFFF"
+      return colors;
+    break;
   }
 }
 
@@ -89,7 +125,7 @@ var fetchGoatPlayers = function(list_id, rb_team_id, league, res, req, callback)
 
 // Check the db first. If it's there and has been added in the last 24 hours, use it. 
 // Otherwise, go get new data from the API and replace/add the database listing
-var fetchPlayers = function(team_id, rb_team_id, league, usat_id, res, req, callback){ 
+var fetchPlayers = function(team_id, rb_team_id, league, usat_id, res, req, first_callback, second_callback){ 
   var players;
   db.collection('players').find({team_id : rb_team_id}).toArray(function (err, items){
     if (items.length > 0){ // data in Mongo
@@ -103,17 +139,17 @@ var fetchPlayers = function(team_id, rb_team_id, league, usat_id, res, req, call
       }
       else {  // data is fine so just return it
         players = item;
-        callback(players, rb_team_id, res, league);
+        first_callback(players, rb_team_id, res, league, second_callback);
       }
     }
     else {  // data not already in Mongo
-       players = fetchPlayersFromApi(team_id, rb_team_id, league, usat_id, res, req, callback)
+       players = fetchPlayersFromApi(team_id, rb_team_id, league, usat_id, res, req, first_callback, second_callback)
     }
   });
 }
 
 
-var fetchPlayersFromApi = function(team_id, rb_team_id, league, usat_id, res, req, callback){
+var fetchPlayersFromApi = function(team_id, rb_team_id, league, usat_id, res, req, first_callback, second_callback){
 var json_response = '';
 var players = {};
 
@@ -169,7 +205,7 @@ switch (league){
                      players_sorted = sortNBA(json_response);
                      players = formatNBAPlayers(players_sorted, rb_team_id, team_roster);
                      mongoInsertPlayers(league, players, rb_team_id);
-                     callback(players, rb_team_id, res, league)
+                     first_callback(players, rb_team_id, res, league, second_callback)
                   }
 
                   else{
@@ -182,27 +218,27 @@ switch (league){
             players_sorted = sortNFL(json_response);
             players = formatPlayers(players_sorted, rb_team_id, json_response);
             mongoInsertPlayers(league, players, rb_team_id);
-            callback(players, rb_team_id, res, league)
+            first_callback(players, rb_team_id, res, league,second_callback)
             break;
           case 'nhl':
             json_response = JSON.parse(body);
-            players = formatPlayers(players_sorted, rb_team_id, json_response);
+            players = formatPlayers(json_response, rb_team_id, json_response);
             appendPlayerShortId(players.players);
-            sortByPositions('nhl', players.players);
+            //sortByPositions('nhl', players.players);
             mongoInsertPlayers(league, players, rb_team_id);
-            callback(players, rb_team_id, res, league)
+            first_callback(players, rb_team_id, res, league, second_callback)
             break;
           case 'eu_soccer':
             playersParsed = formatEUSoccerPlayers(response.body, team_id);
             players = formatPlayersDocument(rb_team_id, playersParsed.players, playersParsed);
             mongoInsertPlayers(league, players, rb_team_id);
-            callback(players, rb_team_id, res, league)
+            first_callback(players, rb_team_id, res, league, second_callback)
             break;
           case 'mlb':  
             playersParsed = formatMLBPlayers(response.body, team_id);
             players = formatPlayersDocument(rb_team_id, playersParsed);
             mongoInsertPlayers(league, players, rb_team_id);
-            callback(players, rb_team_id, res, league)
+            first_callback(players, rb_team_id, res, league,second_callback)
             break;
         }
 
@@ -459,6 +495,7 @@ module.exports = {
   formatNBAPlayers: formatNBAPlayers,
   formatPlayersDocument: formatPlayersDocument,
   mongoInsertPlayers: mongoInsertPlayers,
-  sortNBA: sortNBA
+  sortNBA: sortNBA,
+  intreturnPlayers: intreturnPlayers
 
 }
