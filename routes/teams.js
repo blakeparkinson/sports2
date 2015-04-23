@@ -8,6 +8,7 @@ var http = require("http"),
     mongojs = require("mongojs"),
     db = mongojs.connect(config.mongo_uri);
 var players_model = require('../models/players.js');
+var team_colors_nba = require('../lists/team_colors/team_colors_nba.js')
 var shortId = require('shortid');
 var nodemailer = require('nodemailer');
 
@@ -52,7 +53,7 @@ router.get('/quiz', function(req, res) {
       if (item != null){
         var quiz_name = item.list_name;
         var api_team_id = req.query.api_team_id;
-        createQuiz(rb_team_id, list_id, league, quiz_name, res, returnItem, api_team_id);
+        createQuiz(rb_team_id, list_id, league, quiz_name, res, fetchTeamColors, api_team_id);
       }
 
     })
@@ -61,13 +62,30 @@ router.get('/quiz', function(req, res) {
     var quiz_name = req.query.team_name;
     var league = req.query.league;
     var api_team_id = req.query.api_team_id;
-    createQuiz(rb_team_id, list_id, league, quiz_name, res, returnItem, api_team_id);
+    createQuiz(rb_team_id, list_id, league, quiz_name, res, fetchTeamColors, api_team_id);
   }
 });
 
 // made the return more universal for all callbacks
 var returnItem = function (item, res){
   res.json(item);
+}
+
+var fetchTeamColors = function (league, item, res, team_name, callback){
+  var colorsObject = _.first(team_colors_nba.team_colors);
+  if (league == "nba"){
+    for (i=0;i<colorsObject.teams.length;i++){
+      if (colorsObject.teams[i].team_name == team_name){
+        item.primary_hex = colorsObject.teams[i].primary_hex;
+        item.secondary_hex = colorsObject.teams[i].secondary_hex;
+        console.log(item);
+        callback(item, res)
+      }
+    }
+  }
+  else{
+    callback(item, res)
+  }
 }
 
 var createQuiz = function(rb_team_id, list_id, league, quiz_name, res, callback, api_team_id){
@@ -77,7 +95,7 @@ var createQuiz = function(rb_team_id, list_id, league, quiz_name, res, callback,
           console.log("new quiz insert failed: "+ err);
         }
         else {
-          callback(insert[0], res);
+          callback(league, insert[0], res, quiz_name, returnItem);
         }
     });
   });
