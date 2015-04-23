@@ -37,13 +37,11 @@ var players_model = require('../models/players.js');
                   var metadata = {
                     name: player,
                     ppg: ppg,
-                    team: team	
+                    team: abbreviation_helper(team)  // Consolidates abbreviation differences between sites
                   };
                   results.push(metadata);
                 })
                 _.forEach(results, function(n, key) {
-                  console.log(n.team);
-                  console.log(n.name);
                   players_model.pluckPlayerFromName(n.team, n.name);
 
                 })
@@ -54,3 +52,27 @@ var players_model = require('../models/players.js');
           console.log(error);
         }
     })
+
+
+var abbreviation_helper = function(abbreviation){
+  var replace = abbreviation
+  switch (abbreviation){
+    case 'GS': 
+      replace = 'GSW'
+      break;
+    case 'NO': 
+      replace = 'NOP'
+      break;
+    case 'NY': 
+      replace = 'NYK'
+      break;
+    case 'SA': 
+      replace = 'SAS'
+      break;
+    case 'PHO': 
+      replace = 'PHX'
+      break;
+  }
+  return replace
+}
+
