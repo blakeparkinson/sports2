@@ -8,7 +8,6 @@ var http = require("http"),
     mongojs = require("mongojs"),
     db = mongojs.connect(config.mongo_uri);
 var players_model = require('../models/players.js');
-var team_colors_nba = require('../lists/team_colors/team_colors_nba.js')
 var shortId = require('shortid');
 var nodemailer = require('nodemailer');
 
@@ -70,7 +69,6 @@ router.get('/quiz', function(req, res) {
 var returnItem = function (item, res){
   res.json(item);
 }
-
 
 var createQuiz = function(rb_team_id, list_id, league, quiz_name, res, callback, api_team_id){
   db.open(function(err, db){
