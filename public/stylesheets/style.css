@@ -199,7 +199,14 @@ ul {
 }
 #team-container{
   text-align: center;
-  padding-top: 5%;
+  margin: 5% 26% 0 26%;
+  padding: 2%;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+}
+#index-buttons {
+  width: 70%;
+  margin: 0 auto 0 auto;
 }
 .team-container{  
   margin-left: 5%;
@@ -504,7 +511,7 @@ padding-left: 3%;
 }
 
 .quiz-btn{
-  width:34%;
+  width:100%;
 }
 .select2-container{
   min-width: 150px;
@@ -753,9 +760,7 @@ table tr th:last-child {
 #trending-quiz-contain {
   padding-top: 1%;
 }
-#trending-guys-back {
-  opacity: 0.8;
-  background-color: #f5f5f5;
+#trending-guys-back {    
   padding: 0 2% 0 2%;
   border-radius: 4px;
 }
