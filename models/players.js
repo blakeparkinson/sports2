@@ -51,21 +51,26 @@ var returnPlayers = function (players, rb_team_id, res, league, colors){
 
 var fetchTeamColors = function (league, team_name){
   var colorsObject = _.first(team_colors_nba.team_colors);
-  if (league == "nba"){
-    for (i=0;i<colorsObject.teams.length;i++){
-      if (colorsObject.teams[i].team_name == team_name){
-        var colors = [];
-        colors.primary_hex = colorsObject.teams[i].primary_hex;
-        colors.secondary_hex = colorsObject.teams[i].secondary_hex;
-        return colors;
+  var colors = [];
+  switch (league){
+    case 'nba':
+      for (i=0;i<colorsObject.teams.length;i++){
+        if (colorsObject.teams[i].team_name == team_name){
+          colors.primary_hex = colorsObject.teams[i].primary_hex;
+          colors.secondary_hex = colorsObject.teams[i].secondary_hex;
+          return colors;
+        }
       }
-    }
-  }
-  else{ 
-    var colors = [];
-    colors.primary_hex = "#000080";
-    colors.secondary_hex = "#FF0000"
-    return colors;
+    break;
+    case 'nfl':
+    case 'nhl':
+    case 'goats':
+    case 'mlb':
+    case 'eu_soccer':
+      colors.primary_hex = "#333333";
+      colors.secondary_hex = "#FFFFFF"
+      return colors;
+    break;
   }
 }
 
