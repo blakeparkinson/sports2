@@ -78,7 +78,7 @@ var fetchTeamColors = function (league, item, res, team_name, callback){
       if (colorsObject.teams[i].team_name == team_name){
         item.primary_hex = colorsObject.teams[i].primary_hex;
         item.secondary_hex = colorsObject.teams[i].secondary_hex;
-        console.log(item);
+        //console.log(item);
         callback(item, res)
       }
     }

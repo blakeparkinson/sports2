@@ -28,11 +28,11 @@ router.get('/', function(req, res) {
             if (!rb_team_id || !league){
             	//it's the short url, so let's look up by quiz id to find the other info
                 db.collection('quiz').findOne({_id : quiz_id},function (err, doc){
-                    players = players_model.fetchPlayers(doc.team_id, doc.rb_team_id, doc.league, doc.usat_id, res, players_model.returnPlayers);
+                    players = players_model.fetchPlayers(doc.team_id, doc.rb_team_id, doc.league, doc.usat_id, res, players_model.intreturnPlayers, players_model.returnPlayers);
                 });
             }
             else{
-              players = players_model.fetchPlayers(team_id, rb_team_id, league, usat_id, res, req, players_model.returnPlayers);
+              players = players_model.fetchPlayers(team_id, rb_team_id, league, usat_id, res, req, players_model.intreturnPlayers, players_model.returnPlayers);
             }
           });
         }
