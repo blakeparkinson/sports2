@@ -1,9 +1,12 @@
   <body id="body-index">
     <div id="team-container">
       <div id="team-select">What's your team?</div>
-      <input id="select2" type="hidden"/>
-      <div class="submit-section">
-        <div class="btn btn-success quiz-btn" id="take-quiz-button">Take Quiz</div>
+      <div id="index-buttons">
+        <input id="select2" type="hidden"/>
+        <div class="submit-section">
+          <div class="btn btn-success quiz-btn" id="take-quiz-button">Take Quiz</div>
+      </div>
+
         
         {{#if trending_quiz.length}}
           <div id="trending-quiz-contain">
@@ -30,7 +33,7 @@
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title" id="myModalLabel">Please select a team first</h4>
-          </div>
+          </div>          
           <div class="modal-body">
             <div class="modal-select-team">Make sure you select a team before you start a quiz!</div>
           </div>
@@ -39,5 +42,5 @@
           </div>
         </div>
       </div>
-  </div>
+  </div>  
   </body>

@@ -68,8 +68,8 @@ var team_colors = [
       },
       {
         "team_id": "mJ3HD-NoY",
-        "team_name": "Detriot Pistons",
-        "market": "Detriot",
+        "team_name": "Detroit Pistons",
+        "market": "Detroit",
         "name": "Pistons",
         "primary_hex": "#00519A",
         "secondary_hex": "#EB003C"
@@ -231,7 +231,7 @@ var team_colors = [
         "team_name": "Utah Jazz",
         "market": "Utah",
         "name": "Jazz",
-        "primary_hex": "##00275D",
+        "primary_hex": "#00275D",
         "secondary_hex": "#B5B5B5"
       },
       {

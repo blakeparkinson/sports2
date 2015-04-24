@@ -3,7 +3,7 @@
 $(document).ready(function() {
 
     $("#select2").select2({
-      width: "34%",
+      width: "100%",
       placeholder: "Search a Team...",
       minimumInputLength: 2,
             ajax: {
