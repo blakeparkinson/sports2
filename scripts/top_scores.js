@@ -10,7 +10,8 @@ var config = common.config();
 var http = require("http"),
     mongojs = require("mongojs"),
     db = mongojs.connect(config.mongo_uri);
-var players_model = require('../models/players.js');
+var players_model = require('../models/players.js'),
+    async = require('async');
 
 
     
@@ -41,10 +42,17 @@ var players_model = require('../models/players.js');
                   };
                   results.push(metadata);
                 })
-                _.forEach(results, function(n, key) {
-                  players_model.pluckPlayerFromName(n.team, n.name);
+                async.eachSeries(results, function (player, rearrange) {
+                  var player_info = players_model.pluckPlayerFromName(player.team, player.name);
+                  rearrange(player_info);
 
                 })
+
+                function rearrange(player_info){
+
+                  console.log(player,player_info);
+
+                }
 
             })
         }
