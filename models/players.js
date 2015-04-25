@@ -15,6 +15,7 @@ var parseString = require('xml2js').parseString;
 var players = [];
 var encryption = require('../encryption.js');
 var shortId = require('shortid');
+var salaries_list = require('../lists/other/nba/nba_salaries.js');
 
 
 var returnPlayers = function (players, rb_team_id, res, league){
@@ -186,7 +187,7 @@ switch (league){
             break;
           case 'nhl':
             json_response = JSON.parse(body);
-            players = formatPlayers(players_sorted, rb_team_id, json_response);
+            players = formatPlayers(json_response, rb_team_id, json_response);
             appendPlayerShortId(players.players);
             sortByPositions('nhl', players.players);
             mongoInsertPlayers(league, players, rb_team_id);
@@ -269,9 +270,9 @@ function compareNFL(a,b) {
   return 0;
 }
 
-
 var formatNBAPlayers = function(response, rb_team_id, team_info){
-  var team = formatPlayersDocument(rb_team_id, response.players, team_info);
+  //var team = formatPlayersDocument(rb_team_id, response.players, team_info);
+  var team = fetchSalaries(rb_team_id, response.players, team_info);
   return team;
 }
 
@@ -297,6 +298,55 @@ var formatNBAPlayers = function(response, rb_team_id, team_info){
       return order.indexOf(a.position) - order.indexOf(b.position);
     });
 }*/
+
+// Fetch player salaries from nba_salary list and append to player object.
+var fetchSalaries = function(response, rb_team_id, team_info){
+  // use the team_info.usat_id to match to salaries_list.nba_salaries "TM" field.
+  // Then, loop through players in response.players, matching on salaries.Player = players.full_name
+  // (Performance check? Should this check every time, only if fields don't exist?)
+  // Append players.salary and return response.players with this additional field
+  // This should then call the formatPlayersDocument fxn with new response, rb_team_id, team_info
+  
+  // Loop through salaries list and find all listings of that team
+  for (i=0;i<_.first(salaries_list).length; i++){
+    team = _.first(salaries_list)[i];
+    console.log("team"+team);
+    console.log("team TM" + team.TM);
+
+    Switch(team.TM){ // salaries_list abbreviations don't always match USAT abbreviations.
+      case: "PHO" 
+        team.TM = "PHX";
+        break;
+      case: "CHO" 
+        team.TM = "CHA";
+        break;
+      case: "BRK" 
+        team.TM = "BKN";
+        break;
+    } 
+      
+    if (team.TM.toLowerCase() == team_info.usat_id.toLowerCase()){
+      // Once you find a team match, you need to find a player match
+      player_name = team["Player"];
+      player_salary = team["2015-16"];
+      console.log("player_name from salaries "+ player_name);
+      
+      // need to figure out exactly what the player response looks like.. but likely:
+      console.log("players response "+ response.players);
+      for (j=0;j<response.players["Players"].length;j++){
+        player_info = response.players["Players"][j];
+        if (player_info.full_name.toLowerCase() == player_name.toLowerCase()){
+          player_info.salary = player_salary;
+          console.log(player_info.salary);
+        }
+      }
+    }
+  }
+// Once we finished looping through everything, lets call the next function
+  /* response.players = new_players
+  var team = formatPlayersDocument(rb_team_id, response.players, team_info);
+  return team;*/
+}
 
 
 var formatPlayers = function(response, rb_team_id, team_info){
