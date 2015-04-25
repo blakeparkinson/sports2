@@ -271,8 +271,6 @@ function compareNFL(a,b) {
 }
 
 var formatNBAPlayers = function(response, rb_team_id, team_info){
-  console.log("MMMMM");
-  //var team = formatPlayersDocument(rb_team_id, response.players, team_info);
   var team = fetchSalaries(response.players, rb_team_id, team_info);
   return team;
 }
