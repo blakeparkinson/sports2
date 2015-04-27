@@ -1,4 +1,4 @@
-var starters, bench, roster,
+var roster,
     correct = 0,
     stop_counter = false;
     team_container = $('.team-container'),
@@ -11,27 +11,7 @@ else{
   roster = [];
 }
 
-if (typeof(starters) != undefined){
-  starters = starters;
-}
-
-else{
-  starters = [];
-}
-
-if (typeof(bench) != undefined){
-  bench = bench;
-}
-
-else{
-  bench = [];
-}
-
-if (typeof bench != "undefined" && typeof starters != "undefined"){
-  roster = starters.concat(bench);
-}
 var card = $('.player-card');
-console.log(bench); console.log(starters); console.log(roster);
 
 // DOM Ready =============================================================
 $(document).ready(function() {
@@ -154,9 +134,9 @@ var appendGreenCheck  = function(input_field){
 var addToCorrectList = function (player, index){
   if (player.guessed == true) return;
   correct++;
-  var html = '<div class="outer-guess"><div class="correct-guess" data-index="'+index+'">'+correct +'.' + '<img class="circle-pic" src='+player.avatar_url+'>' + player.full_name + '</div></div>';
+  var html = '<div class="outer-guess"><div class="inner-guess"><div class="correct-guess" data-index="'+index+'">'+correct +'.' + '<img class="circle-pic" src='+player.avatar_url+'>' + player.full_name + '</div></div></div>';
   answer_container.append(html);
-  var current = answer_container.find('.correct-guess[data-index="' + index + '" ]').parent();
+  var current = answer_container.find('.correct-guess[data-index="' + index + '" ]').closest('.outer-guess');
   current.hide();
   current.fadeIn(200).addClass('green-background');
   }

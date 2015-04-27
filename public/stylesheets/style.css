@@ -26,7 +26,7 @@ a {
   background-size: cover;
   background-color: #211922;
   margin: 0;
-  padding: 0;
+  padding: 0;  
 }
 
 #team-selection{
@@ -138,8 +138,7 @@ a {
 .footer {
   position: absolute; 
   bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
+  width: 100%;  
   height: 50px;
   background: rgba(32, 26, 26, 0.7);
   border-radius: 4px;
@@ -148,9 +147,7 @@ a {
 .footer.static{
   position: relative;
 }
-.container {
-  width: auto;
-  max-width: 680px;
+.footer-container {    
   padding: 0 15px;
   text-align: center;
 }
@@ -199,7 +196,14 @@ ul {
 }
 #team-container{
   text-align: center;
-  padding-top: 5%;
+  margin: 5% 26% 0 26%;
+  padding: 2%;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+}
+#index-buttons {
+  width: 80%;
+  margin: 0 auto 0 auto;
 }
 .team-container{  
   margin-left: 5%;
@@ -249,7 +253,7 @@ ul {
 #player-card-contain {
   min-height: 300px;
   min-width: 100px;
-  background: rgba(235, 235, 235, 0.9);
+  background: rgba(255, 255, 255, 0.98);
   border-radius: 0 0 5px 5px;  
   color: black;
 }
@@ -421,13 +425,18 @@ padding-left: 3%;
 }
 
 .answer-container .outer-guess{
-  padding: 5px;
   float: left;
   width: 50%;
   height:42px;
 }
 
-.answer-container .outer-green:hover{  
+.answer-container .inner-guess{
+  padding: 5px;
+  height:42px;
+  width:100%;
+}
+
+.answer-container .inner-guess:hover{  
   cursor:pointer;
   background-color:rgb(22, 231, 22);    
 }
@@ -499,7 +508,7 @@ padding-left: 3%;
 }
 
 .quiz-btn{
-  width:34%;
+  width:100%;
 }
 .select2-container{
   min-width: 150px;
@@ -748,9 +757,7 @@ table tr th:last-child {
 #trending-quiz-contain {
   padding-top: 1%;
 }
-#trending-guys-back {
-  opacity: 0.8;
-  background-color: #f5f5f5;
+#trending-guys-back {    
   padding: 0 2% 0 2%;
   border-radius: 4px;
 }

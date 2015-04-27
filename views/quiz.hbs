@@ -2,7 +2,7 @@
       <div class="columns">
 
   <div id="left-quiz-column">
-    <div class="team-container">
+    <div class="team-container"style="border:3px solid {{secondary_hex}}">
       <div id="align-clock">
         <div class="clock">{{clock}}</div>
       </div>  
@@ -37,7 +37,7 @@
       <div id="card">
         <div class="answer-container front">
           <div class="cover" style="background-image: url({{logo_url}})"></div>
-          <div class="answer-container-contain">
+          <div class="answer-container-contain" style="border:3px solid {{primary_hex}}">
             <div class="answer-row subheader">Players Guessed</div>
           </div>
         </div>
@@ -48,22 +48,12 @@
 </div>
 
   
-
-  				{{> player_card }}
+{{> player_card }}
 
 <script type='text/javascript'>
   var league = '{{league}}',
     team_name = '{{team_name}}';
+  var primary_hex = '{{primary_hex}}';
+  var secondary_hex = '{{secondary_hex}}';
+  var roster =  {{{json_stringify roster}}};
  </script>
-
-  {{#compare league 'nba'}}
-    <script type='text/javascript'>
-    var bench = {{{json_stringify roster.bench}}},
-        starters = {{{json_stringify roster.starters}}};
-    </script>
-  {{/compare}}
-  {{#compare league '!=' 'nba'}}
-    <script type='text/javascript'>
-      var roster =  {{{json_stringify roster}}};
-    </script>
-  {{/compare}}

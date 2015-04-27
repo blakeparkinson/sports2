@@ -132,7 +132,20 @@ var images = [
   },
     {
     "league": "nhl",
-    "teams": []
+    "teams": [
+      {
+        "team_name": "Washington Capitals",
+        "usat_id": "WSH"
+      },
+      {
+        "team_name": "Carolina Hurricanes",
+        "usat_id": "CAR"
+      },
+      {
+        "team_name": "Florida Panthers",
+        "usat_id": "FLA"
+      }
+    ]
   },
     {
     "league": "eu_soccer",
