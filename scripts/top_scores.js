@@ -42,22 +42,18 @@ var players_model = require('../models/players.js'),
                   };
                   results.push(metadata);
                 })
-                async.eachSeries(results, function (player, rearrange) {
-                  var player_info = players_model.pluckPlayerFromName(player.team, player.name);
-                  rearrange(player_info);
-
-                })
-
-                function rearrange(player_info){
-
-                  console.log(player,player_info);
-
-                }
+                async.eachSeries(results, function (player, callback) {
+                  players_model.pluckPlayerFromName(player, results.length -1, results.indexOf(player), players_model.insertTopScorers);
+                  callback();
+                }, function (err) {
+                  if (err) { throw err; }
+                    console.log('yayay');
+                  });
 
             })
         }
         else{
-          console.log(error);
+          console.log('pp');
         }
     })
 

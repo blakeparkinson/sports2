@@ -15,6 +15,8 @@ var parseString = require('xml2js').parseString;
 var players = [];
 var encryption = require('../encryption.js');
 var shortId = require('shortid');
+var top_ppg = [];
+var bb = 0;
 
 
 var returnPlayers = function (players, rb_team_id, res, league){
@@ -469,19 +471,41 @@ var randImg = function(league) {
       return image;    
     }
 
-    var pluckPlayerFromName= function(teamAbbreviation, playerName){
-      db.collection('players').findOne({"abbreviation": teamAbbreviation},function (err, doc){
-        var playerInfo = {};
-        if (doc){
-          for (i=0;i<doc.players.length;i++){
-            if (doc.players[i].full_name.toLowerCase() == playerName.toLowerCase()){
-              playerInfo = doc.players[i];
-              console.log(playerInfo);
+    var pluckPlayerFromName= function(player, length, iteration, callback){
+        bb++;
+        db.collection('players').findOne({"abbreviation": player.team},function (err, doc){
+          var playerInfo = {};
+          if (doc){
+            for (i=0;i<doc.players.length;i++)  {
+              if (doc.players[i].full_name.toLowerCase() == player.name.toLowerCase()){
+                playerInfo = doc.players[i];
+                top_ppg.push(playerInfo);
+                insertTopScorers;
+              }
             }
           }
-        }
-        
-      });
+          else {
+          console.log('could not find player entry for ' + player.name);
+          }
+        });            
+    }
+    
+
+    var insertTopScorers= function (){
+      console.log('hi');
+        var leadersList = {};
+        leadersList.players = top_ppg;
+        leadersList.league = 'nba';
+        leadersList.name = 'ppg';
+        db.open(function(err, db){
+          console.log(leadersList);
+          db.collection('leaders').insert(leadersList, function(err, insert){
+          if (err){
+            console.log("error inserting into mongo" + err);
+          }
+          });
+        })
+      
     }
 
 module.exports = {
@@ -494,6 +518,8 @@ module.exports = {
   formatPlayersDocument: formatPlayersDocument,
   mongoInsertPlayers: mongoInsertPlayers,
   sortNBA: sortNBA,
-  pluckPlayerFromName: pluckPlayerFromName
+  pluckPlayerFromName: pluckPlayerFromName,
+  insertTopScorers: insertTopScorers
+
 
 }
