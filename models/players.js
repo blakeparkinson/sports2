@@ -15,7 +15,10 @@ var parseString = require('xml2js').parseString;
 var players = [];
 var encryption = require('../encryption.js');
 var shortId = require('shortid');
-var team_colors_nba = require('../lists/team_colors/team_colors_nba.js')
+
+var salaries_list = require('../lists/other/nba/nba_salaries.js');
+var team_colors_nba = require('../lists/team_colors/team_colors_nba.js');
+
 
 
 var intreturnPlayers = function(players, rb_team_id, res, league, second_callback){
@@ -305,9 +308,8 @@ function compareNFL(a,b) {
   return 0;
 }
 
-
 var formatNBAPlayers = function(response, rb_team_id, team_info){
-  var team = formatPlayersDocument(rb_team_id, response.players, team_info);
+  var team = fetchSalaries(response.players, rb_team_id, team_info);
   return team;
 }
 
@@ -333,6 +335,38 @@ var formatNBAPlayers = function(response, rb_team_id, team_info){
       return order.indexOf(a.position) - order.indexOf(b.position);
     });
 }*/
+
+// Fetch player salaries from nba_salary list and append to player object.
+var fetchSalaries = function(response, rb_team_id, team_info){
+  // Loop through salaries list and find all listings of that team
+  for (i=0;i<salaries_list.salaries.length; i++){
+    team = salaries_list.salaries[i];
+    switch(team.Tm){ // salaries_list abbreviations don't always match USAT abbreviations.
+      case "PHO": 
+        team.Tm = "PHX";
+        break;
+      case "CHO": 
+        team.Tm = "CHA";
+        break;
+      case "BRK": 
+        team.Tm = "BKN";
+        break;
+    } 
+      
+    if (team.Tm.toLowerCase() == team_info.usat_id.toLowerCase()){
+      // Once you find a team match, you need to find a player match
+      player_name = team["Player"];
+      player_salary = team["2015-16"];
+      for (j=0;j<response.length;j++){
+        if (response[j].full_name.toLowerCase() == player_name.toLowerCase()){
+          response[j].salary = player_salary;
+        }
+      }
+    }
+  }
+  var team = formatPlayersDocument(rb_team_id, response, team_info);
+  return team;
+}
 
 
 var formatPlayers = function(response, rb_team_id, team_info){

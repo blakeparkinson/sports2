@@ -1,4 +1,4 @@
-[
+var salaries = [
   {
     "Rk":"1",
     "Player":"Kobe Bryant",
@@ -5980,3 +5980,8 @@
     "Guaranteed":"$880000"
   }
 ]
+
+
+module.exports = {
+    salaries: salaries
+}
