@@ -471,8 +471,7 @@ var randImg = function(league) {
       return image;    
     }
 
-    var pluckPlayerFromName= function(player, length, iteration, callback){
-        bb++;
+    var pluckPlayerFromName= function(player, callback){
         db.collection('players').findOne({"abbreviation": player.team},function (err, doc){
           var playerInfo = {};
           if (doc){
@@ -480,19 +479,21 @@ var randImg = function(league) {
               if (doc.players[i].full_name.toLowerCase() == player.name.toLowerCase()){
                 playerInfo = doc.players[i];
                 top_ppg.push(playerInfo);
-                insertTopScorers;
               }
             }
+            //let async know the work is done
+            callback();
           }
           else {
           console.log('could not find player entry for ' + player.name);
+          //let async know it's done
+          callback();
           }
         });            
     }
     
 
     var insertTopScorers= function (){
-      console.log('hi');
         var leadersList = {};
         leadersList.players = top_ppg;
         leadersList.league = 'nba';

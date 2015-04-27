@@ -43,11 +43,12 @@ var players_model = require('../models/players.js'),
                   results.push(metadata);
                 })
                 async.eachSeries(results, function (player, callback) {
-                  players_model.pluckPlayerFromName(player, results.length -1, results.indexOf(player), players_model.insertTopScorers);
-                  callback();
+                  //async lib is weird, you pass it a callback and it calls back and lets you know when it has finished for each loop
+                  var ppg = players_model.pluckPlayerFromName(player, callback);
                 }, function (err) {
                   if (err) { throw err; }
-                    console.log('yayay');
+                    players_model.insertTopScorers();
+                    console.log('done');
                   });
 
             })
@@ -56,6 +57,10 @@ var players_model = require('../models/players.js'),
           console.log('pp');
         }
     })
+
+var shit = function(){
+  console.log('this is some dogshit');
+}
 
 
 var abbreviation_helper = function(abbreviation){
