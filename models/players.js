@@ -30,7 +30,7 @@ var intreturnPlayers = function(players, rb_team_id, res, league, second_callbac
 var returnPlayers = function (players, rb_team_id, res, league, colors){
   if (res.quiz_page != undefined && res.quiz_page){
     var team_name = players.team_name
-    var primary_hex =  colors.primary_hex;
+    var primary_hex = colors.primary_hex;
     var secondary_hex = colors.secondary_hex;
      res.render('quiz', {
       roster: players.players,
