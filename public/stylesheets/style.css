@@ -406,6 +406,7 @@ padding-left: 3%;
   min-height: 300px;
   overflow: auto;
   position: relative;
+  font-family:HelveticaNeue;
 }
 
 .cover{
