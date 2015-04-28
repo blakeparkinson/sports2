@@ -58,10 +58,6 @@ var players_model = require('../models/players.js'),
         }
     })
 
-var shit = function(){
-  console.log('this is some dogshit');
-}
-
 
 var abbreviation_helper = function(abbreviation){
   var replace = abbreviation
