@@ -34,7 +34,7 @@ var hoverCard = function(){
 }
 
 var removeHover = function(){
-  $(this).css({"background-color":'#fff', "color": '#333'});
+  $(this).css({"background":'inherit', "color": '#333'});
 }
 
 var startCounter = function(){
