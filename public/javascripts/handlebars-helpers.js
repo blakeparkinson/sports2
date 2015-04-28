@@ -88,7 +88,7 @@ Handlebars.registerHelper('percentageCalc', function(denominator, numerator){
 
 Handlebars.registerHelper('abridgeSalary', function(salary){
   if (arguments.length < 1) {
-        throw new Error("Handlerbars Helper 'abridgeSalary' needs 2 parameters");
+        throw new Error("Handlerbars Helper 'abridgeSalary' needs 1 parameter");
     }
   console.log(salary);
   if (salary === undefined) {
