@@ -15,16 +15,9 @@ var parseString = require('xml2js').parseString;
 var players = [];
 var encryption = require('../encryption.js');
 var shortId = require('shortid');
-<<<<<<< HEAD
 var top_ppg = [];
-var bb = 0;
-var team_colors_nba = require('../lists/team_colors/team_colors_nba.js')
-=======
-
 var salaries_list = require('../lists/other/nba/nba_salaries.js');
 var team_colors_nba = require('../lists/team_colors/team_colors_nba.js');
-
->>>>>>> bd3522a0ebb5654244a0876cf289fcfcfa5a31d5
 
 
 var intreturnPlayers = function(players, rb_team_id, res, league, second_callback){
