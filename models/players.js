@@ -15,10 +15,9 @@ var parseString = require('xml2js').parseString;
 var players = [];
 var encryption = require('../encryption.js');
 var shortId = require('shortid');
-
+var top_ppg = [];
 var salaries_list = require('../lists/other/nba/nba_salaries.js');
 var team_colors_nba = require('../lists/team_colors/team_colors_nba.js');
-
 
 
 var intreturnPlayers = function(players, rb_team_id, res, league, second_callback){
@@ -519,6 +518,44 @@ var randImg = function(league) {
       return image;    
     }
 
+    var pluckPlayerFromName= function(player, callback){
+        db.collection('players').findOne({"abbreviation": player.team},function (err, doc){
+          var playerInfo = {};
+          if (doc){
+            for (i=0;i<doc.players.length;i++)  {
+              if (doc.players[i].full_name.toLowerCase() == player.name.toLowerCase()){
+                playerInfo = doc.players[i];
+                top_ppg.push(playerInfo);
+              }
+            }
+            //let async know the work is done
+            callback();
+          }
+          else {
+          console.log('could not find player entry for ' + player.name);
+          //let async know it's done
+          callback();
+          }
+        });            
+    }
+    
+
+    var insertTopScorers= function (){
+        var leadersList = {};
+        leadersList.players = top_ppg;
+        leadersList.league = 'nba';
+        leadersList.name = 'ppg';
+        db.open(function(err, db){
+          console.log(leadersList);
+          db.collection('leaders').insert(leadersList, function(err, insert){
+          if (err){
+            console.log("error inserting into mongo" + err);
+          }
+          });
+        })
+      
+    }
+
 module.exports = {
   returnPlayers: returnPlayers,
   fetchPlayersFromApi: fetchPlayersFromApi,
@@ -529,6 +566,7 @@ module.exports = {
   formatPlayersDocument: formatPlayersDocument,
   mongoInsertPlayers: mongoInsertPlayers,
   sortNBA: sortNBA,
+  pluckPlayerFromName: pluckPlayerFromName,
+  insertTopScorers: insertTopScorers,
   intreturnPlayers: intreturnPlayers
-
 }
