@@ -5,13 +5,35 @@ var common = require('./common')
 var config = common.config();
 var _ = require('lodash'),
  	mongojs = require("mongojs"),
+ 	async = require('async'),
 	db = mongojs.connect(config.mongo_uri);
 var quizCutoffDate = new Date()
 quizCutoffDate.setDate(quizCutoffDate.getDate() - 7);  //currently set to 1 week ago
 
 
 router.get('/', function(req, res) {
-	 db.collection('quiz').aggregate(
+
+	async.parallel({
+    goat_lists: fetchGoatLists,
+    leaders_lists: fetchLeadersLists
+}, function(err,results){
+        	console.log(results.goat_lists);
+        	res.render('leaguesearch',
+			{ popular_teams: results.goat_lists }
+		);	
+})
+
+});
+
+var fetchLeadersLists = function(callback){
+	db.collection('leaders').find().toArray(function (err, items){
+
+		callback(null, items);
+	});
+}
+
+var fetchGoatLists = function(callback){
+	db.collection('quiz').aggregate(
 
 
 	[{ "$match" : { "created_at" : { "$gt" : quizCutoffDate.toISOString().slice(0, 19).replace('T', ' ') }} //only pull quizzes in timeframe
@@ -30,12 +52,9 @@ router.get('/', function(req, res) {
 			var all_leagues = createTeamLists(result);
 			var sorted_teams = sortTeams(all_leagues);  // Sort the teams within each league by number of quizzes taken
 		}
-
-		res.render('leaguesearch',
-			{ popular_teams: sorted_teams }
-		);		
+		callback(null,sorted_teams);	
 	}); 
-})
+}
 
 
 
