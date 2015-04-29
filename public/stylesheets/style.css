@@ -406,6 +406,7 @@ padding-left: 3%;
   min-height: 300px;
   overflow: auto;
   position: relative;
+  font-family:HelveticaNeue;
 }
 
 .cover{
@@ -438,7 +439,6 @@ padding-left: 3%;
 
 .answer-container .inner-guess:hover{  
   cursor:pointer;
-  background-color:rgb(22, 231, 22);    
 }
 .green-background {
   background-color:rgb(22, 231, 22);

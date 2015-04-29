@@ -85,3 +85,42 @@ Handlebars.registerHelper('percentageCalc', function(denominator, numerator){
   }
   return percentage;
 });
+
+Handlebars.registerHelper('abridgeSalary', function(salary){
+  if (arguments.length < 1) {
+        throw new Error("Handlerbars Helper 'abridgeSalary' needs 1 parameter");
+    }
+  console.log(salary);
+  if (salary === undefined) {
+    var newSalary = "Not available";
+  }
+  else {
+    var salaryLong = salary;
+    var salaryLong = salaryLong.replace("$", "");
+    var asString = String(salaryLong);
+    if (salaryLong.length === 8) {          
+      var one = asString.charAt(0);
+      var two = asString.charAt(1);
+      var three = asString.charAt(2);    
+      var newSalary = "$" + one + two + "." + three + "M";   
+    }    
+    else if (salaryLong.length === 7) {      
+      var one = asString.charAt(0);
+      var two = asString.charAt(1);  
+      var newSalary = "$" + one + "." + two + "M";  
+    } else if (salaryLong.length === 6) {      
+      var one = asString.charAt(0);
+      var two = asString.charAt(1);
+      var three = asString.charAt(2);
+      var newSalary = "$" + one + two + three + "K";   
+    } else if (salaryLong.length === 5) {      
+      var one = asString.charAt(0);
+      var two = asString.charAt(1);
+      var newSalary = "$" + one + two + "K";   
+    }
+      else {
+      var newSalary = "Not available";
+    }
+  }
+  return newSalary;
+});

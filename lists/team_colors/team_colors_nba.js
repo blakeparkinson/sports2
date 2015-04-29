@@ -196,9 +196,9 @@ var team_colors = [
       },
       {
         "team_id": "XkWxBvWNoY",
-        "team_name": "Portland Trailblazers",
+        "team_name": "Portland Trail Blazers",
         "market": "Portland",
-        "name": "Trailblazers",
+        "name": "Trail Blazers",
         "primary_hex": "#F0163A",
         "secondary_hex": "#B6BFBF"
       },

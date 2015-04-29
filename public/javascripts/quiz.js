@@ -21,11 +21,21 @@ $(document).ready(function() {
   $('body').on('click', '.quit-btn', endQuiz);
   $('body').on('click', '.correct-guess', showCard);
   $('#card').flip({trigger: 'manual'});
+  $('body').on('mouseover', '.inner-guess', hoverCard);
+  $('body').on('mouseout', '.inner-guess', removeHover)
 
   startCounter();
  });
 
+var hoverCard = function(){
+  var background = answer_container.data('bhex');
+  var textColor = answer_container.data('fhex');
+  $(this).css({"background-color":background, "color": textColor});
+}
 
+var removeHover = function(){
+  $(this).css({"background":'inherit', "color": 'inherit'});
+}
 
 var startCounter = function(){
   var clock = $('.clock');
