@@ -90,7 +90,7 @@ switch (category){
                   players_model.pluckPlayerFromName(player, callback);
                 }, function (err) {
                   if (err) { throw err; }
-                    players_model.insertTopScorers(category);
+                    players_model.insertTopScorers(league, category);
                     console.log('done');
                   });
 

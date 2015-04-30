@@ -539,15 +539,9 @@ var randImg = function(league) {
     }
     
 
-// db.collection("players").update({team_id: team_document.rb_team_id},
-//     {$set: {team_id: team_id, market: team_document.market, name: team_document.name, team_name: team_document.team_name, abbreviation: team_document.abbreviation, league: league, last_updated: new Date().toISOString().slice(0, 19).replace('T', ' '), players: team_document.players}},
-//     {upsert: true, multi:false}, function (err, upserted){
-
-//{"$and" : [{ 
-
-var insertTopScorers= function (category){
+var insertTopScorers= function (league, category){
     var leadersList = {};
-    leadersList.league = 'nba';
+    leadersList.league = league;
     leadersList.category = category;
     leadersList.players = top_category;
     db.open(function(err, db){
