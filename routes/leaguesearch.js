@@ -15,6 +15,8 @@ router.get('/', function(req, res) {
 
   async.parallel({
     goat_lists: fetchGoatLists,
+    //this (bind) is the syntax you use to pass arguments via async lib.
+    //passing false here because we don't filter
     leaders_lists: fetchLeadersLists.bind(null, false)
   }, function(err,results){
       res.render('leaguesearch',
@@ -29,6 +31,7 @@ router.get('/', function(req, res) {
 var fetchLeadersLists = function(league, callback){
 	var data = {};
 	if (league){
+		//do filtering
 		data.league = league
 	}
   db.collection('leaders').find(data).toArray(function (err, items){
@@ -92,6 +95,7 @@ var fetchGoatListsByLeague = function(league,callback){
 router.get('/:league', function(req, res) {
   var league = req.params.league;
   async.parallel({
+  	//this (bind) is the syntax you use to pass arguments via async lib.
     goat_lists: fetchGoatListsByLeague.bind(null,league),
     leaders_lists: fetchLeadersLists.bind(null, league)
   }, function(err,results){
