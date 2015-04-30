@@ -15,7 +15,7 @@ var parseString = require('xml2js').parseString;
 var players = [];
 var encryption = require('../encryption.js');
 var shortId = require('shortid');
-var top_ppg = [];
+var top_category = [];
 var salaries_list = require('../lists/other/nba/nba_salaries.js');
 var team_colors_nba = require('../lists/team_colors/team_colors_nba.js');
 
@@ -525,14 +525,13 @@ var randImg = function(league) {
             for (i=0;i<doc.players.length;i++)  {
               if (doc.players[i].full_name.toLowerCase() == player.name.toLowerCase()){
                 playerInfo = doc.players[i];
-                top_ppg.push(playerInfo);
+                top_category.push(playerInfo);  //aggregates the list of players
               }
             }
             //let async know the work is done
             callback();
           }
           else {
-          console.log('could not find player entry for ' + player.name);
           //let async know it's done
           callback();
           }
@@ -540,21 +539,30 @@ var randImg = function(league) {
     }
     
 
-    var insertTopScorers= function (){
-        var leadersList = {};
-        leadersList.players = top_ppg;
-        leadersList.league = 'nba';
-        leadersList.name = 'ppg';
-        db.open(function(err, db){
-          console.log(leadersList);
-          db.collection('leaders').insert(leadersList, function(err, insert){
-          if (err){
-            console.log("error inserting into mongo" + err);
-          }
-          });
-        })
-      
-    }
+// db.collection("players").update({team_id: team_document.rb_team_id},
+//     {$set: {team_id: team_id, market: team_document.market, name: team_document.name, team_name: team_document.team_name, abbreviation: team_document.abbreviation, league: league, last_updated: new Date().toISOString().slice(0, 19).replace('T', ' '), players: team_document.players}},
+//     {upsert: true, multi:false}, function (err, upserted){
+
+//{"$and" : [{ 
+
+var insertTopScorers= function (category){
+    var leadersList = {};
+    leadersList.league = 'nba';
+    leadersList.category = category;
+    leadersList.players = top_category;
+    db.open(function(err, db){
+      db.collection('leaders').update({"$and" : [{league: leadersList.league},{category: leadersList.category}]},
+        {$set: leadersList}, 
+        {upsert: true, multi:false}, function(err, insert){
+      if (err){
+        console.log("error inserting into mongo" + err);
+      }
+      });
+    })
+  
+}
+
+
 
 module.exports = {
   returnPlayers: returnPlayers,

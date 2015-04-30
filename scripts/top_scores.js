@@ -1,3 +1,6 @@
+// Possible NBA categories: ppg, rpg, fieldGoalPercentage, ftPercentage, threePointPercentage, apg, spg, bpg, tpg, fpg, mpg
+// Run Script by: node top_scores league category (e.g. node top_scores nba ppg)
+
 var express = require('express');
 var fs = require('fs');
 var request = require('request');
@@ -14,9 +17,49 @@ var players_model = require('../models/players.js'),
     async = require('async');
 
 
-    
+//process.argv grabs the command line arguments
+var league = process.argv[2];
+var category = process.argv[3];
+
+
+switch (category){
+  case "ppg": //points per game
     url = 'http://www.cbssports.com/nba/stats/playersort/nba/year-2014-season-regularseason-category-scoringpergame';
+    break;
+  case "rpg": //rebounds
+    url = 'http://www.cbssports.com/nba/stats/playersort/NBA/year-2014-season-regularseason-category-rebounds';
+    break;
+  case "fieldGoalPercentage": //fieldgoals
+    url = 'http://www.cbssports.com/nba/stats/playersort/NBA/year-2014-season-regularseason-category-fieldgoals';
+    break;
+  case "ftPercentage": //free throw
+    url = 'http://www.cbssports.com/nba/stats/playersort/NBA/year-2014-season-regularseason-category-freethrows';
+    break;
+  case "threePointPercentage": //three point
+    url = 'http://www.cbssports.com/nba/stats/playersort/NBA/year-2014-season-regularseason-category-threepoints';
+    break;
+  case "apg": //assists
+    url = 'http://www.cbssports.com/nba/stats/playersort/NBA/year-2014-season-regularseason-category-assists';
+    break;
+  case "spg": //steals
+    url = 'http://www.cbssports.com/nba/stats/playersort/NBA/year-2014-season-regularseason-category-steals';
+    break;
+  case "bpg": //blocks
+    url = 'http://www.cbssports.com/nba/stats/playersort/NBA/year-2014-season-regularseason-category-blocks';
+    break;
+  case "tpg": //turnovers
+    url = 'http://www.cbssports.com/nba/stats/playersort/NBA/year-2014-season-regularseason-category-turnovers';
+    break;
+  case "fpg": //fouls
+    url = 'http://www.cbssports.com/nba/stats/playersort/NBA/year-2014-season-regularseason-category-fouls';
+    break;
+  case "mpg": //minutes
+    url = 'http://www.cbssports.com/nba/stats/playersort/NBA/year-2014-season-regularseason-category-minutes';
+    break;
+}
+    
     request(url, function(error, response, html){
+      console.log("starting script for "+league+" category: "+category);
 
         if(!error){
             var $ = cheerio.load(html);
@@ -34,20 +77,20 @@ var players_model = require('../models/players.js'),
                 tr.each(function(i, element){
                   var player = $(this).find('td:first-child').text();
                   var team = $(this).find('td:nth-child(3)').text();
-                  var ppg = $(this).find('td.sort').text();
+                  var top = $(this).find('td.sort').text();
                   var metadata = {
                     name: player,
-                    ppg: ppg,
+                    top: top,
                     team: abbreviation_helper(team)  // Consolidates abbreviation differences between sites
                   };
                   results.push(metadata);
                 })
                 async.eachSeries(results, function (player, callback) {
                   //async lib is weird, you pass it a callback and it calls back and lets you know when it has finished for each loop
-                  var ppg = players_model.pluckPlayerFromName(player, callback);
+                  players_model.pluckPlayerFromName(player, callback);
                 }, function (err) {
                   if (err) { throw err; }
-                    players_model.insertTopScorers();
+                    players_model.insertTopScorers(category);
                     console.log('done');
                   });
 
