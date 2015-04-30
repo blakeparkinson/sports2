@@ -109,7 +109,7 @@ var top_script = function(url, category){
       })
     }
     else{
-      console.log('pp');
+      console.log("there was an error with "+ category);
     }
   })
 }
