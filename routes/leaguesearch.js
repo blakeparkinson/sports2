@@ -15,26 +15,29 @@ router.get('/', function(req, res) {
 
   async.parallel({
     goat_lists: fetchGoatLists,
-    leaders_lists: fetchLeadersLists
+    leaders_lists: fetchLeadersLists.bind(null, false)
   }, function(err,results){
-      console.log(results.goat_lists);
       res.render('leaguesearch',
-        { popular_teams: results.goat_lists }
+        { popular_teams: results.goat_lists,
+        	leaders: results.leaders_lists
+         }
     );  
   })
 
 });
 
-var fetchLeadersLists = function(callback){
-  db.collection('leaders').find().toArray(function (err, items){
-
+var fetchLeadersLists = function(league, callback){
+	var data = {};
+	if (league){
+		data.league = league
+	}
+  db.collection('leaders').find(data).toArray(function (err, items){
     callback(null, items);
   });
 }
 
 var fetchGoatLists = function(callback){
   db.collection('quiz').aggregate(
-
 
   [{ "$match" : { "created_at" : { "$gt" : quizCutoffDate.toISOString().slice(0, 19).replace('T', ' ') }} //only pull quizzes in timeframe
   },
@@ -56,11 +59,8 @@ var fetchGoatLists = function(callback){
   }); 
 }
 
-
-
-router.get('/:league', function(req, res) {
-  var league = req.params.league;
-  db.collection('quiz').aggregate(
+var fetchGoatListsByLeague = function(league,callback){
+	db.collection('quiz').aggregate(
     [{ "$match" : {"$and" : [{ "created_at" : { "$gt" : quizCutoffDate.toISOString().slice(0, 19).replace('T', ' ') }}, {"league" : league} ] }
     },
     { "$group": {
@@ -82,15 +82,27 @@ router.get('/:league', function(req, res) {
             team.quizCount = result[i].quizCount;
             teams.push(team);
           }
-        sorted_team = teams.sort(compareCounts)
+        sorted_teams = teams.sort(compareCounts);
       }
-
-    res.render('leaguesearch', {
-      popular_teams: sorted_team
-    });
+      callback(null, sorted_teams);  
   })
-})
+}
 
+
+router.get('/:league', function(req, res) {
+  var league = req.params.league;
+  async.parallel({
+    goat_lists: fetchGoatListsByLeague.bind(null,league),
+    leaders_lists: fetchLeadersLists.bind(null, league)
+  }, function(err,results){
+      res.render('leaguesearch',
+        { popular_teams: results.goat_lists,
+        	leaders: results.leaders_lists
+         }
+    );  
+  })
+
+})
 
 
 var createTeamLists = function(teamobject){
