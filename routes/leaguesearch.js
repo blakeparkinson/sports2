@@ -51,14 +51,26 @@ var fetchGoatLists = function(callback){
         "quiz_name": "$quiz_name"
       },
       "quizCount": { "$sum": 1}
-    }}
+    }}, {
+      $sort: {quizCount: -1}
+    }, {
+      $limit: 10
+    }
 
   ], function (err, result){ 
-    if (result.length > 0){
-      var all_leagues = createTeamLists(result);
-      var sorted_teams = sortTeams(all_leagues);  // Sort the teams within each league by number of quizzes taken
-    }
-    callback(null, sorted_teams);  
+      if (result.length > 0){
+        teams = [];
+        for (i=0;i<Object.keys(result).length;i++){
+            var team = {};
+            team.rb_team_id = result[i]._id.rb_team_id;
+            team.league = result[i]._id.league;
+            team.team_name = result[i]._id.quiz_name;
+            team.quizCount = result[i].quizCount;
+            teams.push(team);
+          }
+        console.log("TEAMS"+teams);
+      }
+    callback(null, teams);  
   }); 
 }
 
@@ -157,9 +169,8 @@ var createTeamLists = function(teamobject){
 var sortTeams = function(teamsobject){
   for (var key in teamsobject){
     teamsobject[key].sort(compareCounts);
-    var limited = teamsobject[key].slice(0,10);
   }
-  return limited
+  return teamsobject
 }
 
 
