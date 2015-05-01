@@ -58,7 +58,7 @@ var fetchGoatLists = function(callback){
       var all_leagues = createTeamLists(result);
       var sorted_teams = sortTeams(all_leagues);  // Sort the teams within each league by number of quizzes taken
     }
-    callback(null,sorted_teams);  
+    callback(null, sorted_teams);  
   }); 
 }
 
@@ -86,8 +86,9 @@ var fetchGoatListsByLeague = function(league,callback){
             teams.push(team);
           }
         sorted_teams = teams.sort(compareCounts);
+        subset = sorted_teams.slice(0,10);
       }
-      callback(null, sorted_teams);  
+      callback(null, subset);  
   })
 }
 
@@ -156,8 +157,9 @@ var createTeamLists = function(teamobject){
 var sortTeams = function(teamsobject){
   for (var key in teamsobject){
     teamsobject[key].sort(compareCounts);
+    var limited = teamsobject[key].slice(0,10);
   }
-  return teamsobject
+  return limited
 }
 
 
