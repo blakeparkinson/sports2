@@ -543,6 +543,7 @@ var insertTopScorers= function (league, category){
     var leadersList = {};
     leadersList.league = league;
     leadersList.category = category;
+    leadersList.rb_team_id = shortId.generate();
     leadersList.players = top_category;
     db.open(function(err, db){
       db.collection('leaders').update({"$and" : [{league: leadersList.league},{category: leadersList.category}]},

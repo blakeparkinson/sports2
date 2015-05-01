@@ -14,6 +14,8 @@ var http = require("http"),
     db = mongojs.connect(config.mongo_uri);
 var players_model = require('../models/players.js'),
     async = require('async');
+var shortId = require('shortid');
+
 
 
 //process.argv grabs the command line arguments
