@@ -15,6 +15,7 @@
     color: white;
     background: rgba(235, 235, 235, 0.8);
     min-height: 300px;
+    max-height: 500px;
 }
 .column-left {
     width: 33%;
