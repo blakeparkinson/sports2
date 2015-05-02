@@ -27,7 +27,15 @@ router.get('/', function(req, res) {
           }
         else if (type == 'leaders'){
           leaders_model.fetchLeadersLists(league, function(doc){
+            console.log(doc);
             res.render('quiz', {
+              clock: '2:00',
+              roster: doc.players,
+              league: doc.league,
+              rb_team_id: doc.team_id,
+              remove_footer: true,
+              team_name: doc.category
+
             })
           }, rb_team_id)
 

@@ -537,6 +537,11 @@ var randImg = function(league) {
           }
         });            
     }
+
+var emptyCategoryArray = function(){
+  top_category = [];
+}
+
     
 
 var insertTopScorers= function (data){
@@ -553,7 +558,7 @@ var insertTopScorers= function (data){
         console.log("error inserting into mongo" + err);
       }
       });
-    })
+  })
   
 }
 
@@ -571,5 +576,6 @@ module.exports = {
   sortNBA: sortNBA,
   pluckPlayerFromName: pluckPlayerFromName,
   insertTopScorers: insertTopScorers,
-  intreturnPlayers: intreturnPlayers
+  intreturnPlayers: intreturnPlayers,
+  emptyCategoryArray: emptyCategoryArray
 }

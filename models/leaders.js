@@ -12,10 +12,10 @@ var encryption = require('../encryption.js');
 var shortId = require('shortid');
 
 var fetchLeadersLists = function(league, callback, rb_team_id){
+	console.log(rb_team_id);
   var data = {};
   if (rb_team_id){
-    db.collection('leaders').findOne({"rb_team_id": rb_team_id},function (err, doc){
-      console.log(callback)
+    db.collection('leaders').findOne({team_id: rb_team_id},function (err, doc){
       callback(doc);
     });
   }

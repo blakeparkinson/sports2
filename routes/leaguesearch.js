@@ -30,23 +30,25 @@ router.get('/', function(req, res) {
 
 var fetchLeadersLists = function(league, callback, rb_team_id){
 	var data = {};
-  if (rb_team_id){
+  data.type = 'leaders';
+  /*if (rb_team_id){
     db.collection('leaders').findOne({"rb_team_id": rb_team_id},function (err, doc){
       console.log(doc);
       callback(doc);
     });
-  }
-  else{
+  }*/
+  //else{
   
   	if (league){
   		//do filtering
   		data.league = league
   	}
-    db.collection('leaders').find(data).toArray(function (err, items){
+    db.collection('teams').find(data).toArray(function (err, items){
+      console.log(items);
       callback(null, items);
     });
   }
-}
+//}
 
 var fetchGoatLists = function(callback){
   db.collection('quiz').aggregate(
@@ -108,7 +110,6 @@ router.get('/:league', function(req, res) {
     goat_lists: fetchGoatListsByLeague.bind(null,league),
     leaders_lists: fetchLeadersLists.bind(null, league)
   }, function(err,results){
-  	console.log(results);
       res.render('leaguesearch',
         { popular_teams: results.goat_lists,
         	leaders: results.leaders_lists
