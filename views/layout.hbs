@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html>
   <head>
  
@@ -14,7 +14,7 @@
 
 	<nav class="navbar navbar-default blitz" role="navigation">
     <div class="navbar-header rb">
-      <a class="navbar-brand main" href="/"><span class="rb-green">Roster</span><span class="rb-green">Blitz</span></a>
+      <a class="navbar-brand main" href="/"><span class="glyphicon glyphicon-flash rb-bolt" aria-hidden="true"></span><span class="rb-green">Roster</span><span class="rb-green">Blitz</span><span class="glyphicon glyphicon-flash rb-bolt" aria-hidden="true"></span></a>
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -27,8 +27,10 @@
           <li class="rb-green"><a href="/leaguesearch/mlb"><span class="rb-green">MLB</span></a></li>
           <li class="rb-green"><a href="/leaguesearch/nba"><span class="rb-green">NBA</span></a></li>
           <li class="rb-green"><a href="/leaguesearch/nfl"><span class="rb-green">NFL</span></a></li>
-          <li class="rb-green"><a href="/leaguesearch/nhl"><span class="rb-green">NHL</span></a></li>          
-          <li><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" id="how-works-button">How this works</button></li>
+          <li class="rb-green"><a href="/leaguesearch/nhl"><span class="rb-green">NHL</span></a></li>         
+          <!-- 
+          <li><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" id="how-works-button"><span class="glyphicon glyphicon-question-sign" id="how-mark" aria-hidden="true"></span>How this works</button></li> -->
+           <li><a id="question-mark-contain" href="" data-toggle="modal" data-target="#myModal"><span data-toggle="tooltip" data-placement="bottom" title="How this works" id="question-mark" class="glyphicon glyphicon-question-sign white-tooltip" aria-hidden="true"></span></a></li>
         </ul>
     </div>
   </nav>
@@ -58,7 +60,7 @@
                 <li><a href="/" class="rb-green">Home</a></li>      
                 <li><a href="/about" class="rb-green">About</a></li>
                 <li><a href="/ourteam" class="rb-green">Team</a></li>
-                <li><a href="/contactUs" class="rb-green">Contact Us</a></li>                       
+                <li><a href="" class="rb-green" data-toggle="modal" data-target="#myContactModal">Contact Us</a></li>                       
               </ul>                     
             </p>      
         </div>
@@ -100,7 +102,7 @@
 </div>
 
 
-<!-- Modal -->
+<!-- How this works Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content" id="how-works-modal">
@@ -127,6 +129,28 @@
         <div class="modal-footer" id="how-works-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">I'm ready to play!</button>        
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Contact Modal -->
+<div class="modal fade" id="myContactModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" id="how-works-modal">
+      <div class="modal-header" id="how-works-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="myModalLabel">Get in touch!</h3>
+      </div>
+      <div class="modal-body" id="how-works-body">
+        The team at RosterBlitz would love to hear your feedback and suggestions. 
+        <div id="how-works-main">        
+          <div>Email: rosterblitz@gmail.com</div>
+          <div>Twitter: @rosterblitz</div>             
+        </div>
+        <div class="modal-footer" id="how-works-footer">              
+        </div>
+      </div>
     </div>
   </div>
 </div>
