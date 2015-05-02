@@ -6,6 +6,7 @@ var http = require("http");
     mongojs = require("mongojs"),
     db = mongojs.connect(config.mongo_uri);
 var players_model = require('../models/players.js');
+var leaders_model = require('../models/leaders.js');
 var leaguesearch = require('./leaguesearch.js');
 
     
@@ -25,11 +26,10 @@ router.get('/', function(req, res) {
             players_model.fetchGoatPlayers(list_id, rb_team_id, league, res, req, players_model.returnPlayers)
           }
         else if (type == 'leaders'){
-          fetchLeadersLists(league, function(doc){
-  console.log(doc);
-  res.render('quiz', {
-    })
-}, rb_team_id)
+          leaders_model.fetchLeadersLists(league, function(doc){
+            res.render('quiz', {
+            })
+          }, rb_team_id)
 
         }
         else {
@@ -70,27 +70,6 @@ router.get('/results', function(req, res) {
       });
     });
 });
-
-
-var fetchLeadersLists = function(league, callback, rb_team_id){
-  var data = {};
-  if (rb_team_id){
-    db.collection('leaders').findOne({"rb_team_id": rb_team_id},function (err, doc){
-      console.log(callback)
-      callback(doc);
-    });
-  }
-  else{
-  
-    if (league){
-      //do filtering
-      data.league = league
-    }
-    db.collection('leaders').find(data).toArray(function (err, items){
-      callback(null, items);
-    });
-  }
-}
 
 
           

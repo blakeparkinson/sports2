@@ -105,7 +105,18 @@ var top_script = function(url, category){
           players_model.pluckPlayerFromName(player, callback);
         }, function (err) {
           if (err) { throw err; }
-            players_model.insertTopScorers(league, category);
+            var leadersList = {},
+                id = shortId.generate(),
+                data = {team_id : id, league: league, category: category};
+                leadersList.league = league,
+                leadersList.type = 'leaders',
+                leadersList.description = fetchStatDescription(category);
+                leadersList._id = id,
+                leadersList.category = category;
+            players_model.insertTopScorers(data);
+            mongoInsert(leadersList);
+
+
             console.log('done with '+category);
           });
       })
@@ -139,5 +150,20 @@ var abbreviation_helper = function(abbreviation){
       break;
   }
   return replace
+}
+
+var mongoInsert = function (leadersList){
+    db.open(function(err, db){
+      db.collection('teams').insert(leadersList, function(err, insert){
+        if (err){
+          console.log("error inserting into mongo" + err);
+        }
+      });
+    })
+}
+
+var fetchStatDescription = function(stat){
+  return stat;
+
 }
 
