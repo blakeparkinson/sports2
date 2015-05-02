@@ -13,7 +13,6 @@ router.get('/', function(req, res) {
       res.quiz_page = true;
       var quiz_id = req.query.id;
       db.collection('quiz').findOne( { _id : quiz_id}, function(err, items){
-        console.log(items);
         list_id = items.list_id;
         rb_team_id = items.rb_team_id;
         league = items.league;
