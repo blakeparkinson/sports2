@@ -108,6 +108,19 @@ var fetchGoatListsByLeague = function(league, callback){
   })
 }
 
+var randImg = function() {      
+      var images = [];      
+      
+          var path = '../images/epic_photos/';          
+                  
+            images[0] = "hockey.jpg",
+            images[1] = "locker_room1.jpg",
+            images[2] = "locker_room2.jpg";            
+            
+      var image = images[Math.floor(Math.random()*images.length)];
+      image = path + image;
+      return image;    
+    }
 
 router.get('/:league', function(req, res) {
   var league = req.params.league;
@@ -118,7 +131,8 @@ router.get('/:league', function(req, res) {
   }, function(err,results){
       res.render('leaguesearch',
         { popular_teams: results.goat_lists,
-        	leaders: results.leaders_lists
+        	leaders: results.leaders_lists,
+          background_image: randImg()
          }
     );  
   })
