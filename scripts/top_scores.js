@@ -16,12 +16,8 @@ var players_model = require('../models/players.js'),
     async = require('async');
 var shortId = require('shortid');
 
-
-
 //process.argv grabs the command line arguments
 var league = process.argv[2];
-
-
 
 // In order to loop through all categories of the league, we need to have a shell function that just loops.
 var main = function(league){
@@ -31,8 +27,7 @@ var main = function(league){
       break;
   }
 
-  for (i=0;i<categories.length;i++){
-    category = categories[i]
+    async.eachSeries(categories, function (category, callback) {
 
     switch (category){
       case "ppg": //points per game
@@ -70,11 +65,14 @@ var main = function(league){
         break;
     }
     // Call the core functionality now that we have the right variables.
-    top_script(url, category)
+    top_script(url, category, callback);
+    },function (err) {
+          if (err) { throw err; }
+          console.log('done');
+          });
   }
-}
 
-var top_script = function(url, category){
+var top_script = function(url, category, callback1){
   request(url, function(error, response, html){
     console.log("starting script for "+league+" category: "+category);
 
@@ -115,9 +113,8 @@ var top_script = function(url, category){
                 leadersList.category = category;
             players_model.insertTopScorers(data);
             mongoInsert(leadersList);
-
-
             console.log('done with '+category);
+            callback1();
           });
       })
     }
@@ -162,8 +159,8 @@ var mongoInsert = function (leadersList){
     })
 }
 
+/** TODO HAVE HENRY POPULATE DESCRIPTIONS WITH THIS FUNCTION **/
 var fetchStatDescription = function(stat){
   return stat;
-
 }
 

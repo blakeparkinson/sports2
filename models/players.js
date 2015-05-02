@@ -557,6 +557,9 @@ var insertTopScorers= function (data){
       if (err){
         console.log("error inserting into mongo" + err);
       }
+      else{
+        emptyCategoryArray();
+      }
       });
   })
   

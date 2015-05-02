@@ -30,25 +30,15 @@ router.get('/', function(req, res) {
 
 var fetchLeadersLists = function(league, callback, rb_team_id){
 	var data = {};
-  data.type = 'leaders';
-  /*if (rb_team_id){
-    db.collection('leaders').findOne({"rb_team_id": rb_team_id},function (err, doc){
-      console.log(doc);
-      callback(doc);
-    });
-  }*/
-  //else{
-  
-  	if (league){
-  		//do filtering
-  		data.league = league
-  	}
-    db.collection('teams').find(data).toArray(function (err, items){
-      console.log(items);
-      callback(null, items);
-    });
-  }
-//}
+  data.type = 'leaders';  
+	if (league){
+		//do filtering
+		data.league = league
+	}
+  db.collection('teams').find(data).toArray(function (err, items){
+    callback(null, items);
+  });
+}
 
 var fetchGoatLists = function(callback){
   db.collection('quiz').aggregate(
@@ -89,13 +79,13 @@ var fetchGoatListsByLeague = function(league,callback){
       if (result.length > 0){
         teams = [];
         for (i=0;i<Object.keys(result).length;i++){
-            var team = {};
-            team.rb_team_id = result[i]._id.rb_team_id;
-            team.league = result[i]._id.league;
-            team.team_name = result[i]._id.quiz_name;
-            team.quizCount = result[i].quizCount;
-            teams.push(team);
-          }
+          var team = {};
+          team.rb_team_id = result[i]._id.rb_team_id;
+          team.league = result[i]._id.league;
+          team.team_name = result[i]._id.quiz_name;
+          team.quizCount = result[i].quizCount;
+          teams.push(team);
+        }
         sorted_teams = teams.sort(compareCounts);
       }
       callback(null, sorted_teams);  
