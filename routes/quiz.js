@@ -8,9 +8,7 @@ var http = require("http");
 var players_model = require('../models/players.js');
 var leaders_model = require('../models/leaders.js');
 var leaguesearch = require('./leaguesearch.js');
-
     
-
 router.get('/', function(req, res) {
       res.quiz_page = true;
       var quiz_id = req.query.id;
@@ -27,7 +25,6 @@ router.get('/', function(req, res) {
           }
         else if (type == 'leaders'){
           leaders_model.fetchLeadersLists(league, function(doc){
-            console.log(doc);
             res.render('quiz', {
               clock: '2:00',
               roster: doc.players,
@@ -35,10 +32,8 @@ router.get('/', function(req, res) {
               rb_team_id: doc.team_id,
               remove_footer: true,
               team_name: doc.category
-
             })
           }, rb_team_id)
-
         }
         else {
           db.collection('teams').findOne( { _id : rb_team_id}, function (err, items){
@@ -59,8 +54,6 @@ router.get('/', function(req, res) {
   });
 });
  
-
-
 router.get('/results', function(req, res) {
   var quiz_id = req.query.quiz_id,
     quiz_score = req.query.quiz_score;
@@ -78,7 +71,5 @@ router.get('/results', function(req, res) {
       });
     });
 });
-
-
           
 module.exports = router;
