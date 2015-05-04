@@ -35,7 +35,7 @@ router.get('/quiz', function(req, res) {
   var type = req.query.type;
 
   if (req.query.trending){
-    if (type != undefined){
+    if (type == 'leaders'){
       db.collection('leaders').findOne( { team_id : rb_team_id}, function (err, item){
         if (item != null){
           var league = item.league;
