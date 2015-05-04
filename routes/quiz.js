@@ -4,6 +4,7 @@ var express = require('express');
 var router = express.Router();
 var http = require("http");
     mongojs = require("mongojs"),
+    clock = '2:00';
     db = mongojs.connect(config.mongo_uri);
 var players_model = require('../models/players.js');
 var leaders_model = require('../models/leaders.js');
@@ -25,7 +26,7 @@ router.get('/', function(req, res) {
         else if (type == 'leaders'){
           leaders_model.fetchLeadersLists(league, function(doc){
             res.render('quiz', {
-              clock: '2:00',
+              clock: clock,
               roster: doc.players,
               league: doc.league,
               rb_team_id: doc.team_id,
