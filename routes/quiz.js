@@ -4,10 +4,12 @@ var express = require('express');
 var router = express.Router();
 var http = require("http");
     mongojs = require("mongojs"),
+    clock = '2:00';
     db = mongojs.connect(config.mongo_uri);
 var players_model = require('../models/players.js');
+var leaders_model = require('../models/leaders.js');
+var leaguesearch = require('./leaguesearch.js');
     
-
 router.get('/', function(req, res) {
       res.quiz_page = true;
       var quiz_id = req.query.id;
@@ -17,9 +19,22 @@ router.get('/', function(req, res) {
         league = items.league;
         api_team_id = items.api_team_id;
         quiz_name = items.quiz_name;
+        type = items.type;
         if (list_id){ 
             players_model.fetchGoatPlayers(list_id, rb_team_id, league, res, req, players_model.returnPlayers)
           }
+        else if (type == 'leaders'){
+          leaders_model.fetchLeadersLists(league, function(doc){
+            res.render('quiz', {
+              clock: clock,
+              roster: doc.players,
+              league: doc.league,
+              rb_team_id: doc.team_id,
+              remove_footer: true,
+              team_name: doc.category
+            })
+          }, rb_team_id)
+        }
         else {
           db.collection('teams').findOne( { _id : rb_team_id}, function (err, items){
             team_id = items.team_id;       // API team id
@@ -38,8 +53,7 @@ router.get('/', function(req, res) {
         }
   });
 });
-
-
+ 
 router.get('/results', function(req, res) {
   var quiz_id = req.query.quiz_id,
     quiz_score = req.query.quiz_score;
@@ -57,6 +71,5 @@ router.get('/results', function(req, res) {
       });
     });
 });
-
           
 module.exports = router;

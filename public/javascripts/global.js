@@ -176,9 +176,12 @@ function closePopupAndRefreshPage(){
 }
 
 function fetchTrendingQuiz(event){
-  var rb_team_id = $(this).data('id');
+  var rb_team_id = $(this).data('id'), 
+      type = $(this).data('type');
+
   var data = {
     rb_team_id: rb_team_id,
+    type: type,
     trending: true
   };
   AjaxCreateQuiz(data);

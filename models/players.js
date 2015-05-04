@@ -537,22 +537,31 @@ var randImg = function(league) {
           }
         });            
     }
+
+var emptyCategoryArray = function(){
+  top_category = [];
+}
+
     
 
-var insertTopScorers= function (league, category){
+var insertTopScorers= function (data){
     var leadersList = {};
-    leadersList.league = league;
-    leadersList.category = category;
+    leadersList.league = data.league;
+    leadersList.category = data.category;
+    leadersList.team_id = data.team_id
     leadersList.players = top_category;
     db.open(function(err, db){
-      db.collection('leaders').update({"$and" : [{league: leadersList.league},{category: leadersList.category}]},
+      db.collection('leaders').update({"$and" : [{league: leadersList.league},{category: leadersList.category},{team_id: leadersList.team_id}]},
         {$set: leadersList}, 
         {upsert: true, multi:false}, function(err, insert){
       if (err){
         console.log("error inserting into mongo" + err);
       }
+      else{
+        emptyCategoryArray();
+      }
       });
-    })
+  })
   
 }
 
@@ -570,5 +579,6 @@ module.exports = {
   sortNBA: sortNBA,
   pluckPlayerFromName: pluckPlayerFromName,
   insertTopScorers: insertTopScorers,
-  intreturnPlayers: intreturnPlayers
+  intreturnPlayers: intreturnPlayers,
+  emptyCategoryArray: emptyCategoryArray
 }

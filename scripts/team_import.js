@@ -23,9 +23,18 @@ var endpoint = '';
 var teams = [];
 var supported_leagues = ['nba', 'nfl', 'mlb', 'nhl', 'eu_soccer'];
 var shortId = require('shortid');
+var teams_model = require('../models/teams.js');
+
 
 //process.argv grabs the command line arguments
 var league = process.argv[2];
+
+//deleting a team sample
+/*var d = {};
+d.type = 'leaders';
+
+teams_model.deleteTeam(d);
+return;*/
 
 if (supported_leagues.indexOf(league) == -1){
   console.log('We cant do this league yet.');

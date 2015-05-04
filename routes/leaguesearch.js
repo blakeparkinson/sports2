@@ -28,13 +28,14 @@ router.get('/', function(req, res) {
 
 });
 
-var fetchLeadersLists = function(league, callback){
+var fetchLeadersLists = function(league, callback, rb_team_id){
 	var data = {};
+  data.type = 'leaders';  
 	if (league){
 		//do filtering
 		data.league = league
 	}
-  db.collection('leaders').find(data).toArray(function (err, items){
+  db.collection('teams').find(data).toArray(function (err, items){
     callback(null, items);
   });
 }
@@ -95,13 +96,13 @@ var fetchGoatListsByLeague = function(league, callback){
       teams = []; 
       if (result.length > 0){
         for (i=0;i<Object.keys(result).length;i++){
-            var team = {};
-            team.rb_team_id = result[i]._id.rb_team_id;
-            team.league = result[i]._id.league;
-            team.team_name = result[i]._id.quiz_name;
-            team.quizCount = result[i].quizCount;
-            teams.push(team);
-          }
+          var team = {};
+          team.rb_team_id = result[i]._id.rb_team_id;
+          team.league = result[i]._id.league;
+          team.team_name = result[i]._id.quiz_name;
+          team.quizCount = result[i].quizCount;
+          teams.push(team);
+        }
         console.log("TEAMS"+teams);
       }
     callback(null, teams);  
@@ -109,18 +110,17 @@ var fetchGoatListsByLeague = function(league, callback){
 }
 
 var randImg = function() {      
-      var images = [];      
-      
-          var path = '../images/epic_photos/';          
-                  
-            images[0] = "hockey.jpg",
-            images[1] = "locker_room1.jpg",
-            images[2] = "locker_room2.jpg";            
+  var images = [];      
+  var path = '../images/epic_photos/';          
+              
+  images[0] = "hockey.jpg",
+  images[1] = "locker_room1.jpg",
+  images[2] = "locker_room2.jpg";            
             
-      var image = images[Math.floor(Math.random()*images.length)];
-      image = path + image;
-      return image;    
-    }
+  var image = images[Math.floor(Math.random()*images.length)];
+  image = path + image;
+  return image;    
+}
 
 router.get('/:league', function(req, res) {
   var league = req.params.league;
@@ -138,7 +138,6 @@ router.get('/:league', function(req, res) {
   })
 
 })
-
 
 
 function compareCounts(a,b) {
