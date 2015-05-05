@@ -15,6 +15,7 @@ var http = require("http"),
 var players_model = require('../models/players.js'),
     async = require('async');
 var shortId = require('shortid');
+var teams_model = require('../models/teams.js'),
 
 //process.argv grabs the command line arguments
 var league = process.argv[2];
@@ -108,7 +109,7 @@ var top_script = function(url, category, callback1){
                 data = {team_id : id, league: league, category: category};
                 leadersList.league = league,
                 leadersList.type = 'leaders',
-                leadersList.description = fetchStatDescription(category);
+                leadersList.description = teams_model.fetchStatDescription(category);
                 leadersList._id = id,
                 leadersList.category = category;
             players_model.insertTopScorers(data);
@@ -158,9 +159,3 @@ var mongoInsert = function (leadersList){
       });
     })
 }
-
-/** TODO HAVE HENRY POPULATE DESCRIPTIONS WITH THIS FUNCTION **/
-var fetchStatDescription = function(stat){
-  return stat;
-}
-
