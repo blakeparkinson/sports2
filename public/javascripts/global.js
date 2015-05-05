@@ -246,14 +246,6 @@ function AjaxCreateQuiz(data){
 
 }
 
-
-
-
-
-
-
-
-
 var formatRoster = function(response){
 	var team_deets = sortTeam(response),
       source = $("#team").html(),
@@ -283,13 +275,4 @@ function validateEmail(email) {
     return re.test(email);
 } 
 
-
 $('#copyright-date').text( (new Date).getFullYear() );
-
-
-
-
-
-
-
-
