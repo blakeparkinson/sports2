@@ -136,7 +136,7 @@ var fetchPlayers = function(team_id, rb_team_id, league, usat_id, res, req, firs
       var datenow = new Date();
       var datecutoff = datenow.getTime() - dataAgeCutOff;
       if (datecutoff > itemdate){   //data is old so call API
-         players = fetchPlayersFromApi(team_id, rb_team_id, league, usat_id, res, callback)
+         players = fetchPlayersFromApi(team_id, rb_team_id, league, usat_id, res, first_callback, second_callback)
       }
       else {  // data is fine so just return it
         players = item;
