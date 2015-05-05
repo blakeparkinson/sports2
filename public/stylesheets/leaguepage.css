@@ -43,6 +43,7 @@
   display: block;
   padding: 10px 15px;
   margin-bottom: -1px; 
+  font-size: 1.1em;
 }
 .top-list-contain .list-group .league-search-items:hover {
   color: #555;
