@@ -25,6 +25,11 @@ $(document).ready(function() {
 
     $('body').on('click', '.email-img', appendMessage);
 
+    $('.tabs').hover(
+       function(){ $(this).addClass('active') },
+       function(){ $(this).removeClass('active') }
+)
+
     $(document).keypress(function(event){ 
       var keycode = (event.keyCode ? event.keyCode : event.which);
       if(keycode == '13'){
@@ -36,6 +41,7 @@ $(document).ready(function() {
 });
 
 // Functions ============================================================= //
+
 
 var modal = $('.modal');
 
