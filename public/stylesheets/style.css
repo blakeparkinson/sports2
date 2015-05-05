@@ -91,7 +91,12 @@ a {
   padding-top: 10px;
 }
 .rb-bolt {
-  color: rgb(255, 255, 255); 
+  vertical-align: -2px;
+  background: rgb(22, 231, 22);
+  padding: 3px 3px;
+  border-radius: 28px;
+  color: rgb(255, 255, 255);
+  margin-left: 2px;
 }
 .tooltip-arrow,
 .white-tooltip + .tooltip > .tooltip-inner {  
