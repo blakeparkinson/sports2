@@ -37,6 +37,19 @@
 	text-align: center;
 	font-size: 1.5em;
 }
+.top-list-contain .list-group .league-search-items {
+  background-color: transparent;
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px; 
+}
+.top-list-contain .list-group .league-search-items:hover {
+  color: #555;
+  font-size: 1.2em;
+  background: rgb(22, 231, 22);
+  
+}
 .all-icons {
   max-width: 22%;
   max-height: 22%;
