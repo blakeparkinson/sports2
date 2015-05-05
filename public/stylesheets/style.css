@@ -82,7 +82,28 @@ a {
 .navbar-brand.main{
   font-size: 22px;
 }
-
+#question-mark-contain {
+  padding: 0;
+}
+#question-mark {
+  font-size: 2em;
+  color: #ffffff;
+  padding-top: 10px;
+}
+.rb-bolt {
+  color: rgb(255, 255, 255); 
+}
+.tooltip-arrow,
+.white-tooltip + .tooltip > .tooltip-inner {  
+  font-size: 1.2em;
+  font-family: HelveticaNeue-Thin;
+  border: 1px solid #fff;
+  margin-right: 12px;
+}
+.tooltip-inner {    
+    /* If max-width does not work, try using width instead */
+    width: 120px; 
+}
 
 .answer-right-section .content-section {
   padding: 9px;
@@ -735,13 +756,6 @@ table tr th:last-child {
   display: inline-block;
   margin: 0 5px 0 5px;
 }
-
-.answer-row .answered-player{
-  display: inline-block;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 #league-background{ 
   background-position: center center;
   background-attachment: fixed;
@@ -754,6 +768,13 @@ table tr th:last-child {
   padding: 0;
   background-image:url(../images/stadiums/euro_soccer_stadiums/olympiastadion-stadium.jpg); 
 }
+
+.answer-row .answered-player{
+  display: inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 #trending-quiz-contain {
   padding-top: 1%;
 }
