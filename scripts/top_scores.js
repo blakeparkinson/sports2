@@ -15,7 +15,7 @@ var http = require("http"),
 var players_model = require('../models/players.js'),
     async = require('async');
 var shortId = require('shortid');
-var teams_model = require('../models/teams.js'),
+var teams_model = require('../models/teams.js');
 
 //process.argv grabs the command line arguments
 var league = process.argv[2];

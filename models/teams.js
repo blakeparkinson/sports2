@@ -20,11 +20,6 @@ var deleteTeam = function(data){
   });
 }
 
-module.exports = {
-  deleteTeam: deleteTeam,
-  fetchStatDescription: fetchStatDescription
-}
-
 /** TODO HAVE HONREE POPULATE DESCRIPTIONS WITH THIS FUNCTION **/
 var fetchStatDescription = function(stat, listType, league){
   switch(stat) {
@@ -63,4 +58,10 @@ var fetchStatDescription = function(stat, listType, league){
         break;
   }
   return description;
+}
+
+
+module.exports = {
+  deleteTeam: deleteTeam,
+  fetchStatDescription: fetchStatDescription
 }
