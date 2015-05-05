@@ -92,6 +92,7 @@ a {
 }
 .rb-bolt {
   color: rgb(255, 255, 255); 
+  vertical-align: -2px;
 }
 .tooltip-arrow,
 .white-tooltip + .tooltip > .tooltip-inner {  
