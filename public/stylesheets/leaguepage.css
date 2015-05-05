@@ -46,9 +46,9 @@
   font-size: 1.1em;
 }
 .top-list-contain .list-group .league-search-items:hover {
-  color: #555;
+  color: #fff;
   font-size: 1.2em;
-  background: rgb(22, 231, 22);
+  background: rgb(22, 231, 22);  
   
 }
 .all-icons {
