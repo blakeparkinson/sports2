@@ -144,7 +144,7 @@ var appendGreenCheck  = function(input_field){
 var addToCorrectList = function (player, index){
   if (player.guessed == true) return;
   correct++;
-  if (type != 'leaders'){
+  if (type != 'leaders' && type != 'goats' ){
     var html = '<div class="outer-guess"><div class="inner-guess"><div class="correct-guess" data-index="'+index+'">'+correct +'.' + '<img class="circle-pic" src='+player.avatar_url+'>' + player.full_name + '</div></div></div>';
     answer_container.append(html);
     var current = answer_container.find('.correct-guess[data-index="' + index + '" ]').closest('.outer-guess');
