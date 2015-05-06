@@ -22,7 +22,8 @@ var team_colors_nba = require('../lists/team_colors/team_colors_nba.js');
 
 var intreturnPlayers = function(players, rb_team_id, res, league, second_callback){
     var team_name = players.team_name;
-    second_callback(players, rb_team_id, res, league, fetchTeamColors(league, team_name))
+    var colors = fetchTeamColors(league, team_name);
+    second_callback(players, rb_team_id, res, league, colors)
 }
 
 
@@ -136,7 +137,7 @@ var fetchPlayers = function(team_id, rb_team_id, league, usat_id, res, req, firs
       var datenow = new Date();
       var datecutoff = datenow.getTime() - dataAgeCutOff;
       if (datecutoff > itemdate){   //data is old so call API
-         players = fetchPlayersFromApi(team_id, rb_team_id, league, usat_id, res, first_callback, second_callback)
+         players = fetchPlayersFromApi(team_id, rb_team_id, league, usat_id, res, req, first_callback, second_callback)
       }
       else {  // data is fine so just return it
         players = item;
