@@ -24,6 +24,8 @@ router.get('/', function(req, res) {
             players_model.fetchGoatPlayers(list_id, rb_team_id, league, res, req, players_model.returnPlayers)
           }
         else if (type == 'leaders'){
+          // pass the colors function an empty string so we get defaults
+          var colors = players_model.fetchTeamColors(league, '');
           leaders_model.fetchLeadersLists(league, function(doc){
             res.render('quiz', {
               clock: clock,
@@ -32,6 +34,8 @@ router.get('/', function(req, res) {
               rb_team_id: doc.team_id,
               remove_footer: true,
               team_name: doc.category,
+              primary_hex: colors.primary_hex,
+              secondary_hex: colors.secondary_hex,
               type: type
             })
           }, rb_team_id)

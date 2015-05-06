@@ -581,5 +581,6 @@ module.exports = {
   pluckPlayerFromName: pluckPlayerFromName,
   insertTopScorers: insertTopScorers,
   intreturnPlayers: intreturnPlayers,
-  emptyCategoryArray: emptyCategoryArray
+  emptyCategoryArray: emptyCategoryArray,
+  fetchTeamColors: fetchTeamColors
 }
