@@ -31,7 +31,8 @@ router.get('/', function(req, res) {
               league: doc.league,
               rb_team_id: doc.team_id,
               remove_footer: true,
-              team_name: doc.category
+              team_name: doc.category,
+              type: type
             })
           }, rb_team_id)
         }
