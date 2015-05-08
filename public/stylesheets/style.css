@@ -32,9 +32,6 @@ a {
 #team-selection{
   margin-bottom: 15px;
 }
-.tabs: {
-
-}
 .navbar-header.rb{
   padding-left: 50px
 }
@@ -83,6 +80,9 @@ a {
 }
 .navbar-brand.main{
   font-size: 22px;
+}
+#nav-tabs-leagues {
+  border-bottom: none;
 }
 #question-mark-contain {
   padding: 0;
