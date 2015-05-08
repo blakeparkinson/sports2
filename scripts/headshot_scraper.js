@@ -46,7 +46,7 @@ var download = function(uri, filename, player, items, player_type, iteration, le
 
 
 
-db.collection('players').find().toArray(function (err, items){
+db.collection('players').find({$or: [{league: 'nba'}, {league: 'nhl'}]}).toArray(function (err, items){
     for (var i=0; i < items.length; i++){
     	for (var y=0; y < images_list.images.length;y++){
             var league = items[i].league;
@@ -61,9 +61,9 @@ db.collection('players').find().toArray(function (err, items){
     	}
 
         for (var b=0; b < items[i].players.length; b++){
+            console.log(items[i].players[b]);
             var full_name = items[i].players[b].full_name.replace(/\s+/g, '-').toLowerCase();
             var url = 'http://www.gannett-cdn.com/media/SMG/sports_headshots/'+league+'/player/2014/'+usat_id+'/120x120/'+full_name+'.jpg';
-            console.log("URL"+ url);
             download(url, '../public/images/headshots/'+league+'/'+full_name+'.jpg', items[i].players[b], items[i], 'players', b, league);
         }
     } 
