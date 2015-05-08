@@ -33,7 +33,7 @@ router.get('/', function(req, res) {
               league: doc.league,
               rb_team_id: doc.team_id,
               remove_footer: true,
-              team_name: doc.category,
+              team_name: doc.description,
               primary_hex: colors.primary_hex,
               secondary_hex: colors.secondary_hex,
               type: type

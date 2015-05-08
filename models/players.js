@@ -18,6 +18,7 @@ var shortId = require('shortid');
 var top_category = [];
 var salaries_list = require('../lists/other/nba/nba_salaries.js');
 var team_colors_nba = require('../lists/team_colors/team_colors_nba.js');
+var teams_model = require('./teams.js');
 
 
 var intreturnPlayers = function(players, rb_team_id, res, league, second_callback){
@@ -549,7 +550,8 @@ var insertTopScorers= function (data){
     var leadersList = {};
     leadersList.league = data.league;
     leadersList.category = data.category;
-    leadersList.team_id = data.team_id
+    leadersList.team_id = data.team_id;
+    leadersList.description = teams_model.fetchStatDescription(data.category);
     leadersList.players = top_category;
     db.open(function(err, db){
       db.collection('leaders').update({"$and" : [{league: leadersList.league},{category: leadersList.category},{team_id: leadersList.team_id}]},
