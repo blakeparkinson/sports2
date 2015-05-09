@@ -132,7 +132,8 @@ router.get('/:league', function(req, res) {
       res.render('leaguesearch',
         { popular_teams: results.goat_lists,
         	leaders: results.leaders_lists,
-          background_image: randImg()
+          background_image: randImg(),
+          how_works_button: true
          }
     );  
   })

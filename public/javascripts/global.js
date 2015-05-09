@@ -24,7 +24,7 @@ $(document).ready(function() {
     $('body').on('hidden.bs.modal', '.modal', clearModal)
 
     $('body').on('click', '.email-img', appendMessage);
-
+    
     $(document).keypress(function(event){ 
       var keycode = (event.keyCode ? event.keyCode : event.which);
       if(keycode == '13'){
@@ -36,6 +36,7 @@ $(document).ready(function() {
 });
 
 // Functions ============================================================= //
+
 
 var modal = $('.modal');
 

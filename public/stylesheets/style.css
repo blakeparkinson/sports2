@@ -32,7 +32,12 @@ a {
 #team-selection{
   margin-bottom: 15px;
 }
-
+.tabs:hover {
+  background-color: #ffffff;
+  border-radius: 10px 10px 0 0;
+  color: black;
+  cursor: pointer;
+}
 .navbar-header.rb{
   padding-left: 50px
 }
@@ -44,7 +49,7 @@ a {
   margin-top: 7px;
 }
 .navbar-right.rb{
-  padding: 0 30px 0 50px;
+  margin-right: 1px;
 }
 #how-works-modal {
   margin-top: 15%;
@@ -81,6 +86,9 @@ a {
 }
 .navbar-brand.main{
   font-size: 22px;
+}
+#nav-tabs-leagues {
+  border-bottom: none;
 }
 #question-mark-contain {
   padding: 0;
@@ -198,9 +206,12 @@ ul {
 }
 
 #team-select{
-  font-size: 58px;
+  font-size: 72px;
   font-family: HelveticaNeue-Thin;
-  padding-bottom: 25px;
+  padding-bottom: 15px;
+  text-shadow: 6px 6px 10px rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-weight: 400;
 }
 
 .point-container{
@@ -222,14 +233,14 @@ ul {
 }
 #team-container{
   text-align: center;
-  margin: 5% 26% 0 26%;
-  padding: 2%;
+  padding: 6% 2% 2% 2%;
+} 
+#index-buttons {  
+  text-align: center;
+  margin: 2% 26% 0 26%;
+  padding: 2% 2% 0 2%;
   background: rgba(255, 255, 255, 0.5);
-  border-radius: 20px;
-}
-#index-buttons {
-  width: 80%;
-  margin: 0 auto 0 auto;
+  border-radius: 5px;
 }
 .team-container{  
   margin-left: 5%;

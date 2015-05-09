@@ -46,7 +46,8 @@ router.get('/', function(req, res) {
 	res.render('index', 
   {
     session:req.session,
-    trending_quiz: trending_quiz
+    trending_quiz: trending_quiz,
+    how_works_button: true
   });
 });
 })
