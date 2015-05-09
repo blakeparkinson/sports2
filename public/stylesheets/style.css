@@ -102,8 +102,11 @@ a {
 }
 #question-mark {
   font-size: 2em;
-  color: #ffffff;
+  color: rgb(22, 231, 22);
   padding-top: 10px;
+}
+#question-mark:hover {
+  color: #ffffff;
 }
 .rb-bolt {
   vertical-align: -2px;
@@ -537,7 +540,6 @@ padding-left: 3%;
 .container-iphone {
   display:none;
 }
-
 
 @media screen and (max-width: 480px) {
     .container-iphone {
