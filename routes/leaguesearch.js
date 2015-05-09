@@ -18,12 +18,12 @@ router.get('/', function(req, res) {
     popular_lists: fetchTeamLists,
     //this (bind) is the syntax you use to pass arguments via async lib.
     //passing false here because we don't filter
-    goat_lists: fetchLeadersLists.bind(null, listObjGoats),
+    goats_lists: fetchLeadersLists.bind(null, listObjGoats),
     leaders_lists: fetchLeadersLists.bind(null, listObjLeaders)
   }, function(err,results){
       res.render('leaguesearch',
         { popular_teams: results.popular_lists,
-          goats: results.goat_lists,
+          goats: results.goats_lists,
         	leaders: results.leaders_lists
          }
     );  
@@ -44,7 +44,7 @@ router.get('/:league', function(req, res) {
   }, function(err,results){
       res.render('leaguesearch',
         { popular_teams: results.popular_lists,
-          goats: results.goat_lists,
+          goats: results.goats_lists,
           leaders: results.leaders_lists,
           background_image: randImg(),
           how_works_button: true
