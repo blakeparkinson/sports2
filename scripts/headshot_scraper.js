@@ -47,23 +47,22 @@ var download = function(uri, filename, player, items, player_type, iteration, le
 db.collection('players').find({$or: [{league: 'nba'}, {league: 'nhl'}]}).toArray(function (err, items){
     for (var i=0; i < items.length; i++){
       for (var y=0; y < images_list.images.length;y++){
-  var league = items[i].league;
+        var league = items[i].league;
         if (items[i].league == images_list.images[y].league){
           for (var k=0;k<images_list.images[y].teams.length; k++){
-  if (items[i].team_name == images_list.images[y].teams[k].team_name){
-    var usat_id = images_list.images[y].teams[k].usat_id;
-    break;
-  }
+            if (items[i].team_name == images_list.images[y].teams[k].team_name){
+              var usat_id = images_list.images[y].teams[k].usat_id;
+              break;
+            }
           }
         }
       }
 
-        for (var b=0; b < items[i].players.length; b++){
-  console.log(items[i].players[b]);
-  var full_name = items[i].players[b].full_name.replace(/\s+/g, '-').toLowerCase();
-  var url = 'http://www.gannett-cdn.com/media/SMG/sports_headshots/'+league+'/player/2014/'+usat_id+'/120x120/'+full_name+'.jpg';
-  download(url, '../public/images/headshots/'+league+'/'+full_name+'.jpg', items[i].players[b], items[i], 'players', b, league);
-        }
+      for (var b=0; b < items[i].players.length; b++){
+        var full_name = items[i].players[b].full_name.replace(/\s+/g, '-').toLowerCase();
+        var url = 'http://www.gannett-cdn.com/media/SMG/sports_headshots/'+league+'/player/2014/'+usat_id+'/120x120/'+full_name+'.jpg';
+        download(url, '../public/images/headshots/'+league+'/'+full_name+'.jpg', items[i].players[b], items[i], 'players', b, league);
+      }
     } 
   });
 
