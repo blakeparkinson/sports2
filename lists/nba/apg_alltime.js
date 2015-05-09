@@ -1,7 +1,8 @@
 var topAPG = [
 {
   "lid": "2",
-  "league": "goats",
+  "league": "nba",
+  "type": "goats",
   "keywords": "top apg nba assists passing",
   "list_name": "topAPGnba",
   "description": "Top APG averages all time",
@@ -11,6 +12,7 @@ var topAPG = [
     "rank":"1",
     "last_name":"Johnson",
     "first_name":"Magic",
+    "full_name":"Magic Johnson",
     "apg":"11.19"
   },
   {
@@ -18,6 +20,7 @@ var topAPG = [
     "rank":"2",
     "last_name":"Stockton",
     "first_name":"John",
+    "full_name":"John Stockton",
     "apg":"10.51"
   },
   {
@@ -25,6 +28,7 @@ var topAPG = [
     "rank":"3",
     "last_name":"Paul",
     "first_name":"Chris",
+    "full_name":"Chris Paul",
     "apg":"9.92"
   },
   {
@@ -32,6 +36,7 @@ var topAPG = [
     "rank":"4",
     "last_name":"Robertson",
     "first_name":"Oscar",
+    "full_name":"Oscar Robertson",
     "apg":"9.51"
   },
   {
@@ -39,6 +44,7 @@ var topAPG = [
     "rank":"5",
     "last_name":"Thomas",
     "first_name":"Isiah",
+    "full_name":"Isiah Thomas",
     "apg":"9.26"
   },
   {
@@ -46,6 +52,7 @@ var topAPG = [
     "rank":"6",
     "last_name":"Johnson",
     "first_name":"Kevin",
+    "full_name":"Kevin Johnson",
     "apg":"9.13"
   },
   {
@@ -53,6 +60,7 @@ var topAPG = [
     "rank":"7",
     "last_name":"Kidd",
     "first_name":"Jason",
+    "full_name":"Jason Kidd",
     "apg":"8.69"
   },
   {
@@ -60,6 +68,7 @@ var topAPG = [
     "rank":"8",
     "last_name":"Wall",
     "first_name":"John",
+    "full_name":"John Wall",
     "apg":"8.61"
   },
   {
@@ -67,6 +76,7 @@ var topAPG = [
     "rank":"9",
     "last_name":"Williams",
     "first_name":"Deron",
+    "full_name":"Deron Williams",
     "apg":"8.53"
   },
   {
@@ -74,6 +84,7 @@ var topAPG = [
     "rank":"10",
     "last_name":"Nash",
     "first_name":"Steve",
+    "full_name":"Steve Nash",
     "apg":"8.49"
   }
   ]
