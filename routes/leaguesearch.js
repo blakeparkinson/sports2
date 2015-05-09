@@ -12,15 +12,18 @@ quizCutoffDate.setDate(quizCutoffDate.getDate() - 7);  //currently set to 1 week
 
 
 router.get('/', function(req, res) {
-
+  var listObjLeaders = {league : false, type: 'leaders'};
+  var listObjGoats = {league : false, type: 'goats'};
   async.parallel({
-    goat_lists: fetchGoatLists,
+    popular_lists: fetchTeamLists,
     //this (bind) is the syntax you use to pass arguments via async lib.
     //passing false here because we don't filter
-    leaders_lists: fetchLeadersLists.bind(null, false)
+    goats_lists: fetchLeadersLists.bind(null, listObjGoats),
+    leaders_lists: fetchLeadersLists.bind(null, listObjLeaders)
   }, function(err,results){
       res.render('leaguesearch',
-        { popular_teams: results.goat_lists,
+        { popular_teams: results.popular_lists,
+          goats: results.goats_lists,
         	leaders: results.leaders_lists
          }
     );  
@@ -28,19 +31,44 @@ router.get('/', function(req, res) {
 
 });
 
-var fetchLeadersLists = function(league, callback, rb_team_id){
+
+router.get('/:league', function(req, res) {
+  var league = req.params.league;
+  var listObjLeaders = {league : league, type: 'leaders'};
+  var listObjGoats = {league : league, type: 'goats'};
+  async.parallel({
+    //this (bind) is the syntax you use to pass arguments via async lib.
+    popular_lists: fetchTeamListsByLeague.bind(null,league),
+    goats_lists: fetchLeadersLists.bind(null, listObjGoats),
+    leaders_lists: fetchLeadersLists.bind(null, listObjLeaders)
+  }, function(err,results){
+      res.render('leaguesearch',
+        { popular_teams: results.popular_lists,
+          goats: results.goats_lists,
+          leaders: results.leaders_lists,
+          background_image: randImg(),
+          how_works_button: true
+         }
+    );  
+  })
+
+})
+
+
+var fetchLeadersLists = function(listObj, callback, rb_team_id){
 	var data = {};
-  data.type = 'leaders';  
-	if (league){
+  data.type = listObj["type"];  
+	if (listObj["league"]){
 		//do filtering
-		data.league = league
+		data.league = listObj["league"]
 	}
   db.collection('teams').find(data).toArray(function (err, items){
     callback(null, items);
   });
 }
 
-var fetchGoatLists = function(callback){
+
+var fetchTeamLists = function(callback){
   db.collection('quiz').aggregate(
 
   [{ "$match" : { "created_at" : { "$gt" : quizCutoffDate.toISOString().slice(0, 19).replace('T', ' ') }} //only pull quizzes in timeframe
@@ -75,7 +103,8 @@ var fetchGoatLists = function(callback){
   }); 
 }
 
-var fetchGoatListsByLeague = function(league, callback){
+
+var fetchTeamListsByLeague = function(league, callback){
 	db.collection('quiz').aggregate(
     [{ "$match" : {"$and" : [{ "created_at" : { "$gt" : quizCutoffDate.toISOString().slice(0, 19).replace('T', ' ') }}, {"league" : league} ] }
     },
@@ -109,6 +138,7 @@ var fetchGoatListsByLeague = function(league, callback){
   })
 }
 
+
 var randImg = function() {      
   var images = [];      
   var path = '../images/epic_photos/';          
@@ -121,24 +151,6 @@ var randImg = function() {
   image = path + image;
   return image;    
 }
-
-router.get('/:league', function(req, res) {
-  var league = req.params.league;
-  async.parallel({
-  	//this (bind) is the syntax you use to pass arguments via async lib.
-    goat_lists: fetchGoatListsByLeague.bind(null,league),
-    leaders_lists: fetchLeadersLists.bind(null, league)
-  }, function(err,results){
-      res.render('leaguesearch',
-        { popular_teams: results.goat_lists,
-        	leaders: results.leaders_lists,
-          background_image: randImg(),
-          how_works_button: true
-         }
-    );  
-  })
-
-})
 
 
 function compareCounts(a,b) {

@@ -14,19 +14,15 @@ router.get('/', function(req, res) {
       res.quiz_page = true;
       var quiz_id = req.query.id;
       db.collection('quiz').findOne( { _id : quiz_id}, function(err, items){
-        list_id = items.list_id;
         rb_team_id = items.rb_team_id;
         league = items.league;
         api_team_id = items.api_team_id;
         quiz_name = items.quiz_name;
         type = items.type;
-        if (list_id){ 
-            players_model.fetchGoatPlayers(list_id, rb_team_id, league, res, req, players_model.returnPlayers)
-          }
-        else if (type == 'leaders'){
+        if (type != null){
           // pass the colors function an empty string so we get defaults
           var colors = players_model.fetchTeamColors(league, '');
-          leaders_model.fetchLeadersLists(league, function(doc){
+          leaders_model.fetchLeadersLists(type, league, function(doc){
             res.render('quiz', {
               clock: clock,
               roster: doc.players,

@@ -11,10 +11,10 @@ var endpoint = '';
 var encryption = require('../encryption.js');
 var shortId = require('shortid');
 
-var fetchLeadersLists = function(league, callback, rb_team_id){
+var fetchLeadersLists = function(type, league, callback, rb_team_id){
   var data = {};
   if (rb_team_id){
-    db.collection('leaders').findOne({team_id: rb_team_id},function (err, doc){
+    db.collection(type).findOne({team_id: rb_team_id},function (err, doc){
       callback(doc);
     });
   }
@@ -24,7 +24,7 @@ var fetchLeadersLists = function(league, callback, rb_team_id){
       //do filtering
       data.league = league
     }
-    db.collection('leaders').find(data).toArray(function (err, items){
+    db.collection(type).find(data).toArray(function (err, items){
       callback(null, items);
     });
   }
