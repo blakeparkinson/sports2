@@ -55,8 +55,6 @@ router.get('/:league', function(req, res) {
 })
 
 
-
-
 var fetchLeadersLists = function(listObj, callback, rb_team_id){
 	var data = {};
   data.type = listObj["type"];  
@@ -105,6 +103,7 @@ var fetchTeamLists = function(callback){
   }); 
 }
 
+
 var fetchTeamListsByLeague = function(league, callback){
 	db.collection('quiz').aggregate(
     [{ "$match" : {"$and" : [{ "created_at" : { "$gt" : quizCutoffDate.toISOString().slice(0, 19).replace('T', ' ') }}, {"league" : league} ] }
@@ -152,8 +151,6 @@ var randImg = function() {
   image = path + image;
   return image;    
 }
-
-
 
 
 function compareCounts(a,b) {
