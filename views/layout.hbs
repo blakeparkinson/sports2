@@ -22,15 +22,18 @@
       </button>    
     </div>
     <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right nav-tabs rb" id="nav-tabs-leagues"> 
+        <ul class="nav navbar-nav navbar-right rb" id="nav-tabs-leagues"> 
           <li class="tabs" role="presentation"><a href="/leaguesearch/soccer"><span class="rb-green">Soccer</span></a></li>
           <li class="tabs"><a href="/leaguesearch/mlb"><span class="rb-green">MLB</span></a></li>
           <li class="tabs"><a href="/leaguesearch/nba"><span class="rb-green">NBA</span></a></li>
           <li class="tabs"><a href="/leaguesearch/nfl"><span class="rb-green">NFL</span></a></li>
           <li class="tabs"><a href="/leaguesearch/nhl"><span class="rb-green">NHL</span></a></li>  
           <!-- IF INDEX PAGE, DO how_works_button, IF ANOTHER OTHER PAGE, do question_mark -->
-          {{> how_works_button }}
-          {{> question_mark }}   
+          {{#if how_works_button}}
+            {{> how_works_button }}
+          {{else}}
+            {{> question_mark }}   
+          {{/if}}
         </ul>                                   
     </div>
   </nav>

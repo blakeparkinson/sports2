@@ -24,11 +24,12 @@ $(document).ready(function() {
     $('body').on('hidden.bs.modal', '.modal', clearModal)
 
     $('body').on('click', '.email-img', appendMessage);
-
+/*
     $('.tabs').hover(
        function(){ $(this).addClass('active') },
        function(){ $(this).removeClass('active') }
-)
+    )
+*/
 
     $(document).keypress(function(event){ 
       var keycode = (event.keyCode ? event.keyCode : event.which);
