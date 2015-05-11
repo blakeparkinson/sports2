@@ -16,8 +16,8 @@
                 <span id="trending-guys-inner">
                   Or try one of our trending quizzes <br />
                 {{#each trending_quiz}}
-                <button class="btn btn-primary trending-quiz create-quiz" id="curvy-buttons" data-id={{rb_team_id}} type="button" data-type={{type}}>
-                  {{quiz_name}} <span class="badge">NBA</span>                  
+                <button class="btn btn-primary trending-quiz create-quiz" id="curvy-buttons" data-id={{rb_team_id}} type="button"  data-type={{type}}>
+                  {{quiz_name}} {{trending_quiz}}<div class="g-badge badge-{{type}}"></div>                  
                 </button>                  
                 {{/each}} 
                 </span>
