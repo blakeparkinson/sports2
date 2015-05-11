@@ -9,10 +9,10 @@ var http = require("http"),
     db = mongojs.connect(config.mongo_uri);
 var shortId = require('shortid');
 
-//helper for deleting teams
-var deleteTeam = function(data){
+//helper for deleting 
+var deleteItem = function(data, collectionName){
   db.open(function(err, db){
-    db.collection('teams',{},function(err, collection){
+    db.collection(collectionName,{},function(err, collection){
       collection.remove(data,function(err, removed){
         console.log(removed);
       });
@@ -56,12 +56,15 @@ var fetchStatDescription = function(stat, listType, league){
       case "mpg": //minutes
         description = 'Minutes per game';
         break;
+      default:
+        description = stat;
+        break;
   }
   return description;
 }
 
 
 module.exports = {
-  deleteTeam: deleteTeam,
+  deleteItem: deleteItem,
   fetchStatDescription: fetchStatDescription
 }

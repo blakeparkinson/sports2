@@ -144,6 +144,114 @@ var images = [
       {
         "team_name": "Florida Panthers",
         "usat_id": "FLA"
+      },
+      {
+        "team_name": "Pittsburgh Penguins",
+        "usat_id": "PIT"
+      },
+      {
+        "team_name": "Montreal Canadiens",
+        "usat_id": "MON"
+      },
+      {
+        "team_name": "Tampa Bay Lightning",
+        "usat_id": "TB"
+      },
+      {
+        "team_name": "Detroit Red Wings",
+        "usat_id": "DET"
+      },
+      {
+        "team_name": "Ottawa Senators",
+        "usat_id": "OTT"
+      },
+      {
+        "team_name": "Boston Bruins",
+        "usat_id": "BOS"
+      },
+      {
+        "team_name": "Toronto Maple Leafs",
+        "usat_id": "TOR"
+      },
+      {
+        "team_name": "Buffalo Sabres",
+        "usat_id": "BUF"
+      },
+      {
+        "team_name": "New York Rangers",
+        "usat_id": "NYR"
+      },
+      {
+        "team_name": "New York Islanders",
+        "usat_id": "NYI"
+      },
+      {
+        "team_name": "Columbus Blue Jackets",
+        "usat_id": "COL"
+      },
+      {
+        "team_name": "Philadelphia Flyers",
+        "usat_id": "PHI"
+      },
+      {
+        "team_name": "New Jersey Devils",
+        "usat_id": "NJ"
+      },
+      {
+        "team_name": "St. Louis Blues",
+        "usat_id": "STL"
+      },
+      {
+        "team_name": "Philadelphia Flyers",
+        "usat_id": "PHI"
+      },
+      {
+        "team_name": "Nashville Predators",
+        "usat_id": "NSH"
+      },
+      {
+        "team_name": "Chicago Blackhawks",
+        "usat_id": "CHI"
+      },
+      {
+        "team_name": "Minnesota Wild",
+        "usat_id": "MIN"
+      },
+      {
+        "team_name": "Winnipeg Jets",
+        "usat_id": "WPG"
+      },
+      {
+        "team_name": "Dallas Stars",
+        "usat_id": "DAL"
+      },
+      {
+        "team_name": "Colorado Avalanche",
+        "usat_id": "COL"
+      },
+      {
+        "team_name": "Anaheim Ducks",
+        "usat_id": "ANA"
+      },
+      {
+        "team_name": "Vancouver Canucks",
+        "usat_id": "VAN"
+      },
+      {
+        "team_name": "Calgary Flames",
+        "usat_id": "CGY"
+      },
+      {
+        "team_name": "Los Angeles Kings",
+        "usat_id": "LA"
+      },
+      {
+        "team_name": "San Jose Sharks",
+        "usat_id": "SJ"
+      },
+      {
+        "team_name": "Arizona Coyotes",
+        "usat_id": "ARI"
       }
     ]
   },

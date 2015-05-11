@@ -225,6 +225,7 @@ switch (league){
             break;
           case 'nhl':
             json_response = JSON.parse(body);
+            json_response.usat_id = abbreviationHelper(league, usat_id);
             players = formatPlayers(json_response, rb_team_id, json_response);
             appendPlayerShortId(players.players);
             //sortByPositions('nhl', players.players);
@@ -520,10 +521,10 @@ var randImg = function(league) {
       return image;    
     }
 
-    var pluckPlayerFromName= function(player, callback){
-        db.collection('players').findOne({"abbreviation": player.team},function (err, doc){
+    var pluckPlayerFromName= function(player, callback, league){
+        db.collection('players').findOne({$and: [{"abbreviation": player.team}, {"league": league}]},function (err, doc){
           var playerInfo = {};
-          if (doc){
+          if (typeof(doc)!= "undefined" && doc !== null){
             for (i=0;i<doc.players.length;i++)  {
               if (doc.players[i].full_name.toLowerCase() == player.name.toLowerCase()){
                 playerInfo = doc.players[i];
@@ -566,6 +567,24 @@ var insertTopScorers= function (data){
       });
   })
   
+}
+
+var abbreviationHelper = function(league, abbreviation){
+  switch (league){
+    case "nhl":
+      switch (abbreviation){
+        case 'WSH':
+          abbreviation = 'WAS';
+        break;
+        default:
+        abbreviation = abbreviation;
+        break;
+      }
+      break;
+    default:
+      break;
+  }
+  return abbreviation;
 }
 
 

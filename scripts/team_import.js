@@ -24,16 +24,16 @@ var teams = [];
 var supported_leagues = ['nba', 'nfl', 'mlb', 'nhl', 'eu_soccer'];
 var shortId = require('shortid');
 var teams_model = require('../models/teams.js');
-
+var _ = require('lodash');
 
 //process.argv grabs the command line arguments
 var league = process.argv[2];
 
 //deleting a team sample
 /*var d = {};
-d.type = 'leaders';
+d.league = 'nhl';
 
-teams_model.deleteTeam(d);
+teams_model.deleteItem(d,'leaders');
 return;*/
 
 if (supported_leagues.indexOf(league) == -1){
@@ -132,7 +132,8 @@ var formatNflTeams = function(response){
   for (i=0;i<hierarchy_response.conferences.length;i++){
     for (j=0;j<hierarchy_response.conferences[i].divisions.length;j++){
       for(k=0; k< hierarchy_response.conferences[i].divisions[j].teams.length; k++){
-            teams.push(hierarchy_response.conferences[i].divisions[j].teams[k]);
+        hierarchy_response.conferences[i].divisions[j].teams[k].usat_id = hierarchy_response.conferences[i].divisions[j].teams[k].alias
+        teams.push(hierarchy_response.conferences[i].divisions[j].teams[k]);
       }
     }   
   }
