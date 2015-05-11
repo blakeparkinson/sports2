@@ -1,9 +1,9 @@
 var fieldGoalPercentage = [
  {
-  "lid": "4",
-  "league": "goats",
+  "league": "nba",
+  "type":"goats",
+  "category": "topFieldGoalnba",
   "keywords": "top field goal percentage nba shooting scoring",
-  "list_name": "topFieldGoalnba",
   "description": "Top field goal percentage all time",
   "players": [
   {
@@ -11,6 +11,7 @@ var fieldGoalPercentage = [
     "rank":"1",
     "last_name":"Gilmore",
     "first_name":"Artis",
+    "full_name":"Artis Gilmore",
     "fieldGoalPercentage":"0.599"
   },
   {
@@ -18,6 +19,7 @@ var fieldGoalPercentage = [
     "rank":"2",
     "last_name":"Chandler",
     "first_name":"Tyson",
+    "full_name":"Tyson Chandler",
     "fieldGoalPercentage":"0.5906"
   },
   {
@@ -25,6 +27,7 @@ var fieldGoalPercentage = [
     "rank":"3",
     "last_name":"O'Neal",
     "first_name":"Shaquille",
+    "full_name":"Shaquille O'Neal",
     "fieldGoalPercentage":"0.5823"
   },
   {
@@ -32,6 +35,7 @@ var fieldGoalPercentage = [
     "rank":"4",
     "last_name":"West",
     "first_name":"Mark",
+    "full_name":"Mark West",
     "fieldGoalPercentage":"0.5803"
   },
   {
@@ -39,6 +43,7 @@ var fieldGoalPercentage = [
     "rank":"5",
     "last_name":"Howard",
     "first_name":"Dwight",
+    "full_name":"Dwight Howard",
     "fieldGoalPercentage":"0.5785"
   },
   {
@@ -46,6 +51,7 @@ var fieldGoalPercentage = [
     "rank":"6",
     "last_name":"Johnson",
     "first_name":"Steve",
+    "full_name":"Steve Johnson",
     "fieldGoalPercentage":"0.5722"
   },
   {
@@ -53,6 +59,7 @@ var fieldGoalPercentage = [
     "rank":"7",
     "last_name":"Dawkins",
     "first_name":"Darryl",
+    "full_name":"Darryl Dawkins",
     "fieldGoalPercentage":"0.572"
   },
   {
@@ -60,6 +67,7 @@ var fieldGoalPercentage = [
     "rank":"8",
     "last_name":"Donaldson",
     "first_name":"James",
+    "full_name":"James Donaldson",
     "fieldGoalPercentage":"0.5706"
   },
   {
@@ -67,6 +75,7 @@ var fieldGoalPercentage = [
     "rank":"9",
     "last_name":"Outlaw",
     "first_name":"Bo",
+    "full_name":"Bo Outlaw",
     "fieldGoalPercentage":"0.5673"
   },
   {
@@ -74,6 +83,7 @@ var fieldGoalPercentage = [
     "rank":"10",
     "last_name":"Ruland",
     "first_name":"Jeff",
+    "full_name":"Jeff Ruland",
     "fieldGoalPercentage":"0.5637"
   }
   ]

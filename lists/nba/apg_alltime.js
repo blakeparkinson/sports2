@@ -1,10 +1,9 @@
 var topAPG = [
 {
-  "lid": "2",
   "league": "nba",
   "type": "goats",
+  "category": "topAPG",
   "keywords": "top apg nba assists passing",
-  "list_name": "topAPGnba",
   "description": "Top APG averages all time",
   "players": [
   {
