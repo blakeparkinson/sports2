@@ -24,7 +24,10 @@ var league = process.argv[2];
 var main = function(league){
   switch (league){
     case "nba": 
-      categories = ["ppg", "rpg", "fieldGoalPercentage", "ftPercentage", "threePointPercentage", "apg", "spg", "bpg", "tpg", "fpg", "mpg"]
+      categories = ["ppg", "rpg", "fieldGoalPercentage", "ftPercentage", "threePointPercentage", "apg", "spg", "bpg", "tpg", "fpg", "mpg"];
+      break;
+    case "nhl":
+      categories =["assists", "goals", "points", "wins",  "gaa", "savePercentage", "penaltyMinutes", "fightingMajors", "penaltyMinGame"];
       break;
   }
 
@@ -64,6 +67,35 @@ var main = function(league){
       case "mpg": //minutes
         url = 'http://www.cbssports.com/nba/stats/playersort/NBA/year-2014-season-regularseason-category-minutes';
         break;
+      case "goals":
+        url ="http://www.cbssports.com/nhl/stats/playersort/nhl/year-2014-season-regularseason-category-goals";
+        break;
+      case "assists":
+        url = "http://www.cbssports.com/nhl/stats/playersort/nhl/year-2014-season-regularseason-category-assists";
+        break;
+      case "points":
+        url = "http://www.cbssports.com/nhl/stats/playersort/nhl/year-2014-season-regularseason-category-points";
+        break;
+      case "wins":
+        url ="http://www.cbssports.com/nhl/stats/playersort/nhl/year-2014-season-regularseason-category-wins";
+        break;
+      case "gaa":
+        url ="http://www.cbssports.com/nhl/stats/playersort/nhl/year-2014-season-regularseason-category-goalsagainstaverage";
+        break;
+      case "savePercentage":
+        url = "http://www.cbssports.com/nhl/stats/playersort/nhl/year-2014-season-regularseason-category-savepercentage";
+        break;
+      case "penaltyMinutes":
+        url="http://www.cbssports.com/nhl/stats/playersort/nhl/year-2014-season-regularseason-category-penaltyminutes";
+        break;
+      case "fightingMajors":
+        url = "http://www.cbssports.com/nhl/stats/teamsort/nhl/year-2014-season-regularseason-category-fightingmajors";
+        break;
+      case "penaltyMinutes":
+        url = "http://www.cbssports.com/nhl/stats/playersort/nhl/year-2014-season-regularseason-category-penaltyminutes";
+        break;
+
+
     }
     // Call the core functionality now that we have the right variables.
     top_script(url, category, callback);
@@ -95,13 +127,13 @@ var top_script = function(url, category, callback1){
           var metadata = {
             name: player,
             top: top,
-            team: abbreviation_helper(team)  // Consolidates abbreviation differences between sites
+            team: players_model.abbreviationHelper(league,team)  // Consolidates abbreviation differences between sites
           };
           results.push(metadata);
         })
         async.eachSeries(results, function (player, callback) {
           //async lib is weird, you pass it a callback and it calls back and lets you know when it has finished for each loop
-          players_model.pluckPlayerFromName(player, callback);
+          players_model.pluckPlayerFromName(player, callback, league);
         }, function (err) {
           if (err) { throw err; }
             var leadersList = {},
@@ -127,28 +159,6 @@ var top_script = function(url, category, callback1){
 
 main(league);
 
-
-var abbreviation_helper = function(abbreviation){
-  var replace = abbreviation
-  switch (abbreviation){
-    case 'GS': 
-      replace = 'GSW'
-      break;
-    case 'NO': 
-      replace = 'NOP'
-      break;
-    case 'NY': 
-      replace = 'NYK'
-      break;
-    case 'SA': 
-      replace = 'SAS'
-      break;
-    case 'PHO': 
-      replace = 'PHX'
-      break;
-  }
-  return replace
-}
 
 var mongoInsert = function (leadersList){
     db.open(function(err, db){

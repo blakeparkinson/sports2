@@ -219,13 +219,14 @@ switch (league){
           case 'nfl':
             json_response = JSON.parse(body);
             players_sorted = sortNFL(json_response);
-            players = formatPlayers(players_sorted, rb_team_id, json_response);
+            players = formatPlayers(players_sorted, rb_team_id, json_response, league);
             mongoInsertPlayers(league, players, rb_team_id);
             first_callback(players, rb_team_id, res, league,second_callback)
             break;
           case 'nhl':
             json_response = JSON.parse(body);
-            players = formatPlayers(json_response, rb_team_id, json_response);
+            json_response.usat_id = abbreviationHelper(league, usat_id);
+            players = formatPlayers(json_response, rb_team_id, json_response, league);
             appendPlayerShortId(players.players);
             //sortByPositions('nhl', players.players);
             mongoInsertPlayers(league, players, rb_team_id);
@@ -369,10 +370,11 @@ var fetchSalaries = function(response, rb_team_id, team_info){
 }
 
 
-var formatPlayers = function(response, rb_team_id, team_info){
+var formatPlayers = function(response, rb_team_id, team_info, league){
   playersarray = [];
   for (i=0;i<response.players.length;i++){
     playersarray[i] = {};
+    response.players[i].avatar_url = '../images/headshots/'+league+'/'+response.players[i].full_name.replace(/\s+/g, '-').toLowerCase()+'.jpg';
     for(var key in response.players[i]){ 
       var value = response.players[i][key];
       playersarray[i][key] = value;
@@ -520,10 +522,10 @@ var randImg = function(league) {
       return image;    
     }
 
-    var pluckPlayerFromName= function(player, callback){
-        db.collection('players').findOne({"abbreviation": player.team},function (err, doc){
+    var pluckPlayerFromName= function(player, callback, league){
+        db.collection('players').findOne({$and: [{"abbreviation": player.team}, {"league": league}]},function (err, doc){
           var playerInfo = {};
-          if (doc){
+          if (typeof(doc)!= "undefined" && doc !== null){
             for (i=0;i<doc.players.length;i++)  {
               if (doc.players[i].full_name.toLowerCase() == player.name.toLowerCase()){
                 playerInfo = doc.players[i];
@@ -568,6 +570,44 @@ var insertTopScorers= function (data){
   
 }
 
+var abbreviationHelper = function(league, abbreviation){
+  switch (league){
+    case 'nhl':
+      switch (abbreviation){
+        case 'WSH':
+          abbreviation = 'WAS';
+        break;
+        default:
+        abbreviation = abbreviation;
+        break;
+      }
+    break;
+    case 'nba':
+      switch (abbreviation){
+        case 'GS': 
+          abbreviation = 'GSW'
+          break;
+        case 'NO': 
+          abbreviation = 'NOP'
+          break;
+        case 'NY': 
+          abbreviation = 'NYK'
+          break;
+        case 'SA': 
+          abbreviation = 'SAS'
+          break;
+        case 'PHO': 
+          abbreviation = 'PHX'
+          break;
+        default: 
+          abbreviation = abbreviation;
+      }
+    break;
+  
+  }
+  return abbreviation;
+}
+
 
 
 module.exports = {
@@ -584,5 +624,6 @@ module.exports = {
   insertTopScorers: insertTopScorers,
   intreturnPlayers: intreturnPlayers,
   emptyCategoryArray: emptyCategoryArray,
-  fetchTeamColors: fetchTeamColors
+  fetchTeamColors: fetchTeamColors,
+  abbreviationHelper: abbreviationHelper
 }
