@@ -38,6 +38,46 @@ a {
 .rb-white {
   color: #ffffff; 
 }
+.g-badge {  
+  display: inline-block;
+  min-width: 10px;
+  padding: 1px 2px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;  
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 50%;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  margin: 0 2px 0 2px;    
+  content: url(http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/magic-marker-icons-culture/115276-magic-marker-icon-culture-crown-five-points2.png) no-repeat 0 0;
+  background-size: 100%;
+  background-color: #fff;
+  vertical-align: -7px;
+}
+.badge-roster {
+
+}
+.badge-leaders {
+
+}
+.badge-goats {
+
+}
+.goats-icon {
+  content: url(http://upload.wikimedia.org/wikipedia/en/thumb/c/c0/Portuguese_Ibex_Cabrera_Goat.svg/500px-Portuguese_Ibex_Cabrera_Goat.svg.png);
+}
+.season-leaders-icon {
+ content: url(http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/magic-marker-icons-culture/115276-magic-marker-icon-culture-crown-five-points2.png);   
+ max-width: 26%;
+ padding-top: 1%;
+}
+.roster-icon {
+ content: url(https://cdn4.iconfinder.com/data/icons/ios7-essence/22/editor_clipboard_checkmark_done-512.png);    
+}
 .tabs:hover {
   background-color: rgb(22, 231, 22); 
   border-radius: 10px 10px 0 0;
