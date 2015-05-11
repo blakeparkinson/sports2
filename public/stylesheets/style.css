@@ -78,9 +78,9 @@ a {
 .roster-icon {
  content: url(https://cdn4.iconfinder.com/data/icons/ios7-essence/22/editor_clipboard_checkmark_done-512.png);    
 }
-.tabs:hover {
+.tabs:hover, .tabs.selected {
   background-color: rgb(22, 231, 22); 
-  border-radius: 10px 10px 0 0;
+  border-radius: 4px 4px 0 0;
   color: white;
   cursor: pointer;
   font-size: 1.1em;

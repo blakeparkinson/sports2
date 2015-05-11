@@ -49,7 +49,8 @@ router.get('/:league', function(req, res) {
           leaders: results.leaders_lists,
           background_image: randImg(),
           how_works_button: true,
-          remove_footer: true
+          remove_footer: true,
+          current: league
          }
     );  
   })

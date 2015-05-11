@@ -23,11 +23,11 @@
     </div>
     <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right rb" id="nav-tabs-leagues"> 
-          <li class="tabs"><a href="/leaguesearch/soccer"><span class="rb-white">Soccer</span></a></li>
-          <li class="tabs"><a href="/leaguesearch/mlb"><span class="rb-white">MLB</span></a></li>
-          <li class="tabs"><a href="/leaguesearch/nba"><span class="rb-white">NBA</span></a></li>
-          <li class="tabs"><a href="/leaguesearch/nfl"><span class="rb-white">NFL</span></a></li>
-          <li class="tabs"><a href="/leaguesearch/nhl"><span  class="rb-white">NHL</span></a></li>  
+          <li class="tabs {{#compare current 'soccer'}}selected{{/compare}}"><a href="/leaguesearch/soccer"><span class="rb-white">Soccer</span></a></li>
+          <li class="tabs {{#compare current 'mlb'}}selected{{/compare}}"><a href="/leaguesearch/mlb"><span class="rb-white">MLB</span></a></li>
+          <li class="tabs {{#compare current 'nba'}}selected{{/compare}}"><a href="/leaguesearch/nba"><span class="rb-white">NBA</span></a></li>
+          <li class="tabs {{#compare current 'nfl'}}selected{{/compare}}"><a href="/leaguesearch/nfl"><span class="rb-white">NFL</span></a></li>
+          <li class="tabs {{#compare current 'nhl'}}selected{{/compare}}"><a href="/leaguesearch/nhl"><span  class="rb-white">NHL</span></a></li>  
           <!-- IF INDEX PAGE, DO how_works_button, IF ANOTHER OTHER PAGE, do question_mark -->
           {{#if how_works_button}}
             {{> how_works_button }}
