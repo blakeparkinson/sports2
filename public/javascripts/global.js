@@ -1,6 +1,13 @@
 
 // DOM Ready =============================================================
 $(document).ready(function() {
+  //look for the league search page
+  if (window.location.pathname.indexOf('leaguesearch') > -1){
+    var pieces = window.location.pathname.split("/");
+    //3rd bit is the league 
+    var action = pieces[2];
+    $('body').find('.tabs.' + action).addClass('selected');
+  }
 
     // Populate the user table on initial page load    
     $('body').on('click', '[data-action="pick-team"], .quiz-btn', fetchQuiz);
