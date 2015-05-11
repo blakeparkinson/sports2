@@ -38,9 +38,11 @@
         </p>
       </div>
       <div class="top-list-contain">
-        <ul id="top-teams-league-page">    
-        
-        </ul>
+        <div class="list-group">  
+         {{#each goats}}  
+          <a href="#" class="create-quiz list-group-item league-search-items" data-id="{{_id}}" data-type="{{type}}">{{description}}</a>
+        {{/each}}  
+        </div>
       </div>
 
     </div>

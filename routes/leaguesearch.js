@@ -24,7 +24,8 @@ router.get('/', function(req, res) {
       res.render('leaguesearch',
         { popular_teams: results.popular_lists,
           goats: results.goats_lists,
-        	leaders: results.leaders_lists
+        	leaders: results.leaders_lists,
+          remove_footer: true
          }
     );  
   })
@@ -47,7 +48,8 @@ router.get('/:league', function(req, res) {
           goats: results.goats_lists,
           leaders: results.leaders_lists,
           background_image: randImg(),
-          how_works_button: true
+          how_works_button: true,
+          remove_footer: true
          }
     );  
   })
