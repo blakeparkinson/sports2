@@ -127,7 +127,7 @@ var top_script = function(url, category, callback1){
           var metadata = {
             name: player,
             top: top,
-            team: players_model.abbreviationHelper(team)  // Consolidates abbreviation differences between sites
+            team: players_model.abbreviationHelper(league,team)  // Consolidates abbreviation differences between sites
           };
           results.push(metadata);
         })
