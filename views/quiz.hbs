@@ -42,7 +42,7 @@
           <div class="answer-container-contain" data-bhex="{{primary_hex}}" data-fhex="{{secondary_hex}}">
             <div class="answer-row subheader">Players Guessed</div>
 
-            {{#compare type "goats"}}
+            {{#if plainDisplay}}
               {{#each roster}}
               <div class="outer-guess">
                 <div class="inner-guess">
@@ -51,18 +51,8 @@
                 </div>
               </div>
               {{/each}}
-            {{/compare}}
+            {{/if}}
 
-            {{#compare type "leaders"}}
-              {{#each roster}}
-              <div class="outer-guess">
-                <div class="inner-guess">
-                  <div class="correct-guess" data-player-id="{{player_id}}" data-index="{{@index}}">{{inc @index}}
-                  </div>
-                </div>
-              </div>
-              {{/each}}
-            {{/compare}}
           </div>
         </div>
         <div class="player-card back"></div>        
@@ -80,4 +70,5 @@
   var secondary_hex = '{{secondary_hex}}';
   var roster =  {{{json_stringify roster}}};
   var type = '{{type}}';
+  var plainDisplay = '{{plainDisplay}}';
  </script>

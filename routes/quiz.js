@@ -32,7 +32,8 @@ router.get('/', function(req, res) {
               team_name: doc.description,
               primary_hex: colors.primary_hex,
               secondary_hex: colors.secondary_hex,
-              type: type
+              type: type,
+              plainDisplay: true
             })
           }, rb_team_id)
         }
