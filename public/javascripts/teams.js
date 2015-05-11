@@ -55,7 +55,7 @@ $(document).ready(function() {
 
 function formatResult(data){
 
-    if (data.list_id){
+    if (data.type){
         var render = '<div id ="team-market">'+data.description+' </div>';
     }
     else{
@@ -67,7 +67,7 @@ function formatResult(data){
     }
 
 function formatSelection(data){
-    if (data.type != null){
+    if (data.type){
         var render = '<p class="selected-team"  data-league= "'+data.league+'" data-type="'+ data.type + '"data-id="'+ data.id + '"> ' +data.description+'</p>';
     }
 
