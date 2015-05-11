@@ -219,14 +219,14 @@ switch (league){
           case 'nfl':
             json_response = JSON.parse(body);
             players_sorted = sortNFL(json_response);
-            players = formatPlayers(players_sorted, rb_team_id, json_response);
+            players = formatPlayers(players_sorted, rb_team_id, json_response, league);
             mongoInsertPlayers(league, players, rb_team_id);
             first_callback(players, rb_team_id, res, league,second_callback)
             break;
           case 'nhl':
             json_response = JSON.parse(body);
             json_response.usat_id = abbreviationHelper(league, usat_id);
-            players = formatPlayers(json_response, rb_team_id, json_response);
+            players = formatPlayers(json_response, rb_team_id, json_response, league);
             appendPlayerShortId(players.players);
             //sortByPositions('nhl', players.players);
             mongoInsertPlayers(league, players, rb_team_id);
@@ -370,10 +370,11 @@ var fetchSalaries = function(response, rb_team_id, team_info){
 }
 
 
-var formatPlayers = function(response, rb_team_id, team_info){
+var formatPlayers = function(response, rb_team_id, team_info, league){
   playersarray = [];
   for (i=0;i<response.players.length;i++){
     playersarray[i] = {};
+    response.players[i].avatar_url = '../images/headshots/'+league+'/'+response.players[i].full_name.replace(/\s+/g, '-').toLowerCase()+'.jpg';
     for(var key in response.players[i]){ 
       var value = response.players[i][key];
       playersarray[i][key] = value;
