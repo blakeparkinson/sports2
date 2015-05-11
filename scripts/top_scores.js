@@ -127,7 +127,7 @@ var top_script = function(url, category, callback1){
           var metadata = {
             name: player,
             top: top,
-            team: abbreviation_helper(team)  // Consolidates abbreviation differences between sites
+            team: players_model.abbreviationHelper(team)  // Consolidates abbreviation differences between sites
           };
           results.push(metadata);
         })
@@ -159,28 +159,6 @@ var top_script = function(url, category, callback1){
 
 main(league);
 
-
-var abbreviation_helper = function(abbreviation){
-  var replace = abbreviation
-  switch (abbreviation){
-    case 'GS': 
-      replace = 'GSW'
-      break;
-    case 'NO': 
-      replace = 'NOP'
-      break;
-    case 'NY': 
-      replace = 'NYK'
-      break;
-    case 'SA': 
-      replace = 'SAS'
-      break;
-    case 'PHO': 
-      replace = 'PHX'
-      break;
-  }
-  return replace
-}
 
 var mongoInsert = function (leadersList){
     db.open(function(err, db){

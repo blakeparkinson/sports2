@@ -572,7 +572,7 @@ var insertTopScorers= function (data){
 
 var abbreviationHelper = function(league, abbreviation){
   switch (league){
-    case "nhl":
+    case 'nhl':
       switch (abbreviation){
         case 'WSH':
           abbreviation = 'WAS';
@@ -581,9 +581,29 @@ var abbreviationHelper = function(league, abbreviation){
         abbreviation = abbreviation;
         break;
       }
-      break;
-    default:
-      break;
+    break;
+    case 'nba':
+      switch (abbreviation){
+        case 'GS': 
+          abbreviation = 'GSW'
+          break;
+        case 'NO': 
+          abbreviation = 'NOP'
+          break;
+        case 'NY': 
+          abbreviation = 'NYK'
+          break;
+        case 'SA': 
+          abbreviation = 'SAS'
+          break;
+        case 'PHO': 
+          abbreviation = 'PHX'
+          break;
+        default: 
+          abbreviation = abbreviation;
+      }
+    break;
+  
   }
   return abbreviation;
 }
@@ -604,5 +624,6 @@ module.exports = {
   insertTopScorers: insertTopScorers,
   intreturnPlayers: intreturnPlayers,
   emptyCategoryArray: emptyCategoryArray,
-  fetchTeamColors: fetchTeamColors
+  fetchTeamColors: fetchTeamColors,
+  abbreviationHelper: abbreviationHelper
 }
