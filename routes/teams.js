@@ -35,8 +35,8 @@ router.get('/quiz', function(req, res) {
   var type = req.query.type;
 
   if (req.query.trending){
-    if (type == 'leaders'){
-      db.collection('leaders').findOne( { team_id : rb_team_id}, function (err, item){
+    if (type){ // leaders or goats
+      db.collection('teams').findOne( { _id : rb_team_id}, function (err, item){
         if (item != null){
           var league = item.league;
           var api_team_id = null;
@@ -64,11 +64,11 @@ router.get('/quiz', function(req, res) {
       });
     }
   }
-  else if (list_id){
+  else if (type){ // leaders or goats
     db.collection('teams').findOne( {_id: rb_team_id}, function (err, item){
       if (item != null){
-        var quiz_name = item.list_name;
-        var api_team_id = req.query.api_team_id;
+        var quiz_name = item.category;
+        var api_team_id = null;
         createQuiz(rb_team_id, list_id, league, quiz_name, res, returnItem, api_team_id, type);
       }
 
@@ -105,8 +105,8 @@ var createQuiz = function(rb_team_id, list_id, league, quiz_name, res, callback,
 router.get('/team', function(req, res) {
     var term = req.query.q;
     //find the team, This syntax does a sql-type like clause with case insensitivity with the RegEx
-    db.collection('teams').find({$or: [{'name': new RegExp(term, 'i')}, {'market': new RegExp(term, 'i')}, {'keywords': new RegExp(term, 'i')}]}).sort({'market': 1}).toArray(function (err, items) {
-    	res.json(items);
+    db.collection('teams').find({$or: [{'name': new RegExp(term, 'i')}, {'market': new RegExp(term, 'i')}, {'category': new RegExp(term, 'i')}, {'keywords': new RegExp(term, 'i')}]}).sort({'market': 1}).toArray(function (err, items) {
+      res.json(items);
     });
 });
 
