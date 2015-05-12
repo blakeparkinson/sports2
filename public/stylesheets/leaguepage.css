@@ -47,9 +47,7 @@
 }
 .top-list-contain .list-group .league-search-items:hover {
   color: #fff;
-  font-size: 1.2em;
-  background: rgb(22, 231, 22);  
-  
+  background: rgb(22, 231, 22);    
 }
 .all-icons {
   max-width: 22%;
