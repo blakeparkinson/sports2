@@ -67,7 +67,6 @@ db.collection('players').find(findClause).toArray(function (err, items){
       }
 
       for (var b=0; b < items[i].players.length; b++){
-        console.log(year);
         var full_name = items[i].players[b].full_name.replace(/\s+/g, '-').toLowerCase();
         var url = 'http://www.gannett-cdn.com/media/SMG/sports_headshots/'+league+'/player/'+year+'/'+usat_id+'/120x120/'+full_name+'.jpg';
         download(url, '../public/images/headshots/'+league+'/'+full_name+'.jpg', items[i].players[b], items[i], 'players', b, league);
