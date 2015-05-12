@@ -98,7 +98,7 @@ var images = [
       },
       {
         "team_name": "Phoenix Suns",
-        "usat_id": "PHX"
+        "usat_id": "PHO"
       },
       {
         "team_name": "Portland Trail Blazers",
