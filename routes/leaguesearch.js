@@ -74,7 +74,7 @@ var fetchLeadersLists = function(listObj, callback, rb_team_id){
 var fetchTeamLists = function(callback){
   db.collection('quiz').aggregate(
 
-  [{ "$match" : { "created_at" : { "$gt" : quizCutoffDate.toISOString().slice(0, 19).replace('T', ' ') }} //only pull quizzes in timeframe
+  [{ "$match" : { "$and": [{ "created_at" : { "$gt" : quizCutoffDate.toISOString().slice(0, 19).replace('T', ' ') }}, {"type": null }]} //only pull quizzes in timeframe and for rosters
   },
   { "$group": {
       "_id": {
@@ -109,7 +109,7 @@ var fetchTeamLists = function(callback){
 
 var fetchTeamListsByLeague = function(league, callback){
 	db.collection('quiz').aggregate(
-    [{ "$match" : {"$and" : [{ "created_at" : { "$gt" : quizCutoffDate.toISOString().slice(0, 19).replace('T', ' ') }}, {"league" : league} ] }
+    [{ "$match" : {"$and" : [{ "created_at" : { "$gt" : quizCutoffDate.toISOString().slice(0, 19).replace('T', ' ') }}, {"league" : league}, {"type" : null} ] }
     },
   { "$group": {
       "_id": {
