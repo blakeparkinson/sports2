@@ -1,4 +1,4 @@
-// Run Script by: node top_scores league (e.g. node top_scores nba )
+// Run Script by: node leaders_import.js league (e.g. node leaders_import.js nba )
 
 var express = require('express');
 var fs = require('fs');
@@ -142,7 +142,7 @@ var top_script = function(url, category, callback1){
                 leadersList.league = league,
                 leadersList.type = 'leaders',
                 leadersList.description = teams_model.fetchStatDescription(category);
-                leadersList._id = id,
+                leadersList.team_id = id,
                 leadersList.category = category;
             players_model.insertTopScorers(data);
             mongoInsert(leadersList);
@@ -161,11 +161,15 @@ main(league);
 
 
 var mongoInsert = function (leadersList){
-    db.open(function(err, db){
-      db.collection('teams').insert(leadersList, function(err, insert){
+  console.log("leadersList.team_id into Teams"+leadersList.team_id);
+  db.open(function(err, db){
+    db.collection('teams').update({"$and" : [{league: leadersList.league},{category: leadersList.category}, {type: leadersList.type}]},
+      {$set: leadersList},
+      {upsert: true, multi: false}, function (err, upserted){
         if (err){
           console.log("error inserting into mongo" + err);
-        }
-      });
-    })
+        }       
+      }
+    )
+  })
 }

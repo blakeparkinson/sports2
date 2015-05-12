@@ -51,22 +51,33 @@ var loopThroughList = function (list){
 var mongoInsert = function (goatlist){
   var rb_team_id = shortId.generate()
     db.open(function(err, db){
-      db.collection("goats", function(err, col) {
-        for (var i = 0; i < goatlist.length; i++){
-          console.log("inserting "+goatlist[i].category+" into mongo goats");
-          col.insert({team_id: rb_team_id, league: goatlist[i].league, type: goatlist[i].type, category: goatlist[i].category, keywords: goatlist[i].keywords, description: goatlist[i].description, players: goatlist[i].players}, function() {})
+      for (var i = 0; i < goatlist.length; i++){
+        goatlist[i].team_id = rb_team_id; 
+        console.log("upserting "+goatlist[i].category+" into mongo goats");
+        db.collection('goats').update({"$and" : [{league: goatlist[i].league},{category: goatlist[i].category}, {type: goatlist[i].type}]},
+        {$set: goatlist[i]},
+        {upsert: true, multi: false}, function (err, upserted){
+          if (err){
+            console.log("error inserting into mongo" + err);
+          }       
         }
-      })
+      )} 
     })
     db.open(function(err, db){
-      db.collection("teams", function(err, col) {
-        for (var i = 0; i < goatlist.length; i++){
-          console.log("inserting "+goatlist[i].category+" into mongo teams");
-          col.insert({_id: rb_team_id, league: goatlist[i].league, type: goatlist[i].type, category: goatlist[i].category, keywords: goatlist[i].keywords, description: goatlist[i].description}, function() {})
+      for (var i = 0; i < goatlist.length; i++){
+        goatlist[i].team_id = rb_team_id;
+        console.log("upserting "+goatlist[i].category+" into mongo teams");
+        db.collection('teams').update({"$and" : [{league: goatlist[i].league},{category: goatlist[i].category}, {type: goatlist[i].type}]},
+        {$set: goatlist[i]},
+        {upsert: true, multi: false}, function (err, upserted){
+          if (err){
+            console.log("error inserting into mongo" + err);
+          }       
         }
-      })
+      )}
     })
 }
+
 
 
 switch (league){
