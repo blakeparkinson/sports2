@@ -25,6 +25,7 @@ $(document).ready(function() {
                             // for leaders and goats
                             if (item.category != undefined){
                                 item.market = item.category;
+                                item._id = item.team_id;
                             }
 
                             newData.push({
