@@ -82,7 +82,7 @@ var images = [
       },
       {
         "team_name": "New York Knicks",
-        "usat_id": "NYK"
+        "usat_id": "NY"
       },
       {
         "team_name": "Oklahoma City Thunder",
