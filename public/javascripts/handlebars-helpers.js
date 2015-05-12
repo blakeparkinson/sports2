@@ -61,6 +61,7 @@ Handlebars.registerHelper('render_position', function(league, position){
 });
 
 Handlebars.registerHelper('format_height', function(heightInches){
+  if (!parseInt(heightInches)) return '';
   if (arguments.length < 1) {
         throw new Error("Handlerbars Helper 'format_height' needs 2 parameters");
     }
