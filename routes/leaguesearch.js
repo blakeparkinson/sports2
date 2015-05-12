@@ -46,8 +46,8 @@ router.get('/:league', function(req, res) {
       res.render('leaguesearch',
         { popular_teams: results.popular_lists,
           goats: results.goats_lists,
-          leaders: results.leaders_lists,
-          background_image: randImg(),
+          leaders: results.leaders_lists,          
+          background_image: imageByLeague(league),
           how_works_button: true,
           remove_footer: true,
           current: league
@@ -141,7 +141,7 @@ var fetchTeamListsByLeague = function(league, callback){
   })
 }
 
-
+/*
 var randImg = function() {      
   var images = [];      
   var path = '../images/epic_photos/';          
@@ -153,6 +153,25 @@ var randImg = function() {
   var image = images[Math.floor(Math.random()*images.length)];
   image = path + image;
   return image;    
+}
+*/
+
+var imageByLeague = function(league) {
+  if (league === 'nba') {
+    var image = 'basketball_epic3.jpg';
+  } else if (league === 'nhl') {  
+    var image = 'hockey_epic.jpg';
+  } else if (league === 'nfl') {  
+    var image = 'football_epic.jpg';
+  } else if (league === 'mlb') {  
+    var image = 'baseball_epic.jpg';
+  } else if (league === 'soccer') {  
+    var image = image = 'soccer_epic2.jpg';
+  }
+
+  var path = '../images/epic_photos/';
+  var image = path + image;  
+  return image;
 }
 
 
