@@ -22,15 +22,18 @@ $(document).ready(function() {
                             if (item.name == undefined){
                                 item.name = '';
                             }
+                            // for leaders and goats
+                            if (item.category != undefined){
+                                item.market = item.category;
+                            }
 
                             newData.push({
                                 id: item._id,  
                                 market: item.market,
                                 name: item.name,
                                 team_id: item.team_id,
+                                type: item.type,
                                 league: item.league,
-                                list_id: item.list_id,
-                                list_name: item.list_name,
                                 description: item.description
                             });
                         });
@@ -52,7 +55,7 @@ $(document).ready(function() {
 
 function formatResult(data){
 
-    if (data.list_id){
+    if (data.type){
         var render = '<div id ="team-market">'+data.description+' </div>';
     }
     else{
@@ -64,8 +67,8 @@ function formatResult(data){
     }
 
 function formatSelection(data){
-    if (data.list_id){
-        var render = '<p class="selected-team"  data-league= "'+data.league+'" data-list-id="'+ data.list_id +'" data-list-name="'+ data.list_name + '"data-id="'+ data.id + '"> ' +data.description+'</p>';
+    if (data.type){
+        var render = '<p class="selected-team"  data-league= "'+data.league+'" data-type="'+ data.type + '"data-id="'+ data.id + '"> ' +data.description+'</p>';
     }
 
     else{

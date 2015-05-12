@@ -154,6 +154,7 @@ var addToCorrectList = function (player, index){
   else{
     var playerBox = answer_container.find('.correct-guess[data-player-id='+player.player_id+']');
     var playerHtml = '<img class="circle-pic" src='+player.avatar_url+'>' + player.full_name;
+    //answer_container.append(playerHtml);
     playerBox.append(playerHtml);
     playerBox.closest('.outer-guess').fadeIn(200).addClass('green-background');
   }

@@ -1,9 +1,9 @@
 var ftPercentage = [
  {
-  "lid": "5",
-  "league": "goats",
+  "league": "nba",
+  "type":"goats",
+  "category": "topFreeThrownba",
   "keywords": "top free throw freethrow percentage nba shooting scoring",
-  "list_name": "topFreeThrownba",
   "description": "Top free throw percentage all time",
   "players": [
   {
@@ -11,6 +11,7 @@ var ftPercentage = [
     "rank":"1",
     "last_name":"Nash",
     "first_name":"Steve",
+    "full_name":"Steve Nash",
     "ftPercentage":"0.9043"
   },
   {
@@ -18,6 +19,7 @@ var ftPercentage = [
     "rank":"2",
     "last_name":"Price",
     "first_name":"Mark",
+    "full_name":"Mark Price",
     "ftPercentage":"0.9039"
   },
   {
@@ -25,6 +27,7 @@ var ftPercentage = [
     "rank":"3",
     "last_name":"Barry",
     "first_name":"Rick",
+    "full_name":"Rick Barry",
     "ftPercentage":"0.8998"
   },
   {
@@ -32,6 +35,7 @@ var ftPercentage = [
     "rank":"4",
     "last_name":"Curry",
     "first_name":"Stephen",
+    "full_name":"Stephen Curry",
     "ftPercentage":"0.8984"
   },
   {
@@ -39,6 +43,7 @@ var ftPercentage = [
     "rank":"5",
     "last_name":"Stojakovic",
     "first_name":"Peja",
+    "full_name":"Peja Stojakovic",
     "ftPercentage":"0.8948"
   },
   {
@@ -46,6 +51,7 @@ var ftPercentage = [
     "rank":"6",
     "last_name":"Billups",
     "first_name":"Chauncey",
+    "full_name":"Chauncey Billups",
     "ftPercentage":"0.894"
   },
   {
@@ -53,6 +59,7 @@ var ftPercentage = [
     "rank":"7",
     "last_name":"Allen",
     "first_name":"Ray",
+    "full_name":"Ray Allen",
     "ftPercentage":"0.8939"
   },
   {
@@ -60,6 +67,7 @@ var ftPercentage = [
     "rank":"8",
     "last_name":"Murphy",
     "first_name":"Calvin",
+    "full_name":"Calvin Murphy",
     "ftPercentage":"0.8916"
   },
   {
@@ -67,6 +75,7 @@ var ftPercentage = [
     "rank":"9",
     "last_name":"Skiles",
     "first_name":"Scott",
+    "full_name":"Scott Skiles",
     "ftPercentage":"0.8891"
   },
   {
@@ -74,6 +83,7 @@ var ftPercentage = [
     "rank":"10",
     "last_name":"Miller",
     "first_name":"Reggie",
+    "full_name":"Reggie Miller",
     "ftPercentage":"0.8877"
   }
   ]

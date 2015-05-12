@@ -1,9 +1,9 @@
 var topBPG = [
 {
-  "lid": "3",
-  "league": "goats",
+  "league": "nba",
+  "type":"goats",
+  "category": "topBPGnba",
   "keywords": "top bpg nba blocks",
-  "list_name": "topBPGnba",
   "description": "Top blocks per game averages all time",
   "players": [
   {
@@ -11,6 +11,7 @@ var topBPG = [
     "rank":"1",
     "last_name":"Eaton",
     "first_name":"Mark",
+    "full_name":"Mark Eaton",
     "bpg":"3.5"
   },
   {
@@ -18,6 +19,7 @@ var topBPG = [
     "rank":"2",
     "last_name":"Bol",
     "first_name":"Manute",
+    "full_name":"Manute Bol",
     "bpg":"3.34"
   },
   {
@@ -25,6 +27,7 @@ var topBPG = [
     "rank":"3",
     "last_name":"Olajuwon",
     "first_name":"Hakeem",
+    "full_name":"Hakeem Olajuwon",
     "bpg":"3.09"
   },
   {
@@ -32,6 +35,7 @@ var topBPG = [
     "rank":"4",
     "last_name":"Robinson",
     "first_name":"David",
+    "full_name":"David Robinson",
     "bpg":"2.99"
   },
   {
@@ -39,6 +43,7 @@ var topBPG = [
     "rank":"5",
     "last_name":"Smith",
     "first_name":"Elmore",
+    "full_name":"Elmore Smith",
     "bpg":"2.9"
   },
   {
@@ -46,6 +51,7 @@ var topBPG = [
     "rank":"6",
     "last_name":"Mourning",
     "first_name":"Alonzo",
+    "full_name":"Alonzo Mourning",
     "bpg":"2.81"
   },
   {
@@ -53,6 +59,7 @@ var topBPG = [
     "rank":"7",
     "last_name":"Mutombo",
     "first_name":"Dikembe",
+    "full_name":"Dikembe Mutombo",
     "bpg":"2.75"
   },
   {
@@ -60,6 +67,7 @@ var topBPG = [
     "rank":"8",
     "last_name":"Ibaka",
     "first_name":"Serge",
+    "full_name":"Serge Ibaka",
     "bpg":"2.58"
   },
   {
@@ -67,6 +75,7 @@ var topBPG = [
     "rank":"9",
     "last_name":"Abdul-Jabbar",
     "first_name":"Kareem",
+    "full_name":"Kareem Abdul-Jabbar",
     "bpg":"2.57"
   },
   {
@@ -74,6 +83,7 @@ var topBPG = [
     "rank":"10",
     "last_name":"Bradley",
     "first_name":"Shawn",
+    "full_name":"Shawn Bradley",
     "bpg":"2.55"
   }
   ]

@@ -198,18 +198,20 @@ function fetchQuiz(event) {
       var api_team_id = team.data('team-id'),
           league = team.data('league'),
           rb_team_id = team.data('id'),
-          team_name = team.data('team'),
-          list_id = team.data('list-id'),
-          list_name = team.data('list-name');
-      
+          type = team.data('type');
+          if (team.data('category')){
+            var team_name = team.data('category');
+          }
+          else{
+            var team_name = team.data('team');
+          }     
 
       var data = {
         api_team_id: api_team_id, 
         league: league, 
         rb_team_id: rb_team_id, 
         team_name: team_name,
-        list_name: list_name,
-        list_id: list_id
+        type: type
       };
 
       AjaxCreateQuiz(data);

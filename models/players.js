@@ -69,7 +69,6 @@ var fetchTeamColors = function (league, team_name){
     break;
     case 'nfl':
     case 'nhl':
-    case 'goats':
     case 'mlb':
     case 'eu_soccer':
     break;
@@ -86,7 +85,6 @@ var getTimeLimit = function(league){
     case 'eu_soccer':
     case 'nfl':
     case 'nba':
-    case 'goats':
       clock = '5:00';
     break;
   }
@@ -115,40 +113,37 @@ var getTimeLimit = function(league){
 */
 
 
-var fetchGoatPlayers = function(list_id, rb_team_id, league, res, req, callback){ 
-  db.collection('goats').findOne({lid : list_id}, function (err, item){
-    if (item != undefined){ // data in Mongo
-        callback(item, rb_team_id, res, league)
-      }
-    else {
-      console.log("goat list not in mongo");
-    }
-  });
-}
-
 // Check the db first. If it's there and has been added in the last 24 hours, use it. 
 // Otherwise, go get new data from the API and replace/add the database listing
-var fetchPlayers = function(team_id, rb_team_id, league, usat_id, res, req, first_callback, second_callback){ 
+var fetchPlayers = function(type, team_id, rb_team_id, league, usat_id, res, req, first_callback, second_callback){ 
   var players;
-  db.collection('players').find({team_id : rb_team_id}).toArray(function (err, items){
-    if (items.length > 0){ // data in Mongo
-      //convert the date to unix timestamp
-      var item = _.first(items);
-      var itemdate = new Date(item.last_updated.replace(' ', 'T')).getTime();
-      var datenow = new Date();
-      var datecutoff = datenow.getTime() - dataAgeCutOff;
-      if (datecutoff > itemdate){   //data is old so call API
+  if (type){ //leaders and goats
+    db.collection(type).find({team_id : rb_team_id}).toArray(function (err, items){
+      players = items;
+      first_callback(players, rb_team_id, res, league, second_callback);
+    })
+  }
+  else {
+    db.collection('players').find({team_id : rb_team_id}).toArray(function (err, items){
+      if (items.length > 0){ // data in Mongo
+        //convert the date to unix timestamp
+        var item = _.first(items);
+        var itemdate = new Date(item.last_updated.replace(' ', 'T')).getTime();
+        var datenow = new Date();
+        var datecutoff = datenow.getTime() - dataAgeCutOff;
+        if (datecutoff > itemdate){   //data is old so call API
+           players = fetchPlayersFromApi(team_id, rb_team_id, league, usat_id, res, req, first_callback, second_callback)
+        }
+        else {  // data is fine so just return it
+          players = item;
+          first_callback(players, rb_team_id, res, league, second_callback);
+        }
+      }
+      else {  // data not already in Mongo
          players = fetchPlayersFromApi(team_id, rb_team_id, league, usat_id, res, req, first_callback, second_callback)
       }
-      else {  // data is fine so just return it
-        players = item;
-        first_callback(players, rb_team_id, res, league, second_callback);
-      }
-    }
-    else {  // data not already in Mongo
-       players = fetchPlayersFromApi(team_id, rb_team_id, league, usat_id, res, req, first_callback, second_callback)
-    }
-  });
+    });
+  }
 }
 
 
@@ -614,7 +609,6 @@ module.exports = {
   returnPlayers: returnPlayers,
   fetchPlayersFromApi: fetchPlayersFromApi,
   fetchPlayers: fetchPlayers,
-  fetchGoatPlayers: fetchGoatPlayers,
   formatPlayers: formatPlayers,
   formatNBAPlayers: formatNBAPlayers,
   formatPlayersDocument: formatPlayersDocument,
