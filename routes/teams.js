@@ -35,7 +35,7 @@ router.get('/quiz', function(req, res) {
 
   if (req.query.trending){
     if (type){ // leaders or goats
-      db.collection('teams').findOne( { _id : rb_team_id}, function (err, item){
+      db.collection('teams').findOne( { team_id : rb_team_id}, function (err, item){
         if (item != null){
           var league = item.league;
           var api_team_id = null;
@@ -64,7 +64,7 @@ router.get('/quiz', function(req, res) {
     }
   }
   else if (type){ // leaders or goats
-    db.collection('teams').findOne( {_id: rb_team_id}, function (err, item){
+    db.collection('teams').findOne( {team_id: rb_team_id}, function (err, item){
       if (item != null){
         var quiz_name = item.category;
         var api_team_id = null;
