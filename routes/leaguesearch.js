@@ -108,6 +108,7 @@ var fetchTeamLists = function(callback){
 
 
 var fetchTeamListsByLeague = function(league, callback){
+  var type = 'roster';
 	db.collection('quiz').aggregate(
     [{ "$match" : {"$and" : [{ "created_at" : { "$gt" : quizCutoffDate.toISOString().slice(0, 19).replace('T', ' ') }}, {"league" : league}, {"type" : type} ] }
     },
@@ -134,7 +135,7 @@ var fetchTeamListsByLeague = function(league, callback){
           team.league = result[i]._id.league;
           team.team_name = result[i]._id.quiz_name;
           team.quizCount = result[i].quizCount;
-          team.type = result[i]._id.league.type;
+          team.type = type;
           teams.push(team);
         }
         console.log("TEAMS"+teams);
