@@ -43,7 +43,6 @@ router.get('/', function(req, res) {
   if (typeof endresult !== 'undefined' && endresult){
     trending_quiz = endresult
   }
-  console.log(trending_quiz);
 	res.render('index', 
   {
     session:req.session,

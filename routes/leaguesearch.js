@@ -126,7 +126,6 @@ var fetchTeamListsByLeague = function(league, callback){
     }
 
   ], function (err, result){
-    console.log(result);
       teams = []; 
       if (result.length > 0){
         for (i=0;i<Object.keys(result).length;i++){
