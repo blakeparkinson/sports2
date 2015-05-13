@@ -543,13 +543,14 @@ var emptyCategoryArray = function(){
 
     
 
-var insertTopScorers= function (data){
+var insertLeaders= function (data){
     var leadersList = {};
     leadersList.league = data.league;
     leadersList.category = data.category;
     leadersList.team_id = data.team_id;
     leadersList.description = teams_model.fetchStatDescription(data.category);
     leadersList.players = top_category;
+    leadersList.created_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
     db.open(function(err, db){
       db.collection('leaders').update({"$and" : [{league: leadersList.league},{category: leadersList.category},{team_id: leadersList.team_id}]},
         {$set: leadersList}, 
@@ -615,7 +616,7 @@ module.exports = {
   mongoInsertPlayers: mongoInsertPlayers,
   sortNBA: sortNBA,
   pluckPlayerFromName: pluckPlayerFromName,
-  insertTopScorers: insertTopScorers,
+  insertLeaders: insertLeaders,
   intreturnPlayers: intreturnPlayers,
   emptyCategoryArray: emptyCategoryArray,
   fetchTeamColors: fetchTeamColors,
