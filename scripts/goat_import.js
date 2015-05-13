@@ -71,7 +71,7 @@ var mongoInsert = function (goatlist){
         goatlist[i].team_id = rb_team_id;
         console.log("upserting "+goatlist[i].category+" into mongo teams");
         db.collection('teams').update({"$and" : [{league: goatlist[i].league},{category: goatlist[i].category}, {type: goatlist[i].type}]},
-        {$set: {league: goatlist[i].league, category: goatlist[i].category, type: goatlist[i].type, description: goatlist[i].description, keywords: goatlist[i].keywords, created_at: created_at}
+        {$set: {league: goatlist[i].league, category: goatlist[i].category, type: goatlist[i].type, description: goatlist[i].description, keywords: goatlist[i].keywords, created_at: created_at}},
         {upsert: true, multi: false}, function (err, upserted){
           if (err){
             console.log("error inserting into mongo" + err);
