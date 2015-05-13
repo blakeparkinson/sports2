@@ -176,7 +176,7 @@ switch (league){
             // find the image from usat and insert into players array
             for (a=0;a<Object.keys(json_response.players).length;a++){
               var player_name = json_response.players[a].first_name.toLowerCase()+'-'+json_response.players[a].last_name.toLowerCase()
-              endpoint = 'http://www.gannett-cdn.com/media/SMG/sports_headshots/'+league+'/player/2014/'+usat_id+'/120x120/'+player_name+'.jpg';
+              endpoint = '../images/headshots/'+league+'/'+player_name+'.jpg';
               json_response.players[a].avatar_url = endpoint;
             } 
                 
