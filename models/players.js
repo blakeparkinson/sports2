@@ -176,7 +176,7 @@ switch (league){
             // find the image from usat and insert into players array
             for (a=0;a<Object.keys(json_response.players).length;a++){
               var player_name = json_response.players[a].first_name.toLowerCase()+'-'+json_response.players[a].last_name.toLowerCase()
-              endpoint = 'http://www.gannett-cdn.com/media/SMG/sports_headshots/'+league+'/player/2014/'+usat_id+'/120x120/'+player_name+'.jpg';
+              endpoint = '../images/headshots/'+league+'/'+player_name+'.jpg';
               json_response.players[a].avatar_url = endpoint;
             } 
                 
@@ -368,6 +368,13 @@ var fetchSalaries = function(response, rb_team_id, team_info){
 var formatPlayers = function(response, rb_team_id, team_info, league){
   playersarray = [];
   for (i=0;i<response.players.length;i++){
+    if (league == 'nfl'){
+      //nfl only returns 'name' do some magic to create full_name and last_name and delete the name field
+      response.players[i].full_name = response.players[i].name;
+      var namePieces = response.players[i].name.split(' ');
+      response.players[i].last_name = namePieces[1];
+      delete response.players[i].name;
+    }
     playersarray[i] = {};
     response.players[i].avatar_url = '../images/headshots/'+league+'/'+response.players[i].full_name.replace(/\s+/g, '-').toLowerCase()+'.jpg';
     for(var key in response.players[i]){ 
@@ -543,13 +550,14 @@ var emptyCategoryArray = function(){
 
     
 
-var insertTopScorers= function (data){
+var insertLeaders= function (data){
     var leadersList = {};
     leadersList.league = data.league;
     leadersList.category = data.category;
     leadersList.team_id = data.team_id;
     leadersList.description = teams_model.fetchStatDescription(data.category);
     leadersList.players = top_category;
+    leadersList.created_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
     db.open(function(err, db){
       db.collection('leaders').update({"$and" : [{league: leadersList.league},{category: leadersList.category},{team_id: leadersList.team_id}]},
         {$set: leadersList}, 
@@ -615,7 +623,7 @@ module.exports = {
   mongoInsertPlayers: mongoInsertPlayers,
   sortNBA: sortNBA,
   pluckPlayerFromName: pluckPlayerFromName,
-  insertTopScorers: insertTopScorers,
+  insertLeaders: insertLeaders,
   intreturnPlayers: intreturnPlayers,
   emptyCategoryArray: emptyCategoryArray,
   fetchTeamColors: fetchTeamColors,
