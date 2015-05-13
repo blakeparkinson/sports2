@@ -109,13 +109,14 @@ var fetchTeamLists = function(callback){
 
 var fetchTeamListsByLeague = function(league, callback){
 	db.collection('quiz').aggregate(
-    [{ "$match" : {"$and" : [{ "created_at" : { "$gt" : quizCutoffDate.toISOString().slice(0, 19).replace('T', ' ') }}, {"league" : league}, {"type" : null} ] }
+    [{ "$match" : {"$and" : [{ "created_at" : { "$gt" : quizCutoffDate.toISOString().slice(0, 19).replace('T', ' ') }}, {"league" : league}, {"type" : type} ] }
     },
   { "$group": {
       "_id": {
         "rb_team_id": "$rb_team_id",
         "league": "$league",
-        "quiz_name": "$quiz_name"
+        "quiz_name": "$quiz_name",
+        "type": "$type"
       },
       "quizCount": { "$sum": 1}
     }}, {
@@ -125,6 +126,7 @@ var fetchTeamListsByLeague = function(league, callback){
     }
 
   ], function (err, result){
+    console.log(result);
       teams = []; 
       if (result.length > 0){
         for (i=0;i<Object.keys(result).length;i++){
@@ -133,6 +135,7 @@ var fetchTeamListsByLeague = function(league, callback){
           team.league = result[i]._id.league;
           team.team_name = result[i]._id.quiz_name;
           team.quizCount = result[i].quizCount;
+          team.type = result[i]._id.league.type;
           teams.push(team);
         }
         console.log("TEAMS"+teams);
