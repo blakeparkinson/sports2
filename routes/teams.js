@@ -32,10 +32,12 @@ router.get('/quiz', function(req, res) {
   var rb_team_id = req.query.rb_team_id;
   var league = req.query.league;
   var type = req.query.type;
-
+console.log(players_model.goatsLeadersArray());
   if (req.query.trending){
-    if (type){ // leaders or goats
+    if (players_model.goatsLeadersArray().indexOf(type) > -1){ // leaders or goats
+      console.log(rb_team_id);
       db.collection('teams').findOne( { team_id : rb_team_id}, function (err, item){
+        console.log(item);
         if (item != null){
           var league = item.league;
           var api_team_id = null;
@@ -49,6 +51,7 @@ router.get('/quiz', function(req, res) {
       });
     }
     else{
+      //it's type 'roster'
       db.collection('teams').findOne( { _id : rb_team_id}, function (err, item){
         if (item != null){
           var league = item.league;
@@ -63,7 +66,7 @@ router.get('/quiz', function(req, res) {
       });
     }
   }
-  else if (type){ // leaders or goats
+  else if (players_model.goatsLeadersArray().indexOf(type) > -1){ // leaders or goats
     db.collection('teams').findOne( {team_id: rb_team_id}, function (err, item){
       if (item != null){
         var quiz_name = item.category;

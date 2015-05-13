@@ -56,7 +56,7 @@ $(document).ready(function() {
 
 function formatResult(data){
 
-    if (data.type){
+    if (data.type != 'roster'){
         var render = '<div id ="team-market">'+data.description+' </div>';
     }
     else{
@@ -68,12 +68,12 @@ function formatResult(data){
     }
 
 function formatSelection(data){
-    if (data.type){
+    if (data.type != 'roster'){
         var render = '<p class="selected-team"  data-league= "'+data.league+'" data-type="'+ data.type + '"data-id="'+ data.id + '"> ' +data.description+'</p>';
     }
 
     else{
-        var render = '<p class="selected-team" data-team="'+data.market+ ' ' +data.name+'" data-league= "'+data.league+'" data-team-id="'+ data.team_id + '"data-id="'+ data.id + '"> ' +data.market+ ' ' +data.name+'</p>';
+        var render = '<p class="selected-team" data-team="'+data.market+ ' ' +data.name+'" data-league= "'+data.league+'" data-type="'+ data.type + '"data-team-id="'+ data.team_id + '"data-id="'+ data.id + '"> ' +data.market+ ' ' +data.name+'</p>';
     }
     return render;
 }
