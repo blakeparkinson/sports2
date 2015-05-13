@@ -368,6 +368,13 @@ var fetchSalaries = function(response, rb_team_id, team_info){
 var formatPlayers = function(response, rb_team_id, team_info, league){
   playersarray = [];
   for (i=0;i<response.players.length;i++){
+    if (league == 'nfl'){
+      //nfl only returns 'name' do some magic to create full_name and last_name and delete the name field
+      response.players[i].full_name = response.players[i].name;
+      var namePieces = response.players[i].name.split(' ');
+      response.players[i].last_name = namePieces[1];
+      delete response.players[i].name;
+    }
     playersarray[i] = {};
     response.players[i].avatar_url = '../images/headshots/'+league+'/'+response.players[i].full_name.replace(/\s+/g, '-').toLowerCase()+'.jpg';
     for(var key in response.players[i]){ 
