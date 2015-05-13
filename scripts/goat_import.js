@@ -54,7 +54,7 @@ var mongoInsert = function (goatlist){
       for (var i = 0; i < goatlist.length; i++){
         goatlist[i].team_id = rb_team_id; 
         console.log("upserting "+goatlist[i].category+" into mongo goats");
-        db.collection('goats').update({"$and" : [{league: goatlist[i].league},{category: goatlist[i].category}, {type: goatlist[i].type}]},
+        db.collection('goats').update({"$and" : [{league: goatlist[i].league},{category: goatlist[i].category}, {type: goatlist[i].type}, {created_at: new Date().toISOString().slice(0, 19).replace('T', ' ')}]},
         {$set: goatlist[i]},
         {upsert: true, multi: false}, function (err, upserted){
           if (err){
@@ -67,7 +67,7 @@ var mongoInsert = function (goatlist){
       for (var i = 0; i < goatlist.length; i++){
         goatlist[i].team_id = rb_team_id;
         console.log("upserting "+goatlist[i].category+" into mongo teams");
-        db.collection('teams').update({"$and" : [{league: goatlist[i].league},{category: goatlist[i].category}, {type: goatlist[i].type}]},
+        db.collection('teams').update({"$and" : [{league: goatlist[i].league},{category: goatlist[i].category}, {type: goatlist[i].type}, {created_at: new Date().toISOString().slice(0, 19).replace('T', ' ')}]},
         {$set: goatlist[i]},
         {upsert: true, multi: false}, function (err, upserted){
           if (err){
