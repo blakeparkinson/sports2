@@ -135,7 +135,7 @@ var fetchTeamListsByLeague = function(league, callback){
           team.league = result[i]._id.league;
           team.team_name = result[i]._id.quiz_name;
           team.quizCount = result[i].quizCount;
-          team.type = result[i]._id.league.type;
+          team.type = result[i]._id.type;
           teams.push(team);
         }
         console.log("TEAMS"+teams);
