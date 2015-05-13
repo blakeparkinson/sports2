@@ -157,23 +157,29 @@ var randImg = function() {
 */
 
 var imageByLeague = function(league) {
-  if (league === 'nba') {
-    var image = 'basketball_epic3.jpg';
-  } else if (league === 'nhl') {  
-    var image = 'hockey_epic.jpg';
-  } else if (league === 'nfl') {  
-    var image = 'football_epic.jpg';
-  } else if (league === 'mlb') {  
-    var image = 'baseball_epic.jpg';
-  } else if (league === 'soccer') {  
-    var image = image = 'soccer_epic2.jpg';
+  switch(league) {
+    case "nba":
+      var image = 'basketball_epic3.jpg';        
+      break;
+    case "nhl":
+      var image = 'hockey_epic.jpg';
+      break;
+    case "nfl":
+      var image = 'football_epic.jpg';
+      break;
+    case "mlb":
+      var image = 'baseball_epic.jpg';
+      break;
+    case "soccer":
+      var image = 'soccer_epic2.jpg';
+      break;            
+    default:
+      var image = 'soccer_epic2.jpg';
   }
-
   var path = '../images/epic_photos/';
   var image = path + image;  
   return image;
 }
-
 
 function compareCounts(a,b) {
   if (a.quizCount < b.quizCount)
