@@ -15,6 +15,7 @@ var card = $('.player-card');
 
 // DOM Ready =============================================================
 $(document).ready(function() {
+  console.log(roster);
     
 	$('body').on('keyup', '#guess-box', fetchGuess);
 	$("#guess-box").focus();
