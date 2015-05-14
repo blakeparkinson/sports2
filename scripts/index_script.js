@@ -25,7 +25,7 @@ if (supported_collections.indexOf(collection) == -1){
   return
 }
 
-
+/*
 db.open(function(err, db){
     db.collection('teams').createIndex( { type: 1 }, { sparse: true }, function (err){
       if (err) {
@@ -34,4 +34,13 @@ db.open(function(err, db){
       }
     })
   })
+*/
 
+db.open(function(err, db){
+    db.collection('quiz').createIndex( { type: "text", league: "text" }, function (err){
+      if (err) {
+        console.log('Ahh! An Error with Insert!');
+        return;
+      }
+    })
+  })
