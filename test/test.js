@@ -7,7 +7,7 @@ var _ = require('lodash');
 
 
 describe('tests', function(){
-  describe('pics', function(){
+  describe('randImg', function(){
     it('should return an image matching the corresponding league', function(){
       var leagues = ['nba', 'mlb', 'nfl', 'nhl', 'eu_soccer'];
       for (var i =0; i < leagues.length; i++){
