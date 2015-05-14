@@ -19,11 +19,10 @@ describe('tests', function(){
   })
   describe('abbreviationHelper', function(){
     it('should return a string given a particular string for an abbreviation', function(){
-      var abbreviations = ['WAS', 'kdkfmdmsf', , 'eu_soccer'];
+      var abbreviations = ['WAS', 'kdkfmdmsf', 'eu_soccer'];
       for (var i =0; i < abbreviations.length; i++){
-        var img = players_model.abbreviationHelper(abbreviations[i]);
-        //the image should have the league text ('nba, 'mlb' ,'nhl', etc...) in the name
-        assert.typeOf(abbreviations[i], 'string');
+        var result = players_model.abbreviationHelper('nba', abbreviations[i]);
+        assert.typeOf(result, 'string');
       }
     })
   })
