@@ -470,7 +470,8 @@ var randImg = function(league) {
       var images = [];      
       switch (league) {
         case "mlb":
-          var path = '../images/stadiums/mlb_stadiums/';          
+          var path = '../images/stadiums/mlb_stadiums/';
+        break;          
         case "nfl":
           var path = '../images/stadiums/nfl_stadiums/';
             images[0] = "nfl-49ers-stadium.jpg",
@@ -506,7 +507,7 @@ var randImg = function(league) {
             images[7] = "NBA-heat-stadium.jpg"
         break;          
         case "eu_soccer":
-          var path = '../images/stadiums/euro_soccer_stadiums/';          
+          var path = '../images/stadiums/eu_soccer_stadiums/';          
             images[0] = "olympiastadion-stadium.jpg",
             images[1] = "soccer-stadium4.jpg",
             images[2] = "bayernmunich-stadium.jpg",
@@ -636,5 +637,6 @@ module.exports = {
   emptyCategoryArray: emptyCategoryArray,
   fetchTeamColors: fetchTeamColors,
   abbreviationHelper: abbreviationHelper,
+  randImg: randImg,
   goatsLeadersArray: goatsLeadersArray
 }
