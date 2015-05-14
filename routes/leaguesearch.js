@@ -12,10 +12,11 @@ quizCutoffDate.setDate(quizCutoffDate.getDate() - 7);  //currently set to 1 week
 
 
 router.get('/', function(req, res) {
+  var listObjRosters = {league : false, type: 'roster'};
   var listObjLeaders = {league : false, type: 'leaders'};
   var listObjGoats = {league : false, type: 'goats'};
   async.parallel({
-    popular_lists: fetchTeamLists,
+    popular_lists: fetchTeamLists.bind(null,listObjRosters),
     //this (bind) is the syntax you use to pass arguments via async lib.
     //passing false here because we don't filter
     goats_lists: fetchLeadersLists.bind(null, listObjGoats),
@@ -35,11 +36,12 @@ router.get('/', function(req, res) {
 
 router.get('/:league', function(req, res) {
   var league = req.params.league;
+  var listObjRosters = {league : league, type: 'roster'};
   var listObjLeaders = {league : league, type: 'leaders'};
   var listObjGoats = {league : league, type: 'goats'};
   async.parallel({
     //this (bind) is the syntax you use to pass arguments via async lib.
-    popular_lists: fetchTeamListsByLeague.bind(null,league),
+    popular_lists: fetchTeamListsByLeague.bind(null,listObjRosters),
     goats_lists: fetchLeadersLists.bind(null, listObjGoats),
     leaders_lists: fetchLeadersLists.bind(null, listObjLeaders)
   }, function(err,results){
@@ -71,10 +73,11 @@ var fetchLeadersLists = function(listObj, callback, rb_team_id){
 }
 
 
-var fetchTeamLists = function(callback){
+var fetchTeamLists = function(listObj, callback){
+  var type = listObj["type"];  
   db.collection('quiz').aggregate(
 
-  [{ "$match" : { "$and": [{ "created_at" : { "$gt" : quizCutoffDate.toISOString().slice(0, 19).replace('T', ' ') }}, {"type": null }]} //only pull quizzes in timeframe and for rosters
+  [{ "$match" : { "$and": [{ "created_at" : { "$gt" : quizCutoffDate.toISOString().slice(0, 19).replace('T', ' ') }}, {"type": type }]} //only pull quizzes in timeframe and for rosters
   },
   { "$group": {
       "_id": {
@@ -107,15 +110,22 @@ var fetchTeamLists = function(callback){
 }
 
 
-var fetchTeamListsByLeague = function(league, callback){
+var fetchTeamListsByLeague = function(listObj, callback){
+  var type = listObj["type"];  
+  if (listObj["league"]){
+    //do filtering
+    var league = listObj["league"];
+  }
+
 	db.collection('quiz').aggregate(
-    [{ "$match" : {"$and" : [{ "created_at" : { "$gt" : quizCutoffDate.toISOString().slice(0, 19).replace('T', ' ') }}, {"league" : league}, {"type" : null} ] }
+    [{ "$match" : {"$and" : [{ "created_at" : { "$gt" : quizCutoffDate.toISOString().slice(0, 19).replace('T', ' ') }}, {"league" : league}, {"type" : type} ] }
     },
   { "$group": {
       "_id": {
         "rb_team_id": "$rb_team_id",
         "league": "$league",
-        "quiz_name": "$quiz_name"
+        "quiz_name": "$quiz_name",
+        "type": "$type"
       },
       "quizCount": { "$sum": 1}
     }}, {
@@ -133,6 +143,7 @@ var fetchTeamListsByLeague = function(league, callback){
           team.league = result[i]._id.league;
           team.team_name = result[i]._id.quiz_name;
           team.quizCount = result[i].quizCount;
+          team.type = result[i]._id.type;
           teams.push(team);
         }
         console.log("TEAMS"+teams);
