@@ -21,6 +21,12 @@ var team_colors_nba = require('../lists/team_colors/team_colors_nba.js');
 var teams_model = require('./teams.js');
 
 
+var goatsLeadersArray = function(){
+
+  var a =['goats', 'leaders'];
+  return a;
+}
+
 var intreturnPlayers = function(players, rb_team_id, res, league, second_callback){
     var team_name = players.team_name;
     var colors = fetchTeamColors(league, team_name);
@@ -117,13 +123,15 @@ var getTimeLimit = function(league){
 // Otherwise, go get new data from the API and replace/add the database listing
 var fetchPlayers = function(type, team_id, rb_team_id, league, usat_id, res, req, first_callback, second_callback){ 
   var players;
-  if (type){ //leaders and goats
+  if (goatsLeadersArray().indexOf(type) > -1){ 
+    //it's a leader or goat quiz
     db.collection(type).find({team_id : rb_team_id}).toArray(function (err, items){
       players = items;
       first_callback(players, rb_team_id, res, league, second_callback);
     })
   }
   else {
+    // it's a roster quiz
     db.collection('players').find({team_id : rb_team_id}).toArray(function (err, items){
       if (items.length > 0){ // data in Mongo
         //convert the date to unix timestamp
@@ -629,5 +637,6 @@ module.exports = {
   emptyCategoryArray: emptyCategoryArray,
   fetchTeamColors: fetchTeamColors,
   abbreviationHelper: abbreviationHelper,
-  randImg: randImg
+  randImg: randImg,
+  goatsLeadersArray: goatsLeadersArray
 }
