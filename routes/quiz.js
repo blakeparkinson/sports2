@@ -19,7 +19,7 @@ router.get('/', function(req, res) {
         api_team_id = items.api_team_id;
         quiz_name = items.quiz_name;
         type = items.type;
-        if (type){ // leaders or goats
+        if (players_model.goatsLeadersArray().indexOf(type) > -1){ // leaders or goats
           // pass the colors function an empty string so we get defaults
           var colors = players_model.fetchTeamColors(league, '');
           leaders_model.fetchLeadersLists(type, league, function(doc){
@@ -38,6 +38,7 @@ router.get('/', function(req, res) {
           }, rb_team_id)
         }
         else {
+          //it's type 'roster'
           db.collection('teams').findOne( { _id : rb_team_id}, function (err, items){
             team_id = items.team_id;       // API team id
             usat_id = items.usat_id;

@@ -67,7 +67,7 @@ switch (league){
                 break;
 	            case 'nfl':
               case 'nhl':
-	            	teams = formatNflTeams(response.body);
+	            	teams = formatNflAndNhlTeams(response.body, league);
 	            	break;
               case 'mlb':
                 teaams = formatMlbTeams(response.body);
@@ -90,11 +90,11 @@ switch (league){
         for (var i = 0; i < teams.length; i++) {
           if (league == 'eu_soccer'){
               //soccer teams don't really have markets, their names include their citys. For our puropses (rendering), this will go into the market field
-              col.insert({_id:shortId.generate(), team_id:encryption.encrypt(teams[i].id), market:teams[i].name, name: '', country:teams[i].country, league:league, created_at: new Date().toISOString().slice(0, 19).replace('T', ' ')}, function() {});
+              col.insert({_id:shortId.generate(), team_id:encryption.encrypt(teams[i].id), market:teams[i].name, name: '', country:teams[i].country, league:league, type: 'roster'}, function() {});
           }
           else{
             //really the only 4 key:value pairs we care about for now
-            col.insert({_id:shortId.generate(), team_id:encryption.encrypt(teams[i].id), name:teams[i].name, market:teams[i].market, league:league, usat_id: teams[i].usat_id, created_at: new Date().toISOString().slice(0, 19).replace('T', ' ')}, function() {});
+            col.insert({_id:shortId.generate(), team_id:encryption.encrypt(teams[i].id), name:teams[i].name, market:teams[i].market, league:league, usat_id: teams[i].usat_id, type: 'roster'}, function() {});
           }
         }
       })
@@ -127,12 +127,18 @@ return teams
 }
 
 
-var formatNflTeams = function(response){
+var formatNflAndNhlTeams = function(response, league){
   var  hierarchy_response = JSON.parse(response);
   for (i=0;i<hierarchy_response.conferences.length;i++){
     for (j=0;j<hierarchy_response.conferences[i].divisions.length;j++){
       for(k=0; k< hierarchy_response.conferences[i].divisions[j].teams.length; k++){
-        hierarchy_response.conferences[i].divisions[j].teams[k].usat_id = hierarchy_response.conferences[i].divisions[j].teams[k].alias
+        //set the usat_id to the city shorthand
+        if (league == 'nhl'){
+          hierarchy_response.conferences[i].divisions[j].teams[k].usat_id = hierarchy_response.conferences[i].divisions[j].teams[k].alias
+        }
+        else{
+          hierarchy_response.conferences[i].divisions[j].teams[k].usat_id = hierarchy_response.conferences[i].divisions[j].teams[k].id
+        }
         teams.push(hierarchy_response.conferences[i].divisions[j].teams[k]);
       }
     }   
