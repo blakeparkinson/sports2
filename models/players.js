@@ -462,7 +462,8 @@ var randImg = function(league) {
       var images = [];      
       switch (league) {
         case "mlb":
-          var path = '../images/stadiums/mlb_stadiums/';          
+          var path = '../images/stadiums/mlb_stadiums/';
+        break;          
         case "nfl":
           var path = '../images/stadiums/nfl_stadiums/';
             images[0] = "nfl-49ers-stadium.jpg",
@@ -627,5 +628,6 @@ module.exports = {
   intreturnPlayers: intreturnPlayers,
   emptyCategoryArray: emptyCategoryArray,
   fetchTeamColors: fetchTeamColors,
-  abbreviationHelper: abbreviationHelper
+  abbreviationHelper: abbreviationHelper,
+  randImg: randImg
 }
