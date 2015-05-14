@@ -221,8 +221,8 @@ switch (league){
             break; 
           case 'nfl':
             json_response = JSON.parse(body);
-            players_sorted = sortNFL(json_response);
-            players = formatPlayers(players_sorted, rb_team_id, json_response, league);
+            json_response.usat_id = abbreviationHelper(league, usat_id);
+            players = formatPlayers(json_response, rb_team_id, json_response, league);
             mongoInsertPlayers(league, players, rb_team_id);
             first_callback(players, rb_team_id, res, league,second_callback)
             break;
