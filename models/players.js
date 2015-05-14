@@ -21,6 +21,12 @@ var team_colors_nba = require('../lists/team_colors/team_colors_nba.js');
 var teams_model = require('./teams.js');
 
 
+var goatsLeadersArray = function(){
+
+  var a =['goats', 'leaders'];
+  return a;
+}
+
 var intreturnPlayers = function(players, rb_team_id, res, league, second_callback){
     var team_name = players.team_name;
     var colors = fetchTeamColors(league, team_name);
@@ -117,13 +123,15 @@ var getTimeLimit = function(league){
 // Otherwise, go get new data from the API and replace/add the database listing
 var fetchPlayers = function(type, team_id, rb_team_id, league, usat_id, res, req, first_callback, second_callback){ 
   var players;
-  if (type){ //leaders and goats
+  if (goatsLeadersArray().indexOf(type) > -1){ 
+    //it's a leader or goat quiz
     db.collection(type).find({team_id : rb_team_id}).toArray(function (err, items){
       players = items;
       first_callback(players, rb_team_id, res, league, second_callback);
     })
   }
   else {
+    // it's a roster quiz
     db.collection('players').find({team_id : rb_team_id}).toArray(function (err, items){
       if (items.length > 0){ // data in Mongo
         //convert the date to unix timestamp
@@ -213,8 +221,8 @@ switch (league){
             break; 
           case 'nfl':
             json_response = JSON.parse(body);
-            players_sorted = sortNFL(json_response);
-            players = formatPlayers(players_sorted, rb_team_id, json_response, league);
+            json_response.usat_id = abbreviationHelper(league, usat_id);
+            players = formatPlayers(json_response, rb_team_id, json_response, league);
             mongoInsertPlayers(league, players, rb_team_id);
             first_callback(players, rb_team_id, res, league,second_callback)
             break;
@@ -368,6 +376,13 @@ var fetchSalaries = function(response, rb_team_id, team_info){
 var formatPlayers = function(response, rb_team_id, team_info, league){
   playersarray = [];
   for (i=0;i<response.players.length;i++){
+    if (league == 'nfl'){
+      //nfl only returns 'name' do some magic to create full_name and last_name and delete the name field
+      response.players[i].full_name = response.players[i].name;
+      var namePieces = response.players[i].name.split(' ');
+      response.players[i].last_name = namePieces[1];
+      delete response.players[i].name;
+    }
     playersarray[i] = {};
     response.players[i].avatar_url = '../images/headshots/'+league+'/'+response.players[i].full_name.replace(/\s+/g, '-').toLowerCase()+'.jpg';
     for(var key in response.players[i]){ 
@@ -455,7 +470,8 @@ var randImg = function(league) {
       var images = [];      
       switch (league) {
         case "mlb":
-          var path = '../images/stadiums/mlb_stadiums/';          
+          var path = '../images/stadiums/mlb_stadiums/';
+        break;          
         case "nfl":
           var path = '../images/stadiums/nfl_stadiums/';
             images[0] = "nfl-49ers-stadium.jpg",
@@ -491,7 +507,7 @@ var randImg = function(league) {
             images[7] = "NBA-heat-stadium.jpg"
         break;          
         case "eu_soccer":
-          var path = '../images/stadiums/euro_soccer_stadiums/';          
+          var path = '../images/stadiums/eu_soccer_stadiums/';          
             images[0] = "olympiastadion-stadium.jpg",
             images[1] = "soccer-stadium4.jpg",
             images[2] = "bayernmunich-stadium.jpg",
@@ -620,5 +636,7 @@ module.exports = {
   intreturnPlayers: intreturnPlayers,
   emptyCategoryArray: emptyCategoryArray,
   fetchTeamColors: fetchTeamColors,
-  abbreviationHelper: abbreviationHelper
+  abbreviationHelper: abbreviationHelper,
+  randImg: randImg,
+  goatsLeadersArray: goatsLeadersArray
 }

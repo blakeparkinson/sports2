@@ -46,10 +46,19 @@ Handlebars.registerHelper('render_position', function(league, position){
     case 'nhl':
       switch(position){
         case 'D':
-          position = 'Defence';
+          position = 'Defender';
         break;
+        case 'C':
+          position = 'Center';
+          break;
+          case 'LW':
+          position = 'Left Winger';
+          break;
+        case 'RW':
+          position = 'Right Winger';
         case 'F':
           position = 'Forward';
+          break;
         break;
         case 'G':
           position = 'Goalie';
@@ -124,4 +133,12 @@ Handlebars.registerHelper('abridgeSalary', function(salary){
     }
   }
   return newSalary;
+});
+
+Handlebars.registerHelper('add_together', function(number1, number2){
+  if (arguments.length < 1) {
+        throw new Error("Handlerbars Helper 'add_together' needs 2 parameters");
+    }
+  var total = number1 + number2;
+  return total;
 });
