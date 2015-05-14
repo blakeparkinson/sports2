@@ -17,8 +17,15 @@ var players_model = require('../models/players.js'),
 var shortId = require('shortid');
 var teams_model = require('../models/teams.js');
 
+var supported_leagues = ['nba', 'nfl', 'nhl'];
 //process.argv grabs the command line arguments
 var league = process.argv[2];
+
+if (supported_leagues.indexOf(league) == -1){
+  console.log('We cant do this '+league+' yet.');
+  return
+}
+
 
 // In order to loop through all categories of the league, we need to have a shell function that just loops.
 var main = function(league){
@@ -29,6 +36,8 @@ var main = function(league){
     case "nhl":
       categories =["assists", "goals", "points", "wins",  "gaa", "savePercentage", "penaltyMinutes", "fightingMajors", "penaltyMinGame"];
       break;
+    case "nfl":
+      categories = ["passYards","passTD", "passINT", "compPercentage", "qbRating", "rushYards", "rushTD", "recYards", "recTD", "tackles", "sacks", "interceptions" ]
   }
 
     async.eachSeries(categories, function (category, callback) {
@@ -94,7 +103,42 @@ var main = function(league){
       case "penaltyMinutes":
         url = "http://www.cbssports.com/nhl/stats/playersort/nhl/year-2014-season-regularseason-category-penaltyminutes";
         break;
-
+      case "passYards":
+        url = "http://www.cbssports.com/nfl/stats/playersort/sortableTable/nfl/year-2014-season-regular-category-passing-qualifying-1?:sort_col=9";
+        break;
+      case "passTD":
+        url = "http://www.cbssports.com/nfl/stats/playersort/sortableTable/nfl/year-2014-season-regular-category-passing-qualifying-1?:sort_col=12";
+        break;
+      case "passINT":
+        url = "http://www.cbssports.com/nfl/stats/playersort/sortableTable/nfl/year-2014-season-regular-category-passing-qualifying-1?:sort_col=13";
+        break;
+      case "compPercentage":
+        url = "http://www.cbssports.com/nfl/stats/playersort/sortableTable/nfl/year-2014-season-regular-category-passing-qualifying-1?:sort_col=7";
+        break;
+      case "qbRating":
+        url = "http://www.cbssports.com/nfl/stats/playersort/sortableTable/nfl/year-2014-season-regular-category-passing-qualifying-1?:sort_col=16";
+        break;
+      case "rushYards":
+        url = "http://www.cbssports.com/nfl/stats/playersort/sortableTable/nfl/year-2014-season-regular-category-rushing-qualifying-1?:sort_col=7";
+        break;
+      case "rushTD":
+        url = "http://www.cbssports.com/nfl/stats/playersort/sortableTable/nfl/year-2014-season-regular-category-rushing-qualifying-1?:sort_col=10";
+        break;
+      case "recYards":
+        url = "http://www.cbssports.com/nfl/stats/playersort/sortableTable/nfl/year-2014-season-regular-category-receiving-qualifying-1?:sort_col=6";
+        break;
+      case "recTD":
+        url = "http://www.cbssports.com/nfl/stats/playersort/sortableTable/nfl/year-2014-season-regular-category-receiving-qualifying-1?:sort_col=11";
+        break;
+      case "tackles":
+        url ="http://www.cbssports.com/nfl/stats/playersort/nfl/year-2014-season-regular-category-tackles";
+        break;
+      case "sacks":
+        url ="http://www.cbssports.com/nfl/stats/playersort/nfl/year-2014-season-regular-category-sacks";
+        break;
+      case "interceptions":
+        url ="http://www.cbssports.com/nfl/stats/playersort/nfl/year-2014-season-regular-category-interceptions";
+        break;
 
     }
     // Call the core functionality now that we have the right variables.
@@ -119,7 +163,7 @@ var top_script = function(url, category, callback1){
         var data = $(this);
         var results = [];
         //sort through their odd and even rows
-        var tr = data.find('.row1, .row2')
+        var tr = data.find('.row1, .row2');
         tr.each(function(i, element){
           var player = $(this).find('td:first-child').text();
           var team = $(this).find('td:nth-child(3)').text();
@@ -131,6 +175,7 @@ var top_script = function(url, category, callback1){
           };
           results.push(metadata);
         })
+
         async.eachSeries(results, function (player, callback) {
           //async lib is weird, you pass it a callback and it calls back and lets you know when it has finished for each loop
           players_model.pluckPlayerFromName(player, callback, league);
