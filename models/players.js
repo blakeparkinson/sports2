@@ -499,7 +499,7 @@ var randImg = function(league) {
             images[7] = "NBA-heat-stadium.jpg"
         break;          
         case "eu_soccer":
-          var path = '../images/stadiums/euro_soccer_stadiums/';          
+          var path = '../images/stadiums/eu_soccer_stadiums/';          
             images[0] = "olympiastadion-stadium.jpg",
             images[1] = "soccer-stadium4.jpg",
             images[2] = "bayernmunich-stadium.jpg",
