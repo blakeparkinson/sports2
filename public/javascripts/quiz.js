@@ -20,7 +20,7 @@ $(document).ready(function() {
 	$('body').on('keyup', '#guess-box', fetchGuess);
 	$("#guess-box").focus();
   $('body').on('click', '.quit-btn', endQuiz);
-  $('body').on('click', '.correct-guess', showCard);
+  $('body').on('click', ".correct-guess:not('.no-flip')", showCard);
   $('#card').flip({trigger: 'manual'});
   $('body').on('mouseover', '.inner-guess', hoverCard);
   $('body').on('mouseout', '.inner-guess', removeHover)
@@ -153,7 +153,9 @@ var addToCorrectList = function (player, index){
     current.fadeIn(200).addClass('green-background');
   }
   else{
+    //goats and leaders
     var playerBox = answer_container.find('.correct-guess[data-player-id='+player.player_id+']');
+    playerBox.removeClass('no-flip');
     var playerHtml = '<img class="circle-pic" src='+player.avatar_url+'>' + player.full_name;
     //answer_container.append(playerHtml);
     playerBox.append(playerHtml);
