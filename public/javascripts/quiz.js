@@ -145,8 +145,12 @@ var appendGreenCheck  = function(input_field){
 var addToCorrectList = function (player, index){
   if (player.guessed == true) return;
   correct++;
+  var imgHtml = '';
+  if (typeof player.avatar_url != 'undefined'){
+    imgHtml = '<img class="circle-pic" src='+player.avatar_url+'>';
+  }
   if (type != 'leaders' && type != 'goats' ){
-    var html = '<div class="outer-guess"><div class="inner-guess"><div class="correct-guess" data-index="'+index+'">'+correct +'.' + '<img class="circle-pic" src='+player.avatar_url+'>' + player.full_name + '</div></div></div>';
+    var html = '<div class="outer-guess"><div class="inner-guess"><div class="correct-guess" data-index="'+index+'">'+correct +'.' + imgHtml + player.full_name + '</div></div></div>';
     answer_container.append(html);
     var current = answer_container.find('.correct-guess[data-index="' + index + '" ]').closest('.outer-guess');
     current.hide();
@@ -156,8 +160,7 @@ var addToCorrectList = function (player, index){
     //goats and leaders
     var playerBox = answer_container.find('.correct-guess[data-player-id='+player.player_id+']');
     playerBox.removeClass('no-flip');
-    var playerHtml = '<img class="circle-pic" src='+player.avatar_url+'>' + player.full_name;
-    //answer_container.append(playerHtml);
+    var playerHtml = imgHtml + player.full_name;
     playerBox.append(playerHtml);
     playerBox.closest('.outer-guess').fadeIn(200).addClass('green-background');
   }

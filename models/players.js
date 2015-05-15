@@ -19,6 +19,7 @@ var top_category = [];
 var salaries_list = require('../lists/other/nba/nba_salaries.js');
 var team_colors_nba = require('../lists/team_colors/team_colors_nba.js');
 var teams_model = require('./teams.js');
+var avatarLeagues = ['nfl, nhl'];
 
 
 var goatsLeadersArray = function(){
@@ -384,7 +385,10 @@ var formatPlayers = function(response, rb_team_id, team_info, league){
       delete response.players[i].name;
     }
     playersarray[i] = {};
-    response.players[i].avatar_url = '../images/headshots/'+league+'/'+response.players[i].full_name.replace(/\s+/g, '-').toLowerCase()+'.jpg';
+    //check to see if the league is one where we do headshots
+    if (avatarLeagues.indexOf(league) > -1){
+      response.players[i].avatar_url = '../images/headshots/'+league+'/'+response.players[i].full_name.replace(/\s+/g, '-').toLowerCase()+'.jpg';
+    }
     for(var key in response.players[i]){ 
       var value = response.players[i][key];
       playersarray[i][key] = value;
