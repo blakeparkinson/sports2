@@ -17,7 +17,7 @@ a {
   color: #00B7FF;
 }
 #body-index {
-  background: url(../images/stadiums/euro_soccer_stadiums/olympiastadion-stadium.jpg);     
+  background: url(../images/stadiums/eu_soccer_stadiums/olympiastadion-stadium.jpg);     
   background-position: center center;
   background-attachment: fixed;
   -webkit-background-size: cover;
@@ -683,7 +683,7 @@ padding-left: 3%;
 
 /* about page */
 .about-body {
-  background: url(../images/stadiums/euro_soccer_stadiums/soccer-stadium4.jpg);    
+  background: url(../images/stadiums/eu_soccer_stadiums/soccer-stadium4.jpg);    
   background-position: center center;
   background-attachment: fixed;
   -webkit-background-size: cover;
@@ -879,7 +879,7 @@ table tr th:last-child {
   background-color: #211922;
   margin: 0;
   padding: 0;
-  background-image:url(../images/stadiums/euro_soccer_stadiums/olympiastadion-stadium.jpg); 
+  background-image:url(../images/stadiums/eu_soccer_stadiums/olympiastadion-stadium.jpg); 
 }
 
 .answer-row .answered-player{
