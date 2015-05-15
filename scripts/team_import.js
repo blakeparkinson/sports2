@@ -47,7 +47,7 @@ switch (league){
 		break;
 	//mlb seems to only return in xml for now :(
 	case 'mlb':
-		endpoint = 'https://api.sportsdatallc.org/mlb-t4/teams/2014.xml?api_key=' + config.mlb_key;
+		endpoint = 'https://api.sportsdatallc.org/mlb-t5/league/hierarchy.json?api_key=' + config.mlb_key;
 		break;
 	case 'nfl':
 		endpoint = 'https://api.sportsdatallc.org/nfl-t1/teams/hierarchy.json?api_key='+ config.nfl_key;
@@ -70,13 +70,13 @@ switch (league){
 	            	teams = formatNflAndNhlTeams(response.body, league);
 	            	break;
               case 'mlb':
-                teaams = formatMlbTeams(response.body);
+                teams = formatMlbTeams(response.body);
                 break;
                case 'eu_soccer':
                 teams = formatSoccerTeams(response.body);
                 break;
 	           }
-       mongoInsert(teams, league);
+        mongoInsert(teams, league);
       }
       else{
         console.log('somethings really terrible happened');
@@ -147,17 +147,18 @@ return teams
 }
 
 var formatMlbTeams = function(response){
-  //convert the xml to js object
-  parseString(response, function (err, result) {
-    //start teh loops
-     for (i=0; i < result[Object.keys(result)[0]].team.length;i++){
-     //there was some random stuff in here, only get markets that are longer than 2 letters
-      if (result[Object.keys(result)[0]].team[i].$.market.trim().length > 2){
-        teams.push(result[Object.keys(result)[0]].team[i].$);
+  response = JSON.parse(response);
+  //start teh loops
+   for (i=0; i < response.leagues.length; i++){
+      var divisions = response.leagues[i].divisions;
+      for (j=0; j < divisions.length; j++){
+        var baseballTeams = divisions[j].teams;
+        for (x=0; x < baseballTeams.length; x++){
+          baseballTeams[x].usat_id = baseballTeams[x].abbr;
+          teams.push(baseballTeams[x]);
+        }
       }
-     }
-
-  });
+    }
   return teams;
 }
 
