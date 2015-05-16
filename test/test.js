@@ -2,8 +2,13 @@
 
 var chai = require("chai");
 var assert = chai.assert;
+var expect = chai.expect;
 var players_model = require('../models/players.js');
 var _ = require('lodash');
+var common = require('../routes/common')
+var config = common.config();
+var request = require('request');
+
 
 
 describe('tests', function(){
@@ -24,6 +29,22 @@ describe('tests', function(){
         var result = players_model.abbreviationHelper('nba', abbreviations[i]);
         assert.typeOf(result, 'string');
       }
+    })
+  })
+  describe('baseballTeamApi', function(){
+    it('should return baseball teams', function(done){
+      var endpoint = 'https://api.sportsdatallc.org/mlb-t5/league/hierarchy.json?api_key=' + config.mlb_key;
+      request(endpoint, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+          var parseResponse = JSON.parse(body);
+          //American and National
+          expect(parseResponse.leagues).to.have.length(2);
+          done();
+        }
+        else{
+          console.log(error);
+        }
+      });
     })
   })
 })
