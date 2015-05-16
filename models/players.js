@@ -29,9 +29,9 @@ var goatsLeadersArray = function(){
 }
 
 var intreturnPlayers = function(players, rb_team_id, res, league, second_callback){
-    var team_name = players.team_name;
-    var colors = fetchTeamColors(league, team_name);
-    second_callback(players, rb_team_id, res, league, colors)
+  var team_name = players.team_name;
+  var colors = fetchTeamColors(league, team_name);
+  second_callback(players, rb_team_id, res, league, colors)
 }
 
 
@@ -174,7 +174,7 @@ switch (league){
     endpoint = 'https://api.sportsdatallc.org/soccer-t2/eu/teams/'+encryption.decrypt(team_id)+'/profile.xml?api_key='+config.soccer_eu_key;
     break;
   case 'mlb':
-    endpoint = 'https://api.sportsdatallc.org/mlb-t4/rosters/2014.xml?api_key='+config.mlb_key;
+    endpoint = 'https://api.sportsdatallc.org/mlb-t5/league/active_rosters.json?api_key='+config.mlb_key;
 }
 
     request(endpoint, function (error, response, body) {
@@ -243,8 +243,7 @@ switch (league){
             first_callback(players, rb_team_id, res, league, second_callback)
             break;
           case 'mlb':  
-            playersParsed = formatMLBPlayers(response.body, team_id);
-            players = formatPlayersDocument(rb_team_id, playersParsed);
+            players = formatMLBPlayers(JSON.parse(body), team_id, rb_team_id);
             mongoInsertPlayers(league, players, rb_team_id);
             first_callback(players, rb_team_id, res, league,second_callback)
             break;
@@ -456,18 +455,17 @@ formatEUSoccerPlayers = function(response){
   return roster;
 }
 
-formatMLBPlayers = function(response, team_id){
-  parseString(response, function (err, result) {
-    var str = result[Object.keys(result)[0]];
-        for (j=0; j < str.team.length; j++){ 
-          if (str.team[j].$.id.trim() == encryption.decrypt(team_id).trim()){
-            for (k=0; k < str.team[j].players[0].player.length; k++){
-              players.push(str.team[j].players[0].player[k].$)
-            }
-          }
-        }
-  });
-  return players;
+formatMLBPlayers = function(response, team_id, rb_team_id){
+  decryptedTeamId = encryption.decrypt(team_id);
+  for (var i =0; i <response.teams.length; i++){
+    if (decryptedTeamId == response.teams[i].id){
+      players = response.teams[i];
+      break;
+    }
+  }
+  var teamDoc = formatPlayersDocument(rb_team_id, players.players, players);
+  return teamDoc;
+
 }
 
 var randImg = function(league) {      
