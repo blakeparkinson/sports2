@@ -232,7 +232,6 @@ switch (league){
             json_response.usat_id = abbreviationHelper(league, usat_id);
             players = formatPlayers(json_response, rb_team_id, json_response, league);
             appendPlayerShortId(players.players);
-            //sortByPositions('nhl', players.players);
             mongoInsertPlayers(league, players, rb_team_id);
             first_callback(players, rb_team_id, res, league, second_callback)
             break;
@@ -242,8 +241,9 @@ switch (league){
             mongoInsertPlayers(league, players, rb_team_id);
             first_callback(players, rb_team_id, res, league, second_callback)
             break;
-          case 'mlb':  
-            players = formatMLBPlayers(JSON.parse(body), team_id, rb_team_id);
+          case 'mlb': 
+            json_response = JSON.parse(body);
+            players = formatMLBPlayers(json_response, team_id, rb_team_id, usat_id);
             mongoInsertPlayers(league, players, rb_team_id);
             first_callback(players, rb_team_id, res, league,second_callback)
             break;
@@ -455,11 +455,12 @@ formatEUSoccerPlayers = function(response){
   return roster;
 }
 
-formatMLBPlayers = function(response, team_id, rb_team_id){
+formatMLBPlayers = function(response, team_id, rb_team_id, usat_id){
   decryptedTeamId = encryption.decrypt(team_id);
   for (var i =0; i <response.teams.length; i++){
     if (decryptedTeamId == response.teams[i].id){
       players = response.teams[i];
+      players.usat_id = usat_id;
       break;
     }
   }
