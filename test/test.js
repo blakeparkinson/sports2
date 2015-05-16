@@ -33,18 +33,18 @@ describe('tests', function(){
   })
   describe('baseballTeamApi', function(){
     it('should return baseball teams', function(done){
-    	var endpoint = 'https://api.sportsdatallc.org/mlb-t5/league/hierarchy.json?api_key=' + config.mlb_key;
+      var endpoint = 'https://api.sportsdatallc.org/mlb-t5/league/hierarchy.json?api_key=' + config.mlb_key;
       request(endpoint, function (error, response, body) {
-	      if (!error && response.statusCode == 200) {
-	      	var parseResponse = JSON.parse(body);
-	      	//American and National
-	      	expect(parseResponse.leagues).to.have.length(2);
-	      	done();
-	      }
-	      else{
-	      	console.log(error);
-	      }
-    	});
+        if (!error && response.statusCode == 200) {
+          var parseResponse = JSON.parse(body);
+          //American and National
+          expect(parseResponse.leagues).to.have.length(2);
+          done();
+        }
+        else{
+          console.log(error);
+        }
+      });
     })
   })
 })
