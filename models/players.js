@@ -617,6 +617,16 @@ var abbreviationHelper = function(league, abbreviation){
         default: 
           abbreviation = abbreviation;
       }
+    case 'mlb':
+      switch (abbreviation){
+        case 'CHW': 
+          abbreviation = 'CWS'
+          break;
+        case 'WAS':
+          abbreviation = 'WSH'
+        default: 
+          abbreviation = abbreviation;
+      }
     break;
   
   }
