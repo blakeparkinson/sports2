@@ -236,7 +236,7 @@ switch (league){
             first_callback(players, rb_team_id, res, league, second_callback)
             break;
           case 'eu_soccer':
-            playersParsed = formatEUSoccerPlayers(response.body, team_id);
+            playersParsed = formatEUSoccerPlayers(response.body, usat_id);
             players = formatPlayersDocument(rb_team_id, playersParsed.players, playersParsed);
             mongoInsertPlayers(league, players, rb_team_id);
             first_callback(players, rb_team_id, res, league, second_callback)
@@ -317,29 +317,6 @@ var formatNBAPlayers = function(response, rb_team_id, team_info){
   return team;
 }
 
-/*var sortByPositions = function(league, starters){
-    switch (league){
-      case 'nba':
-        var order = ['G', 'G-F', 'F-G', 'F', 'F-C', 'C-F', 'C'];
-      break;
-
-      case 'eu_soccer':
-        var order = ['F', 'M', 'D', 'G'];
-      break;
-
-      case 'nhl':
-        var order = ['F', 'D', 'G'];
-      break;
-      //figure out the other leagues later
-      default:
-        return;
-
-    }
-    starters.sort(function(a,b){
-      return order.indexOf(a.position) - order.indexOf(b.position);
-    });
-}*/
-
 // Fetch player salaries from nba_salary list and append to player object.
 var fetchSalaries = function(response, rb_team_id, team_info){
   // Loop through salaries list and find all listings of that team
@@ -404,7 +381,7 @@ var formatPlayersDocument = function(rb_team_id, players, team_info){
   teamDocument.players= players;
   teamDocument.market = team_info.market;
   teamDocument.name = team_info.name;
-  teamDocument.team_name = team_info.market + ' ' + team_info.name;
+  teamDocument.team_name = (typeof team_info.market === 'undefined')? team_info.name : team_info.market + ' ' + team_info.name;
   teamDocument.abbreviation = team_info.usat_id;
   return teamDocument;
 }
@@ -434,24 +411,24 @@ function mongoInsertPlayers(league, team_document, rb_team_id){
 }
 
 
-formatEUSoccerPlayers = function(response){
+formatEUSoccerPlayers = function(response, usat_id){
   var roster = {};
   parseString(response, function (err, result) {
     var str = result[Object.keys(result)[0]];
     roster.name = str.team[0].$.name;
-
       for (i=0; i < str.team.length;i++){
         for (j=0; j < str.team[i].roster.length; j++){
           for (k=0; k < str.team[i].roster[j].player.length; k++){
             var player = str.team[i].roster[j].player[k].$;
+            player.full_name = player.first_name + ' ' + player.last_name;
             appendPlayerShortId(player);
             players.push(player);
           }
         }
       }
   });
-  sortByPositions('eu_soccer', players);
-  roster.players = players
+  roster.usat_id = usat_id;
+  roster.players = players;
   return roster;
 }
 

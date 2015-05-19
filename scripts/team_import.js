@@ -76,7 +76,7 @@ switch (league){
                 teams = formatSoccerTeams(response.body);
                 break;
 	           }
-        mongoInsert(teams, league);
+            mongoInsert(teams, league);
       }
       else{
         console.log('somethings really terrible happened');
@@ -90,7 +90,7 @@ switch (league){
         for (var i = 0; i < teams.length; i++) {
           if (league == 'eu_soccer'){
               //soccer teams don't really have markets, their names include their citys. For our puropses (rendering), this will go into the market field
-              col.insert({_id:shortId.generate(), team_id:encryption.encrypt(teams[i].id), market:teams[i].name, name: '', country:teams[i].country, league:league, type: 'roster'}, function() {});
+              col.insert({_id:shortId.generate(), team_id:encryption.encrypt(teams[i].id), market:teams[i].name, name: '', country:teams[i].country, usat_id:teams[i].alias, league:league, type: 'roster'}, function() {});
           }
           else{
             //really the only 4 key:value pairs we care about for now
