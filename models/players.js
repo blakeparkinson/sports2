@@ -571,7 +571,7 @@ var insertLeaders= function (data){
     leadersList.players = top_category;
     leadersList.created_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
     db.open(function(err, db){
-      db.collection('leaders').update({"$and" : [{league: leadersList.league},{category: leadersList.category},{team_id: leadersList.team_id}]},
+      db.collection('leaders').update({"$and" : [{league: leadersList.league},{category: leadersList.category}]},
         {$set: leadersList}, 
         {upsert: true, multi:false}, function(err, insert){
       if (err){
