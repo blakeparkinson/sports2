@@ -1,6 +1,7 @@
 // run this script by cd'ing into the scripts dir and 
-//then typing "node index_script.js ['collection']"
-// for example to import nba, you do "node index_script.js goats"
+// uncommenting the indexes you want to insert into Mongo
+// Type "node index_script.js to run
+
 
 var common = require('../routes/common')
 var config = common.config();
@@ -15,27 +16,21 @@ var encryption = require('../encryption.js');
 var request = require('request');
 
 
-var supported_collections = ['goats', 'teams', 'leaders', 'players', 'quiz'];
-
-//process.argv grabs the command line arguments
-var collection = process.argv[2];
-
-if (supported_collections.indexOf(collection) == -1){
-  console.log('We cant do this collection yet.');
-  return
-}
-
 /*
+// Players Collection Team_id unique
 db.open(function(err, db){
-    db.collection('teams').createIndex( { type: 1 }, { sparse: true }, function (err){
+    db.collection('players').createIndex( { team_id: 1 }, { unique: true }, function (err){
       if (err) {
         console.log('Ahh! An Error with Insert!');
         return;
       }
     })
   })
+
 */
 
+/*
+// Quiz Collection Type & League
 db.open(function(err, db){
     db.collection('quiz').createIndex( { type: "text", league: "text" }, function (err){
       if (err) {
@@ -44,3 +39,18 @@ db.open(function(err, db){
       }
     })
   })
+
+*/
+
+/*
+// Quiz Collection 
+db.open(function(err, db){
+    db.collection('quiz').createIndex( { created_at : 1}, function (err){
+      if (err) {
+        console.log('Ahh! An Error with Insert!');
+        return;
+      }
+    })
+  })
+*/
+

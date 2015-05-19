@@ -187,8 +187,8 @@ var top_script = function(url, category, callback1){
                 leadersList.league = league,
                 leadersList.type = 'leaders',
                 leadersList.description = teams_model.fetchStatDescription(category);
-                leadersList.team_id = id,
-                leadersList.created_at= new Date().toISOString().slice(0, 19).replace('T', ' ');
+                leadersList.team_id = id;
+                leadersList.created_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
                 leadersList.category = category;
             players_model.insertLeaders(data);
             mongoInsert(leadersList);
