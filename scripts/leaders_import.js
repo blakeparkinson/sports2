@@ -37,7 +37,10 @@ var main = function(league){
       categories =["assists", "goals", "points", "wins",  "gaa", "savePercentage", "penaltyMinutes", "fightingMajors", "penaltyMinGame"];
       break;
     case "nfl":
-      categories = ["passYards","passTD", "passINT", "compPercentage", "qbRating", "rushYards", "rushTD", "recYards", "recTD", "tackles", "sacks", "interceptions" ]
+      categories = ["passYards","passTD", "passINT", "compPercentage", "qbRating", "rushYards", "rushTD", "recYards", "recTD", "tackles", "sacks", "interceptions" ];
+      break;
+    case 'mlb':
+      categories = ['battingAvg', 'hr', 'rbi', 'sb', 'hittingBb', 'battingK', 'slg', 'ops', 'obp', 'era', 'pitchingK', 'wins', 'whip', 'pitchingBb']
   }
 
     async.eachSeries(categories, function (category, callback) {
@@ -139,7 +142,48 @@ var main = function(league){
       case "interceptions":
         url ="http://www.cbssports.com/nfl/stats/playersort/nfl/year-2014-season-regular-category-interceptions";
         break;
-
+      case "battingAvg":
+        url = "http://www.cbssports.com/mlb/stats/playersort/sortableTable/mlb/year-2015-season-regularseason-category-batting-qualifying-1?:sort_col=4";
+        break;
+      case "hr":
+        url = "http://www.cbssports.com/mlb/stats/playersort/sortableTable/mlb/year-2015-season-regularseason-category-batting?:sort_col=10";
+        break;
+      case "rbi":
+        url = "http://www.cbssports.com/mlb/stats/playersort/sortableTable/mlb/year-2015-season-regularseason-category-batting?:sort_col=11";
+        break;
+      case "sb":
+        url ="http://www.cbssports.com/mlb/stats/playersort/sortableTable/mlb/year-2015-season-regularseason-category-batting?:sort_col=12";
+        break;
+      case "hittingBb":
+        url = "http://www.cbssports.com/mlb/stats/playersort/sortableTable/mlb/year-2015-season-regularseason-category-batting?:sort_col=14";
+        break;
+      case "battingK":
+        url ="http://www.cbssports.com/mlb/stats/playersort/sortableTable/mlb/year-2015-season-regularseason-category-batting?:sort_col=15";
+        break;
+      case "slg":
+        url = "http://www.cbssports.com/mlb/stats/playersort/sortableTable/mlb/year-2015-season-regularseason-category-batting?:sort_col=17";
+        break;
+      case "ops":
+        url ="http://www.cbssports.com/mlb/stats/playersort/sortableTable/mlb/year-2015-season-regularseason-category-batting?:sort_col=18";
+        break;
+      case "obp":
+        url = "http://www.cbssports.com/mlb/stats/playersort/sortableTable/mlb/year-2015-season-regularseason-category-batting?:sort_col=16";
+        break;
+      case "era":
+        url = "http://www.cbssports.com/mlb/stats/playersort/sortableTable/mlb/year-2015-season-regularseason-category-pitching-qualifying-1?:sort_col=15";
+        break;
+      case "pitchingK":
+        url = "http://www.cbssports.com/mlb/stats/playersort/sortableTable/mlb/year-2015-season-regularseason-category-pitching-qualifying-1?:sort_col=17";
+        break;
+      case "pitchingBb":
+        url = "http://www.cbssports.com/mlb/stats/playersort/sortableTable/mlb/year-2015-season-regularseason-category-pitching-qualifying-1?:sort_col=16";
+        break;
+      case "whip":
+        url ="http://www.cbssports.com/mlb/stats/playersort/sortableTable/mlb/year-2015-season-regularseason-category-pitching-qualifying-1?:sort_col=19";
+        break;
+      case "wins":
+        url = "http://www.cbssports.com/mlb/stats/playersort/sortableTable/mlb/year-2015-season-regularseason-category-pitching-qualifying-1?:sort_col=7";
+        break;
     }
     // Call the core functionality now that we have the right variables.
     top_script(url, category, callback);
