@@ -69,13 +69,14 @@ var startCounter = function(){
 
 }
 
-var uploadScore = function(correct_answers){
+var uploadScore = function(correct_answers, percentage_correct){
   //get the quiz_id from the url
   var query_string = QueryString();
   var data = {
     quiz_id: query_string.id,
     quiz_score: correct_answers,
-    possible_score: roster.length
+    possible_score: roster.length,
+    percentage_correct: percentage_correct
   };
 
 
@@ -212,6 +213,8 @@ var AppendTemplate = function(source, parent, data){
 }
 
 var endQuiz = function(e, skip_mapping){
+  percent = +((correct / roster.length).toFixed(2));
+  console.log("percent "+ percent);
   $('#also-might-like').show();
   stop_counter = true;
   team_container.find('.clock').text('00:00');
@@ -223,7 +226,7 @@ var endQuiz = function(e, skip_mapping){
   }
   //remove the quit button
   team_container.find('.quit-btn').remove();
-  uploadScore(correct);
+  uploadScore(correct, percent);
 }
 
 var QueryString = function () {

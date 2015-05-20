@@ -60,10 +60,11 @@ router.get('/', function(req, res) {
 router.get('/results', function(req, res) {
   var quiz_id = req.query.quiz_id,
     quiz_score = req.query.quiz_score,
-    possible_score = req.query.possible_score;
+    possible_score = req.query.possible_score,
+    percentage_correct = req.query.percentage_correct;
     db.open(function(err, db){
       db.collection("quiz").update({_id: quiz_id},
-      {$set: {quiz_score: quiz_score, possible_score: possible_score}},
+      {$set: {quiz_score: quiz_score, possible_score: possible_score, percentage_correct: percentage_correct}},
       {upsert: true, multi:false}, function (err, upserted){
         if (err){
           console.log(err);
