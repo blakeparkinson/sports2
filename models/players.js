@@ -61,7 +61,7 @@ var returnPlayers = function (players, rb_team_id, res, league, colors){
 }
 
 var fetchTeamColors = function (league, team_name){
-  var colorsObject = _.first(team_colors_nba.team_colors);
+  var colorsObject = _.first(all_team_colors.team_colors);
   var colors = [];
   colors.primary_hex = "#333333";
   colors.secondary_hex = "#FFFFFF";
@@ -75,7 +75,13 @@ var fetchTeamColors = function (league, team_name){
       }
     break;
     case 'nfl':
-    case 'nhl':
+    case 'nhl': 
+     for (i=0;i<colorsObject.teams.length;i++){
+        if (colorsObject.teams[i].team_name == team_name){
+          colors.primary_hex = colorsObject.teams[i].primary_hex;
+          colors.secondary_hex = colorsObject.teams[i].secondary_hex;
+        }
+      }
     case 'mlb':
     case 'eu_soccer':
     break;
