@@ -1,5 +1,6 @@
 var roster,
     correct = 0,
+    placer = 0,
     stop_counter = false;
     team_container = $('.team-container'),
     answer_container = $('.answer-container-contain');
@@ -73,7 +74,8 @@ var uploadScore = function(correct_answers){
   var query_string = QueryString();
   var data = {
     quiz_id: query_string.id,
-    quiz_score: correct_answers
+    quiz_score: correct_answers,
+    possible_score: roster.length
   };
 
 
@@ -122,6 +124,7 @@ var checkForMatches = function(guess, input_field){
     //check full name and just last name, also make sure the player has not been guessed already
     if ((guess == last_name.toLowerCase().trim() || guess == full_name.toLowerCase().trim()) && !player.guessed){
       appendGreenCheck(input_field);
+      correct++;
       //populateTable(player);
       addToCorrectList(player, index);
       input_field.val('');
@@ -144,13 +147,13 @@ var appendGreenCheck  = function(input_field){
 
 var addToCorrectList = function (player, index){
   if (player.guessed == true) return;
-  correct++;
+  placer++;
   var imgHtml = '';
   if (typeof player.avatar_url != 'undefined'){
     imgHtml = '<img class="circle-pic" src='+player.avatar_url+'>';
   }
   if (type != 'leaders' && type != 'goats' ){
-    var html = '<div class="outer-guess"><div class="inner-guess"><div class="correct-guess" data-index="'+index+'">'+correct +'.' + imgHtml + player.full_name + '</div></div></div>';
+    var html = '<div class="outer-guess"><div class="inner-guess"><div class="correct-guess" data-index="'+index+'">'+placer +'.' + imgHtml + player.full_name + '</div></div></div>';
     answer_container.append(html);
     var current = answer_container.find('.correct-guess[data-index="' + index + '" ]').closest('.outer-guess');
     current.hide();
