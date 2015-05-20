@@ -36,9 +36,12 @@ router.get('/', function(req, res) {
 
 router.get('/:league', function(req, res) {
   var league = req.params.league;
+  var listObjGoats = {league : league, type: 'goats'};
+  if (league == 'soccer'){
+    league = 'eu_soccer';
+  }
   var listObjRosters = {league : league, type: 'roster'};
   var listObjLeaders = {league : league, type: 'leaders'};
-  var listObjGoats = {league : league, type: 'goats'};
   async.parallel({
     //this (bind) is the syntax you use to pass arguments via async lib.
     popular_lists: fetchTeamListsByLeague.bind(null,listObjRosters),
