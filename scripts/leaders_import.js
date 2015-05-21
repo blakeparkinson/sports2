@@ -348,7 +348,7 @@ main(league);
 var hackFormatSoccerPlayer = function(soccerPlayer, callback){
   var id = shortId.generate();
   var formattedPlayer = {
-    'id': id,
+    'player_id': id,
     'full_name': soccerPlayer.name,
     'last_name': soccerPlayer.name.substring(soccerPlayer.name.indexOf(' ') + 1), //get rid of the space and everything before it to get last name
     'stat': soccerPlayer.top
