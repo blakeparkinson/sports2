@@ -17,7 +17,7 @@ var encryption = require('../encryption.js');
 var shortId = require('shortid');
 var top_category = [];
 var salaries_list = require('../lists/other/nba/nba_salaries.js');
-var team_colors_nba = require('../lists/team_colors/team_colors_nba.js');
+var teamColors = require('../lists/team_colors/team_colors.js');
 var teams_model = require('./teams.js');
 var avatarLeagues = ['nfl, nhl'];
 
@@ -29,8 +29,7 @@ var goatsLeadersArray = function(){
 }
 
 var intreturnPlayers = function(players, rb_team_id, res, league, second_callback){
-  var team_name = players.team_name;
-  var colors = fetchTeamColors(league, team_name);
+  var colors = fetchTeamColors(league, players.name);
   second_callback(players, rb_team_id, res, league, colors)
 }
 
@@ -61,25 +60,19 @@ var returnPlayers = function (players, rb_team_id, res, league, colors){
 }
 
 var fetchTeamColors = function (league, team_name){
-  var colorsObject = _.first(team_colors_nba.team_colors);
   var colors = [];
   colors.primary_hex = "#333333";
   colors.secondary_hex = "#FFFFFF";
-  switch (league){
-    case 'nba':
-      for (i=0;i<colorsObject.teams.length;i++){
-        if (colorsObject.teams[i].team_name == team_name){
-          colors.primary_hex = colorsObject.teams[i].primary_hex;
-          colors.secondary_hex = colorsObject.teams[i].secondary_hex;
+  _.each(teamColors.team_colors, function(leagueObj){
+    if (leagueObj.league == league){
+      _.each(leagueObj.teams, function(teamObj){
+        if (teamObj.name == team_name){
+          colors.primary_hex = teamObj.primary_hex;
+          colors.secondary_hex = teamObj.secondary_hex;
         }
-      }
-    break;
-    case 'nfl':
-    case 'nhl':
-    case 'mlb':
-    case 'eu_soccer':
-    break;
-  }
+      })
+    }
+  })
   return colors;
 }
 
