@@ -242,7 +242,8 @@ var team_colors = [
         "primary_hex": "#C60C30",
         "secondary_hex": "#002244"
       }
-    ]  
+    ]
+   }, 
     {
     "league": "nhl",
     "teams": [
@@ -267,7 +268,7 @@ var team_colors = [
         "type": "roster",
         "primary_hex": "#006A4E",
         "secondary_hex": "#C0C0C0"
-      }.
+      },
       {
         "_id": "Xki9YHWDA",
         "team_id": "dw53EN1CMekNqWoobhugKyra4CJ9d52ydUbXOJSZto8QMO+h/Pr/Pg==",
@@ -575,9 +576,8 @@ var team_colors = [
         "type": "roster",
         "primary_hex": "#E03A3E",
         "secondary_hex": "#000000"
-      }
-    ]             
-  }            
+      }             
+    ]           
   }
 ]
 
