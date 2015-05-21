@@ -10,7 +10,6 @@ var config = common.config();
 var request = require('request');
 
 
-
 describe('tests', function(){
   describe('randImg', function(){
     it('should return an image matching the corresponding league', function(){
@@ -45,6 +44,13 @@ describe('tests', function(){
           console.log(error);
         }
       });
+    })
+  })
+  describe('fetchTeamColors', function(){
+    it('should return a primary and secondary hex representing the teams colors', function(){
+      var colors = players_model.fetchTeamColors('nhl', 'Canucks');
+      expect(colors.primary_hex).to.equal('#07346F');
+      expect(colors.secondary_hex).to.equal('#047A4A');
     })
   })
 })
