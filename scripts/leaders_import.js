@@ -17,7 +17,7 @@ var players_model = require('../models/players.js'),
 var shortId = require('shortid');
 var teams_model = require('../models/teams.js');
 
-var supported_leagues = ['nba', 'nfl', 'nhl', 'mlb'];
+var supported_leagues = ['nba', 'nfl', 'nhl', 'mlb', 'eu_soccer'];
 //process.argv grabs the command line arguments
 var league = process.argv[2];
 
@@ -40,7 +40,10 @@ var main = function(league){
       categories = ["passYards","passTD", "passINT", "compPercentage", "qbRating", "rushYards", "rushTD", "recYards", "recTD", "tackles", "sacks", "interceptions" ];
       break;
     case 'mlb':
-      categories = ['battingAvg', 'hr', 'rbi', 'sb', 'hittingBb', 'battingK', 'slg', 'ops', 'obp', 'era', 'pitchingK', 'wins', 'whip', 'pitchingBb']
+      categories = ['battingAvg', 'hr', 'rbi', 'sb', 'hittingBb', 'battingK', 'slg', 'ops', 'obp', 'era', 'pitchingK', 'wins', 'whip', 'pitchingBb'];
+    case 'eu_soccer':
+      categories = ['eplGoals','eplShots', 'eplShotsOnTarget', 'eplAssists', 'eplYc', 'eplRc', 'laligaGoals','laligaShots', 'laligaShotsOnTarget', 'laligaAssists', 'laligaYc', 'laligaRc', 'bundGoals','bundShots', 'bundShotsOnTarget', 'bundAssists', 'bundYc', 'bundRc', 'seriaAGoals','seriaAShots', 'seriaAShotsOnTarget', 'seriaAAssists', 'seriaAYc', 'seriaARc',];
+      break;
   }
 
     async.eachSeries(categories, function (category, callback) {
@@ -184,34 +187,116 @@ var main = function(league){
       case "wins":
         url = "http://www.cbssports.com/mlb/stats/playersort/sortableTable/mlb/year-2015-season-regularseason-category-pitching-qualifying-1?:sort_col=7";
         break;
+      case "eplGoals":
+        url = "http://www.foxsports.com/soccer/stats?competition=1&season=2014&category=STANDARD&team=0&sort=3";
+        break;
+      case "eplShots":
+        url = "http://www.foxsports.com/soccer/stats?competition=1&season=2014&category=STANDARD&pos=0&team=0&splitType=0&sort=4";
+        break;
+      case "eplShotsOnTarget":
+        url = "http://www.foxsports.com/soccer/stats?competition=1&season=2014&category=STANDARD&pos=0&team=0&splitType=0&sort=5";
+        break;
+      case "eplAssists":
+        url = "http://www.foxsports.com/soccer/stats?competition=1&season=2014&category=STANDARD&pos=0&team=0&splitType=0&sort=6";
+        break;
+      case "eplYc":
+        url = "http://www.foxsports.com/soccer/stats?competition=1&season=2014&category=STANDARD&pos=0&team=0&splitType=0&sort=8";
+        break;
+      case "eplRc":
+        url = "http://www.foxsports.com/soccer/stats?competition=1&season=2014&category=STANDARD&pos=0&team=0&splitType=0&sort=9";
+        break;
+      case "laligaGoals":
+        url = "http://www.foxsports.com/soccer/stats?competition=2&season=2014&category=STANDARD&pos=0&team=0&splitType=0&sort=3";
+        break;
+      case "laligaShots":
+        url = "http://www.foxsports.com/soccer/stats?competition=2&season=2014&category=STANDARD&pos=0&team=0&splitType=0&sort=4";
+        break;
+      case "laligaShotsOnTarget":
+        url = "http://www.foxsports.com/soccer/stats?competition=2&season=2014&category=STANDARD&pos=0&team=0&splitType=0&sort=5";
+        break;
+      case "laligaAssists":
+        url = "http://www.foxsports.com/soccer/stats?competition=2&season=2014&category=STANDARD&pos=0&team=0&splitType=0&sort=6";
+        break;
+      case "laligaYc":
+        url = "http://www.foxsports.com/soccer/stats?competition=2&season=2014&category=STANDARD&pos=0&team=0&splitType=0&sort=8";
+        break;
+      case "laligaRc":
+        url = "http://www.foxsports.com/soccer/stats?competition=2&season=2014&category=STANDARD&pos=0&team=0&splitType=0&sort=9";
+        break;
+      case "bundGoals":
+        url = "http://www.foxsports.com/soccer/stats?competition=4&season=2014&category=STANDARD&team=0&sort=3";
+        break;
+      case "bundShots":
+        url = "http://www.foxsports.com/soccer/stats?competition=4&season=2014&category=STANDARD&team=0&sort=4";
+        break;
+      case "bundShotsOnTarget":
+        url = "http://www.foxsports.com/soccer/stats?competition=4&season=2014&category=STANDARD&team=0&sort=5";
+        break;
+      case "bundAssists":
+        url = "http://www.foxsports.com/soccer/stats?competition=4&season=2014&category=STANDARD&team=0&sort=6";
+        break;
+      case "bundYc":
+        url = "http://www.foxsports.com/soccer/stats?competition=4&season=2014&category=STANDARD&team=0&sort=8";
+        break;
+      case "bundRc":
+        url = "http://www.foxsports.com/soccer/stats?competition=4&season=2014&category=STANDARD&team=0&sort=9";
+        break;
+      case "seriaAGoals":
+        url = "http://www.foxsports.com/soccer/stats?competition=3&season=2014&category=STANDARD&pos=0&team=0&splitType=0&sort=3";
+        break;
+      case "seriaAShots":
+        url = "http://www.foxsports.com/soccer/stats?competition=3&season=2014&category=STANDARD&pos=0&team=0&splitType=0&sort=4";
+        break;
+      case "seriaAShotsOnTarget":
+        url = "http://www.foxsports.com/soccer/stats?competition=3&season=2014&category=STANDARD&pos=0&team=0&splitType=0&sort=5";
+        break;
+      case "seriaAAssists":
+        url = "http://www.foxsports.com/soccer/stats?competition=3&season=2014&category=STANDARD&pos=0&team=0&splitType=0&sort=6";
+        break;
+      case "seriaAYc":
+        url = "http://www.foxsports.com/soccer/stats?competition=3&season=2014&category=STANDARD&pos=0&team=0&splitType=0&sort=8";
+        break;
+      case "seriaARc":
+        url = "http://www.foxsports.com/soccer/stats?competition=3&season=2014&category=STANDARD&pos=0&team=0&splitType=0&sort=9";
+        break;
     }
     // Call the core functionality now that we have the right variables.
-    top_script(url, category, callback);
+    top_script(url, category, league, callback);
     },function (err) {
           if (err) { throw err; }
           console.log('done');
           });
   }
 
-var top_script = function(url, category, callback1){
+var top_script = function(url, category, league, callback1){
   request(url, function(error, response, html){
     console.log("starting script for "+league+" category: "+category);
 
     if(!error){
       var $ = cheerio.load(html);
 
+      var table = (league != 'eu_soccer')? '.data' : '.wisfb_statTableV2 >tbody';
+      console.log(table);
      	//this is the table class name
-      $('.data').filter(function(){
+      $(table).filter(function(){
 
      // Let's store the data we filter into a variable so we can easily see what's going on.
         var data = $(this);
-        var results = [];
+        var results = [],
+            soccerPlayers =[];
         //sort through their odd and even rows
-        var tr = data.find('.row1, .row2');
+        var tr = (league != 'eu_soccer')? data.find('.row1, .row2'): data.find('tr');
         tr.each(function(i, element){
-          var player = $(this).find('td:first-child').text();
-          var team = $(this).find('td:nth-child(3)').text();
-          var top = $(this).find('td.sort').text();
+          if (league != 'eu_soccer'){
+            var player = $(this).find('td:first-child').text();
+            var team = $(this).find('td:nth-child(3)').text();
+            var top = $(this).find('td.sort').text();
+          }
+          else{
+            var player = $(this).find('td:nth-child(2) .wisfb_dataContainer a:nth-child(1)').text();
+            var team = $(this).find('td:nth-child(2) .wisfb_doubleLink a:nth-child(2)').text();
+            var top = $(this).find('td.wisfb_selected .wisfb_dataContainer').text();
+          }
           var metadata = {
             name: player,
             top: top,
@@ -221,8 +306,17 @@ var top_script = function(url, category, callback1){
         })
 
         async.eachSeries(results, function (player, callback) {
-          //async lib is weird, you pass it a callback and it calls back and lets you know when it has finished for each loop
-          players_model.pluckPlayerFromName(player, callback, league);
+          if (league == 'eu_soccer'){
+            var soccerPlayer = hackFormatSoccerPlayer(player);
+            soccerPlayers.push(soccerPlayer);
+            callback();
+          }
+          else{
+            //async lib is weird, you pass it a callback and it calls back and lets you know when it has finished for each loop
+            players_model.pluckPlayerFromName(player, callback, league);
+          }
+
+          
         }, function (err) {
           if (err) { throw err; }
             var leadersList = {},
@@ -234,6 +328,9 @@ var top_script = function(url, category, callback1){
                 leadersList.team_id = id;
                 leadersList.created_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
                 leadersList.category = category;
+            if (league == 'eu_soccer'){
+              data.players = soccerPlayers;
+            }
             players_model.insertLeaders(data);
             mongoInsert(leadersList);
             console.log('done with '+category);
@@ -248,6 +345,19 @@ var top_script = function(url, category, callback1){
 }
 
 main(league);
+
+var hackFormatSoccerPlayer = function(soccerPlayer, callback){
+  console.log(soccerPlayer);
+  var id = shortId.generate();
+  var formattedPlayer = {
+    'id': id,
+    'full_name': soccerPlayer.name,
+    'last_name': soccerPlayer.name.substring(soccerPlayer.name.indexOf(' ')),
+    'stat': soccerPlayer.top
+  };
+
+  return formattedPlayer;
+}
 
 
 var mongoInsert = function (leadersList){

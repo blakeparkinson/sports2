@@ -545,7 +545,7 @@ var insertLeaders= function (data){
     leadersList.category = data.category;
     leadersList.team_id = data.team_id;
     leadersList.description = teams_model.fetchStatDescription(data.category);
-    leadersList.players = top_category;
+    leadersList.players = (typeof data.players == 'undefined')? top_category: data.players;
     leadersList.created_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
     db.open(function(err, db){
       db.collection('leaders').update({"$and" : [{league: leadersList.league},{category: leadersList.category}]},
@@ -605,6 +605,30 @@ var abbreviationHelper = function(league, abbreviation){
           abbreviation = abbreviation;
       }
     break;
+    case 'eu_soccer':
+      switch (abbreviation){
+        case 'MCY':
+          abbreviation = 'MC';
+        break;
+        case 'MAN':
+          abbreviation = "MU";
+        break;
+        case 'SHN':
+          abbreviation = 'SOU';
+        break;
+        case 'LIV':
+          abbreviation = 'LFC';
+        break;
+        case 'NCU':
+          abbreviation = 'NEW';
+        break;
+        case 'RMD':
+          abbreviation = 'MAD';
+        break;
+        case 'CEL':
+          abbreviation = 'CEV';
+        break;
+      }
   
   }
   return abbreviation;
