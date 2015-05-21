@@ -276,7 +276,6 @@ var top_script = function(url, category, league, callback1){
       var $ = cheerio.load(html);
 
       var table = (league != 'eu_soccer')? '.data' : '.wisfb_statTableV2 >tbody';
-      console.log(table);
      	//this is the table class name
       $(table).filter(function(){
 
@@ -347,12 +346,11 @@ var top_script = function(url, category, league, callback1){
 main(league);
 
 var hackFormatSoccerPlayer = function(soccerPlayer, callback){
-  console.log(soccerPlayer);
   var id = shortId.generate();
   var formattedPlayer = {
     'id': id,
     'full_name': soccerPlayer.name,
-    'last_name': soccerPlayer.name.substring(soccerPlayer.name.indexOf(' ')),
+    'last_name': soccerPlayer.name.substring(soccerPlayer.name.indexOf(' ') + 1), //get rid of the space and everything before it to get last name
     'stat': soccerPlayer.top
   };
 
