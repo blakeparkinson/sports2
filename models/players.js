@@ -515,6 +515,7 @@ var randImg = function(league) {
             for (i=0;i<doc.players.length;i++)  {
               if (doc.players[i].full_name.toLowerCase() == player.name.toLowerCase()){
                 playerInfo = doc.players[i];
+                playerInfo.stat = player.top;
                 top_category.push(playerInfo);  //aggregates the list of players
               }
             }
