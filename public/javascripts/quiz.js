@@ -75,7 +75,7 @@ var uploadScore = function(correct_answers){
   var data = {
     quiz_id: query_string.id,
     quiz_score: correct_answers,
-    possible_score: roster.length,
+    possible_score: roster.length
   };
 
 
