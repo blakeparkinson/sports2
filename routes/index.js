@@ -11,7 +11,6 @@ quizCutoffDate.setDate(quizCutoffDate.getDate() - 7);  //currently set to 1 week
 
 
 router.get('/', function(req, res) {
-	console.log(req.session.hello);
 	var popular_quizzes = db.collection('quiz').aggregate(
 	[{ "$match" : { "created_at" : { "$gt" : quizCutoffDate.toISOString().slice(0, 19).replace('T', ' ') }}},
 	{ $group : {

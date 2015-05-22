@@ -87,6 +87,10 @@ var uploadScore = function(correct_answers, percentage_correct){
       dataType: 'json',
         success: function(response){
           console.log(response);
+          var allScores = response.all_scores,
+          thisQuizScore = response.this_score;
+          console.log("allScores"+allScores);
+          console.log("thisquiz"+thisQuizScore);
         }
     });
 
@@ -253,29 +257,17 @@ var QueryString = function () {
 }
 
 var getTemplate = function(name, data, options){
+  templates = {},
+  $.post('/index/get/' + name, data, function(d){
+      templates[name] = d;
+      tpl = processTemplate(d, data, options); 
+      return tpl;
+  }); 
+}
 
-    templates = {},
-
-    $.post('/index/get/' + name, data, function(d){
-        
-        templates[name] = d;
-        
-        tpl = processTemplate(d, data, options); 
-
-
-        return tpl;
-
-    }); 
-                   
-  }
-
-  var processTemplate = function(template, data, options){
-
-        var tpl = Handlebars.compile(template, options),
-            compiled;
-
-        data ? compiled = tpl(data) : compiled = tpl({});
-
-        return compiled;
-
-    }
+var processTemplate = function(template, data, options){
+  var tpl = Handlebars.compile(template, options),
+    compiled;
+    data ? compiled = tpl(data) : compiled = tpl({});
+    return compiled;
+}
