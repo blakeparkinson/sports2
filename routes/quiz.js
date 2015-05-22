@@ -13,7 +13,7 @@ var leaguesearch = require('./leaguesearch.js');
 router.get('/', function(req, res) {
       res.quiz_page = true;
       var quiz_id = req.query.id;
-      //var rb_team_id = null;
+      var rb_team_id = null;
       db.collection('quiz').findOne( { _id : quiz_id}, function(err, items){
         rb_team_id = items.rb_team_id;
         league = items.league;
@@ -55,11 +55,9 @@ router.get('/', function(req, res) {
             }
           });
         }
-
+        bla = fetchQuizScores(req, rb_team_id);
+        console.log("bla"+ bla);
   });
-/*  console.log("req is "+Object.keys(req));
-  req.session.percentages = fetchQuizScores(rb_team_id);
-  console.log("req sesh "+ req.session.percentages);*/
 })
  
 router.get('/results', function(req, res) {
@@ -80,28 +78,21 @@ router.get('/results', function(req, res) {
         }
       });
     });
-    //fetchQuizScores(rb_team_id);
-  fetchQuizScores(req, res, rb_team_id);
 });
 
-var fetchQuizScores = function(req, res, rb_team_id){
-  console.log("fetching quiz scores");
+var fetchQuizScores = function(req, rb_team_id){
   db.collection('quiz').find({ "rb_team_id" : rb_team_id}, {percentage_correct: 1}, function(err, items){
-            percentages = []
-            
-            if (err){
-              console.log("bummer man "+ err);
-            }
-            
-            else {
-              for (i=0;i<Object.keys(items).length;i++){
-                percentages.push(items[i].percentage_correct);
-              }
-              req.session.percentages = percentages;
-              console.log("req sesh "+ req.session.percentages);
-              //res.send(req.session.percentages);
-
-            }
+    percentages = []
+    if (err){
+      console.log("bummer man "+ err);
+    }
+    else {
+      for (i=0;i<Object.keys(items).length;i++){
+        percentages.push(items[i].percentage_correct);
+      }
+      console.log("lala "+percentages);
+      req.session.hello = percentages;
+    }
   })
 }
           

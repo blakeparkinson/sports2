@@ -12,7 +12,6 @@ quizCutoffDate.setDate(quizCutoffDate.getDate() - 7);  //currently set to 1 week
 
 
 router.get('/', function(req, res) {
-  console.log("req is"+req.session.percentages);
   var listObjRosters = {league : false, type: 'roster'};
   var listObjLeaders = {league : false, type: 'leaders'};
   var listObjGoats = {league : false, type: 'goats'};
