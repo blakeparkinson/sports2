@@ -63,7 +63,6 @@ router.get('/', function(req, res) {
  
 
 router.get('/results', function(req, res) {
-  console.log("resullllts"+req.session.scores);
   var quiz_id = req.query.quiz_id,
     quiz_score = req.query.quiz_score,
     possible_score = req.query.possible_score,
@@ -89,13 +88,12 @@ var fetchQuizScores = function(req, rb_team_id){
   db.collection('quiz').find({ "rb_team_id" : rb_team_id}, {percentage_correct: 1}, function(err, items){
     percentages = []
     if (err){
-      console.log("bummer man "+ err);
+      console.log(err);
     }
     else {
       for (i=0;i<Object.keys(items).length;i++){
         percentages.push(items[i].percentage_correct);
       }
-      console.log("lala "+percentages);
       // Assign each quiz score to a bucket for graph display
       bracketQuizScores(req, percentages);
     }
@@ -111,7 +109,6 @@ var bracketQuizScores = function(req, percentage_array){
   eScores = 0;
   
   for (i=0;i<percentage_array.length;i++){
-    console.log(percentage_array[i]);
     if (percentage_array[i] == null){console.log("meh")}
     else if (percentage_array[i] < 0.20){aScores++}
     else if (percentage_array[i]>= 0.20 && percentage_array[i] < 0.40){bScores++}
