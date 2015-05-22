@@ -161,10 +161,12 @@ var addToCorrectList = function (player, index){
   }
   else{
     //goats and leaders
+    var statHtml = '<span class="stat">'+player.stat+'</span>';
     var playerBox = answer_container.find('.correct-guess[data-player-id='+player.player_id+']');
     playerBox.removeClass('no-flip');
     var playerHtml = imgHtml + player.full_name;
     playerBox.append(playerHtml);
+    playerBox.parent().append(statHtml);
     playerBox.closest('.outer-guess').fadeIn(200).addClass('green-background');
   }
 }
