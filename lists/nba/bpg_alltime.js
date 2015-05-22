@@ -12,7 +12,7 @@ var topBPG = [
     "last_name":"Eaton",
     "first_name":"Mark",
     "full_name":"Mark Eaton",
-    "bpg":"3.5"
+    "stat":"3.5"
   },
   {
     "player_id": "2",
@@ -20,7 +20,7 @@ var topBPG = [
     "last_name":"Bol",
     "first_name":"Manute",
     "full_name":"Manute Bol",
-    "bpg":"3.34"
+    "stat":"3.34"
   },
   {
     "player_id": "3",
@@ -28,7 +28,7 @@ var topBPG = [
     "last_name":"Olajuwon",
     "first_name":"Hakeem",
     "full_name":"Hakeem Olajuwon",
-    "bpg":"3.09"
+    "stat":"3.09"
   },
   {
     "player_id": "4",
@@ -36,7 +36,7 @@ var topBPG = [
     "last_name":"Robinson",
     "first_name":"David",
     "full_name":"David Robinson",
-    "bpg":"2.99"
+    "stat":"2.99"
   },
   {
     "player_id": "5",
@@ -44,7 +44,7 @@ var topBPG = [
     "last_name":"Smith",
     "first_name":"Elmore",
     "full_name":"Elmore Smith",
-    "bpg":"2.9"
+    "stat":"2.9"
   },
   {
     "player_id": "6",
@@ -52,7 +52,7 @@ var topBPG = [
     "last_name":"Mourning",
     "first_name":"Alonzo",
     "full_name":"Alonzo Mourning",
-    "bpg":"2.81"
+    "stat":"2.81"
   },
   {
     "player_id": "7",
@@ -60,7 +60,7 @@ var topBPG = [
     "last_name":"Mutombo",
     "first_name":"Dikembe",
     "full_name":"Dikembe Mutombo",
-    "bpg":"2.75"
+    "stat":"2.75"
   },
   {
     "player_id": "8",
@@ -68,7 +68,7 @@ var topBPG = [
     "last_name":"Ibaka",
     "first_name":"Serge",
     "full_name":"Serge Ibaka",
-    "bpg":"2.58"
+    "stat":"2.58"
   },
   {
     "player_id": "9",
@@ -76,7 +76,7 @@ var topBPG = [
     "last_name":"Abdul-Jabbar",
     "first_name":"Kareem",
     "full_name":"Kareem Abdul-Jabbar",
-    "bpg":"2.57"
+    "stat":"2.57"
   },
   {
     "player_id": "10",
@@ -84,7 +84,7 @@ var topBPG = [
     "last_name":"Bradley",
     "first_name":"Shawn",
     "full_name":"Shawn Bradley",
-    "bpg":"2.55"
+    "stat":"2.55"
   }
   ]
 }]

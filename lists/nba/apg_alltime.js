@@ -12,7 +12,7 @@ var topAPG = [
     "last_name":"Johnson",
     "first_name":"Magic",
     "full_name":"Magic Johnson",
-    "apg":"11.19"
+    "stat":"11.19"
   },
   {
     "player_id": "2",
@@ -20,7 +20,7 @@ var topAPG = [
     "last_name":"Stockton",
     "first_name":"John",
     "full_name":"John Stockton",
-    "apg":"10.51"
+    "stat":"10.51"
   },
   {
     "player_id": "3",
@@ -28,7 +28,7 @@ var topAPG = [
     "last_name":"Paul",
     "first_name":"Chris",
     "full_name":"Chris Paul",
-    "apg":"9.92"
+    "stat":"9.92"
   },
   {
     "player_id": "4",
@@ -36,7 +36,7 @@ var topAPG = [
     "last_name":"Robertson",
     "first_name":"Oscar",
     "full_name":"Oscar Robertson",
-    "apg":"9.51"
+    "stat":"9.51"
   },
   {
     "player_id": "5",
@@ -44,7 +44,7 @@ var topAPG = [
     "last_name":"Thomas",
     "first_name":"Isiah",
     "full_name":"Isiah Thomas",
-    "apg":"9.26"
+    "stat":"9.26"
   },
   {
     "player_id": "6",
@@ -52,7 +52,7 @@ var topAPG = [
     "last_name":"Johnson",
     "first_name":"Kevin",
     "full_name":"Kevin Johnson",
-    "apg":"9.13"
+    "stat":"9.13"
   },
   {
     "player_id": "7",
@@ -60,7 +60,7 @@ var topAPG = [
     "last_name":"Kidd",
     "first_name":"Jason",
     "full_name":"Jason Kidd",
-    "apg":"8.69"
+    "stat":"8.69"
   },
   {
     "player_id": "8",
@@ -68,7 +68,7 @@ var topAPG = [
     "last_name":"Wall",
     "first_name":"John",
     "full_name":"John Wall",
-    "apg":"8.61"
+    "stat":"8.61"
   },
   {
     "player_id": "9",
@@ -76,7 +76,7 @@ var topAPG = [
     "last_name":"Williams",
     "first_name":"Deron",
     "full_name":"Deron Williams",
-    "apg":"8.53"
+    "stat":"8.53"
   },
   {
     "player_id": "10",
@@ -84,7 +84,7 @@ var topAPG = [
     "last_name":"Nash",
     "first_name":"Steve",
     "full_name":"Steve Nash",
-    "apg":"8.49"
+    "stat":"8.49"
   }
   ]
 }]

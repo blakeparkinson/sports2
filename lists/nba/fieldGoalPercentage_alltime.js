@@ -12,7 +12,7 @@ var fieldGoalPercentage = [
     "last_name":"Gilmore",
     "first_name":"Artis",
     "full_name":"Artis Gilmore",
-    "fieldGoalPercentage":"0.599"
+    "stat":"0.599"
   },
   {
     "player_id": "2",
@@ -20,7 +20,7 @@ var fieldGoalPercentage = [
     "last_name":"Chandler",
     "first_name":"Tyson",
     "full_name":"Tyson Chandler",
-    "fieldGoalPercentage":"0.5906"
+    "stat":"0.5906"
   },
   {
     "player_id": "3",
@@ -28,7 +28,7 @@ var fieldGoalPercentage = [
     "last_name":"O'Neal",
     "first_name":"Shaquille",
     "full_name":"Shaquille O'Neal",
-    "fieldGoalPercentage":"0.5823"
+    "stat":"0.5823"
   },
   {
     "player_id": "4",
@@ -36,7 +36,7 @@ var fieldGoalPercentage = [
     "last_name":"West",
     "first_name":"Mark",
     "full_name":"Mark West",
-    "fieldGoalPercentage":"0.5803"
+    "stat":"0.5803"
   },
   {
     "player_id": "5",
@@ -44,7 +44,7 @@ var fieldGoalPercentage = [
     "last_name":"Howard",
     "first_name":"Dwight",
     "full_name":"Dwight Howard",
-    "fieldGoalPercentage":"0.5785"
+    "stat":"0.5785"
   },
   {
     "player_id": "6",
@@ -52,7 +52,7 @@ var fieldGoalPercentage = [
     "last_name":"Johnson",
     "first_name":"Steve",
     "full_name":"Steve Johnson",
-    "fieldGoalPercentage":"0.5722"
+    "stat":"0.5722"
   },
   {
     "player_id": "7",
@@ -60,7 +60,7 @@ var fieldGoalPercentage = [
     "last_name":"Dawkins",
     "first_name":"Darryl",
     "full_name":"Darryl Dawkins",
-    "fieldGoalPercentage":"0.572"
+    "stat":"0.572"
   },
   {
     "player_id": "8",
@@ -68,7 +68,7 @@ var fieldGoalPercentage = [
     "last_name":"Donaldson",
     "first_name":"James",
     "full_name":"James Donaldson",
-    "fieldGoalPercentage":"0.5706"
+    "stat":"0.5706"
   },
   {
     "player_id": "9",
@@ -76,7 +76,7 @@ var fieldGoalPercentage = [
     "last_name":"Outlaw",
     "first_name":"Bo",
     "full_name":"Bo Outlaw",
-    "fieldGoalPercentage":"0.5673"
+    "stat":"0.5673"
   },
   {
     "player_id": "10",
@@ -84,7 +84,7 @@ var fieldGoalPercentage = [
     "last_name":"Ruland",
     "first_name":"Jeff",
     "full_name":"Jeff Ruland",
-    "fieldGoalPercentage":"0.5637"
+    "stat":"0.5637"
   }
   ]
 }]

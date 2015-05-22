@@ -12,7 +12,7 @@ var ftPercentage = [
     "last_name":"Nash",
     "first_name":"Steve",
     "full_name":"Steve Nash",
-    "ftPercentage":"0.9043"
+    "stat":"0.9043"
   },
   {
     "player_id": "2",
@@ -20,7 +20,7 @@ var ftPercentage = [
     "last_name":"Price",
     "first_name":"Mark",
     "full_name":"Mark Price",
-    "ftPercentage":"0.9039"
+    "stat":"0.9039"
   },
   {
     "player_id": "3",
@@ -28,7 +28,7 @@ var ftPercentage = [
     "last_name":"Barry",
     "first_name":"Rick",
     "full_name":"Rick Barry",
-    "ftPercentage":"0.8998"
+    "stat":"0.8998"
   },
   {
     "player_id": "4",
@@ -36,7 +36,7 @@ var ftPercentage = [
     "last_name":"Curry",
     "first_name":"Stephen",
     "full_name":"Stephen Curry",
-    "ftPercentage":"0.8984"
+    "stat":"0.8984"
   },
   {
     "player_id": "5",
@@ -44,7 +44,7 @@ var ftPercentage = [
     "last_name":"Stojakovic",
     "first_name":"Peja",
     "full_name":"Peja Stojakovic",
-    "ftPercentage":"0.8948"
+    "stat":"0.8948"
   },
   {
     "player_id": "6",
@@ -52,7 +52,7 @@ var ftPercentage = [
     "last_name":"Billups",
     "first_name":"Chauncey",
     "full_name":"Chauncey Billups",
-    "ftPercentage":"0.894"
+    "stat":"0.894"
   },
   {
     "player_id": "7",
@@ -60,7 +60,7 @@ var ftPercentage = [
     "last_name":"Allen",
     "first_name":"Ray",
     "full_name":"Ray Allen",
-    "ftPercentage":"0.8939"
+    "stat":"0.8939"
   },
   {
     "player_id": "8",
@@ -68,7 +68,7 @@ var ftPercentage = [
     "last_name":"Murphy",
     "first_name":"Calvin",
     "full_name":"Calvin Murphy",
-    "ftPercentage":"0.8916"
+    "stat":"0.8916"
   },
   {
     "player_id": "9",
@@ -76,7 +76,7 @@ var ftPercentage = [
     "last_name":"Skiles",
     "first_name":"Scott",
     "full_name":"Scott Skiles",
-    "ftPercentage":"0.8891"
+    "stat":"0.8891"
   },
   {
     "player_id": "10",
@@ -84,7 +84,7 @@ var ftPercentage = [
     "last_name":"Miller",
     "first_name":"Reggie",
     "full_name":"Reggie Miller",
-    "ftPercentage":"0.8877"
+    "stat":"0.8877"
   }
   ]
 }]

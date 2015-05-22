@@ -231,6 +231,11 @@ a {
   color: rgb(55, 132, 211);
 }
 
+.answer-container .inner-guess .stat{
+  float: right;
+  padding-right: 20px;
+}
+
 @media screen and (max-width: 580px) {
     .team-container{
       width:85%;

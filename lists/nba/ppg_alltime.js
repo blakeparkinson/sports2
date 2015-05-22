@@ -12,7 +12,7 @@
         "last_name": "Jordan",
         "first_name": "Michael",
         "full_name":"Michael Jordan",
-        "ppg": "30.12"
+        "stat": "30.12"
     },
     {
         "player_id": "2",
@@ -20,7 +20,7 @@
         "last_name": "Chamberlain",
         "first_name": "Wilt",
         "full_name": "Wilt Chamberlain",
-        "ppg": "30.07"
+        "stat": "30.07"
     },
     {
         "player_id": "3",
@@ -28,7 +28,7 @@
         "last_name": "James",
         "first_name": "LeBron",
         "full_name":"LeBron James",
-        "ppg": "27.44"
+        "stat": "27.44"
     },
     {
         "player_id": "4",
@@ -36,7 +36,7 @@
         "last_name": "Baylor",
         "first_name": "Elgin",
         "full_name":"Elgin Baylor",
-        "ppg": "27.36"
+        "stat": "27.36"
     },
     {
         "player_id": "5",
@@ -44,7 +44,7 @@
         "last_name": "Durant",
         "first_name": "Kevin",
         "full_name":"Kevin Durant",
-        "ppg": "27.31"
+        "stat": "27.31"
     },
     {
         "player_id": "6",
@@ -52,7 +52,7 @@
         "last_name": "West",
         "first_name": "Jerry",
         "full_name":"Jerry West",
-        "ppg": "27.03"
+        "stat": "27.03"
     },
     {
         "player_id": "7",
@@ -60,7 +60,7 @@
         "last_name": "Iverson",
         "first_name": "Allen",
         "full_name":"Allen Iverson",
-        "ppg": "26.66"
+        "stat": "26.66"
     },
     {
         "player_id": "8",
@@ -68,7 +68,7 @@
         "last_name": "Pettit",
         "first_name": "Bob",
         "full_name":"Bob Pettit",
-        "ppg": "26.36"
+        "stat": "26.36"
     },
     {
         "player_id": "9",
@@ -76,7 +76,7 @@
         "last_name": "Gervin",
         "first_name": "George",
         "full_name":"George Gervin",
-        "ppg": "26.18"
+        "stat": "26.18"
     },
     {
         "player_id": "10",
@@ -84,7 +84,7 @@
         "last_name": "Oscar",
         "first_name": "Robertson",
         "full_name":"Robertson Oscar",
-        "ppg": "25.68"
+        "stat": "25.68"
     }]
 }]
 

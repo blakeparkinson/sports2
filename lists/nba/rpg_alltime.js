@@ -12,7 +12,7 @@ var topRPG = [
     "last_name":"Chamberlain",
     "first_name":"Wilt",
     "full_name":"Wilt Chamberlain",
-    "rpg":"22.89"
+    "stat":"22.89"
   },
   {
     "player_id":"2",
@@ -20,7 +20,7 @@ var topRPG = [
     "last_name":"Russell",
     "first_name":"Bill",
     "full_name":"Bill Russell",
-    "rpg":"22.45"
+    "stat":"22.45"
   },
   {
     "player_id":"3",
@@ -28,7 +28,7 @@ var topRPG = [
     "last_name":"Pettit",
     "first_name":"Bob",
     "full_name":"Bob Pettit",
-    "rpg":"16.22"
+    "stat":"16.22"
   },
   {
     "player_id":"4",
@@ -36,7 +36,7 @@ var topRPG = [
     "last_name":"Lucas",
     "first_name":"Jerry",
     "full_name":"Jerry Lucas",
-    "rpg":"15.61"
+    "stat":"15.61"
   },
   {
     "player_id":"5",
@@ -44,7 +44,7 @@ var topRPG = [
     "last_name":"Thurmond",
     "first_name":"Nate",
     "full_name":"Nate Thurmond",
-    "rpg":"15"
+    "stat":"15"
   },
   {
     "player_id":"6",
@@ -52,7 +52,7 @@ var topRPG = [
     "last_name":"Unseld",
     "first_name":"Wes",
     "full_name":"Wes Unseld",
-    "rpg":"13.99"
+    "stat":"13.99"
   },
   {
     "player_id":"7",
@@ -60,7 +60,7 @@ var topRPG = [
     "last_name":"Bellamy",
     "first_name":"Walt",
     "full_name":"Walt Bellamy",
-    "rpg":"13.65"
+    "stat":"13.65"
   },
   {
     "player_id":"8",
@@ -68,7 +68,7 @@ var topRPG = [
     "last_name":"Cowens",
     "first_name":"Dave",
     "full_name":"Dave Cowens",
-    "rpg":"13.63"
+    "stat":"13.63"
   },
   {
     "player_id":"9",
@@ -76,7 +76,7 @@ var topRPG = [
     "last_name":"Baylor",
     "first_name":"Elgin",
     "full_name":"Elgin Baylor",
-    "rpg":"13.55"
+    "stat":"13.55"
   },
   {
     "player_id":"10",
@@ -84,7 +84,7 @@ var topRPG = [
     "last_name":"Rodman",
     "first_name":"Dennis",
     "full_name":"Dennis Rodman",
-    "rpg":"13.12"
+    "stat":"13.12"
   }
   ]
 }]
