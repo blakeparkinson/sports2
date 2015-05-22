@@ -66,7 +66,7 @@ router.get('/results', function(req, res) {
   var quiz_id = req.query.quiz_id,
     quiz_score = req.query.quiz_score,
     possible_score = req.query.possible_score,
-    percentage_correct = req.query.percentage_correct;
+    percentage_correct = +((quiz_score / possible_score).toFixed(2));
     db.open(function(err, db){
       db.collection("quiz").update({_id: quiz_id},
       {$set: {quiz_score: quiz_score, possible_score: possible_score, percentage_correct: percentage_correct}},
@@ -102,22 +102,22 @@ var fetchQuizScores = function(req, rb_team_id){
 
 
 var bracketQuizScores = function(req, percentage_array){
-  aScores = 0;
-  bScores = 0;
-  cScores = 0;
-  dScores = 0;
-  eScores = 0;
+  lowScores = 0;
+  mlowScores = 0;
+  medScores = 0;
+  mhighScores = 0;
+  highScores = 0;
   
   for (i=0;i<percentage_array.length;i++){
     if (percentage_array[i] == null){console.log("meh")}
-    else if (percentage_array[i] < 0.20){aScores++}
-    else if (percentage_array[i]>= 0.20 && percentage_array[i] < 0.40){bScores++}
-    else if (percentage_array[i]>= 0.40 && percentage_array[i] < 0.60){cScores++}
-    else if (percentage_array[i]>= 0.60 && percentage_array[i] < 0.80){dScores++}
-    else if (percentage_array[i] >= 0.80){eScores++}
+    else if (percentage_array[i] < 0.20){lowScores++}
+    else if (percentage_array[i]>= 0.20 && percentage_array[i] < 0.40){mlowScores++}
+    else if (percentage_array[i]>= 0.40 && percentage_array[i] < 0.60){medScores++}
+    else if (percentage_array[i]>= 0.60 && percentage_array[i] < 0.80){mhighScores++}
+    else if (percentage_array[i] >= 0.80){highScores++}
     else{console.log("ignore")}
   }
-  req.session.scores = {a: aScores, b:bScores , c:cScores, d:dScores, e:eScores};
+  req.session.scores = {low: lowScores, mlow:mlowScores , med:medScores, mhigh:mhighScores, high:highScores};
 }
           
 module.exports = router;
