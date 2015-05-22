@@ -345,7 +345,7 @@ var top_script = function(url, category, league, callback1){
 
 main(league);
 
-var hackFormatSoccerPlayer = function(soccerPlayer, callback){
+var hackFormatSoccerPlayer = function(soccerPlayer){
   var id = shortId.generate();
   var formattedPlayer = {
     'player_id': id,
