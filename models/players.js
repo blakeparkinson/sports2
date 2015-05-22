@@ -217,6 +217,7 @@ switch (league){
             json_response = JSON.parse(body);
             json_response.usat_id = abbreviationHelper(league, usat_id);
             players = formatPlayers(json_response, rb_team_id, json_response, league);
+            appendPlayerShortId(players.players);
             mongoInsertPlayers(league, players, rb_team_id);
             first_callback(players, rb_team_id, res, league,second_callback)
             break;
@@ -237,6 +238,7 @@ switch (league){
           case 'mlb': 
             json_response = JSON.parse(body);
             players = formatMLBPlayers(json_response, team_id, rb_team_id, usat_id);
+            appendPlayerShortId(players.players);
             mongoInsertPlayers(league, players, rb_team_id);
             first_callback(players, rb_team_id, res, league,second_callback)
             break;
