@@ -25,6 +25,7 @@ $(document).ready(function() {
   $('#card').flip({trigger: 'manual'});
   $('body').on('mouseover', '.inner-guess', hoverCard);
   $('body').on('mouseout', '.inner-guess', removeHover)
+  $('#graphModal').modal({ show: false})
 
   startCounter();
  });
@@ -84,16 +85,127 @@ var uploadScore = function(correct_answers){
       data: data,
       type: 'get',
       dataType: 'json',
-        success: function(response){
-          console.log(response);
-          var allScores = response.all_scores,
-          thisQuizScore = response.this_score;
-          console.log("allScores"+allScores);
-          console.log("thisquiz"+thisQuizScore);
-        }
+      success: showGraphModal
     });
 
 }
+
+var showGraphModal = function(response){
+  response.correct = correct;
+  console.log(response);
+  var source   = $("#quiz-graph"),
+      parent = $('#graphModal');
+    AppendTemplate(source, parent, response, function(){
+      $('#graphModal').modal('show');
+      $('#graphModal').on('shown.bs.modal', function(event){
+             //draws the chart on the canvas element
+        var data = [
+            {
+                value: response.all_scores.high,
+                color: "#B7CA85",
+                label: 'Above 80%'
+            },
+            {
+                value: response.all_scores.mhigh,
+                color:"#FFD271",
+                label: '60%-80%'
+            },
+            {
+                value: response.all_scores.med,
+                color: "#C56363",
+                label: '40%-60%'
+            },
+            {
+                value: response.all_scores.mlow,
+                color: "#FDB45C",
+                label: '20%-40%'
+
+            },
+            {
+                value: response.all_scores.mlow,
+                color: "#46BFBD",
+                label: 'Below 20%'
+
+            }
+        ];
+
+
+
+        var options = {
+            segmentShowStroke : true,
+            percentageInnerCutout : 65,
+            showTooltips: false,
+            responsive: true,
+            animationSteps: 100,
+            animationEasing: 'easeOutQuart',
+
+        };
+        var t = document.getElementById("chart");
+        console.log(t)
+        var ctx = document.getElementById("chart").getContext("2d");
+        var donutChart = new Chart(ctx).Doughnut(data,options);
+        legend(document.getElementById("chartLegend"), data, donutChart);
+      })
+    });
+
+}
+
+function legend(parent, data) {
+    legend(parent, data, null);
+}
+
+function legend(parent, data, chart) {
+    parent.className = 'legend';
+    var datas = data.hasOwnProperty('datasets') ? data.datasets : data;
+
+    // remove possible children of the parent
+    while(parent.hasChildNodes()) {
+        parent.removeChild(parent.lastChild);
+    }
+
+    var show = chart ? noop : noop;
+    datas.forEach(function(d, i) {
+        //span to div: legend appears to all element (color-sample and text-node)
+        var title = document.createElement('div');
+        title.className = 'title';
+        parent.appendChild(title);
+
+        var colorSample = document.createElement('div');
+        colorSample.className = 'color-sample';
+        colorSample.style.backgroundColor = d.hasOwnProperty('strokeColor') ? d.strokeColor : d.color;
+        colorSample.style.borderColor = d.hasOwnProperty('fillColor') ? d.fillColor : d.color;
+        title.appendChild(colorSample);
+
+        var text = document.createTextNode(d.label);
+        text.className = 'text-node';
+        title.appendChild(text);
+
+        show(chart, title, i);
+    });
+}
+
+//add events to legend that show tool tips on chart
+function showTooltip(chart, elem, indexChartSegment){
+    var helpers = Chart.helpers;
+
+    var segments = chart.segments;
+    //Only chart with segments
+    if(typeof segments != 'undefined'){
+        helpers.addEvent(elem, 'mouseover', function(){
+            var segment = segments[indexChartSegment];
+            segment.save();
+            segment.fillColor = segment.highlightColor;
+            chart.showTooltip([segment]);
+            segment.restore();
+        });
+
+        helpers.addEvent(elem, 'mouseout', function(){
+            chart.draw();
+        });
+    }
+}
+
+function noop() {}
   
 var fetchGuess = function(){
   var guess = $(this).val().toLowerCase().trim(),
@@ -201,20 +313,20 @@ var prepareCard = function(player, flip){
   player.league = league;
   var source   = $("#full-card");
   AppendTemplate(source, card, player);
+  $(parent).on('click', '.back-to-answer', function(){$("#card").flip(false);});
   if (flip){
     $("#card").flip(true);
   }
 
 }
 
-var AppendTemplate = function(source, parent, data){
+var AppendTemplate = function(source, parent, data, callback){
   var source   = source.html();
   var template = Handlebars.compile(source);
   parent.empty();
   var html = template(data);
   parent.append(html);
-    $(parent).on('click', '.back-to-answer', function(){$("#card").flip(false);});
-
+  if (callback)callback();
 }
 
 var endQuiz = function(e, skip_mapping){

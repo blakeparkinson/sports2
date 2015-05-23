@@ -1,0 +1,22 @@
+<script id="quiz-graph" type="text/x-handlebars-template">
+
+<div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">You got \{{correct}} players correct for a score of \{{this_score}}</h4>
+      </div>
+      <div class="modal-body">
+      <div class="char-body-header">Here&#39s how you compare to other RosterBlitz players</div>
+      <div class="chart-container">
+        <div id="chartLegend"></div>
+        <canvas id="chart" width="650" height="350"></canvas>
+        <div class="chart-text">Correct Answers</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="email-btn">Send Email</button>
+      </div>
+    </div>
+  </div>
+</script>
