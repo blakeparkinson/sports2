@@ -4,18 +4,29 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">You got \{{correct}} players correct for a score of \{{this_score}}</h4>
+        <h4 class="modal-title" id="myModalLabel">You got \{{correct}} players correct for a score of <span class="percentage" style="background-color:\{{labelColor}}">\{{percentage}}%</span></h4>
       </div>
       <div class="modal-body">
-      <div class="char-body-header">Here&#39s how you compare to other RosterBlitz players</div>
+      <h3 class="chart-team">\{{team_name}}</h3>
       <div class="chart-container">
-        <div id="chartLegend"></div>
-        <canvas id="chart" width="650" height="350"></canvas>
-        <div class="chart-text">Correct Answers</div>
+        <div class="char-body-header">Here&#39s how you compare to other RosterBlitz players</div>
+        <p id="chartLegend"></p>
+        <canvas id="chart" width="425" height="225"></canvas>
+        <div class="chart-text" style="background-image: url({{logo_url}})"></div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="email-btn">Send Email</button>
+        <div class="social-chart" data-title="Try out this quiz at Rosterblitz: ">
+          <div id="share-1" class="share-element email-img" data-toggle="modal" data-target="#emailModal">
+            <div id="email"></div>
+          </div>
+          <div id ="share-2" class="share-element">
+            <div id="facebook" class="post-social"></div>
+          </div>
+            <div id ="share-3" class="share-element">
+            <div id="twitter" class="post-social"></div>
+        </div>
+  </div>
+        <button type="button" class="btn btn-default social-chart-close" data-dismiss="modal">Go Back</button>
       </div>
     </div>
   </div>

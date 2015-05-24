@@ -92,7 +92,11 @@ var uploadScore = function(correct_answers){
 
 var showGraphModal = function(response){
   response.correct = correct;
-  console.log(response);
+  response.team_name = team_name;
+  response.logo_url = logo_url;
+  var percentage = response.this_score * 100;
+  response.percentage = percentage.toFixed(0);
+  response.labelColor = getSpanColor(response.this_score);
   var source   = $("#quiz-graph"),
       parent = $('#graphModal');
     AppendTemplate(source, parent, response, function(){
@@ -102,7 +106,7 @@ var showGraphModal = function(response){
         var data = [
             {
                 value: response.all_scores.high,
-                color: "#B7CA85",
+                color: "#C56363",
                 label: 'Above 80%'
             },
             {
@@ -112,18 +116,18 @@ var showGraphModal = function(response){
             },
             {
                 value: response.all_scores.med,
-                color: "#C56363",
+                color: "#B7CA85",
                 label: '40%-60%'
             },
             {
                 value: response.all_scores.mlow,
-                color: "#FDB45C",
+                color: "#46BFBD",
                 label: '20%-40%'
 
             },
             {
                 value: response.all_scores.mlow,
-                color: "#46BFBD",
+                color: "#8C33B7",
                 label: 'Below 20%'
 
             }
@@ -148,6 +152,28 @@ var showGraphModal = function(response){
       })
     });
 
+}
+
+function getSpanColor(score){
+  var color = '#fff';
+  switch (true){
+    case (score < 0.20):
+      color = '#8C33B7';
+      break;
+    case (score >= 0.20 && score < 0.40 ):
+      color= '#46BFBD';
+      break;
+    case (score >= 0.40 && score < 0.60 ):
+      color= '#B7CA85';
+      break;
+    case (score >= 0.60 && score < 0.80 ):
+      color= '#FFD271';
+      break;
+    case (score >= 0.80):
+      color= '#C56363';
+      break;
+  }
+  return color;
 }
 
 function legend(parent, data) {
