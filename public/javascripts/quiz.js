@@ -339,7 +339,7 @@ var prepareCard = function(player, flip){
   player.league = league;
   var source   = $("#full-card");
   AppendTemplate(source, card, player);
-  $(parent).on('click', '.back-to-answer', function(){$("#card").flip(false);});
+  $(card).on('click', '.back-to-answer', function(){$("#card").flip(false);});
   if (flip){
     $("#card").flip(true);
   }
