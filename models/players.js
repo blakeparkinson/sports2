@@ -115,7 +115,7 @@ var getTimeLimit = function(league){
 
 // Check the db first. If it's there and has been added in the last 24 hours, use it. 
 // Otherwise, go get new data from the API and replace/add the database listing
-var fetchPlayers = function(type, team_id, rb_team_id, league, usat_id, res, req, first_callback, second_callback){ 
+var fetchPlayers = function(type, api_team_id, rb_team_id, league, usat_id, res, req, first_callback, second_callback){ 
   var players;
   if (goatsLeadersArray().indexOf(type) > -1){ 
     //it's a leader or goat quiz
@@ -134,7 +134,7 @@ var fetchPlayers = function(type, team_id, rb_team_id, league, usat_id, res, req
         var datenow = new Date();
         var datecutoff = datenow.getTime() - dataAgeCutOff;
         if (datecutoff > itemdate){   //data is old so call API
-           players = fetchPlayersFromApi(team_id, rb_team_id, league, usat_id, res, req, first_callback, second_callback)
+           players = fetchPlayersFromApi(api_team_id, rb_team_id, league, usat_id, res, req, first_callback, second_callback)
         }
         else {  // data is fine so just return it
           players = item;
@@ -142,29 +142,29 @@ var fetchPlayers = function(type, team_id, rb_team_id, league, usat_id, res, req
         }
       }
       else {  // data not already in Mongo
-         players = fetchPlayersFromApi(team_id, rb_team_id, league, usat_id, res, req, first_callback, second_callback)
+         players = fetchPlayersFromApi(api_team_id, rb_team_id, league, usat_id, res, req, first_callback, second_callback)
       }
     });
   }
 }
 
 
-var fetchPlayersFromApi = function(team_id, rb_team_id, league, usat_id, res, req, first_callback, second_callback){
+var fetchPlayersFromApi = function(api_team_id, rb_team_id, league, usat_id, res, req, first_callback, second_callback){
 var json_response = '';
 var players = {};
 
 switch (league){
   case 'nba':
-    endpoint = 'https://api.sportsdatallc.org/nba-t3/seasontd/2014/reg/teams/'+encryption.decrypt(team_id)+'/statistics.json?api_key=' + config.nba_key2;
+    endpoint = 'https://api.sportsdatallc.org/nba-t3/seasontd/2014/reg/teams/'+encryption.decrypt(api_team_id)+'/statistics.json?api_key=' + config.nba_key2;
     break;
   case 'nfl':
-    endpoint = 'https://api.sportsdatallc.org/nfl-t1/teams/'+encryption.decrypt(team_id)+'/2014/REG/statistics.json?api_key='+ config.nfl_key;
+    endpoint = 'https://api.sportsdatallc.org/nfl-t1/teams/'+encryption.decrypt(api_team_id)+'/2014/REG/statistics.json?api_key='+ config.nfl_key;
     break;
   case 'nhl':
-    endpoint = 'https://api.sportsdatallc.org/nhl-t3/seasontd/2014/REG/teams/'+encryption.decrypt(team_id)+'/statistics.json?api_key='+ config.nhl_key;
+    endpoint = 'https://api.sportsdatallc.org/nhl-t3/seasontd/2014/REG/teams/'+encryption.decrypt(api_team_id)+'/statistics.json?api_key='+ config.nhl_key;
     break;
   case 'eu_soccer':
-    endpoint = 'https://api.sportsdatallc.org/soccer-t2/eu/teams/'+encryption.decrypt(team_id)+'/profile.xml?api_key='+config.soccer_eu_key;
+    endpoint = 'https://api.sportsdatallc.org/soccer-t2/eu/teams/'+encryption.decrypt(api_team_id)+'/profile.xml?api_key='+config.soccer_eu_key;
     break;
   case 'mlb':
     endpoint = 'https://api.sportsdatallc.org/mlb-t5/league/active_rosters.json?api_key='+config.mlb_key;
@@ -183,7 +183,7 @@ switch (league){
             } 
                 
             //for nba we need to make a 2nd api request to fetch players on the active roster
-            request('https://api.sportsdatallc.org/nba-t3/teams/'+encryption.decrypt(team_id)+'/profile.json?api_key=' +config.nba_key, function (error, response, roster) {
+            request('https://api.sportsdatallc.org/nba-t3/teams/'+encryption.decrypt(api_team_id)+'/profile.json?api_key=' +config.nba_key, function (error, response, roster) {
                   if (!error && response.statusCode == 200) {
                      var team_roster = JSON.parse(roster);
                      var players_roster = team_roster.players;

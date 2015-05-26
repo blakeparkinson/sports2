@@ -15,12 +15,12 @@ router.get('/', function(req, res) {
   res.quiz_page = true;
   var quiz_id = req.query.id;
   var rb_team_id = null;
-  db.collection('quiz').findOne( { _id : quiz_id}, function(err, items){
-    rb_team_id = items.rb_team_id;
-    league = items.league;
-    api_team_id = items.api_team_id;
-    quiz_name = items.quiz_name;
-    type = items.type;
+  db.collection('quiz').findOne( { _id : quiz_id}, function(err, item){
+    rb_team_id = item.rb_team_id;
+    league = item.league;
+    api_team_id = item.api_team_id;
+    quiz_name = item.quiz_name;
+    type = item.type;
     if (players_model.goatsLeadersArray().indexOf(type) > -1){ // leaders or goats
       // pass the colors function an empty string so we get defaults
       var colors = players_model.fetchTeamColors(league, '');
@@ -41,18 +41,18 @@ router.get('/', function(req, res) {
     }
     else {
       //it's type 'roster'
-      db.collection('teams').findOne( { _id : rb_team_id}, function (err, items){
+      db.collection('teams').findOne( { team_id : rb_team_id}, function (err, items){
         team_id = items.team_id;       // API team id
         usat_id = items.usat_id;
       
         if (!rb_team_id || !league){
         	//it's the short url, so let's look up by quiz id to find the other info
             db.collection('quiz').findOne({_id : quiz_id},function (err, doc){
-                players = players_model.fetchPlayers(type, doc.team_id, doc.rb_team_id, doc.league, doc.usat_id, res, players_model.intreturnPlayers, players_model.returnPlayers);
+                players = players_model.fetchPlayers(type, doc.api_team_id, doc.rb_team_id, doc.league, doc.usat_id, res, players_model.intreturnPlayers, players_model.returnPlayers);
             });
         }
         else{
-          players = players_model.fetchPlayers(type, team_id, rb_team_id, league, usat_id, res, req, players_model.intreturnPlayers, players_model.returnPlayers);
+          players = players_model.fetchPlayers(type, api_team_id, rb_team_id, league, usat_id, res, req, players_model.intreturnPlayers, players_model.returnPlayers);
         }
       });
     }

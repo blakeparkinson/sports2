@@ -33,35 +33,19 @@ router.get('/quiz', function(req, res) {
   var league = req.query.league;
   var type = req.query.type;
   if (req.query.trending){
-    if (players_model.goatsLeadersArray().indexOf(type) > -1){ // leaders or goats
-      db.collection('teams').findOne( { team_id : rb_team_id}, function (err, item){
-        if (item != null){
-          var league = item.league;
-          var api_team_id = null;
-          var quiz_name = item.category;
-          createQuiz(rb_team_id, league, quiz_name, res, returnItem, api_team_id, type);
-        }
-        else{
-          res.status(500);
-          res.json('error', { error: 'unable to find a matching team' });
-        }
-      });
-    }
-    else{
-      //it's type 'roster'
-      db.collection('teams').findOne( { _id : rb_team_id}, function (err, item){
-        if (item != null){
-          var league = item.league;
-          var api_team_id = item.team_id;
-          var quiz_name = item.market + ' ' + item.name;
-          createQuiz(rb_team_id, league, quiz_name, res, returnItem, api_team_id, type);
-        }
-        else{
-          res.status(500);
-          res.json('error', { error: 'unable to find a matching team' });
-        }
-      });
-    }
+    db.collection('teams').findOne( { team_id : rb_team_id}, function (err, item){
+      if (item != null){
+        var league = item.league;
+        var api_team_id = null;
+        var quiz_name = item.category;
+        createQuiz(rb_team_id, league, quiz_name, res, returnItem, api_team_id, type);
+      }
+      else{
+        res.status(500);
+        res.json('error', { error: 'unable to find a matching team' });
+      }
+    });
+    
   }
   else if (players_model.goatsLeadersArray().indexOf(type) > -1){ // leaders or goats
     db.collection('teams').findOne( {team_id: rb_team_id}, function (err, item){

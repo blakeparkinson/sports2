@@ -10,7 +10,7 @@
       <div class="top-list-contain">  	    
         <div class="list-group">    
   	    {{#each popular_teams}}  
-          <a href="#" data-id="{{rb_team_id}}" data-type="{{type}}" class="create-quiz list-group-item league-search-items">{{team_name}}</a>
+          <a href="#" data-team-id="{{rb_team_id}}" data-type="{{type}}" class="create-quiz list-group-item league-search-items">{{team_name}}</a>
   	    {{/each}}    
   	  	</div>
     	</div>
@@ -25,7 +25,7 @@
       <div class="top-list-contain">
         <div class="list-group">    
         {{#each leaders}}  
-          <a href="#" class="create-quiz list-group-item league-search-items" data-id="{{team_id}}" data-type="{{type}}">{{description}}</a>
+          <a href="#" class="create-quiz list-group-item league-search-items" data-team-id="{{team_id}}" data-type="{{type}}">{{description}}</a>
         {{/each}}    
         </div>
       </div>
@@ -39,7 +39,7 @@
       <div class="top-list-contain">
         <div class="list-group">  
          {{#each goats}}  
-          <a href="#" class="create-quiz list-group-item league-search-items" data-id="{{team_id}}" data-type="{{type}}">{{description}}</a>
+          <a href="#" class="create-quiz list-group-item league-search-items" data-team-id="{{team_id}}" data-type="{{type}}">{{description}}</a>
         {{/each}}  
         </div>
       </div>

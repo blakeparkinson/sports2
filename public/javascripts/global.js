@@ -177,7 +177,7 @@ function closePopupAndRefreshPage(){
 }
 
 function fetchTrendingQuiz(event){
-  var rb_team_id = $(this).data('id'),
+  var rb_team_id = $(this).data('team-id'),
     type = $(this).data('type');
 
   var data = {
@@ -195,16 +195,15 @@ function fetchQuiz(event) {
     var team = $('.selected-team');
 
     if (team.length){
-      var api_team_id = team.data('team-id'),
+      var api_team_id = team.data('api-team-id'),
           league = team.data('league'),
-          type = team.data('type');
+          type = team.data('type'),
+          rb_team_id = team.data('team-id');
           if (team.data('category')){
             var team_name = team.data('category');
-            var rb_team_id = team.data('team_id');
           }
           else{
             var team_name = team.data('team');
-            var rb_team_id = team.data('id');
           }     
 
       var data = {
