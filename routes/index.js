@@ -14,7 +14,7 @@ router.get('/', function(req, res) {
 	var popular_quizzes = db.collection('quiz').aggregate(
 	[{ "$match" : { "created_at" : { "$gt" : quizCutoffDate.toISOString().slice(0, 19).replace('T', ' ') }}},
 	{ $group : {
-		_id : {rb_team_id: "$rb_team_id", type: "$type", quiz_name: "$quiz_name"}, counts : {$sum: 1} 
+		_id : {team_id: "$team_id", type: "$type", quiz_name: "$quiz_name"}, counts : {$sum: 1} 
 		}
 	},
 	{ $sort: {
