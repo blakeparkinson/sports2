@@ -177,11 +177,11 @@ function closePopupAndRefreshPage(){
 }
 
 function fetchTrendingQuiz(event){
-  var rb_team_id = $(this).data('id'),
+  var team_id = $(this).data('team-id'),
     type = $(this).data('type');
 
   var data = {
-    rb_team_id: rb_team_id,
+    team_id: team_id,
     type: type,
     trending: true
   };
@@ -195,22 +195,21 @@ function fetchQuiz(event) {
     var team = $('.selected-team');
 
     if (team.length){
-      var api_team_id = team.data('team-id'),
+      var api_team_id = team.data('api-team-id'),
           league = team.data('league'),
-          type = team.data('type');
+          type = team.data('type'),
+          team_id = team.data('team-id');
           if (team.data('category')){
             var team_name = team.data('category');
-            var rb_team_id = team.data('team_id');
           }
           else{
             var team_name = team.data('team');
-            var rb_team_id = team.data('id');
           }     
 
       var data = {
         api_team_id: api_team_id, 
         league: league, 
-        rb_team_id: rb_team_id, 
+        team_id: team_id, 
         team_name: team_name,
         type: type
       };
@@ -241,7 +240,7 @@ function AjaxCreateQuiz(data){
       dataType: 'json',
         success: function(response){
           if (!response.error){
-            window.location.href = '../quiz?id='+response["_id"]+'&team_id='+response["rb_team_id"]+'&league='+response["league"];
+            window.location.href = '../quiz?id='+response["_id"]+'&team_id='+response["team_id"]+'&league='+response["league"];
           }
           else{console.log('Throw an error popup or smething eventually');}
         }

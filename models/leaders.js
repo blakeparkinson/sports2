@@ -11,10 +11,10 @@ var endpoint = '';
 var encryption = require('../encryption.js');
 var shortId = require('shortid');
 
-var fetchLeadersLists = function(type, league, callback, rb_team_id){
+var fetchLeadersLists = function(type, league, callback, team_id){
   var data = {};
-  if (rb_team_id){
-    db.collection(type).findOne({team_id: rb_team_id},function (err, doc){
+  if (team_id){
+    db.collection(type).findOne({team_id: team_id},function (err, doc){
       callback(doc);
     });
   }
