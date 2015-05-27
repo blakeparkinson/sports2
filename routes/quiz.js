@@ -100,7 +100,6 @@ var fetchQuizScores = function(req, team_id){
     else {
       for (i=0;i<Object.keys(items).length;i++){
           mod_scores.push(items[i].modified_score);
-          console.log("ms"+mod_scores);
         }
       }
       // Assign each quiz score to a bucket for graph display
@@ -118,15 +117,14 @@ var bracketQuizScores = function(req, mod_scores){
   shighScores = 0;
   
   for (i=0;i<mod_scores.length;i++){
-    console.log("score is "+mod_scores)
-    if (mod_scores[i] == null){console.log("meh")}
+    if (mod_scores[i] == null){console.log("null score")}
     else if (mod_scores[i] < 1){lowScores++}
     else if (mod_scores[i]>= 1 && mod_scores[i] < 2){mlowScores++}
     else if (mod_scores[i]>= 2 && mod_scores[i] < 3){medScores++}
     else if (mod_scores[i]>= 3 && mod_scores[i] < 4){mhighScores++}
     else if (mod_scores[i]>= 4 && mod_scores[i] < 5){highScores++}
     else if (mod_scores[i] >= 5){shighScores++}
-    else{console.log("ignore")}
+    else{console.log("fyi: we have bad scores in mongo")}
   }
   req.session.scores = {low: lowScores, mlow:mlowScores , med:medScores, mhigh:mhighScores, high:highScores, shigh: shighScores};
 }
