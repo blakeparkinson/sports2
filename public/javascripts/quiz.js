@@ -4,6 +4,17 @@ var roster,
     stop_counter = false;
     team_container = $('.team-container'),
     answer_container = $('.answer-container-contain');
+
+//CHART COLORS
+
+var shighHex = '#C56363',
+    highHex  = '#FFAB45',
+    mhighHex = '#FFFF59',
+    medHex   = '#B7CA85',
+    mlowHex  = '#46BFBD',
+    lowHex   = '#8C33B7';
+
+
 if (typeof(roster) != undefined){
   roster = roster;
 }
@@ -111,7 +122,7 @@ var getLegendLabel = function(category){
         label = '3-5';
         break;
       case 'low':
-        label = '2 or Less';
+        label = '2 or Fewer';
         break;
     }
   }
@@ -154,33 +165,33 @@ var showGraphModal = function(response){
         var data = [
           {
                 value: response.all_scores.shigh,
-                color: "#C56363",
+                color: shighHex,
                 label: getLegendLabel('shigh')
             },
             {
                 value: response.all_scores.high,
-                color: "#FFAB45",
+                color: highHex,
                 label: getLegendLabel('high')
             },
             {
                 value: response.all_scores.mhigh,
-                color:"#FFFF59",
+                color: mhighHex,
                 label: getLegendLabel('mhigh')
             },
             {
                 value: response.all_scores.med,
-                color: "#B7CA85",
+                color: medHex,
                 label: getLegendLabel('med')
             },
             {
                 value: response.all_scores.mlow,
-                color: "#46BFBD",
+                color: mlowHex,
                 label: getLegendLabel('mlow')
 
             },
             {
                 value: response.all_scores.low,
-                color: "#8C33B7",
+                color: lowHex,
                 label: getLegendLabel('low')
 
             }
@@ -213,22 +224,22 @@ function getSpanColor(score){
   var color = '#fff';
   switch (true){
     case (score < 1):
-      color = '#8C33B7';
+      color = lowHex;
       break;
     case (score >= 0.1 && score < 2 ):
-      color= '#46BFBD';
+      color= mlowHex;
       break;
     case (score >= 2 && score < 3):
-      color= '#B7CA85';
+      color= medHex;
       break;
     case (score >= 3 && score < 4 ):
-      color= '#FFFF59';
+      color= mhighHex;
       break;
     case (score >= 4 && score < 5):
-      color= '#FFAB45';
+      color= highHex;
       break;
     case (score >= 5):
-      color= '#C56363';
+      color= shighHex;
       break;
   }
   return color;
