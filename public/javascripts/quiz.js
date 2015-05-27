@@ -136,6 +136,7 @@ var getLegendLabel = function(category){
         break;
     }
   }
+  return label;
 }
 
 var showGraphModal = function(response){
@@ -155,33 +156,33 @@ var showGraphModal = function(response){
           {
                 value: response.all_scores.shigh,
                 color: "#C56363",
-                label: getLegendLabel('shigh');
+                label: getLegendLabel('shigh')
             },
             {
                 value: response.all_scores.high,
                 color: "#C56363",
-                label: getLegendLabel('high');
+                label: getLegendLabel('high')
             },
             {
                 value: response.all_scores.mhigh,
                 color:"#FFD271",
-                label: getLegendLabel('mhigh');
+                label: getLegendLabel('mhigh')
             },
             {
                 value: response.all_scores.med,
                 color: "#B7CA85",
-                label: getLegendLabel('med');
+                label: getLegendLabel('med')
             },
             {
                 value: response.all_scores.mlow,
                 color: "#46BFBD",
-                label: getLegendLabel('mlow');
+                label: getLegendLabel('mlow')
 
             },
             {
                 value: response.all_scores.low,
                 color: "#8C33B7",
-                label: getLegendLabel('low');
+                label: getLegendLabel('low')
 
             }
         ];
