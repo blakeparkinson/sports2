@@ -89,7 +89,7 @@ var uploadScore = function(correct_answers){
           console.log(response);
           var allScores = response.all_scores,
           thisQuizScore = response.this_score,
-          allValues = response.all_values;
+          percentile = response.percentile
         }
     });
 
