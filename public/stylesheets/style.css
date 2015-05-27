@@ -54,12 +54,13 @@ a {
   opacity: 0.9;
   position: absolute;
   top: 49%;
+  left:4%;
   margin-top: -22px;
   font-size: 25px;
   height: 138px;
   font-weight: normal;
   text-align: center;
-  width: 95%;
+  width: 92%;
   background-size: 26% auto;
   background-repeat: no-repeat;
   background-position: center center;
