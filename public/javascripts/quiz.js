@@ -160,12 +160,12 @@ var showGraphModal = function(response){
             },
             {
                 value: response.all_scores.high,
-                color: "#C56363",
+                color: "#FFAB45",
                 label: getLegendLabel('high')
             },
             {
                 value: response.all_scores.mhigh,
-                color:"#FFD271",
+                color:"#FFFF59",
                 label: getLegendLabel('mhigh')
             },
             {
@@ -244,6 +244,11 @@ function legend(parent, data, chart) {
     }
 
     var show = chart ? noop : noop;
+    var subheader = document.createElement('div');
+      subheader.className ='legend-header';
+      subheaderText = document.createTextNode('Players Guessed');
+    subheader.appendChild(subheaderText);
+    parent.appendChild(subheader);
     datas.forEach(function(d, i) {
         //span to div: legend appears to all element (color-sample and text-node)
         var title = document.createElement('div');
