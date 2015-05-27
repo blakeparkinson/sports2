@@ -75,6 +75,7 @@ var uploadScore = function(correct_answers){
   var query_string = QueryString();
   var data = {
     quiz_id: query_string.id,
+    league: query_string.league,
     quiz_score: correct_answers,
     possible_score: roster.length
   };

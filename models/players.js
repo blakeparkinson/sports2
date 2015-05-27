@@ -384,9 +384,8 @@ var formatPlayersDocument = function(team_id, players, team_info){
 
 function mongoInsertPlayers(league, team_document, team_id){
   console.log("inserting into the DB");
-  var team_id = '';
   if (team_id != undefined){
-    team_id = team_id;
+    var team_id = team_id;
   }
 
   //the players_import script doesn't pass the team_id but the document will have it
@@ -398,7 +397,7 @@ function mongoInsertPlayers(league, team_document, team_id){
     {$set: {team_id: team_id, market: team_document.market, name: team_document.name, team_name: team_document.team_name, abbreviation: team_document.abbreviation, league: league, last_updated: new Date().toISOString().slice(0, 19).replace('T', ' '), players: team_document.players}},
     {upsert: true, multi:false}, function (err, upserted){
       if (err) {
-        console.log('Ahh! An Error with Insert!');
+        console.log('Ahh! An Error with Insert!' + err);
         return;
       }
     });
