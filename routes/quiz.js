@@ -85,36 +85,43 @@ router.get('/results', function(req, res) {
 
 // Pull all raw quiz scores for that team_id
 var fetchQuizScores = function(req, rb_team_id){
-  db.collection('quiz').find({ "rb_team_id" : rb_team_id}, {percentage_correct: 1}, function(err, items){
-    percentages = []
+  db.collection('quiz').find({ "rb_team_id" : rb_team_id}, {league: 1, quiz_score: 1, possible_score: 1}, function(err, items){
+    mod_scores = []
     if (err){
       console.log(err);
     }
     else {
       for (i=0;i<Object.keys(items).length;i++){
-        percentages.push(items[i].percentage_correct);
+        if (league == "nfl"){
+          modifiedscore = items[i].quiz_score / 5
+          mod_scores.push(modifiedscore);
+        }
+        else{
+          modifiedscore = items[i].quiz_score / 3
+          mod_scores.push(modifiedscore);
+        }
       }
       // Assign each quiz score to a bucket for graph display
-      bracketQuizScores(req, percentages);
+      bracketQuizScores(req, mod_scores);
     }
   })
 }
 
 
-var bracketQuizScores = function(req, percentage_array){
+var bracketQuizScores = function(req, mod_scores){
   lowScores = 0;
   mlowScores = 0;
   medScores = 0;
   mhighScores = 0;
   highScores = 0;
   
-  for (i=0;i<percentage_array.length;i++){
-    if (percentage_array[i] == null){console.log("meh")}
-    else if (percentage_array[i] < 0.20){lowScores++}
-    else if (percentage_array[i]>= 0.20 && percentage_array[i] < 0.40){mlowScores++}
-    else if (percentage_array[i]>= 0.40 && percentage_array[i] < 0.60){medScores++}
-    else if (percentage_array[i]>= 0.60 && percentage_array[i] < 0.80){mhighScores++}
-    else if (percentage_array[i] >= 0.80){highScores++}
+  for (i=0;i<mod_scores.length;i++){
+    if (mod_scores[i] == null){console.log("meh")}
+    else if (mod_scores[i] < 1){lowScores++}
+    else if (mod_scores[i]>= 1 && mod_scores[i] < 2){mlowScores++}
+    else if (mod_scores[i]>= 2 && mod_scores[i] < 3){medScores++}
+    else if (mod_scores[i]>= 3 && mod_scores[i] < 4){mhighScores++}
+    else if (mod_scores[i] >= 4){highScores++}
     else{console.log("ignore")}
   }
   req.session.scores = {low: lowScores, mlow:mlowScores , med:medScores, mhigh:mhighScores, high:highScores};
