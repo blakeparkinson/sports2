@@ -28,13 +28,13 @@ var goatsLeadersArray = function(){
   return a;
 }
 
-var intreturnPlayers = function(players, rb_team_id, res, league, second_callback){
+var intreturnPlayers = function(players, team_id, res, league, second_callback){
   var colors = fetchTeamColors(league, players.name);
-  second_callback(players, rb_team_id, res, league, colors)
+  second_callback(players, team_id, res, league, colors)
 }
 
 
-var returnPlayers = function (players, rb_team_id, res, league, colors){
+var returnPlayers = function (players, team_id, res, league, colors){
   if (res.quiz_page != undefined && res.quiz_page){
     var team_name = players.team_name
     var primary_hex = colors.primary_hex;
@@ -43,7 +43,7 @@ var returnPlayers = function (players, rb_team_id, res, league, colors){
       roster: players.players,
       primary_hex: primary_hex,
       secondary_hex: secondary_hex,
-      rb_team_id: rb_team_id,
+      team_id: team_id,
       league: league,
       remove_footer: true,
       team_name: team_name,
@@ -115,18 +115,18 @@ var getTimeLimit = function(league){
 
 // Check the db first. If it's there and has been added in the last 24 hours, use it. 
 // Otherwise, go get new data from the API and replace/add the database listing
-var fetchPlayers = function(type, team_id, rb_team_id, league, usat_id, res, req, first_callback, second_callback){ 
+var fetchPlayers = function(type, api_team_id, team_id, league, usat_id, res, req, first_callback, second_callback){ 
   var players;
   if (goatsLeadersArray().indexOf(type) > -1){ 
     //it's a leader or goat quiz
-    db.collection(type).find({team_id : rb_team_id}).toArray(function (err, items){
+    db.collection(type).find({team_id : team_id}).toArray(function (err, items){
       players = items;
-      first_callback(players, rb_team_id, res, league, second_callback);
+      first_callback(players, team_id, res, league, second_callback);
     })
   }
   else {
     // it's a roster quiz
-    db.collection('players').find({team_id : rb_team_id}).toArray(function (err, items){
+    db.collection('players').find({team_id : team_id}).toArray(function (err, items){
       if (items.length > 0){ // data in Mongo
         //convert the date to unix timestamp
         var item = _.first(items);
@@ -134,37 +134,37 @@ var fetchPlayers = function(type, team_id, rb_team_id, league, usat_id, res, req
         var datenow = new Date();
         var datecutoff = datenow.getTime() - dataAgeCutOff;
         if (datecutoff > itemdate){   //data is old so call API
-           players = fetchPlayersFromApi(team_id, rb_team_id, league, usat_id, res, req, first_callback, second_callback)
+           players = fetchPlayersFromApi(api_team_id, team_id, league, usat_id, res, req, first_callback, second_callback)
         }
         else {  // data is fine so just return it
           players = item;
-          first_callback(players, rb_team_id, res, league, second_callback);
+          first_callback(players, team_id, res, league, second_callback);
         }
       }
       else {  // data not already in Mongo
-         players = fetchPlayersFromApi(team_id, rb_team_id, league, usat_id, res, req, first_callback, second_callback)
+         players = fetchPlayersFromApi(api_team_id, team_id, league, usat_id, res, req, first_callback, second_callback)
       }
     });
   }
 }
 
 
-var fetchPlayersFromApi = function(team_id, rb_team_id, league, usat_id, res, req, first_callback, second_callback){
+var fetchPlayersFromApi = function(api_team_id, team_id, league, usat_id, res, req, first_callback, second_callback){
 var json_response = '';
 var players = {};
 
 switch (league){
   case 'nba':
-    endpoint = 'https://api.sportsdatallc.org/nba-t3/seasontd/2014/reg/teams/'+encryption.decrypt(team_id)+'/statistics.json?api_key=' + config.nba_key2;
+    endpoint = 'https://api.sportsdatallc.org/nba-t3/seasontd/2014/reg/teams/'+encryption.decrypt(api_team_id)+'/statistics.json?api_key=' + config.nba_key2;
     break;
   case 'nfl':
-    endpoint = 'https://api.sportsdatallc.org/nfl-t1/teams/'+encryption.decrypt(team_id)+'/2014/REG/statistics.json?api_key='+ config.nfl_key;
+    endpoint = 'https://api.sportsdatallc.org/nfl-t1/teams/'+encryption.decrypt(api_team_id)+'/2014/REG/statistics.json?api_key='+ config.nfl_key;
     break;
   case 'nhl':
-    endpoint = 'https://api.sportsdatallc.org/nhl-t3/seasontd/2014/REG/teams/'+encryption.decrypt(team_id)+'/statistics.json?api_key='+ config.nhl_key;
+    endpoint = 'https://api.sportsdatallc.org/nhl-t3/seasontd/2014/REG/teams/'+encryption.decrypt(api_team_id)+'/statistics.json?api_key='+ config.nhl_key;
     break;
   case 'eu_soccer':
-    endpoint = 'https://api.sportsdatallc.org/soccer-t2/eu/teams/'+encryption.decrypt(team_id)+'/profile.xml?api_key='+config.soccer_eu_key;
+    endpoint = 'https://api.sportsdatallc.org/soccer-t2/eu/teams/'+encryption.decrypt(api_team_id)+'/profile.xml?api_key='+config.soccer_eu_key;
     break;
   case 'mlb':
     endpoint = 'https://api.sportsdatallc.org/mlb-t5/league/active_rosters.json?api_key='+config.mlb_key;
@@ -183,7 +183,7 @@ switch (league){
             } 
                 
             //for nba we need to make a 2nd api request to fetch players on the active roster
-            request('https://api.sportsdatallc.org/nba-t3/teams/'+encryption.decrypt(team_id)+'/profile.json?api_key=' +config.nba_key, function (error, response, roster) {
+            request('https://api.sportsdatallc.org/nba-t3/teams/'+encryption.decrypt(api_team_id)+'/profile.json?api_key=' +config.nba_key, function (error, response, roster) {
                   if (!error && response.statusCode == 200) {
                      var team_roster = JSON.parse(roster);
                      var players_roster = team_roster.players;
@@ -203,9 +203,9 @@ switch (league){
                      }
                      team_roster.usat_id = usat_id;
                      players_sorted = sortNBA(json_response);
-                     players = formatNBAPlayers(players_sorted, rb_team_id, team_roster);
-                     mongoInsertPlayers(league, players, rb_team_id);
-                     first_callback(players, rb_team_id, res, league, second_callback)
+                     players = formatNBAPlayers(players_sorted, team_id, team_roster);
+                     mongoInsertPlayers(league, players, team_id);
+                     first_callback(players, team_id, res, league, second_callback)
                   }
 
                   else{
@@ -216,31 +216,31 @@ switch (league){
           case 'nfl':
             json_response = JSON.parse(body);
             json_response.usat_id = abbreviationHelper(league, usat_id);
-            players = formatPlayers(json_response, rb_team_id, json_response, league);
+            players = formatPlayers(json_response, team_id, json_response, league);
             appendPlayerShortId(players.players);
-            mongoInsertPlayers(league, players, rb_team_id);
-            first_callback(players, rb_team_id, res, league,second_callback)
+            mongoInsertPlayers(league, players, team_id);
+            first_callback(players, team_id, res, league,second_callback)
             break;
           case 'nhl':
             json_response = JSON.parse(body);
             json_response.usat_id = abbreviationHelper(league, usat_id);
-            players = formatPlayers(json_response, rb_team_id, json_response, league);
+            players = formatPlayers(json_response, team_id, json_response, league);
             appendPlayerShortId(players.players);
-            mongoInsertPlayers(league, players, rb_team_id);
-            first_callback(players, rb_team_id, res, league, second_callback)
+            mongoInsertPlayers(league, players, team_id);
+            first_callback(players, team_id, res, league, second_callback)
             break;
           case 'eu_soccer':
             playersParsed = formatEUSoccerPlayers(response.body, usat_id);
-            players = formatPlayersDocument(rb_team_id, playersParsed.players, playersParsed);
-            mongoInsertPlayers(league, players, rb_team_id);
-            first_callback(players, rb_team_id, res, league, second_callback)
+            players = formatPlayersDocument(team_id, playersParsed.players, playersParsed);
+            mongoInsertPlayers(league, players, team_id);
+            first_callback(players, team_id, res, league, second_callback)
             break;
           case 'mlb': 
             json_response = JSON.parse(body);
-            players = formatMLBPlayers(json_response, team_id, rb_team_id, usat_id);
+            players = formatMLBPlayers(json_response, team_id, team_id, usat_id);
             appendPlayerShortId(players.players);
-            mongoInsertPlayers(league, players, rb_team_id);
-            first_callback(players, rb_team_id, res, league,second_callback)
+            mongoInsertPlayers(league, players, team_id);
+            first_callback(players, team_id, res, league,second_callback)
             break;
         }
 
@@ -307,13 +307,13 @@ function compareNFL(a,b) {
   return 0;
 }
 
-var formatNBAPlayers = function(response, rb_team_id, team_info){
-  var team = fetchSalaries(response.players, rb_team_id, team_info);
+var formatNBAPlayers = function(response, team_id, team_info){
+  var team = fetchSalaries(response.players, team_id, team_info);
   return team;
 }
 
 // Fetch player salaries from nba_salary list and append to player object.
-var fetchSalaries = function(response, rb_team_id, team_info){
+var fetchSalaries = function(response, team_id, team_info){
   // Loop through salaries list and find all listings of that team
   for (i=0;i<salaries_list.salaries.length; i++){
     team = salaries_list.salaries[i];
@@ -340,12 +340,12 @@ var fetchSalaries = function(response, rb_team_id, team_info){
       }
     }
   }
-  var team = formatPlayersDocument(rb_team_id, response, team_info);
+  var team = formatPlayersDocument(team_id, response, team_info);
   return team;
 }
 
 
-var formatPlayers = function(response, rb_team_id, team_info, league){
+var formatPlayers = function(response, team_id, team_info, league){
   playersarray = [];
   for (i=0;i<response.players.length;i++){
     if (league == 'nfl'){
@@ -365,14 +365,14 @@ var formatPlayers = function(response, rb_team_id, team_info, league){
       playersarray[i][key] = value;
     }
   }
-  var team = formatPlayersDocument(rb_team_id, playersarray, team_info);
+  var team = formatPlayersDocument(team_id, playersarray, team_info);
   return team;
 }
 
 
-var formatPlayersDocument = function(rb_team_id, players, team_info){
+var formatPlayersDocument = function(team_id, players, team_info){
   teamDocument = {};
-  teamDocument.team_id = rb_team_id;
+  teamDocument.team_id = team_id;
   teamDocument.players= players;
   teamDocument.market = team_info.market;
   teamDocument.name = team_info.name;
@@ -382,23 +382,23 @@ var formatPlayersDocument = function(rb_team_id, players, team_info){
 }
 
 
-function mongoInsertPlayers(league, team_document, rb_team_id){
+function mongoInsertPlayers(league, team_document, team_id){
   console.log("inserting into the DB");
   var team_id = '';
-  if (rb_team_id != undefined){
-    team_id = rb_team_id;
+  if (team_id != undefined){
+    team_id = team_id;
   }
 
-  //the players_import script doesn't pass the rb_team_id but the document will have it
+  //the players_import script doesn't pass the team_id but the document will have it
   else{
-    team_id = team_document.rb_team_id;
+    team_id = team_document.team_id;
   }
   db.open(function(err, db){
-    db.collection("players").update({team_id: team_document.rb_team_id},
+    db.collection("players").update({team_id: team_document.team_id},
     {$set: {team_id: team_id, market: team_document.market, name: team_document.name, team_name: team_document.team_name, abbreviation: team_document.abbreviation, league: league, last_updated: new Date().toISOString().slice(0, 19).replace('T', ' '), players: team_document.players}},
     {upsert: true, multi:false}, function (err, upserted){
       if (err) {
-        console.log('Ahh! An Error with Insert!');
+        console.log('Ahh! An Error with Insert!' + err);
         return;
       }
     });
@@ -427,7 +427,7 @@ formatEUSoccerPlayers = function(response, usat_id){
   return roster;
 }
 
-formatMLBPlayers = function(response, team_id, rb_team_id, usat_id){
+formatMLBPlayers = function(response, team_id, team_id, usat_id){
   decryptedTeamId = encryption.decrypt(team_id);
   for (var i =0; i <response.teams.length; i++){
     if (decryptedTeamId == response.teams[i].id){
@@ -436,7 +436,7 @@ formatMLBPlayers = function(response, team_id, rb_team_id, usat_id){
       break;
     }
   }
-  var teamDoc = formatPlayersDocument(rb_team_id, players.players, players);
+  var teamDoc = formatPlayersDocument(team_id, players.players, players);
   return teamDoc;
 
 }

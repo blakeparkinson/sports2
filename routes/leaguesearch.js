@@ -63,7 +63,7 @@ router.get('/:league', function(req, res) {
 })
 
 
-var fetchLeadersLists = function(listObj, callback, rb_team_id){
+var fetchLeadersLists = function(listObj, callback){
 	var data = {};
   data.type = listObj["type"];  
 	if (listObj["league"]){
@@ -84,7 +84,7 @@ var fetchTeamLists = function(listObj, callback){
   },
   { "$group": {
       "_id": {
-        "rb_team_id": "$rb_team_id",
+        "team_id": "$team_id",
         "league": "$league",
         "quiz_name": "$quiz_name"
       },
@@ -100,7 +100,7 @@ var fetchTeamLists = function(listObj, callback){
         teams = [];
         for (i=0;i<Object.keys(result).length;i++){
             var team = {};
-            team.rb_team_id = result[i]._id.rb_team_id;
+            team.team_id = result[i]._id.team_id;
             team.league = result[i]._id.league;
             team.team_name = result[i]._id.quiz_name;
             team.quizCount = result[i].quizCount;
@@ -125,7 +125,7 @@ var fetchTeamListsByLeague = function(listObj, callback){
     },
   { "$group": {
       "_id": {
-        "rb_team_id": "$rb_team_id",
+        "team_id": "$team_id",
         "league": "$league",
         "quiz_name": "$quiz_name",
         "type": "$type"
@@ -142,7 +142,7 @@ var fetchTeamListsByLeague = function(listObj, callback){
       if (result.length > 0){
         for (i=0;i<Object.keys(result).length;i++){
           var team = {};
-          team.rb_team_id = result[i]._id.rb_team_id;
+          team.team_id = result[i]._id.team_id;
           team.league = result[i]._id.league;
           team.team_name = result[i]._id.quiz_name;
           team.quizCount = result[i].quizCount;

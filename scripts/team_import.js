@@ -90,11 +90,11 @@ switch (league){
         for (var i = 0; i < teams.length; i++) {
           if (league == 'eu_soccer'){
               //soccer teams don't really have markets, their names include their citys. For our puropses (rendering), this will go into the market field
-              col.insert({_id:shortId.generate(), team_id:encryption.encrypt(teams[i].id), market:teams[i].name, name: '', country:teams[i].country, usat_id:teams[i].alias, league:league, type: 'roster'}, function() {});
+              col.insert({_id:shortId.generate(), api_team_id:encryption.encrypt(teams[i].id), team_id: shortId.generate(), market:teams[i].name, name: '', country:teams[i].country, usat_id:teams[i].alias, league:league, type: 'roster'}, function() {});
           }
           else{
             //really the only 4 key:value pairs we care about for now
-            col.insert({_id:shortId.generate(), team_id:encryption.encrypt(teams[i].id), name:teams[i].name, market:teams[i].market, league:league, usat_id: teams[i].usat_id, type: 'roster'}, function() {});
+            col.insert({_id:shortId.generate(), api_team_id:encryption.encrypt(teams[i].id), team_id: shortId.generate(), name:teams[i].name, market:teams[i].market, league:league, usat_id: teams[i].usat_id, type: 'roster'}, function() {});
           }
         }
       })

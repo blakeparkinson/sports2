@@ -29,46 +29,36 @@ router.get('/', function(res, res) {
 
 // when quiz endpoint is hit, insert a new quiz into mongo and return quiz_id
 router.get('/quiz', function(req, res) {
-  var rb_team_id = req.query.rb_team_id;
+  var team_id = req.query.team_id;
   var league = req.query.league;
   var type = req.query.type;
   if (req.query.trending){
-    if (players_model.goatsLeadersArray().indexOf(type) > -1){ // leaders or goats
-      db.collection('teams').findOne( { team_id : rb_team_id}, function (err, item){
-        if (item != null){
-          var league = item.league;
+    db.collection('teams').findOne( { team_id : team_id}, function (err, item){
+      if (item != null){
+        var league = item.league;
+        if (players_model.goatsLeadersArray().indexOf(type) > -1){
           var api_team_id = null;
           var quiz_name = item.category;
-          createQuiz(rb_team_id, league, quiz_name, res, returnItem, api_team_id, type);
         }
         else{
-          res.status(500);
-          res.json('error', { error: 'unable to find a matching team' });
-        }
-      });
-    }
-    else{
-      //it's type 'roster'
-      db.collection('teams').findOne( { _id : rb_team_id}, function (err, item){
-        if (item != null){
-          var league = item.league;
-          var api_team_id = item.team_id;
+          var api_team_id = item.api_team_id;
           var quiz_name = item.market + ' ' + item.name;
-          createQuiz(rb_team_id, league, quiz_name, res, returnItem, api_team_id, type);
         }
-        else{
-          res.status(500);
-          res.json('error', { error: 'unable to find a matching team' });
-        }
-      });
-    }
+        createQuiz(team_id, league, quiz_name, res, returnItem, api_team_id, type);
+      }
+      else{
+        res.status(500);
+        res.json('error', { error: 'unable to find a matching team' });
+      }
+    });
+    
   }
   else if (players_model.goatsLeadersArray().indexOf(type) > -1){ // leaders or goats
-    db.collection('teams').findOne( {team_id: rb_team_id}, function (err, item){
+    db.collection('teams').findOne( {team_id: team_id}, function (err, item){
       if (item != null){
         var quiz_name = item.category;
         var api_team_id = null;
-        createQuiz(rb_team_id, league, quiz_name, res, returnItem, api_team_id, type);
+        createQuiz(team_id, league, quiz_name, res, returnItem, api_team_id, type);
       }
 
     })
@@ -77,7 +67,7 @@ router.get('/quiz', function(req, res) {
     var quiz_name = req.query.team_name;
     var league = req.query.league;
     var api_team_id = req.query.api_team_id;
-    createQuiz(rb_team_id, league, quiz_name, res, returnItem, api_team_id, type);
+    createQuiz(team_id, league, quiz_name, res, returnItem, api_team_id, type);
   }
 });
 
@@ -86,9 +76,9 @@ var returnItem = function (item, res){
   res.json(item);
 }
 
-var createQuiz = function(rb_team_id, league, quiz_name, res, callback, api_team_id, type){
+var createQuiz = function(team_id, league, quiz_name, res, callback, api_team_id, type){
   db.open(function(err, db){
-    db.collection("quiz").insert({_id:shortId.generate(), rb_team_id: rb_team_id, type:type, created_at: new Date().toISOString().slice(0, 19).replace('T', ' '), league: league, api_team_id: api_team_id, quiz_name: quiz_name, quiz_score: "null"}, function (err, insert){
+    db.collection("quiz").insert({_id:shortId.generate(), team_id: team_id, type:type, created_at: new Date().toISOString().slice(0, 19).replace('T', ' '), league: league, api_team_id: api_team_id, quiz_name: quiz_name, quiz_score: "null"}, function (err, insert){
         if (err){
           console.log("new quiz insert failed: "+ err);
         }
