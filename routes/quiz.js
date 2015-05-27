@@ -9,7 +9,7 @@ var http = require("http");
 var players_model = require('../models/players.js');
 var leaders_model = require('../models/leaders.js');
 var leaguesearch = require('./leaguesearch.js');
-    
+var mod_scores = [];
 
 router.get('/', function(req, res) {
   res.quiz_page = true;
@@ -73,6 +73,9 @@ router.get('/results', function(req, res) {
     else {
       modified_score = quiz_score / 3
     }
+    mod_scores.push(modified_score); // add this quiz's score to the all scores array
+    mod_scores.sort()
+    calculatePercentile(req, modified_score, mod_scores);
 
     db.open(function(err, db){
       db.collection("quiz").update({_id: quiz_id},
@@ -83,17 +86,39 @@ router.get('/results', function(req, res) {
           res.json({success: false});
         }
         else {
-          res.json({all_scores: req.session.scores, this_score: modified_score, success: true});
+          res.json({all_scores: req.session.scores, all_values: req.session.values, this_score: modified_score, success: true, percentile: req.session.percentile});
         }
       });
     });
 });
 
+/* Takes in a sorted array that includes the score and the score. Sorted position over length = percentile. 
+Am ignoring true math piece of even/odd stuff */
+var calculatePercentile = function(req, score, all_scores){
+  len = all_scores.length;
+  count = 0;
+  for (i=0;i<all_scores.length;i++){
+    if(all_scores[i]< score){
+      count++
+    }
+    else if (all_scores[i] == score){
+      percentile = (count/len)*100
+      req.session.percentile = percentile
+      return;
+    }
+    else if (all_scores[i] > score){
+      // this is bad and we should never actually hit this case.
+      percentile = (count/len)*100
+      req.session.percentile = percentile
+      return;
+    }
+  }
+}
+
 
 // Pull all raw quiz scores for that team_id
 var fetchQuizScores = function(req, team_id){
   db.collection('quiz').find({ "team_id" : team_id}, {modified_score: 1}, function(err, items){
-    mod_scores = []
     if (err){
       console.log(err);
     }
