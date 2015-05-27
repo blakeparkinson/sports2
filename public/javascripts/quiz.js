@@ -90,6 +90,54 @@ var uploadScore = function(correct_answers){
 
 }
 
+var getLegendLabel = function(category){
+  var label = '';
+  if (league != 'nfl'){
+    switch(category){
+      case 'shigh':
+        label = '15+';
+        break;
+      case 'high':
+        label = '12-14';
+        break;
+      case 'mhigh':
+        label = '9-11';
+        break;
+      case 'med':
+        label = '6-8';
+        break;
+      case 'mlow':
+        label = '3-5';
+        break;
+      case 'low':
+        label = '2 or Less';
+        break;
+    }
+  }
+  else{
+    switch(category){
+      case 'shigh':
+        label = '25+';
+        break;
+      case 'high':
+        label = '20-24';
+        break;
+      case 'mhigh':
+        label = '15-19';
+        break;
+      case 'med':
+        label = '10-14';
+        break;
+      case 'mlow':
+        label = '5-9';
+        break;
+      case 'low':
+        label = '5 or Less';
+        break;
+    }
+  }
+}
+
 var showGraphModal = function(response){
   response.correct = correct;
   response.team_name = team_name;
@@ -104,31 +152,36 @@ var showGraphModal = function(response){
       $('#graphModal').on('shown.bs.modal', function(event){
              //draws the chart on the canvas element
         var data = [
+          {
+                value: response.all_scores.shigh,
+                color: "#C56363",
+                label: getLegendLabel('shigh');
+            },
             {
                 value: response.all_scores.high,
                 color: "#C56363",
-                label: 'Above 80%'
+                label: getLegendLabel('high');
             },
             {
                 value: response.all_scores.mhigh,
                 color:"#FFD271",
-                label: '60%-80%'
+                label: getLegendLabel('mhigh');
             },
             {
                 value: response.all_scores.med,
                 color: "#B7CA85",
-                label: '40%-60%'
+                label: getLegendLabel('med');
             },
             {
                 value: response.all_scores.mlow,
                 color: "#46BFBD",
-                label: '20%-40%'
+                label: getLegendLabel('mlow');
 
             },
             {
-                value: response.all_scores.mlow,
+                value: response.all_scores.low,
                 color: "#8C33B7",
-                label: 'Below 20%'
+                label: getLegendLabel('low');
 
             }
         ];
