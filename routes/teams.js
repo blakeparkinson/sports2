@@ -36,8 +36,14 @@ router.get('/quiz', function(req, res) {
     db.collection('teams').findOne( { team_id : team_id}, function (err, item){
       if (item != null){
         var league = item.league;
-        var api_team_id = null;
-        var quiz_name = item.category;
+        if (players_model.goatsLeadersArray().indexOf(type) > -1){
+          var api_team_id = null;
+          var quiz_name = item.category;
+        }
+        else{
+          var api_team_id = item.api_team_id;
+          var quiz_name = item.market + ' ' + item.name;
+        }
         createQuiz(team_id, league, quiz_name, res, returnItem, api_team_id, type);
       }
       else{
