@@ -86,7 +86,7 @@ router.get('/results', function(req, res) {
           res.json({success: false});
         }
         else {
-          res.json({all_scores: req.session.scores, all_values: req.session.values, this_score: modified_score, success: true, percentile: req.session.percentile});
+          res.json({all_scores: req.session.scores, this_score: modified_score, success: true, percentile: req.session.percentile});
         }
       });
     });

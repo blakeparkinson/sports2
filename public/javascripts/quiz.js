@@ -90,8 +90,6 @@ var uploadScore = function(correct_answers){
           var allScores = response.all_scores,
           thisQuizScore = response.this_score,
           allValues = response.all_values;
-          console.log("allScores"+allScores);
-          console.log("thisquiz"+thisQuizScore);
         }
     });
 
