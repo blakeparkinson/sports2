@@ -144,9 +144,7 @@ var showGraphModal = function(response){
   response.correct = correct;
   response.team_name = team_name;
   response.logo_url = logo_url;
-  var percentage = response.this_score * 100;
-  response.percentage = percentage.toFixed(0);
-  response.labelColor = getSpanColor(response.this_score);
+  response.labelColor = getSpanColor(correct);
   var source   = $("#quiz-graph"),
       parent = $('#graphModal');
     AppendTemplate(source, parent, response, function(){
@@ -189,7 +187,6 @@ var showGraphModal = function(response){
         ];
 
 
-
         var options = {
             segmentShowStroke : true,
             percentageInnerCutout : 65,
@@ -210,21 +207,27 @@ var showGraphModal = function(response){
 }
 
 function getSpanColor(score){
+  if (league == 'nfl'){
+    score = score / 5
+  }else{score = score/3 }
   var color = '#fff';
   switch (true){
-    case (score < 0.20):
+    case (score < 1):
       color = '#8C33B7';
       break;
-    case (score >= 0.20 && score < 0.40 ):
+    case (score >= 0.1 && score < 2 ):
       color= '#46BFBD';
       break;
-    case (score >= 0.40 && score < 0.60 ):
+    case (score >= 2 && score < 3):
       color= '#B7CA85';
       break;
-    case (score >= 0.60 && score < 0.80 ):
-      color= '#FFD271';
+    case (score >= 3 && score < 4 ):
+      color= '#FFFF59';
       break;
-    case (score >= 0.80):
+    case (score >= 4 && score < 5):
+      color= '#FFAB45';
+      break;
+    case (score >= 5):
       color= '#C56363';
       break;
   }
