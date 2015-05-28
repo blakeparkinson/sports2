@@ -4,6 +4,17 @@ var roster,
     stop_counter = false;
     team_container = $('.team-container'),
     answer_container = $('.answer-container-contain');
+
+//CHART COLORS
+
+var shighHex = '#C56363',
+    highHex  = '#FFAB45',
+    mhighHex = '#FFFF59',
+    medHex   = '#B7CA85',
+    mlowHex  = '#46BFBD',
+    lowHex   = '#8C33B7';
+
+
 if (typeof(roster) != undefined){
   roster = roster;
 }
@@ -25,6 +36,7 @@ $(document).ready(function() {
   $('#card').flip({trigger: 'manual'});
   $('body').on('mouseover', '.inner-guess', hoverCard);
   $('body').on('mouseout', '.inner-guess', removeHover)
+  $('#graphModal').modal({ show: false})
 
   startCounter();
  });
@@ -85,16 +97,215 @@ var uploadScore = function(correct_answers){
       data: data,
       type: 'get',
       dataType: 'json',
-        success: function(response){
-          console.log(response);
-          var allScores = response.all_scores,
-          thisQuizScore = response.this_score;
-          console.log("allScores"+allScores);
-          console.log("thisquiz"+thisQuizScore);
-        }
+      success: showGraphModal
     });
 
 }
+
+var getLegendLabel = function(category){
+  var label = '';
+  if (league != 'nfl'){
+    switch(category){
+      case 'shigh':
+        label = '15+';
+        break;
+      case 'high':
+        label = '12-14';
+        break;
+      case 'mhigh':
+        label = '9-11';
+        break;
+      case 'med':
+        label = '6-8';
+        break;
+      case 'mlow':
+        label = '3-5';
+        break;
+      case 'low':
+        label = '2 or Fewer';
+        break;
+    }
+  }
+  else{
+    switch(category){
+      case 'shigh':
+        label = '25+';
+        break;
+      case 'high':
+        label = '20-24';
+        break;
+      case 'mhigh':
+        label = '15-19';
+        break;
+      case 'med':
+        label = '10-14';
+        break;
+      case 'mlow':
+        label = '5-9';
+        break;
+      case 'low':
+        label = '5 or Less';
+        break;
+    }
+  }
+  return label;
+}
+
+var showGraphModal = function(response){
+  response.correct = correct;
+  response.team_name = team_name;
+  response.logo_url = logo_url;
+  response.labelColor = getSpanColor(correct);
+  var source   = $("#quiz-graph"),
+      parent = $('#graphModal');
+    AppendTemplate(source, parent, response, function(){
+      $('#graphModal').modal('show');
+      $('#graphModal').on('shown.bs.modal', function(event){
+             //draws the chart on the canvas element
+        var data = [
+          {
+                value: response.all_scores.shigh,
+                color: shighHex,
+                label: getLegendLabel('shigh')
+            },
+            {
+                value: response.all_scores.high,
+                color: highHex,
+                label: getLegendLabel('high')
+            },
+            {
+                value: response.all_scores.mhigh,
+                color: mhighHex,
+                label: getLegendLabel('mhigh')
+            },
+            {
+                value: response.all_scores.med,
+                color: medHex,
+                label: getLegendLabel('med')
+            },
+            {
+                value: response.all_scores.mlow,
+                color: mlowHex,
+                label: getLegendLabel('mlow')
+
+            },
+            {
+                value: response.all_scores.low,
+                color: lowHex,
+                label: getLegendLabel('low')
+
+            }
+        ];
+
+
+        var options = {
+            segmentShowStroke : true,
+            percentageInnerCutout : 65,
+            showTooltips: false,
+            responsive: true,
+            animationSteps: 100,
+            animationEasing: 'easeOutQuart',
+
+        };
+        var t = document.getElementById("chart");
+        console.log(t)
+        var ctx = document.getElementById("chart").getContext("2d");
+        var donutChart = new Chart(ctx).Doughnut(data,options);
+        legend(document.getElementById("chartLegend"), data, donutChart);
+      })
+    });
+
+}
+
+function getSpanColor(score){
+  if (league == 'nfl'){
+    score = score / 5
+  }else{score = score/3 }
+  var color = '#fff';
+  switch (true){
+    case (score < 1):
+      color = lowHex;
+      break;
+    case (score >= 0.1 && score < 2 ):
+      color= mlowHex;
+      break;
+    case (score >= 2 && score < 3):
+      color= medHex;
+      break;
+    case (score >= 3 && score < 4 ):
+      color= mhighHex;
+      break;
+    case (score >= 4 && score < 5):
+      color= highHex;
+      break;
+    case (score >= 5):
+      color= shighHex;
+      break;
+  }
+  return color;
+}
+
+function legend(parent, data) {
+    legend(parent, data, null);
+}
+
+function legend(parent, data, chart) {
+    parent.className = 'legend';
+    var datas = data.hasOwnProperty('datasets') ? data.datasets : data;
+
+    // remove possible children of the parent
+    while(parent.hasChildNodes()) {
+        parent.removeChild(parent.lastChild);
+    }
+
+    var show = chart ? noop : noop;
+    var subheader = document.createElement('div');
+      subheader.className ='legend-header';
+      subheaderText = document.createTextNode('Players Guessed');
+    subheader.appendChild(subheaderText);
+    parent.appendChild(subheader);
+    datas.forEach(function(d, i) {
+        //span to div: legend appears to all element (color-sample and text-node)
+        var title = document.createElement('div');
+        title.className = 'title';
+        parent.appendChild(title);
+
+        var colorSample = document.createElement('div');
+        colorSample.className = 'color-sample';
+        colorSample.style.backgroundColor = d.hasOwnProperty('strokeColor') ? d.strokeColor : d.color;
+        colorSample.style.borderColor = d.hasOwnProperty('fillColor') ? d.fillColor : d.color;
+        title.appendChild(colorSample);
+
+        var text = document.createTextNode(d.label);
+        text.className = 'text-node';
+        title.appendChild(text);
+
+        show(chart, title, i);
+    });
+}
+
+//add events to legend that show tool tips on chart
+function showTooltip(chart, elem, indexChartSegment){
+    var helpers = Chart.helpers;
+
+    var segments = chart.segments;
+    //Only chart with segments
+    if(typeof segments != 'undefined'){
+        helpers.addEvent(elem, 'mouseover', function(){
+            var segment = segments[indexChartSegment];
+            segment.save();
+            segment.fillColor = segment.highlightColor;
+            chart.showTooltip([segment]);
+            segment.restore();
+        });
+
+        helpers.addEvent(elem, 'mouseout', function(){
+            chart.draw();
+        });
+    }
+}
+
+function noop() {}
   
 var fetchGuess = function(){
   var guess = $(this).val().toLowerCase().trim(),
@@ -202,20 +413,20 @@ var prepareCard = function(player, flip){
   player.league = league;
   var source   = $("#full-card");
   AppendTemplate(source, card, player);
+  $(card).on('click', '.back-to-answer', function(){$("#card").flip(false);});
   if (flip){
     $("#card").flip(true);
   }
 
 }
 
-var AppendTemplate = function(source, parent, data){
+var AppendTemplate = function(source, parent, data, callback){
   var source   = source.html();
   var template = Handlebars.compile(source);
   parent.empty();
   var html = template(data);
   parent.append(html);
-    $(parent).on('click', '.back-to-answer', function(){$("#card").flip(false);});
-
+  if (callback)callback();
 }
 
 var endQuiz = function(e, skip_mapping){

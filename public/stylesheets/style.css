@@ -38,6 +38,42 @@ a {
 .tabs-text {
  color: #ffffff; 
 }
+.social-chart{
+  float: left;
+}
+
+.social-chart-close{
+  margin-top:8px;
+}
+
+.social-chart .share-element{
+  padding:0;
+}
+
+.chart-text{
+  opacity: 0.9;
+  position: absolute;
+  top: 49%;
+  left:4%;
+  margin-top: -22px;
+  font-size: 25px;
+  height: 138px;
+  font-weight: normal;
+  text-align: center;
+  width: 92%;
+  background-size: 26% auto;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+#chartLegend{
+  margin-top: -30px
+}
+
+.legend-header{
+  margin-bottom: 5px;
+  margin-left: 6px;
+}
 
 /*
 .g-badge {  
@@ -60,7 +96,43 @@ a {
   background-color: #fff;
   vertical-align: -7px;
 }
-*/
+*/  
+
+.modal-title .percentage{
+  color: white;
+  padding: 3px;
+  border-radius: 9px
+}
+.chart-team{margin-top: 0;}
+.char-body-header{float:left;}
+.chart-container p{
+  margin:0;
+}
+.legend {
+    width: 10em;
+    float: right;
+}
+
+.legend .title:last-child{
+  margin-bottom: 0;
+}
+
+.legend .title {
+    display: block;
+    margin-bottom: 0.5em;
+    line-height: 1.2em;
+    padding: 0 0.3em;
+}
+
+.legend .color-sample {
+    display: block;
+    float: left;
+    width: 1em;
+    height: 1em;
+    border: 2px solid; /* Comment out if you don't want to show the fillColor */
+    border-radius: 0.5em; /* Comment out if you prefer squarish samples */
+    margin-right: 0.5em;
+}
 .badge-small-roster {
   display: inline-block;
   padding: 2px 4px;
@@ -750,12 +822,12 @@ padding-left: 3%;
 
     }
 }
-.social-sidebar .share-element{
+.share-element{
     position: relative;
     float: right;
     padding-right: 5px;
 }
-.social-sidebar #email{
+#email{
     background-image: url(../images/blitz-social-sprite.png);
     background-repeat: no-repeat;
     background-position: -60px -59px;
@@ -767,11 +839,11 @@ padding-left: 3%;
     cursor: pointer;
 }
 
-.social-sidebar #email:hover{
+#email:hover{
     background-position: -60px -147px;
 }
 
-.social-sidebar #facebook{
+#facebook{
     background-image: url(../images/blitz-social-sprite.png);
     background-repeat: no-repeat;
     background-position: -260px -60px;
@@ -783,7 +855,7 @@ padding-left: 3%;
     cursor: pointer;
 }
 
-.social-sidebar #facebook:hover{
+#facebook:hover{
     background-position: -260px -147px;
 }
 
@@ -791,7 +863,7 @@ padding-left: 3%;
     border-radius: 25px;
 }
 
-.social-sidebar #twitter{
+#twitter{
     background-image: url(../images/blitz-social-sprite.png);
     background-repeat: no-repeat;
     background-position: -394px -59.5px;
@@ -803,7 +875,7 @@ padding-left: 3%;
     cursor: pointer;
 }
 
-.social-sidebar #twitter:hover{
+#twitter:hover{
     background-position: -394px -147.5px;
 }
 
@@ -1254,4 +1326,6 @@ GENERAL RESPONSIVE VIEWS
 @media (max-width: 479px) {
   /* modal */
   .modal-video { width:100%; height:250px; }
+
+
 
