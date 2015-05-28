@@ -129,9 +129,12 @@ var fetchQuizScores = function(req, team_id){
     }
     else {
       for (i=0;i<Object.keys(items).length;i++){
-          mod_scores.push(items[i].modified_score);
+          if (items[i].modified_score != null){
+            mod_scores.push(items[i].modified_score);
+          }
         }
       }
+    req.session.scores = {};
     req.session.scores.all_scores = mod_scores;
     // Assign each quiz score to a bucket for graph display
     bracketQuizScores(req, mod_scores);
