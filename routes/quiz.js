@@ -19,6 +19,7 @@ router.get('/', function(req, res) {
   var tId = req.query.team_id;
 
   if (typeof tId != 'undefined' && typeof quiz_id == 'undefined'){
+    //we've only been given a team id. Look up the needed and info and create a quiz from there.
     db.collection('teams').findOne( { team_id : tId}, function (err, item){
          if (players_model.goatsLeadersArray().indexOf(item.type) > -1){
           var api_team_id = null;
@@ -30,6 +31,7 @@ router.get('/', function(req, res) {
         }
         teams_model.createQuiz(tId, item.league, quiz_name, res, redirectQuiz, api_team_id, item.type);
     });
+    //createQuiz method will actually route back to this function. Jump out now that we've done the work
     return;
   }
 
