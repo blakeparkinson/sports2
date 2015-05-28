@@ -163,11 +163,6 @@ var showGraphModal = function(response){
       $('#graphModal').on('shown.bs.modal', function(event){
              //draws the chart on the canvas element
         var data = [
-          {
-                value: response.all_scores.shigh,
-                color: shighHex,
-                label: getLegendLabel('shigh')
-            },
             {
                 value: response.all_scores.high,
                 color: highHex,
@@ -197,7 +192,14 @@ var showGraphModal = function(response){
             }
         ];
 
-
+        //only append the 15+ section if there are actually 15+ players
+        if (roster.length > 14){
+          data.unshift({
+                value: response.all_scores.shigh,
+                color: shighHex,
+                label: getLegendLabel('shigh')
+            });
+        }
         var options = {
             segmentShowStroke : true,
             percentageInnerCutout : 65,
