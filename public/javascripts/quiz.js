@@ -15,6 +15,7 @@ var shighHex = '#C56363',
     lowHex   = '#8C33B7';
 
 
+
 if (typeof(roster) != undefined){
   roster = roster;
 }
@@ -156,6 +157,7 @@ var showGraphModal = function(response){
   response.team_name = team_name;
   response.logo_url = logo_url;
   response.labelColor = getSpanColor(correct);
+  response.teamId = teamId
   var source   = $("#quiz-graph"),
       parent = $('#graphModal');
     AppendTemplate(source, parent, response, function(){
@@ -206,13 +208,20 @@ var showGraphModal = function(response){
 
         };
         var t = document.getElementById("chart");
-        console.log(t)
         var ctx = document.getElementById("chart").getContext("2d");
         var donutChart = new Chart(ctx).Doughnut(data,options);
         legend(document.getElementById("chartLegend"), data, donutChart);
+        var client = new ZeroClipboard($("[data-clipboard-text]"));
+        parent.on('click', '.share-this', activeCopyButton)
+
+
       })
     });
 
+}
+
+var activeCopyButton = function(){
+  $(this).text('Copied').addClass('copied');
 }
 
 function getSpanColor(score){
