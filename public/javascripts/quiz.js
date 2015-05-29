@@ -164,36 +164,34 @@ var showGraphModal = function(response){
              //draws the chart on the canvas element
         var data = [
           {
-                value: response.all_scores.shigh,
+                value: response.scores.brackets.shigh,
                 color: shighHex,
                 label: getLegendLabel('shigh')
             },
             {
-                value: response.all_scores.high,
+                value: response.scores.brackets.high,
                 color: highHex,
                 label: getLegendLabel('high')
             },
             {
-                value: response.all_scores.mhigh,
+                value: response.scores.brackets.mhigh,
                 color: mhighHex,
                 label: getLegendLabel('mhigh')
             },
             {
-                value: response.all_scores.med,
+                value: response.scores.brackets.med,
                 color: medHex,
                 label: getLegendLabel('med')
             },
             {
-                value: response.all_scores.mlow,
+                value: response.scores.brackets.mlow,
                 color: mlowHex,
                 label: getLegendLabel('mlow')
-
             },
             {
-                value: response.all_scores.low,
+                value: response.scores.brackets.low,
                 color: lowHex,
                 label: getLegendLabel('low')
-
             }
         ];
 
