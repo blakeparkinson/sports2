@@ -76,21 +76,14 @@ a {
 }
 
 .modal-footer .share-this{
-  padding: 5px 15px 5px 15px;
-  color: #5e95dc;
-  font-weight: 500;
-  border-radius: 4px;
-  border: 2px solid #eaeded;
-  cursor: pointer;
   float: left;
   margin-left: 14%;
-  margin-top: 1%;
+  margin-top: 1.4%;
   width: 122px;
 }
 .modal-footer .share-this.copied{
-  background-color: #CBD0D0;
-  border-color: #CBD0D0;
-  color:rgb(102, 97, 97);
+  background-color: #2F772F;
+  border-color: #286928;
   text-align: center;
 }
 
