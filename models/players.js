@@ -85,7 +85,7 @@ var getTimeLimit = function(league){
     case 'eu_soccer':
     case 'nfl':
     case 'nba':
-      clock = '5:00';
+      clock = '2:00';
     break;
   }
 

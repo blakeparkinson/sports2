@@ -89,7 +89,7 @@ router.get('/results', function(req, res) {
           res.json({success: false});
         }
         else {
-          console.log("RSSCOres "+Object.keys(req.session.scores));
+          appendCurrentScore(modified_score, req.session.scores.brackets);
           res.json({scores: req.session.scores, success: true});
         }
       });
@@ -139,6 +139,15 @@ var fetchQuizScores = function(req, team_id){
     // Assign each quiz score to a bucket for graph display
     bracketQuizScores(req, mod_scores);
   })
+}
+
+var appendCurrentScore = function(score, previousScoresObj){
+    if (score < 1){previousScoresObj.low++}
+    else if (score>= 1 && score < 2){previousScoresObj.mlow++}
+    else if (score>= 2 && score < 3){previousScoresObj.med++}
+    else if (score>= 3 && score < 4){previousScoresObj.mhigh++}
+    else if (score>= 4 && score < 5){previousScoresObj.high++}
+    else if (score >= 5){previousScoresObj.shigh++}
 }
 
 

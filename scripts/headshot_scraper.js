@@ -12,6 +12,7 @@ var http = require("http"),
   db = mongojs.connect(config.mongo_uri);
 var images_list = require('../lists/images2.js');
 var year = 2014;
+var usat_id = '';
 
 //if you want to just do an individual team, then pass an command line team abbreviation argument  (i.e. node headshot_scraper.js POR for blazers)
 var abbreviation = process.argv[2];
@@ -55,8 +56,8 @@ db.collection('players').find(findClause).toArray(function (err, items){
   if (items.length > 0){
     for (var i=0; i < items.length; i++){
       var league = items[i].league;
+      usat_id = items[i].abbreviation;
       randomHackyFunction(items[i], league);
-      var usat_id = items[i].abbreviation;
       for (var b=0; b < items[i].players.length; b++){
         var full_name = items[i].players[b].full_name.replace(/\s+/g, '-').toLowerCase();
         var url = 'http://www.gannett-cdn.com/media/SMG/sports_headshots/'+league+'/player/'+year+'/'+usat_id+'/120x120/'+full_name+'.jpg';
@@ -72,6 +73,9 @@ db.collection('players').find(findClause).toArray(function (err, items){
 randomHackyFunction = function(team, league){
   if (team.abbreviation == 'POR'){
     year = 2013;
+  }
+  if (team.abbreviation == 'SAS'){
+    usat_id = 'SAN';
   }
   if (league == 'mlb'){
     year = 2015;
