@@ -63,8 +63,22 @@ var fetchStatDescription = function(stat, listType, league){
   return description;
 }
 
+var createQuiz = function(team_id, league, quiz_name, res, callback, api_team_id, type){
+  db.open(function(err, db){
+    db.collection("quiz").insert({_id:shortId.generate(), team_id: team_id, type:type, created_at: new Date().toISOString().slice(0, 19).replace('T', ' '), league: league, api_team_id: api_team_id, quiz_name: quiz_name, quiz_score: "null"}, function (err, item){
+        if (err){
+          console.log("new quiz insert failed: "+ err);
+        }
+        else {
+          callback(item[0], res);
+        }
+    });
+  });
+}
+
 
 module.exports = {
   deleteItem: deleteItem,
-  fetchStatDescription: fetchStatDescription
+  fetchStatDescription: fetchStatDescription,
+  createQuiz: createQuiz
 }

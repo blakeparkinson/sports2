@@ -8,6 +8,7 @@ var http = require("http"),
     mongojs = require("mongojs"),
     db = mongojs.connect(config.mongo_uri);
 var players_model = require('../models/players.js');
+var teams_model = require('../models/teams.js');
 var shortId = require('shortid');
 var nodemailer = require('nodemailer');
 
@@ -44,7 +45,7 @@ router.get('/quiz', function(req, res) {
           var api_team_id = item.api_team_id;
           var quiz_name = item.market + ' ' + item.name;
         }
-        createQuiz(team_id, league, quiz_name, res, returnItem, api_team_id, type);
+        teams_model.createQuiz(team_id, league, quiz_name, res, returnItem, api_team_id, type);
       }
       else{
         res.status(500);
@@ -58,7 +59,7 @@ router.get('/quiz', function(req, res) {
       if (item != null){
         var quiz_name = item.category;
         var api_team_id = null;
-        createQuiz(team_id, league, quiz_name, res, returnItem, api_team_id, type);
+        teams_model.createQuiz(team_id, league, quiz_name, res, returnItem, api_team_id, type);
       }
 
     })
@@ -67,26 +68,13 @@ router.get('/quiz', function(req, res) {
     var quiz_name = req.query.team_name;
     var league = req.query.league;
     var api_team_id = req.query.api_team_id;
-    createQuiz(team_id, league, quiz_name, res, returnItem, api_team_id, type);
+    teams_model.createQuiz(team_id, league, quiz_name, res, returnItem, api_team_id, type);
   }
 });
 
 // made the return more universal for all callbacks
 var returnItem = function (item, res){
   res.json(item);
-}
-
-var createQuiz = function(team_id, league, quiz_name, res, callback, api_team_id, type){
-  db.open(function(err, db){
-    db.collection("quiz").insert({_id:shortId.generate(), team_id: team_id, type:type, created_at: new Date().toISOString().slice(0, 19).replace('T', ' '), league: league, api_team_id: api_team_id, quiz_name: quiz_name, quiz_score: "null"}, function (err, insert){
-        if (err){
-          console.log("new quiz insert failed: "+ err);
-        }
-        else {
-          callback(insert[0], res);
-        }
-    });
-  });
 }
 
 

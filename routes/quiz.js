@@ -9,11 +9,32 @@ var http = require("http");
 var players_model = require('../models/players.js');
 var leaders_model = require('../models/leaders.js');
 var leaguesearch = require('./leaguesearch.js');
+var teams_model = require('../models/teams.js');
 
 
 router.get('/', function(req, res) {
   res.quiz_page = true;
   var quiz_id = req.query.id;
+  var tId = req.query.team_id;
+
+  if (typeof tId != 'undefined' && typeof quiz_id == 'undefined'){
+    //we've only been given a team id and that's it!. Look up the needed info and create a quiz from there.
+    db.collection('teams').findOne( { team_id : tId}, function (err, item){
+         if (players_model.goatsLeadersArray().indexOf(item.type) > -1){
+          var api_team_id = null;
+          var quiz_name = item.category;
+        }
+        else{
+          var api_team_id = item.api_team_id;
+          var quiz_name = item.market + ' ' + item.name;
+        }
+        teams_model.createQuiz(tId, item.league, quiz_name, res, redirectQuiz, api_team_id, item.type);
+    });
+    //createQuiz method will actually route back to this function. Jump out now that we've done the work
+    return;
+  }
+
+
   db.collection('quiz').findOne( { _id : quiz_id}, function(err, item){
     team_id = item.team_id;
     league = item.league;
@@ -96,6 +117,12 @@ router.get('/results', function(req, res) {
     });
 });
 
+
+var redirectQuiz = function(item, res){
+   res.writeHead(302, {'Location': '/quiz?team_id='+item.team_id+'&id='+item._id+'&league='+item.league});
+   res.end();
+}
+
 /* Takes in a sorted array that includes the historical scores and the new score. Sorted position over length = percentile. 
 Am ignoring true math piece of even/odd stuff */
 var calculatePercentile = function(req, score, all_scores){
@@ -118,6 +145,7 @@ var calculatePercentile = function(req, score, all_scores){
     }
   }
 }
+
 
 
 // Pull all raw quiz scores for that team_id
