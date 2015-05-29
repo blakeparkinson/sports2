@@ -123,22 +123,26 @@ var redirectQuiz = function(item, res){
    res.end();
 }
 
-/* Takes in a sorted array that includes the historical scores and the new score. Sorted position over length = percentile. 
-Am ignoring true math piece of even/odd stuff */
+/* Takes in a sorted array that includes the historical scores and the new score. Sorted position / length = percentile. 
+Optimistic way of calculating. Ex scores 0,1,1,2,3 and you scored one of the 1's, you will be in the 60th percentile. */
 var calculatePercentile = function(req, score, all_scores){
   len = all_scores.length;
   count = 0;
   for (i=0;i<all_scores.length;i++){
-    if(all_scores[i]< score){
+    if (len == 1){ // if you're the first taker, you get 100th percentile
+      req.session.scores.percentile = 1
+      return;
+    }
+    else if(all_scores[i]<= score && count < len -1){
       count++
     }
-    else if (all_scores[i] == score){
+    else if (all_scores[i]<= score && count == len - 1){
+      count++
       percentile = (count/len)*100
       req.session.scores.percentile = percentile
       return;
     }
-    else if (all_scores[i] > score){
-      // this is bad and we should never actually hit this case.
+    else if (all_scores[i]> score){
       percentile = (count/len)*100
       req.session.scores.percentile = percentile
       return;
