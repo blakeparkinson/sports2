@@ -155,6 +155,7 @@ var showGraphModal = function(response){
   response.correct = correct;
   response.team_name = team_name;
   response.logo_url = logo_url;
+  response.shortPercentile = response.scores.percentile.toFixed(0);
   response.labelColor = getSpanColor(correct);
   var source   = $("#quiz-graph"),
       parent = $('#graphModal');
