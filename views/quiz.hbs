@@ -68,7 +68,7 @@
 <div class="modal fade" id="graphModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   {{> quiz_graph}}
 </div>
-
+<script src='/javascripts/ZeroClipboard.min.js'></script>
 <script type='text/javascript'>
   var league = '{{league}}',
     team_name = '{{team_name}}';
@@ -76,5 +76,6 @@
   var secondary_hex = '{{secondary_hex}}';
   var roster =  {{{json_stringify roster}}};
   var type = '{{type}}';
-  var logo_url ='{{{logo_url}}}'
+  var logo_url ='{{{logo_url}}}';
+  var teamId = "{{team_id}}"
  </script>

@@ -75,6 +75,18 @@ a {
   margin-left: 6px;
 }
 
+.modal-footer .share-this{
+  float: left;
+  margin-left: 14%;
+  margin-top: 1.4%;
+  width: 122px;
+}
+.modal-footer .share-this.copied{
+  background-color: #2F772F;
+  border-color: #286928;
+  text-align: center;
+}
+
 /*
 .g-badge {  
   display: inline-block;
