@@ -156,7 +156,7 @@ var showGraphModal = function(response){
   response.correct = correct;
   response.team_name = team_name;
   response.logo_url = logo_url;
-  response.shortPercentile = response.scores.percentile.toFixed(0);
+  response.shortPercentile = percentileEndingText(response.scores.percentile.toFixed(0));
   response.labelColor = getSpanColor(correct);
   response.teamId = teamId
   var source   = $("#quiz-graph"),
@@ -491,4 +491,30 @@ var processTemplate = function(template, data, options){
     compiled;
     data ? compiled = tpl(data) : compiled = tpl({});
     return compiled;
+}
+
+var percentileEndingText = function(percentile){
+  var lastDigit = percentile % 10,
+      text = '';
+  switch (lastDigit){
+    case 0:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+      text = 'th';
+      break;
+    case 1:
+      text ='st';
+      break;
+    case 2:
+      text = 'nd';
+      break;
+    case 3:
+      text = 'rd';
+      break;
+  }
+  return (percentile+text);
 }

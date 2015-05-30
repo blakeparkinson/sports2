@@ -1033,45 +1033,6 @@ table tr th:last-child {
   max-width:75%;
   float: none;
 }
-.nba-bench-container {
-  float: left;
-  
-
-}
-.nba-starting-players {
-  padding-top: 30px;
-  text-align: center
-}
-.row1 {
-  width: 100%;
-  height: 300px;
-}
-.guard-div {
-  margin: 0 0 0 5%;
-  width: 80%;
-}
-.guard-1-place {
-  padding: 0 0 0 10%;
-}
-.guard-2-place {
-  padding: 0 0 0 35%;
-}
-.forward-1-div {
-  margin: 20% 0 0 5%;
-  width: 80%;
-  
-}
-.forward-1-place {
-  padding: 0 0 0 13%;
-}
-.forward-2-div {
-  margin: 10% 0 0 5%;
-  width: 80%;
-
-}
-.forward-2-place {
-  margin: 10% 0 0 53%;
-}
 .center-div {
   margin: 15% 0 0 5%;
   width: 80%;
