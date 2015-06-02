@@ -21,5 +21,23 @@
   },
   "devDependencies": {
     "handlebars-helpers": "^0.5.8"
-  }
+  },
+  "description": "sports ======",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blakeparkinson/sports2.git"
+  },
+  "keywords": [
+    "rosterblitz"
+  ],
+  "author": "Blake Parkinson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/blakeparkinson/sports2/issues"
+  },
+  "homepage": "https://github.com/blakeparkinson/sports2"
 }
