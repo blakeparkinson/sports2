@@ -16,6 +16,8 @@ Installing
 ----------
 Installing Handlebars is easy. Simply download the package [from the official site](http://handlebarsjs.com/) or the [bower repository][bower-repo] and add it to your web pages (you should usually use the most recent version).
 
+For web browsers, a free CDN is available at [jsDelivr](http://www.jsdelivr.com/#!handlebarsjs).  Advanced usage, such as [version aliasing & concocting](https://github.com/jsdelivr/jsdelivr#usage), is available. 
+
 Alternatively, if you prefer having the latest version of handlebars from
 the 'master' branch, passing builds of the 'master' branch are automatically
 published to S3. You may download the latest passing master build by grabbing
@@ -108,7 +110,7 @@ templates easier and also changes a tiny detail of how partials work.
 ### Paths
 
 Handlebars.js supports an extended expression syntax that we call paths.
-Paths are made up of typical expressions and . characters. Expressions
+Paths are made up of typical expressions and `.` characters. Expressions
 allow you to not only display data from the current context, but to
 display data from contexts that are descendants and ancestors of the
 current context.
@@ -132,7 +134,7 @@ into the person object you could still display the company's name with
 an expression like `{{../company.name}}`, so:
 
 ```
-{{#with person}}{{name}} - {{../company.name}}{{/person}}
+{{#with person}}{{name}} - {{../company.name}}{{/with}}
 ```
 
 would render:
@@ -195,7 +197,7 @@ template(data);
 ```
 
 Whenever the block helper is called it is given one or more parameters,
-any arguments that are passed in the helper in the call and an `options`
+any arguments that are passed into the helper in the call, and an `options`
 object containing the `fn` function which executes the block's child.
 The block's current context may be accessed through `this`.
 
