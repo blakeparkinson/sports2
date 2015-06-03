@@ -791,7 +791,7 @@ padding-left: 3%;
   text-align: center;
   background-color: rgba(0, 0, 0, 0.75);
   color: white;
-  border-radius: 80px;
+  border-radius: 20px;
 }
 .text-contain {
   padding:20px;
@@ -800,7 +800,9 @@ padding-left: 3%;
   font: 24px;
   opacity: 0.9;
 }
-
+.about-bigger {
+  font-size: 1.4em;
+}
 .about-body.modal-open {
   opacity: 1;
 }
