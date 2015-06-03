@@ -387,7 +387,13 @@ var addToCorrectList = function (player, index){
   }
   else{
     //goats and leaders
-    var statHtml = '<span class="stat">'+player.stat+'</span>';
+    if (player.stat < 1) {
+      var statAsPerc = (player.stat * 100);
+      var statAsPerc = statAsPerc.toFixed(1) + "%";
+    } else {
+      var statAsPerc = player.stat;
+    }    
+    var statHtml = '<span class="stat">'+statAsPerc+'</span>';
     var playerBox = answer_container.find('.correct-guess[data-player-id='+player.player_id+']');
     playerBox.removeClass('no-flip');
     var playerHtml = imgHtml + player.full_name;
