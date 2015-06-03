@@ -146,7 +146,6 @@ function postSocial(event){
     }
 
   if (target.attr('id') == 'twitter'){
-    console.log(title);
     window.open('https://twitter.com/share?text='+title+'&url=www.espn.com', 'Share a quiz on twitter', 'scrollbars=yes, width=' + d.w + ', height=' + d.h + ', top=' + d.top + ', left=' + d.left);
   }
 
