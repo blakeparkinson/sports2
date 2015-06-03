@@ -55,7 +55,8 @@ router.get('/', function(req, res) {
           primary_hex: colors.primary_hex,
           secondary_hex: colors.secondary_hex,
           type: type,
-          plainDisplay: true
+          plainDisplay: true,
+          quizPage: true
         })
       }, team_id)
     }
