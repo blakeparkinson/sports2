@@ -35,8 +35,8 @@ $(document).ready(function() {
   $('body').on('click', '.quit-btn', endQuiz);
   $('body').on('click', ".correct-guess:not('.no-flip')", showCard);
   $('#card').flip({trigger: 'manual'});
-  $('body').on('mouseover', '.inner-guess', hoverCard);
-  $('body').on('mouseout', '.inner-guess', removeHover)
+  $('body').on('mouseover', ".inner-guess.guessed:not('.no-hover')", hoverCard);
+  $('body').on('mouseout', '.inner-guess.guessed', removeHover)
   $('#graphModal').modal({ show: false})
 
   startCounter();
@@ -382,6 +382,7 @@ var addToCorrectList = function (player, index){
     var html = '<div class="outer-guess"><div class="inner-guess"><div class="correct-guess" data-index="'+index+'">'+placer +'.' + imgHtml + player.full_name + '</div></div></div>';
     answer_container.append(html);
     var current = answer_container.find('.correct-guess[data-index="' + index + '" ]').closest('.outer-guess');
+    current.find('.inner-guess').addClass('guessed');
     current.hide();
     current.fadeIn(200).addClass('green-background');
   }
@@ -395,10 +396,10 @@ var addToCorrectList = function (player, index){
     }    
     var statHtml = '<span class="stat">'+statAsPerc+'</span>';
     var playerBox = answer_container.find('.correct-guess[data-player-id='+player.player_id+']');
-    playerBox.removeClass('no-flip');
+    //playerBox.removeClass('no-flip');
     var playerHtml = imgHtml + player.full_name;
     playerBox.append(playerHtml);
-    playerBox.parent().append(statHtml);
+    playerBox.parent().append(statHtml).addClass('guessed no-hover');
     playerBox.closest('.outer-guess').fadeIn(200).addClass('green-background');
   }
 }
