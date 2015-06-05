@@ -50,8 +50,13 @@ function clearModal(){
 
 
 function appendMessage(event){
-
-  modal.find('#message').val('I totally just dominated this quiz');
+  if (typeof teamId != 'undefined' && typeof team_name != 'undefined'){
+    var message = 'Try to beat my score of {{' +correct+'}} on this ' + team_name + ' quiz: https://www.rosterbliz.com?team_id=Qknb0gNGL1x';
+  } 
+  else{
+    var message = 'Thought you might enjoy some sports quizzes at rosterbliz.com.';
+  }
+  modal.find('#message').val(message);
 }
 
 function sendEmail(event){
@@ -132,11 +137,16 @@ function fetchPopupDimensions(){
 function postSocial(event){
 
   var target = $(event.target),
-    d = fetchPopupDimensions(),
-    title = target.closest('.social-sidebar').data('title');
+    d = fetchPopupDimensions();
+    if (target.closest('.social').hasClass('social-sidebar')){
+      title = target.closest('.social-sidebar').data('title');
+    }
+    else{
+      title = target.closest('.social-chart').data('title');
+    }
 
   if (target.attr('id') == 'twitter'){
-    window.open('https://twitter.com/share?text='+title+'&url='+window.location.href, 'Share a quiz on twitter', 'scrollbars=yes, width=' + d.w + ', height=' + d.h + ', top=' + d.top + ', left=' + d.left);
+    window.open('https://twitter.com/share?text='+title+'&url=www.espn.com', 'Share a quiz on twitter', 'scrollbars=yes, width=' + d.w + ', height=' + d.h + ', top=' + d.top + ', left=' + d.left);
   }
 
   else{

@@ -8,16 +8,33 @@
   },
   "dependencies": {
     "express": "~4.11.1",
+    "express-session": "~1.10.2",
+    "handlebars": "3.0.0",
+    "handlebars-helpers": "0.5.8",
     "body-parser": "~1.10.2",
-    "cookie-parser": "~1.3.3",
+    "chai": "~2.3.0",
+    "cheerio": "0.19.0",
+    "async": "~0.9.0",
+    "cookie-parser": "~1.3.4",
     "morgan": "~1.5.1",
     "serve-favicon": "~2.2.0",
-    "debug": "~2.1.1",
+    "debug": "~2.1.2",
     "hbs": "~2.8.0",
+    "lodash": "~3.3.1",
     "mongojs": "*",
+    "morgan": "~1.5.1",
+    "nodemailer": "~1.3.0",
     "http": "*",
     "jquery": "*",
-    "xml2js": "*"
+    "xml2js": "*",
+    "mongojs": "~0.18.2",
+    "passport": "~0.2.1",
+    "passport-facebook": "~1.0.3",
+    "request": "2.51.0",
+    "passport-twitter": "~1.0.2",
+    "serve-favicon": "2.2.0",
+    "shortid": "~2.1.3",
+    "twitter": "~1.2.1"
   },
   "devDependencies": {
     "gulp": "^3.9.0",
@@ -27,5 +44,23 @@
     "gulp-sass": "^2.0.1",
     "gulp-uglify": "^1.2.0",
     "handlebars-helpers": "^0.5.8"
-  }
+  },
+  "description": "sports ======",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blakeparkinson/sports2.git"
+  },
+  "keywords": [
+    "rosterblitz"
+  ],
+  "author": "Blake Parkinson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/blakeparkinson/sports2/issues"
+  },
+  "homepage": "https://github.com/blakeparkinson/sports2"
 }

@@ -4,7 +4,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">You got <span class="percentage" style="background-color:\{{labelColor}}">\{{correct}}</span> players correct which puts you in the \{{shortPercentile}} percentile. </span></h4>
+        <h4 class="modal-title" id="myModalLabel">You got <span class="percentage" style="background-color:\{{labelColor}}">\{{correct}}</span> \{{pluralCount correct 'player' 'players'}} correct which puts you in the \{{shortPercentile}} percentile. </span></h4>
       </div>
       <div class="modal-body">
       <h3 class="chart-team">\{{team_name}}</h3>
@@ -15,7 +15,7 @@
         <div class="chart-text" style="background-image: url({{logo_url}})"></div>
       </div>
       <div class="modal-footer">
-        <div class="social-chart" data-title="Try out this quiz at Rosterblitz: ">
+        <div class="social-chart social" data-title="Try to beat my score of \{{correct}} on this \{{team_name}} quiz: https://www.rosterbliz.com/quiz?team_id=\{{teamId}}">
           <div id="share-1" class="share-element email-img" data-toggle="modal" data-target="#emailModal">
             <div id="email"></div>
           </div>
@@ -25,9 +25,8 @@
             <div id ="share-3" class="share-element">
             <div id="twitter" class="post-social"></div>
         </div>
-        </div>
-        <button class="share-this btn btn-success" data-clipboard-text="www.rosterblitz.com/quiz?team_id=\{{teamId}}">Copy Quiz Link</button>
-        <button type="button" class="btn btn-info social-chart-close" data-dismiss="modal">Go Back</button>
+      </div>
+        <button type="button" class="btn btn-default social-chart-close" data-dismiss="modal">Go Back</button>
       </div>
     </div>
   </div>

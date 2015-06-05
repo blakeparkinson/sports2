@@ -55,7 +55,8 @@ router.get('/', function(req, res) {
           primary_hex: colors.primary_hex,
           secondary_hex: colors.secondary_hex,
           type: type,
-          plainDisplay: true
+          plainDisplay: true,
+          quizPage: true
         })
       }, team_id)
     }
@@ -126,6 +127,11 @@ var redirectQuiz = function(item, res){
 /* Takes in a sorted array that includes the historical scores and the new score. Sorted position / length = percentile. 
 Optimistic way of calculating. Ex scores 0,1,1,2,3 and you scored one of the 1's, you will be in the 60th percentile. */
 var calculatePercentile = function(req, score, all_scores){
+  if (score == 0){
+    //you didn't get any right, so you are 0 percentile
+    req.session.scores.percentile = 0;
+    return;
+  }
   len = all_scores.length;
   count = 0;
   for (i=0;i<all_scores.length;i++){

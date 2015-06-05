@@ -287,6 +287,12 @@ a {
   border-radius: 28px;
   color: rgb(255, 255, 255);
   margin-left: 7px;
+  -webkit-transition: -webkit-transform .8s ease-in-out;
+  transition: transform .8s ease-in-out;
+}
+.navbar-brand.main:hover .rb-bolt{
+  -webkit-transform: rotate(360deg);
+  transform: rotate(360deg);
 }
 .tooltip-arrow,
 .white-tooltip + .tooltip > .tooltip-inner {  
@@ -661,8 +667,11 @@ padding-left: 3%;
   width:100%;
 }
 
-.answer-container .inner-guess:hover{  
+.answer-container .inner-guess.guessed:hover{  
   cursor:pointer;
+}
+.answer-container .inner-guess.guessed.no-hover:hover{  
+  cursor:default;
 }
 .green-background {
   background-color:rgb(22, 231, 22);
@@ -701,7 +710,8 @@ padding-left: 3%;
 .answer-container .correct-guess{
   position: absolute;
   z-index: 5;
-  width:inherit;
+  width:50%;
+  height:inherit;
 }
 
 
@@ -791,7 +801,7 @@ padding-left: 3%;
   text-align: center;
   background-color: rgba(0, 0, 0, 0.75);
   color: white;
-  border-radius: 80px;
+  border-radius: 20px;
 }
 .text-contain {
   padding:20px;
@@ -800,7 +810,9 @@ padding-left: 3%;
   font: 24px;
   opacity: 0.9;
 }
-
+.about-bigger {
+  font-size: 1.4em;
+}
 .about-body.modal-open {
   opacity: 1;
 }

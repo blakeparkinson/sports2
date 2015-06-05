@@ -7,6 +7,8 @@ var http = require("http"),
  	mongojs = require("mongojs"),
 	db = mongojs.connect(config.mongo_uri);
 var quizCutoffDate = new Date();
+var ua = require('universal-analytics');
+var visitor = ua(config.googleTrackingID);
 quizCutoffDate.setDate(quizCutoffDate.getDate() - 7);  //currently set to 1 week ago
 
 
@@ -43,6 +45,7 @@ router.get('/', function(req, res) {
   if (typeof endresult !== 'undefined' && endresult){
     trending_quiz = endresult
   }
+  visitor.pageview("/", "index", "http://rosterblitz.com").send();
 	res.render('index', 
   {
     session:req.session,

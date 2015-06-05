@@ -1,6 +1,4 @@
 /*jshint -W004 */
-import SafeString from "./safe-string";
-
 var escape = {
   "&": "&amp;",
   "<": "&lt;",
@@ -50,11 +48,21 @@ export var isArray = Array.isArray || function(value) {
   return (value && typeof value === 'object') ? toString.call(value) === '[object Array]' : false;
 };
 
+// Older IE versions do not directly support indexOf so we must implement our own, sadly.
+export function indexOf(array, value) {
+  for (var i = 0, len = array.length; i < len; i++) {
+    if (array[i] === value) {
+      return i;
+    }
+  }
+  return -1;
+}
+
 
 export function escapeExpression(string) {
   // don't escape SafeStrings, since they're already safe
-  if (string instanceof SafeString) {
-    return string.toString();
+  if (string && string.toHTML) {
+    return string.toHTML();
   } else if (string == null) {
     return "";
   } else if (!string) {
@@ -78,6 +86,11 @@ export function isEmpty(value) {
   } else {
     return false;
   }
+}
+
+export function blockParams(params, ids) {
+  params.path = ids;
+  return params;
 }
 
 export function appendContextPath(contextPath, id) {

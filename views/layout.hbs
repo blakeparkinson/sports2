@@ -8,6 +8,7 @@
     <link rel='stylesheet' href='/stylesheets/select2.css' />
     <link rel='stylesheet' href='/stylesheets/leaguepage.css' />
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' />
+    <link rel='shortcut icon' href='/images/faviconRB3.ico' type='image/x-icon'/ >
   </head>
   <body id="league-background" style={{#if background_image}}"background-image: url({{background_image}});"{{/if}}>
 {{# unless special_layout}}
@@ -30,7 +31,9 @@
           <li class="tabs {{#compare current 'nhl'}}selected{{/compare}}"><a href="/leaguesearch/nhl"><span  class="tabs-text">NHL</span></a></li>  
           <!-- IF INDEX PAGE, DO how_works_button, IF ANOTHER OTHER PAGE, do question_mark -->
           {{#if how_works_button}}
+          <li>
             {{> how_works_button }}
+          </li>
           {{else}}
             {{> question_mark }}   
           {{/if}}
@@ -41,8 +44,7 @@
   {{{body}}}
     
 {{# unless special_layout}}
-
-  <div class="social-sidebar" data-title="Try out this quiz at Rosterblitz: ">
+  <div class="social-sidebar social" data-title="{{#if quizPage}}Try out this quiz for the {{team_name}} quiz: https://www.rosterbliz.com/quiz?team_id={{team_id}}{{else}}Thought you might enjoy some sports quizzes at rosterbliz.com{{/if}}">
     <div id="share-1" class="share-element email-img" data-toggle="modal" data-target="#emailModal">
       <div id="email"></div>
     </div>
@@ -157,11 +159,6 @@
     </div>
   </div>
 </div>
-
-
-    <script src='/test/all.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js'></script>
-    <script src='https://code.jquery.com/jquery.js'></script>
-    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js'></script>
+    <script src='/test/all.min.js'></script> 
   </body>
 </html>
