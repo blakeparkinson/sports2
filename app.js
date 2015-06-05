@@ -18,6 +18,7 @@ var config = common.config();
 
 var auth = require('./routes/auth');
 var session = require('express-session'); //express-session is currently working, but is deprecated
+var RedisStore = require('connect-redis')(session);
 
 var app = express();
 var passport = require('passport');
@@ -37,11 +38,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({ 
-    secret: config.express_secret,
-    resave: false,
-    saveUninitialized: false
- })); 
+app.use(session({ store: new RedisStore({
+    host: '127.0.0.1',
+    port: 6379
+  }), secret: config.sessionKey,
+    resave: true,
+    saveUninitialized: true
+}));
 
 app.use(passport.initialize());
 app.use(passport.session()); 
