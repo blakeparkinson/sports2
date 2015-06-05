@@ -39,8 +39,6 @@ app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ store: new RedisStore({
-    host: '127.0.0.1',
-    port: 6379
   }), secret: config.sessionKey,
     resave: true,
     saveUninitialized: true
