@@ -8,14 +8,6 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 
-// Launch Server
-gulp.task('serveprod', function() {
-  connect.server({
-    root: /Users/kelsey/projects/sports2/sports2,
-    port: process.env.PORT || 5000, // localhost:5000
-    livereload: false
-  });
-});
 
 // Lint Task
 gulp.task('lint', function() {
@@ -33,12 +25,11 @@ gulp.task('sass', function() {
 
 // Concatenate & Minify JS
 gulp.task('scripts', function() {
-    return gulp.src('js/*.js')
+    return gulp.src('public/javascripts/*.js')
         .pipe(concat('all.js'))
-        .pipe(gulp.dest('dist'))
         .pipe(rename('all.min.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('public/test'));
 });
 
 // Watch Files For Changes
