@@ -126,6 +126,9 @@ var fetchPlayers = function(type, api_team_id, team_id, league, usat_id, res, re
       var playersObj = JSON.parse(playersString);
       if (isItemExpired(playersObj)){
         players = fetchPlayersFromApi(api_team_id, team_id, league, usat_id, res, req, first_callback, second_callback);
+        //set redis back to null, so it will get refreshed down the pipe
+        redisClient.set(team_id, null);
+
       }
       else{
         //we got something in redis, continue
