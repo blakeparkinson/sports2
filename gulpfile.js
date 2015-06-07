@@ -26,7 +26,7 @@ gulp.task('minify-css', function() {
 
 // Concatenate & Minify JS
 gulp.task('scripts', function() {
-    return gulp.src('public/javascripts/*.js')
+    return gulp.src('public/javascripts/src/*.js')
         .pipe(concat('all.js'))
         .pipe(rename('all.min.js'))
         .pipe(uglify())
