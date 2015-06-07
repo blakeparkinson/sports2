@@ -20,6 +20,9 @@ var salaries_list = require('../lists/other/nba/nba_salaries.js');
 var teamColors = require('../lists/team_colors/team_colors.js');
 var teams_model = require('./teams.js');
 var avatarLeagues = ['nfl, nhl'];
+var util = require('util');
+var redis = require("redis"),
+    redisClient = redis.createClient({detect_buffers: true});
 
 
 var goatsLeadersArray = function(){
@@ -113,40 +116,66 @@ var getTimeLimit = function(league){
 }
 */
 
-
-// Check the db first. If it's there and has been added in the last 24 hours, use it. 
+// Check redis first. Not there go to Mongo
+// Check the db. If it's there and has been added in the last 24 hours, use it. 
 // Otherwise, go get new data from the API and replace/add the database listing
 var fetchPlayers = function(type, api_team_id, team_id, league, usat_id, res, req, first_callback, second_callback){ 
   var players;
-  if (goatsLeadersArray().indexOf(type) > -1){ 
-    //it's a leader or goat quiz
-    db.collection(type).find({team_id : team_id}).toArray(function (err, items){
-      players = items;
-      first_callback(players, team_id, res, league, second_callback);
-    })
-  }
-  else {
-    // it's a roster quiz
-    db.collection('players').find({team_id : team_id}).toArray(function (err, items){
-      if (items.length > 0){ // data in Mongo
-        //convert the date to unix timestamp
-        var item = _.first(items);
-        var itemdate = new Date(item.last_updated.replace(' ', 'T')).getTime();
-        var datenow = new Date();
-        var datecutoff = datenow.getTime() - dataAgeCutOff;
-        if (datecutoff > itemdate){   //data is old so call API
-           players = fetchPlayersFromApi(api_team_id, team_id, league, usat_id, res, req, first_callback, second_callback)
-        }
-        else {  // data is fine so just return it
-          players = item;
+  redisClient.get(team_id, function (err, playersString) {
+    if (playersString != null){
+      var playersObj = JSON.parse(playersString);
+      if (isItemExpired(playersObj)){
+        players = fetchPlayersFromApi(api_team_id, team_id, league, usat_id, res, req, first_callback, second_callback);
+      }
+      else{
+        //we got something in redis, continue
+        first_callback(JSON.parse(playersString), team_id, res, league, second_callback);
+      }
+    }
+    else{
+      if (goatsLeadersArray().indexOf(type) > -1){ 
+        //it's a leader or goat quiz
+        db.collection(type).find({team_id : team_id}).toArray(function (err, items){
+          players = items;
+          redisClient.set(team_id, JSON.stringify(players));
           first_callback(players, team_id, res, league, second_callback);
-        }
+        })
       }
-      else {  // data not already in Mongo
-         players = fetchPlayersFromApi(api_team_id, team_id, league, usat_id, res, req, first_callback, second_callback)
+      else {
+        // it's a roster quiz
+        db.collection('players').find({team_id : team_id}).toArray(function (err, items){
+          if (items.length > 0){ // data in Mongo  
+            var item = _.first(items);
+            if (isItemExpired(item)){   //data is old so call API
+               players = fetchPlayersFromApi(api_team_id, team_id, league, usat_id, res, req, first_callback, second_callback)
+            }
+            else {  // data is fine so just return it
+              players = item;
+              redisClient.set(team_id, JSON.stringify(players));
+              first_callback(players, team_id, res, league, second_callback);
+            }
+          }
+          else {  // data not already in Mongo
+             players = fetchPlayersFromApi(api_team_id, team_id, league, usat_id, res, req, first_callback, second_callback)
+          }
+        });
       }
-    });
+    }
+
+  })
+}
+
+var isItemExpired = function (item){
+  var itemdate = new Date(item.last_updated.replace(' ', 'T')).getTime();
+  var datenow = new Date();
+  var datecutoff = datenow.getTime() - dataAgeCutOff;
+  if (datecutoff > itemdate){
+    return true;
   }
+  else{
+    return false;
+  }
+
 }
 
 
