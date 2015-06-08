@@ -167,6 +167,16 @@
     <script src='/javascripts/libraries/jquery.flip.min.js'></script>
     <script src='/javascripts/libraries/bootstrap-select.min.js'></script>
     <script src='/javascripts/libraries/select2.min.js'></script>
-    <script src='/test/all.min.js'></script>
+    {{#if isProduction}}
+      <script src='/test/all.min.js'></script>
+    {{else}}
+      <script src='/javascripts/src/global.js'></script>
+      <script src='/javascripts/src/handlebars-helpers.js'></script>
+      <script src='/javascripts/src/leaguesearch.js'></script>
+      <script src='/javascripts/src/quiz.js'></script>
+      <script src='/javascripts/src/teams.js'></script>
+    {{/if}}
+
+
   </body>
 </html>

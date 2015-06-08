@@ -8,7 +8,10 @@ var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var minifyCss = require('gulp-minify-css');
 
+var argv = require('yargs').argv;
 
+
+// command line arg exmaple - "gulp task --production"
 // Lint Task
 gulp.task('lint', function() {
     return gulp.src('js/*.js')
@@ -28,8 +31,8 @@ gulp.task('minify-css', function() {
 gulp.task('scripts', function() {
     return gulp.src('public/javascripts/src/*.js')
         .pipe(concat('all.js'))
-        .pipe(rename('all.min.js'))
-        .pipe(uglify())
+        .pipe(gulpif(argv.production, rename(all.min.js)))
+        .pipe(gulpif(argv.production, uglify()))
         .pipe(gulp.dest('public/test'));
 });
 
