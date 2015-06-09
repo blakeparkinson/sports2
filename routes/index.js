@@ -50,14 +50,16 @@ router.get('/', function(req, res) {
   {
     session:req.session,
     trending_quiz: trending_quiz,
-    how_works_button: true
+    how_works_button: true,
+    isProduction: common.isProduction
   });
 });
 })
 
 router.get('/get', function(req, res) {
     var term = req.query.q;
-    res.render('../views/partials/player_card.hbs', {layout: false, data: data});
+    res.render('../views/partials/player_card.hbs', {layout: false, data: data, isProduction: common.isProduction
+		});
 
 });
 

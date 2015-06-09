@@ -26,7 +26,9 @@ router.get('/', function(req, res) {
         { popular_teams: results.popular_lists,
           goats: results.goats_lists,
         	leaders: results.leaders_lists,
-          remove_footer: true
+          remove_footer: true,
+          isProduction: common.isProduction
+
          }
     );  
   })
@@ -55,7 +57,9 @@ router.get('/:league', function(req, res) {
           background_image: imageByLeague(league),
           how_works_button: true,
           remove_footer: true,
-          current: league
+          current: league,
+          isProduction: common.isProduction
+
          }
     );  
   })
