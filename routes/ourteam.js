@@ -5,7 +5,8 @@ var http = require("http");
 
 router.get('/', function(res, res) {
       res.render('ourteam', {
-      	static_footer: true
+      	static_footer: true,
+      	isProduction: common.isProduction
       });
     });
 
