@@ -56,7 +56,8 @@ router.get('/', function(req, res) {
           secondary_hex: colors.secondary_hex,
           type: type,
           plainDisplay: true,
-          quizPage: true
+          quizPage: true,
+          isProduction: common.isProduction
         })
       }, team_id)
     }

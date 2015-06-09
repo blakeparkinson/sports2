@@ -1,7 +1,7 @@
   <!DOCTYPE html>
 <html>
   <head>
- 
+  
     <title>{{title}}</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/bootstrap-select.min.css' />
@@ -159,19 +159,24 @@
     </div>
   </div>
 </div>
+    <script src='/javascripts/libraries/jquery.min.js'></script>
+    <script src='/javascripts/libraries/underscore.min.js'></script>
+    <script src='/javascripts/libraries/handlebars.min.js'></script>
+    <script src='/javascripts/libraries/bootstrap.min.js'></script> 
+    <script src='/javascripts/libraries/Chart.min.js'></script>
+    <script src='/javascripts/libraries/jquery.flip.min.js'></script>
+    <script src='/javascripts/libraries/bootstrap-select.min.js'></script>
+    <script src='/javascripts/libraries/select2.min.js'></script>
+    {{#if isProduction}}
+      <script src='/test/all.min.js'></script>
+    {{else}}
+      <script src='/javascripts/src/global.js'></script>
+      <script src='/javascripts/src/handlebars-helpers.js'></script>
+      <script src='/javascripts/src/leaguesearch.js'></script>
+      <script src='/javascripts/src/quiz.js'></script>
+      <script src='/javascripts/src/teams.js'></script>
+    {{/if}}
 
-    <script src='/javascripts/underscore.min.js'></script>
-    <script src='/javascripts/handlebars.min.js'></script>
-    <script src='/javascripts/jquery.min.js'></script>
-    <script src='/javascripts/handlebars-helpers.js'></script>
-    <script src='/javascripts/select2.min.js'></script>
-    <script src='/javascripts/Chart.min.js'></script>
-    <script src='/javascripts/global.js'></script>
-    <script src='/javascripts/jquery.flip.min.js'></script>
-    <script src='/javascripts/quiz.js'></script>
-    <script src='/javascripts/teams.js'></script>
-    <script src='/javascripts/leaguesearch.js'></script>    
-    <script src='/javascripts/bootstrap-select.min.js'></script>
-    <script src='/javascripts/bootstrap.min.js'></script>    
+
   </body>
 </html>
