@@ -40,7 +40,6 @@ gulp.task('watch', function() {
 });
 
 // Default Task
-gulp.task('default', ['lint', 'minify-css', 'scripts', 'watch']);
-
+gulp.task('build', ['lint', 'minify-css', 'scripts', 'watch']);
 
 
