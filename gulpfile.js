@@ -42,7 +42,6 @@ gulp.task('watch', function() {
 // Default Task
 gulp.task('build', ['lint', 'minify-css', 'scripts', 'watch']);
 gulp.task("heroku:production", function(){
-    console.log('hello'); 
+     ['lint', 'minify-css', 'scripts', 'watch']
 });
-
 
