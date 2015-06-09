@@ -21,8 +21,17 @@ var teamColors = require('../lists/team_colors/team_colors.js');
 var teams_model = require('./teams.js');
 var avatarLeagues = ['nfl, nhl'];
 var util = require('util');
-var redis = require("redis"),
+// Redis has local and production modes
+console.log("LALALAL"+process.env.REDISTOGO_URL);
+if (common.isProduction){
+  var rtg   = require("url").parse(process.env.REDISTOGO_URL);
+  var redis = require("redis").createClient(rtg.port, rtg.hostname);
+  redis.auth(rtg.auth.split(":")[1]);
+}
+else{
+  var redis = require("redis"),
     redisClient = redis.createClient({detect_buffers: true});
+}
 
 
 var goatsLeadersArray = function(){
