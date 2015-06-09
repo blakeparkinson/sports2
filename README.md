@@ -17,5 +17,5 @@ Installing redis:
 Deployment:
 
 1. Set app to production mode: ```heroku config:set NODE_ENV=production```
-2. Add the buildpack: ```heroku config:set BUILDPACK_URL=https://github.com/krry/heroku-buildpack-nodejs-gulp-bower```
+2. Add the buildpack: ```heroku config:set BUILDPACK_URL=https://github.com/blakeparkinson/heroku-buildpack-nodejs-gulp-bower```
 3. Do the usual heroku deployment steps.
