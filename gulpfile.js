@@ -8,8 +8,6 @@ var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var minifyCss = require('gulp-minify-css');
 
-var argv = require('yargs').argv;
-
 
 // Lint Task
 gulp.task('lint', function() {
