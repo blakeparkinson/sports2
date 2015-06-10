@@ -25,7 +25,7 @@ var passport = require('passport');
 
 var hbs = require('hbs');
 
-if (common.isProduction){
+if (process.env.REDISTOGO_URL){
   var rtg   = require("url").parse(process.env.REDISTOGO_URL);
   var redisClient = require("redis").createClient(rtg.port, rtg.hostname);
   redisClient.auth(rtg.auth.split(":")[1]);
