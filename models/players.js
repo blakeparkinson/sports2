@@ -23,7 +23,7 @@ var avatarLeagues = ['nfl, nhl'];
 var util = require('util');
 // Redis has local and production modes
 console.log("LALALAL"+process.env.REDISTOGO_URL);
-if (common.isProduction){
+if (process.env.REDISTOGO_URL){
   var rtg   = require("url").parse(process.env.REDISTOGO_URL);
   var redisClient = require("redis").createClient(rtg.port, rtg.hostname);
   redisClient.auth(rtg.auth.split(":")[1]);
