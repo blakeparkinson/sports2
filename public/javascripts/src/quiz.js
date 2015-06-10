@@ -29,14 +29,15 @@ var card = $('.player-card');
 // DOM Ready =============================================================
 $(document).ready(function() {
   console.log(roster);
-    
-	$('body').on('keyup', '#guess-box', fetchGuess);
+  var columnsSelector = $('.columns');
+
+	columnsSelector.on('keyup', '#guess-box', fetchGuess);
 	$("#guess-box").focus();
-  $('body').on('click', '.quit-btn', endQuiz);
-  $('body').on('click', ".correct-guess:not('.no-flip')", showCard);
+  columnsSelector.on('click', '.quit-btn', endQuiz);
+  columnsSelector.on('click', ".correct-guess:not('.no-flip')", showCard);
   $('#card').flip({trigger: 'manual'});
-  $('body').on('mouseover', ".inner-guess.guessed:not('.no-hover')", hoverCard);
-  $('body').on('mouseout', '.inner-guess.guessed', removeHover)
+  columnsSelector.on('mouseover', ".inner-guess.guessed:not('.no-hover')", hoverCard);
+  columnsSelector.on('mouseout', '.inner-guess.guessed', removeHover)
   $('#graphModal').modal({ show: false})
 
   startCounter();
