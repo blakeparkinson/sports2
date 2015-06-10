@@ -29,7 +29,7 @@ var card = $('.player-card');
 // DOM Ready =============================================================
 $(document).ready(function() {
   console.log(roster);
-  var columnsSelector = $('.columns');
+  var columnsSelector = ('.columns');
 
 	$(columnsSelector).on('keyup', '#guess-box', fetchGuess);
 	$("#guess-box").focus();
