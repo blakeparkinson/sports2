@@ -9,7 +9,7 @@ var rename = require('gulp-rename');
 var minifyCss = require('gulp-minify-css');
 
 
-// Lint Task
+//uuu Lint Task
 gulp.task('lint', function() {
     return gulp.src('js/*.js')
         .pipe(jshint())
