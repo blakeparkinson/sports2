@@ -30,13 +30,13 @@ var card = $('.player-card');
 $(document).ready(function() {
   console.log(roster);
     
-	$('body').on('keyup', '#guess-box', fetchGuess);
+	$('.columns').on('keyup', '#guess-box', fetchGuess);
 	$("#guess-box").focus();
-  $('body').on('click', '.quit-btn', endQuiz);
-  $('body').on('click', ".correct-guess:not('.no-flip')", showCard);
+  $('.columns').on('click', '.quit-btn', endQuiz);
+  $('.columns').on('click', ".correct-guess:not('.no-flip')", showCard);
   $('#card').flip({trigger: 'manual'});
-  $('body').on('mouseover', ".inner-guess.guessed:not('.no-hover')", hoverCard);
-  $('body').on('mouseout', '.inner-guess.guessed', removeHover)
+  $('.columns').on('mouseover', ".inner-guess.guessed:not('.no-hover')", hoverCard);
+  $('.columns').on('mouseout', '.inner-guess.guessed', removeHover)
   $('#graphModal').modal({ show: false})
 
   startCounter();
