@@ -24,6 +24,16 @@ var app = express();
 var passport = require('passport');
 
 var hbs = require('hbs');
+
+if (common.isProduction){
+  var rtg   = require("url").parse(process.env.REDISTOGO_URL);
+  var redisClient = require("redis").createClient(rtg.port, rtg.hostname);
+  redisClient.auth(rtg.auth.split(":")[1]);
+}
+else{
+  var redis = require("redis"),
+    redisClient = redis.createClient({detect_buffers: true});
+}
 hbs.registerPartials(__dirname + '/views/partials');
 
 // view engine setup
@@ -39,6 +49,7 @@ app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ store: new RedisStore({
+  client: redisClient
   }), secret: config.sessionKey,
     resave: true,
     saveUninitialized: true
