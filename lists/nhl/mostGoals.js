@@ -1,4 +1,4 @@
-var mostGoals = [
+var mostGoals1 = [
   {
   "league": "nhl",
   "type":"goats",
