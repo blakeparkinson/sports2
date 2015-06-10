@@ -147,13 +147,13 @@ a {
 }
 .badge-small-roster {
   display: inline-block;
-  padding: 2px 4px;
+  padding: 1px 4px;
   font-size: 12px;
   font-weight: 700;
   line-height: 1;  
   text-align: center;
   white-space: nowrap;  
-  border-radius: 50%;
+  border-radius: 44%;
   display: inline-block;
   width: 25px;
   height: 25px;
@@ -165,13 +165,13 @@ a {
 }
 .badge-small-leaders {
   display: inline-block;  
-  padding: 2px 4px;
+  padding: 1px 4px;
   font-size: 12px;
   font-weight: 700;
   line-height: 1;  
   text-align: center;
   white-space: nowrap;  
-  border-radius: 50%;
+  border-radius: 44%;
   display: inline-block;
   width: 25px;
   height: 25px;
@@ -183,13 +183,13 @@ a {
 }
 .badge-small-goats {
   display: inline-block;
-  padding: 2px 4px;
+  padding: 1px 4px;
   font-size: 12px;
   font-weight: 700;
   line-height: 1;  
   text-align: center;
   white-space: nowrap;
-  border-radius: 50%;
+  border-radius: 44%;
   display: inline-block;
   width: 25px;
   height: 25px;
