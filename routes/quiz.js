@@ -172,7 +172,11 @@ var fetchQuizScores = function(req, team_id){
             mod_scores.push(items[i].modified_score);
           }
         }
-      }
+      
+}
+console.log(req);
+console.log(req.session);
+console.log(mod_scores);
     req.session.scores = {};
     req.session.scores.all_scores = mod_scores;
     // Assign each quiz score to a bucket for graph display

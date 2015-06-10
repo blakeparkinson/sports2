@@ -9,7 +9,7 @@ var rename = require('gulp-rename');
 var minifyCss = require('gulp-minify-css');
 
 
-// Lint Task
+//uuu Lint Task
 gulp.task('lint', function() {
     return gulp.src('js/*.js')
         .pipe(jshint())
@@ -42,7 +42,6 @@ gulp.task('watch', function() {
 // Default Task
 gulp.task('build', ['lint', 'minify-css', 'scripts', 'watch']);
 gulp.task("heroku:production", function(){
-     ['lint', 'minify-css', 'scripts', 'watch']
+     ['minify-css', 'scripts', 'watch']
 });
-
 
