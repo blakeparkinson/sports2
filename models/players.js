@@ -22,8 +22,6 @@ var teams_model = require('./teams.js');
 var avatarLeagues = ['nfl, nhl'];
 var util = require('util');
 // Redis has local and production modes
-console.log("LALALAL"+process.env.REDISTOGO_URL);
-
 if (process.env.REDISTOGO_URL){
   var rtg   = require("url").parse(process.env.REDISTOGO_URL);
   var redisClient = require("redis").createClient(rtg.port, rtg.hostname);
@@ -133,20 +131,16 @@ var getTimeLimit = function(league){
 var fetchPlayers = function(type, api_team_id, team_id, league, usat_id, res, req, first_callback, second_callback){ 
   var players;
   redisClient.get(team_id, function (err, playersString) {
-    if (playersString != null){
-      var playersObj = JSON.parse(playersString);
-      if (isItemExpired(playersObj)){
-        players = fetchPlayersFromApi(api_team_id, team_id, league, usat_id, res, req, first_callback, second_callback);
-        //set redis back to null, so it will get refreshed down the pipe
+    if (playersString != null && isItemExpired(JSON.parse(playersString)) == true){
+      // it is in redis, but is expired
         redisClient.set(team_id, null);
-
       }
-      else{
+    else if (playersString != null && isItemExpired(JSON.parse(playersString)) == false){
         //we got something in redis, continue
         first_callback(JSON.parse(playersString), team_id, res, league, second_callback);
       }
-    }
     else{
+    // not in redis, go to mongo
       if (goatsLeadersArray().indexOf(type) > -1){ 
         //it's a leader or goat quiz
         db.collection(type).find({team_id : team_id}).toArray(function (err, items){
