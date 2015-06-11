@@ -17,7 +17,7 @@ var api_key = '';
 var ver = '';
 var endpoint = '';
 var teams = [];
-var supported_leagues = ['nba', 'nhl'];
+var supported_leagues = ['nba', 'nhl', 'mlb', 'nfl'];
 var shortId = require('shortid');
 
 // NBA LISTS
@@ -32,7 +32,6 @@ var threePointPercentage_alltime = require('../lists/nba/threePointPercentage_al
 
 var supported_nba_lists = [apg_alltime.topAPG, bpg_alltime.topBPG, fieldGoalPercentage_alltime.fieldGoalPercentage, ftPercentage_alltime.ftPercentage, ppg_alltime.topPPG, rpg_alltime.topRPG, spg_alltime.topSPG, threePointPercentage_alltime.threePointPercentage];
 
-
 //NHL LISTS
 var mostAssists = require('../lists/nhl/mostAssists.js');
 var mostGoals = require('../lists/nhl/mostGoals.js');
@@ -40,6 +39,18 @@ var mostPoints = require('../lists/nhl/mostPoints.js');
 
 var supported_nhl_lists = [mostAssists.mostAssists, mostGoals.mostGoals, mostPoints.mostPoints];
 
+
+// MLB LISTS
+var mostHits = require('../lists/mlb/mostHits.js');
+var mostHomeRuns = require('../lists/mlb/mostHomeRuns.js');
+
+var supported_mlb_lists = [mostHits.mostHits, mostHomeRuns.mostHomeRuns];
+
+// NFL LISTS
+var mostPassingTD = require('../lists/nfl/mostPassingTD.js');
+var mostRushingYards = require('../lists/nfl/mostRushingYards.js');
+
+var supported_nfl_lists = [mostPassingTD.mostPassingTD, mostRushingYards.mostRushingYards];
 
 //process.argv grabs the command line arguments
 var league = process.argv[2];
@@ -95,6 +106,10 @@ switch (league){
     loopThroughList(supported_nba_lists);
   case 'nhl':
     loopThroughList(supported_nhl_lists);
+  case 'mlb':
+    loopThroughList(supported_mlb_lists);
+  case 'nfl':
+    loopThroughList(supported_nfl_lists);
   } 
 
 
