@@ -20,7 +20,7 @@ gulp.task('lint', function() {
 gulp.task('minify-css', function() {
   return gulp.src('public/stylesheets/*.css')
     .pipe(minifyCss({compatibility: 'ie8'}))
-    .pipe(gulp.dest('public/test'));
+    .pipe(gulp.dest('public/min'));
 });
 
 
@@ -30,7 +30,7 @@ gulp.task('scripts', function() {
         .pipe(concat('all.js'))
         .pipe(rename('all.min.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('public/test'));
+        .pipe(gulp.dest('public/min'));
 });
 
 // Watch Files For Changes
@@ -40,8 +40,9 @@ gulp.task('watch', function() {
 });
 
 // Default Task
-gulp.task('build', ['lint', 'minify-css', 'scripts', 'watch']);
+gulp.task('default', ['lint', 'minify-css', 'scripts', 'watch']);
 gulp.task("heroku:production", function(){
      ['minify-css', 'scripts', 'watch']
 });
+
 

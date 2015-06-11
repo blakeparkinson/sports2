@@ -3,10 +3,17 @@
   <head>
   
     <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel='stylesheet' href='/stylesheets/bootstrap-select.min.css' />
-    <link rel='stylesheet' href='/stylesheets/select2.css' />
-    <link rel='stylesheet' href='/stylesheets/leaguepage.css' />
+    {{#if isProduction}}
+      <link rel='stylesheet' href='/min/style.css' />
+      <link rel='stylesheet' href='/min/bootstrap-select.min.css' />
+      <link rel='stylesheet' href='/min/select2.css' />
+      <link rel='stylesheet' href='/min/leaguepage.css' />
+    {{else}}
+      <link rel='stylesheet' href='/stylesheets/style.css' />
+      <link rel='stylesheet' href='/stylesheets/bootstrap-select.min.css' />
+      <link rel='stylesheet' href='/stylesheets/select2.css' />
+      <link rel='stylesheet' href='/stylesheets/leaguepage.css' />
+    {{/if}}
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' />
     <link rel='shortcut icon' href='/images/faviconRB3.ico' type='image/x-icon'/ >
     <meta property="og:title" content="Rosterblitz"/>
@@ -175,7 +182,7 @@
     <script src='/javascripts/libraries/bootstrap-select.min.js'></script>
     <script src='/javascripts/libraries/select2.min.js'></script>
     {{#if isProduction}}
-      <script src='/test/all.min.js'></script>
+      <script src='/min/all.min.js'></script>
     {{else}}
       <script src='/javascripts/src/global.js'></script>
       <script src='/javascripts/src/handlebars-helpers.js'></script>
