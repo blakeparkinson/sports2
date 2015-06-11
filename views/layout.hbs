@@ -24,8 +24,8 @@
     <meta property="og:description"
       content="Rosterblitz - the premier sports quiz site."/>
   </head>
-  <body id="league-background" style={{#if background_image}}"background-image: url({{background_image}});"{{/if}}>
 {{# unless special_layout}}
+  <body id="league-background" style={{#if background_image}}{{#unless special_layout}}"background-image: url({{background_image}});"{{/unless}}{{/if}}>
 
 	<nav class="navbar navbar-default blitz" role="navigation">
     <div class="navbar-header rb">
