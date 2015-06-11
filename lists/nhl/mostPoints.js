@@ -12,7 +12,7 @@ var mostPoints = [
         "last_name": "Gretzky",
         "first_name": "Wayne",
         "full_name":"Wayne Gretzky",
-        "stat": "2857  "
+        "stat": "2857"
     },
     {
         "player_id": "2",
