@@ -131,11 +131,11 @@ var getTimeLimit = function(league){
 var fetchPlayers = function(type, api_team_id, team_id, league, usat_id, res, req, first_callback, second_callback){ 
   var players;
   redisClient.get(team_id, function (err, playersString) {
-    if (playersString != null && isItemExpired(JSON.parse(playersString)) == true){
+    if (playersString != null && isItemExpired(JSON.parse(playersString))){
       // it is in redis, but is expired
         redisClient.set(team_id, null);
       }
-    else if (playersString != null && isItemExpired(JSON.parse(playersString)) == false){
+    else if (playersString != null && !isItemExpired(JSON.parse(playersString))){
         //we got something in redis, continue
         first_callback(JSON.parse(playersString), team_id, res, league, second_callback);
       }
