@@ -498,20 +498,18 @@ var randImg = function(league) {
             images[3] = "nfl-ravens-stadium.jpg",
             images[4] = "nfl-seahawks-stadium.jpg",
             images[5] = "nfl-bills-stadium.jpg",
-            images[6] = "nfl-chargers-stadium.jpg",
-            images[7] = "nfl-chiefs-stadium.jpg",
-            images[8] = "nfl-jets-stadium.jpg",
-            images[9] = "nfl-raiders-stadium.jpg",
-            images[10] = "nfl-cowboys-stadium.jpg"
+            images[6] = "nfl-chiefs-stadium.jpg",
+            images[7] = "nfl-jets-stadium.jpg",
+            images[8] = "nfl-raiders-stadium.jpg",
+            images[9] = "nfl-cowboys-stadium.jpg"
           break;
         case "nhl":
           var path = '../images/stadiums/nhl_stadiums/';
-            images[0] = "nhl-bruins-stadium.jpg",
-            images[1] = "nhl-flyers-stadium.jpg",
-            images[2] = "nhl-redwings-stadium.jpg",
-            images[3] = "nhl-sabres-stadium.jpg",
-            images[4] = "nhl-thrashers-stadium.jpg",
-            images[5] = "nhl-predators-stadium.jpg"
+            images[0] = "nhl-flyers-stadium.jpg",
+            images[1] = "nhl-redwings-stadium.jpg",
+            images[2] = "nhl-sabres-stadium.jpg",
+            images[3] = "nhl-thrashers-stadium.jpg",
+            images[4] = "nhl-predators-stadium.jpg"
           break;
         case "nba": 
           var path = '../images/stadiums/nba_stadiums/';          
