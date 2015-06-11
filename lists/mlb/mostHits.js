@@ -90,5 +90,5 @@ var mostHits = [
 
 
 module.exports = {
-  mostHitss: mostHits
+  mostHits: mostHits
 }
