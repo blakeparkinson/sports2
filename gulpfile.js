@@ -7,7 +7,13 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var minifyCss = require('gulp-minify-css');
+var runSeq = require('run-sequence');
+var del = require('del');
 
+gulp.task('clean', function(cb) {
+  // You can use multiple globbing patterns as you would with `gulp.src`
+  del(['build'], cb);
+});
 
 //uuu Lint Task
 gulp.task('lint', function() {
@@ -25,24 +31,26 @@ gulp.task('minify-css', function() {
 
 
 // Concatenate & Minify JS
-gulp.task('scripts', function() {
+var scripts = function() {
     return gulp.src('public/javascripts/src/*.js')
         .pipe(concat('all.js'))
         .pipe(rename('all.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('public/min'));
-});
+};
+gulp.task('scripts', ['clean'], scripts);
+gulp.task('scripts-watch', scripts);
 
 // Watch Files For Changes
 gulp.task('watch', function() {
-    gulp.watch('js/*.js', ['lint', 'scripts']);
+    gulp.watch('js/*.js', ['scripts-watch']);
     gulp.watch('scss/*.scss', ['minify-css']);
 });
 
 // Default Task
 gulp.task('default', ['lint', 'minify-css', 'scripts', 'watch']);
 gulp.task("heroku:production", function(){
-     ['minify-css', 'scripts', 'watch']
+     runSeq('clean','minify-css', 'scripts', 'watch')
 });
 
 
