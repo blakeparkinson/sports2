@@ -520,7 +520,7 @@ var randImg = function(league) {
             images[2] = "NBA-warriors-stadium.jpg",
             images[3] = "NBA-pelicans-stadium.jpg",
             images[4] = "NBA-hornets-stadium.jpg",
-            images[5] = "NBA-rockets-stadium.png",
+            images[5] = "NBA-rockets-stadium.jpg",
             images[6] = "NBA-knicks-stadium.jpg",
             images[7] = "NBA-heat-stadium.jpg"
         break;          
