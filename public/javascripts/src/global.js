@@ -51,7 +51,7 @@ function clearModal(){
 
 function appendMessage(event){
   if (typeof teamId != 'undefined' && typeof team_name != 'undefined'){
-    var message = 'Try to beat my score of {{' +correct+'}} on this ' + team_name + ' quiz: https://www.rosterbliz.com?team_id=Qknb0gNGL1x';
+    var message = 'Try to beat my score of ' +correct+' on this ' + team_name + ' quiz: https://www.rosterbliz.com?team_id=Qknb0gNGL1x';
   } 
   else{
     var message = 'Thought you might enjoy some sports quizzes at rosterbliz.com.';
