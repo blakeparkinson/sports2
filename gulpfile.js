@@ -10,6 +10,7 @@ var minifyCss = require('gulp-minify-css');
 var runSeq = require('run-sequence');
 var del = require('del');
 
+
 gulp.task('clean', function(cb) {
   // You can use multiple globbing patterns as you would with `gulp.src`
   del(['build'], cb);
@@ -29,7 +30,6 @@ gulp.task('minify-css', function() {
     .pipe(gulp.dest('public/min'));
 });
 
-
 // Concatenate & Minify JS
 var scripts = function() {
     return gulp.src('public/javascripts/src/*.js')
@@ -47,10 +47,12 @@ gulp.task('watch', function() {
     gulp.watch('scss/*.scss', ['minify-css']);
 });
 
+gulp.task('exit', function() {
+    process.exit(0);
+});
+
 // Default Task
 gulp.task('default', ['lint', 'minify-css', 'scripts', 'watch']);
 gulp.task("heroku:production", function(){
-     runSeq('clean','minify-css', 'scripts', 'watch')
+     runSeq('clean','minify-css', 'scripts', 'watch', 'exit');
 });
-
-
