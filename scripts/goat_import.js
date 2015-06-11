@@ -17,7 +17,7 @@ var api_key = '';
 var ver = '';
 var endpoint = '';
 var teams = [];
-var supported_leagues = ['nba'];
+var supported_leagues = ['nba', 'nhl'];
 var shortId = require('shortid');
 
 // NBA LISTS
@@ -33,6 +33,14 @@ var threePointPercentage_alltime = require('../lists/nba/threePointPercentage_al
 var supported_nba_lists = [apg_alltime.topAPG, bpg_alltime.topBPG, fieldGoalPercentage_alltime.fieldGoalPercentage, ftPercentage_alltime.ftPercentage, ppg_alltime.topPPG, rpg_alltime.topRPG, spg_alltime.topSPG, threePointPercentage_alltime.threePointPercentage];
 
 
+//NHL LISTS
+var mostAssists = require('../lists/nhl/mostAssists.js');
+var mostGoals = require('../lists/nhl/mostGoals.js');
+var mostPoints = require('../lists/nhl/mostPoints.js');
+
+var supported_nhl_lists = [mostAssists.mostAssists, mostGoals.mostGoals, mostPoints.mostPoints];
+
+
 //process.argv grabs the command line arguments
 var league = process.argv[2];
 
@@ -43,7 +51,7 @@ if (supported_leagues.indexOf(league) == -1){
 
  
 var loopThroughList = function (list){
-  for (var i = 0; i < list.length; i++) { //this is looping through supported_nba_lists
+  for (var i = 0; i < list.length; i++) { //this is looping through supported lists
     mongoInsert(list[i]);
   }
 }
@@ -85,6 +93,8 @@ var mongoInsert = function (goatlist){
 switch (league){
   case 'nba':
     loopThroughList(supported_nba_lists);
+  case 'nhl':
+    loopThroughList(supported_nhl_lists);
   } 
 
 

@@ -3,7 +3,7 @@ var mostPoints = [
   "league": "nhl",
   "type":"goats",
   "keywords": "nhl points points hockey",
-  "category": "mostGoals",
+  "category": "mostPoints",
   "description": "Most Points in NHL History",
   "players": [
     {
