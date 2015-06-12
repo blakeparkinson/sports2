@@ -10,7 +10,9 @@
 
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  font-family: HelveticaNeue-Thin !important;
+  font-family: "HelveticaNeue-Thin", "Helvetica Neue Thin", "Helvetica Neue","HelveticaNeue-Light", "Helvetica Neue Light",
+  Helvetica, Arial, "Lucida Grande", sans-serif !important;
+
 }
 
 a {
