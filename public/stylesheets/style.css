@@ -1040,6 +1040,7 @@ table tr th:last-child {
   .standard-nba-container{
     min-height: 500px;
   }
+
 }
 
 /*******780************/
@@ -1057,8 +1058,8 @@ table tr th:last-child {
 
     }
     #team-select {
-        font-size: 45px;
-        padding-bottom: 20px;
+        font-size: 38px;
+        padding-bottom: 10px;
 
     }
     .social-sidebar{
