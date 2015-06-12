@@ -10,7 +10,7 @@ var router = express.Router();
 var parseString = require('xml2js').parseString;
 var http = require("http"),
     mongojs = require("mongojs"),
-    db = mongojs.connect(config.mongo_uri);
+    db = mongojs.connect(common.mongo_uri);
 var request = require('request');
 
 var supported_leagues = ['nba'];

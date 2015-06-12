@@ -9,7 +9,7 @@ var http = require("http"),
   mongojs = require("mongojs"),
     async = require('async'),
 
-  db = mongojs.connect(config.mongo_uri);
+  db = mongojs.connect(common.mongo_uri);
 var images_list = require('../lists/images2.js');
 var year = 2014;
 var usat_id = '';

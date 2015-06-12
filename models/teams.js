@@ -6,7 +6,7 @@ var router = express.Router();
 var _ = require('lodash');
 var http = require("http"),
     mongojs = require("mongojs"),
-    db = mongojs.connect(config.mongo_uri);
+    db = mongojs.connect(common.mongo_uri);
 var shortId = require('shortid');
 
 //helper for deleting 
