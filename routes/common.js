@@ -10,7 +10,7 @@ exports.isProduction = (process.env.NODE_ENV == 'production')? true : false;
 
 
 
-// Redis has local and production modes
+// Check for RedistoGo Url to use local redis when local mode is production, and production redis when truly live.
 if (process.env.REDISTOGO_URL){
   var rtg   = require("url").parse(process.env.REDISTOGO_URL);
   exports.redisClient = require("redis").createClient(rtg.port, rtg.hostname);
