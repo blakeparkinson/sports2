@@ -307,6 +307,10 @@ a {
 #index-buttons .select2-container .select2-choice{
   height: 35px;
 }
+#index-buttons .select2-container .select2-choice > .select2-chosen {
+  font-size: 18px;
+  padding-top: 2px;
+}
 
 .answer-right-section .content-section {
   padding: 9px;
@@ -427,7 +431,7 @@ ul {
 #index-buttons {  
   text-align: center;
   margin: 2% 15% 0 15%;
-  padding: 2% 2% 0 2%;
+  padding: 3% 2% 0 2%;
   background: rgba(255, 255, 255, 0.7);
   border-radius: 5px;
 }
@@ -1037,6 +1041,7 @@ table tr th:last-child {
     }
     #index-buttons{
       margin: 2% 6% 0 6%;
+      padding-top:6%;
     }
 
   .standard-nba-container{
@@ -1069,10 +1074,17 @@ table tr th:last-child {
 
     }
     #index-buttons{
-      margin: 2% 8% 0 8%;
+      margin: 12% 8% 0 8%;
+      padding-top:5%;
     }
     .footer{
       display:none;
+    }
+    .trendquiz{
+      margin-bottom: 20px;
+    }
+    #curvy-buttons{
+      margin-bottom: 20px;
     }
      
 }
