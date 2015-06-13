@@ -1071,6 +1071,9 @@ table tr th:last-child {
     #index-buttons{
       margin: 2% 8% 0 8%;
     }
+    .footer{
+      display:none;
+    }
      
 }
 
