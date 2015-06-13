@@ -456,7 +456,6 @@ ul {
 #right-quiz-column {
   float: right;
   width: 50%;
-  min-height: 750px;
   margin-top: 5%;
   padding-left: 5%;
   padding-right: 5%;
@@ -1057,11 +1056,13 @@ table tr th:last-child {
         padding-bottom: 20px;
         margin-top: none;
         padding-left: 5%;
+        width:100%;
     }
     #left-quiz-column{
       float:none;
       margin-top: none;
       padding-left: 5%;
+      width:100%;
 
     }
     #team-select {
@@ -1085,6 +1086,24 @@ table tr th:last-child {
     }
     #curvy-buttons{
       margin-bottom: 20px;
+    }
+    .answer-container .outer-guess{
+      float:none;
+      width:100%;
+    }
+    .answer-container .correct-guess{
+      width:100%;
+    }
+    .team-container{
+      margin-left: 0;
+    }
+
+    #chartLegend{
+      margin:0;
+      float: none;
+    }
+    .char-body-header{
+      float: none;
     }
      
 }
