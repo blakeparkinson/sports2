@@ -159,8 +159,8 @@ a {
   width: 25px;
   height: 25px;
   margin: 0 2px 0 5px;
-  background: url(https://cdn4.iconfinder.com/data/icons/ios7-essence/22/editor_clipboard_checkmark_done-512.png) no-repeat 2px 1px;
-  background-size: 90%;
+  background: url(../images/icons/clipboard1.png) no-repeat 2px 1px;
+  background-size: 80%;
   background-color: #fff;
   vertical-align: -7px;
 }
@@ -176,8 +176,8 @@ a {
   width: 25px;
   height: 25px;
   margin: 0 2px 0 5px;    
-  background: url(http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/magic-marker-icons-culture/115276-magic-marker-icon-culture-crown-five-points2.png) no-repeat 2px 1px;
-  background-size: 90%;
+  background: url(../images/icons/crown.png) no-repeat 2px 1px;
+  background-size: 80%;
   background-color: #fff;
   vertical-align: -7px;
 }
@@ -193,21 +193,20 @@ a {
   width: 25px;
   height: 25px;
   margin: 0 2px 0 5px;    
-  content: url(http://upload.wikimedia.org/wikipedia/en/thumb/c/c0/Portuguese_Ibex_Cabrera_Goat.svg/500px-Portuguese_Ibex_Cabrera_Goat.svg.png) no-repeat 2px 1px;
-  background-size: 90%;
+  content: url(../images/icons/theGoat2.png) no-repeat 2px 1px;
+  background-size: 80%;
   background-color: #fff;
   vertical-align: -7px;
 }
 .goats-icon {
-  content: url(http://upload.wikimedia.org/wikipedia/en/thumb/c/c0/Portuguese_Ibex_Cabrera_Goat.svg/500px-Portuguese_Ibex_Cabrera_Goat.svg.png);
+  content: url(../images/icons/theGoat.png);
 }
 .season-leaders-icon {
- content: url(http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/magic-marker-icons-culture/115276-magic-marker-icon-culture-crown-five-points2.png);   
- max-width: 26%;
+ content: url(../images/icons/crown.png);
  padding-top: 1%;
 }
 .roster-icon {
- content: url(https://cdn4.iconfinder.com/data/icons/ios7-essence/22/editor_clipboard_checkmark_done-512.png);    
+ content: url(../images/icons/clipboard1.png);    
 }
 .tabs:hover, .tabs.selected {
   background-color: rgb(22, 231, 22); 
