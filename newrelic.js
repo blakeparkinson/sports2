@@ -1,3 +1,5 @@
+var common = require('./routes/common');
+var config = common.config();
 /**
  * New Relic agent configuration.
  *
@@ -12,7 +14,7 @@ exports.config = {
   /**
    * Your New Relic license key.
    */
-  license_key: 'd95578d344e90323056d37f7e47831a5c1858cd9',
+  license_key: common.newRelicKey,
   logging: {
     /**
      * Level at which to log. 'trace' is most useful to New Relic when diagnosing
