@@ -397,6 +397,9 @@ ul {
 .center-it {
   width: auto;
 }
+.center-it2 {
+  text-align: center;
+}
 
 #team-select{
   font-size: 80px;
