@@ -7,7 +7,7 @@ var config = common.config();
 
 router.get('/', function(res, res) {
       res.render('ourteam', {
-      	static_footer: true,
+      	footer_class: 'static',
       	isProduction: common.isProduction
       });
     });
