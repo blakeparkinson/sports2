@@ -146,7 +146,7 @@ function postSocial(event){
     }
 
   if (target.attr('id') == 'twitter'){
-    window.open('https://twitter.com/share?text='+title+'&url='+window.location.href+'', 'Share a quiz on twitter', 'scrollbars=yes, width=' + d.w + ', height=' + d.h + ', top=' + d.top + ', left=' + d.left);
+    window.open('https://twitter.com/share?text='+title+'&url=rosterblitz.com' , 'Share a quiz on twitter', 'scrollbars=yes, width=' + d.w + ', height=' + d.h + ', top=' + d.top + ', left=' + d.left);
   }
 
   else{
