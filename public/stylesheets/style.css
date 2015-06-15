@@ -1105,6 +1105,12 @@ table tr th:last-child {
     .char-body-header{
       float: none;
     }
+    #stats-table td{
+      padding:2px 1px;
+    }
+    #top-player-info{
+      padding-left: 0;
+    }
      
 }
 
