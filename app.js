@@ -34,6 +34,9 @@ else{
   var redis = require("redis"),
     redisClient = redis.createClient({detect_buffers: true});
 }
+if (common.isProduction){
+  require('newrelic');
+}
 hbs.registerPartials(__dirname + '/views/partials');
 
 // view engine setup
