@@ -20,6 +20,19 @@ var deleteItem = function(data, collectionName){
   });
 }
 
+var clearRedisTeam = function(teamID){
+  if (process.env.REDISTOGO_URL){
+    var rtg   = require("url").parse(process.env.REDISTOGO_URL);
+    var redisClient = require("redis").createClient(rtg.port, rtg.hostname);
+    redisClient.auth(rtg.auth.split(":")[1]);
+  }
+  else{
+    var redis = require("redis"),
+      redisClient = redis.createClient({detect_buffers: true});
+  }
+  redisClient.set(teamID, null);
+}
+
 /** TODO HAVE HONREE POPULATE DESCRIPTIONS WITH THIS FUNCTION **/
 var fetchStatDescription = function(stat, listType, league){
   switch(stat) {
@@ -80,5 +93,6 @@ var createQuiz = function(team_id, league, quiz_name, res, callback, api_team_id
 module.exports = {
   deleteItem: deleteItem,
   fetchStatDescription: fetchStatDescription,
-  createQuiz: createQuiz
+  createQuiz: createQuiz,
+  clearRedisTeam: clearRedisTeam
 }

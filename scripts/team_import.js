@@ -36,6 +36,10 @@ d.league = 'nhl';
 teams_model.deleteItem(d,'leaders');
 return;*/
 
+//deleting a team from redis
+teams_model.clearRedisTeam('myVeMK4ne-x');
+return;
+
 if (supported_leagues.indexOf(league) == -1){
   console.log('We cant do this league yet.');
   return
