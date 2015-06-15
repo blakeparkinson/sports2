@@ -148,7 +148,7 @@ a {
     margin-right: 0.5em;
 }
 .badge-small-roster {
-  padding: 0px 4px;
+  padding: 0 4px 0 5px;
   font-size: 12px;
   font-weight: 700;
   line-height: 1;
@@ -165,24 +165,24 @@ a {
   vertical-align: -7px;
 }
 .badge-small-leaders {
-  padding: 0px 4px;
+  padding: 0 4px 0 4px;
   font-size: 12px;
   font-weight: 700;
   line-height: 1;  
   text-align: center;
   white-space: nowrap;  
-  border-radius: 44%;
+  border-radius: 50%;
   display: inline-block;
   width: 25px;
   height: 25px;
   margin: 0 2px 0 5px;    
   background: url(../images/icons/crown.png) no-repeat 2px 1px;
-  background-size: 80%;
+  background-size: 90%;
   background-color: #fff;
-  vertical-align: -7px;
+  vertical-align: -8px;
 }
 .badge-small-goats {
-  padding: 0px 4px;
+  padding: 2px 2px 1px 2px;
   font-size: 12px;
   font-weight: 700;
   line-height: 1;  
