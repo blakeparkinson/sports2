@@ -43,8 +43,14 @@ var supported_nhl_lists = [mostAssists.mostAssists, mostGoals.mostGoals, mostPoi
 // MLB LISTS
 var mostHits = require('../lists/mlb/mostHits.js');
 var mostHomeRuns = require('../lists/mlb/mostHomeRuns.js');
+var bestBattingAverage = require('../lists/mlb/bestBattingAverage.js');
+var mostRBIs = require('../lists/mlb/mostRBIs.js');
+var mostSavesByPitcher = require('../lists/mlb/mostSavesByPitcher.js');
+var mostShutoutsByPitcher = require('../lists/mlb/mostShutoutsByPitcher.js');
+var mostStolenBases = require('../lists/mlb/mostStolenBases.js');
+var mostWinsByPitcher = require('../lists/mlb/mostWinsByPitcher.js');
 
-var supported_mlb_lists = [mostHits.mostHits, mostHomeRuns.mostHomeRuns];
+var supported_mlb_lists = [mostHits.mostHits, mostHomeRuns.mostHomeRuns, bestBattingAverage.bestBattingAverage, mostRBIs.mostRBIs, mostSavesByPitcher.mostSavesByPitcher, mostShutoutsByPitcher.mostShutoutsByPitcher, mostStolenBases.mostStolenBases, mostWinsByPitcher.mostWinsByPitcher];
 
 // NFL LISTS
 var mostPassingTD = require('../lists/nfl/mostPassingTD.js');
