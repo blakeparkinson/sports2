@@ -4,7 +4,7 @@ var topAPG = [
   "type": "goats",
   "category": "topAPG",
   "keywords": "top apg nba assists passing",
-  "description": "Top APG averages all time",
+  "description": "Most Assists per Game All Time",
   "players": [
   {
     "player_id": "1",

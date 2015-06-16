@@ -55,8 +55,13 @@ var supported_mlb_lists = [mostHits.mostHits, mostHomeRuns.mostHomeRuns, bestBat
 // NFL LISTS
 var mostPassingTD = require('../lists/nfl/mostPassingTD.js');
 var mostRushingYards = require('../lists/nfl/mostRushingYards.js');
+var bestPasserRating = require('../lists/nfl/bestPasserRating.js');
+var mostPassingYards = require('../lists/nfl/mostPassingYards.js');
+var mostReceivingTDs = require('../lists/nfl/mostReceivingTDs.js');
+var mostReceivingYards = require('../lists/nfl/mostReceivingYards.js');
+var mostRushingTDs = require('../lists/nfl/mostRushingTDs.js');
 
-var supported_nfl_lists = [mostPassingTD.mostPassingTD, mostRushingYards.mostRushingYards];
+var supported_nfl_lists = [mostPassingTD.mostPassingTD, mostRushingYards.mostRushingYards, bestPasserRating.bestPasserRating, mostPassingYards.mostPassingYards, mostReceivingTDs.mostReceivingTDs, mostReceivingYards.mostReceivingYards, mostRushingTDs.mostRushingTDs];
 
 //process.argv grabs the command line arguments
 var league = process.argv[2];

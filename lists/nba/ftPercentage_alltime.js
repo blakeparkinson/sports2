@@ -4,7 +4,7 @@ var ftPercentage = [
   "type":"goats",
   "category": "topFreeThrownba",
   "keywords": "top free throw freethrow percentage nba shooting scoring",
-  "description": "Top free throw percentage all time",
+  "description": "Highest Free Throw Percentage All Time",
   "players": [
   {
     "player_id": "1",

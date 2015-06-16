@@ -4,7 +4,7 @@
   "type":"goats",
   "category": "topSPGnba",
   "keywords": "top steals defense",
-  "description": "Top steals per game all time",
+  "description": "Most Steals per Game All Time",
   "players":  [
     {
       "player_id":"1",

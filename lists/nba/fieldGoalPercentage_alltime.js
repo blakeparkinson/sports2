@@ -4,7 +4,7 @@ var fieldGoalPercentage = [
   "type":"goats",
   "category": "topFieldGoalnba",
   "keywords": "top field goal percentage nba shooting scoring",
-  "description": "Top field goal percentage all time",
+  "description": "Highest Field Goal Percentage All Time",
   "players": [
   {
     "player_id": "1",

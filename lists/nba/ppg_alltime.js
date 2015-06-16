@@ -4,7 +4,7 @@
   "type":"goats",
   "keywords": "top ppg nba scoring points",
   "category": "topPPGnba",
-  "description": "Top PPG averages all time NBA",
+  "description": "Most Points per Game All Time",
   "players": [
     {
         "player_id": "1",
