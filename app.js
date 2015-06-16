@@ -27,6 +27,10 @@ var hbs = require('hbs');
 
 var redisClient = common.redisClient;
 
+if (common.isProduction){
+  require('newrelic');
+}
+
 hbs.registerPartials(__dirname + '/views/partials');
 
 // view engine setup
