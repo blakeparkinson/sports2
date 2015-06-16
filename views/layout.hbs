@@ -27,6 +27,7 @@
       content="Rosterblitz - the premier sports quiz site."/>
   </head>
 {{# unless special_layout}}
+
   <body id="league-background" style={{#if background_image}}{{#unless special_layout}}"background-image: url({{background_image}});"{{/unless}}{{/if}}>
 
 	<nav class="navbar navbar-default blitz" role="navigation">
@@ -72,6 +73,8 @@
     </div>
   </div>
   
+  
+  {{/unless}}
   {{#unless remove_footer}}
     <footer class="footer {{footer_class}}">
       <div class="navbar-collapse collapse">      
@@ -87,8 +90,6 @@
         </div>
       </div>  
     </footer>
-  {{/unless}}
-  
   {{/unless}}
 
        <!-- Modal -->

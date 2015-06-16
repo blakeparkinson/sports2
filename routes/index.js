@@ -51,7 +51,9 @@ router.get('/', function(req, res) {
     session:req.session,
     trending_quiz: trending_quiz,
     how_works_button: true,
-    isProduction: common.isProduction
+    isProduction: common.isProduction,
+    special_layout: true,
+    footer_class: 'index'
   });
 });
 })
