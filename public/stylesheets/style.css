@@ -255,11 +255,12 @@ a {
   margin-top: 5%;
 }
 .navbar.blitz{
-  background: rgba(32, 26, 26, 0.7);
+  background: rgba(32, 26, 26, 0.4);
   font-family: HelveticaNeue-Thin;
   z-index:100;
   margin-bottom: 0;  
   border-color: #201A1A;
+  border: none;
 }
 .navbar-brand.main{
   font-size: 22px;
@@ -366,7 +367,7 @@ a {
   bottom: 0;
   width: 100%;  
   height: 50px;
-  background: rgba(32, 26, 26, 0.7);
+  background: rgba(32, 26, 26, 0.4);
   border-radius: 4px;
 }
 
