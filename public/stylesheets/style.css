@@ -10,7 +10,9 @@
 
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  font-family: HelveticaNeue-Thin !important;
+  font-family: "HelveticaNeue-Thin", "Helvetica Neue Thin", "Helvetica Neue","HelveticaNeue-Light", "Helvetica Neue Light",
+  Helvetica, Arial, "Lucida Grande", sans-serif !important;
+
 }
 
 a {
@@ -146,7 +148,7 @@ a {
     margin-right: 0.5em;
 }
 .badge-small-roster {
-  padding: 0px 4px;
+  padding: 0 4px 0 5px;
   font-size: 12px;
   font-weight: 700;
   line-height: 1;
@@ -157,30 +159,30 @@ a {
   width: 25px;
   height: 25px;
   margin: 0 2px 0 5px;
-  background: url(https://cdn4.iconfinder.com/data/icons/ios7-essence/22/editor_clipboard_checkmark_done-512.png) no-repeat 2px 1px;
-  background-size: 90%;
+  background: url(../images/icons/clipboard1.png) no-repeat 2px 1px;
+  background-size: 80%;
   background-color: #fff;
   vertical-align: -7px;
 }
 .badge-small-leaders {
-  padding: 0px 4px;
+  padding: 0 4px 0 4px;
   font-size: 12px;
   font-weight: 700;
   line-height: 1;  
   text-align: center;
   white-space: nowrap;  
-  border-radius: 44%;
+  border-radius: 50%;
   display: inline-block;
   width: 25px;
   height: 25px;
   margin: 0 2px 0 5px;    
-  background: url(http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/magic-marker-icons-culture/115276-magic-marker-icon-culture-crown-five-points2.png) no-repeat 2px 1px;
+  background: url(../images/icons/crown.png) no-repeat 2px 1px;
   background-size: 90%;
   background-color: #fff;
-  vertical-align: -7px;
+  vertical-align: -8px;
 }
 .badge-small-goats {
-  padding: 0px 4px;
+  padding: 2px 2px 1px 2px;
   font-size: 12px;
   font-weight: 700;
   line-height: 1;  
@@ -191,21 +193,20 @@ a {
   width: 25px;
   height: 25px;
   margin: 0 2px 0 5px;    
-  content: url(http://upload.wikimedia.org/wikipedia/en/thumb/c/c0/Portuguese_Ibex_Cabrera_Goat.svg/500px-Portuguese_Ibex_Cabrera_Goat.svg.png) no-repeat 2px 1px;
-  background-size: 90%;
+  content: url(../images/icons/theGoat2.png) no-repeat 2px 1px;
+  background-size: 80%;
   background-color: #fff;
   vertical-align: -7px;
 }
 .goats-icon {
-  content: url(http://upload.wikimedia.org/wikipedia/en/thumb/c/c0/Portuguese_Ibex_Cabrera_Goat.svg/500px-Portuguese_Ibex_Cabrera_Goat.svg.png);
+  content: url(../images/icons/theGoat.png);
 }
 .season-leaders-icon {
- content: url(http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/magic-marker-icons-culture/115276-magic-marker-icon-culture-crown-five-points2.png);   
- max-width: 26%;
+ content: url(../images/icons/crown.png);
  padding-top: 1%;
 }
 .roster-icon {
- content: url(https://cdn4.iconfinder.com/data/icons/ios7-essence/22/editor_clipboard_checkmark_done-512.png);    
+ content: url(../images/icons/clipboard1.png);    
 }
 .tabs:hover, .tabs.selected {
   background-color: rgb(22, 231, 22); 
@@ -254,11 +255,12 @@ a {
   margin-top: 5%;
 }
 .navbar.blitz{
-  background: rgba(32, 26, 26, 0.7);
+  background: rgba(32, 26, 26, 0.4);
   font-family: HelveticaNeue-Thin;
   z-index:100;
   margin-bottom: 0;  
   border-color: #201A1A;
+  border: none;
 }
 .navbar-brand.main{
   font-size: 22px;
@@ -302,6 +304,13 @@ a {
     /* If max-width does not work, try using width instead */
     width: 120px; 
 }
+#index-buttons .select2-container .select2-choice{
+  height: 35px;
+}
+#index-buttons .select2-container .select2-choice > .select2-chosen {
+  font-size: 18px;
+  padding-top: 2px;
+}
 
 .answer-right-section .content-section {
   padding: 9px;
@@ -323,12 +332,6 @@ a {
   padding-right: 20px;
 }
 
-@media screen and (max-width: 580px) {
-    .team-container{
-      width:85%;
-
-    }
-}
 
 .team-name{
   color:#fff;
@@ -364,7 +367,7 @@ a {
   bottom: 0;
   width: 100%;  
   height: 50px;
-  background: rgba(32, 26, 26, 0.7);
+  background: rgba(32, 26, 26, 0.4);
   border-radius: 4px;
 }
 
@@ -393,6 +396,9 @@ ul {
 }
 .center-it {
   width: auto;
+}
+.center-it2 {
+  text-align: center;
 }
 
 #team-select{
@@ -427,8 +433,8 @@ ul {
 } 
 #index-buttons {  
   text-align: center;
-  margin: 2% 26% 0 26%;
-  padding: 2% 2% 0 2%;
+  margin: 2% 15% 0 15%;
+  padding: 3% 2% 0 2%;
   background: rgba(255, 255, 255, 0.7);
   border-radius: 5px;
 }
@@ -453,27 +459,11 @@ ul {
 #right-quiz-column {
   float: right;
   width: 50%;
-  min-height: 750px;
   margin-top: 5%;
   padding-left: 5%;
   padding-right: 5%;
 }
 
-@media screen and (max-width: 780px) {
-    #right-quiz-column {
-        float:none;
-        padding-bottom: 20px;
-        margin-top: none;
-        padding-left: 5%;
-    }
-    #left-quiz-column{
-      float:none;
-      margin-top: none;
-      padding-left: 5%;
-
-    }
-     
-}
 
   /* ===== PLAYER CARD STYLING ===== */
 
@@ -585,14 +575,6 @@ padding-left: 3%;
 /* ======= END PLAYER CARD  ========= */
 
 
-@media screen and (max-width: 535px) {
-    .point-container{
-      padding: 4px 11px 4px 4px;
-
-    }
-}
-
-
 .point-container .number{
   margin: 0;
   font-size: 17px;
@@ -619,12 +601,6 @@ padding-left: 3%;
   width:50%;
 }
 
-@media screen and (max-width: 580px) {
-    .answer-row.left{
-      float:none;
-
-    }
-}
 
 .answer-container-contain {
   background: rgba(255, 255, 255, 0.98);
@@ -712,26 +688,10 @@ padding-left: 3%;
 }
 
 
-@media screen and (max-width: 780px) {
-    #team-select {
-        font-size: 34px;
-        padding-bottom: 20px;
-
-    }
-     
-}
-
 .container-iphone {
   display:none;
 }
 
-@media screen and (max-width: 480px) {
-    .container-iphone {
-      display: block;
-      background: url(../images/bball_back.svg) no-repeat scroll center top/cover transparent;
-    }  
-    
-}
 .submit-section{
   padding-top: 30px;
 }
@@ -821,28 +781,6 @@ padding-left: 3%;
 }
 
 
-@media screen and (max-width: 880px) {
-    .social-sidebar{
-        right: 92%;
-
-    }
-     
-}
-
-@media screen and (max-width: 750px) {
-    .social-sidebar{
-        right: 91%;
-
-    }
-     
-}
-
-@media screen and (max-width: 480px) {
-    .social-sidebar{
-        display: none;
-
-    }
-}
 .share-element{
     position: relative;
     float: right;
@@ -952,6 +890,7 @@ table tr th:last-child {
 }
 .rb-green {
   color: rgb(22, 231, 22); 
+  /* #16E716 in hex */
 }
 .rb-black{
     color: #000000;
@@ -986,9 +925,6 @@ table tr th:last-child {
   white-space: nowrap;
 }
 
-#trending-quiz-contain {
-  padding-top: 3%;
-}
 #trending-guys-back {    
   padding: 0 2% 0 2%;
   border-radius: 4px;
@@ -997,8 +933,12 @@ table tr th:last-child {
   font-size: 1.2em;
   color: #000000;
 }
+.trendquiz{
+  margin-bottom: 10px;
+}
 #curvy-buttons {
   border-radius: 20px;
+  margin-bottom: 5px;
 }
 
 .quiz-page-backgrounds {
@@ -1010,12 +950,6 @@ table tr th:last-child {
   position:relative;
 }
 
-@media screen and (max-height: 600px) {
-
-  .standard-nba-container{
-    min-height: 500px;
-  }
-}
 
 .name-point-container .player-name{
   width: 85%;
@@ -1071,243 +1005,129 @@ table tr th:last-child {
 }
 
 
-/* ======= HONREEE CRAPOLLA TO MOVE TO OTHER SHEET LATER ===== */
+
+  /***********480********/
+  @media screen and (max-width: 480px) {
+
+    .container-iphone {
+        display: block;
+        background: url(../images/bball_back.svg) no-repeat scroll center top/cover transparent;
+      }
+    .modal-video { width:100%; height:250px; }
+    .social-sidebar{
+        display: none;
+
+    }
+    .g-badge {
+        display: none;
+      }
+    #index-buttons{
+      margin: 2% 2% 0 2%;
+    }
+
+  }  
+
+  /***********580*******/
+
+  @media screen and (max-width: 580px) {
+    .team-container{
+      width:85%;
+
+    }
+    .point-container{
+      padding: 4px 11px 4px 4px;
+
+    }
+    .answer-row.left{
+      float:none;
+
+    }
+    #index-buttons{
+      margin: 2% 6% 0 6%;
+      padding-top:6%;
+    }
+
+  .standard-nba-container{
+    min-height: 500px;
+  }
+
+}
+
+/*******780************/
+@media screen and (max-width: 780px) {
+    #right-quiz-column {
+        float:none;
+        padding-bottom: 20px;
+        margin-top: none;
+        padding-left: 5%;
+        width:100%;
+    }
+    #left-quiz-column{
+      float:none;
+      margin-top: none;
+      padding-left: 5%;
+      width:100%;
+
+    }
+    #team-select {
+        font-size: 38px;
+        padding-bottom: 10px;
+
+    }
+    .social-sidebar{
+        right: 91%;
+
+    }
+    #index-buttons{
+      margin: 12% 8% 0 8%;
+      padding-top:5%;
+    }
+    .footer{
+      display:none;
+    }
+    .trendquiz{
+      margin-bottom: 20px;
+    }
+    #curvy-buttons{
+      margin-bottom: 20px;
+    }
+    .answer-container .outer-guess{
+      float:none;
+      width:100%;
+    }
+    .answer-container .correct-guess{
+      width:100%;
+    }
+    .team-container{
+      margin-left: 0;
+    }
+
+    #chartLegend{
+      margin:0;
+      float: none;
+    }
+    .char-body-header{
+      float: none;
+    }
+    #stats-table td{
+      padding:2px 1px;
+    }
+    #top-player-info{
+      padding-left: 0;
+    }
+     
+}
+
+/******880********/
+@media screen and (max-width: 880px) {
+    .social-sidebar{
+        right: 92%;
+
+    }
+     
+}
 
 
-/* 
-
--------------------------------------------------------------
-
-THE TEAM
- 
-*/
-.our-team-contain {
-  padding: 0 18% 0 18%;
-}
-#the-team { padding:10px;
-   padding-bottom:60px; }
-#the-team h2 { font-family:'Open Sans Condensed', sans-serif; font-size:60px; line-height:60px; margin:0px; }
-#the-team h2 span { color:#9d9d9d; font-family:'Sanchez', sans-serif; display:block; font-weight:normal; font-size:26px; line-height:46px; }
-#team-seagull1 { width:100px; height:277px; position:absolute; z-index:10; top:-155px; left:0%; }
-#team-seagull2 { width:108px; height:242px; position:absolute; z-index:10; top:-155px; left:30%; }
-.team-block { border-bottom:2px solid #e2e2e2; padding-top:8%; }
-.team-left { width:48%; float:left; }
-.team-right { width:48%; float:right; }
-.team-text { padding:70px 0px; }
-.team-image { text-align:center; padding-bottom:60px; }
-.team-dribbble { padding-left:25px; background:url(../img/icon-dribbble.png) top left no-repeat; line-height:23px; display:inline-block; }
-/* team quote slider */
-#the-team .quote-slider { height:173px; }
-#the-team .quote-slider .slide-text span.slide-fact { line-height:24px; color:#252525; font-size:18px; }
-.teampage-images {
-  border-radius:75px;
-  border:2px solid #e2e2e2;
-}
-/* 
--------------------------------------------------------------
-THE OTHER GUYS
- 
-*/
-#otherguys { padding-bottom:60px; }
-.otherguys-block { width:20%; float:left; text-align:center; font-size:18px; line-height:18px; }
-.otherguys-block span { font-size:14px; color:#aaaaaa; line-height:14px; }
-/* 
--------------------------------------------------------------
-TEAM PAGE RESPONSIVE VIEWS
-*/
-/* tablet landscape view */
-@media (max-width: 1150px) {
-  /* the team */
-  #the-team h2 { font-size:50px; line-height:50px; }
-  #the-team h2 span { font-size:20px; line-height:40px; }
-}
-/* tablet portrait view */
-@media (max-width: 960px) {
-  /* the office */
-  #theoffice { display:none; }
-  #team-seagull2, #team-seagull1 { top:-180px; }
-}
-/* phone view */
-@media (max-width: 767px) {
-  /* team */
-  .team-left, .team-right { float:none; width:100%; }
-  .team-image { padding:0px; }
-  .team-text { padding:10px; padding-bottom:30px; }
-  #team-seagull2, #team-seagull1 { display:none; }
-  /* quote slider */
-  #the-team .quote-slider .slide-text span.slide-fact { line-height:20px; color:#252525; font-size:14px; }
-  /* other guys */
-  #otherguys { display:none; }
-}
-img { max-width:100%; }
-/* 
--------------------------------------------------------------
-HEADER
-*/
-/* 
--------------------------------------------------------------
-SITE OF THE DAY
-*/
-#awwwards { position:absolute; top:100px; z-index:9999; }
-#awwwards.right { right:0; }
-#awwwards a { display:block; width:70px; height:105px; text-indent:-8000px; background-repeat:no-repeat; background-position: 0 0; overflow:hidden; }
-#awwwards.right.black a { background-image:url(../img/ribbons/awwwards_sotd_black_right.png); }
-@media (max-width: 767px) {
-  #awwwards { display:none; }
-}
-@media only screen and (-Webkit-min-device-pixel-ratio: 1.5), only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5) {
-  #awwwards a { -moz-background-size: 70px 105px; -ie-background-size:70px 105px; -o-background-size:70px 105px; -webkit-background-size:70px 105px; background-size:70px 105px; }
-  
-  #awwwards.right.black a { background-image:url('ribbons/awwwards_sotd_black_right2x.png'); }
-  
-}
-/* 
--------------------------------------------------------------
-NAVIGATION
-*/
-#primary-nav { background:#e7e7e7 url(../img/bg-header.jpg) top left repeat-x; height:1px; }
-.logo-small { position:absolute; left:0px; top:5px; width:80px; height:50px; }
-#primary-nav .logo-small { display:none; }
-#logo { width:280px; height:100px; position:absolute; left:0px; top:30px; z-index:150; }
-#mobile-btn { display:none; width:50px; height:50px; position:absolute; right:10px; top:0px; }
-nav.primary { width:60%; height:40px; position:absolute; right:0px; top:60px; font-size:17px; text-align:right; z-index:150; }
-nav.primary a { color:#3c3d3d; margin-left:35px; line-height:40px; }
-nav.primary a:hover { color:#b5d448; }
-/* secondary navigation */
-#secondary-nav { height:50px; width:100%; left:0px; top:-51px; position:fixed; z-index:200; background:url(../img/bg-secondarynav.png) repeat; border-bottom:1px solid #d9d9d9; }
-nav.secondary { width:80%; position:absolute; right:0px; top:0px; height:50px; line-height:50px; text-align:right; }
-nav.secondary a { color:#3c3d3d; margin-left:35px; line-height:40px; }
-nav.secondary a:hover { color:#b5d448; }
-/* 
--------------------------------------------------------------
-FOOTER
-*/
-.foot-sep { border-bottom:4px solid #606060; margin:30px auto; width:100px; }
-/* foot social */
-#foot-social { padding-top:30px; }
-#foot-social a { display:inline-block; width:45px; height:45px; margin:0px 5px; background-repeat:no-repeat; background-position:top center; }
-#foot-social a.fb { background-image:url(../img/footer-social-fb.png); }
-#foot-social a.twitter { background-image:url(../img/footer-social-twitter.png); }
-#foot-social a.mail { background-image:url(../img/footer-social-mail.png); }
-/* 
--------------------------------------------------------------
-MAIN CONTAINERS
-*/
-.bg-white { background:#ffffff; }
-.bg-gray-light { background:#fafafa; }
-.bg-gray-dark { background:#3c3d3d; }
-.bg-green { background:#b5d448; }
-/*.col2 { width:46.36%; float:left; margin-left:7.28%; }*/
-.col2 { width:46.2727%; float:left; margin-left:7.4546%; }
-.col2:first-child { margin:0px; }
-/* 
--------------------------------------------------------------
-QUOTE SLIDER
-*/
-.quote-slider { height:210px; border-top:1px dashed #cecece; margin-top:40px; position:relative; overflow:hidden; }
-.quote-slider .slide { padding:30px 0px; width:100%; }
-.quote-slider .slide-image { width:18%; float:left; }
-.quote-slider .slide-text { width:77%; float:right; }
-.quote-slider .slide-title { color:#9d9d9d; font-size:16px; display:block; margin-bottom:5px; }
-.quote-slider .slide i { font-family:'Palatino', serif; font-style:italic; font-size:18px; line-height:26px; }
-/* slider nav */
-.quote-slider-nav { height:23px; width:100%; position:absolute; left:0px; bottom:0px; background:url(../img/bg-quotenav.png) center repeat-x; }
-.quote-slider-nav .next { float:right; }
-.quote-slider-nav .prev { float:left; }
-/* 
--------------------------------------------------------------
-DRIBBBLE FEED
- 
-*/
-#dribbble-feed { padding:70px 0px; text-align:center; }
-#dribbble-feed a { color:#ffffff; margin:0px 5px; }
-#dribbble-feed a:hover { text-decoration:underline; }
-#dribbble-feed a:hover img { border:7px solid #ffffff; }
-#dribbble-feed img { width:13%; border:7px solid #cce181; }
-/* 
--------------------------------------------------------------
-POP UP
-*/
-.modal { position:absolute; top:0px; left:0px; z-index:450; background-repeat:repeat; display:none; }
-.modal-main { position:relative; width:1100px; margin:auto; box-shadow:0px 0px 10px rgba(0,0,0,0.3); }
-.modal-video { width:1100px; height:619px; margin-bottom:-5px; }
-.modal-close { width:40px; height:40px; position:absolute; right:35px; top:35px; transition:opacity 0.1s linear; -webkit-transition:opacity 0.1s linear; -moz-transition:opacity 0.1s linear; opacity:0.5; }
-.modal-close:hover { opacity:1; }
-/* 
--------------------------------------------------------------
-GENERAL
-*/
-.clear { clear:both; }
-.nomarg { margin:0px; }
-.noborder { border:none; }
-.line-sep { border-bottom:4px solid #e4e4e4; margin:20px 0px; width:80px; }
-.noborder-right { border-right:none; }
-.noborder-bottom { border-bottom:none; }
-.noborder { border:none; }
-/* 
--------------------------------------------------------------
-GENERAL RESPONSIVE VIEWS
-*/
-/* tablet landscape view */
-@media (max-width: 1150px) {
-  .container { width:900px; }
-  /* modal */
-  .modal-main { width:900px; }
-  .modal-video { width:900px; height:507px; }
-}
-/* tablet portrait view */
-@media (max-width: 960px) {
-    
-  .container { width:700px; }
-  .col2, .col2:first-child { width:509px; float:none; margin:0px; margin:0px auto; }
-  /* modal */
-  .modal-main { width:700px; }
-  .modal-video { width:700px; height:394px; }
-  /* navigation */
-  nav.primary { font-size:15px; width:70%; }
-  nav.primary a { margin-left:25px; }
-  /* hide portrait elements */
-  .hide-portait { display:none; }
-  /* dribbble feed */
-  #dribbble-feed img { width:12%; }
-}
-/* phone view */
-@media (max-width: 767px) {
-  .container { width:80%; }
-  #logo { display:none; }
-  .col2, .col2:first-child { width:100%; }
-  /* modal */
-  .modal-main { width:90%; }
-  .modal-video { width:100%; height:350px; }
-  /* header */
-  
-  #header-interior { height:50px; }
-  /* navigation */
-  #mobile-btn { display:block; }
-  #primary-nav { position:fixed; height:50px; width:100%; z-index:200; background:url(../img/bg-secondarynav.png) repeat; border-bottom:1px solid #d9d9d9; }
-  #primary-nav .logo-small { display:block; left:10px; }
-  #primary-nav .container { width:100%; }
-  #secondary-nav { display:none; }
-  nav.primary { display:none; }
-  nav.shownav { display:block; color:#ff0000; top:51px; left:0px; height:auto; width:100%; background:url(../img/bg-secondarynav.png) repeat; text-align:center; }
-  nav.shownav a { display:block; line-height:50px; border-bottom:1px solid #d9d9d9; margin:0px; }
-  /* hidden elements */
-  .hide-mobile { display:none; }
-  /* quote slider */
-  .quote-slider .slide i { font-size:14px; line-height:20px; }
-  /* footer */
-  
-  /* rows */
-  .row-fluid .span4, .row-fluid .span6 { width:100%; float:none; margin:0px; margin-bottom:30px; }
-  /* dribbble feed */
-  #dribbble-feed { padding:40px 0px; }
-  #dribbble-feed img { width:38%; margin-bottom:10px; }
-  /* general */
-}
-/* smaller phone view */
-@media (max-width: 479px) {
-  /* modal */
-  .modal-video { width:100%; height:250px; }
 
 
 

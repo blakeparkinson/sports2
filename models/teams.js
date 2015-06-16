@@ -20,6 +20,11 @@ var deleteItem = function(data, collectionName){
   });
 }
 
+var clearRedisTeam = function(teamID){
+  var redisClient = common.redisClient;
+  redisClient.set(teamID, null);
+}
+
 /** TODO HAVE HONREE POPULATE DESCRIPTIONS WITH THIS FUNCTION **/
 var fetchStatDescription = function(stat, listType, league){
   switch(stat) {
@@ -80,5 +85,6 @@ var createQuiz = function(team_id, league, quiz_name, res, callback, api_team_id
 module.exports = {
   deleteItem: deleteItem,
   fetchStatDescription: fetchStatDescription,
-  createQuiz: createQuiz
+  createQuiz: createQuiz,
+  clearRedisTeam: clearRedisTeam
 }
