@@ -889,6 +889,7 @@ table tr th:last-child {
 }
 .rb-green {
   color: rgb(22, 231, 22); 
+  /* #16E716 in hex */
 }
 .rb-black{
     color: #000000;
