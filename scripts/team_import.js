@@ -13,7 +13,7 @@ var parseString = require('xml2js').parseString;
 var http = require("http"),
     mongojs = require("mongojs"),
 
-    db = mongojs.connect(config.mongo_uri);
+    db = mongojs.connect(common.mongo_uri);
 
 var encryption = require('../encryption.js');
 var request = require('request');

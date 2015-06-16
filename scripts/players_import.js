@@ -7,7 +7,7 @@ var http = require("http"),
     async = require('async'),
     mongojs = require("mongojs"),
 
-    db = mongojs.connect(config.mongo_uri);
+    db = mongojs.connect(common.mongo_uri);
 
 
 var request = require('request');

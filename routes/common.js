@@ -8,6 +8,8 @@ exports.config = function() {
 
 exports.isProduction = (process.env.NODE_ENV == 'production')? true : false;
 
+// Production MongoDB vs. Dev MongoDB
+exports.mongo_uri = (process.env.NODE_ENV == 'production')? 'mongodb://root:root@ds031541.mongolab.com:31541/rosterblitz':'mongodb://root:root@ds043982.mongolab.com:43982/rosterblitzstaging'
 
 
 // Check for RedistoGo Url to use local redis when local mode is production, and production redis when truly live.
@@ -20,3 +22,4 @@ else{
   var redis = require("redis");
     exports.redisClient = redis.createClient({detect_buffers: true})
 }
+

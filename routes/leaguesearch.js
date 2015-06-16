@@ -6,7 +6,7 @@ var config = common.config();
 var _ = require('lodash'),
    mongojs = require("mongojs"),
    async = require('async'),
-  db = mongojs.connect(config.mongo_uri);
+  db = mongojs.connect(common.mongo_uri);
 var quizCutoffDate = new Date()
 quizCutoffDate.setDate(quizCutoffDate.getDate() - 7);  //currently set to 1 week ago
 
