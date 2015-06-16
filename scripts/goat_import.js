@@ -36,8 +36,10 @@ var supported_nba_lists = [apg_alltime.topAPG, bpg_alltime.topBPG, fieldGoalPerc
 var mostAssists = require('../lists/nhl/mostAssists.js');
 var mostGoals = require('../lists/nhl/mostGoals.js');
 var mostPoints = require('../lists/nhl/mostPoints.js');
+var highestSavePercentage = require('../lists/nhl/highestSavePercentage.js');
+var mostShutoutsNHL = require('../lists/nhl/mostShutoutsNHL.js');
 
-var supported_nhl_lists = [mostAssists.mostAssists, mostGoals.mostGoals, mostPoints.mostPoints];
+var supported_nhl_lists = [mostAssists.mostAssists, mostGoals.mostGoals, mostPoints.mostPoints, mostShutoutsNHL.mostShutoutsNHL, highestSavePercentage.highestSavePercentage];
 
 
 // MLB LISTS

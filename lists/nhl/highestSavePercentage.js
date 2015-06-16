@@ -51,8 +51,7 @@ var highestSavePercentage = [
         "rank": "6",
         "last_name": "Price",
         "first_name": "Carey",
-        "full_name":"Carey Price",
-        "stat": "81"
+        "full_name":"Carey Price",        
         "stat": "0.919"
     },
     {

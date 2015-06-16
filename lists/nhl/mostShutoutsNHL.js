@@ -52,8 +52,7 @@ var mostShutoutsNHL = [
         "last_name": "Hašek",
         "first_name": "Dominik",
         "full_name":"Dominik Hašek",
-        "stat": "81"
-        "stat": "1080"
+        "stat": "81"        
     },
     {
         "player_id": "7",
