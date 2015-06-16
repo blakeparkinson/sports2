@@ -371,6 +371,11 @@ a {
   border-radius: 4px;
 }
 
+.footer.index{
+  position: relative;
+  background: none;
+}
+
 .footer.static{
   position: relative;
 }
@@ -429,13 +434,13 @@ ul {
 }
 #team-container{
   text-align: center;
-  padding: 6% 2% 2% 2%;
+  padding: 6% 2% 18% 2%;
 } 
 #index-buttons {  
   text-align: center;
-  margin: 2% 15% 0 15%;
-  padding: 3% 2% 0 2%;
-  background: rgba(255, 255, 255, 0.7);
+  margin: -9% 19% 0 19%;
+  padding: 4% 5% 4% 5%;
+  background: rgba(78, 125, 165, 1);
   border-radius: 5px;
 }
 .team-container{  
@@ -695,8 +700,15 @@ padding-left: 3%;
 .submit-section{
   padding-top: 30px;
 }
-.quiz-btn{
-  width:100%;
+.submit-section .quiz-btn{
+  color: #fff;
+  border: 2px solid;
+  box-shadow: 1px 1px 1px 1px #fff;
+  padding: 8px 45px;
+}
+.submit-section .quiz-btn:hover{
+  color: #fff;
+  background-color: rgb(29, 104, 177);
 }
 #take-quiz-button {
   font-size: 1.2em;
@@ -934,13 +946,20 @@ table tr th:last-child {
   color: #000000;
 }
 .trendquiz{
-  margin-bottom: 10px;
+  margin-bottom: 6%;
+  text-align: center;
+  font-size: 34px;
 }
 #curvy-buttons {
-  border-radius: 20px;
+  border-radius: 5px;
   margin-bottom: 5px;
+  background-color: #48A58B;
+  border-color: #157D57;
 }
 
+#curvy-buttons:hover{
+    background-color: #1E775E;
+}
 .quiz-page-backgrounds {
   background: no-repeat scroll center top/cover transparent; 
   padding: 0;
@@ -1003,6 +1022,62 @@ table tr th:last-child {
   color: #009AB9;
   cursor: pointer;
 }
+
+#quiz-types{
+  margin-top: 30px;
+  text-align: center;
+}
+
+#quiz-types .type-ways{
+  font-size: 34px;
+}
+
+#quiz-types .types{
+  display:inline-block;
+  padding:3%;
+  width: 213px;
+  }
+#quiz-types .bubble-img{
+  width: 60px;
+  height: 60px;
+  color: white;
+  display: inline-block;
+  background-size: 100%;
+  margin-top: 20px;
+}
+.roster .bubble-img{
+  background: url(../images/icons/clipboard2.png) no-repeat 2px 1px;
+}
+.leaders .bubble-img{
+  background: url(../images/icons/crown.png) no-repeat 2px 1px;
+}
+#quiz-types .goats .bubble-img{
+  background: url(../images/icons/theGoat.png) no-repeat 2px 1px;
+  background-size: 100%;
+}
+
+#quiz-types .bubble{
+  height: 100px;
+  background-color: rgb(22, 231, 22);
+  text-align: center;
+  border-radius: 50%;
+}
+#quiz-types .type-header{
+  font-size: 22px;
+  margin: 10px;
+}
+#quiz-types .type-description{
+  margin-bottom: 10px;
+}
+#trending-quiz-contain{
+  text-align: center;
+}
+#trending-quiz-contain > div{
+  border-bottom: 1px solid rgb(178, 178, 178);
+  display: inline-block;
+  padding-bottom: 30px;
+}
+
 
 
 
@@ -1079,10 +1154,10 @@ table tr th:last-child {
 
     }
     #index-buttons{
-      margin: 12% 8% 0 8%;
+      margin: -10% 8% 0 8%;
       padding-top:5%;
     }
-    .footer{
+    .footer:not(.index){
       display:none;
     }
     .trendquiz{
@@ -1115,6 +1190,19 @@ table tr th:last-child {
     #top-player-info{
       padding-left: 0;
     }
+    #quiz-types .bubble {
+      height: 80px;
+      width: 50%;
+      margin-left: 50px;
+  }
+  #quiz-types .bubble-img {
+    margin-top: 10px;
+  }
+
+  #quiz-types .goats .bubble-img {
+    margin-top: 10px;
+
+}
      
 }
 
