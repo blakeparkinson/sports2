@@ -919,16 +919,15 @@ table tr th:last-child {
   margin: 0 5px 0 5px;
 }
 #league-background{ 
-  background-position: center center;
-  background-attachment: fixed;
+    background-position: center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
+  background-size: 100% 100%;
   background-color: #211922;
   margin: 0;
   padding: 0;
-  background-image:url(../images/stadiums/eu_soccer_stadiums/olympiastadion-stadium.jpg); 
+  background-image: url(../images/stadiums/eu_soccer_stadiums/olympiastadion-stadium.jpg);
 }
 
 .answer-row .answered-player{
