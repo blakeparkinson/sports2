@@ -1201,7 +1201,11 @@ table tr th:last-child {
   #quiz-types .goats .bubble-img {
     margin-top: 10px;
 
-}
+  }
+  .trendquiz, #quiz-types .type-ways{
+    font-size: 28px;
+  }
+
      
 }
 
