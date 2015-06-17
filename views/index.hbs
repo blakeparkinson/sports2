@@ -15,14 +15,6 @@
           <li class="tabs {{#compare current 'nba'}}selected{{/compare}}"><a href="/leaguesearch/nba"><span class="tabs-text">NBA</span></a></li>
           <li class="tabs {{#compare current 'nfl'}}selected{{/compare}}"><a href="/leaguesearch/nfl"><span class="tabs-text">NFL</span></a></li>
           <li class="tabs {{#compare current 'nhl'}}selected{{/compare}}"><a href="/leaguesearch/nhl"><span  class="tabs-text">NHL</span></a></li>  
-          <!-- IF INDEX PAGE, DO how_works_button, IF ANOTHER OTHER PAGE, do question_mark -->
-          {{#if how_works_button}}
-          <li>
-            {{> how_works_button }}
-          </li>
-          {{else}}
-            {{> question_mark }}   
-          {{/if}}
         </ul>                                   
     </div>
   </nav>
