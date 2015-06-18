@@ -183,7 +183,7 @@ var imageByLeague = function(league) {
       var image = 'hockey_epic.jpg';
       break;
     case "nfl":
-      var image = 'football_epic.jpg';
+      var image = 'epic_football3.jpg';
       break;
     case "mlb":
       var image = 'baseball_epic.jpg';
