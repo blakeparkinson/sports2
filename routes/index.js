@@ -5,7 +5,7 @@ var router = express.Router();
 var _ = require('lodash');
 var http = require("http"),
  	mongojs = require("mongojs"),
-	db = mongojs.connect(config.mongo_uri);
+	db = mongojs.connect(common.mongo_uri);
 var quizCutoffDate = new Date();
 var ua = require('universal-analytics');
 var visitor = ua(config.googleTrackingID);
@@ -51,7 +51,9 @@ router.get('/', function(req, res) {
     session:req.session,
     trending_quiz: trending_quiz,
     how_works_button: true,
-    isProduction: common.isProduction
+    isProduction: common.isProduction,
+    special_layout: true,
+    footer_class: 'index'
   });
 });
 })

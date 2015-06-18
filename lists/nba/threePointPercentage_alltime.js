@@ -3,7 +3,7 @@ var threePointPercentage = [
   "type":"goats",
   "category": "topThreePointnba",
   "keywords": "top three point threepoint shooting scoring",
-  "description": "Top three point percentage all time",
+  "description": "Highest Three Point Percentage All Time",
   "players": [
   {
     "player_id":"1",

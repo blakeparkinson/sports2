@@ -10,7 +10,7 @@ var parseString = require('xml2js').parseString;
 var _ = require('lodash');
 var http = require("http"),
     mongojs = require("mongojs"),
-    db = mongojs.connect(config.mongo_uri);
+    db = mongojs.connect(common.mongo_uri);
 var encryption = require('../encryption.js');
 var request = require('request');
 var api_key = '';
@@ -36,21 +36,34 @@ var supported_nba_lists = [apg_alltime.topAPG, bpg_alltime.topBPG, fieldGoalPerc
 var mostAssists = require('../lists/nhl/mostAssists.js');
 var mostGoals = require('../lists/nhl/mostGoals.js');
 var mostPoints = require('../lists/nhl/mostPoints.js');
+var highestSavePercentage = require('../lists/nhl/highestSavePercentage.js');
+var mostShutoutsNHL = require('../lists/nhl/mostShutoutsNHL.js');
 
-var supported_nhl_lists = [mostAssists.mostAssists, mostGoals.mostGoals, mostPoints.mostPoints];
+var supported_nhl_lists = [mostAssists.mostAssists, mostGoals.mostGoals, mostPoints.mostPoints, mostShutoutsNHL.mostShutoutsNHL, highestSavePercentage.highestSavePercentage];
 
 
 // MLB LISTS
 var mostHits = require('../lists/mlb/mostHits.js');
 var mostHomeRuns = require('../lists/mlb/mostHomeRuns.js');
+var bestBattingAverage = require('../lists/mlb/bestBattingAverage.js');
+var mostRBIs = require('../lists/mlb/mostRBIs.js');
+var mostSavesByPitcher = require('../lists/mlb/mostSavesByPitcher.js');
+var mostShutoutsByPitcher = require('../lists/mlb/mostShutoutsByPitcher.js');
+var mostStolenBases = require('../lists/mlb/mostStolenBases.js');
+var mostWinsByPitcher = require('../lists/mlb/mostWinsByPitcher.js');
 
-var supported_mlb_lists = [mostHits.mostHits, mostHomeRuns.mostHomeRuns];
+var supported_mlb_lists = [mostHits.mostHits, mostHomeRuns.mostHomeRuns, bestBattingAverage.bestBattingAverage, mostRBIs.mostRBIs, mostSavesByPitcher.mostSavesByPitcher, mostShutoutsByPitcher.mostShutoutsByPitcher, mostStolenBases.mostStolenBases, mostWinsByPitcher.mostWinsByPitcher];
 
 // NFL LISTS
 var mostPassingTD = require('../lists/nfl/mostPassingTD.js');
 var mostRushingYards = require('../lists/nfl/mostRushingYards.js');
+var bestPasserRating = require('../lists/nfl/bestPasserRating.js');
+var mostPassingYards = require('../lists/nfl/mostPassingYards.js');
+var mostReceivingTDs = require('../lists/nfl/mostReceivingTDs.js');
+var mostReceivingYards = require('../lists/nfl/mostReceivingYards.js');
+var mostRushingTDs = require('../lists/nfl/mostRushingTDs.js');
 
-var supported_nfl_lists = [mostPassingTD.mostPassingTD, mostRushingYards.mostRushingYards];
+var supported_nfl_lists = [mostPassingTD.mostPassingTD, mostRushingYards.mostRushingYards, bestPasserRating.bestPasserRating, mostPassingYards.mostPassingYards, mostReceivingTDs.mostReceivingTDs, mostReceivingYards.mostReceivingYards, mostRushingTDs.mostRushingTDs];
 
 //process.argv grabs the command line arguments
 var league = process.argv[2];

@@ -4,7 +4,7 @@ var topRPG = [
   "type":"goats",
   "category": "topRPGnba",
   "keywords": "top rebounds rpg rebounding",
-  "description": "Top rebounds per game all time",
+  "description": "Most Rebounds per Game All Time",
   "players": [
   {
     "player_id":"1",

@@ -4,7 +4,7 @@ var topBPG = [
   "type":"goats",
   "category": "topBPGnba",
   "keywords": "top bpg nba blocks",
-  "description": "Top blocks per game averages all time",
+  "description": "Most Blocks per Game All Time",
   "players": [
   {
     "player_id": "1",
