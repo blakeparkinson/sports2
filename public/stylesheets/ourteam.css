@@ -197,3 +197,7 @@ TEAM PAGE RESPONSIVE VIEWS
   #otherguys { display:none; }
 }
 img { max-width:100%; }
+
+.bigger {
+  font-size: 1.4em;
+}
