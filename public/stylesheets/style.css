@@ -918,17 +918,24 @@ table tr th:last-child {
   display: inline-block;
   margin: 0 5px 0 5px;
 }
+.league-background-index{ 
+  background-size: 100% 100% !important;
+  background-attachment: inherit !important;
+}
+
 #league-background{ 
   background-position: center center;
+  background-attachment: fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: 100% 100%;
+  background-size: cover;
   background-color: #211922;
   margin: 0;
   padding: 0;
-  background-image: url(../images/stadiums/eu_soccer_stadiums/olympiastadion-stadium.jpg);
+  background-image:url(../images/stadiums/eu_soccer_stadiums/olympiastadion-stadium.jpg); 
 }
+
 
 .answer-row .answered-player{
   display: inline-block;
@@ -1045,7 +1052,7 @@ table tr th:last-child {
   margin-top: 20px;
 }
 .roster .bubble-img{
-  background: url(../images/icons/clipboard2.png) no-repeat 2px 1px;
+  background: url(../images/icons/clipboard2.png) no-repeat 2px 0px;
 }
 .leaders .bubble-img{
   background: url(../images/icons/crown.png) no-repeat 0px 1px;
