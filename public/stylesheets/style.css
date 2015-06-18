@@ -1052,13 +1052,13 @@ table tr th:last-child {
   margin-top: 20px;
 }
 .roster .bubble-img{
-  background: url(../images/icons/clipboard2.png) no-repeat 2px 1px;
+  background: url(../images/icons/clipboard2.png) no-repeat 2px 0px;
 }
 .leaders .bubble-img{
-  background: url(../images/icons/crown.png) no-repeat 2px 1px;
+  background: url(../images/icons/crown.png) no-repeat 0px 1px;
 }
 #quiz-types .goats .bubble-img{
-  background: url(../images/icons/theGoat.png) no-repeat 2px 1px;
+  background: url(../images/icons/theGoat.png) no-repeat -1px 1px;
   background-size: 100%;
 }
 
