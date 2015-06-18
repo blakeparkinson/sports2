@@ -12,7 +12,6 @@ var router = express.Router();
 var parseString = require('xml2js').parseString;
 var http = require("http"),
     mongojs = require("mongojs"),
-
     db = mongojs.connect(config.mongo_uri);
 
 var encryption = require('../encryption.js');
@@ -37,8 +36,8 @@ teams_model.deleteItem(d,'leaders');
 return;*/
 
 //deleting a team from redis
-teams_model.clearRedisTeam('myVeMK4ne-x');
-return;
+// teams_model.clearRedisTeam('myVeMK4ne-x');
+// return;
 
 if (supported_leagues.indexOf(league) == -1){
   console.log('We cant do this league yet.');
@@ -65,19 +64,18 @@ switch (league){
 
     request(endpoint, function (error, response, body) {
       if (!error && response.statusCode == 200) {
+        console.log("ok, we're adding teams for the "+league);
             switch (league){
 	        		case 'nba':
-                teams = formatNbaTeams(response.body);
-                break;
-	            case 'nfl':
+              case 'nfl':
               case 'nhl':
-	            	teams = formatNflAndNhlTeams(response.body, league);
-	            	break;
+                teams = formatTeams(response.body, league);
+                break;
               case 'mlb':
-                teams = formatMlbTeams(response.body);
+                teams = formatMlbTeams(response.body, league);
                 break;
                case 'eu_soccer':
-                teams = formatSoccerTeams(response.body);
+                teams = formatSoccerTeams(response.body, league);
                 break;
 	           }
             mongoInsert(teams, league);
@@ -94,11 +92,10 @@ switch (league){
         for (var i = 0; i < teams.length; i++) {
           if (league == 'eu_soccer'){
               //soccer teams don't really have markets, their names include their citys. For our puropses (rendering), this will go into the market field
-              col.insert({_id:shortId.generate(), api_team_id:encryption.encrypt(teams[i].id), team_id: shortId.generate(), market:teams[i].name, name: '', country:teams[i].country, usat_id:teams[i].alias, league:league, type: 'roster'}, function() {});
+              col.insert({_id:shortId.generate(), api_team_id:encryption.encrypt(teams[i].id), team_id: teams[i].team_id, market:teams[i].name, name: '', country:teams[i].country, usat_id:teams[i].alias, league:league, type: 'roster'}, function() {});
           }
           else{
-            //really the only 4 key:value pairs we care about for now
-            col.insert({_id:shortId.generate(), api_team_id:encryption.encrypt(teams[i].id), team_id: shortId.generate(), name:teams[i].name, market:teams[i].market, league:league, usat_id: teams[i].usat_id, type: 'roster'}, function() {});
+            col.insert({_id:shortId.generate(), api_team_id:encryption.encrypt(teams[i].id), team_id: teams[i].team_id, name:teams[i].name, market:teams[i].market, league:league, usat_id: teams[i].usat_id, type: 'roster'}, function() {});
           }
         }
       })
@@ -107,22 +104,33 @@ switch (league){
 }
 
 
-var formatNbaTeams = function(response){
+var formatTeams = function(response, league){
   var  hierarchy_response = JSON.parse(response);
+  // API spits back Division > Conference > Teams  so NBA > EAST > CELTICS
   for (i=0;i<hierarchy_response.conferences.length;i++){
     for (j=0;j<hierarchy_response.conferences[i].divisions.length;j++){
       for(k=0; k< hierarchy_response.conferences[i].divisions[j].teams.length; k++){
         var team_item = hierarchy_response.conferences[i].divisions[j].teams[k];
-        for (b=0;b<images_list.images.length;b++){
+        // Pull USAT ID and rb_team_id from static file
+        for (b=0;b<images_list.images.length;b++){ 
           league_temp = images_list.images[b];
-          for (c=0;c<Object.keys(league_temp.teams).length;c++){
-            team_name = team_item.market+' '+team_item.name;
-            if (team_name == league_temp.teams[c].team_name){
-              var team_initials = league_temp.teams[c].usat_id;
-              team_item.usat_id = team_initials;
+          if (league_temp.league == league){
+            for (c=0;c<Object.keys(league_temp.teams).length;c++){ 
+              team_name = team_item.market+' '+team_item.name;
+              if (team_name == league_temp.teams[c].team_name){
+                team_item.team_id = league_temp.teams[c].team_id;
+                if (league == 'nfl'){
+                  team_item.usat_id = hierarchy_response.conferences[i].divisions[j].teams[k].id;
+                }
+                else {
+                  team_item.usat_id = league_temp.teams[c].usat_id;
+                }
+              }
             }
           }
         }
+        console.log("adding team "+team_item.market + ' ' + team_item.name);
+        teams_model.clearRedisTeam(team_item.team_id);
         teams.push(team_item);
       }
     }   
@@ -130,71 +138,82 @@ var formatNbaTeams = function(response){
 return teams
 }
 
-
-var formatNflAndNhlTeams = function(response, league){
-  var  hierarchy_response = JSON.parse(response);
-  for (i=0;i<hierarchy_response.conferences.length;i++){
-    for (j=0;j<hierarchy_response.conferences[i].divisions.length;j++){
-      for(k=0; k< hierarchy_response.conferences[i].divisions[j].teams.length; k++){
-        //set the usat_id to the city shorthand
-        if (league == 'nhl'){
-          hierarchy_response.conferences[i].divisions[j].teams[k].usat_id = hierarchy_response.conferences[i].divisions[j].teams[k].alias
-        }
-        else{
-          hierarchy_response.conferences[i].divisions[j].teams[k].usat_id = hierarchy_response.conferences[i].divisions[j].teams[k].id
-        }
-        teams.push(hierarchy_response.conferences[i].divisions[j].teams[k]);
-      }
-    }   
-  }
-return teams
-}
-
-var formatMlbTeams = function(response){
+var formatMlbTeams = function(response, league){
   response = JSON.parse(response);
-  //start teh loops
+  // API spits back Division > Teams  so WEST > GIANTS
    for (i=0; i < response.leagues.length; i++){
       var divisions = response.leagues[i].divisions;
       for (j=0; j < divisions.length; j++){
         var baseballTeams = divisions[j].teams;
         for (x=0; x < baseballTeams.length; x++){
-          baseballTeams[x].usat_id = baseballTeams[x].abbr;
-          teams.push(baseballTeams[x]);
+        var team_item = baseballTeams[x];
+        // Pull USAT ID and rb_team_id from static file
+          for (b=0;b<images_list.images.length;b++){ 
+            league_temp = images_list.images[b];
+            if (league_temp.league == league){
+              for (c=0;c<Object.keys(league_temp.teams).length;c++){ 
+                team_name = team_item.market+' '+team_item.name;
+                if (team_name == league_temp.teams[c].team_name){
+                  team_item.team_id = league_temp.teams[c].team_id;
+                  team_item.usat_id = league_temp.teams[c].usat_id;
+                }
+              }
+            }
+          }
+          console.log("adding team "+team_item.market + ' ' + team_item.name);
+          teams_model.clearRedisTeam(team_item.team_id);
+          teams.push(team_item);
         }
       }
     }
-  return teams;
+return teams;
 }
 
-formatSoccerTeams = function(response){
+
+
+formatSoccerTeams = function(response, league){
   //honree says these are the soccer stuff we care about
   var countries = ['Germany', 'England', 'Italy', 'Spain'],
       leagues = ['Premier League', 'Bundesliga', 'Serie A', 'Primera Division'];
   parseString(response, function (err, result) {
     var str = result[Object.keys(result)[0]];
-         for (i=0; i < str.category.length;i++){
-            //check to see if they are in the right country
-            if (countries.indexOf(str.category[i].$.name) > -1){
-              for (j=0; j < str.category[i].tournament_group.length; j++){
-                  //check to see if they are in the right league
-                  if (leagues.indexOf(str.category[i].tournament_group[j].$.name) > -1){
-                    for(k=0; k < str.category[i].tournament_group[j].tournament.length; k++){
-                      //no idea what's going on at this point
-                      if (str.category[i].tournament_group[j].tournament[k].$.name != 'Bundesliga Relegation/Promotion'){
-                        for (l=0; l < str.category[i].tournament_group[j].tournament[k].team.length; l++){
-                          teams.push(str.category[i].tournament_group[j].tournament[k].team[l].$);
+    for (i=0; i < str.category.length;i++){ 
+      //check to see if they are in the right country
+      if (countries.indexOf(str.category[i].$.name) > -1){
+        for (j=0; j < str.category[i].tournament_group.length; j++){
+            //check to see if they are in the right league
+          if (leagues.indexOf(str.category[i].tournament_group[j].$.name) > -1){
+            for(k=0; k < str.category[i].tournament_group[j].tournament.length; k++){
+              //no idea what's going on at this point
+              if (str.category[i].tournament_group[j].tournament[k].$.name != 'Bundesliga Relegation/Promotion'){
+                for (l=0; l < str.category[i].tournament_group[j].tournament[k].team.length; l++){
+                  var team_item = str.category[i].tournament_group[j].tournament[k].team[l].$;
+                  // Pull the rb_team_id from static file
+                  for (b=0;b<images_list.images.length;b++){ 
+                    league_temp = images_list.images[b];
+                    if (league_temp.league == league){
+                      for (c=0;c<Object.keys(league_temp.teams).length;c++){ 
+                        if (team_item.name == league_temp.teams[c].team_name){
+                          team_item.team_id = league_temp.teams[c].team_id;
+                          team_item.usat_id = str.category[i].tournament_group[j].tournament[k].team[l].$.alias;
                         }
                       }
                     }
                   }
+                  console.log("adding team "+team_item.name);
+                  teams_model.clearRedisTeam(team_item.team_id);
+                  teams.push(team_item);
+                }
               }
             }
-                
-         }
-
+          }
+        }
+      }       
+    }
   });
-  return teams;
+return teams;
 }
+
 
 
 
