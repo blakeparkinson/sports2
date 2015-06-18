@@ -39,7 +39,7 @@ router.get('/quiz', function(req, res) {
         var league = item.league;
         if (players_model.goatsLeadersArray().indexOf(type) > -1){
           var api_team_id = null;
-          var quiz_name = item.category;
+          var quiz_name = item.description;
         }
         else{
           var api_team_id = item.api_team_id;
@@ -57,7 +57,7 @@ router.get('/quiz', function(req, res) {
   else if (players_model.goatsLeadersArray().indexOf(type) > -1){ // leaders or goats
     db.collection('teams').findOne( {team_id: team_id}, function (err, item){
       if (item != null){
-        var quiz_name = item.category;
+        var quiz_name = item.description;
         var api_team_id = null;
         teams_model.createQuiz(team_id, league, quiz_name, res, returnItem, api_team_id, type);
       }
