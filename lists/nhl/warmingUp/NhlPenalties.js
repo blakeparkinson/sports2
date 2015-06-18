@@ -9,61 +9,47 @@ var NhlPenalities = [
   "teams": [
   {
     "rank":"1",
-    "name": "High Sticking",
-    "stat": "Post",
-  },
+    "name": "High Sticking"
   {
     "rank":"2",
-    "name": "Boarding",
-    "stat": "Post",
+    "name": "Boarding"
   },
   {
     "rank":"3",
-    "name": "Hooking",
-    "stat": "Post",
+    "name": "Hooking"
   },
   {
     "rank":"4",
-    "name": "Cross-Checking",
-    "stat": "Post",
+    "name": "Cross-Checking"
   },
   {
     "rank":"5",
-    "name": "Elbowing",
-    "stat": "Post",
+    "name": "Elbowing"
   },
   {
     "rank":"6",
-    "name": "Interference",
-    "stat": "Post",
+    "name": "Interference"
   },
   {
     "rank":"7",
-    "name": "Misconduct",
-    "stat": "Post",
+    "name": "Misconduct"
   },
   {
     "rank":"8",
-    "name": "Slashing",
-    "stat": "Post",
+    "name": "Slashing"
   },
   {
     "rank":"9",
-    "name": "Tripping",
-    "stat": "Post",
+    "name": "Tripping"
   },
   {
     "rank":"10",
-    "name": "Delay Of Game",
-    "stat": "Post",
+    "name": "Delay Of Game"
   },
   {
-    "rank":"12",
-    "name": "Icing",
-    "stat": "Post",
-  },
-    
-  
+    "rank":"11",
+    "name": "Icing"
+  },    
   ]
 }]
 
