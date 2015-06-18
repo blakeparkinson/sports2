@@ -94,13 +94,17 @@ router.get('/results', function(req, res) {
     if (league == "nfl"){
       modified_score = quiz_score / 5;
     }
-    else {
-      modified_score = quiz_score / 3
+    else if (possible_score <= 10){
+      modified_score = quiz_score / 2;
     }
-    req.session.scores.this_score = modified_score
+    else {
+      modified_score = quiz_score / 3;
+    }
+    req.session.scores.this_score = modified_score;
     mod_scores.push(modified_score); // add this quiz's score to the all scores array
-    mod_scores.sort()
-    req.session.scores.all_scores = mod_scores
+    mod_scores.sort();
+    req.session.scores.all_scores = mod_scores;
+    req.session.scores.possible_score  = possible_score;
     calculatePercentile(req, modified_score, mod_scores);
 
     db.open(function(err, db){
