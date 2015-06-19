@@ -1,9 +1,9 @@
 .container-league {
     position: relative;
-    width: 70%;
+    width: 75%;
     margin-left: auto;
     margin-right: auto;    
-    margin-top:7%; 
+    margin-top:3%; 
     overflow: hidden; 
 }
 #league-type {
@@ -11,7 +11,7 @@
 	font-size: 2em;
 }
 .all-columns {
-    border: 1px solid white;
+    border: 1px solid #ffffff;
     color: white;
     background: rgba(235, 235, 235, 0.9);
     height: 50%;
@@ -71,4 +71,8 @@
   color: #ffffff;
   margin-bottom: 0.5%;
   margin-top: 1%
+}
+.search-ls {
+  width: 30%!important;
+  margin: 1% 20% 0 35%;
 }

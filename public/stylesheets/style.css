@@ -923,6 +923,10 @@ table tr th:last-child {
   background-size: 100% 100% !important;
   background-attachment: inherit !important;
 }
+.leaguesearch-search {
+  width: 40%;
+  margin: 3% 0 0 30%;
+}
 
 #league-background{ 
   background-position: center center;
