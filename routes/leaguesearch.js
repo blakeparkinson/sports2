@@ -180,7 +180,7 @@ var imageByLeague = function(league) {
       var image = 'basketball_epic3.jpg';        
       break;
     case "nhl":
-      var image = 'hockey_epic.jpg';
+      var image = 'hockey_epic3.jpg';
       break;
     case "nfl":
       var image = 'epic_football3.jpg';
