@@ -1048,10 +1048,12 @@ table tr th:last-child {
 }
 
 #quiz-types .types{
-  display:inline-block;
-  padding:3%;
+  display: inline-block;
+  padding: 3% 0%;
   width: 213px;
-  }
+  margin: 0 3%;
+}
+  
 #quiz-types .bubble-img{
   width: 60px;
   height: 60px;
@@ -1076,6 +1078,8 @@ table tr th:last-child {
   background-color: rgb(22, 231, 22);
   text-align: center;
   border-radius: 50%;
+  width: 50%;
+  margin-left: 25%;
 }
 #quiz-types .type-header{
   font-size: 22px;
