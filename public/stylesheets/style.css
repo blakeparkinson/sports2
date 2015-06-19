@@ -264,7 +264,8 @@ a {
   border: none;
 }
 .navbar-brand.main{
-  font-size: 22px;
+  font-size: 24px;
+  padding-top:10px;
 }
 #nav-tabs-leagues {
   border-bottom: none;
@@ -439,10 +440,11 @@ ul {
 } 
 #index-buttons {  
   text-align: center;
-  margin: -9% 19% 0 19%;
-  padding: 4% 5% 4% 5%;
+  margin: -8% 19% 0 19%;
+  padding: 3% 5% 3% 5%;
   background: rgba(78, 125, 165, 1);
   border-radius: 5px;
+  border: 1.75px solid #fff;
 }
 .team-container{  
   margin-left: 5%;
