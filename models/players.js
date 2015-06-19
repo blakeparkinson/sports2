@@ -128,6 +128,7 @@ var fetchPlayers = function(type, api_team_id, team_id, league, usat_id, res, re
       }
     else{
       if (isItemExpired(JSON.parse(playersString))){
+        //clear redis
         redisClient.set(team_id, null);
       }
     // not in redis, go to mongo
