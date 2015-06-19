@@ -200,10 +200,11 @@ a {
 }
 .goats-icon {
   content: url(../images/icons/theGoat.png);
+  padding-top: 3.58%;
 }
 .season-leaders-icon {
  content: url(../images/icons/crown.png);
- padding-top: 1%;
+ padding-top: 2.9%;
 }
 .roster-icon {
  content: url(../images/icons/clipboard2.png);    
@@ -922,6 +923,10 @@ table tr th:last-child {
   background-size: 100% 100% !important;
   background-attachment: inherit !important;
 }
+.leaguesearch-search {
+  width: 40%;
+  margin: 3% 0 0 30%;
+}
 
 #league-background{ 
   background-position: center center;
@@ -952,7 +957,7 @@ table tr th:last-child {
   color: #000000;
 }
 .trendquiz{
-  margin-bottom: 6%;
+  margin-bottom: 2%;
   text-align: center;
   font-size: 34px;
 }
