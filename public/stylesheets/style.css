@@ -283,7 +283,7 @@ a {
   color: #ffffff;
 }
 .rb-bolt {
-  vertical-align: -2px;
+  vertical-align: -1.3px;
   background: rgb(22, 231, 22);
   padding: 3px 3px;
   border-radius: 28px;
@@ -910,6 +910,9 @@ table tr th:last-child {
 }
 .rb-black{
     color: #000000;
+}
+.index-logo {
+  font-size: 1.1em;
 }
 
 .rb-red{
