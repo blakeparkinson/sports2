@@ -7,7 +7,7 @@ $(document).ready(function() {
       placeholder: "Search a Team...",
       minimumInputLength: 2,
             ajax: {
-                url: "teams/team",
+                url: "../teams/team",
                 dataType: 'json', 
                     data: function(term, page) {
                         return {
