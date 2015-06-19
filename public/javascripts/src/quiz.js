@@ -125,7 +125,7 @@ var getLegendLabel = function(category, possible_score){
         label = '5-9';
         break;
       case 'low':
-        label = '5 or Less';
+        label = '4 or Fewer';
         break;
     }
     
@@ -255,11 +255,11 @@ var activeCopyButton = function(){
 
 function getSpanColor(score, possible_score){
   var intScore = parseInt(possible_score);
-  if (league == 'nfl'){
-    score = score / 5;
-  }
-  else if (intScore <= 10){
+  if (intScore <= 10){
     score = score / 2;
+  }
+  else if (league == 'nfl'){
+    score = score / 5;
   }
   else{score = score/3; }
   var color = '#fff';

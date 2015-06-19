@@ -91,11 +91,11 @@ router.get('/results', function(req, res) {
     possible_score = req.query.possible_score,
     percentage_correct = +((quiz_score / possible_score).toFixed(2)),
     mod_scores = req.session.scores.all_scores;
-    if (league == "nfl"){
-      modified_score = quiz_score / 5;
-    }
-    else if (possible_score <= 10){
+    if (possible_score <= 10){
       modified_score = quiz_score / 2;
+    }
+    else if (league == "nfl"){
+      modified_score = quiz_score / 5;
     }
     else {
       modified_score = quiz_score / 3;
