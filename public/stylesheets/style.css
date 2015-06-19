@@ -1232,6 +1232,11 @@ table tr th:last-child {
   .trendquiz, #quiz-types .type-ways{
     font-size: 28px;
   }
+  .chart-text{
+    top:54%;
+    left:6%;
+    width:88%;
+  }
 
      
 }
