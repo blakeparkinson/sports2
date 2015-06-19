@@ -122,15 +122,14 @@ var getTimeLimit = function(league){
 var fetchPlayers = function(type, api_team_id, team_id, league, usat_id, res, req, first_callback, second_callback){ 
   var players;
   redisClient.get(team_id, function (err, playersString) {
-    if (playersString != null && isItemExpired(JSON.parse(playersString))){
-      // it is in redis, but is expired
-        redisClient.set(team_id, null);
-      }
-    else if (playersString != null && !isItemExpired(JSON.parse(playersString))){
+    if (playersString != null && !isItemExpired(JSON.parse(playersString))){
         //we got something in redis, continue
         first_callback(JSON.parse(playersString), team_id, res, league, second_callback);
       }
     else{
+      if (isItemExpired(JSON.parse(playersString))){
+        redisClient.set(team_id, null);
+      }
     // not in redis, go to mongo
       if (goatsLeadersArray().indexOf(type) > -1){ 
         //it's a leader or goat quiz
