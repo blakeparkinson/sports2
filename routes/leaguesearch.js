@@ -27,8 +27,8 @@ router.get('/', function(req, res) {
           goats: results.goats_lists,
         	leaders: results.leaders_lists,
           remove_footer: true,
-          isProduction: common.isProduction
-
+          isProduction: common.isProduction,
+          title: "RosterBlitz - Search by League"
          }
     );  
   })
@@ -40,6 +40,14 @@ router.get('/:league', function(req, res) {
   var league = req.params.league;
   if (league == 'soccer'){
     league = 'eu_soccer';
+  }
+  var changeTitle = function(league) {
+    if (league == 'eu_soccer') {
+      var title = "RosterBlitz - Soccer Quizzes";
+    } else {
+      var title = "RosterBlitz - " + league.toUpperCase() + " Quizzes";
+    }
+    return title;
   }
   var listObjGoats = {league : league, type: 'goats'};
   var listObjRosters = {league : league, type: 'roster'};
@@ -58,8 +66,8 @@ router.get('/:league', function(req, res) {
           how_works_button: true,
           remove_footer: true,
           current: league,
-          isProduction: common.isProduction
-
+          isProduction: common.isProduction,
+          title: changeTitle(league) 
          }
     );  
   })
