@@ -217,7 +217,7 @@ a {
   font-size: 1.1em;
 }
 .navbar-header.rb{
-  padding-left: 50px
+  padding-left: 40px
 }
 #how-works-button {
   padding-top: 5px;
@@ -266,7 +266,9 @@ a {
 .navbar-brand.main{
   font-size: 24px;
   padding-top:10px;
-}
+}   
+
+  }  
 #nav-tabs-leagues {
   border-bottom: none;
 }
@@ -1097,6 +1099,13 @@ table tr th:last-child {
 
   /***********480********/
   @media screen and (max-width: 480px) {
+    .navbar-brand.main{
+      font-size: 16px;
+      padding-top:15px;
+    }
+    .navbar-header.rb{
+      padding-left: 0;
+    }
 
     .container-iphone {
         display: block;
@@ -1112,8 +1121,7 @@ table tr th:last-child {
       }
     #index-buttons{
       margin: 2% 2% 0 2%;
-    }
-
+    }    
   }  
 
   /***********580*******/
