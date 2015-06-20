@@ -1239,7 +1239,9 @@ table tr th:last-child {
     left:6%;
     width:88%;
   }
-
+  .team-name{
+    font-size: 28px;
+  }
      
 }
 
