@@ -36,8 +36,8 @@ router.get('/', function(res, res) {
 router.get('/quiz', function(req, res) {
   var team_id = req.query.team_id;
   var league = req.query.league;
+  var type = req.query.type;
   if (req.query.random){
-    var type = req.query.type;
     var maxNum = 0;
     switch (type){
       case 'players':
