@@ -12,6 +12,10 @@ var teams_model = require('../models/teams.js');
 var shortId = require('shortid');
 var nodemailer = require('nodemailer');
 
+var countPlayersDocs = 26;
+var countLeadersDocs = 1;
+var countGoatsDocs = 11;
+
 // create reusable transporter object using SMTP transport 
 var transporter = nodemailer.createTransport({
     service: 'Gmail',
@@ -32,8 +36,30 @@ router.get('/', function(res, res) {
 router.get('/quiz', function(req, res) {
   var team_id = req.query.team_id;
   var league = req.query.league;
-  var type = req.query.type;
-  if (req.query.trending){
+  if (req.query.random){
+    var type = req.query.type;
+    var maxNum = 0;
+    switch (type){
+      case 'players':
+        maxNum = countPlayersDocs;
+        break;
+      case 'goats':
+        maxNum = countGoatsDocs;
+        break;
+      case 'leaders':
+        maxNum = countLeadersDocs;
+        break;
+    }
+
+    var randNum = teams_model.randomIntFromInterval(0, maxNum);
+    db.collection('teams').find({type: type}, function (err, items){
+      var randTeam = items[randNum];
+      teams_model.createQuiz(randTeam.team_id, randTeam.league, '', res, returnItem, randTeam.api_team_id, type);
+
+    })
+
+  }
+  else if (req.query.trending){
     db.collection('teams').findOne( { team_id : team_id}, function (err, item){
       if (item != null){
         var league = item.league;
@@ -76,7 +102,6 @@ router.get('/quiz', function(req, res) {
 var returnItem = function (item, res){
   res.json(item);
 }
-
 
 //this is for the /teams page search field ajax
 router.get('/team', function(req, res) {
