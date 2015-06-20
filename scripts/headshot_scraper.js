@@ -77,6 +77,9 @@ randomHackyFunction = function(team, league){
   if (team.abbreviation == 'SAS'){
     usat_id = 'SAN';
   }
+  if (team.abbreviation == 'BKN'){
+    usat_id = 'BRK';
+  }
   if (league == 'mlb'){
     year = 2015;
   }
