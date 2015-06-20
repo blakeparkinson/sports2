@@ -142,7 +142,7 @@ var calculatePercentile = function(req, score, all_scores){
   count = 0;
   for (i=0;i<all_scores.length;i++){
     if (len == 1){ // if you're the first taker, you get 100th percentile
-      req.session.scores.percentile = 1
+      req.session.scores.percentile = 100.00
       return;
     }
     else if(all_scores[i]<= score && count < len -1){
