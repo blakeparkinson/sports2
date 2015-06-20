@@ -5,6 +5,7 @@ $(document).ready(function() {
     // Populate the user table on initial page load    
     $('body').on('click', '[data-action="pick-team"], .quiz-btn', fetchQuiz);
     $('body').on('click', '.create-quiz', fetchTrendingQuiz);
+    $('body').on('click', '.random-quiz', fetchRandomQuizByCollection);
     $('body').on('click', '.twitter-login', openAuthPopup);
     $('body').on('click', '.tweet', openTweetPopup);
     $('body').on('click', '.facebook-login', openFacebookAuthPopup);
@@ -194,6 +195,15 @@ function fetchTrendingQuiz(event){
     team_id: team_id,
     type: type,
     trending: true
+  };
+  AjaxCreateQuiz(data);
+}
+
+function fetchRandomQuizByCollection(event){
+  var type = $(this).data('type');
+  var data = {
+    type: type,
+    random: true
   };
   AjaxCreateQuiz(data);
 }
