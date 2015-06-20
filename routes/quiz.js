@@ -57,7 +57,8 @@ router.get('/', function(req, res) {
           type: type,
           plainDisplay: true,
           quizPage: true,
-          isProduction: common.isProduction
+          isProduction: common.isProduction,
+          title: "RosterBlitz - Put Your Sports Knowledge to the Ultimate Test"
         })
       }, team_id)
     }

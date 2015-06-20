@@ -53,7 +53,8 @@ router.get('/', function(req, res) {
     how_works_button: true,
     isProduction: common.isProduction,
     special_layout: true,
-    footer_class: 'index'
+    footer_class: 'index',
+    title: "RosterBlitz - Put Your Sports Knowledge to the Ultimate Test"
   });
 });
 })
