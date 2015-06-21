@@ -54,7 +54,9 @@ router.get('/quiz', function(req, res) {
     var randNum = teams_model.randomIntFromInterval(0, maxNum);
     db.collection('teams').find({type: type}, function (err, items){
       var randTeam = items[randNum];
-      teams_model.createQuiz(randTeam.team_id, randTeam.league, '', res, returnItem, randTeam.api_team_id, type);
+      var tName = '';
+      (type == 'roster')? tName = randTeam.market + ' ' + randTeam.name : tName = randTeam.description;
+      teams_model.createQuiz(randTeam.team_id, randTeam.league, tName, res, returnItem, randTeam.api_team_id, type);
 
     })
 
