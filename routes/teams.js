@@ -40,7 +40,7 @@ router.get('/quiz', function(req, res) {
   if (req.query.random){
     var maxNum = 0;
     switch (type){
-      case 'players':
+      case 'roster':
         maxNum = countPlayersDocs;
         break;
       case 'goats':
