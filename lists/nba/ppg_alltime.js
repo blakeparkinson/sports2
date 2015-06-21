@@ -83,7 +83,7 @@
         "rank": "10",
         "last_name": "Oscar",
         "first_name": "Robertson",
-        "full_name":"Robertson Oscar",
+        "full_name":"Oscar Robertson",
         "stat": "25.68"
     }]
 }]
