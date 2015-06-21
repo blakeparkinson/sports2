@@ -81,8 +81,8 @@
     {
         "player_id": "10",
         "rank": "10",
-        "last_name": "Oscar",
-        "first_name": "Robertson",
+        "last_name": "Robertson",
+        "first_name": "Oscar",
         "full_name":"Oscar Robertson",
         "stat": "25.68"
     }]
