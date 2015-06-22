@@ -27,7 +27,6 @@ router.get('/', function(req, res) {
           goats: results.goats_lists,
         	leaders: results.leaders_lists,
           remove_footer: true,
-          isProduction: common.isProduction,
           title: "RosterBlitz - Search by League"
          }
     );  
@@ -66,7 +65,6 @@ router.get('/:league', function(req, res) {
           how_works_button: true,
           remove_footer: true,
           current: league,
-          isProduction: common.isProduction,
           title: changeTitle(league) 
          }
     );  

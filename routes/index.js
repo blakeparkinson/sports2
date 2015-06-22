@@ -51,7 +51,6 @@ router.get('/', function(req, res) {
     session:req.session,
     trending_quiz: trending_quiz,
     how_works_button: true,
-    isProduction: common.isProduction,
     special_layout: true,
     footer_class: 'index',
     title: "RosterBlitz - Put Your Sports Knowledge to the Ultimate Test"
@@ -61,7 +60,9 @@ router.get('/', function(req, res) {
 
 router.get('/get', function(req, res) {
     var term = req.query.q;
-    res.render('../views/partials/player_card.hbs', {layout: false, data: data, isProduction: common.isProduction
+    res.render('../views/partials/player_card.hbs', {
+    	layout: false,
+    	data: data
 		});
 
 });
