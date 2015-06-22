@@ -93,13 +93,17 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
+
 app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
+
 });
+//this sets a 1-time session variable that can be passed to all routes
+app.locals.isProduction = common.isProduction;
 
 hbs.registerHelper('json_stringify', function(context) {
     var c = JSON.stringify(context);

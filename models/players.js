@@ -52,8 +52,7 @@ var returnPlayers = function (players, team_id, res, league, colors){
       clock: getTimeLimit(league),
       background_image: randImg(league),
       logo_url: '../images/team_logos/'+league+'/'+players.name.replace(/ +/g, "").toLowerCase()+'.png',
-      quizPage: true,
-      isProduction: common.isProduction
+      quizPage: true
     });
 
 
