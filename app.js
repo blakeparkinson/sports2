@@ -19,6 +19,7 @@ var config = common.config();
 var auth = require('./routes/auth');
 var session = require('express-session'); //express-session is currently working, but is deprecated
 var RedisStore = require('connect-redis')(session);
+var airbrake = require('airbrake').createClient(config.airbrakeKey);
 
 var app = express();
 var passport = require('passport');
@@ -51,6 +52,8 @@ app.use(session({ store: new RedisStore({
     resave: true,
     saveUninitialized: true
 }));
+
+app.use(airbrake.expressHandler())
 
 app.use(passport.initialize());
 app.use(passport.session()); 
@@ -90,13 +93,19 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
+
 app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
+
 });
+//this sets a 1-time session variable that can be passed to all routes
+app.locals.isProduction = common.isProduction;
+
+(common.isProduction)? app.locals.mixpanelToken = config.mixpanelProdToken : app.locals.mixpanelToken = config.mixpanelDevToken;
 
 hbs.registerHelper('json_stringify', function(context) {
     var c = JSON.stringify(context);

@@ -1,6 +1,6 @@
 Handlebars.registerHelper('render_position', function(league, position){
   if (arguments.length < 2) {
-        throw new Error("Handlerbars Helper 'render_position' needs 2 parameters");
+        throw new Error("Handlebars Helper 'render_position' needs 2 parameters");
     }
 
   var position = position.toUpperCase();
@@ -153,3 +153,13 @@ Handlebars.registerHelper('pluralize', function(number, singular, plural) {
 Handlebars.registerHelper('pluralCount', function(number, singular, plural) {
     return Handlebars.helpers.pluralize.apply(this, arguments);
 });
+
+Handlebars.registerHelper('ifIsNotOnMobileDevice', function(options){
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    return options.inverse(this);
+  }
+  else{
+    return options.fn(this);
+  }
+})
+

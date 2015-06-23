@@ -104,9 +104,56 @@ var uploadScore = function(correct_answers){
 
 }
 
-var getLegendLabel = function(category){
+var getLegendLabel = function(category, possible_score){
+  var intScore = parseInt(possible_score);
   var label = '';
-  if (league != 'nfl'){
+  if (league == 'nfl'){
+    switch(category){
+      case 'shigh':
+        label = '25+';
+        break;
+      case 'high':
+        label = '20-24';
+        break;
+      case 'mhigh':
+        label = '15-19';
+        break;
+      case 'med':
+        label = '10-14';
+        break;
+      case 'mlow':
+        label = '5-9';
+        break;
+      case 'low':
+        label = '4 or Fewer';
+        break;
+    }
+    
+  }
+  else if (intScore <= 10){
+    switch(category){
+      case 'shigh':
+        label = '10+';
+        break;
+      case 'high':
+        label = '8-9';
+        break;
+      case 'mhigh':
+        label = '6-7';
+        break;
+      case 'med':
+        label = '4-5';
+        break;
+      case 'mlow':
+        label = '2-3';
+        break;
+      case 'low':
+        label = '1 or Fewer';
+        break;
+    }
+
+  }
+  else{
     switch(category){
       case 'shigh':
         label = '15+';
@@ -128,28 +175,6 @@ var getLegendLabel = function(category){
         break;
     }
   }
-  else{
-    switch(category){
-      case 'shigh':
-        label = '25+';
-        break;
-      case 'high':
-        label = '20-24';
-        break;
-      case 'mhigh':
-        label = '15-19';
-        break;
-      case 'med':
-        label = '10-14';
-        break;
-      case 'mlow':
-        label = '5-9';
-        break;
-      case 'low':
-        label = '5 or Less';
-        break;
-    }
-  }
   return label;
 }
 
@@ -158,7 +183,7 @@ var showGraphModal = function(response){
   response.team_name = team_name;
   response.logo_url = logo_url;
   response.shortPercentile = percentileEndingText(response.scores.percentile.toFixed(0));
-  response.labelColor = getSpanColor(correct);
+  response.labelColor = getSpanColor(correct, response.scores.possible_score);
   response.teamId = teamId
   var source   = $("#quiz-graph"),
       parent = $('#graphModal');
@@ -170,36 +195,36 @@ var showGraphModal = function(response){
             {
                 value: response.scores.brackets.high,
                 color: highHex,
-                label: getLegendLabel('high')
+                label: getLegendLabel('high', response.scores.possible_score)
             },
             {
                 value: response.scores.brackets.mhigh,
                 color: mhighHex,
-                label: getLegendLabel('mhigh')
+                label: getLegendLabel('mhigh', response.scores.possible_score)
             },
             {
                 value: response.scores.brackets.med,
                 color: medHex,
-                label: getLegendLabel('med')
+                label: getLegendLabel('med',response.scores.possible_score)
             },
             {
                 value: response.scores.brackets.mlow,
                 color: mlowHex,
-                label: getLegendLabel('mlow')
+                label: getLegendLabel('mlow', response.scores.possible_score)
             },
             {
                 value: response.scores.brackets.low,
                 color: lowHex,
-                label: getLegendLabel('low')
+                label: getLegendLabel('low', response.scores.possible_score)
             }
         ];
 
-        //only append the 15+ section if there are actually 15+ players
-        if (roster.length > 14){
+        //only append the 15+ section if there are actually 15+ players...ugly :()
+        if (roster.length > 14 || type == 'goats'){
           data.unshift({
                 value: response.scores.brackets.shigh,
                 color: shighHex,
-                label: getLegendLabel('shigh')
+                label: getLegendLabel('shigh', response.scores.possible_score)
             });
         }
         var options = {
@@ -228,10 +253,15 @@ var activeCopyButton = function(){
   $(this).text('Copied').addClass('copied');
 }
 
-function getSpanColor(score){
-  if (league == 'nfl'){
-    score = score / 5
-  }else{score = score/3 }
+function getSpanColor(score, possible_score){
+  var intScore = parseInt(possible_score);
+  if (intScore <= 10){
+    score = score / 2;
+  }
+  else if (league == 'nfl'){
+    score = score / 5;
+  }
+  else{score = score/3; }
   var color = '#fff';
   switch (true){
     case (score < 1):
@@ -380,7 +410,7 @@ var addToCorrectList = function (player, index){
     imgHtml = '<img class="circle-pic" src='+player.avatar_url+'>';
   }
   if (type != 'leaders' && type != 'goats' ){
-    var html = '<div class="outer-guess"><div class="inner-guess"><div class="correct-guess" data-index="'+index+'">'+placer +'.' + imgHtml + player.full_name + '</div></div></div>';
+    var html = '<div class="outer-guess"><div class="inner-guess"><div class="correct-guess" data-index="'+index+'">'+placer +'. ' + imgHtml + player.full_name + '</div></div></div>';
     answer_container.append(html);
     var current = answer_container.find('.correct-guess[data-index="' + index + '" ]').closest('.outer-guess');
     current.find('.inner-guess').addClass('guessed');
@@ -435,6 +465,9 @@ var prepareCard = function(player, flip){
   if (flip){
     $("#card").flip(true);
   }
+  mixpanel.track("Flipped Player Card", {
+    "player": full_name
+  });
 
 }
 

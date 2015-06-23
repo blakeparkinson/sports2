@@ -200,10 +200,11 @@ a {
 }
 .goats-icon {
   content: url(../images/icons/theGoat.png);
+  padding-top: 3.58%;
 }
 .season-leaders-icon {
  content: url(../images/icons/crown.png);
- padding-top: 1%;
+ padding-top: 2.9%;
 }
 .roster-icon {
  content: url(../images/icons/clipboard2.png);    
@@ -216,7 +217,7 @@ a {
   font-size: 1.1em;
 }
 .navbar-header.rb{
-  padding-left: 50px
+  padding-left: 40px
 }
 #how-works-button {
   padding-top: 5px;
@@ -263,8 +264,10 @@ a {
   border: none;
 }
 .navbar-brand.main{
-  font-size: 22px;
-}
+  font-size: 24px;
+  padding-top:10px;
+}   
+
 #nav-tabs-leagues {
   border-bottom: none;
 }
@@ -280,7 +283,7 @@ a {
   color: #ffffff;
 }
 .rb-bolt {
-  vertical-align: -2px;
+  vertical-align: -1.3px;
   background: rgb(22, 231, 22);
   padding: 3px 3px;
   border-radius: 28px;
@@ -438,17 +441,16 @@ ul {
 } 
 #index-buttons {  
   text-align: center;
-  margin: -9% 19% 0 19%;
-  padding: 4% 5% 4% 5%;
+  margin: -8% 19% 0 19%;
+  padding: 3% 5% 3% 5%;
   background: rgba(78, 125, 165, 1);
   border-radius: 5px;
+  border: 1.75px solid #fff;
 }
 .team-container{  
-  margin-left: 5%;
   padding: 5% 2% 5% 2%;
   background: rgba(32, 26, 26, 0.7);
   min-height: 220px;
-  min-width: 330px;
 }
 #also-might-like {  
   margin-top: 5%;
@@ -533,7 +535,7 @@ padding-left: 3%;
   border-collapse: separate;
   border-spacing: 2px 0;
   width: 80%;
-  padding-top: 3%;
+  padding-top: 1%;
 }
 #stats-table td {
   background: rgba(250, 250, 250, 0.2);
@@ -571,6 +573,10 @@ padding-left: 3%;
 #other-card-info {  
   padding-bottom: 3%;
   font-size: 1.3em;
+}
+#other-card-info-nhl {  
+  padding-top: 4%;  
+  padding-left: 18%;
 }
 #other-card-info-left {
   float: left;
@@ -907,6 +913,9 @@ table tr th:last-child {
 .rb-black{
     color: #000000;
 }
+.index-logo {
+  font-size: 1.1em;
+}
 
 .rb-red{
     color: rgb(231, 85, 22);
@@ -921,6 +930,10 @@ table tr th:last-child {
 .league-background-index{ 
   background-size: 100% 100% !important;
   background-attachment: inherit !important;
+}
+.leaguesearch-search {
+  width: 40%;
+  margin: 3% 0 0 30%;
 }
 
 #league-background{ 
@@ -952,7 +965,7 @@ table tr th:last-child {
   color: #000000;
 }
 .trendquiz{
-  margin-bottom: 6%;
+  margin-bottom: 2%;
   text-align: center;
   font-size: 34px;
 }
@@ -1039,10 +1052,12 @@ table tr th:last-child {
 }
 
 #quiz-types .types{
-  display:inline-block;
-  padding:3%;
+  display: inline-block;
+  padding: 3% 0%;
   width: 213px;
-  }
+  margin: 0 3%;
+}
+  
 #quiz-types .bubble-img{
   width: 60px;
   height: 60px;
@@ -1067,6 +1082,8 @@ table tr th:last-child {
   background-color: rgb(22, 231, 22);
   text-align: center;
   border-radius: 50%;
+  width: 50%;
+  margin-left: 25%;
 }
 #quiz-types .type-header{
   font-size: 22px;
@@ -1090,6 +1107,13 @@ table tr th:last-child {
 
   /***********480********/
   @media screen and (max-width: 480px) {
+    .navbar-brand.main{
+      font-size: 16px;
+      padding-top:15px;
+    }
+    .navbar-header.rb{
+      padding-left: 0;
+    }
 
     .container-iphone {
         display: block;
@@ -1105,17 +1129,12 @@ table tr th:last-child {
       }
     #index-buttons{
       margin: 2% 2% 0 2%;
-    }
-
+    }    
   }  
 
   /***********580*******/
 
   @media screen and (max-width: 580px) {
-    .team-container{
-      width:85%;
-
-    }
     .point-container{
       padding: 4px 11px 4px 4px;
 
@@ -1141,13 +1160,11 @@ table tr th:last-child {
         float:none;
         padding-bottom: 20px;
         margin-top: none;
-        padding-left: 5%;
         width:100%;
     }
     #left-quiz-column{
       float:none;
       margin-top: none;
-      padding-left: 5%;
       width:100%;
 
     }
@@ -1213,7 +1230,14 @@ table tr th:last-child {
   .trendquiz, #quiz-types .type-ways{
     font-size: 28px;
   }
-
+  .chart-text{
+    top:54%;
+    left:6%;
+    width:88%;
+  }
+  .team-name{
+    font-size: 28px;
+  }
      
 }
 

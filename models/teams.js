@@ -81,10 +81,16 @@ var createQuiz = function(team_id, league, quiz_name, res, callback, api_team_id
   });
 }
 
+var randomIntFromInterval = function (min,max)
+{
+    return Math.floor(Math.random()*(max-min+1)+min);
+}
+
 
 module.exports = {
   deleteItem: deleteItem,
   fetchStatDescription: fetchStatDescription,
   createQuiz: createQuiz,
-  clearRedisTeam: clearRedisTeam
+  clearRedisTeam: clearRedisTeam,
+  randomIntFromInterval: randomIntFromInterval
 }

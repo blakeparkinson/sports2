@@ -12,6 +12,10 @@ var teams_model = require('../models/teams.js');
 var shortId = require('shortid');
 var nodemailer = require('nodemailer');
 
+var countPlayersDocs = 26;
+var countLeadersDocs = 1;
+var countGoatsDocs = 11;
+
 // create reusable transporter object using SMTP transport 
 var transporter = nodemailer.createTransport({
     service: 'Gmail',
@@ -33,13 +37,37 @@ router.get('/quiz', function(req, res) {
   var team_id = req.query.team_id;
   var league = req.query.league;
   var type = req.query.type;
-  if (req.query.trending){
+  if (req.query.random){
+    var maxNum = 0;
+    switch (type){
+      case 'roster':
+        maxNum = countPlayersDocs;
+        break;
+      case 'goats':
+        maxNum = countGoatsDocs;
+        break;
+      case 'leaders':
+        maxNum = countLeadersDocs;
+        break;
+    }
+
+    var randNum = teams_model.randomIntFromInterval(0, maxNum);
+    db.collection('teams').find({type: type}, function (err, items){
+      var randTeam = items[randNum];
+      var tName = '';
+      (type == 'roster')? tName = randTeam.market + ' ' + randTeam.name : tName = randTeam.description;
+      teams_model.createQuiz(randTeam.team_id, randTeam.league, tName, res, returnItem, randTeam.api_team_id, type);
+
+    })
+
+  }
+  else if (req.query.trending){
     db.collection('teams').findOne( { team_id : team_id}, function (err, item){
       if (item != null){
         var league = item.league;
         if (players_model.goatsLeadersArray().indexOf(type) > -1){
           var api_team_id = null;
-          var quiz_name = item.category;
+          var quiz_name = item.description;
         }
         else{
           var api_team_id = item.api_team_id;
@@ -57,7 +85,7 @@ router.get('/quiz', function(req, res) {
   else if (players_model.goatsLeadersArray().indexOf(type) > -1){ // leaders or goats
     db.collection('teams').findOne( {team_id: team_id}, function (err, item){
       if (item != null){
-        var quiz_name = item.category;
+        var quiz_name = item.description;
         var api_team_id = null;
         teams_model.createQuiz(team_id, league, quiz_name, res, returnItem, api_team_id, type);
       }
@@ -76,7 +104,6 @@ router.get('/quiz', function(req, res) {
 var returnItem = function (item, res){
   res.json(item);
 }
-
 
 //this is for the /teams page search field ajax
 router.get('/team', function(req, res) {

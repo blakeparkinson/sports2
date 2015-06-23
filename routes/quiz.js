@@ -57,7 +57,7 @@ router.get('/', function(req, res) {
           type: type,
           plainDisplay: true,
           quizPage: true,
-          isProduction: common.isProduction
+          title: "RosterBlitz - Put Your Sports Knowledge to the Ultimate Test"
         })
       }, team_id)
     }
@@ -91,16 +91,20 @@ router.get('/results', function(req, res) {
     possible_score = req.query.possible_score,
     percentage_correct = +((quiz_score / possible_score).toFixed(2)),
     mod_scores = req.session.scores.all_scores;
-    if (league == "nfl"){
+    if (possible_score <= 10){
+      modified_score = quiz_score / 2;
+    }
+    else if (league == "nfl"){
       modified_score = quiz_score / 5;
     }
     else {
-      modified_score = quiz_score / 3
+      modified_score = quiz_score / 3;
     }
-    req.session.scores.this_score = modified_score
+    req.session.scores.this_score = modified_score;
     mod_scores.push(modified_score); // add this quiz's score to the all scores array
-    mod_scores.sort()
-    req.session.scores.all_scores = mod_scores
+    mod_scores.sort();
+    req.session.scores.all_scores = mod_scores;
+    req.session.scores.possible_score  = possible_score;
     calculatePercentile(req, modified_score, mod_scores);
 
     db.open(function(err, db){
@@ -137,7 +141,7 @@ var calculatePercentile = function(req, score, all_scores){
   count = 0;
   for (i=0;i<all_scores.length;i++){
     if (len == 1){ // if you're the first taker, you get 100th percentile
-      req.session.scores.percentile = 1
+      req.session.scores.percentile = 100.00
       return;
     }
     else if(all_scores[i]<= score && count < len -1){
