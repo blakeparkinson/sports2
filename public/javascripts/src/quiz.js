@@ -465,6 +465,9 @@ var prepareCard = function(player, flip){
   if (flip){
     $("#card").flip(true);
   }
+  mixpanel.track("Flipped Player Card", {
+    "player": full_name
+  });
 
 }
 
