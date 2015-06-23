@@ -265,7 +265,7 @@ switch (league){
             break;
           case 'mlb': 
             json_response = JSON.parse(body);
-            players = formatMLBPlayers(json_response, team_id, team_id, usat_id);
+            players = formatMLBPlayers(json_response, team_id, api_team_id, usat_id);
             appendPlayerShortId(players.players);
             mongoInsertPlayers(league, players, team_id);
             first_callback(players, team_id, res, league,second_callback)
@@ -454,8 +454,8 @@ formatEUSoccerPlayers = function(response, usat_id){
   return roster;
 }
 
-formatMLBPlayers = function(response, team_id, team_id, usat_id){
-  decryptedTeamId = encryption.decrypt(team_id);
+formatMLBPlayers = function(response, team_id, api_team_id, usat_id){
+  decryptedTeamId = encryption.decrypt(api_team_id);
   for (var i =0; i <response.teams.length; i++){
     if (decryptedTeamId == response.teams[i].id){
       players = response.teams[i];
