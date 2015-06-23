@@ -17,56 +17,56 @@ var lastTenNflChamps = [
     "rank":"2",
     "name":"Seahawks",
     "market":"Seattle",
-    "year":"2014",
+    "year":"2014"
   },
   {
     "rank":"3",
     "name":"Ravens",
     "market":"Baltimore",
-    "year":"2013",
+    "year":"2013"
   },
   {
     "rank":"4",
     "name":"Giants",
     "market":"New York",
-    "year":"2012",
+    "year":"2012"
   },
   {
     "rank":"5",
     "name":"Packers",
     "market":"Green Bay",
-    "year":"2011",
+    "year":"2011"
   },
   {
     "rank":"6",
     "name":"Saints",
     "market":"New Orleans",
-    "year":"2010",
+    "year":"2010"
   },
   {
     "rank":"7",
     "name":"Steelers",
     "market":"Pittsburgh",
-    "year":"2009",
+    "year":"2009"
   },
   {
     "rank":"8",
     "name":"Giants",
     "market":"New York",
-    "year":"2008",
+    "year":"2008"
   },
   {
     "rank":"9",
     "name":"Colts",
     "market":"Indianapolis",
-    "year":"2007",
+    "year":"2007"
   },
   {
     "rank":"10",
     "name":"Steelers",
     "market":"Pittsburgh",
-    "year":"2006",
-  },
+    "year":"2006"
+  }
   ]
 }]
 

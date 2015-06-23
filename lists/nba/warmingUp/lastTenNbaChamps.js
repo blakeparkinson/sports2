@@ -17,56 +17,56 @@ var lastTenNbaChamps = [
     "rank":"2",
     "name":"Spurs",
     "market":"San Antonio",
-    "year":"2014",
+    "year":"2014"
   },
   {
     "rank":"3",
     "name":"Heat",
     "market":"Miami",
-    "year":"2013",
+    "year":"2013"
   },
   {
     "rank":"4",
     "name":"Heat",
     "market":"Miami",
-    "year":"2012",
+    "year":"2012"
   },
   {
     "rank":"5",
     "name":"Mavericks",
     "market":"Dallas",
-    "year":"2011",
+    "year":"2011"
   },
   {
     "rank":"6",
     "name":"Lakers",
     "market":"Los Angeles",
-    "year":"2010",
+    "year":"2010"
   },
   {
     "rank":"7",
     "name":"Lakers",
     "market":"Los Angeles",
-    "year":"2009",
+    "year":"2009"
   },
   {
     "rank":"8",
     "name":"Celtics",
     "market":"Boston",
-    "year":"2008",
+    "year":"2008"
   },
   {
     "rank":"9",
     "name":"Spurs",
     "market":"San Antonio",
-    "year":"2007",
+    "year":"2007"
   },
   {
     "rank":"10",
     "name":"Heat",
     "market":"Miami",
-    "year":"2006",
-  },
+    "year":"2006"
+  }
   ]
 }]
 
