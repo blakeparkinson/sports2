@@ -410,7 +410,7 @@ var addToCorrectList = function (player, index){
     imgHtml = '<img class="circle-pic" src='+player.avatar_url+'>';
   }
   if (type != 'leaders' && type != 'goats' ){
-    var html = '<div class="outer-guess"><div class="inner-guess"><div class="correct-guess" data-index="'+index+'">'+placer +'.' + imgHtml + player.full_name + '</div></div></div>';
+    var html = '<div class="outer-guess"><div class="inner-guess"><div class="correct-guess" data-index="'+index+'">'+placer +'. ' + imgHtml + player.full_name + '</div></div></div>';
     answer_container.append(html);
     var current = answer_container.find('.correct-guess[data-index="' + index + '" ]').closest('.outer-guess');
     current.find('.inner-guess').addClass('guessed');
