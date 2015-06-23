@@ -84,7 +84,7 @@ function formatSelection(data){
 }
 
 function formatNoMatches(data){
-    var render = '<p>You drunk?</p>';
+    var render = '<p>No quiz found</p>';
     mixpanel.track("Team dropdown not found", {});
     return render;
 

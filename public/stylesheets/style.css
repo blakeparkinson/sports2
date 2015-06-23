@@ -535,7 +535,7 @@ padding-left: 3%;
   border-collapse: separate;
   border-spacing: 2px 0;
   width: 80%;
-  padding-top: 3%;
+  padding-top: 1%;
 }
 #stats-table td {
   background: rgba(250, 250, 250, 0.2);
@@ -573,6 +573,10 @@ padding-left: 3%;
 #other-card-info {  
   padding-bottom: 3%;
   font-size: 1.3em;
+}
+#other-card-info-nhl {  
+  padding-top: 4%;  
+  padding-left: 18%;
 }
 #other-card-info-left {
   float: left;
