@@ -105,6 +105,8 @@ app.use(function(err, req, res, next) {
 //this sets a 1-time session variable that can be passed to all routes
 app.locals.isProduction = common.isProduction;
 
+(common.isProduction)? app.locals.mixpanelToken = config.mixpanelProdToken : app.locals.mixpanelToken = config.mixpanelDevToken;
+
 hbs.registerHelper('json_stringify', function(context) {
     var c = JSON.stringify(context);
     return c;
