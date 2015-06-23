@@ -87,12 +87,16 @@ function sendEmail(event){
         type: 'get',
         dataType: 'json',
           success: function(response){
-            console.log('here');
+            $('#emailModal').modal('hide');
           }
       })
   }
 
-  $('#emailModal').modal('hide');
+  mixpanel.track("Email Share Sent", {
+    "sender": sender,
+    "recipients": recipients,
+    "message": text_body
+  });
 }
 
 function validateInputs(data){
@@ -148,11 +152,13 @@ function postSocial(event){
 
   if (target.attr('id') == 'twitter'){
     window.open('https://twitter.com/share?text='+title+'&url=rosterblitz.com' , 'Share a quiz on twitter', 'scrollbars=yes, width=' + d.w + ', height=' + d.h + ', top=' + d.top + ', left=' + d.left);
+    mixpanel.track("Twitter Share", {});
   }
 
   else{
     // it's teh facebook
     window.open('https://www.facebook.com/dialog/share?app_id=1600051886893474&href=www.rosterbliz.com&display=popup&redirect_uri=http://localhost:3000/auth/social','', 'scrollbars=yes, width=' + d.w + ', height=' + d.h + ', top=' + d.top + ', left=' + d.left);
+    mixpanel.track("Facebook Share", {});
   }
 
 }
@@ -197,6 +203,12 @@ function fetchTrendingQuiz(event){
     trending: true
   };
   AjaxCreateQuiz(data);
+  var url = window.location.pathname.split("/");
+  mixpanel.track("trending-quiz", {
+    "quizType": type,
+    "teamId": team_id,
+    "page": url[1]
+  });
 }
 
 function fetchRandomQuizByCollection(event){
@@ -206,6 +218,9 @@ function fetchRandomQuizByCollection(event){
     random: true
   };
   AjaxCreateQuiz(data);
+  mixpanel.track("Home Page random-quiz", {
+    "quizType": type,
+  });
 }
 
 
@@ -233,8 +248,12 @@ function fetchQuiz(event) {
         team_name: team_name,
         type: type
       };
-
       AjaxCreateQuiz(data);
+      mixpanel.track("Team dropdown create-quiz", {
+        "league": league,
+        "quizType": type,
+        "teamName": team_name
+      });
     }
 
     else{
