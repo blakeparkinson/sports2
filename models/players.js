@@ -473,6 +473,7 @@ var randImg = function(league) {
       switch (league) {
         case "mlb":
           var path = '../images/stadiums/mlb_stadiums/';
+            images[0] = "MLB-giants-stadium.jpg"
         break;          
         case "nfl":
           var path = '../images/stadiums/nfl_stadiums/';
@@ -527,7 +528,7 @@ var randImg = function(league) {
             images[6] = "NBA-knicks-stadium.jpg",
             images[7] = "NBA-heat-stadium.jpg"        
   
-      }        
+      }              
       var image = images[Math.floor(Math.random()*images.length)];
       image = path + image;
       return image;    
