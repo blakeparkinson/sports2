@@ -262,7 +262,6 @@ switch (league){
             break;
           case 'mlb': 
             json_response = JSON.parse(body);
-            appendAvatarUrl(json_response);
             players = formatMLBPlayers(json_response, team_id, api_team_id, usat_id);
             appendPlayerShortId(players.players);
             mongoInsertPlayers(league, players, team_id);
@@ -466,6 +465,7 @@ formatMLBPlayers = function(response, team_id, api_team_id, usat_id){
     if (decryptedTeamId == response.teams[i].id){
       players = response.teams[i];
       players.usat_id = usat_id;
+      appendAvatarUrl(players);
       break;
     }
   }
