@@ -410,6 +410,11 @@ var images = [
         "team_name": "Arizona Coyotes",
         "team_id": "22492",
         "usat_id": "ARI"
+      },
+      {
+        "team_name": "Edmonton Oilers",
+        "team_id": "29498",
+        "usat_id": "EDM"
       }
     ]
   },
