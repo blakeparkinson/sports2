@@ -47,7 +47,7 @@ var download = function(uri, filename, player, items, player_type, iteration, le
   });
 }
 
-var findClause = {$or: [{league: 'nba'}, {league: 'nhl'}, {league: 'mlb'}]}
+var findClause = {$or: [{league: 'nba'}, {league: 'nhl'}]}
 if (abbreviation){
   findClause = {abbreviation: abbreviation}
 }
