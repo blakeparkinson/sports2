@@ -204,11 +204,7 @@ switch (league){
           case 'nba':
             json_response = JSON.parse(body);
             // find the image from usat and insert into players array
-            for (a=0;a<Object.keys(json_response.players).length;a++){
-              var player_name = json_response.players[a].first_name.toLowerCase()+'-'+json_response.players[a].last_name.toLowerCase()
-              endpoint = '../images/headshots/'+league+'/'+player_name+'.jpg';
-              json_response.players[a].avatar_url = endpoint;
-            } 
+            appendAvatarUrl(json_response);
                 
             //for nba we need to make a 2nd api request to fetch players on the active roster
             request('https://api.sportsdatallc.org/nba-t3/teams/'+encryption.decrypt(api_team_id)+'/profile.json?api_key=' +config.nba_key, function (error, response, roster) {
@@ -252,6 +248,7 @@ switch (league){
           case 'nhl':
             json_response = JSON.parse(body);
             json_response.usat_id = abbreviationHelper(league, usat_id);
+            appendAvatarUrl(json_response);
             players = formatPlayers(json_response, team_id, json_response, league);
             appendPlayerShortId(players.players);
             mongoInsertPlayers(league, players, team_id);
@@ -265,6 +262,7 @@ switch (league){
             break;
           case 'mlb': 
             json_response = JSON.parse(body);
+            appendAvatarUrl(json_response);
             players = formatMLBPlayers(json_response, team_id, api_team_id, usat_id);
             appendPlayerShortId(players.players);
             mongoInsertPlayers(league, players, team_id);
@@ -277,6 +275,14 @@ switch (league){
         console.log('something really terrible has happened');
       }
     });
+}
+
+var appendAvatarUrl = function(playersObj){
+  for (a=0;a<Object.keys(playersObj.players).length;a++){
+    var player_name = playersObj.players[a].first_name.toLowerCase()+'-'+playersObj.players[a].last_name.toLowerCase()
+    endpoint = '../images/headshots/'+league+'/'+player_name+'.jpg';
+    playersObj.players[a].avatar_url = endpoint;
+  } 
 }
 
 
