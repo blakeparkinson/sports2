@@ -957,7 +957,7 @@ table tr th:last-child {
 }
 
 #trending-guys-back {    
-  padding: 0 2% 0 2%;
+  padding: 2% 2% 0 2%;
   border-radius: 4px;
 }
 #trending-guys-inner {
@@ -1100,6 +1100,9 @@ table tr th:last-child {
   display: inline-block;
   padding-bottom: 30px;
   width:60%;
+}
+.trending-container{
+  margin-top: 3%;
 }
 
 
