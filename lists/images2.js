@@ -399,7 +399,7 @@ var images = [
       {
         "team_name": "Los Angeles Kings",
         "team_id": "26206",
-        "usat_id": "LA"
+        "usat_id": "LAK"
       },
       {
         "team_name": "San Jose Sharks",
