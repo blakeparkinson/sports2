@@ -21,6 +21,7 @@ var download = function(uri, filename, player, items, player_type, iteration, le
   request.head(uri, function(err, res, body){
   var avatar_url = {};
   var content_type = res.headers['content-type'];
+  console.log(content_type);
   //make sure the image actually exists
   if (content_type == 'image/jpeg'){
     var team_id = items.team_id;
@@ -35,6 +36,8 @@ var download = function(uri, filename, player, items, player_type, iteration, le
     avatar_url[player_type+"."+ iteration +".avatar_url"] = '../images/headshots/untitled.jpg';
   }
 
+  console.log(avatar_url);
+
 
   db.collection('players').findAndModify({
     query: {team_id: team_id},
@@ -46,10 +49,12 @@ var download = function(uri, filename, player, items, player_type, iteration, le
     });
   });
 }
+var findClause = {};
 
-var findClause = {$or: [{league: 'nba'}, {league: 'nhl'}]}
+//var findClause = {$or: [{league: 'nhl'}]}
 if (abbreviation){
-  findClause = {abbreviation: abbreviation}
+  findClause.abbreviation = abbreviation;
+  findClause.league = 'nhl';
 }
 
 db.collection('players').find(findClause).toArray(function (err, items){
