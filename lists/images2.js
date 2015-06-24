@@ -705,7 +705,7 @@ var images = [
       },
       { "team_id": "43547", 
         "team_name": "Kansas City Royals", 
-        "usat_id": "KAN"  
+        "usat_id": "KC"  
       },
       { "team_id": "41467", 
         "team_name": "Los Angeles Angels",  
@@ -773,7 +773,7 @@ var images = [
       },
       { "team_id": "48391", 
         "team_name": "Washington Nationals", 
-        "usat_id": "WAS"  
+        "usat_id": "WSH"  
       }
     ]
   }
