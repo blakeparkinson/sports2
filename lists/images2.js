@@ -329,7 +329,7 @@ var images = [
       {
         "team_name": "Columbus Blue Jackets",
         "team_id": "27202",
-        "usat_id": "COL"
+        "usat_id": "CBJ"
       },
       {
         "team_name": "Philadelphia Flyers",
