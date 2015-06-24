@@ -479,7 +479,18 @@ var randImg = function(league) {
       switch (league) {
         case "mlb":
           var path = '../images/stadiums/mlb_stadiums/';
-            images[0] = "MLB-giants-stadium.jpg"
+            images[0] = "MLB-giants-stadium.jpg",
+            images[1] = "MLB-yankees-stadium.jpg",
+            images[2] = "MLB-angels-stadium.jpg",
+            images[3] = "MLB-astros-stadium.jpg",
+            images[4] = "MLB-athletics-stadium.jpg",
+            images[5] = "MLB-diamondbacks-stadium.jpg",
+            images[6] = "MLB-dodgers-stadium.jpg",
+            images[7] = "MLB-mariners-stadium.jpg",
+            images[8] = "MLB-padres-stadium.jpg",
+            images[9] = "MLB-rangers-stadium.jpg",
+            images[10] = "MLB-rockies-stadium.jpg",
+            images[11] = "MLB-reds-stadium.jpg"
         break;          
         case "nfl":
           var path = '../images/stadiums/nfl_stadiums/';
@@ -535,6 +546,7 @@ var randImg = function(league) {
             images[7] = "NBA-heat-stadium.jpg"        
   
       }              
+      console.log(image);
       var image = images[Math.floor(Math.random()*images.length)];
       image = path + image;
       return image;    
