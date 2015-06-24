@@ -696,8 +696,8 @@ var images = [
         "usat_id": "DET"  
       },
       { "team_id": "48127", 
-        "team_name": "Florida Marlins",  
-        "usat_id": "FLA"  
+        "team_name": "Miami Marlins",  
+        "usat_id": "MIA"  
       },
       { "team_id": "47775", 
         "team_name": "Houston Astros", 
@@ -708,7 +708,7 @@ var images = [
         "usat_id": "KAN"  
       },
       { "team_id": "41467", 
-        "team_name": "Los Angeles Angels of Anaheim",  
+        "team_name": "Los Angeles Angels",  
         "usat_id": "LAA"  
       },
       { "team_id": "46956", 
