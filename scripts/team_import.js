@@ -30,9 +30,9 @@ var league = process.argv[2];
 
 //deleting a team sample
 /*var d = {};
-d.league = 'nhl';
+d.type = 'roster';
 
-teams_model.deleteItem(d,'leaders');
+teams_model.deleteItem(d,'teams');
 return;*/
 
 //deleting a team from redis
