@@ -289,7 +289,7 @@ var images = [
       {
         "team_name": "Tampa Bay Lightning",
         "team_id": "21287",
-        "usat_id": "TB"
+        "usat_id": "TBL"
       },
       {
         "team_name": "Detroit Red Wings",
