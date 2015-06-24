@@ -284,7 +284,7 @@ var images = [
       {
         "team_name": "Montreal Canadiens",
         "team_id": "20060",
-        "usat_id": "MON"
+        "usat_id": "MTL"
       },
       {
         "team_name": "Tampa Bay Lightning",
