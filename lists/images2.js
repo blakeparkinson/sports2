@@ -404,7 +404,7 @@ var images = [
       {
         "team_name": "San Jose Sharks",
         "team_id": "27402",
-        "usat_id": "SJ"
+        "usat_id": "SJS"
       },
       {
         "team_name": "Arizona Coyotes",
