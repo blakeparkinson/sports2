@@ -588,9 +588,9 @@ var abbreviationHelper = function(league, abbreviation){
   switch (league){
     case 'nhl':
       switch (abbreviation){
-        case 'WSH':
+        /*case 'WSH':
           abbreviation = 'WAS';
-        break;
+        break;*/
         default:
         abbreviation = abbreviation;
         break;
