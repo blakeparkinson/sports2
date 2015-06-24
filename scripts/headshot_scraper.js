@@ -15,7 +15,8 @@ var year = 2014;
 var usat_id = '';
 
 //if you want to just do an individual team, then pass an command line team abbreviation argument  (i.e. node headshot_scraper.js POR for blazers)
-var abbreviation = process.argv[2];
+var abbreviation = process.argv[3];
+var desiredLeague = process.argv[2];
 
 var download = function(uri, filename, player, items, player_type, iteration, league){
   request.head(uri, function(err, res, body){
@@ -47,9 +48,13 @@ var download = function(uri, filename, player, items, player_type, iteration, le
   });
 }
 
-var findClause = {$or: [{league: 'nba'}, {league: 'nhl'}]}
+var findClause = {};
+
 if (abbreviation){
-  findClause = {abbreviation: abbreviation}
+  findClause.abbreviation = abbreviation;
+}
+if (desiredLeague){
+  findClause.league = desiredLeague;
 }
 
 db.collection('players').find(findClause).toArray(function (err, items){
