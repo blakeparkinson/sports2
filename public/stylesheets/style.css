@@ -694,8 +694,12 @@ padding-left: 3%;
 .answer-container .correct-guess{
   position: absolute;
   z-index: 5;
-  width:50%;
-  height:inherit;
+  width: 50%;
+  white-space: nowrap;
+  height: inherit;
+  padding-right: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 
