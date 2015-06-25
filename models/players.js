@@ -497,7 +497,20 @@ var randImg = function(league) {
             images[14] = "MLB-royals-stadium.jpg",
             images[15] = "MLB-tigers-stadium.jpg",
             images[16] = "MLB-twins-stadium.jpg",
-            images[17] = "MLB-whitesox-stadium.jpg"
+            images[17] = "MLB-whitesox-stadium.jpg",
+            images[18] = "MLB-marlins-stadium.jpg",
+            images[19] = "MLB-mets-stadium.jpg",
+            images[20] = "MLB-nationals-stadium.jpg",
+            images[21] = "MLB-orioles-stadium.jpg",
+            images[22] = "MLB-redsox-stadium.jpg",
+            images[23] = "MLB-bluejays-stadium.jpg",
+            images[24] = "MLB-rays-stadium.jpg",
+            images[25] = "MLB-pirates-stadium.jpg",
+            images[26] = "MLB-phillies-stadium.jpg",
+            images[27] = "MLB-brewers-stadium.jpg",
+            images[28] = "MLB-braves-stadium.jpg",
+            images[29] = "MLB-cardinals-stadium.jpg"
+
         break;          
         case "nfl":
           var path = '../images/stadiums/nfl_stadiums/';
