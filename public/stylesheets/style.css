@@ -965,7 +965,6 @@ table tr th:last-child {
   color: #000000;
 }
 .trendquiz{
-  margin-bottom: 2%;
   text-align: center;
   font-size: 34px;
 }
@@ -1053,7 +1052,7 @@ table tr th:last-child {
 
 #quiz-types .types{
   display: inline-block;
-  padding: 3% 0%;
+  padding: 20px 0;
   width: 213px;
   margin: 0 3%;
 }
@@ -1094,19 +1093,17 @@ table tr th:last-child {
 }
 #trending-quiz-contain{
   text-align: center;
+  margin-top: 30px;
 }
-#trending-quiz-contain > div{
+#trending-quiz-contain > .trenders{
   border-bottom: 1px solid rgb(178, 178, 178);
   display: inline-block;
   padding-bottom: 30px;
   width:60%;
 }
-.trending-container{
-  margin-top: 3%;
+.trendquiz{
+  margin-bottom: 20px;
 }
-
-
-
 
   /***********480********/
   @media screen and (max-width: 480px) {
@@ -1188,9 +1185,6 @@ table tr th:last-child {
     }
     .footer:not(.index){
       display:none;
-    }
-    .trendquiz{
-      margin-bottom: 20px;
     }
     #curvy-buttons{
       margin-bottom: 20px;
