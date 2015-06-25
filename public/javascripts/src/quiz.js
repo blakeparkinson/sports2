@@ -377,6 +377,10 @@ var checkForMatches = function(guess, input_field){
     }
 
     var last_name = player.last_name != undefined? player.last_name : player.full_last_name;
+    //srub any weird accents/characters
+    last_name = rb.utilities.removeDiacritics(last_name);
+    full_name = rb.utilities.removeDiacritics(full_name);
+
     //check full name and just last name, also make sure the player has not been guessed already
     if ((guess == last_name.toLowerCase().trim() || guess == full_name.toLowerCase().trim()) && !player.guessed){
       appendGreenCheck(input_field);
