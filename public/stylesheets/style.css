@@ -1243,6 +1243,15 @@ table tr th:last-child {
   .team-name{
     font-size: 28px;
   }
+  .modal-title{
+    font-size: 16px;
+  }
+  .chart-team{
+    font-size: 16px;
+  }
+  .legend-header{
+    margin-left: 0;
+  }
      
 }
 

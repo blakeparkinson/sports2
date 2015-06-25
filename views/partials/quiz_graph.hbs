@@ -9,7 +9,7 @@
       <div class="modal-body">
       <h3 class="chart-team">\{{team_name}}</h3>
       <div class="chart-container">
-        <div class="char-body-header">Here&#39s how you compare to other RosterBlitz players</div>
+        <div class="char-body-header">Here&#39s how you compare to other \{{#ifIsNotOnMobileDevice}}RosterBlitz\{{else}}RB\{{/ifIsNotOnMobileDevice}} players</div>
         <p id="chartLegend"></p>
         <canvas id="chart" width="425" height="225"></canvas>
         <div class="chart-text" style="background-image: url({{logo_url}})"></div>
