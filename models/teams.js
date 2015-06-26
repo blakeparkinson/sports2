@@ -61,6 +61,78 @@ var fetchStatDescription = function(stat, listType, league){
       case "mpg": //minutes
         description = 'Minutes per game';
         break;
+      case "eplGoals":
+        description = "Top EPL Goal Scorers";
+        break;
+      case "eplShots":
+        description = "Top EPL Shot Takers";
+        break;
+      case "eplShotsOnTarget":
+        description = "Top EPL Shots on Target";
+        break;
+      case "eplAssists":
+        description = "Top EPL Assisters";
+        break;
+      case "eplYc":
+        description = "Most EPL Yellow Cards";
+        break;
+      case "eplRc":
+        description = "Most EPL Red Cards";
+        break;
+      case "laligaGoals":
+        description = "Top La Liga Goal Scorers";
+        break;
+      case "laligaShots":
+        description = "Top La Liga Shot Takers";
+        break;
+      case "laligaShotsOnTarget":
+        description = "Top La Liga Shots on Target";
+        break;
+      case "laligaAssists":
+        description = "Top La Liga Assisters";
+        break;
+      case "laligaYc":
+        description = "Most La Liga Yellow Cards";
+        break;
+      case "laligaRc":
+        description = "Most La Liga Red Cards";
+        break;
+      case "bundGoals":
+        description = "Top Bundesliga Goal Scorers";
+        break;
+      case "bundShots":
+        description = "Top Bundesliga Shot Takers";
+        break;
+      case "bundShotsOnTarget":
+        description = "Top Bundesliga Shots on Target";
+        break;
+      case "bundAssists":
+        description = "Top Bundesliga Assisters";
+        break;
+      case "bundYc":
+        description = "Most Bundesliga Yellow Cards";
+        break;
+      case "bundRc":
+        description = "Most Bundesliga Red Cards";
+        break;
+      case "seriaAGoals":
+        description = "Top Series A Goal Scorers";
+        break;
+      case "seriaAShots":
+        description = "Top Series A Shot Takers";
+        break;
+      case "seriaAShotsOnTarget":
+        description = "Top Series A Shots on Target";
+        break;
+      case "seriaAAssists":
+        description = "Top Series Assisters";
+        break;
+      case "seriaAYc":
+        description = "Most Series A Yellow Cards";
+        break;
+      case "seriaARc":
+        description = "Most Series A Red Cards";
+        break;
       default:
         description = stat;
         break;
