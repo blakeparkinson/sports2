@@ -346,25 +346,31 @@ a {
   border-radius: 10px; 
   padding: 5px;
 }
-#align-clock {
-  text-align: center; 
+#align-clock {  
+  text-align: center;
+  font-size: 2em;
 }
-.clock{
+.clock{  
   display: inline-block;
   font-family:"Erbos Draco 1st Open NBP";
   background-color: rgb(137, 32, 32);
   color: #F4E1E1;
-  border-radius: 1px;
-  font-size: 30px;
-  padding-left: 5px;
-  padding-bottom: 2px;
+  border-radius: 1px;  
+  padding: 0 5px 2px 5px;  
+  float: right;
+  margin-top: 8px;
+  margin-right: 2%;
 }
-
+#new-team-name {  
+  color: #ffffff;  
+  margin-top: 3px;
+  display: inline-block;
+  font-size: 1.2em;  
+}
 .name-point-container{
   padding-top: 5%;
   overflow: hidden;
 }
-
 .footer {
   position: absolute; 
   bottom: 0;
@@ -432,8 +438,16 @@ ul {
 /* ====== LEFT COLUMN  ======== */
 #left-quiz-column {
   float: left;
+  width: 45%;
+  margin-top: 8%;
+  margin-left: 40px;
+}
+#right-quiz-column {
+  float: right;
   width: 50%;
-  margin-top: 5%;
+  margin-top: 8%;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 #team-container{
   text-align: center;
@@ -448,7 +462,7 @@ ul {
   border: 1.75px solid #fff;
 }
 .team-container{  
-  padding: 5% 2% 5% 2%;
+  padding: 3% 2% 3% 2%;
   background: rgba(32, 26, 26, 0.7);
   min-height: 220px;
 }
@@ -463,14 +477,6 @@ ul {
   font-size: 1.3em;
   padding: 3%;
 }
-#right-quiz-column {
-  float: right;
-  width: 50%;
-  margin-top: 5%;
-  padding-left: 5%;
-  padding-right: 5%;
-}
-
 
   /* ===== PLAYER CARD STYLING ===== */
 
@@ -1117,7 +1123,7 @@ table tr th:last-child {
     }
     .navbar-header.rb{
       padding-left: 0;
-    }
+    }    
 
     .container-iphone {
         display: block;
@@ -1167,12 +1173,19 @@ table tr th:last-child {
         width:100%;
         padding-left: 0;
         padding-right: 0;
+    }    
+    .name-point-container {
+      overflow: visible;
+    }
+    #align-clock {  
+      text-align: center;
+      font-size: 1.2em;
     }
     #left-quiz-column{
       float:none;
-      margin-top: none;
+      margin-top: 0;
       width:100%;
-
+      margin-left: 0;
     }
     #team-select {
         font-size: 38px;
