@@ -537,7 +537,6 @@ var randImg = function(league, teamName) {
             images[7] = "NBA-heat-stadium.jpg"        
   
       }              
-      console.log(image);
       var image = images[Math.floor(Math.random()*images.length)];
       image = path + image;
       return image;    
