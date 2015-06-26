@@ -6,6 +6,7 @@ var jshint = require('gulp-jshint');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
+var mocha = require('gulp-mocha');
 var minifyCss = require('gulp-minify-css');
 var runSeq = require('run-sequence');
 var del = require('del');
@@ -51,8 +52,20 @@ gulp.task('exit', function() {
     process.exit(0);
 });
 
+gulp.task('test', function () {
+  return gulp.src('test/test.js')
+    // gulp-mocha needs filepaths so you can't have any plugins before it 
+    .pipe(mocha({reporter: 'spec'})
+    .on("error", handleError));
+});
+
+function handleError(err) {
+  console.log(err.toString());
+  this.emit('end');
+}
+
 // Default Task
-gulp.task('default', ['lint', 'minify-css', 'scripts', 'watch']);
+gulp.task('default', ['lint', 'minify-css', 'scripts', 'watch', 'test']);
 gulp.task("heroku:production", function(){
-     runSeq('clean','minify-css', 'scripts', 'watch', 'exit');
+     runSeq('clean','minify-css', 'scripts', 'watch', 'test', 'exit');
 });
