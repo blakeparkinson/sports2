@@ -50,7 +50,7 @@ var returnPlayers = function (players, team_id, res, league, colors){
       remove_footer: true,
       team_name: team_name,
       clock: getTimeLimit(league),
-      background_image: randImg(league),
+      background_image: randImg(league, players.name),
       logo_url: '../images/team_logos/'+league+'/'+players.name.replace(/ +/g, "").toLowerCase()+'.png',
       quizPage: true,
       title: "RosterBlitz - Sports Trivia and Quizzes"
@@ -475,43 +475,14 @@ formatMLBPlayers = function(response, team_id, api_team_id, usat_id){
 
 }
 
-var randImg = function(league) {      
+var randImg = function(league, teamName) {              
+      var teamName = teamName.replace(/\s+/g, '-').toLowerCase();
       var images = [];      
       switch (league) {
-        case "mlb":
+        case "mlb":        
           var path = '../images/stadiums/mlb_stadiums/';
-            images[0] = "MLB-giants-stadium.jpg",
-            images[1] = "MLB-yankees-stadium.jpg",
-            images[2] = "MLB-angels-stadium.jpg",
-            images[3] = "MLB-astros-stadium.jpg",
-            images[4] = "MLB-athletics-stadium.jpg",
-            images[5] = "MLB-diamondbacks-stadium.jpg",
-            images[6] = "MLB-dodgers-stadium.jpg",
-            images[7] = "MLB-mariners-stadium.jpg",
-            images[8] = "MLB-padres-stadium.jpg",
-            images[9] = "MLB-rangers-stadium.jpg",
-            images[10] = "MLB-rockies-stadium.jpg",
-            images[11] = "MLB-reds-stadium.jpg",
-            images[12] = "MLB-cubs-stadium.jpg",
-            images[13] = "MLB-indians-stadium.jpg",
-            images[14] = "MLB-royals-stadium.jpg",
-            images[15] = "MLB-tigers-stadium.jpg",
-            images[16] = "MLB-twins-stadium.jpg",
-            images[17] = "MLB-whitesox-stadium.jpg",
-            images[18] = "MLB-marlins-stadium.jpg",
-            images[19] = "MLB-mets-stadium.jpg",
-            images[20] = "MLB-nationals-stadium.jpg",
-            images[21] = "MLB-orioles-stadium.jpg",
-            images[22] = "MLB-redsox-stadium.jpg",
-            images[23] = "MLB-bluejays-stadium.jpg",
-            images[24] = "MLB-rays-stadium.jpg",
-            images[25] = "MLB-pirates-stadium.jpg",
-            images[26] = "MLB-phillies-stadium.jpg",
-            images[27] = "MLB-brewers-stadium.jpg",
-            images[28] = "MLB-braves-stadium.jpg",
-            images[29] = "MLB-cardinals-stadium.jpg"
-
-        break;          
+          images[0] = "MLB-" + teamName + "-stadium.jpg";              
+        break;                      
         case "nfl":
           var path = '../images/stadiums/nfl_stadiums/';
             images[0] = "nfl-49ers-stadium.jpg",
