@@ -125,7 +125,7 @@ var fetchStatDescription = function(stat, listType, league){
         description = "Top Series A Shots on Target";
         break;
       case "seriaAAssists":
-        description = "Top Series Assisters";
+        description = "Top Series A Assisters";
         break;
       case "seriaAYc":
         description = "Most Series A Yellow Cards";
