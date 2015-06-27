@@ -30,7 +30,7 @@ if (supported_leagues.indexOf(league) == -1){
 // In order to loop through all categories of the league, we need to have a shell function that just loops.
 var main = function(league){
   switch (league){
-    case "nba": 
+    case "nba":
       categories = ["ppg", "rpg", "fieldGoalPercentage", "ftPercentage", "threePointPercentage", "apg", "spg", "bpg", "tpg", "fpg", "mpg"];
       break;
     case "nhl":
@@ -41,6 +41,7 @@ var main = function(league){
       break;
     case 'mlb':
       categories = ['battingAvg', 'hr', 'rbi', 'sb', 'hittingBb', 'battingK', 'slg', 'ops', 'obp', 'era', 'pitchingK', 'wins', 'whip', 'pitchingBb'];
+      break;
     case 'eu_soccer':
       categories = ['eplGoals','eplShots', 'eplShotsOnTarget', 'eplAssists', 'eplYc', 'eplRc', 'laligaGoals','laligaShots', 'laligaShotsOnTarget', 'laligaAssists', 'laligaYc', 'laligaRc', 'bundGoals','bundShots', 'bundShotsOnTarget', 'bundAssists', 'bundYc', 'bundRc', 'seriaAGoals','seriaAShots', 'seriaAShotsOnTarget', 'seriaAAssists', 'seriaAYc', 'seriaARc',];
       break;
@@ -386,7 +387,7 @@ var top_script = function(url, category, league, teamId, callback1){
             players_model.pluckPlayerFromName(player, callback, league);
           }
 
-          
+
         }, function (err) {
           if (err) { throw err; }
             var leadersList = {},
@@ -436,7 +437,7 @@ var mongoInsert = function (leadersList){
       {upsert: true, multi: false}, function (err, upserted){
         if (err){
           console.log("error inserting into mongo" + err);
-        }       
+        }
       }
     )
   })

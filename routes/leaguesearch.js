@@ -27,9 +27,10 @@ router.get('/', function(req, res) {
           goats: results.goats_lists,
         	leaders: results.leaders_lists,
           remove_footer: true,
+          special_layout: true,
           title: "RosterBlitz - Search by League"
          }
-    );  
+    );
   })
 
 });
@@ -60,14 +61,15 @@ router.get('/:league', function(req, res) {
       res.render('leaguesearch',
         { popular_teams: results.popular_lists,
           goats: results.goats_lists,
-          leaders: results.leaders_lists,          
-          background_image: imageByLeague(league),
+          leaders: results.leaders_lists,
+          background__roster_image: imageByLeague(league),
           how_works_button: true,
-          remove_footer: true,
+          special_layout: true,
           current: league,
-          title: changeTitle(league) 
+          footer_class: 'index',
+          title: changeTitle(league)
          }
-    );  
+    );
   })
 
 })
@@ -75,7 +77,7 @@ router.get('/:league', function(req, res) {
 
 var fetchLeadersLists = function(listObj, callback){
 	var data = {};
-  data.type = listObj["type"];  
+  data.type = listObj["type"];
 	if (listObj["league"]){
 		//do filtering
 		data.league = listObj["league"]
@@ -87,7 +89,7 @@ var fetchLeadersLists = function(listObj, callback){
 
 
 var fetchTeamLists = function(listObj, callback){
-  var type = listObj["type"];  
+  var type = listObj["type"];
   db.collection('quiz').aggregate(
 
   [{ "$match" : { "$and": [{ "created_at" : { "$gt" : quizCutoffDate.toISOString().slice(0, 19).replace('T', ' ') }}, {"type": type }]} //only pull quizzes in timeframe and for rosters
@@ -105,7 +107,7 @@ var fetchTeamLists = function(listObj, callback){
       "$limit": 10
     }
 
-  ], function (err, result){ 
+  ], function (err, result){
       if (result.length > 0){
         teams = [];
         for (i=0;i<Object.keys(result).length;i++){
@@ -118,13 +120,13 @@ var fetchTeamLists = function(listObj, callback){
           }
         console.log("TEAMS"+teams);
       }
-    callback(null, teams);  
-  }); 
+    callback(null, teams);
+  });
 }
 
 
 var fetchTeamListsByLeague = function(listObj, callback){
-  var type = listObj["type"];  
+  var type = listObj["type"];
   if (listObj["league"]){
     //do filtering
     var league = listObj["league"];
@@ -148,7 +150,7 @@ var fetchTeamListsByLeague = function(listObj, callback){
     }
 
   ], function (err, result){
-      teams = []; 
+      teams = [];
       if (result.length > 0){
         for (i=0;i<Object.keys(result).length;i++){
           var team = {};
@@ -161,29 +163,29 @@ var fetchTeamListsByLeague = function(listObj, callback){
         }
         console.log("TEAMS"+teams);
       }
-    callback(null, teams);  
+    callback(null, teams);
   })
 }
 
 /*
-var randImg = function() {      
-  var images = [];      
-  var path = '../images/epic_photos/';          
-              
+var randImg = function() {
+  var images = [];
+  var path = '../images/epic_photos/';
+
   images[0] = "hockey.jpg",
   images[1] = "locker_room1.jpg",
-  images[2] = "locker_room2.jpg";            
-            
+  images[2] = "locker_room2.jpg";
+
   var image = images[Math.floor(Math.random()*images.length)];
   image = path + image;
-  return image;    
+  return image;
 }
 */
 
 var imageByLeague = function(league) {
   switch(league) {
     case "nba":
-      var image = 'basketball_epic3.jpg';        
+      var image = 'basketball_epic3.jpg';
       break;
     case "nhl":
       var image = 'hockey_epic3.jpg';
@@ -196,12 +198,12 @@ var imageByLeague = function(league) {
       break;
     case "soccer":
       var image = 'soccer_epic2.jpg';
-      break;            
+      break;
     default:
       var image = 'soccer_epic2.jpg';
   }
   var path = '../images/epic_photos/';
-  var image = path + image;  
+  var image = path + image;
   return image;
 }
 

@@ -2,9 +2,9 @@
     position: relative;
     width: 75%;
     margin-left: auto;
-    margin-right: auto;    
-    margin-top:5%; 
-    overflow: hidden; 
+    margin-right: auto;
+    margin-top:5%;
+    overflow: hidden;
 }
 #league-type {
 	text-align: center;
@@ -13,43 +13,75 @@
 .all-columns {
     border: 1px solid #ffffff;
     color: white;
-    background: rgba(235, 235, 235, 0.9);
-    height: 50%;
 }
-.column-left {
-    width: 33%;
+.all-columns.roster{
+  background: rgba(66, 107, 215, 0.9);
 }
-.group-rows{
-  height: 350px;
-  overflow-y: scroll;
+.all-columns.leaders{
+    background: rgba(232, 67, 224, 0.9);
+}
+.all-columns.goats{
+  background: rgba(232, 67, 67, 0.9);
 }
 .column-center {
-    width: 34%;    
+    margin: 3% 19%;
+    border: none;
 }
-.column-right {
-    width: 33%;
+.group-rows{
+  overflow-y: scroll;
 }
+
 .league-align-center {
 	text-align: center;
 	font-size: 1.5em;
+  margin: 0 31%;
 }
 .top-list-contain .list-group .league-search-items {
   background-color: transparent;
   position: relative;
   display: block;
   padding: 10px 15px;
-  margin-bottom: -1px; 
+  margin-bottom: -1px;
   font-size: 1.1em;
+  width: 50%;
+  float: left;
+  color:white;
+  border: 1px solid #4052CB;
+}
+.top-list-contain .list-group.leaders .league-search-items{
+  border: 1px solid #DB2CF7;
+}
+.top-list-contain .list-group.goats .league-search-items{
+  border: 1px solid #FA4323;
 }
 .top-list-contain .list-group .league-search-items:hover {
   color: #fff;
-  background: rgb(22, 231, 22);    
+  background: rgb(22, 231, 22);
 }
-.all-icons {
-  max-width: 22%;
-  max-height: 22%;
-  margin: 0 auto 0 auto;
-  margin-top: 5%;
+.all-icons.white {
+  filter: brightness(0) invert(1);
+  -webkit-filter: brightness(0) invert(1);
+-moz-filter:brightness(0) invert(1);
+-o-filter: brightness(0) invert(1);
+-ms-filter: brightness(0) invert(1);
+}
+.all-icons.roster-icon{
+  max-width: 72%;
+  margin-top: 7%;
+  margin-left: 4%;
+  margin-bottom:7%;
+}
+.all-icons.black{
+  max-width: 75%;
+  margin-top: 8.9%;
+  margin-bottom: 8.9%;
+}
+.all-icons.goats-icon{
+  margin-top: 8%;
+  margin-left: -3%;
+  max-width: 72%;
+  margin-bottom: 8%;
+}
 }
 .all-icons-small {
   max-width: 12% !important;
@@ -58,9 +90,7 @@
 .text-align-center {
     text-align: center;
 }
-.top-list-contain {
-    padding-top: 10%;
-}
+
 .top-list-contain li {
     padding: 5px;
     cursor:pointer;
@@ -75,4 +105,64 @@
 .search-ls {
   width: 30%!important;
   margin: 1% 20% 0 35%;
+}
+
+.league-section{
+  text-align: center;
+  padding: 3% 2% 3% 2%;
+}
+#goats-background{
+  background-position: 100% 10%;
+  -webkit-background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+  -o-background-size: 100% 100%;
+  background-size: 100% 100%;
+  background-color: #211922;
+  margin: 0;
+  padding: 0;
+  background-image: url(../images/epic_photos/goat_herd.jpg);
+  background-attachment: fixed;
+}
+
+#leaders-background{
+  background: #eef2f6;
+}
+
+.type-head{
+  font-size: 3.2em;
+  text-shadow: 6px 6px 10px rgba(0,0,0,.6);
+  color: #fff;
+  font-weight: 400;
+}
+.type-head.leaders{
+  color: rgb(69, 62, 62);
+}
+.league-bubble{
+  width: 20%;
+  border-radius: 50%;
+  margin-left: 40%;
+}
+.goats .league-bubble{
+  background-color: rgba(232, 67, 67, 0.9);
+}
+.leaders .league-bubble{
+  background-color: rgba(232, 67, 224, 0.9);
+}
+.roster .league-bubble{
+  background-color: rgba(66, 107, 215, 0.9);
+}
+
+@media screen and (max-width: 780px) {
+  .top-list-contain .list-group .league-search-items{
+    width:100%;
+    float:none;
+  }
+
+  .league-align-center{
+    font-size: 70%;
+    margin:0;
+  }
+  .column-center{
+    margin:3% 6%;
+  }
 }
