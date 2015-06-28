@@ -36,7 +36,8 @@ router.get('/', function(req, res) {
 
 
   db.collection('quiz').findOne( { _id : quiz_id}, function(err, item){
-    team_id = item.team_id;
+    //use tehe given team_id ideally
+    team_id = tId || item.team_id;
     league = item.league;
     api_team_id = item.api_team_id;
     quiz_name = item.quiz_name;
@@ -66,7 +67,7 @@ router.get('/', function(req, res) {
       db.collection('teams').findOne( { team_id : team_id}, function (err, items){
         team_id = items.team_id;       // API team id
         usat_id = items.usat_id;
-      
+
         if (!team_id || !league){
         	//it's the short url, so let's look up by quiz id to find the other info
             db.collection('quiz').findOne({_id : quiz_id},function (err, doc){
@@ -82,7 +83,7 @@ router.get('/', function(req, res) {
     fetchQuizScores(req, team_id);
   });
 })
- 
+
 
 router.get('/results', function(req, res) {
   var quiz_id = req.query.quiz_id,
@@ -129,7 +130,7 @@ var redirectQuiz = function(item, res){
    res.end();
 }
 
-/* Takes in a sorted array that includes the historical scores and the new score. Sorted position / length = percentile. 
+/* Takes in a sorted array that includes the historical scores and the new score. Sorted position / length = percentile.
 Optimistic way of calculating. Ex scores 0,1,1,2,3 and you scored one of the 1's, you will be in the 60th percentile. */
 var calculatePercentile = function(req, score, all_scores){
   if (score == 0){
@@ -176,7 +177,7 @@ var fetchQuizScores = function(req, team_id){
             mod_scores.push(items[i].modified_score);
           }
         }
-      
+
     }
     req.session.scores = {};
     req.session.scores.all_scores = mod_scores;
@@ -202,7 +203,7 @@ var bracketQuizScores = function(req, mod_scores){
   mhighScores = 0;
   highScores = 0;
   shighScores = 0;
-  
+
   for (i=0;i<mod_scores.length;i++){
     if (mod_scores[i] == null){console.log("null score")}
     else if (mod_scores[i] < 1){lowScores++}
@@ -215,5 +216,5 @@ var bracketQuizScores = function(req, mod_scores){
   }
   req.session.scores.brackets = {low: lowScores, mlow:mlowScores , med:medScores, mhigh:mhighScores, high:highScores, shigh: shighScores};
 }
-          
+
 module.exports = router;
