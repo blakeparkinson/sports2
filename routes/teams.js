@@ -13,10 +13,10 @@ var shortId = require('shortid');
 var nodemailer = require('nodemailer');
 
 var countPlayersDocs = 26;
-var countLeadersDocs = 1;
-var countGoatsDocs = 11;
+var countLeadersDocs = 5;
+var countGoatsDocs = 5;
 
-// create reusable transporter object using SMTP transport 
+// create reusable transporter object using SMTP transport
 var transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
@@ -80,7 +80,7 @@ router.get('/quiz', function(req, res) {
         res.json('error', { error: 'unable to find a matching team' });
       }
     });
-    
+
   }
   else if (players_model.goatsLeadersArray().indexOf(type) > -1){ // leaders or goats
     db.collection('teams').findOne( {team_id: team_id}, function (err, item){
@@ -119,14 +119,14 @@ router.get('/email', function(req,res){
 
     var mailOptions = {
 
-        from: req.query.sender, // sender address 
-        to: req.query.recipients, // list of receivers 
-        subject: req.query.subject, // Subject line 
-        text: req.query.text_body, // plaintext body 
-        html: req.query.html_body// html body 
+        from: req.query.sender, // sender address
+        to: req.query.recipients, // list of receivers
+        subject: req.query.subject, // Subject line
+        text: req.query.text_body, // plaintext body
+        html: req.query.html_body// html body
     };
 
-    // send mail with defined transport object 
+    // send mail with defined transport object
     transporter.sendMail(mailOptions, function(error, info){
         if(error){
             console.log(error);
@@ -135,7 +135,6 @@ router.get('/email', function(req,res){
         }
     });
 })
-  
+
 
 module.exports = router;
-
