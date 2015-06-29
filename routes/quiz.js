@@ -84,6 +84,7 @@ router.get('/', function(req, res) {
       fetchQuizScores(req, team_id);
     }
       else {
+        //we couldn't find the quiz in mongo
         res.render('error', {
           message: "Something really terrible happened and we weren't able to create your quiz :(",
         })
