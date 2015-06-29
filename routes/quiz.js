@@ -36,54 +36,61 @@ router.get('/', function(req, res) {
 
 
   db.collection('quiz').findOne( { _id : quiz_id}, function(err, item){
-    //use tehe given team_id ideally
-    team_id = tId || item.team_id;
-    league = item.league;
-    api_team_id = item.api_team_id;
-    quiz_name = item.quiz_name;
-    type = item.type;
-    if (players_model.goatsLeadersArray().indexOf(type) > -1){ // leaders or goats
-      // pass the colors function an empty string so we get defaults
-      var colors = players_model.fetchTeamColors(league, '');
-      leaders_model.fetchLeadersLists(type, league, function(doc){
-        res.render('quiz', {
-          clock: clock,
-          roster: doc.players,
-          league: doc.league,
-          team_id: doc.team_id,
-          remove_footer: true,
-          team_name: doc.description,
-          primary_hex: colors.primary_hex,
-          secondary_hex: colors.secondary_hex,
-          type: type,
-          plainDisplay: true,
-          quizPage: true,
-          title: "RosterBlitz - Put Your Sports Knowledge to the Ultimate Test"
+    if (item != null){
+      //use tehe given team_id ideally
+      team_id = tId || item.team_id;
+      league = item.league;
+      api_team_id = item.api_team_id;
+      quiz_name = item.quiz_name;
+      type = item.type;
+      if (players_model.goatsLeadersArray().indexOf(type) > -1){ // leaders or goats
+        // pass the colors function an empty string so we get defaults
+        var colors = players_model.fetchTeamColors(league, '');
+        leaders_model.fetchLeadersLists(type, league, function(doc){
+          res.render('quiz', {
+            clock: clock,
+            roster: doc.players,
+            league: doc.league,
+            team_id: doc.team_id,
+            remove_footer: true,
+            team_name: doc.description,
+            primary_hex: colors.primary_hex,
+            secondary_hex: colors.secondary_hex,
+            type: type,
+            plainDisplay: true,
+            quizPage: true,
+            title: "RosterBlitz - Put Your Sports Knowledge to the Ultimate Test"
+          })
+        }, team_id)
+      }
+      else {
+        //it's type 'roster'
+        db.collection('teams').findOne( { team_id : team_id}, function (err, items){
+          team_id = items.team_id;       // API team id
+          usat_id = items.usat_id;
+
+          if (!team_id || !league){
+          	//it's the short url, so let's look up by quiz id to find the other info
+              db.collection('quiz').findOne({_id : quiz_id},function (err, doc){
+                  players = players_model.fetchPlayers(type, doc.api_team_id, doc.team_id, doc.league, doc.usat_id, res, players_model.intreturnPlayers, players_model.returnPlayers);
+              });
+          }
+          else{
+            players = players_model.fetchPlayers(type, api_team_id, team_id, league, usat_id, res, req, players_model.intreturnPlayers, players_model.returnPlayers);
+          }
+        });
+      }
+      // Calculate all other scores for this team in the background
+      fetchQuizScores(req, team_id);
+    }
+      else {
+        //we couldn't find the quiz in mongo
+        res.render('error', {
+          message: "Something really terrible happened and we weren't able to create your quiz :(",
         })
-      }, team_id)
-    }
-    else {
-      //it's type 'roster'
-      db.collection('teams').findOne( { team_id : team_id}, function (err, items){
-        team_id = items.team_id;       // API team id
-        usat_id = items.usat_id;
-
-        if (!team_id || !league){
-        	//it's the short url, so let's look up by quiz id to find the other info
-            db.collection('quiz').findOne({_id : quiz_id},function (err, doc){
-                players = players_model.fetchPlayers(type, doc.api_team_id, doc.team_id, doc.league, doc.usat_id, res, players_model.intreturnPlayers, players_model.returnPlayers);
-            });
-        }
-        else{
-          players = players_model.fetchPlayers(type, api_team_id, team_id, league, usat_id, res, req, players_model.intreturnPlayers, players_model.returnPlayers);
-        }
-      });
-    }
-    // Calculate all other scores for this team in the background
-    fetchQuizScores(req, team_id);
-  });
+      }
+    });
 })
-
 
 router.get('/results', function(req, res) {
   var quiz_id = req.query.quiz_id,
