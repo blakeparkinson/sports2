@@ -117,9 +117,9 @@ var getTimeLimit = function(league){
 */
 
 // Check redis first. Not there go to Mongo
-// Check the db. If it's there and has been added in the last 24 hours, use it. 
+// Check the db. If it's there and has been added in the last 24 hours, use it.
 // Otherwise, go get new data from the API and replace/add the database listing
-var fetchPlayers = function(type, api_team_id, team_id, league, usat_id, res, req, first_callback, second_callback){ 
+var fetchPlayers = function(type, api_team_id, team_id, league, usat_id, res, req, first_callback, second_callback){
   var players;
   redisClient.get(team_id, function (err, playersString) {
     if (playersString != null && !isItemExpired(JSON.parse(playersString))){
@@ -132,7 +132,7 @@ var fetchPlayers = function(type, api_team_id, team_id, league, usat_id, res, re
         redisClient.set(team_id, null);
       }
     // not in redis, go to mongo
-      if (goatsLeadersArray().indexOf(type) > -1){ 
+      if (goatsLeadersArray().indexOf(type) > -1){
         //it's a leader or goat quiz
         db.collection(type).find({team_id : team_id}).toArray(function (err, items){
           players = items;
@@ -143,7 +143,7 @@ var fetchPlayers = function(type, api_team_id, team_id, league, usat_id, res, re
       else {
         // it's a roster quiz
         db.collection('players').find({team_id : team_id}).toArray(function (err, items){
-          if (items.length > 0){ // data in Mongo  
+          if (items.length > 0){ // data in Mongo
             var item = _.first(items);
             if (isItemExpired(item)){   //data is old so call API
                players = fetchPlayersFromApi(api_team_id, team_id, league, usat_id, res, req, first_callback, second_callback)
@@ -206,7 +206,7 @@ switch (league){
             json_response = JSON.parse(body);
             // find the image from usat and insert into players array
             appendAvatarUrl(json_response);
-                
+
             //for nba we need to make a 2nd api request to fetch players on the active roster
             request('https://api.sportsdatallc.org/nba-t3/teams/'+encryption.decrypt(api_team_id)+'/profile.json?api_key=' +config.nba_key, function (error, response, roster) {
                   if (!error && response.statusCode == 200) {
@@ -236,8 +236,8 @@ switch (league){
                   else{
                     console.log(error + ' api_status_code:' + response.statusCode);
                   }
-            }) 
-            break; 
+            })
+            break;
           case 'nfl':
             json_response = JSON.parse(body);
             json_response.usat_id = abbreviationHelper(league, usat_id);
@@ -261,7 +261,7 @@ switch (league){
             mongoInsertPlayers(league, players, team_id);
             first_callback(players, team_id, res, league, second_callback)
             break;
-          case 'mlb': 
+          case 'mlb':
             json_response = JSON.parse(body);
             players = formatMLBPlayers(json_response, team_id, api_team_id, usat_id);
             appendPlayerShortId(players.players);
@@ -282,7 +282,7 @@ var appendAvatarUrl = function(playersObj){
     var player_name = playersObj.players[a].first_name.toLowerCase()+'-'+playersObj.players[a].last_name.toLowerCase()
     endpoint = '../images/headshots/'+league+'/'+player_name+'.jpg';
     playersObj.players[a].avatar_url = endpoint;
-  } 
+  }
 }
 
 
@@ -352,17 +352,17 @@ var fetchSalaries = function(response, team_id, team_info){
   for (i=0;i<salaries_list.salaries.length; i++){
     team = salaries_list.salaries[i];
     switch(team.Tm){ // salaries_list abbreviations don't always match USAT abbreviations.
-      case "PHO": 
+      case "PHO":
         team.Tm = "PHX";
         break;
-      case "CHO": 
+      case "CHO":
         team.Tm = "CHA";
         break;
-      case "BRK": 
+      case "BRK":
         team.Tm = "BKN";
         break;
-    } 
-      
+    }
+
     if (team.Tm.toLowerCase() == team_info.usat_id.toLowerCase()){
       // Once you find a team match, you need to find a player match
       player_name = team["Player"];
@@ -394,7 +394,7 @@ var formatPlayers = function(response, team_id, team_info, league){
     if (avatarLeagues.indexOf(league) > -1){
       response.players[i].avatar_url = '../images/headshots/'+league+'/'+response.players[i].full_name.replace(/\s+/g, '-').toLowerCase()+'.jpg';
     }
-    for(var key in response.players[i]){ 
+    for(var key in response.players[i]){
       var value = response.players[i][key];
       playersarray[i][key] = value;
     }
@@ -441,6 +441,7 @@ function mongoInsertPlayers(league, team_document, team_id){
 
 formatEUSoccerPlayers = function(response, usat_id){
   var roster = {};
+  var playersArray = [];
   parseString(response, function (err, result) {
     var str = result[Object.keys(result)[0]];
     roster.name = str.team[0].$.name;
@@ -450,13 +451,13 @@ formatEUSoccerPlayers = function(response, usat_id){
             var player = str.team[i].roster[j].player[k].$;
             player.full_name = player.first_name + ' ' + player.last_name;
             appendPlayerShortId(player);
-            players.push(player);
+            playersArray.push(player);
           }
         }
       }
   });
   roster.usat_id = usat_id;
-  roster.players = players;
+  roster.players = playersArray;
   return roster;
 }
 
@@ -475,14 +476,14 @@ formatMLBPlayers = function(response, team_id, api_team_id, usat_id){
 
 }
 
-var randImg = function(league, teamName) {              
+var randImg = function(league, teamName) {
       var teamName = teamName.replace(/\s+/g, '-').toLowerCase();
-      var images = [];      
+      var images = [];
       switch (league) {
-        case "mlb":        
+        case "mlb":
           var path = '../images/stadiums/mlb_stadiums/';
-          images[0] = "MLB-" + teamName + "-stadium.jpg";              
-        break;                      
+          images[0] = "MLB-" + teamName + "-stadium.jpg";
+        break;
         case "nfl":
           var path = '../images/stadiums/nfl_stadiums/';
             images[0] = "nfl-49ers-stadium.jpg",
@@ -504,8 +505,8 @@ var randImg = function(league, teamName) {
             images[3] = "nhl-thrashers-stadium.jpg",
             images[4] = "nhl-predators-stadium.jpg"
           break;
-        case "nba": 
-          var path = '../images/stadiums/nba_stadiums/';          
+        case "nba":
+          var path = '../images/stadiums/nba_stadiums/';
             images[0] = "NBA-kings-stadium.jpg",
             images[1] = "NBA-bucks-stadium.jpg",
             images[2] = "NBA-warriors-stadium.jpg",
@@ -514,19 +515,19 @@ var randImg = function(league, teamName) {
             images[5] = "NBA-rockets-stadium.jpg",
             images[6] = "NBA-knicks-stadium.jpg",
             images[7] = "NBA-heat-stadium.jpg"
-        break;          
+        break;
         case "eu_soccer":
-          var path = '../images/stadiums/eu_soccer_stadiums/';          
+          var path = '../images/stadiums/eu_soccer_stadiums/';
             images[0] = "olympiastadion-stadium.jpg",
             images[1] = "soccer-stadium4.jpg",
             images[2] = "bayernmunich-stadium.jpg",
             images[3] = "newcastle-stadium.jpg",
             images[4] = "saitama-stadium.jpg",
             images[5] = "sounders-stadium.jpg",
-            images[6] = "fcbarcelona-stadium.jpg"                                                      
+            images[6] = "fcbarcelona-stadium.jpg"
           break;
         default:
-        var path = '../images/stadiums/nba_stadiums/';          
+        var path = '../images/stadiums/nba_stadiums/';
             images[0] = "NBA-kings-stadium.jpg",
             images[1] = "NBA-bucks-stadium.jpg",
             images[2] = "NBA-warriors-stadium.jpg",
@@ -534,12 +535,12 @@ var randImg = function(league, teamName) {
             images[4] = "NBA-hornets-stadium.jpg",
             images[5] = "NBA-rockets-stadium.jpg",
             images[6] = "NBA-knicks-stadium.jpg",
-            images[7] = "NBA-heat-stadium.jpg"        
-  
-      }              
+            images[7] = "NBA-heat-stadium.jpg"
+
+      }
       var image = images[Math.floor(Math.random()*images.length)];
       image = path + image;
-      return image;    
+      return image;
     }
 
     var pluckPlayerFromName= function(player, callback, league){
@@ -560,14 +561,14 @@ var randImg = function(league, teamName) {
           //let async know it's done
           callback();
           }
-        });            
+        });
     }
 
 var emptyCategoryArray = function(){
   top_category = [];
 }
 
-    
+
 
 var insertLeaders= function (data){
     var leadersList = {};
@@ -579,7 +580,7 @@ var insertLeaders= function (data){
     leadersList.created_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
     db.open(function(err, db){
       db.collection('leaders').update({"$and" : [{league: leadersList.league},{category: leadersList.category}]},
-        {$set: leadersList}, 
+        {$set: leadersList},
         {upsert: true, multi:false}, function(err, insert){
       if (err){
         console.log("error inserting into mongo" + err);
@@ -589,7 +590,7 @@ var insertLeaders= function (data){
       }
       });
   })
-  
+
 }
 
 var abbreviationHelper = function(league, abbreviation){
@@ -606,32 +607,32 @@ var abbreviationHelper = function(league, abbreviation){
     break;
     case 'nba':
       switch (abbreviation){
-        case 'GS': 
+        case 'GS':
           abbreviation = 'GSW'
           break;
-        case 'NO': 
+        case 'NO':
           abbreviation = 'NOP'
           break;
-        case 'NY': 
+        case 'NY':
           abbreviation = 'NYK'
           break;
-        case 'SA': 
+        case 'SA':
           abbreviation = 'SAS'
           break;
-        case 'PHO': 
+        case 'PHO':
           abbreviation = 'PHX'
           break;
-        default: 
+        default:
           abbreviation = abbreviation;
       }
     case 'mlb':
       switch (abbreviation){
-        case 'CHW': 
+        case 'CHW':
           abbreviation = 'CWS'
           break;
         case 'WAS':
           abbreviation = 'WSH'
-        default: 
+        default:
           abbreviation = abbreviation;
       }
     break;
@@ -659,7 +660,7 @@ var abbreviationHelper = function(league, abbreviation){
           abbreviation = 'CEV';
         break;
       }
-  
+
   }
   return abbreviation;
 }
