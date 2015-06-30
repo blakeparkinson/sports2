@@ -36,53 +36,61 @@ router.get('/', function(req, res) {
 
 
   db.collection('quiz').findOne( { _id : quiz_id}, function(err, item){
-    team_id = item.team_id;
-    league = item.league;
-    api_team_id = item.api_team_id;
-    quiz_name = item.quiz_name;
-    type = item.type;
-    if (players_model.goatsLeadersArray().indexOf(type) > -1){ // leaders or goats
-      // pass the colors function an empty string so we get defaults
-      var colors = players_model.fetchTeamColors(league, '');
-      leaders_model.fetchLeadersLists(type, league, function(doc){
-        res.render('quiz', {
-          clock: clock,
-          roster: doc.players,
-          league: doc.league,
-          team_id: doc.team_id,
-          remove_footer: true,
-          team_name: doc.description,
-          primary_hex: colors.primary_hex,
-          secondary_hex: colors.secondary_hex,
-          type: type,
-          plainDisplay: true,
-          quizPage: true,
-          title: "RosterBlitz - Put Your Sports Knowledge to the Ultimate Test"
+    if (item != null){
+      //use tehe given team_id ideally
+      team_id = tId || item.team_id;
+      league = item.league;
+      api_team_id = item.api_team_id;
+      quiz_name = item.quiz_name;
+      type = item.type;
+      if (players_model.goatsLeadersArray().indexOf(type) > -1){ // leaders or goats
+        // pass the colors function an empty string so we get defaults
+        var colors = players_model.fetchTeamColors(league, '');
+        leaders_model.fetchLeadersLists(type, league, function(doc){
+          res.render('quiz', {
+            clock: clock,
+            roster: doc.players,
+            league: doc.league,
+            team_id: doc.team_id,
+            remove_footer: true,
+            team_name: doc.description,
+            primary_hex: colors.primary_hex,
+            secondary_hex: colors.secondary_hex,
+            type: type,
+            plainDisplay: true,
+            quizPage: true,
+            title: "RosterBlitz - Put Your Sports Knowledge to the Ultimate Test"
+          })
+        }, team_id)
+      }
+      else {
+        //it's type 'roster'
+        db.collection('teams').findOne( { team_id : team_id}, function (err, items){
+          team_id = items.team_id;       // API team id
+          usat_id = items.usat_id;
+
+          if (!team_id || !league){
+          	//it's the short url, so let's look up by quiz id to find the other info
+              db.collection('quiz').findOne({_id : quiz_id},function (err, doc){
+                  players = players_model.fetchPlayers(type, doc.api_team_id, doc.team_id, doc.league, doc.usat_id, res, players_model.intreturnPlayers, players_model.returnPlayers);
+              });
+          }
+          else{
+            players = players_model.fetchPlayers(type, api_team_id, team_id, league, usat_id, res, req, players_model.intreturnPlayers, players_model.returnPlayers);
+          }
+        });
+      }
+      // Calculate all other scores for this team in the background
+      fetchQuizScores(req, team_id);
+    }
+      else {
+        //we couldn't find the quiz in mongo
+        res.render('error', {
+          message: "Something really terrible happened and we weren't able to create your quiz :(",
         })
-      }, team_id)
-    }
-    else {
-      //it's type 'roster'
-      db.collection('teams').findOne( { team_id : team_id}, function (err, items){
-        team_id = items.team_id;       // API team id
-        usat_id = items.usat_id;
-      
-        if (!team_id || !league){
-        	//it's the short url, so let's look up by quiz id to find the other info
-            db.collection('quiz').findOne({_id : quiz_id},function (err, doc){
-                players = players_model.fetchPlayers(type, doc.api_team_id, doc.team_id, doc.league, doc.usat_id, res, players_model.intreturnPlayers, players_model.returnPlayers);
-            });
-        }
-        else{
-          players = players_model.fetchPlayers(type, api_team_id, team_id, league, usat_id, res, req, players_model.intreturnPlayers, players_model.returnPlayers);
-        }
-      });
-    }
-    // Calculate all other scores for this team in the background
-    fetchQuizScores(req, team_id);
-  });
+      }
+    });
 })
- 
 
 router.get('/results', function(req, res) {
   var quiz_id = req.query.quiz_id,
@@ -129,7 +137,7 @@ var redirectQuiz = function(item, res){
    res.end();
 }
 
-/* Takes in a sorted array that includes the historical scores and the new score. Sorted position / length = percentile. 
+/* Takes in a sorted array that includes the historical scores and the new score. Sorted position / length = percentile.
 Optimistic way of calculating. Ex scores 0,1,1,2,3 and you scored one of the 1's, you will be in the 60th percentile. */
 var calculatePercentile = function(req, score, all_scores){
   if (score == 0){
@@ -176,7 +184,7 @@ var fetchQuizScores = function(req, team_id){
             mod_scores.push(items[i].modified_score);
           }
         }
-      
+
     }
     req.session.scores = {};
     req.session.scores.all_scores = mod_scores;
@@ -202,7 +210,7 @@ var bracketQuizScores = function(req, mod_scores){
   mhighScores = 0;
   highScores = 0;
   shighScores = 0;
-  
+
   for (i=0;i<mod_scores.length;i++){
     if (mod_scores[i] == null){console.log("null score")}
     else if (mod_scores[i] < 1){lowScores++}
@@ -215,5 +223,5 @@ var bracketQuizScores = function(req, mod_scores){
   }
   req.session.scores.brackets = {low: lowScores, mlow:mlowScores , med:medScores, mhigh:mhighScores, high:highScores, shigh: shighScores};
 }
-          
+
 module.exports = router;
