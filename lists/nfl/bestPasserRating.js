@@ -5,6 +5,7 @@ var bestPasserRating = [
   "keywords": "nfl football best passer rating passing quarterback",
   "category": "bestPasserRating",
   "description": "Best Passer Ratings in NFL History",
+  "team_id": "60201",
   "players": [
     {
         "player_id": "1",

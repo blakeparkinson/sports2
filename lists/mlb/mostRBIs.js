@@ -5,6 +5,7 @@ var mostRBIs = [
   "keywords": "mlb most runs batted in RBI baseball hitting hits",
   "category": "mostRBIs",
   "description": "Most RBIs in MLB History",
+   "team_id": "60004",
   "players": [
     {
         "player_id": "1",

@@ -5,6 +5,7 @@ var mostHits = [
   "keywords": "mlb hitter bat hits baseball",
   "category": "mostHits",
   "description": "Most Hits in MLB History",
+  "team_id": "60002",
   "players": [
     {
         "player_id": "1",

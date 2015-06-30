@@ -5,6 +5,7 @@ var bestBattingAverage = [
   "keywords": "mlb best batting average baseball hitting hits",
   "category": "bestBattingAverage",
   "description": "Best Career Batting Averages in MLB History",
+  "team_id": "60001",
   "players": [
     {
         "player_id": "1",

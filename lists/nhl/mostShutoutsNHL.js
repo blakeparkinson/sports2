@@ -5,6 +5,7 @@ var mostShutoutsNHL = [
   "keywords": "nhl shutouts goalie keeper hockey",
   "category": "mostShutoutsNHL",
   "description": "Most Shutouts in NHL History",
+  "team_id": "60305",
   "players": [
     {
         "player_id": "1",

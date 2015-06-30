@@ -5,6 +5,7 @@ var fieldGoalPercentage = [
   "category": "topFieldGoalnba",
   "keywords": "top field goal percentage nba shooting scoring",
   "description": "Highest Field Goal Percentage All Time",
+  "team_id": "60103",
   "players": [
   {
     "player_id": "1",

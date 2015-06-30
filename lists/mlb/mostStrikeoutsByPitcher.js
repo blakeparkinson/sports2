@@ -5,6 +5,7 @@ var mostStrikeoutsByPitcher = [
   "keywords": "mlb most strikeouts pitcher pitching perfect",
   "category": "mostStrikeoutsByPitcher",
   "description": "Most Strikeouts by Pitcher in MLB History",
+  "team_id": "60008",
   "players": [
     {
         "player_id": "1",

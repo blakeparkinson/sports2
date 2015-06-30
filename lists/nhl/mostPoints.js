@@ -5,6 +5,7 @@ var mostPoints = [
   "keywords": "nhl points points hockey",
   "category": "mostPoints",
   "description": "Most Points in NHL History",
+  "team_id": "60304",
   "players": [
     {
         "player_id": "1",

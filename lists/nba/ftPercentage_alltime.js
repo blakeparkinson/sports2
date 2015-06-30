@@ -5,6 +5,7 @@ var ftPercentage = [
   "category": "topFreeThrownba",
   "keywords": "top free throw freethrow percentage nba shooting scoring",
   "description": "Highest Free Throw Percentage All Time",
+  "team_id": "60104",
   "players": [
   {
     "player_id": "1",
