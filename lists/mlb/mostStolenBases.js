@@ -5,6 +5,7 @@ var mostStolenBases = [
   "keywords": "mlb stolen bases stealing baseball",
   "category": "mostStolenBases",
   "description": "Most Stolen Bases in MLB History",
+  "team_id": "60007",
   "players": [
     {
         "player_id": "1",

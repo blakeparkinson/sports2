@@ -5,6 +5,7 @@ var mostReceivingTDs = [
   "keywords": "nfl football most receiving touchdowns TD receiver",
   "category": "mostReceivingTDs",
   "description": "Most Receiving Touchdowns in NFL History",
+  "team_id": "60204",
   "players": [
     {
         "player_id": "1",

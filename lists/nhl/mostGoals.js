@@ -5,6 +5,7 @@ var mostGoals = [
   "keywords": "nhl goals points hockey",
   "category": "mostGoals",
   "description": "Most Goals in NHL History",
+  "team_id": "60303",
   "players": [
     {
         "player_id": "1",

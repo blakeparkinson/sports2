@@ -5,6 +5,7 @@
   "category": "topSPGnba",
   "keywords": "top steals defense",
   "description": "Most Steals per Game All Time",
+  "team_id": "60107",
   "players":  [
     {
       "player_id":"1",

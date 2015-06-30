@@ -5,6 +5,7 @@ var mostRushingYards = [
   "keywords": "nfl football most rushing yards running back",
   "category": "mostRushingYards",
   "description": "Most Rushing Yards in NFL History",
+  "team_id": "60207",
   "players": [
     {
         "player_id": "1",

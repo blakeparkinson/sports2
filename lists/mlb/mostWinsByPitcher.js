@@ -5,6 +5,7 @@ var mostWinsByPitcher = [
   "keywords": "mlb most wins pitcher pitching perfect",
   "category": "mostWinsByPitcher",
   "description": "Most Wins by Pitcher in MLB History",
+  "team_id": "60009",
   "players": [
     {
         "player_id": "1",

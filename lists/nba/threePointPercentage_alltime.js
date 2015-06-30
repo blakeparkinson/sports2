@@ -4,6 +4,7 @@ var threePointPercentage = [
   "category": "topThreePointnba",
   "keywords": "top three point threepoint shooting scoring",
   "description": "Highest Three Point Percentage All Time",
+  "team_id": "60108",
   "players": [
   {
     "player_id":"1",

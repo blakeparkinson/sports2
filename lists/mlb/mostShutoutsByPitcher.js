@@ -5,6 +5,7 @@ var mostShutoutsByPitcher = [
   "keywords": "mlb most shutouts scoreless pitcher pitching perfect",
   "category": "mostShutoutsByPitcher",
   "description": "Most Shutouts by Pitcher in MLB History",
+  "team_id": "60006",
   "players": [
     {
         "player_id": "1",

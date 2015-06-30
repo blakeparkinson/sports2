@@ -5,6 +5,7 @@
   "keywords": "top ppg nba scoring points",
   "category": "topPPGnba",
   "description": "Most Points per Game All Time",
+  "team_id": "60105",
   "players": [
     {
         "player_id": "1",

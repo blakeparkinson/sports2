@@ -5,6 +5,7 @@ var mostRushingTDs = [
   "keywords": "nfl football most rushing running touchdowns TD running back",
   "category": "mostRushingTDs",
   "description": "Most Rushing Touchdowns in NFL History",
+  "team_id": "60206",
   "players": [
     {
         "player_id": "1",

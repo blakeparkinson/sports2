@@ -5,6 +5,7 @@ var highestSavePercentage = [
   "keywords": "nhl save shutout goalie keeper hockey",
   "category": "highestSavePercentage",
   "description": "Highest Save Percentage in NHL History",
+  "team_id": "60301",
   "players": [
     {
         "player_id": "1",

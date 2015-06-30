@@ -5,6 +5,7 @@ var mostReceivingYards = [
   "keywords": "nfl football most receiving yards receiver",
   "category": "mostReceivingYards",
   "description": "Most Receiving Yards in NFL History",
+  "team_id": "60205",
   "players": [
     {
         "player_id": "1",
