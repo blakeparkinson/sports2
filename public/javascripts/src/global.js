@@ -2,7 +2,14 @@
 // DOM Ready =============================================================
 $(document).ready(function() {
 
-    // Populate the user table on initial page load    
+  $('#sidebar').affix({
+      offset: {
+        top: $('header').height()
+      }
+});
+
+
+    // Populate the user table on initial page load
     $('body').on('click', '[data-action="pick-team"], .quiz-btn', fetchQuiz);
     $('body').on('click', '.create-quiz', fetchTrendingQuiz);
     $('body').on('click', '.random-quiz', fetchRandomQuizByCollection);
@@ -25,14 +32,14 @@ $(document).ready(function() {
     $('body').on('hidden.bs.modal', '.modal', clearModal)
 
     $('body').on('click', '.email-img', appendMessage);
-    
-    $(document).keypress(function(event){ 
+
+    $(document).keypress(function(event){
       var keycode = (event.keyCode ? event.keyCode : event.which);
       if(keycode == '13'){
          $("#take-quiz-button").trigger('click');
-      }     
+      }
     });
-    
+
 
 });
 
@@ -53,7 +60,7 @@ function clearModal(){
 function appendMessage(event){
   if (typeof teamId != 'undefined' && typeof team_name != 'undefined'){
     var message = 'Try to beat my score of ' +correct+' on this ' + team_name + ' quiz: https://www.rosterbliz.com?team_id=Qknb0gNGL1x';
-  } 
+  }
   else{
     var message = 'Thought you might enjoy some sports quizzes at rosterbliz.com.';
   }
@@ -239,12 +246,12 @@ function fetchQuiz(event) {
           }
           else{
             var team_name = team.data('team');
-          }     
+          }
 
       var data = {
-        api_team_id: api_team_id, 
-        league: league, 
-        team_id: team_id, 
+        api_team_id: api_team_id,
+        league: league,
+        team_id: team_id,
         team_name: team_name,
         type: type
       };
@@ -312,9 +319,9 @@ function compare(a,b) {
   return 0;
 }
 
-function validateEmail(email) { 
+function validateEmail(email) {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
-} 
+}
 
 $('#copyright-date').text( (new Date).getFullYear() );

@@ -1,3 +1,4 @@
+<body data-spy="scroll" data-target="#scroll">
 <div id="league-background" style="background-image: url({{background__roster_image}});">
   <div class="section league-roster">
     <nav class="navbar navbar-default blitz" role="navigation">
@@ -19,8 +20,18 @@
         </ul>
     </div>
     </nav>
-    <div class="league-section roster">
+    <div class="col-md-3 league-sidebar" role="complementary">
+    <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm rb-green" id="scroll" data-spy="affix" data-offset-top="150">
+    <ul class="nav bs-docs-sidenav">
+        <li class=""><a class="ls-tag" href="#rosters-sp">Rosters</a></li>
+        <li class=""><a class="ls-tag" href="#leaders-sp">Leaders</a></li>
+        <li class=""><a class="ls-tag" href="#goats-sp">Goats</a></li>
+    </ul>
+  </nav>
+ </div>
+    <div class="league-section roster" id="rosters-sp">
       <div class="league-align-center" data-toggle="modal" data-trigger="click" data-target="#myModal">
+        <a name="rosters-sp"></a>
           <div class="league-bubble"><span class="all-icons roster-icon white" id="rosters-league-page" data-toggle="popover" data-container="body" data-placement="top" title="Team roster quizzes" data-content="See if you can name all the players on a specific team" data-trigger="hover">
           </span></div>
         <span class="type-head">Roster Quizzes</span>
@@ -39,8 +50,9 @@
   </div>
 </div>
 <div id="leaders-background">
-  <div class="league-section leaders">
+  <div class="league-section leaders" id="leaders-sp">
     <div class="league-align-center" data-toggle="modal" data-trigger="click" data-target="#myModal">
+      <a name="leaders-sp"></a>
       <div class="league-bubble"><span class="all-icons season-leaders-icon black" id="rosters-league-page" data-toggle="popover" data-container="body" data-placement="top" title="Team roster quizzes" data-content="See if you can name all the players on a specific team" data-trigger="hover">
       </span></div>
       <span class="type-head leaders">Leaders Quizzes</span>
@@ -58,8 +70,9 @@
   </div>
 </div>
 <div id="goats-background">
-  <div class="league-section goats">
+  <div class="league-section goats" id="goats-sp">
     <div class="league-align-center" data-toggle="modal" data-trigger="click" data-target="#myModal">
+      <a name="goats-sp"></a>
       <div class="league-bubble"><span class="all-icons goats-icon white" id="rosters-league-page" data-toggle="popover" data-container="body" data-placement="top" title="Team roster quizzes" data-content="See if you can name all the players on a specific team" data-trigger="hover">
       </span></div>
       <span class="type-head goats">Goats Quizzes</span>
@@ -76,6 +89,8 @@
     </div>
   </div>
 </div>
+</body>
+
   <input id="select2" class="search-ls hidden" type="hidden"/>
 
 <script type='text/javascript'>
