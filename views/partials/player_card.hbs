@@ -21,6 +21,10 @@
                 <td id="player-card-team">\{{team_name}}</td>
               </tr>
             </table>
+            {{#compare league 'mlb'}}    
+              <div>Bats: \{{baseball_hand bat_hand}} <span style="padding-left: 10px">Throws: \{{baseball_hand throw_hand}} </span> </div>  
+            {{/compare}}  
+            
             <div class="subheader">Season stats</div>
             
         {{#compare league 'nhl'}}    
