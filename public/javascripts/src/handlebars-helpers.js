@@ -163,3 +163,42 @@ Handlebars.registerHelper('ifIsNotOnMobileDevice', function(options){
   }
 })
 
+Handlebars.registerHelper('baseball_hand', function(hand){
+  if (arguments.length < 1) {
+        throw new Error("Handlerbars Helper 'add_together' needs 2 parameters");
+    }
+  switch(hand) {
+    case "R":
+      return "Right";
+      break;
+    case "L":
+      return "Left";
+      break;
+    case "B":
+      return "Switch";
+      break;
+    default:
+      return "Not available";
+  }
+});
+
+Handlebars.registerHelper('years_in_league', function(proDebut){
+  if (arguments.length < 1) {
+        throw new Error("Handlerbars Helper 'add_together' needs 2 parameters");
+    }
+  var thisYear = new Date().getFullYear()  
+  var debutYear = proDebut.slice(0,4);  
+  var yearCount = (thisYear - parseInt(debutYear));
+  return yearCount;
+});
+
+Handlebars.registerHelper('college_check', function(college){
+  if (arguments.length < 1) {
+        throw new Error("Handlerbars Helper 'add_together' needs 2 parameters");
+    }
+  if (college != undefined) {
+    return college;
+  } else {
+    return "Not available";
+  }
+});

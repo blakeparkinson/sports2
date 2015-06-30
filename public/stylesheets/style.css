@@ -1115,10 +1115,6 @@ table tr th:last-child {
   margin-bottom: 20px;
 }
 
-.league-section{
-  text-align: center;
-  padding: 6% 2% 18% 2%;
-}
 
   /***********480********/
   @media screen and (max-width: 480px) {
