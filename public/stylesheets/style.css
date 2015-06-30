@@ -577,7 +577,7 @@ padding-left: 3%;
   background: #931207;
 }
 #other-card-info {
-  padding-bottom: 3%;
+  padding-bottom: 7%;
   font-size: 1.3em;
 }
 #other-card-info-nhl {
@@ -586,7 +586,7 @@ padding-left: 3%;
 }
 #other-card-info-left {
   float: left;
-  padding-right: 30%;
+  padding-right: 18%;
 }
 
 /* ======= END PLAYER CARD  ========= */
