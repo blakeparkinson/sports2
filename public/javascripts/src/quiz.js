@@ -5,6 +5,7 @@ var roster,
     team_container = $('.team-container'),
     answer_container = $('.answer-container-contain');
 
+console.log(roster);
 //CHART COLORS
 
 var shighHex = '#C56363',

@@ -1,4 +1,3 @@
-<div>Bats: <span>Throws: </span> </div>
 <table id="stats-table" class="player-card-table">
   <tr>
     <th style="background-color: {{primary_hex}}">AVG</th>
@@ -12,8 +11,7 @@
     <td id="apg">\{{average.assists}}</td>
     <td id="rpg">\{{average.rebounds}}</td>
     <td id="fg-percent">\{{percentageCalc average.field_goals_att average.field_goals_made}}</td>
-    <td id="ft-percent">\{{percentageCalc average.free_throws_att average.free_throws_made}}</td>
-    <td id="threepoint-percent">\{{percentageCalc average.three_points_att average.three_points_made}}</td>
+    <td id="ft-percent">\{{percentageCalc average.free_throws_att average.free_throws_made}}</td>    
   </tr>
 </table>
           </div>
@@ -24,14 +22,13 @@
         <br />              
         <div id="other-card-info">
           <div id="other-card-info-left">
-            <div id="years-in-league">Years in League: \{{experience}}</div>
-            <div id="college">College: \{{college}}</div>
-            <div id="salary">Salary: \{{abridgeSalary salary}}</div>
+            <div id="years-in-league">Years in League: \{{years_in_league pro_debut}}</div>
+            <div id="college">College: \{{college_check college}}</div>
+            <div id="salary">Birthplace: \{{birthcountry}}</div>
           </div>
           <div id="other-card-info-right">  
             <div id="height">Height: \{{format_height height}} </div>
-            <div id="weight">Weight: \{{weight}}</div>
-            <div id="salary-rank">Salary rank on team: </div>
+            <div id="weight">Weight: \{{weight}}</div>            
           </div>           
         </div>
       </div>
