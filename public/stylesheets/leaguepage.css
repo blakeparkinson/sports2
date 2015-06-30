@@ -58,6 +58,16 @@
   color: #fff;
   background: rgb(22, 231, 22);
 }
+
+.top-list-contain .list-group.goats .league-search-items:hover{
+  background: rgb(209, 16, 16);
+}
+.top-list-contain .list-group.roster .league-search-items:hover{
+  background: rgb(35, 58, 205)
+}
+.top-list-contain .list-group.leaders .league-search-items:hover{
+  background: rgb(201, 53, 227);
+}
 .all-icons.white {
   filter: brightness(0) invert(1);
   -webkit-filter: brightness(0) invert(1);
