@@ -132,55 +132,16 @@ var fetchTeamListsByLeague = function(listObj, callback){
     var league = listObj["league"];
   }
 
-	db.collection('quiz').aggregate(
-    [{ "$match" : {"$and" : [{ "created_at" : { "$gt" : quizCutoffDate.toISOString().slice(0, 19).replace('T', ' ') }}, {"league" : league}, {"type" : type} ] }
-    },
-  { "$group": {
-      "_id": {
-        "team_id": "$team_id",
-        "league": "$league",
-        "quiz_name": "$quiz_name",
-        "type": "$type"
-      },
-      "quizCount": { "$sum": 1}
-    }}, {
-      "$sort": {"quizCount": -1}
-    }, {
-      "$limit": 10
-    }
+	db.collection('teams').find({$and: [{"league" : league}, {"type" : type}]}).toArray(function (err, items){
+    var teamArray = _.map(items,function(team){
+      team.team_name = team.market + ' ' + team.name;
+      return team;
+    })
+    callback(null,items);
 
-  ], function (err, result){
-      teams = [];
-      if (result.length > 0){
-        for (i=0;i<Object.keys(result).length;i++){
-          var team = {};
-          team.team_id = result[i]._id.team_id;
-          team.league = result[i]._id.league;
-          team.team_name = result[i]._id.quiz_name;
-          team.quizCount = result[i].quizCount;
-          team.type = result[i]._id.type;
-          teams.push(team);
-        }
-        console.log("TEAMS"+teams);
-      }
-    callback(null, teams);
   })
 }
 
-/*
-var randImg = function() {
-  var images = [];
-  var path = '../images/epic_photos/';
-
-  images[0] = "hockey.jpg",
-  images[1] = "locker_room1.jpg",
-  images[2] = "locker_room2.jpg";
-
-  var image = images[Math.floor(Math.random()*images.length)];
-  image = path + image;
-  return image;
-}
-*/
 
 var imageByLeague = function(league) {
   switch(league) {
