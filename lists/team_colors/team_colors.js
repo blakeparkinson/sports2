@@ -33,7 +33,7 @@ var team_colors = [
         "name": "Nets",
         "primary_hex": "#000000",
         "secondary_hex": "#FFFFFF"
-      },      
+      },
       {
         "team_id": "mkFBD-NiF",
         "team_name": "Chicago Bulls",
@@ -243,7 +243,7 @@ var team_colors = [
         "secondary_hex": "#002244"
       }
     ]
-   }, 
+   },
     {
     "league": "nhl",
     "teams": [
@@ -576,421 +576,422 @@ var team_colors = [
         "type": "roster",
         "primary_hex": "#E03A3E",
         "secondary_hex": "#000000"
-      }             
-    ]           
+      }
+    ]
   },
   {
     "league": "mlb",
-    "teams": "teams": [
-      { "team_id": "47962", 
-        "team_name": "Arizona Diamondbacks", 
+    "teams": [
+      { "team_id": "47962",
+        "team_name": "Arizona Diamondbacks",
         "usat_id": "ARI",
         "type": "roster",
         "primary_hex": "#A71930",
-        "secondary_hex": "#DBCEAC"  
+        "secondary_hex": "#DBCEAC"
       },
-      { "team_id": "42040", 
-        "team_name": "Atlanta Braves", 
+      { "team_id": "42040",
+        "team_name": "Atlanta Braves",
         "usat_id": "ATL",
         "type": "roster",
         "primary_hex": "#002F5F",
-        "secondary_hex": "#B71234"  
+        "secondary_hex": "#B71234"
       },
-      { "team_id": "46247", 
-        "team_name": "Baltimore Orioles",  
+      { "team_id": "46247",
+        "team_name": "Baltimore Orioles",
         "usat_id": "BAL",
         "type": "roster",
         "primary_hex": "#ED4C09",
-        "secondary_hex": "#000000"  
+        "secondary_hex": "#000000"
       },
-      { "team_id": "41990", 
-        "team_name": "Boston Red Sox", 
+      { "team_id": "41990",
+        "team_name": "Boston Red Sox",
         "usat_id": "BOS",
         "type": "roster",
         "primary_hex": "#C60C30",
-        "secondary_hex": "#002244"  
+        "secondary_hex": "#002244"
       },
-      { "team_id": "45854", 
-        "team_name": "Chicago Cubs", 
+      { "team_id": "45854",
+        "team_name": "Chicago Cubs",
           "usat_id": "CHC",
         "type": "roster",
         "primary_hex": "#003279",
         "secondary_hex": "#CC0033"
       },
-      { "team_id": "43696", 
-        "team_name": "Chicago White Sox",  
+      { "team_id": "43696",
+        "team_name": "Chicago White Sox",
         "usat_id": "CWS",
         "type": "roster",
         "primary_hex": "#000000",
-        "secondary_hex": "#C0C0C0"  
+        "secondary_hex": "#C0C0C0"
       },
-      { "team_id": "47509", 
-        "team_name": "Cincinnati Reds",  
+      { "team_id": "47509",
+        "team_name": "Cincinnati Reds",
         "usat_id": "CIN",
         "type": "roster",
         "primary_hex": "#C6011F",
-        "secondary_hex": "#000000"  
+        "secondary_hex": "#000000"
       },
-      { "team_id": "44628", 
-        "team_name": "Cleveland Indians",  
+      { "team_id": "44628",
+        "team_name": "Cleveland Indians",
         "usat_id": "CLE",
         "type": "roster",
         "primary_hex": "#003366",
-        "secondary_hex": "#D30335"  
+        "secondary_hex": "#D30335"
       },
-      { "team_id": "40769", 
-        "team_name": "Colorado Rockies", 
+      { "team_id": "40769",
+        "team_name": "Colorado Rockies",
         "usat_id": "COL",
         "type": "roster",
         "primary_hex": "#333366",
-        "secondary_hex": "#C0C0C0"  
+        "secondary_hex": "#C0C0C0"
       },
-      { "team_id": "49236", 
-        "team_name": "Detroit Tigers", 
+      { "team_id": "49236",
+        "team_name": "Detroit Tigers",
         "usat_id": "DET",
         "type": "roster",
         "primary_hex": "#001742",
-        "secondary_hex": "#DE4406"  
+        "secondary_hex": "#DE4406"
       },
-      { "team_id": "48127", 
-        "team_name": "Miami Marlins",  
+      { "team_id": "48127",
+        "team_name": "Miami Marlins",
         "usat_id": "MIA",
         "type": "roster",
         "primary_hex": "#F9423A",
-        "secondary_hex": "#0077C8"  
+        "secondary_hex": "#0077C8"
       },
-      { "team_id": "47775", 
-        "team_name": "Houston Astros", 
+      { "team_id": "47775",
+        "team_name": "Houston Astros",
         "usat_id": "HOU",
         "type": "roster",
         "primary_hex": "#072854",
-        "secondary_hex": "#FF7F00"  
+        "secondary_hex": "#FF7F00"
       },
-      { "team_id": "43547", 
-        "team_name": "Kansas City Royals", 
+      { "team_id": "43547",
+        "team_name": "Kansas City Royals",
         "usat_id": "KC",
         "type": "roster",
         "primary_hex": "#15317E",
-        "secondary_hex": "#74B4FA"  
+        "secondary_hex": "#74B4FA"
       },
-      { "team_id": "41467", 
-        "team_name": "Los Angeles Angels",  
+      { "team_id": "41467",
+        "team_name": "Los Angeles Angels",
         "usat_id": "LAA",
         "type": "roster",
         "primary_hex": "#74B4FA",
-        "secondary_hex": "#002244"  
+        "secondary_hex": "#002244"
       },
-      { "team_id": "46956", 
-        "team_name": "Los Angeles Dodgers",  
+      { "team_id": "46956",
+        "team_name": "Los Angeles Dodgers",
         "usat_id": "LAD",
         "type": "roster",
         "primary_hex": "#083C6B",
-        "secondary_hex": "#000000"  
+        "secondary_hex": "#000000"
       },
-      { "team_id": "48233", 
-        "team_name": "Milwaukee Brewers",  
+      { "team_id": "48233",
+        "team_name": "Milwaukee Brewers",
         "usat_id": "MIL",
         "type": "roster",
         "primary_hex": "#182B49",
-        "secondary_hex": "#92754C"  
+        "secondary_hex": "#92754C"
       },
-      { "team_id": "49499", 
-        "team_name": "Minnesota Twins",  
+      { "team_id": "49499",
+        "team_name": "Minnesota Twins",
         "usat_id": "MIN",
         "type": "roster",
         "primary_hex": "#072754",
-        "secondary_hex": "#C6011F"  
+        "secondary_hex": "#C6011F"
       },
-      { "team_id": "47095", 
-        "team_name": "New York Mets",  
+      { "team_id": "47095",
+        "team_name": "New York Mets",
         "usat_id": "NYM",
         "type": "roster",
         "primary_hex": "#002C77",
-        "secondary_hex": "#FB4F14"  
+        "secondary_hex": "#FB4F14"
       },
-      { "team_id": "45441", 
-        "team_name": "New York Yankees", 
+      { "team_id": "45441",
+        "team_name": "New York Yankees",
         "usat_id": "NYY",
         "type": "roster",
         "primary_hex": "#1C2841",
-        "secondary_hex": "#808080"  
+        "secondary_hex": "#808080"
       },
-      { "team_id": "44540", 
-        "team_name": "Oakland Athletics",  
+      { "team_id": "44540",
+        "team_name": "Oakland Athletics",
         "usat_id": "OAK",
         "type": "roster",
         "primary_hex": "#003831",
-        "secondary_hex": "#FFD800"  
+        "secondary_hex": "#FFD800"
       },
-      { "team_id": "48612", 
-        "team_name": "Philadelphia Phillies",  
+      { "team_id": "48612",
+        "team_name": "Philadelphia Phillies",
         "usat_id": "PHI",
         "type": "roster",
         "primary_hex": "#BA0C2F",
-        "secondary_hex": "#003087"  
+        "secondary_hex": "#003087"
       },
-      { "team_id": "40131", 
-        "team_name": "Pittsburgh Pirates", 
+      { "team_id": "40131",
+        "team_name": "Pittsburgh Pirates",
         "usat_id": "PIT",
         "type": "roster",
         "primary_hex": "#FDB829",
-        "secondary_hex": "#000000"  
+        "secondary_hex": "#000000"
       },
-      { "team_id": "47951", 
-        "team_name": "San Diego Padres", 
+      { "team_id": "47951",
+        "team_name": "San Diego Padres",
         "usat_id": "SD",
         "type": "roster",
         "primary_hex": "#002147",
-        "secondary_hex": "#B4A76C" 
+        "secondary_hex": "#B4A76C"
       },
-      { "team_id": "49444", 
-        "team_name": "Seattle Mariners", 
+      { "team_id": "49444",
+        "team_name": "Seattle Mariners",
         "usat_id": "SEA",
         "type": "roster",
         "primary_hex": "#005C5C",
-        "secondary_hex": "#0C2C56"  
+        "secondary_hex": "#0C2C56"
       },
-      { "team_id": "49681", 
-        "team_name": "San Francisco Giants", 
+      { "team_id": "49681",
+        "team_name": "San Francisco Giants",
         "usat_id": "SF",
         "type": "roster",
         "primary_hex": "#F2552C",
-        "secondary_hex": "#000000" 
+        "secondary_hex": "#000000"
       },
-      { "team_id": "42257", 
-        "team_name": "St. Louis Cardinals",  
+      { "team_id": "42257",
+        "team_name": "St. Louis Cardinals",
         "usat_id": "STL",
         "type": "roster",
         "primary_hex": "#C41E3A",
-        "secondary_hex": "#0A2252"  
+        "secondary_hex": "#0A2252"
       },
-      { "team_id": "45739", 
-        "team_name": "Tampa Bay Rays", 
+      { "team_id": "45739",
+        "team_name": "Tampa Bay Rays",
         "usat_id": "TB",
         "type": "roster",
         "primary_hex": "#9ECEEE",
-        "secondary_hex": "#00285D" 
+        "secondary_hex": "#00285D"
       },
-      { "team_id": "49947", 
-        "team_name": "Texas Rangers",  
+      { "team_id": "49947",
+        "team_name": "Texas Rangers",
         "usat_id": "TEX",
         "type": "roster",
         "primary_hex": "#BD1021",
-        "secondary_hex": "#003279"  
+        "secondary_hex": "#003279"
       },
-      { "team_id": "47217", 
-        "team_name": "Toronto Blue Jays",  
+      { "team_id": "47217",
+        "team_name": "Toronto Blue Jays",
         "usat_id": "TOR",
         "type": "roster",
         "primary_hex": "#003DA5",
-        "secondary_hex": "#041E42"  
+        "secondary_hex": "#041E42"
       },
-      { "team_id": "48391", 
-        "team_name": "Washington Nationals", 
+      { "team_id": "48391",
+        "team_name": "Washington Nationals",
         "usat_id": "WSH",
         "type": "roster",
         "primary_hex": "#BA122B",
-        "secondary_hex": "#11225B"  
+        "secondary_hex": "#11225B"
       }
     ],
+  },
   {
     "league": "nfl",
     "teams": [
-      { "team_name": "Arizona Cardinals", 
+      { "team_name": "Arizona Cardinals",
         "team_id": "38479",
         "type": "roster",
         "primary_hex": "#97233F",
-        "secondary_hex": "#000000"             
+        "secondary_hex": "#000000"
       },
-      { "team_name": "Chicago Bears", 
+      { "team_name": "Chicago Bears",
         "team_id": "30538",
         "type": "roster",
         "primary_hex": "#0B162A",
-        "secondary_hex": "#C83803"    
+        "secondary_hex": "#C83803"
       },
-      { "team_name": "Green Bay Packers", 
+      { "team_name": "Green Bay Packers",
         "team_id": "38696",
         "type": "roster",
         "primary_hex": "#203731",
-        "secondary_hex": "#FFB612"    
+        "secondary_hex": "#FFB612"
       },
-      { "team_name": "New York Giants", 
+      { "team_name": "New York Giants",
         "team_id": "31896",
         "type": "roster",
         "primary_hex": "#0B2265",
-        "secondary_hex": "#A71930"    
+        "secondary_hex": "#A71930"
       },
-      { "team_name": "Detroit Lions", 
+      { "team_name": "Detroit Lions",
         "team_id": "33919",
         "type": "roster",
         "primary_hex": "#005A8B",
-        "secondary_hex": "#B0B7BC"    
+        "secondary_hex": "#B0B7BC"
       },
-      { "team_name": "Washington Redskins", 
+      { "team_name": "Washington Redskins",
         "team_id": "34944",
         "type": "roster",
         "primary_hex": "#773141",
-        "secondary_hex": "#FFB612"    
+        "secondary_hex": "#FFB612"
       },
-      { "team_name": "Philadelphia Eagles", 
+      { "team_name": "Philadelphia Eagles",
         "team_id": "34988",
         "type": "roster",
         "primary_hex": "#004953",
-        "secondary_hex": "#A5ACAF"    
+        "secondary_hex": "#A5ACAF"
       },
-      { "team_name": "Pittsburgh Steelers", 
+      { "team_name": "Pittsburgh Steelers",
         "team_id": "34070",
         "type": "roster",
         "primary_hex": "#FFB612",
-        "secondary_hex": "#000000"    
+        "secondary_hex": "#000000"
       },
-      { "team_name": "St. Louis Rams",  
+      { "team_name": "St. Louis Rams",
         "team_id": "32507",
         "type": "roster",
         "primary_hex": "#B3995D",
-        "secondary_hex": "#002244"    
+        "secondary_hex": "#002244"
       },
-      { "team_name": "San Francisco 49ers", 
+      { "team_name": "San Francisco 49ers",
         "team_id": "38240",
         "type": "roster",
         "primary_hex": "#AA0000",
-        "secondary_hex": "#B3995D"    
+        "secondary_hex": "#B3995D"
       },
-      { "team_name": "Cleveland Browns",  
+      { "team_name": "Cleveland Browns",
         "team_id": "36763",
         "type": "roster",
         "primary_hex": "#FB4F14",
-        "secondary_hex": "#22150C"    
+        "secondary_hex": "#22150C"
       },
-      { "team_name": "Indianapolis Colts",  
+      { "team_name": "Indianapolis Colts",
         "team_id": "30806",
         "type": "roster",
         "primary_hex": "#002C5F",
-        "secondary_hex": "#A5ACAF"    
+        "secondary_hex": "#A5ACAF"
       },
-      { "team_name": "Dallas Cowboys",  
+      { "team_name": "Dallas Cowboys",
         "team_id": "34843",
         "type": "roster",
         "primary_hex": "#002244",
-        "secondary_hex": "#B0B7BC"    
+        "secondary_hex": "#B0B7BC"
       },
-      { "team_name": "Kansas City Chiefs",  
+      { "team_name": "Kansas City Chiefs",
         "team_id": "31082",
         "type": "roster",
         "primary_hex": "#E31837",
-        "secondary_hex": "#FFB612"    
+        "secondary_hex": "#FFB612"
       },
-      { "team_name": "San Diego Chargers",  
+      { "team_name": "San Diego Chargers",
         "team_id": "33280",
         "type": "roster",
         "primary_hex": "#0073CF",
-        "secondary_hex": "#FFB612"    
+        "secondary_hex": "#FFB612"
       },
-      { "team_name": "Denver Broncos",  
+      { "team_name": "Denver Broncos",
         "team_id": "32698",
         "type": "roster",
         "primary_hex": "#FB4F14",
-        "secondary_hex": "#002244"    
+        "secondary_hex": "#002244"
       },
-      { "team_name": "New York Jets", 
+      { "team_name": "New York Jets",
         "team_id": "32719",
         "type": "roster",
         "primary_hex": "#203731",
-        "secondary_hex": "#000000"   
+        "secondary_hex": "#000000"
       },
-      { "team_name": "New England Patriots",  
+      { "team_name": "New England Patriots",
         "team_id": "31230",
         "type": "roster",
         "primary_hex": "#002244",
-        "secondary_hex": "#C60C30"    
+        "secondary_hex": "#C60C30"
       },
-      { "team_name": "Oakland Raiders", 
+      { "team_name": "Oakland Raiders",
         "team_id": "31007",
         "type": "roster",
         "primary_hex": "#A5ACAF",
-        "secondary_hex": "#000000"    
+        "secondary_hex": "#000000"
       },
-      { "team_name": "Tennessee Titans",  
+      { "team_name": "Tennessee Titans",
         "team_id": "30253",
         "type": "roster",
         "primary_hex": "#4B92DB",
-        "secondary_hex": "#002244"    
+        "secondary_hex": "#002244"
       },
-      { "team_name": "Buffalo Bills", 
+      { "team_name": "Buffalo Bills",
         "team_id": "39134",
         "type": "roster",
         "primary_hex": "#00338D",
-        "secondary_hex": "#C60C30"    
+        "secondary_hex": "#C60C30"
       },
-      { "team_name": "Minnesota Vikings", 
+      { "team_name": "Minnesota Vikings",
         "team_id": "38172",
         "type": "roster",
         "primary_hex": "#4F2683",
-        "secondary_hex": "#FFC62F"    
+        "secondary_hex": "#FFC62F"
       },
-      { "team_name": "Atlanta Falcons", 
+      { "team_name": "Atlanta Falcons",
         "team_id": "31262",
         "type": "roster",
         "primary_hex": "#A71930",
-        "secondary_hex": "#000000"    
+        "secondary_hex": "#000000"
       },
-      { "team_name": "Miami Dolphins",  
+      { "team_name": "Miami Dolphins",
         "team_id": "38091",
         "type": "roster",
         "primary_hex": "#008E97",
-        "secondary_hex": "#F58220"    
+        "secondary_hex": "#F58220"
       },
-      { "team_name": "New Orleans Saints",  
+      { "team_name": "New Orleans Saints",
         "team_id": "35358",
         "type": "roster",
         "primary_hex": "#9F8958",
-        "secondary_hex": "#000000"    
+        "secondary_hex": "#000000"
       },
-      { "team_name": "Cincinnati Bengals",  
+      { "team_name": "Cincinnati Bengals",
         "team_id": "31239",
         "type": "roster",
         "primary_hex": "#FB4F14",
-        "secondary_hex": "#000000"    
+        "secondary_hex": "#000000"
       },
-      { "team_name": "Seattle Seahawks",  
+      { "team_name": "Seattle Seahawks",
         "team_id": "38817",
         "type": "roster",
         "primary_hex": "#002244",
-        "secondary_hex": "#69BE28"    
+        "secondary_hex": "#69BE28"
       },
-      { "team_name": "Tampa Bay Buccaneers",  
+      { "team_name": "Tampa Bay Buccaneers",
         "team_id": "39006",
         "type": "roster",
         "primary_hex": "#D50A0A",
-        "secondary_hex": "#34302B"    
+        "secondary_hex": "#34302B"
       },
-      { "team_name": "Carolina Panthers", 
+      { "team_name": "Carolina Panthers",
         "team_id": "39643",
         "type": "roster",
         "primary_hex": "#0085CA",
-        "secondary_hex": "#BFC0BF"    
+        "secondary_hex": "#BFC0BF"
       },
-      { "team_name": "Jacksonville Jaguars",  
+      { "team_name": "Jacksonville Jaguars",
         "team_id": "39064",
         "type": "roster",
         "primary_hex": "#006778",
-        "secondary_hex": "#9F792C"    
+        "secondary_hex": "#9F792C"
       },
-      { "team_name": "Baltimore Ravens",  
+      { "team_name": "Baltimore Ravens",
         "team_id": "38991",
         "type": "roster",
         "primary_hex": "#241773",
-        "secondary_hex": "#000000"    
+        "secondary_hex": "#000000"
       },
-      { "team_name": "Houston Texans",  
+      { "team_name": "Houston Texans",
         "team_id": "32949",
         "type": "roster",
         "primary_hex": "#A71930",
-        "secondary_hex": "#03202F"    
+        "secondary_hex": "#03202F"
       }
     ]
   }
-        
+
 ]
 
 module.exports = {
