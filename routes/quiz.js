@@ -10,6 +10,7 @@ var players_model = require('../models/players.js');
 var leaders_model = require('../models/leaders.js');
 var leaguesearch = require('./leaguesearch.js');
 var teams_model = require('../models/teams.js');
+var scores = {};
 
 
 router.get('/', function(req, res) {
@@ -98,7 +99,7 @@ router.get('/results', function(req, res) {
     quiz_score = req.query.quiz_score,
     possible_score = req.query.possible_score,
     percentage_correct = +((quiz_score / possible_score).toFixed(2)),
-    mod_scores = req.session.scores.all_scores;
+    mod_scores = scores.all_scores;
     if (possible_score <= 10){
       modified_score = quiz_score / 2;
     }
@@ -108,11 +109,11 @@ router.get('/results', function(req, res) {
     else {
       modified_score = quiz_score / 3;
     }
-    req.session.scores.this_score = modified_score;
+    scores.this_score = modified_score;
     mod_scores.push(modified_score); // add this quiz's score to the all scores array
     mod_scores.sort();
-    req.session.scores.all_scores = mod_scores;
-    req.session.scores.possible_score  = possible_score;
+    scores.all_scores = mod_scores;
+    scores.possible_score  = possible_score;
     calculatePercentile(req, modified_score, mod_scores);
 
     db.open(function(err, db){
@@ -124,8 +125,8 @@ router.get('/results', function(req, res) {
           res.json({success: false});
         }
         else {
-          appendCurrentScore(modified_score, req.session.scores.brackets);
-          res.json({scores: req.session.scores, success: true});
+          appendCurrentScore(modified_score, scores.brackets);
+          res.json({scores: scores, success: true});
         }
       });
     });
@@ -142,14 +143,14 @@ Optimistic way of calculating. Ex scores 0,1,1,2,3 and you scored one of the 1's
 var calculatePercentile = function(req, score, all_scores){
   if (score == 0){
     //you didn't get any right, so you are 0 percentile
-    req.session.scores.percentile = 0;
+    scores.percentile = 0;
     return;
   }
   len = all_scores.length;
   count = 0;
   for (i=0;i<all_scores.length;i++){
     if (len == 1){ // if you're the first taker, you get 100th percentile
-      req.session.scores.percentile = 100.00
+      scores.percentile = 100.00
       return;
     }
     else if(all_scores[i]<= score && count < len -1){
@@ -158,12 +159,12 @@ var calculatePercentile = function(req, score, all_scores){
     else if (all_scores[i]<= score && count == len - 1){
       count++
       percentile = (count/len)*100
-      req.session.scores.percentile = percentile
+      scores.percentile = percentile
       return;
     }
     else if (all_scores[i]> score){
       percentile = (count/len)*100
-      req.session.scores.percentile = percentile
+      scores.percentile = percentile
       return;
     }
   }
@@ -186,8 +187,8 @@ var fetchQuizScores = function(req, team_id){
         }
 
     }
-    req.session.scores = {};
-    req.session.scores.all_scores = mod_scores;
+    scores = {};
+    scores.all_scores = mod_scores;
     // Assign each quiz score to a bucket for graph display
     bracketQuizScores(req, mod_scores);
   })
@@ -221,7 +222,7 @@ var bracketQuizScores = function(req, mod_scores){
     else if (mod_scores[i] >= 5){shighScores++}
     else{console.log("fyi: we have bad scores in mongo")}
   }
-  req.session.scores.brackets = {low: lowScores, mlow:mlowScores , med:medScores, mhigh:mhighScores, high:highScores, shigh: shighScores};
+  scores.brackets = {low: lowScores, mlow:mlowScores , med:medScores, mhigh:mhighScores, high:highScores, shigh: shighScores};
 }
 
 module.exports = router;
