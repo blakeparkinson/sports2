@@ -21,6 +21,10 @@ router.get('/', function(req, res) {
   if (typeof tId != 'undefined' && typeof quiz_id == 'undefined'){
     //we've only been given a team id and that's it!. Look up the needed info and create a quiz from there.
     db.collection('teams').findOne( { team_id : tId}, function (err, item){
+         if (item == null){
+           renderErrorPage(res);
+           return
+         }
          if (players_model.goatsLeadersArray().indexOf(item.type) > -1){
           var api_team_id = null;
           var quiz_name = item.category;
@@ -86,12 +90,17 @@ router.get('/', function(req, res) {
     }
       else {
         //we couldn't find the quiz in mongo
-        res.render('error', {
-          message: "Something really terrible happened and we weren't able to create your quiz :(",
-        })
+        renderErrorPage(res);
       }
     });
 })
+
+var renderErrorPage = function(res){
+  //we couldn't find the quiz in mongo
+  res.render('error', {
+    message: "Something really terrible happened and we weren't able to create your quiz :(",
+  })
+}
 
 router.get('/results', function(req, res) {
   var quiz_id = req.query.quiz_id,
