@@ -16,7 +16,7 @@ router.get('/', function(req, res) {
 	var popular_quizzes = db.collection('quiz').aggregate(
 	[{ "$match" : { "created_at" : { "$gt" : quizCutoffDate.toISOString().slice(0, 19).replace('T', ' ') }}},
 	{ $group : {
-		_id : {team_id: "$team_id", type: "$type", quiz_name: "$quiz_name"}, counts : {$sum: 1} 
+		_id : {team_id: "$team_id", type: "$type", quiz_name: "$quiz_name"}, counts : {$sum: 1}
 		}
 	},
 	{ $sort: {
@@ -26,7 +26,7 @@ router.get('/', function(req, res) {
 		temparray = [];
 		var endresult = [];
 		if (result){
-			temparray = result.slice(0,3)
+			temparray = result.slice(0,10)
 			for (i=0;i<temparray.length;i++){
 				team_info = temparray[i]._id;
 				team_info.counts = temparray[i].counts;
@@ -46,7 +46,7 @@ router.get('/', function(req, res) {
     trending_quiz = endresult
   }
   visitor.pageview("/", "index", "http://rosterblitz.com").send();
-	res.render('index', 
+	res.render('index',
   {
     session:req.session,
     trending_quiz: trending_quiz,
