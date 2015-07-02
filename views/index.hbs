@@ -6,16 +6,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-      </button>    
+      </button>
     </div>
     <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right rb" id="nav-tabs-leagues"> 
+        <ul class="nav navbar-nav navbar-right rb" id="nav-tabs-leagues">
           <li class="tabs {{#compare current 'soccer'}}selected{{/compare}}"><a href="/leaguesearch/soccer"><span class="tabs-text">Soccer</span></a></li>
           <li class="tabs {{#compare current 'mlb'}}selected{{/compare}}"><a href="/leaguesearch/mlb"><span class="tabs-text">MLB</span></a></li>
           <li class="tabs {{#compare current 'nba'}}selected{{/compare}}"><a href="/leaguesearch/nba"><span class="tabs-text">NBA</span></a></li>
           <li class="tabs {{#compare current 'nfl'}}selected{{/compare}}"><a href="/leaguesearch/nfl"><span class="tabs-text">NFL</span></a></li>
-          <li class="tabs {{#compare current 'nhl'}}selected{{/compare}}"><a href="/leaguesearch/nhl"><span  class="tabs-text">NHL</span></a></li>  
-        </ul>                                   
+          <li class="tabs {{#compare current 'nhl'}}selected{{/compare}}"><a href="/leaguesearch/nhl"><span  class="tabs-text">NHL</span></a></li>
+        </ul>
     </div>
   </nav>
     <div id="team-container">
@@ -27,19 +27,24 @@
           <div class="submit-section">
             <div class="btn quiz-btn" id="take-quiz-button">Take Quiz</div>
           </div>
-        </div> 
+        </div>
         {{#if trending_quiz.length}}
           <div id="trending-quiz-contain">
             <div class="trendquiz">Trending Quizzes</div>
             <div class="trenders">
                 {{#if trending_quiz}}
-                  <div class="trending-container">
+                <div class="list-group trending group-rows">
                   {{#each trending_quiz}}
-                    <button class="btn btn-primary trending-quiz create-quiz" id="curvy-buttons" data-team-id={{team_id}} type="button"  data-type={{type}}>{{quiz_name}}<div class="g-badge badge-small-{{type}}"></div>                  
-                    </button>                  
+                    <a data-team-id="{{team_id}}" data-type="{{type}}" class="create-quiz list-group-item tquiz-items"><span class="g-badge badge-small-{{type}}"></span>{{quiz_name}}</a>
                   {{/each}}
                 </div>
                 {{/if}}
+
+                  <!--<div class="trending-container">
+                    <button class="btn btn-primary trending-quiz create-quiz" id="curvy-buttons" data-team-id={{team_id}} type="button"  data-type={{type}}>{{quiz_name}}<div class="g-badge badge-small-{{type}}"></div>
+                    </button>
+                </div> -->
+
             </div>
             <br />
           </div>
@@ -80,8 +85,8 @@
             </div>
           <div class="types-section">
 
-        </div>    
-        
+        </div>
+
         </div>
       </div>
     </div>
@@ -91,7 +96,7 @@
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title" id="myModalLabel">Please select a team first</h4>
-          </div>          
+          </div>
           <div class="modal-body">
             <div class="modal-select-team">Make sure you select a team before you start a quiz!</div>
           </div>
@@ -100,4 +105,4 @@
           </div>
         </div>
       </div>
-  </div>  
+  </div>

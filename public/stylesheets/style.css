@@ -148,30 +148,21 @@ a {
     margin-right: 0.5em;
 }
 .badge-small-roster {
-  padding: 0 4px 0 5px;
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1;
-  text-align: center;
-  white-space: nowrap;
-  border-radius: 50%;
   display: inline-block;
   width: 25px;
   height: 25px;
   margin: 0 2px 0 5px;
   background: url(../images/icons/clipboard1.png) no-repeat 2px 1px;
   background-size: 80%;
-  background-color: #fff;
   vertical-align: -7px;
+  filter: brightness(0) invert(1);
+  -webkit-filter: brightness(0) invert(1);
+  -moz-filter: brightness(0) invert(1);
+  -o-filter: brightness(0) invert(1);
+  -ms-filter: brightness(0) invert(1);
+  webkit-filter: brightness(0) invert(1);
 }
 .badge-small-leaders {
-  padding: 0 4px 0 4px;
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1;
-  text-align: center;
-  white-space: nowrap;
-  border-radius: 50%;
   display: inline-block;
   width: 25px;
   height: 25px;
@@ -180,15 +171,14 @@ a {
   background-size: 90%;
   background-color: #fff;
   vertical-align: -8px;
+  filter: brightness(0) invert(1);
+  -webkit-filter: brightness(0) invert(1);
+  -moz-filter: brightness(0) invert(1);
+  -o-filter: brightness(0) invert(1);
+  -ms-filter: brightness(0) invert(1);
+  webkit-filter: brightness(0) invert(1);
 }
 .badge-small-goats {
-  padding: 2px 2px 1px 2px;
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1;
-  text-align: center;
-  white-space: nowrap;
-  border-radius: 44%;
   display: inline-block;
   width: 25px;
   height: 25px;
@@ -197,6 +187,12 @@ a {
   background-size: 80%;
   background-color: #fff;
   vertical-align: -7px;
+  filter: brightness(0) invert(1);
+  -webkit-filter: brightness(0) invert(1);
+  -moz-filter: brightness(0) invert(1);
+  -o-filter: brightness(0) invert(1);
+  -ms-filter: brightness(0) invert(1);
+  webkit-filter: brightness(0) invert(1);
 }
 .goats-icon {
   content: url(../images/icons/theGoat.png);
@@ -890,6 +886,22 @@ padding-left: 3%;
   padding: 5px 20px;
   border: solid 1px black;
 }
+.list-group.trending{
+  color: white;
+  background: #E25822;
+}
+.list-group .tquiz-items{
+  background-color: transparent;
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px;
+  font-size: 1.1em;
+  width: 50%;
+  float: left;
+  color: white;
+  border: 1px solid #CB8440;
+}
 
 
 table tr:first-child th {
@@ -1263,6 +1275,10 @@ table tr th:last-child {
   }
   .legend-header{
     margin-left: 0;
+  }
+  .list-group .tquiz-items{
+    float:none;
+    width:100%;
   }
 
 }
