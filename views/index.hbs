@@ -35,7 +35,7 @@
                 {{#if trending_quiz}}
                 <div class="list-group trending group-rows">
                   {{#each trending_quiz}}
-                    <a data-team-id="{{team_id}}" data-type="{{type}}" class="create-quiz list-group-item tquiz-items"><span class="g-badge badge-small-{{type}}"></span>{{quiz_name}}</a>
+                    <a data-team-id="{{team_id}}" data-type="{{type}}" class="create-quiz list-group-item tquiz-items"><span class="g-badge badge-small-{{type}}"></span><span>{{quiz_name}}</span></a>
                   {{/each}}
                 </div>
                 {{/if}}
