@@ -901,6 +901,12 @@ padding-left: 3%;
   float: left;
   color: white;
   border: 1px solid #CB8440;
+  cursor:pointer;
+}
+.list-group .tquiz-items:hover{
+  color: #fff;
+  text-decoration: none;
+  background-color: #B84C16
 }
 
 
