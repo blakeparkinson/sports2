@@ -166,10 +166,9 @@ a {
   display: inline-block;
   width: 25px;
   height: 25px;
-  margin: 0 2px 0 5px;
+  margin-right: 5px;
   background: url(../images/icons/crown.png) no-repeat 2px 1px;
   background-size: 90%;
-  background-color: #fff;
   vertical-align: -8px;
   filter: brightness(0) invert(1);
   -webkit-filter: brightness(0) invert(1);
@@ -182,10 +181,9 @@ a {
   display: inline-block;
   width: 25px;
   height: 25px;
-  margin: 0 2px 0 5px;
+  margin-right: 5px;
   content: url(../images/icons/theGoat2.png) no-repeat 2px 1px;
   background-size: 80%;
-  background-color: #fff;
   vertical-align: -7px;
   filter: brightness(0) invert(1);
   -webkit-filter: brightness(0) invert(1);
