@@ -31,6 +31,7 @@
     "http": "*",
     "jquery": "*",
     "lodash": "~3.3.1",
+    "mobile-detect": "^1.2.0",
     "mongojs": "~0.18.2",
     "morgan": "~1.5.1",
     "newrelic": "^1.20.1",
