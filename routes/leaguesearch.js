@@ -7,11 +7,17 @@ var _ = require('lodash'),
    mongojs = require("mongojs"),
    async = require('async'),
   db = mongojs.connect(common.mongo_uri);
+var MobileDetect = require('mobile-detect');
 var quizCutoffDate = new Date()
 quizCutoffDate.setDate(quizCutoffDate.getDate() - 7);  //currently set to 1 week ago
 
 
 router.get('/', function(req, res) {
+  var isMobile = false;
+  var md = new MobileDetect(req.headers['user-agent']);
+  if (md.mobile() != null){
+    isMobile = true;
+  }
   var listObjRosters = {league : false, type: 'roster'};
   var listObjLeaders = {league : false, type: 'leaders'};
   var listObjGoats = {league : false, type: 'goats'};
@@ -28,6 +34,7 @@ router.get('/', function(req, res) {
         	leaders: results.leaders_lists,
           remove_footer: true,
           special_layout: true,
+          isMobile: isMobile,
           title: "RosterBlitz - Search by League"
          }
     );
@@ -37,6 +44,11 @@ router.get('/', function(req, res) {
 
 
 router.get('/:league', function(req, res) {
+  var isMobile = false;
+  var md = new MobileDetect(req.headers['user-agent']);
+  if (md.mobile() != null){
+    isMobile = true;
+  }
   var league = req.params.league;
   if (league == 'soccer'){
     league = 'eu_soccer';
@@ -67,6 +79,7 @@ router.get('/:league', function(req, res) {
           special_layout: true,
           current: league,
           footer_class: 'index',
+          isMobile: isMobile,
           title: changeTitle(league)
          }
     );

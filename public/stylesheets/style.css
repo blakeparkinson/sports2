@@ -975,6 +975,9 @@ table tr th:last-child {
   padding: 0;
   background-image:url(../images/stadiums/eu_soccer_stadiums/olympiastadion-stadium.jpg);
 }
+.mobile-background.mobile{
+  background-attachment: inherit!important;
+}
 
 
 .answer-row .answered-player{

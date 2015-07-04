@@ -1,5 +1,5 @@
 <body data-spy="scroll" data-target="#scroll">
-<div id="league-background" style="background-image: url({{background__roster_image}});">
+<div id="league-background" {{#if isMobile}} class="mobile-background mobile" {{/if}} style="background-image: url({{background__roster_image}});">
   <div class="section league-roster">
     <nav class="navbar navbar-default blitz" role="navigation">
     <div class="navbar-header rb">
@@ -69,7 +69,7 @@
     </div>
   </div>
 </div>
-<div id="goats-background">
+<div id="goats-background" {{#if isMobile}} class="mobile-background mobile"{{/if}}>
   <div class="league-section goats" id="goats-sp">
     <div class="league-align-center" data-toggle="modal" data-trigger="click" data-target="#myModal">
       <a name="goats-sp"></a>
@@ -96,11 +96,6 @@
 <script type='text/javascript'>
 
     var teams = {{{json_stringify popular_teams}}};
-    console.log(teams);
-
     var leaders = {{{json_stringify leaders}}};
-    console.log(leaders);
-
     var goats = {{{json_stringify goats}}};
-    console.log(goats);
 </script>
