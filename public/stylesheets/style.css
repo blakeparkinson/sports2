@@ -345,21 +345,22 @@ a {
   font-size: 2em;
 }
 .clock{
-  display: inline-block;
   font-family:"Erbos Draco 1st Open NBP";
   background-color: rgb(137, 32, 32);
   color: #F4E1E1;
   border-radius: 1px;
   padding: 0 5px 2px 5px;
-  float: right;
   margin-top: 8px;
   margin-right: 2%;
 }
 #new-team-name {
-  color: #ffffff;
   margin-top: 3px;
-  display: inline-block;
-  font-size: 1.2em;
+  margin-top: 3px;
+  text-shadow: 6px 6px 10px rgba(0,0,0,.6);
+  color: #fff;
+  font-weight: 400;
+  font-size: 350%;
+  text-align: center;
 }
 .name-point-container{
   padding-top: 5%;
@@ -433,13 +434,13 @@ ul {
 #left-quiz-column {
   float: left;
   width: 45%;
-  margin-top: 8%;
+  margin-top: 6%;
   margin-left: 40px;
 }
 #right-quiz-column {
   float: right;
   width: 50%;
-  margin-top: 8%;
+  margin-top: 6%;
   padding-left: 5%;
   padding-right: 5%;
 }
@@ -1283,6 +1284,9 @@ table tr th:last-child {
   .list-group .tquiz-items{
     float:none;
     width:100%;
+  }
+  #new-team-name{
+    font-size: 140%;
   }
 
 }
