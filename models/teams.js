@@ -193,7 +193,7 @@ var fetchStatDescription = function(stat, listType, league){
       case "sacks":
         description = "NFL Most Sacks (season)";
         break;
-      case "Interceptions":
+      case "interceptions":
         description = "NFL Most Interceptions (season)";
         break;
       case "battingAvg":
