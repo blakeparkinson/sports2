@@ -1,7 +1,12 @@
 <div class="columns">
-  <div id="new-team-name">{{team_name}}</div>
+  {{#unless isMobile}}
+    <div id="new-team-name">{{team_name}}</div>
+  {{/unless}}
   <div id="left-quiz-column">
     <div class="team-container">
+      {{#if isMobile}}
+        <div id="new-team-name">{{team_name}}</div>
+      {{/if}}
       <div id="align-clock">
         <span class="clock">{{clock}}</span>
       </div>

@@ -30,13 +30,13 @@ var goatsLeadersArray = function(){
   return a;
 }
 
-var intreturnPlayers = function(players, team_id, res, league, second_callback){
+var intreturnPlayers = function(players, team_id, res, req, league, second_callback){
   var colors = fetchTeamColors(league, players.name);
-  second_callback(players, team_id, res, league, colors)
+  second_callback(players, team_id, res, req, league, colors)
 }
 
 
-var returnPlayers = function (players, team_id, res, league, colors){
+var returnPlayers = function (players, team_id, res, req, league, colors){
   if (res.quiz_page != undefined && res.quiz_page){
     var team_name = players.team_name
     var primary_hex = colors.primary_hex;
@@ -53,6 +53,7 @@ var returnPlayers = function (players, team_id, res, league, colors){
       background_image: randImg(league, players.name),
       logo_url: '../images/team_logos/'+league+'/'+players.name.replace(/ +/g, "").toLowerCase()+'.png',
       quizPage: true,
+      isMobile: common.isMobile(req),
       title: "RosterBlitz - Sports Trivia and Quizzes"
     });
 
@@ -124,7 +125,7 @@ var fetchPlayers = function(type, api_team_id, team_id, league, usat_id, res, re
   redisClient.get(team_id, function (err, playersString) {
     if (playersString != null && !isItemExpired(JSON.parse(playersString))){
         //we got something in redis, continue
-        first_callback(JSON.parse(playersString), team_id, res, league, second_callback);
+        first_callback(JSON.parse(playersString), team_id, res, req, league, second_callback);
       }
     else{
       if (playersString != null && isItemExpired(JSON.parse(playersString))){
@@ -137,7 +138,7 @@ var fetchPlayers = function(type, api_team_id, team_id, league, usat_id, res, re
         db.collection(type).find({team_id : team_id}).toArray(function (err, items){
           players = items;
           redisClient.set(team_id, JSON.stringify(players));
-          first_callback(players, team_id, res, league, second_callback);
+          first_callback(players, team_id, res, req, league, second_callback);
         })
       }
       else {
@@ -151,7 +152,7 @@ var fetchPlayers = function(type, api_team_id, team_id, league, usat_id, res, re
             else {  // data is fine so just return it
               players = item;
               redisClient.set(team_id, JSON.stringify(players));
-              first_callback(players, team_id, res, league, second_callback);
+              first_callback(players, team_id, res, req, league, second_callback);
             }
           }
           else {  // data not already in Mongo
@@ -230,7 +231,7 @@ switch (league){
                      players_sorted = sortNBA(json_response);
                      players = formatNBAPlayers(players_sorted, team_id, team_roster);
                      mongoInsertPlayers(league, players, team_id);
-                     first_callback(players, team_id, res, league, second_callback)
+                     first_callback(players, team_id, res, req, league, second_callback)
                   }
 
                   else{
@@ -244,7 +245,7 @@ switch (league){
             players = formatPlayers(json_response, team_id, json_response, league);
             appendPlayerShortId(players.players);
             mongoInsertPlayers(league, players, team_id);
-            first_callback(players, team_id, res, league,second_callback)
+            first_callback(players, team_id, res, req, league,second_callback)
             break;
           case 'nhl':
             json_response = JSON.parse(body);
@@ -253,20 +254,20 @@ switch (league){
             players = formatPlayers(json_response, team_id, json_response, league);
             appendPlayerShortId(players.players);
             mongoInsertPlayers(league, players, team_id);
-            first_callback(players, team_id, res, league, second_callback)
+            first_callback(players, team_id, res, req, league, second_callback)
             break;
           case 'eu_soccer':
             playersParsed = formatEUSoccerPlayers(response.body, usat_id);
             players = formatPlayersDocument(team_id, playersParsed.players, playersParsed);
             mongoInsertPlayers(league, players, team_id);
-            first_callback(players, team_id, res, league, second_callback)
+            first_callback(players, team_id, res, req, league, second_callback)
             break;
           case 'mlb':
             json_response = JSON.parse(body);
             players = formatMLBPlayers(json_response, team_id, api_team_id, usat_id);
             appendPlayerShortId(players.players);
             mongoInsertPlayers(league, players, team_id);
-            first_callback(players, team_id, res, league,second_callback)
+            first_callback(players, team_id, res, req, league,second_callback)
             break;
         }
 

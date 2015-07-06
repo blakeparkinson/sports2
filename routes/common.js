@@ -1,11 +1,14 @@
 var env = require('../env.json');
 var session = require('express-session'); //express-session is currently working, but is deprecated
 var RedisStore = require('connect-redis')(session);
+var MobileDetect = require('mobile-detect');
+
 
 
 exports.config = function() {
   return env;
 };
+
 
 exports.isProduction = (process.env.NODE_ENV == 'production')? true : false;
 
@@ -24,3 +27,11 @@ else{
     exports.redisClient = redis.createClient({detect_buffers: true})
 }
 
+exports.isMobile = function(req){
+  var isMobile = false;
+  var md = new MobileDetect(req.headers['user-agent']);
+  if (md.mobile() != null){
+    isMobile = true;
+  }
+  return isMobile
+}
