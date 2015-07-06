@@ -9,7 +9,7 @@ var http = require("http"),
     db = mongojs.connect(common.mongo_uri);
 var shortId = require('shortid');
 
-//helper for deleting 
+//helper for deleting
 var deleteItem = function(data, collectionName){
   db.open(function(err, db){
     db.collection(collectionName,{},function(err, collection){
@@ -29,37 +29,37 @@ var clearRedisTeam = function(teamID){
 var fetchStatDescription = function(stat, listType, league){
   switch(stat) {
     case "ppg": //points per game
-        description = 'Points per game';
+        description = 'NBA Most Points per game';
         break;
       case "rpg": //rebounds
-        description = 'Rebounds per game';
+        description = 'NBA Most Rebounds per game';
         break;
       case "fieldGoalPercentage": //fieldgoals
-        description = 'Field goal percentage';
+        description = 'NBA Highest Field goal percentage';
         break;
       case "ftPercentage": //free throw
-        description = 'Free throw percentage';
+        description = 'NBA Highest Free throw percentage';
         break;
       case "threePointPercentage": //three point
-        description = 'Three points percentage';
+        description = 'NBA Highest Three points percentage';
         break;
       case "apg": //assists
-        description = 'Assists per game';
+        description = 'NBA Most Assists per game';
         break;
       case "spg": //steals
-        description = 'Steals per game';
+        description = 'NBA Most Steals per game';
         break;
       case "bpg": //blocks
-        description = 'Blocks per game';
+        description = 'NBA Most Blocks per game';
         break;
       case "tpg": //turnovers
-        description = 'Turnovers per game';
+        description = 'NBA Most Turnovers per game';
         break;
       case "fpg": //fouls
-        description = 'Fouls per game';
+        description = 'NBA Most Fouls per game';
         break;
       case "mpg": //minutes
-        description = 'Minutes per game';
+        description = 'NBA Most Minutes per game';
         break;
       case "eplGoals":
         description = "Top EPL Goal Scorers";
@@ -132,6 +132,111 @@ var fetchStatDescription = function(stat, listType, league){
         break;
       case "seriaARc":
         description = "Most Series A Red Cards";
+        break;
+      case "assists":
+        description = "NHL Most Assists";
+        break;
+      case "goals":
+        description = "NHL Most Goals";
+        break;
+      case "points":
+        description = "NHL Most Points";
+        break;
+      case "wins":
+        description = "NHL Most Wins";
+        break;
+      case "gaa":
+        description = "NHL Lowest Goals Against";
+        break;
+      case "savePercentage":
+        description = "NHL Highest Save Percentage";
+        break;
+      case "penaltyMinutes":
+        description = "NHL Most Penalty Minutes";
+        break;
+      case "fightingMajors":
+        description = "NHL Most Fighting Majors";
+        break;
+      case "penaltyMinGame":
+        description = "NHL Most Penalty Minutes per Game";
+        break;
+      case "passYards":
+        description = "NFL Passing Yards (season)";
+        break;
+      case "passTD":
+        description = "NFL Most Passing Touchdowns (season)";
+        break;
+      case "passINT":
+        description = "NFL Most Interceptions thrown (season)";
+        break;
+      case "compPercentage":
+        description = "NFL Highest Completion Percentage (season)";
+        break;
+      case "qbRating":
+        description = "NFL Highest QB Rating (season)";
+        break;
+      case "rushYards":
+        description = "NFL Most Rushing Yards (season)";
+        break;
+      case "rushTD":
+        description = "NFL Most Rushing TDs (season)";
+        break;
+      case "recYards":
+        description = "NFL Most Receiving Yards (season)";
+        break;
+      case "recTD":
+        description = "NFL Most Receiving TDs (season)";
+        break;
+      case "tackles":
+        description = "NFL Most Tackles (season)";
+        break;
+      case "sacks":
+        description = "NFL Most Sacks (season)";
+        break;
+      case "interceptions":
+        description = "NFL Most Interceptions (season)";
+        break;
+      case "battingAvg":
+        description = "MLB Highest Batting Average (season)";
+        break;
+      case "hr":
+        description = "MLB Most Home Runs (season)";
+        break;
+      case "rbi":
+        description = "MLB Most RBIs (season)";
+        break;
+      case "sb":
+        description = "MLB Most Stolen Bases (season)";
+        break;
+      case "hittingBb":
+        description = "MLB Most Walks Drawn (season)";
+        break;
+      case "battingK":
+        description = "MLB Strikeouts - Batting (season)";
+        break;
+      case "slg":
+        description = "MLB Highest Slugging (season)";
+        break;
+      case "ops":
+        description = "MLB Highest OPS (season)";
+        break;
+      case "obp":
+        description = "MLB Highest OBP (season)";
+        break;
+      case "era":
+        description = "MLB Lowest ERA (season)";
+        break;
+      case "pitchingK":
+        description = "MLB Most Strikeouts - Pitching (season)";
+        break;
+      case "wins":
+        description = "MLB Most Wins (season)";
+        break;
+      case "whip":
+        description = "MLB Lowest WHIP (season)";
+        break;
+      case "pitchingBb":
+        description = "MLB Most Walks = pitching (season)";
         break;
       default:
         description = stat;
