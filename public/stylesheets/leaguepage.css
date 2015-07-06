@@ -143,6 +143,7 @@
   text-shadow: 6px 6px 10px rgba(0,0,0,.6);
   color: #fff;
   font-weight: 400;
+  margin: 0 -200px;
 }
 .type-head.leaders{
   color: rgb(69, 62, 62);
