@@ -128,7 +128,7 @@ var getLegendLabel = function(category, possible_score){
         label = '4 or Fewer';
         break;
     }
-    
+
   }
   else if (intScore <= 10){
     switch(category){
@@ -347,7 +347,7 @@ function showTooltip(chart, elem, indexChartSegment){
 }
 
 function noop() {}
-  
+
 var fetchGuess = function(){
   var guess = $(this).val().toLowerCase().trim(),
       target = $(event.target);
@@ -358,7 +358,7 @@ var fetchGuess = function(){
 }
 
 var checkForMatches = function(guess, input_field){
-  
+
   _.each(roster, function(player, index){
     var last_name = '';
     var full_name = '';
@@ -398,7 +398,7 @@ var checkForMatches = function(guess, input_field){
     }
   })
 }
- 
+
 var appendGreenCheck  = function(input_field){
   var glyc = input_field.closest('.form-group').find('.glyphicon');
   glyc.removeClass('hidden').show();
@@ -409,9 +409,11 @@ var appendGreenCheck  = function(input_field){
 var addToCorrectList = function (player, index){
   if (player.guessed == true) return;
   placer++;
-  var imgHtml = '';
+  var imgHtml = '',
+      spanClass = '';
   if (typeof player.avatar_url != 'undefined'){
     imgHtml = '<img class="circle-pic" src='+player.avatar_url+'>';
+    spanClass = "pushed";
   }
   if (type != 'leaders' && type != 'goats' ){
     var html = '<div class="outer-guess"><div class="inner-guess"><div class="correct-guess" data-index="'+index+'">'+placer +'. ' + imgHtml + player.full_name + '</div></div></div>';
@@ -428,13 +430,13 @@ var addToCorrectList = function (player, index){
       var statAsPerc = statAsPerc.toFixed(1) + "%";
     } else {
       var statAsPerc = player.stat;
-    }    
-    var statHtml = '<span class="stat">'+statAsPerc+'</span>';
+    }
+    var statHtml = '<span class="stat '+spanClass+'">'+statAsPerc+'</span>';
     var playerBox = answer_container.find('.correct-guess[data-player-id='+player.player_id+']');
     //playerBox.removeClass('no-flip');
-    var playerHtml = imgHtml + player.full_name;
+    var playerHtml = imgHtml + '<span>'+player.full_name +'</span>' + statHtml;
     playerBox.append(playerHtml);
-    playerBox.parent().append(statHtml).addClass('guessed no-hover');
+    playerBox.parent().addClass('guessed no-hover');
     playerBox.closest('.outer-guess').fadeIn(200).addClass('green-background');
   }
 }
@@ -500,7 +502,7 @@ var endQuiz = function(e, skip_mapping){
 }
 
 var QueryString = function () {
-  // This function is anonymous, is executed immediately and 
+  // This function is anonymous, is executed immediately and
   // the return value is assigned to QueryString!
   var query_string = {};
   var query = window.location.search.substring(1);
@@ -518,7 +520,7 @@ var QueryString = function () {
     } else {
       query_string[pair[0]].push(pair[1]);
     }
-  } 
+  }
     return query_string;
 }
 
@@ -526,9 +528,9 @@ var getTemplate = function(name, data, options){
   templates = {},
   $.post('/index/get/' + name, data, function(d){
       templates[name] = d;
-      tpl = processTemplate(d, data, options); 
+      tpl = processTemplate(d, data, options);
       return tpl;
-  }); 
+  });
 }
 
 var processTemplate = function(template, data, options){
