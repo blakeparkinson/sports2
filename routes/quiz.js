@@ -27,7 +27,7 @@ router.get('/', function(req, res) {
          }
          if (players_model.goatsLeadersArray().indexOf(item.type) > -1){
           var api_team_id = null;
-          var quiz_name = item.category;
+          var quiz_name = item.description;
         }
         else{
           var api_team_id = item.api_team_id;
