@@ -8,6 +8,18 @@
     src: url(../fonts/erbos_draco_1st_open_nbp.ttf)
 }
 
+@font-face {
+    font-family: 'socicon';
+    src: url('../fonts/socicon.eot');
+    src: url('../fonts/socicon.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/socicon.woff') format('woff'),
+         url('../fonts/socicon.ttf') format('truetype'),
+         url('../fonts/socicon.svg#sociconregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    text-transform: initial;
+}
+
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   font-family: "HelveticaNeue-Thin", "Helvetica Neue Thin", "Helvetica Neue","HelveticaNeue-Light", "Helvetica Neue Light",
@@ -29,6 +41,10 @@ a {
   background-color: #211922;
   margin: 0;
   padding: 0;
+}
+
+.socicon {
+    font-family: 'socicon' !important;
 }
 
 #team-selection{
