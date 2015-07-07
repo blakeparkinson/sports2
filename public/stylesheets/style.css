@@ -326,7 +326,10 @@ a {
 
 .answer-container .inner-guess .stat{
   float: right;
-  padding-right: 20px;
+  padding-right: 10px;
+}
+.answer-container .inner-guess .stat.pushed{
+  line-height: 30px;
 }
 
 
@@ -606,6 +609,7 @@ padding-left: 3%;
   white-space: nowrap;
   text-align: center;
   border-bottom: 1px solid #ccc;
+  margin-bottom: 15px;
 }
 
 .answer-row.left{
@@ -643,6 +647,9 @@ padding-left: 3%;
 .answer-container .outer-guess{
   float: left;
   width: 50%;
+  height:42px;
+}
+.answer-container .outer-guess:first-child{
   height:42px;
 }
 
