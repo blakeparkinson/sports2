@@ -822,8 +822,8 @@ padding-left: 3%;
 
 .social-sidebar{
     position: absolute;
-    right: 82%;
-    top: 60px;
+    top: 30%;
+    left: 87%;
 }
 
 
@@ -833,51 +833,48 @@ padding-left: 3%;
     padding-right: 5px;
 }
 #email{
-    background-image: url(../images/blitz-social-sprite.png);
-    background-repeat: no-repeat;
-    background-position: -60px -59px;
-    height: 45px;
-    width: 45px;
-    top: 0;
-    left: 0;
-    background-size: 700px;
-    cursor: pointer;
+  height: 35px;
+  width: 35px;
+  background-color: #55B1C1;
+  cursor: pointer;
+  padding-top: 3px;
+  transition: transform .5s;
+}
+#email .socicon, #facebook .socicon, #twitter .socicon{
+  font-size: 23px;
+  color: white;
+  padding-left: 7px;
 }
 
-#email:hover{
-    background-position: -60px -147px;
+.social-icon:hover{
+  -moz-transform: scale(1.2,1.2);
+  -ms-transform: scale(1.2,1.2);
+  -webkit-transform: scale(1.2,1.2);
+  transform: scale(1.2,1.2);
 }
 
 #facebook{
-    background-image: url(../images/blitz-social-sprite.png);
-    background-repeat: no-repeat;
-    background-position: -260px -60px;
-    height: 45px;
-    width: 45px;
-    top: 0;
-    left: 0;
-    background-size: 700px;
+    height: 35px;
+    width: 35px;
+    background-color: #3b5998;
     cursor: pointer;
-}
-
-#facebook:hover{
-    background-position: -260px -147px;
+    padding-top: 3px;
+    transition: transform .5s;
 }
 
 .share-element div{
-    border-radius: 25px;
+  -moz-border-radius: 18px;
+  -webkit-border-radius: 18px;
+  border-radius: 18px;
 }
 
 #twitter{
-    background-image: url(../images/blitz-social-sprite.png);
-    background-repeat: no-repeat;
-    background-position: -394px -59.5px;
-    height: 45px;
-    width: 45px;
-    top: 0;
-    left: 0;
-    background-size: 700px;
-    cursor: pointer;
+  background-color: #00abec;
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
+  padding-top: 3px;
+  transition: transform .5s;
 }
 
 #twitter:hover{
@@ -1237,7 +1234,7 @@ table tr th:last-child {
 
     }
     .social-sidebar{
-        right: 91%;
+        left: 91%;
 
     }
     #index-buttons{
@@ -1321,7 +1318,7 @@ table tr th:last-child {
 /******880********/
 @media screen and (max-width: 880px) {
     .social-sidebar{
-        right: 92%;
+        left: 92%;
 
     }
 
