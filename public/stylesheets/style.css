@@ -836,13 +836,13 @@ padding-left: 3%;
   width: 35px;
   background-color: #55B1C1;
   cursor: pointer;
-  padding-top: 3px;
+  padding-top: 2px;
   transition: transform .5s;
 }
 #email .socicon, #facebook .socicon, #twitter .socicon{
   font-size: 23px;
   color: white;
-  padding-left: 7px;
+  padding-left: 6px;
 }
 
 .social-icon:hover{
@@ -874,10 +874,6 @@ padding-left: 3%;
   cursor: pointer;
   padding-top: 3px;
   transition: transform .5s;
-}
-
-#twitter:hover{
-    background-position: -394px -147.5px;
 }
 
 .auth-container .share{
