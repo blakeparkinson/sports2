@@ -163,7 +163,7 @@ function postSocial(event){
 
   else{
     // it's teh facebook
-    window.open('https://www.facebook.com/dialog/share?app_id=1600051886893474&href=www.rosterbliz.com&display=popup&redirect_uri=http://localhost:3000/auth/social','', 'scrollbars=yes, width=' + d.w + ', height=' + d.h + ', top=' + d.top + ', left=' + d.left);
+    window.open('https://www.facebook.com/dialog/share?app_id=870458513037642&href=http://rosterblitz.com&display=popup&redirect_uri=http://rosterblitz.com/auth/social','', 'scrollbars=yes, width=' + d.w + ', height=' + d.h + ', top=' + d.top + ', left=' + d.left);
     mixpanel.track("Facebook Share", {});
   }
 
