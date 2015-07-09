@@ -75,6 +75,7 @@ router.get('/:league', function(req, res) {
           current: league,
           footer_class: 'index',
           isMobile: isMobile,
+          no_social: true,
           title: changeTitle(league)
          }
     );

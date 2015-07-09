@@ -68,7 +68,7 @@ mixpanel.init("{{mixpanelToken}}");</script>
 {{/unless}}
   {{{body}}}
 
-{{# unless special_layout}}
+{{# unless no_social}}
   <div class="social-sidebar social" data-title="{{#if quizPage}}Try out this {{team_name}} quiz: http://www.rosterblitz.com/quiz?team_id={{team_id}}{{else}}Thought you might enjoy some sports quizzes at rosterbliz.com{{/if}}">
     <div id="share-1" class="share-element email-img" data-toggle="modal" data-target="#emailModal">
       <div id="email" class="social-icon">
@@ -86,9 +86,8 @@ mixpanel.init("{{mixpanelToken}}");</script>
       </div>
     </div>
   </div>
-
-
   {{/unless}}
+  
   {{#unless remove_footer}}
     <footer class="footer {{footer_class}}">
       <div class="navbar-collapse collapse">
