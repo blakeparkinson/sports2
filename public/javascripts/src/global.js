@@ -148,7 +148,7 @@ function fetchPopupDimensions(){
 
 function postSocial(event){
 
-  var target = $(event.target),
+  var target = $(event.target).closest('.post-social'),
     d = fetchPopupDimensions();
     if (target.closest('.social').hasClass('social-sidebar')){
       title = target.closest('.social-sidebar').data('title');
@@ -156,7 +156,6 @@ function postSocial(event){
     else{
       title = target.closest('.social-chart').data('title');
     }
-
   if (target.attr('id') == 'twitter'){
     window.open('https://twitter.com/share?text='+title+'&url=rosterblitz.com' , 'Share a quiz on twitter', 'scrollbars=yes, width=' + d.w + ', height=' + d.h + ', top=' + d.top + ', left=' + d.left);
     mixpanel.track("Twitter Share", {});
