@@ -1,32 +1,23 @@
 @font-face {
-    font-family:"Erbos Draco 1st NBP";
-    src: url(../fonts/erbos_draco_1st_nbp.ttf)
+  font-family: "Erbos Draco 1st NBP";
+  src: url(../fonts/erbos_draco_1st_nbp.ttf)
 }
-
 @font-face {
-    font-family:"Erbos Draco 1st Open NBP";
-    src: url(../fonts/erbos_draco_1st_open_nbp.ttf)
+  font-family: "Erbos Draco 1st Open NBP";
+  src: url(../fonts/erbos_draco_1st_open_nbp.ttf)
 }
-
 @font-face {
-    font-family: 'socicon';
-    src: url('../fonts/socicon.eot');
-    src: url('../fonts/socicon.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/socicon.woff') format('woff'),
-         url('../fonts/socicon.ttf') format('truetype'),
-         url('../fonts/socicon.svg#sociconregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-    text-transform: initial;
+  font-family: 'socicon';
+  src: url('../fonts/socicon.eot');
+  src: url('../fonts/socicon.eot?#iefix') format('embedded-opentype'), url('../fonts/socicon.woff') format('woff'), url('../fonts/socicon.ttf') format('truetype'), url('../fonts/socicon.svg#sociconregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  text-transform: initial;
 }
-
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  font-family: "HelveticaNeue-Thin", "Helvetica Neue Thin", "Helvetica Neue","HelveticaNeue-Light", "Helvetica Neue Light",
-  Helvetica, Arial, "Lucida Grande", sans-serif !important;
-
+  font-family: "HelveticaNeue-Thin", "Helvetica Neue Thin", "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif !important;
 }
-
 a {
   color: #00B7FF;
 }
@@ -42,37 +33,32 @@ a {
   margin: 0;
   padding: 0;
 }
-
 .socicon {
-    font-family: 'socicon' !important;
+  font-family: 'socicon' !important;
 }
-
-#team-selection{
+#team-selection {
   margin-bottom: 15px;
 }
 .tabs {
   color: #ffffff;
 }
 .tabs-text {
- color: #ffffff;
+  color: #ffffff;
 }
-.social-chart{
+.social-chart {
   float: left;
 }
-
-.social-chart-close{
-  margin-top:8px;
+.social-chart-close {
+  margin-top: 8px;
 }
-
-.social-chart .share-element{
-  padding:0;
+.social-chart .share-element {
+  padding: 0;
 }
-
-.chart-text{
+.chart-text {
   opacity: 0.9;
   position: absolute;
   top: 49%;
-  left:4%;
+  left: 4%;
   margin-top: -22px;
   font-size: 25px;
   height: 138px;
@@ -83,23 +69,20 @@ a {
   background-repeat: no-repeat;
   background-position: center center;
 }
-
-#chartLegend{
+#chartLegend {
   margin-top: -30px
 }
-
-.legend-header{
+.legend-header {
   margin-bottom: 5px;
   margin-left: 6px;
 }
-
-.modal-footer .share-this{
+.modal-footer .share-this {
   float: left;
   margin-left: 14%;
   margin-top: 1.4%;
   width: 122px;
 }
-.modal-footer .share-this.copied{
+.modal-footer .share-this.copied {
   background-color: #2F772F;
   border-color: #286928;
   text-align: center;
@@ -128,40 +111,43 @@ a {
 }
 */
 
-.modal-title .percentage{
+.modal-title .percentage {
   color: white;
   padding: 3px;
   border-radius: 9px
 }
-.chart-team{margin-top: 0;}
-.char-body-header{float:left;}
-.chart-container p{
-  margin:0;
+.chart-team {
+  margin-top: 0;
+}
+.char-body-header {
+  float: left;
+}
+.chart-container p {
+  margin: 0;
 }
 .legend {
-    width: 10em;
-    float: right;
+  width: 10em;
+  float: right;
 }
-
-.legend .title:last-child{
+.legend .title:last-child {
   margin-bottom: 0;
 }
-
 .legend .title {
-    display: block;
-    margin-bottom: 0.5em;
-    line-height: 1.2em;
-    padding: 0 0.3em;
+  display: block;
+  margin-bottom: 0.5em;
+  line-height: 1.2em;
+  padding: 0 0.3em;
 }
-
 .legend .color-sample {
-    display: block;
-    float: left;
-    width: 1em;
-    height: 1em;
-    border: 2px solid; /* Comment out if you don't want to show the fillColor */
-    border-radius: 0.5em; /* Comment out if you prefer squarish samples */
-    margin-right: 0.5em;
+  display: block;
+  float: left;
+  width: 1em;
+  height: 1em;
+  border: 2px solid;
+  /* Comment out if you don't want to show the fillColor */
+  border-radius: 0.5em;
+  /* Comment out if you prefer squarish samples */
+  margin-right: 0.5em;
 }
 .badge-small-roster {
   display: inline-block;
@@ -213,11 +199,11 @@ a {
   padding-top: 3.58%;
 }
 .season-leaders-icon {
- content: url(../images/icons/crown.png);
- padding-top: 2.9%;
+  content: url(../images/icons/crown.png);
+  padding-top: 2.9%;
 }
 .roster-icon {
- content: url(../images/icons/clipboard2.png);
+  content: url(../images/icons/clipboard2.png);
 }
 .tabs:hover, .tabs.selected {
   background-color: rgb(22, 231, 22);
@@ -226,7 +212,7 @@ a {
   cursor: pointer;
   font-size: 1.1em;
 }
-.navbar-header.rb{
+.navbar-header.rb {
   padding-left: 40px
 }
 #how-works-button {
@@ -236,7 +222,7 @@ a {
   padding-right: 10px;
   margin-top: 7px;
 }
-.navbar-right.rb{
+.navbar-right.rb {
   margin-right: 1px;
 }
 #how-works-modal {
@@ -265,19 +251,18 @@ a {
   clear: left;
   margin-top: 5%;
 }
-.navbar.blitz{
+.navbar.blitz {
   background: rgba(32, 26, 26, 0.4);
   font-family: HelveticaNeue-Thin;
-  z-index:100;
+  z-index: 100;
   margin-bottom: 0;
   border-color: #201A1A;
   border: none;
 }
-.navbar-brand.main{
+.navbar-brand.main {
   font-size: 24px;
-  padding-top:10px;
+  padding-top: 10px;
 }
-
 #nav-tabs-leagues {
   border-bottom: none;
 }
@@ -302,55 +287,47 @@ a {
   -webkit-transition: -webkit-transform .8s ease-in-out;
   transition: transform .8s ease-in-out;
 }
-.navbar-brand.main:hover .rb-bolt{
+.navbar-brand.main:hover .rb-bolt {
   -webkit-transform: rotate(360deg);
   transform: rotate(360deg);
 }
-.tooltip-arrow,
-.white-tooltip + .tooltip > .tooltip-inner {
+.tooltip-arrow, .white-tooltip + .tooltip > .tooltip-inner {
   font-size: 1.2em;
   font-family: HelveticaNeue-Thin;
   border: 1px solid #fff;
   margin-right: 12px;
 }
 .tooltip-inner {
-    /* If max-width does not work, try using width instead */
-    width: 120px;
+  /* If max-width does not work, try using width instead */
+  width: 120px;
 }
-#index-buttons .select2-container .select2-choice{
+#index-buttons .select2-container .select2-choice {
   height: 35px;
 }
 #index-buttons .select2-container .select2-choice > .select2-chosen {
   font-size: 18px;
   padding-top: 2px;
 }
-
 .answer-right-section .content-section {
   padding: 9px;
 }
-
 .answer-right-section .subheader {
   border-bottom: 1px solid rgb(204, 204, 204);
 }
-
-
-.answer-right-section .correct-guess{
+.answer-right-section .correct-guess {
   padding-top: 10px;
   cursor: pointer;
   color: rgb(55, 132, 211);
 }
-
-.answer-container .inner-guess .stat{
+.answer-container .inner-guess .stat {
   float: right;
   padding-right: 10px;
 }
-.answer-container .inner-guess .stat.pushed{
+.answer-container .inner-guess .stat.pushed {
   line-height: 30px;
 }
-
-
-.team-name{
-  color:#fff;
+.team-name {
+  color: #fff;
   font-size: 40px;
   text-align: center;
   background: rgba(32, 26, 26, 0.5);
@@ -363,8 +340,8 @@ a {
   text-align: center;
   font-size: 2em;
 }
-.clock{
-  font-family:"Erbos Draco 1st Open NBP";
+.clock {
+  font-family: "Erbos Draco 1st Open NBP";
   background-color: rgb(137, 32, 32);
   color: #F4E1E1;
   border-radius: 1px;
@@ -375,13 +352,13 @@ a {
 #new-team-name {
   margin-top: 3px;
   margin-top: 3px;
-  text-shadow: 6px 6px 10px rgba(0,0,0,.6);
+  text-shadow: 6px 6px 10px rgba(0, 0, 0, .6);
   color: #fff;
   font-weight: 400;
   font-size: 350%;
   text-align: center;
 }
-.name-point-container{
+.name-point-container {
   padding-top: 5%;
   overflow: hidden;
 }
@@ -393,13 +370,11 @@ a {
   background: rgba(32, 26, 26, 0.4);
   border-radius: 4px;
 }
-
-.footer.index{
+.footer.index {
   position: relative;
   background: none;
 }
-
-.footer.static{
+.footer.static {
   position: relative;
 }
 .footer-container {
@@ -412,15 +387,15 @@ a {
   font-family: HelveticaNeue-Thin;
 }
 .bs-docs-footer-links {
-    padding-left: 0;
-    margin-top: 20px;
+  padding-left: 0;
+  margin-top: 20px;
 }
 .bs-docs-footer-links > li {
-  margin:0 10px 0 10px;
-    display: inline-block;
+  margin: 0 10px 0 10px;
+  display: inline-block;
 }
 ul {
-    list-style-type: none;
+  list-style-type: none;
 }
 .center-it {
   width: auto;
@@ -428,8 +403,7 @@ ul {
 .center-it2 {
   text-align: center;
 }
-
-#team-select{
+#team-select {
   font-size: 80px;
   font-family: HelveticaNeue-Thin;
   padding-bottom: 15px;
@@ -437,8 +411,7 @@ ul {
   color: #fff;
   font-weight: 400;
 }
-
-.point-container{
+.point-container {
   background: rgb(62, 65, 62);
   padding: 6px 11px 5px 11px;
   margin-left: -4px;
@@ -449,7 +422,9 @@ ul {
   border-radius: 0 5px 0 0;
   border-bottom: 1px rgb(62, 65, 62);
 }
+
 /* ====== LEFT COLUMN  ======== */
+
 #left-quiz-column {
   float: left;
   width: 45%;
@@ -463,7 +438,7 @@ ul {
   padding-left: 5%;
   padding-right: 5%;
 }
-#team-container{
+#team-container {
   text-align: center;
   padding: 6% 2% 18% 2%;
 }
@@ -475,7 +450,7 @@ ul {
   border-radius: 5px;
   border: 1.75px solid #fff;
 }
-.team-container{
+.team-container {
   padding: 3% 2% 3% 2%;
   background: rgba(32, 26, 26, 0.7);
   min-height: 220px;
@@ -492,7 +467,7 @@ ul {
   padding: 3%;
 }
 
-  /* ===== PLAYER CARD STYLING ===== */
+/* ===== PLAYER CARD STYLING ===== */
 
 #player-card-contain {
   min-height: 300px;
@@ -501,23 +476,21 @@ ul {
   border-radius: 0 0 5px 5px;
   color: black;
 }
-
-.back-to-answer{
+.back-to-answer {
   padding: 2%;
   cursor: pointer;
   display: inline-block;
-  color:#337ab7;;
+  color: #337ab7;
+  ;
 }
-
-.back-to-answer-absolute{
+.back-to-answer-absolute {
   position: absolute;
   z-index: 5;
   width: inherit;
 }
-
 #top-half-card {
-padding-top: 4%;
-padding-left: 3%;
+  padding-top: 4%;
+  padding-left: 3%;
 }
 #player-card-image {
   max-width: 95px;
@@ -528,7 +501,6 @@ padding-left: 3%;
 }
 #top-player-info {
   padding-left: 22%;
-
 }
 #lower-half-card {
   padding: 0 10% 0 10%;
@@ -565,12 +537,12 @@ padding-left: 3%;
   line-height: 24px;
   color: #000;
 }
-#lower-half-card .player-card-table{
+#lower-half-card .player-card-table {
   border-collapse: separate;
   border-spacing: 2px 0;
   width: 230px;
 }
-#lower-half-card .player-card-table td{
+#lower-half-card .player-card-table td {
   background: rgba(250, 250, 250, 0.2);
   text-align: center;
   padding: 2px 10px;
@@ -578,7 +550,7 @@ padding-left: 3%;
   line-height: 24px;
   color: #000;
 }
-#lower-half-card .subheader{
+#lower-half-card .subheader {
   color: #000;
 }
 .player-card-table th {
@@ -605,19 +577,14 @@ padding-left: 3%;
 
 /* ======= END PLAYER CARD  ========= */
 
-
-.point-container .number{
+.point-container .number {
   margin: 0;
   font-size: 17px;
 }
-
-.point-container .points{
+.point-container .points {
   font-size: 12px;
-  margin:0;
-
+  margin: 0;
 }
-
-
 .answer-row.subheader {
   padding: 6px 12px;
   overflow: hidden;
@@ -627,13 +594,10 @@ padding-left: 3%;
   border-bottom: 1px solid #ccc;
   margin-bottom: 15px;
 }
-
-.answer-row.left{
-  float:left;
-  width:50%;
+.answer-row.left {
+  float: left;
+  width: 50%;
 }
-
-
 .answer-container-contain {
   background: rgba(255, 255, 255, 0.98);
   border-radius: 5px 5px 5px 5px;
@@ -641,10 +605,9 @@ padding-left: 3%;
   min-height: 300px;
   overflow: auto;
   position: relative;
-  font-family:HelveticaNeue;
+  font-family: HelveticaNeue;
 }
-
-.cover{
+.cover {
   position: absolute;
   background-size: 30% auto;
   background-repeat: no-repeat;
@@ -654,68 +617,61 @@ padding-left: 3%;
   z-index: 1;
   opacity: 0.1;
 }
-
-.answer-container .starters{
+.answer-container .starters {
   border-bottom: 1px solid #ccc;
   padding-bottom: 15px;
 }
-
-.answer-container .outer-guess{
+.answer-container .outer-guess {
   float: left;
   width: 50%;
-  height:42px;
+  height: 42px;
 }
-.answer-container .outer-guess:first-child{
-  height:42px;
+.answer-container .outer-guess:first-child {
+  height: 42px;
 }
-
-.answer-container .inner-guess{
+.answer-container .inner-guess {
   padding: 5px;
-  height:42px;
-  width:100%;
+  height: 42px;
+  width: 100%;
 }
-
-.answer-container .inner-guess.guessed:hover{
-  cursor:pointer;
+.answer-container .inner-guess.guessed:hover {
+  cursor: pointer;
 }
-.answer-container .inner-guess.guessed.no-hover:hover{
-  cursor:default;
+.answer-container .inner-guess.guessed.no-hover:hover {
+  cursor: default;
 }
 .green-background {
-  background-color:rgb(22, 231, 22);
+  background-color: rgb(22, 231, 22);
   animation: fadeout 2s forwards;
-    animation-delay: 1s;
-    -moz-animation: fadeout 2s forwards;
-    -moz-animation-delay: 1s;
-    -webkit-animation: fadeout 2s forwards;
-    -webkit-animation-delay: 1s;
-    -o-animation: fadeout 2s forwards;
-    -o-animation-delay: 1s;
+  animation-delay: 1s;
+  -moz-animation: fadeout 2s forwards;
+  -moz-animation-delay: 1s;
+  -webkit-animation: fadeout 2s forwards;
+  -webkit-animation-delay: 1s;
+  -o-animation: fadeout 2s forwards;
+  -o-animation-delay: 1s;
 }
-
 @keyframes fadeout {
-    to {
-        background-color:rgba(255, 255, 255, 0.3);
-    }
-
+  to {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
 }
 @-moz-keyframes fadeout {
-    to {
-        background-color: rgba(255, 255, 255, 0.3);
-    }
+  to {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
 }
 @-webkit-keyframes fadeout {
-    to {
-        background-color: rgba(255, 255, 255, 0.3);
-    }
+  to {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
 }
 @-o-keyframes fadeout {
-    to {
-        background-color: rgba(255, 255, 255, 0.3);
-    }
+  to {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
 }
-
-.answer-container .correct-guess{
+.answer-container .correct-guess {
   position: absolute;
   z-index: 5;
   width: 50%;
@@ -725,65 +681,58 @@ padding-left: 3%;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
-
 .container-iphone {
-  display:none;
+  display: none;
 }
-
-.submit-section{
+.submit-section {
   padding-top: 30px;
 }
-.submit-section .quiz-btn{
+.submit-section .quiz-btn {
   color: #fff;
   border: 2px solid;
   box-shadow: 1px 1px 1px 1px #fff;
   padding: 8px 45px;
 }
-.submit-section .quiz-btn:hover{
+.submit-section .quiz-btn:hover {
   color: #fff;
   background-color: rgb(29, 104, 177);
 }
 #take-quiz-button {
   font-size: 1.2em;
 }
-.select2-container{
+.select2-container {
   min-width: 150px;
 }
-
-.select2-selection{
+.select2-selection {
   text-align: left;
 }
-
-.select2-selection__rendered{
-  color:gray !important;
+.select2-selection__rendered {
+  color: gray !important;
 }
-
-.select2-container .select2-choice > .select2-chosen{
+.select2-container .select2-choice > .select2-chosen {
   text-align: left
 }
-.circle-avatar{
-    margin-top:5px;
-    width:40px;
-    height:40px;
-    border-radius:20px;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
+.circle-avatar {
+  margin-top: 5px;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
 }
-
-.auth-container{
-    text-align: center;
-    padding-top: 100px;
+.auth-container {
+  text-align: center;
+  padding-top: 100px;
 }
-
-.auth-thanks{
-    color: #777;
-    font-family: HelveticaNeue-Thin;
-    font-size: 30px;
-    padding-bottom: 20px;
+.auth-thanks {
+  color: #777;
+  font-family: HelveticaNeue-Thin;
+  font-size: 30px;
+  padding-bottom: 20px;
 }
 
 /* about page */
+
 .about-body {
   background: url(../images/stadiums/eu_soccer_stadiums/soccer-stadium4.jpg);
   background-position: center center;
@@ -807,7 +756,7 @@ padding-left: 3%;
   border-radius: 20px;
 }
 .text-contain {
-  padding:20px;
+  padding: 20px;
 }
 .about-body {
   font: 24px;
@@ -819,19 +768,17 @@ padding-left: 3%;
 .about-body.modal-open {
   opacity: 1;
 }
-
-.social-sidebar{
-    position: absolute;
-    left: 87%;
+.social-sidebar {
+  position: absolute;
+  left: 87%;
+  top: 75px;
 }
-
-
-.share-element{
-    position: relative;
-    float: right;
-    padding-right: 5px;
+.share-element {
+  position: relative;
+  float: right;
+  padding-right: 5px;
 }
-#email{
+#email {
   height: 35px;
   width: 35px;
   background-color: #55B1C1;
@@ -839,36 +786,32 @@ padding-left: 3%;
   padding-top: 2px;
   transition: transform .5s;
 }
-#email .socicon, #facebook .socicon, #twitter .socicon{
+#email .socicon, #facebook .socicon, #twitter .socicon {
   font-size: 23px;
   color: white;
   padding-left: 6px;
   float: left;
 }
-
-.social-icon:hover{
-  -moz-transform: scale(1.2,1.2);
-  -ms-transform: scale(1.2,1.2);
-  -webkit-transform: scale(1.2,1.2);
-  transform: scale(1.2,1.2);
+.social-icon:hover {
+  -moz-transform: scale(1.2, 1.2);
+  -ms-transform: scale(1.2, 1.2);
+  -webkit-transform: scale(1.2, 1.2);
+  transform: scale(1.2, 1.2);
 }
-
-#facebook{
-    height: 35px;
-    width: 35px;
-    background-color: #3b5998;
-    cursor: pointer;
-    padding-top: 3px;
-    transition: transform .5s;
+#facebook {
+  height: 35px;
+  width: 35px;
+  background-color: #3b5998;
+  cursor: pointer;
+  padding-top: 3px;
+  transition: transform .5s;
 }
-
-.share-element div{
+.share-element div {
   -moz-border-radius: 18px;
   -webkit-border-radius: 18px;
   border-radius: 18px;
 }
-
-#twitter{
+#twitter {
   background-color: #00abec;
   height: 35px;
   width: 35px;
@@ -876,20 +819,18 @@ padding-left: 3%;
   padding-top: 3px;
   transition: transform .5s;
 }
-
-.auth-container .share{
-    margin-bottom: 10px;
-    color: rgb(102, 117, 127);
-    font-weight: 300;
-    text-align: left;
-    font-size: 24px;
+.auth-container .share {
+  margin-bottom: 10px;
+  color: rgb(102, 117, 127);
+  font-weight: 300;
+  text-align: left;
+  font-size: 24px;
 }
-
-.auth-container .share.center{
-    text-align: center;
-    margin-bottom: 30px;
+.auth-container .share.center {
+  text-align: center;
+  margin-bottom: 30px;
 }
-.table-iphone{
+.table-iphone {
   margin-left: auto;
   margin-right: auto;
 }
@@ -901,11 +842,11 @@ padding-left: 3%;
   padding: 5px 20px;
   border: solid 1px black;
 }
-.list-group.trending{
+.list-group.trending {
   color: white;
   background: #E25822;
 }
-.list-group .tquiz-items{
+.list-group .tquiz-items {
   background-color: transparent;
   position: relative;
   display: block;
@@ -916,35 +857,31 @@ padding-left: 3%;
   float: left;
   color: white;
   border: 1px solid #CB8440;
-  cursor:pointer;
+  cursor: pointer;
 }
-.list-group .tquiz-items:hover{
+.list-group .tquiz-items:hover {
   color: #fff;
   text-decoration: none;
   background-color: #B84C16
 }
-
-
 table tr:first-child th {
   border-top: 0;
 }
- table tr:last-child td {
+table tr:last-child td {
   border-bottom: 0;
 }
 #basic-info-table {
   font-size: 1.2em;
 }
-#basic-info-table tr td:first-child,
-#basic-info-table tr th:first-child {
+#basic-info-table tr td:first-child, #basic-info-table tr th:first-child {
   border-left: 0;
   padding-left: 0;
 }
-table tr td:last-child,
-table tr th:last-child {
+table tr td:last-child, table tr th:last-child {
   border-right: 0;
 }
 .iphone-table-container {
-  margin:20px 0 0 20px;
+  margin: 20px 0 0 20px;
 }
 .guesser {
   margin-top: 10px;
@@ -953,24 +890,22 @@ table tr th:last-child {
   color: rgb(22, 231, 22);
   /* #16E716 in hex */
 }
-.rb-black{
-    color: #000000;
+.rb-black {
+  color: #000000;
 }
 .index-logo {
   font-size: 1.1em;
 }
-
-.rb-red{
-    color: rgb(231, 85, 22);
+.rb-red {
+  color: rgb(231, 85, 22);
 }
-
-.circle-pic{
+.circle-pic {
   height: 32px;
   border-radius: 30px;
   display: inline-block;
   margin: 0 5px 0 5px;
 }
-.league-background-index{
+.league-background-index {
   background-size: 100% 100% !important;
   background-attachment: inherit !important;
 }
@@ -978,8 +913,7 @@ table tr th:last-child {
   width: 40%;
   margin: 3% 0 0 30%;
 }
-
-#league-background{
+#league-background {
   background-position: center center;
   background-attachment: fixed;
   -webkit-background-size: cover;
@@ -989,19 +923,16 @@ table tr th:last-child {
   background-color: #211922;
   margin: 0;
   padding: 0;
-  background-image:url(../images/stadiums/eu_soccer_stadiums/olympiastadion-stadium.jpg);
+  background-image: url(../images/stadiums/eu_soccer_stadiums/olympiastadion-stadium.jpg);
 }
-.mobile-background.mobile{
+.mobile-background.mobile {
   background-attachment: inherit!important;
 }
-
-
-.answer-row .answered-player{
+.answer-row .answered-player {
   display: inline-block;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
 #trending-guys-back {
   padding: 2% 2% 0 2%;
   border-radius: 4px;
@@ -1010,7 +941,7 @@ table tr th:last-child {
   font-size: 1.2em;
   color: #000000;
 }
-.trendquiz{
+.trendquiz {
   text-align: center;
   font-size: 34px;
 }
@@ -1020,43 +951,38 @@ table tr th:last-child {
   background-color: #48A58B;
   border-color: #157D57;
 }
-
-#curvy-buttons:hover{
-    background-color: #1E775E;
+#curvy-buttons:hover {
+  background-color: #1E775E;
 }
 .quiz-page-backgrounds {
   background: no-repeat scroll center top/cover transparent;
   padding: 0;
-  bottom:0;
+  bottom: 0;
   min-height: 650px;
-  width:100%;
-  position:relative;
+  width: 100%;
+  position: relative;
 }
-
-
-.name-point-container .player-name{
+.name-point-container .player-name {
   width: 85%;
-  float:left;
+  float: left;
   margin-bottom: 0;
   position: relative;
 }
-
-.name-point-container .player-name .glyphicon-ok{
+.name-point-container .player-name .glyphicon-ok {
   position: absolute;
   right: 2%;
   top: 26%;
   color: rgb(22, 231, 22);
 }
-}
 
-.player-name .form-control{
+}
+.player-name .form-control {
   padding: 19px 12px;
   border-radius: 4px 0 0 0;
 }
-
-#quiz-container .answer-container{
+#quiz-container .answer-container {
   padding-left: 90px;
-  max-width:75%;
+  max-width: 75%;
   float: none;
 }
 .center-div {
@@ -1067,43 +993,38 @@ table tr th:last-child {
   margin: 10% 0 0 25%;
 }
 .answer-box {
-  width:  10%;
+  width: 10%;
   height: 100%;
   border: 1px solid #D3D3D3;
 }
-
-.button-section{
-    text-align: center;
-    padding-top: 15px;
+.button-section {
+  text-align: center;
+  padding-top: 15px;
 }
-.button-section .quit-btn{
+.button-section .quit-btn {
   padding: 6px 30px;
 }
 .quit-btn {
   display: block !important;
 }
-.trending-quiz{
+.trending-quiz {
   color: #009AB9;
   cursor: pointer;
 }
-
-#quiz-types{
+#quiz-types {
   margin-top: 30px;
   text-align: center;
 }
-
-#quiz-types .type-ways{
+#quiz-types .type-ways {
   font-size: 34px;
 }
-
-#quiz-types .types{
+#quiz-types .types {
   display: inline-block;
   padding: 20px 0;
   width: 213px;
   margin: 0 3%;
 }
-
-#quiz-types .bubble-img{
+#quiz-types .bubble-img {
   width: 60px;
   height: 60px;
   color: white;
@@ -1111,18 +1032,17 @@ table tr th:last-child {
   background-size: 100%;
   margin-top: 20px;
 }
-.roster .bubble-img{
+.roster .bubble-img {
   background: url(../images/icons/clipboard2.png) no-repeat 2px 0px;
 }
-.leaders .bubble-img{
+.leaders .bubble-img {
   background: url(../images/icons/crown.png) no-repeat 0px 1px;
 }
-#quiz-types .goats .bubble-img{
+#quiz-types .goats .bubble-img {
   background: url(../images/icons/theGoat.png) no-repeat -1px 1px;
   background-size: 100%;
 }
-
-#quiz-types .bubble{
+#quiz-types .bubble {
   height: 100px;
   background-color: rgb(22, 231, 22);
   text-align: center;
@@ -1130,192 +1050,179 @@ table tr th:last-child {
   width: 50%;
   margin-left: 25%;
 }
-#quiz-types .type-header{
+#quiz-types .type-header {
   font-size: 22px;
   margin: 10px;
 }
-#quiz-types .type-description{
+#quiz-types .type-description {
   margin-bottom: 10px;
 }
-#trending-quiz-contain{
+#trending-quiz-contain {
   text-align: center;
   margin-top: 30px;
 }
-#trending-quiz-contain > .trenders{
+#trending-quiz-contain > .trenders {
   border-bottom: 1px solid rgb(178, 178, 178);
   display: inline-block;
   padding-bottom: 30px;
-  width:60%;
+  width: 60%;
 }
-.trendquiz{
+.trendquiz {
   margin-bottom: 20px;
 }
 
-
-  /***********480********/
-  @media screen and (max-width: 480px) {
-    .navbar-brand.main{
-      font-size: 16px;
-      padding-top:15px;
-    }
-    .navbar-header.rb{
-      padding-left: 0;
-    }
-
-    .container-iphone {
-        display: block;
-        background: url(../images/bball_back.svg) no-repeat scroll center top/cover transparent;
-      }
-    .modal-video { width:100%; height:250px; }
-    .social-sidebar{
-        display: none;
-
-    }
-    .g-badge {
-        display: none;
-      }
-    #index-buttons{
-      margin: 2% 2% 0 2%;
-    }
+/***********480********/
+@media screen and (max-width: 480px) {
+  .navbar-brand.main {
+    font-size: 16px;
+    padding-top: 15px;
   }
+  .navbar-header.rb {
+    padding-left: 0;
+  }
+  .container-iphone {
+    display: block;
+    background: url(../images/bball_back.svg) no-repeat scroll center top/cover transparent;
+  }
+  .modal-video {
+    width: 100%;
+    height: 250px;
+  }
+  .social-sidebar {
+    display: none;
+  }
+  .g-badge {
+    display: none;
+  }
+  #index-buttons {
+    margin: 2% 2% 0 2%;
+  }
+}
 
-  /***********580*******/
-
-  @media screen and (max-width: 580px) {
-    .point-container{
-      padding: 4px 11px 4px 4px;
-
-    }
-    .answer-row.left{
-      float:none;
-
-    }
-    #index-buttons{
-      margin: 2% 6% 0 6%;
-      padding-top:6%;
-    }
-
-  .standard-nba-container{
+/***********580*******/
+@media screen and (max-width: 580px) {
+  .point-container {
+    padding: 4px 11px 4px 4px;
+  }
+  .answer-row.left {
+    float: none;
+  }
+  #index-buttons {
+    margin: 2% 6% 0 6%;
+    padding-top: 6%;
+  }
+  .standard-nba-container {
     min-height: 500px;
   }
-
 }
 
 /*******780************/
 @media screen and (max-width: 780px) {
-    #right-quiz-column {
-        float:none;
-        padding-bottom: 20px;
-        margin-top: none;
-        width:100%;
-        padding-left: 0;
-        padding-right: 0;
-    }
-    .name-point-container {
-      overflow: visible;
-    }
-    #align-clock {
-      text-align: center;
-      font-size: 1.6em;
-    }
-    #left-quiz-column{
-      float:none;
-      margin-top: 0;
-      width:100%;
-      margin-left: 0;
-    }
-    #team-select {
-        font-size: 38px;
-        padding-bottom: 10px;
-
-    }
-    .social-sidebar{
-        left: 91%;
-
-    }
-    #index-buttons{
-      margin: -10% 8% 0 8%;
-      padding-top:5%;
-    }
-    .footer:not(.index){
-      display:none;
-    }
-    #curvy-buttons{
-      margin-bottom: 20px;
-    }
-    .answer-container .outer-guess{
-      float:none;
-      width:100%;
-    }
-    .answer-container .correct-guess{
-      width:100%;
-    }
-    .team-container{
-      margin-left: 0;
-    }
-
-    #chartLegend{
-      margin:0;
-      float: none;
-    }
-    .char-body-header{
-      float: none;
-    }
-    #stats-table td{
-      padding:2px 1px;
-    }
-    #top-player-info{
-      padding-left: 0;
-    }
-    #quiz-types .bubble {
-      height: 80px;
-      width: 50%;
-      margin-left: 50px;
+  #right-quiz-column {
+    float: none;
+    padding-bottom: 20px;
+    margin-top: none;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .name-point-container {
+    overflow: visible;
+  }
+  #align-clock {
+    text-align: center;
+    font-size: 1.6em;
+  }
+  #left-quiz-column {
+    float: none;
+    margin-top: 0;
+    width: 100%;
+    margin-left: 0;
+  }
+  #team-select {
+    font-size: 38px;
+    padding-bottom: 10px;
+  }
+  .social-sidebar {
+    left: 91%;
+  }
+  #index-buttons {
+    margin: -10% 8% 0 8%;
+    padding-top: 5%;
+  }
+  .footer:not(.index) {
+    display: none;
+  }
+  #curvy-buttons {
+    margin-bottom: 20px;
+  }
+  .answer-container .outer-guess {
+    float: none;
+    width: 100%;
+  }
+  .answer-container .correct-guess {
+    width: 100%;
+  }
+  .team-container {
+    margin-left: 0;
+  }
+  #chartLegend {
+    margin: 0;
+    float: none;
+  }
+  .char-body-header {
+    float: none;
+  }
+  #stats-table td {
+    padding: 2px 1px;
+  }
+  #top-player-info {
+    padding-left: 0;
+  }
+  #quiz-types .bubble {
+    height: 80px;
+    width: 50%;
+    margin-left: 50px;
   }
   #quiz-types .bubble-img {
     margin-top: 10px;
   }
-
   #quiz-types .goats .bubble-img {
     margin-top: 10px;
-
   }
-  .trendquiz, #quiz-types .type-ways{
+  .trendquiz, #quiz-types .type-ways {
     font-size: 28px;
   }
-  .chart-text{
-    top:54%;
-    left:6%;
-    width:88%;
+  .chart-text {
+    top: 54%;
+    left: 6%;
+    width: 88%;
   }
-  .team-name{
+  .team-name {
     font-size: 28px;
   }
-  .modal-title{
+  .modal-title {
     font-size: 16px;
   }
-  .chart-team{
+  .chart-team {
     font-size: 16px;
   }
-  .legend-header{
+  .legend-header {
     margin-left: 0;
   }
-  .list-group .tquiz-items{
-    float:none;
-    width:100%;
+  .list-group .tquiz-items {
+    float: none;
+    width: 100%;
   }
-  #new-team-name{
+  #new-team-name {
     font-size: 140%;
     margin-bottom: 10px;
   }
-
 }
 
 /******880********/
 @media screen and (max-width: 880px) {
-    .social-sidebar{
-        left: 92%;
-
-    }
-
+  .social-sidebar {
+    left: 92%;
+  }
 }

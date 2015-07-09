@@ -36,8 +36,8 @@ passport.use(new FacebookStrategy({
     });
 	*/
   //	console.log(profile);
-  	return done(null,profile);  
-  	  		
+  	return done(null,profile);
+
   }
 ));
 
@@ -56,7 +56,7 @@ passport.use(new TwitterStrategy({
       if (err) { return done(err); }
       done(null, user);
     });*/
-    return done(null,profile); 
+    return done(null,profile);
   }
 ));
 
@@ -66,28 +66,30 @@ router.get('/facebook', passport.authenticate('facebook'));
 // authentication process by attempting to obtain an access token.  If
 // access was granted, the user will be logged in.  Otherwise,
 // authentication has failed.
-router.get('/facebook/callback', passport.authenticate('facebook', 
+router.get('/facebook/callback', passport.authenticate('facebook',
   { successRedirect: '/auth/social',
-   failureRedirect: '/login' 
+   failureRedirect: '/login'
  }));
 
 router.get('/twitter', passport.authenticate('twitter'));
 
-router.get('/twitter/callback', passport.authenticate('twitter', { 
+router.get('/twitter/callback', passport.authenticate('twitter', {
   successRedirect: '/auth/social',
-  failureRedirect: '/login' 
+  failureRedirect: '/login'
 })
 );
 
 router.get('/social', function(req, res) {
       res.render('social', {
         special_layout : true,
+        no_social: true
       });
     });
 
 router.get('/posttofacebook', function(res, res) {
       res.render('facebookpost', {
-        special_layout : true
+        special_layout : true,
+        no_social: true
       });
     });
 /*
@@ -112,4 +114,3 @@ router.get('/tweet', function(req, res) {
 */
 
 module.exports = router;
-
