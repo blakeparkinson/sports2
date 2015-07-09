@@ -843,6 +843,7 @@ padding-left: 3%;
   font-size: 23px;
   color: white;
   padding-left: 6px;
+  float: left;
 }
 
 .social-icon:hover{
