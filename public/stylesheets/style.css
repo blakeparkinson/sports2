@@ -773,6 +773,9 @@ ul {
   left: 83%;
   top: 75px;
 }
+.social-sidebar.quiz{
+  top: 130px;
+}
 .share-element {
   position: relative;
   float: right;

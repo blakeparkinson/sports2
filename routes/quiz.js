@@ -65,6 +65,7 @@ router.get('/', function(req, res) {
             plainDisplay: true,
             quizPage: true,
             isMobile: common.isMobile(req),
+            view: 'quiz',
             title: "RosterBlitz - Put Your Sports Knowledge to the Ultimate Test"
           })
         }, team_id)
