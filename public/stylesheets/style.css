@@ -770,26 +770,26 @@ ul {
 }
 .social-sidebar {
   position: absolute;
-  left: 87%;
+  left: 83%;
   top: 75px;
 }
 .share-element {
   position: relative;
   float: right;
-  padding-right: 5px;
+  padding-right: 10px;
 }
 #email {
-  height: 35px;
-  width: 35px;
+  height: 40px;
+  width: 40px;
   background-color: #55B1C1;
   cursor: pointer;
-  padding-top: 2px;
+  padding-top: 5px;
   transition: transform .5s;
 }
 #email .socicon, #facebook .socicon, #twitter .socicon {
   font-size: 23px;
   color: white;
-  padding-left: 6px;
+  padding-left: 8px;
   float: left;
 }
 .social-icon:hover {
@@ -799,11 +799,11 @@ ul {
   transform: scale(1.2, 1.2);
 }
 #facebook {
-  height: 35px;
-  width: 35px;
+  height: 40px;
+  width: 40px;
   background-color: #3b5998;
   cursor: pointer;
-  padding-top: 3px;
+  padding-top: 5px;
   transition: transform .5s;
 }
 .share-element div {
@@ -813,10 +813,10 @@ ul {
 }
 #twitter {
   background-color: #00abec;
-  height: 35px;
-  width: 35px;
+  height: 40px;
+  width: 40px;
   cursor: pointer;
-  padding-top: 3px;
+  padding-top: 5px;
   transition: transform .5s;
 }
 .auth-container .share {
@@ -1088,9 +1088,7 @@ table tr td:last-child, table tr th:last-child {
     width: 100%;
     height: 250px;
   }
-  .social-sidebar {
-    display: none;
-  }
+
   .g-badge {
     display: none;
   }
@@ -1144,7 +1142,14 @@ table tr td:last-child, table tr th:last-child {
     padding-bottom: 10px;
   }
   .social-sidebar {
-    left: 91%;
+    overflow: hidden;
+    text-align: center;
+    position: initial;
+  }
+  .share-element{
+    float:none;
+    padding: 15px 15px 0px 15px;
+    display: inline-block;
   }
   #index-buttons {
     margin: -10% 8% 0 8%;
@@ -1217,12 +1222,5 @@ table tr td:last-child, table tr th:last-child {
   #new-team-name {
     font-size: 140%;
     margin-bottom: 10px;
-  }
-}
-
-/******880********/
-@media screen and (max-width: 880px) {
-  .social-sidebar {
-    left: 92%;
   }
 }
