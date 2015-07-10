@@ -54,6 +54,7 @@ var returnPlayers = function (players, team_id, res, req, league, colors){
       logo_url: '../images/team_logos/'+league+'/'+players.name.replace(/ +/g, "").toLowerCase()+'.png',
       quizPage: true,
       isMobile: common.isMobile(req),
+      view: 'quiz',
       title: "RosterBlitz - Sports Trivia and Quizzes"
     });
 
