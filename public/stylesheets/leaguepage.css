@@ -184,7 +184,7 @@
 
 .league-roster .league-sidebar{
   float:right;
-  width:12%;
+  width:11%;
   margin-right: -20px;
   margin-top: 3%;
 }
@@ -193,20 +193,30 @@
 }
 
 .bs-docs-sidenav{
-  background-color: rgba(43, 100, 242, 0.5);
+  background-color: rgba(118, 204, 236, 0.7);
   border-radius: 2px;
   margin-top: -6%;
 }
 
-.ls-tag{
+.league-sidebar .ls-tag{
   color: #fff;
-  font-size: 18px;
+  font-size: 14px;
   line-height: 1.42857143;
+  padding: 5px 15px;
 }
 
 .bs-docs-sidenav li.active{
-  background-color: #eee;
   color: #000;
+}
+
+.bs-docs-sidenav li.rosters.active{
+  background: rgba(66, 107, 215, 0.9);
+}
+.bs-docs-sidenav li.leaders.active{
+  background: rgba(232, 67, 224, 0.9);
+}
+.bs-docs-sidenav li.goats.active{
+  background: rgba(232, 67, 67, 0.9);
 }
 .bs-docs-sidenav li.active a{
   color: #000;
