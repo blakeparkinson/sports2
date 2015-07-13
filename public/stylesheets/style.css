@@ -1187,6 +1187,9 @@ table tr td:last-child, table tr th:last-child {
   #top-player-info {
     padding-left: 0;
   }
+  .answer-container-contain{
+    min-height: 150px;
+  }
   #quiz-types .bubble {
     height: 80px;
     width: 50%;
