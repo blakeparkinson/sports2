@@ -209,13 +209,13 @@
   color: #000;
 }
 
-.bs-docs-sidenav li.rosters.active{
+.bs-docs-sidenav li.rosters.active, .bs-docs-sidenav li.rosters>a:hover{
   background: rgba(66, 107, 215, 0.9);
 }
-.bs-docs-sidenav li.leaders.active{
+.bs-docs-sidenav li.leaders.active, .bs-docs-sidenav li.leaders>a:hover{
   background: rgba(232, 67, 224, 0.9);
 }
-.bs-docs-sidenav li.goats.active{
+.bs-docs-sidenav li.goats.active, .bs-docs-sidenav li.goats>a:hover{
   background: rgba(232, 67, 67, 0.9);
 }
 .bs-docs-sidenav li.active a{
