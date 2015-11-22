@@ -570,7 +570,7 @@ or an object representing multiple samples for the metric. If `value` is
 an object, it must include keys for `count`, `total`, `min`, `max`, and
 `sumOfSquares`.
 
-#### newrelic.api.incrementMetric(name[, amount])
+#### newrelic.incrementMetric(name[, amount])
 
 `name` is the metric name to record, it must be a string that beings with
 `Custom/` typically followed by segments for `category` and `label`.
@@ -637,7 +637,7 @@ Information about changes to the module are in [NEWS.md](NEWS.md).
 ### New Relic features available for other platforms not yet in Node.js
 
 * custom metrics
-* slow SQL traces and explain plans
+* explain plans
 * garbage collector instrumentation
 * thread profiling
 * X-ray transactions (depends on thread profiling)
