@@ -1,4 +1,5 @@
 min/
 npm-debug.log
+node_modules
 
 newrelic_agent.log
