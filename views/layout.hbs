@@ -3,19 +3,11 @@
   <head>
     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     <title>{{title}}</title>
-    {{#if isProduction}}
-      <link rel='stylesheet' href='/min/style.css' />
-      <link rel='stylesheet' href='/min/bootstrap-select.min.css' />
-      <link rel='stylesheet' href='/min/select2.css' />
-      <link rel='stylesheet' href='/min/leaguepage.css' />
-      <link rel='stylesheet' href='/min/ourteam.css' />
-    {{else}}
       <link rel='stylesheet' href='/stylesheets/style.css' />
       <link rel='stylesheet' href='/stylesheets/bootstrap-select.min.css' />
       <link rel='stylesheet' href='/stylesheets/select2.css' />
       <link rel='stylesheet' href='/stylesheets/leaguepage.css' />
       <link rel='stylesheet' href='/stylesheets/ourteam.css' />
-    {{/if}}
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' />
     <link rel='shortcut icon' href='/images/faviconRB3.ico' type='image/x-icon'/ >
     <meta property="og:title" content="Rosterblitz"/>
@@ -197,16 +189,12 @@ mixpanel.init("{{mixpanelToken}}");</script>
     <script src='/javascripts/libraries/jquery.flip.min.js'></script>
     <script src='/javascripts/libraries/bootstrap-select.min.js'></script>
     <script src='/javascripts/libraries/select2.min.js'></script>
-    {{#if isProduction}}
-      <script src='/min/all.min.js'></script>
-    {{else}}
       <script src='/javascripts/src/global.js'></script>
       <script src='/javascripts/src/utilities.js'></script>
       <script src='/javascripts/src/handlebars-helpers.js'></script>
       <script src='/javascripts/src/leaguesearch.js'></script>
       <script src='/javascripts/src/quiz.js'></script>
       <script src='/javascripts/src/teams.js'></script>
-    {{/if}}
 
 
   </body>
