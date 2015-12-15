@@ -10,6 +10,7 @@ var http = require("http"),
 var routes = require('./routes/index');
 var teams = require('./routes/teams');
 var quiz = require('./routes/quiz');
+var fingerprint = require('./routes/fingerprint');
 var about = require('./routes/about');
 var ourteam = require('./routes/ourteam');
 var leaguesearch = require('./routes/leaguesearch');
@@ -56,7 +57,7 @@ app.use(session({ store: new RedisStore({
 app.use(airbrake.expressHandler())
 
 app.use(passport.initialize());
-app.use(passport.session()); 
+app.use(passport.session());
 
 
 app.use('/', routes);
@@ -66,6 +67,8 @@ app.use('/ourteam', ourteam);
 app.use('/leaguesearch', leaguesearch);
 app.use('/auth', auth);
 app.use('/quiz', quiz);
+app.use('/fingerprint', fingerprint);
+
 
 
 
@@ -115,17 +118,17 @@ hbs.registerHelper('json_stringify', function(context) {
 hbs.registerHelper('compare', function (lvalue, operator, rvalue, options) {
 
     var operators, result;
-    
+
     if (arguments.length < 3) {
         throw new Error("Handlerbars Helper 'compare' needs 2 parameters");
     }
-    
+
     if (options === undefined) {
         options = rvalue;
         rvalue = operator;
         operator = "===";
     }
-    
+
     operators = {
         '==': function (l, r) { return l == r; },
         '===': function (l, r) { return l === r; },
@@ -137,13 +140,13 @@ hbs.registerHelper('compare', function (lvalue, operator, rvalue, options) {
         '>=': function (l, r) { return l >= r; },
         'typeof': function (l, r) { return typeof l == r; }
     };
-    
+
     if (!operators[operator]) {
         throw new Error("Handlerbars Helper 'compare' doesn't know the operator " + operator);
     }
-    
+
     result = operators[operator](lvalue, rvalue);
-    
+
     if (result) {
         return options.fn(this);
     } else {
@@ -187,7 +190,7 @@ hbs.registerHelper('render_position', function(league, position){
     break;
     case 'eu_soccer':
       switch (position){
-        case 'D': 
+        case 'D':
           position = 'Defender';
         break;
         case 'F':
